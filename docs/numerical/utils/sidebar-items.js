@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["jacobian","Jacobian Matrix"],["jacobian_dual",""],["tdma","TriDiagonal Matrix Algorithm (TDMA)"]]});

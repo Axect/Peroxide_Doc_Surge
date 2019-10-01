@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["marsaglia_polar","Gaussian random number generator using Marsaglia polar form"],["rand_num","Simple uniform random number generator with ThreadRng"],["ziggurat","Gaussian random numbers using the Ziggurat Method"]]});
