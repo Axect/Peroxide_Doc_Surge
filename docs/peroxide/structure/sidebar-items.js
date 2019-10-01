@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["dataframe","R-like dataframe"],["dual","Dual number system for Automatic differentiation"],["hyper_dual","Hyper dual number system for Automatic differentiation"],["matrix","Matrix for Scientific computation"],["multinomial",""],["polynomial",""],["vector","Extra tools for `Vec<f64>`"]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["cubic_spline","Cubic Spline (Natural)"]]});

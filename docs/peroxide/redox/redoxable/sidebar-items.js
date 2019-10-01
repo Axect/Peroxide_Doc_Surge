@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["RedoxVector","Smart pointer of Vector"]]});
