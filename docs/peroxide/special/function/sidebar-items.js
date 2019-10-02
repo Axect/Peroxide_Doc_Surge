@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["beta","Beta function"],["digamma","Digamma function"],["erf","Error function"],["erf_inv","Inverse error function"],["erfc","Complement error function"],["gamma","Gamma function"],["gaussian","Gaussian function"]]});

@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["DataFrame",""]],"trait":[["WithCSV",""],["WithNetCDF",""]]});

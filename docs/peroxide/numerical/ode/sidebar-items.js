@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["BoundaryCondition","Kinds of Boundary Conditions"],["ExMethod","Explicit ODE Methods"],["ImMethod",""],["ODEOptions","Options for ODE"]],"struct":[["ExplicitODE",""],["ImplicitODE",""],["State","State for ODE"]],"trait":[["ODE","ODE solver"]],"type":[["ExUpdater",""],["ImUpdater",""]]});

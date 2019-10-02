@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["newton","Newton-Raphson Method"]]});

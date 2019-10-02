@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["cor","Pearson's correlation coefficient"],["cov","Covariance (to Value)"],["lm","R like linear regression"]],"trait":[["Statistics","Statistics Trait"]]});

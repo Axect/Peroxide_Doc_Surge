@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["api","Choose api - MATLAB, R, Python"],["low_level",""],["non_macro","Macro to non macro function"],["plot","Plotting module for peroxide"],["print","Easy to print any structures"],["useful","Useful missing tools"],["writer","More convenient matrix writer"]]});

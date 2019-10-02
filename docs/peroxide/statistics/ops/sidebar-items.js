@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["C","Combination"],["H","Combination with Repetition"],["P","Permutation"],["factorial","Factorial"]]});

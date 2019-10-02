@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["poly","Convenient to declare polynomial"]],"struct":[["Polynomial","Polynomial Structure"]],"trait":[["Calculus",""]]});

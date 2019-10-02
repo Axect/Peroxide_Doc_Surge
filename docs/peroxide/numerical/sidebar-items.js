@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["interp",""],["newton",""],["ode","Solver for ordinary differential equations"],["optimize","To optimize parametric model (non-linear regression)"],["spline",""],["utils",""]]});

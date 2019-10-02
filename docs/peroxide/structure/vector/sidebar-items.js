@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["blas_daxpy",""],["blas_daxpy_return",""],["map",""],["reduce",""],["zip_with",""]],"trait":[["Algorithm","Some algorithms for Vector"],["FPVector","Functional Programming tools for Vector"],["VecOps","Convenient Vector Operation trait"]],"type":[["Vector",""]]});
