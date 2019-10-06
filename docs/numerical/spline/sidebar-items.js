@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["cubic_spline","Cubic Spline (Natural)"]]});
+initSidebarItems({"fn":[["cubic_spline","Cubic Spline (Natural)"]],"struct":[["CubicSpline","Cubic Spline (Natural)"]]});

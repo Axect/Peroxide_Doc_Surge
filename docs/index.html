@@ -106,40 +106,40 @@
 <h2 id="quick-start" class="section-header"><a href="#quick-start">Quick Start</a></h2><h3 id="cargotoml" class="section-header"><a href="#cargotoml">Cargo.toml</a></h3>
 <ul>
 <li>To use <code>peroxide</code>, you should edit <code>Cargo.toml</code></li>
-<li>Current document version is corresponding to <code>0.17.1</code></li>
+<li>Current document version is corresponding to <code>0.18.0</code></li>
 </ul>
 <ol>
 <li>Default
 <pre><code class="language-toml">[dependencies]
-peroxide = &quot;0.17&quot;
+peroxide = &quot;0.18&quot;
 </code></pre>
 </li>
 <li>OpenBLAS &amp; SIMD
 <pre><code class="language-toml">[dependencies.peroxide]
-version = &quot;0.17&quot;
+version = &quot;0.18&quot;
 default-features = false
-features = [&quot;oxidize&quot;]
+features = [&quot;O3&quot;]
 </code></pre>
 </li>
 <li>Plot
 <pre><code class="language-toml">[dependencies.peroxide]
-version = &quot;0.17&quot;
+version = &quot;0.18&quot;
 default-features = false
 features = [&quot;plot&quot;]
 </code></pre>
 </li>
 <li>DataFrame
 <pre><code class="language-toml">[dependencies.peroxide]
-version = &quot;0.17&quot;
+version = &quot;0.18&quot;
 default-features = false
 features = [&quot;dataframe&quot;]
 </code></pre>
 </li>
 <li>Together
 <pre><code class="language-toml">[dependencies.peroxide]
-version = &quot;0.17&quot;
+version = &quot;0.18&quot;
 default-features = false
-features = [&quot;oxidize&quot;, &quot;plot&quot;, &quot;dataframe&quot;]
+features = [&quot;O3&quot;, &quot;plot&quot;, &quot;dataframe&quot;]
 </code></pre>
 </li>
 </ol>
