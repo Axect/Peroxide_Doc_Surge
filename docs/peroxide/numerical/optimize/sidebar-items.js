@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["OptMethod",""],["OptOption",""]],"struct":[["Optimizer","Optimizer for optimization (non-linear regression)"]]});

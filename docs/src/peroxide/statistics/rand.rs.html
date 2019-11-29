@@ -1,0 +1,823 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/statistics/rand.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rand.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "\\(", right: "\\)", display: false},
+                {left: "$", right: "$", display: false},
+                {left: "\\[", right: "\\]", display: true}
+            ]
+        });
+    });
+</script>
+
+<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<span id="2">  2</span>
+<span id="3">  3</span>
+<span id="4">  4</span>
+<span id="5">  5</span>
+<span id="6">  6</span>
+<span id="7">  7</span>
+<span id="8">  8</span>
+<span id="9">  9</span>
+<span id="10"> 10</span>
+<span id="11"> 11</span>
+<span id="12"> 12</span>
+<span id="13"> 13</span>
+<span id="14"> 14</span>
+<span id="15"> 15</span>
+<span id="16"> 16</span>
+<span id="17"> 17</span>
+<span id="18"> 18</span>
+<span id="19"> 19</span>
+<span id="20"> 20</span>
+<span id="21"> 21</span>
+<span id="22"> 22</span>
+<span id="23"> 23</span>
+<span id="24"> 24</span>
+<span id="25"> 25</span>
+<span id="26"> 26</span>
+<span id="27"> 27</span>
+<span id="28"> 28</span>
+<span id="29"> 29</span>
+<span id="30"> 30</span>
+<span id="31"> 31</span>
+<span id="32"> 32</span>
+<span id="33"> 33</span>
+<span id="34"> 34</span>
+<span id="35"> 35</span>
+<span id="36"> 36</span>
+<span id="37"> 37</span>
+<span id="38"> 38</span>
+<span id="39"> 39</span>
+<span id="40"> 40</span>
+<span id="41"> 41</span>
+<span id="42"> 42</span>
+<span id="43"> 43</span>
+<span id="44"> 44</span>
+<span id="45"> 45</span>
+<span id="46"> 46</span>
+<span id="47"> 47</span>
+<span id="48"> 48</span>
+<span id="49"> 49</span>
+<span id="50"> 50</span>
+<span id="51"> 51</span>
+<span id="52"> 52</span>
+<span id="53"> 53</span>
+<span id="54"> 54</span>
+<span id="55"> 55</span>
+<span id="56"> 56</span>
+<span id="57"> 57</span>
+<span id="58"> 58</span>
+<span id="59"> 59</span>
+<span id="60"> 60</span>
+<span id="61"> 61</span>
+<span id="62"> 62</span>
+<span id="63"> 63</span>
+<span id="64"> 64</span>
+<span id="65"> 65</span>
+<span id="66"> 66</span>
+<span id="67"> 67</span>
+<span id="68"> 68</span>
+<span id="69"> 69</span>
+<span id="70"> 70</span>
+<span id="71"> 71</span>
+<span id="72"> 72</span>
+<span id="73"> 73</span>
+<span id="74"> 74</span>
+<span id="75"> 75</span>
+<span id="76"> 76</span>
+<span id="77"> 77</span>
+<span id="78"> 78</span>
+<span id="79"> 79</span>
+<span id="80"> 80</span>
+<span id="81"> 81</span>
+<span id="82"> 82</span>
+<span id="83"> 83</span>
+<span id="84"> 84</span>
+<span id="85"> 85</span>
+<span id="86"> 86</span>
+<span id="87"> 87</span>
+<span id="88"> 88</span>
+<span id="89"> 89</span>
+<span id="90"> 90</span>
+<span id="91"> 91</span>
+<span id="92"> 92</span>
+<span id="93"> 93</span>
+<span id="94"> 94</span>
+<span id="95"> 95</span>
+<span id="96"> 96</span>
+<span id="97"> 97</span>
+<span id="98"> 98</span>
+<span id="99"> 99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+<span id="363">363</span>
+<span id="364">364</span>
+<span id="365">365</span>
+<span id="366">366</span>
+<span id="367">367</span>
+<span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
+<span id="378">378</span>
+<span id="379">379</span>
+<span id="380">380</span>
+<span id="381">381</span>
+<span id="382">382</span>
+<span id="383">383</span>
+<span id="384">384</span>
+<span id="385">385</span>
+<span id="386">386</span>
+<span id="387">387</span>
+<span id="388">388</span>
+<span id="389">389</span>
+<span id="390">390</span>
+<span id="391">391</span>
+<span id="392">392</span>
+<span id="393">393</span>
+<span id="394">394</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+<span id="400">400</span>
+<span id="401">401</span>
+<span id="402">402</span>
+</pre><div class="example-wrap"><pre class="rust ">
+<span class="doccomment">//! Simple random number generator</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## Simple Random Number Generator</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * Peroxide uses external [`rand` crate](https://crates.io/crates/rand) to generate random number</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     extern crate rand;</span>
+<span class="doccomment">//!     use self::rand::prelude::*;</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!     fn main() {</span>
+<span class="doccomment">//!         let mut rng = thread_rng();</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!         let a = rng.gen_range(0f64, 1f64); // Generate random f64 number ranges from 0 to 1</span>
+<span class="doccomment">//!     }</span>
+<span class="doccomment">//!     ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * To want more detailed explanation, see [`rand` crate](https://crates.io/crates/rand)</span>
+
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
+<span class="kw">use</span> <span class="self">self</span>::<span class="ident">rand</span>::<span class="ident">distributions</span>::<span class="ident">uniform</span>::<span class="ident">SampleUniform</span>;
+<span class="kw">use</span> <span class="self">self</span>::<span class="ident">rand</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">u32</span>;
+
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
+<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="kw-2">*</span>;
+
+<span class="doccomment">/// Simple uniform random number generator with ThreadRng</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Examples</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// extern crate peroxide;</span>
+<span class="doccomment">/// use peroxide::*;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// let mut rng = thread_rng();</span>
+<span class="doccomment">/// println!(&quot;{}&quot;, rand_num(&amp;mut rng, 1, 7));       // Roll a dice</span>
+<span class="doccomment">/// println!(&quot;{}&quot;, rand_num(&amp;mut rng, 0f64, 1f64)); // Uniform [0,1)</span>
+<span class="doccomment">/// ```</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rand_num</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThreadRng</span>, <span class="ident">start</span>: <span class="ident">T</span>, <span class="ident">end</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
+<span class="kw">where</span>
+    <span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span>,
+{
+    <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="ident">start</span>, <span class="ident">end</span>)
+}
+
+<span class="comment">// =============================================================================</span>
+<span class="comment">// Back end utils</span>
+<span class="comment">// =============================================================================</span>
+
+<span class="doccomment">/// Gaussian random number generator using Marsaglia polar form</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">marsaglia_polar</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThreadRng</span>, <span class="ident">m</span>: <span class="ident">f64</span>, <span class="ident">s</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x1</span> <span class="op">=</span> <span class="number">0f64</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x2</span> <span class="op">=</span> <span class="number">0f64</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_y2</span> <span class="op">=</span> <span class="number">0f64</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">w</span> <span class="op">=</span> <span class="number">0f64</span>;
+
+    <span class="kw">while</span> <span class="ident">w</span> <span class="op">=</span><span class="op">=</span> <span class="number">0.</span> <span class="op">|</span><span class="op">|</span> <span class="ident">w</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">1.</span> {
+        <span class="ident">x1</span> <span class="op">=</span> <span class="number">2.0</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>, <span class="number">1f64</span>) <span class="op">-</span> <span class="number">1.0</span>;
+        <span class="ident">x2</span> <span class="op">=</span> <span class="number">2.0</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>, <span class="number">1f64</span>) <span class="op">-</span> <span class="number">1.0</span>;
+        <span class="ident">w</span> <span class="op">=</span> <span class="ident">x1</span> <span class="op">*</span> <span class="ident">x1</span> <span class="op">+</span> <span class="ident">x2</span> <span class="op">*</span> <span class="ident">x2</span>;
+    }
+
+    <span class="ident">w</span> <span class="op">=</span> (<span class="op">-</span><span class="number">2.0</span> <span class="op">*</span> <span class="ident">w</span>.<span class="ident">ln</span>() <span class="op">/</span> <span class="ident">w</span>).<span class="ident">sqrt</span>();
+    <span class="kw">let</span> <span class="ident">y1</span> <span class="op">=</span> <span class="ident">x1</span> <span class="op">*</span> <span class="ident">w</span>;
+    <span class="ident">_y2</span> <span class="op">=</span> <span class="ident">x2</span> <span class="op">*</span> <span class="ident">w</span>;
+
+    <span class="kw">return</span> <span class="ident">m</span> <span class="op">+</span> <span class="ident">y1</span> <span class="op">*</span> <span class="ident">s</span>;
+}
+
+<span class="comment">// =============================================================================</span>
+<span class="comment">// Ziggurat Table</span>
+<span class="comment">// =============================================================================</span>
+
+<span class="doccomment">/// Position of Right-most step</span>
+<span class="kw">const</span> <span class="ident">PARAM_R</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">3.44428647676</span>;
+
+<span class="doccomment">/// Tabulated values for the height of the Ziggurat levels</span>
+<span class="kw">const</span> <span class="ident">YTAB</span>: [<span class="ident">f64</span>; <span class="number">128</span>] <span class="op">=</span> [
+    <span class="number">1.</span>,
+    <span class="number">0.963598623011</span>,
+    <span class="number">0.936280813353</span>,
+    <span class="number">0.913041104253</span>,
+    <span class="number">0.892278506696</span>,
+    <span class="number">0.873239356919</span>,
+    <span class="number">0.855496407634</span>,
+    <span class="number">0.838778928349</span>,
+    <span class="number">0.822902083699</span>,
+    <span class="number">0.807732738234</span>,
+    <span class="number">0.793171045519</span>,
+    <span class="number">0.779139726505</span>,
+    <span class="number">0.765577436082</span>,
+    <span class="number">0.752434456248</span>,
+    <span class="number">0.739669787677</span>,
+    <span class="number">0.727249120285</span>,
+    <span class="number">0.715143377413</span>,
+    <span class="number">0.703327646455</span>,
+    <span class="number">0.691780377035</span>,
+    <span class="number">0.68048276891</span>,
+    <span class="number">0.669418297233</span>,
+    <span class="number">0.65857233912</span>,
+    <span class="number">0.647931876189</span>,
+    <span class="number">0.637485254896</span>,
+    <span class="number">0.62722199145</span>,
+    <span class="number">0.617132611532</span>,
+    <span class="number">0.607208517467</span>,
+    <span class="number">0.597441877296</span>,
+    <span class="number">0.587825531465</span>,
+    <span class="number">0.578352913803</span>,
+    <span class="number">0.569017984198</span>,
+    <span class="number">0.559815170911</span>,
+    <span class="number">0.550739320877</span>,
+    <span class="number">0.541785656682</span>,
+    <span class="number">0.532949739145</span>,
+    <span class="number">0.524227434628</span>,
+    <span class="number">0.515614886373</span>,
+    <span class="number">0.507108489253</span>,
+    <span class="number">0.498704867478</span>,
+    <span class="number">0.490400854812</span>,
+    <span class="number">0.482193476986</span>,
+    <span class="number">0.47407993601</span>,
+    <span class="number">0.466057596125</span>,
+    <span class="number">0.458123971214</span>,
+    <span class="number">0.450276713467</span>,
+    <span class="number">0.442513603171</span>,
+    <span class="number">0.434832539473</span>,
+    <span class="number">0.427231532022</span>,
+    <span class="number">0.419708693379</span>,
+    <span class="number">0.41226223212</span>,
+    <span class="number">0.404890446548</span>,
+    <span class="number">0.397591718955</span>,
+    <span class="number">0.390364510382</span>,
+    <span class="number">0.383207355816</span>,
+    <span class="number">0.376118859788</span>,
+    <span class="number">0.369097692334</span>,
+    <span class="number">0.362142585282</span>,
+    <span class="number">0.355252328834</span>,
+    <span class="number">0.348425768415</span>,
+    <span class="number">0.341661801776</span>,
+    <span class="number">0.334959376311</span>,
+    <span class="number">0.328317486588</span>,
+    <span class="number">0.321735172063</span>,
+    <span class="number">0.31521151497</span>,
+    <span class="number">0.308745638367</span>,
+    <span class="number">0.302336704338</span>,
+    <span class="number">0.29598391232</span>,
+    <span class="number">0.289686497571</span>,
+    <span class="number">0.283443729739</span>,
+    <span class="number">0.27725491156</span>,
+    <span class="number">0.271119377649</span>,
+    <span class="number">0.265036493387</span>,
+    <span class="number">0.259005653912</span>,
+    <span class="number">0.253026283183</span>,
+    <span class="number">0.247097833139</span>,
+    <span class="number">0.241219782932</span>,
+    <span class="number">0.235391638239</span>,
+    <span class="number">0.229612930649</span>,
+    <span class="number">0.223883217122</span>,
+    <span class="number">0.218202079518</span>,
+    <span class="number">0.212569124201</span>,
+    <span class="number">0.206983981709</span>,
+    <span class="number">0.201446306496</span>,
+    <span class="number">0.195955776745</span>,
+    <span class="number">0.190512094256</span>,
+    <span class="number">0.185114984406</span>,
+    <span class="number">0.179764196185</span>,
+    <span class="number">0.174459502324</span>,
+    <span class="number">0.169200699492</span>,
+    <span class="number">0.1639876086</span>,
+    <span class="number">0.158820075195</span>,
+    <span class="number">0.153697969964</span>,
+    <span class="number">0.148621189348</span>,
+    <span class="number">0.143589656295</span>,
+    <span class="number">0.138603321143</span>,
+    <span class="number">0.133662162669</span>,
+    <span class="number">0.128766189309</span>,
+    <span class="number">0.123915440582</span>,
+    <span class="number">0.119109988745</span>,
+    <span class="number">0.114349940703</span>,
+    <span class="number">0.10963544023</span>,
+    <span class="number">0.104966670533</span>,
+    <span class="number">0.100343857232</span>,
+    <span class="number">0.0957672718266</span>,
+    <span class="number">0.0912372357329</span>,
+    <span class="number">0.0867541250127</span>,
+    <span class="number">0.082318375932</span>,
+    <span class="number">0.0779304915295</span>,
+    <span class="number">0.0735910494266</span>,
+    <span class="number">0.0693007111742</span>,
+    <span class="number">0.065060233529</span>,
+    <span class="number">0.0608704821745</span>,
+    <span class="number">0.056732448584</span>,
+    <span class="number">0.05264727098</span>,
+    <span class="number">0.0486162607163</span>,
+    <span class="number">0.0446409359769</span>,
+    <span class="number">0.0407230655415</span>,
+    <span class="number">0.0368647267386</span>,
+    <span class="number">0.0330683839378</span>,
+    <span class="number">0.0293369977411</span>,
+    <span class="number">0.0256741818288</span>,
+    <span class="number">0.0220844372634</span>,
+    <span class="number">0.0185735200577</span>,
+    <span class="number">0.0151490552854</span>,
+    <span class="number">0.0118216532614</span>,
+    <span class="number">0.00860719483079</span>,
+    <span class="number">0.00553245272614</span>,
+    <span class="number">0.00265435214565</span>,
+];
+
+<span class="doccomment">/// Tabulated values for 2^24 times `x[i] / x[i+1]`</span>
+<span class="doccomment">/// Used to accept for `U*x[i+1] &lt;= x[i]` without any floating point operations</span>
+<span class="kw">const</span> <span class="ident">KTAB</span>: [<span class="ident">u32</span>; <span class="number">128</span>] <span class="op">=</span> [
+    <span class="number">0</span>, <span class="number">12590644</span>, <span class="number">14272653</span>, <span class="number">14988939</span>, <span class="number">15384584</span>, <span class="number">15635009</span>, <span class="number">15807561</span>, <span class="number">15933577</span>, <span class="number">16029594</span>, <span class="number">16105155</span>,
+    <span class="number">16166147</span>, <span class="number">16216399</span>, <span class="number">16258508</span>, <span class="number">16294295</span>, <span class="number">16325078</span>, <span class="number">16351831</span>, <span class="number">16375291</span>, <span class="number">16396026</span>, <span class="number">16414479</span>,
+    <span class="number">16431002</span>, <span class="number">16445880</span>, <span class="number">16459343</span>, <span class="number">16471578</span>, <span class="number">16482744</span>, <span class="number">16492970</span>, <span class="number">16502368</span>, <span class="number">16511031</span>, <span class="number">16519039</span>,
+    <span class="number">16526459</span>, <span class="number">16533352</span>, <span class="number">16539769</span>, <span class="number">16545755</span>, <span class="number">16551348</span>, <span class="number">16556584</span>, <span class="number">16561493</span>, <span class="number">16566101</span>, <span class="number">16570433</span>,
+    <span class="number">16574511</span>, <span class="number">16578353</span>, <span class="number">16581977</span>, <span class="number">16585398</span>, <span class="number">16588629</span>, <span class="number">16591685</span>, <span class="number">16594575</span>, <span class="number">16597311</span>, <span class="number">16599901</span>,
+    <span class="number">16602354</span>, <span class="number">16604679</span>, <span class="number">16606881</span>, <span class="number">16608968</span>, <span class="number">16610945</span>, <span class="number">16612818</span>, <span class="number">16614592</span>, <span class="number">16616272</span>, <span class="number">16617861</span>,
+    <span class="number">16619363</span>, <span class="number">16620782</span>, <span class="number">16622121</span>, <span class="number">16623383</span>, <span class="number">16624570</span>, <span class="number">16625685</span>, <span class="number">16626730</span>, <span class="number">16627708</span>, <span class="number">16628619</span>,
+    <span class="number">16629465</span>, <span class="number">16630248</span>, <span class="number">16630969</span>, <span class="number">16631628</span>, <span class="number">16632228</span>, <span class="number">16632768</span>, <span class="number">16633248</span>, <span class="number">16633671</span>, <span class="number">16634034</span>,
+    <span class="number">16634340</span>, <span class="number">16634586</span>, <span class="number">16634774</span>, <span class="number">16634903</span>, <span class="number">16634972</span>, <span class="number">16634980</span>, <span class="number">16634926</span>, <span class="number">16634810</span>, <span class="number">16634628</span>,
+    <span class="number">16634381</span>, <span class="number">16634066</span>, <span class="number">16633680</span>, <span class="number">16633222</span>, <span class="number">16632688</span>, <span class="number">16632075</span>, <span class="number">16631380</span>, <span class="number">16630598</span>, <span class="number">16629726</span>,
+    <span class="number">16628757</span>, <span class="number">16627686</span>, <span class="number">16626507</span>, <span class="number">16625212</span>, <span class="number">16623794</span>, <span class="number">16622243</span>, <span class="number">16620548</span>, <span class="number">16618698</span>, <span class="number">16616679</span>,
+    <span class="number">16614476</span>, <span class="number">16612071</span>, <span class="number">16609444</span>, <span class="number">16606571</span>, <span class="number">16603425</span>, <span class="number">16599973</span>, <span class="number">16596178</span>, <span class="number">16591995</span>, <span class="number">16587369</span>,
+    <span class="number">16582237</span>, <span class="number">16576520</span>, <span class="number">16570120</span>, <span class="number">16562917</span>, <span class="number">16554758</span>, <span class="number">16545450</span>, <span class="number">16534739</span>, <span class="number">16522287</span>, <span class="number">16507638</span>,
+    <span class="number">16490152</span>, <span class="number">16468907</span>, <span class="number">16442518</span>, <span class="number">16408804</span>, <span class="number">16364095</span>, <span class="number">16301683</span>, <span class="number">16207738</span>, <span class="number">16047994</span>, <span class="number">15704248</span>,
+    <span class="number">15472926</span>,
+];
+
+<span class="doccomment">/// Tabulated values of `2^{-24} * x[i]`</span>
+<span class="kw">const</span> <span class="ident">WTAB</span>: [<span class="ident">f64</span>; <span class="number">128</span>] <span class="op">=</span> [
+    <span class="number">1.62318314817e-08</span>,
+    <span class="number">2.16291505214e-08</span>,
+    <span class="number">2.54246305087e-08</span>,
+    <span class="number">2.84579525938e-08</span>,
+    <span class="number">3.10340022482e-08</span>,
+    <span class="number">3.33011726243e-08</span>,
+    <span class="number">3.53439060345e-08</span>,
+    <span class="number">3.72152672658e-08</span>,
+    <span class="number">3.8950989572e-08</span>,
+    <span class="number">4.05763964764e-08</span>,
+    <span class="number">4.21101548915e-08</span>,
+    <span class="number">4.35664624904e-08</span>,
+    <span class="number">4.49563968336e-08</span>,
+    <span class="number">4.62887864029e-08</span>,
+    <span class="number">4.75707945735e-08</span>,
+    <span class="number">4.88083237257e-08</span>,
+    <span class="number">5.00063025384e-08</span>,
+    <span class="number">5.11688950428e-08</span>,
+    <span class="number">5.22996558616e-08</span>,
+    <span class="number">5.34016475624e-08</span>,
+    <span class="number">5.44775307871e-08</span>,
+    <span class="number">5.55296344581e-08</span>,
+    <span class="number">5.65600111659e-08</span>,
+    <span class="number">5.75704813695e-08</span>,
+    <span class="number">5.85626690412e-08</span>,
+    <span class="number">5.95380306862e-08</span>,
+    <span class="number">6.04978791776e-08</span>,
+    <span class="number">6.14434034901e-08</span>,
+    <span class="number">6.23756851626e-08</span>,
+    <span class="number">6.32957121259e-08</span>,
+    <span class="number">6.42043903937e-08</span>,
+    <span class="number">6.51025540077e-08</span>,
+    <span class="number">6.59909735447e-08</span>,
+    <span class="number">6.68703634341e-08</span>,
+    <span class="number">6.77413882848e-08</span>,
+    <span class="number">6.8604668381e-08</span>,
+    <span class="number">6.94607844804e-08</span>,
+    <span class="number">7.03102820203e-08</span>,
+    <span class="number">7.11536748229e-08</span>,
+    <span class="number">7.1991448372e-08</span>,
+    <span class="number">7.2824062723e-08</span>,
+    <span class="number">7.36519550992e-08</span>,
+    <span class="number">7.44755422158e-08</span>,
+    <span class="number">7.52952223703e-08</span>,
+    <span class="number">7.61113773308e-08</span>,
+    <span class="number">7.69243740467e-08</span>,
+    <span class="number">7.77345662086e-08</span>,
+    <span class="number">7.85422956743e-08</span>,
+    <span class="number">7.93478937793e-08</span>,
+    <span class="number">8.01516825471e-08</span>,
+    <span class="number">8.09539758128e-08</span>,
+    <span class="number">8.17550802699e-08</span>,
+    <span class="number">8.25552964535e-08</span>,
+    <span class="number">8.33549196661e-08</span>,
+    <span class="number">8.41542408569e-08</span>,
+    <span class="number">8.49535474601e-08</span>,
+    <span class="number">8.57531242006e-08</span>,
+    <span class="number">8.65532538723e-08</span>,
+    <span class="number">8.73542180955e-08</span>,
+    <span class="number">8.8156298059e-08</span>,
+    <span class="number">8.89597752521e-08</span>,
+    <span class="number">8.97649321908e-08</span>,
+    <span class="number">9.05720531451e-08</span>,
+    <span class="number">9.138142487e-08</span>,
+    <span class="number">9.21933373471e-08</span>,
+    <span class="number">9.30080845407e-08</span>,
+    <span class="number">9.38259651738e-08</span>,
+    <span class="number">9.46472835298e-08</span>,
+    <span class="number">9.54723502847e-08</span>,
+    <span class="number">9.63014833769e-08</span>,
+    <span class="number">9.71350089201e-08</span>,
+    <span class="number">9.79732621669e-08</span>,
+    <span class="number">9.88165885297e-08</span>,
+    <span class="number">9.96653446693e-08</span>,
+    <span class="number">1.00519899658e-07</span>,
+    <span class="number">1.0138063623e-07</span>,
+    <span class="number">1.02247952126e-07</span>,
+    <span class="number">1.03122261554e-07</span>,
+    <span class="number">1.04003996769e-07</span>,
+    <span class="number">1.04893609795e-07</span>,
+    <span class="number">1.05791574313e-07</span>,
+    <span class="number">1.06698387725e-07</span>,
+    <span class="number">1.07614573423e-07</span>,
+    <span class="number">1.08540683296e-07</span>,
+    <span class="number">1.09477300508e-07</span>,
+    <span class="number">1.1042504257e-07</span>,
+    <span class="number">1.11384564771e-07</span>,
+    <span class="number">1.12356564007e-07</span>,
+    <span class="number">1.13341783071e-07</span>,
+    <span class="number">1.14341015475e-07</span>,
+    <span class="number">1.15355110887e-07</span>,
+    <span class="number">1.16384981291e-07</span>,
+    <span class="number">1.17431607977e-07</span>,
+    <span class="number">1.18496049514e-07</span>,
+    <span class="number">1.19579450872e-07</span>,
+    <span class="number">1.20683053909e-07</span>,
+    <span class="number">1.21808209468e-07</span>,
+    <span class="number">1.2295639141e-07</span>,
+    <span class="number">1.24129212952e-07</span>,
+    <span class="number">1.25328445797e-07</span>,
+    <span class="number">1.26556042658e-07</span>,
+    <span class="number">1.27814163916e-07</span>,
+    <span class="number">1.29105209375e-07</span>,
+    <span class="number">1.30431856341e-07</span>,
+    <span class="number">1.31797105598e-07</span>,
+    <span class="number">1.3320433736e-07</span>,
+    <span class="number">1.34657379914e-07</span>,
+    <span class="number">1.36160594606e-07</span>,
+    <span class="number">1.37718982103e-07</span>,
+    <span class="number">1.39338316679e-07</span>,
+    <span class="number">1.41025317971e-07</span>,
+    <span class="number">1.42787873535e-07</span>,
+    <span class="number">1.44635331499e-07</span>,
+    <span class="number">1.4657889173e-07</span>,
+    <span class="number">1.48632138436e-07</span>,
+    <span class="number">1.50811780719e-07</span>,
+    <span class="number">1.53138707402e-07</span>,
+    <span class="number">1.55639532047e-07</span>,
+    <span class="number">1.58348931426e-07</span>,
+    <span class="number">1.61313325908e-07</span>,
+    <span class="number">1.64596952856e-07</span>,
+    <span class="number">1.68292495203e-07</span>,
+    <span class="number">1.72541128694e-07</span>,
+    <span class="number">1.77574279496e-07</span>,
+    <span class="number">1.83813550477e-07</span>,
+    <span class="number">1.92166040885e-07</span>,
+    <span class="number">2.05295471952e-07</span>,
+    <span class="number">2.22600839893e-07</span>,
+];
+
+<span class="doccomment">/// Gaussian random numbers using the Ziggurat Method</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The code is based on a [C implementation][1] by Jochen Voss.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [1]: https://www.seehuhn.de/pages/ziggurat.html</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_assignments</span>)]</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ziggurat</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThreadRng</span>, <span class="ident">sigma</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+    <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">u</span>, <span class="kw-2">mut</span> <span class="ident">i</span>, <span class="kw-2">mut</span> <span class="ident">sign</span>, <span class="kw-2">mut</span> <span class="ident">j</span>) <span class="op">=</span> (<span class="number">0u32</span>, <span class="number">0usize</span>, <span class="number">0u32</span>, <span class="number">0u32</span>);
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">0f64</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="number">0f64</span>;
+
+    <span class="kw">loop</span> {
+        <span class="ident">u</span> <span class="op">=</span> <span class="ident">rand_num</span>(<span class="ident">rng</span>, <span class="ident">u32</span>::<span class="ident">MIN</span>, <span class="ident">u32</span>::<span class="ident">MAX</span>);
+        <span class="ident">i</span> <span class="op">=</span> (<span class="ident">u</span> <span class="op">&amp;</span> <span class="number">0x0000007F</span>) <span class="kw">as</span> <span class="ident">usize</span>; <span class="comment">// 7 bit to choose the step</span>
+        <span class="ident">sign</span> <span class="op">=</span> <span class="ident">u</span> <span class="op">&amp;</span> <span class="number">0x00000080</span>; <span class="comment">// 1 bit for the sign</span>
+        <span class="ident">j</span> <span class="op">=</span> <span class="ident">u</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">8</span>; <span class="comment">// 24 bit for the x-value</span>
+
+        <span class="ident">x</span> <span class="op">=</span> <span class="ident">j</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">*</span> <span class="ident">WTAB</span>[<span class="ident">i</span>];
+        <span class="kw">if</span> <span class="ident">j</span> <span class="op">&lt;</span> <span class="ident">KTAB</span>[<span class="ident">i</span>] {
+            <span class="kw">break</span>;
+        }
+
+        <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="number">127</span> {
+            <span class="kw">let</span> <span class="ident">y0</span> <span class="op">=</span> <span class="ident">YTAB</span>[<span class="ident">i</span>];
+            <span class="kw">let</span> <span class="ident">y1</span> <span class="op">=</span> <span class="ident">YTAB</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>];
+            <span class="ident">y</span> <span class="op">=</span> <span class="ident">y1</span> <span class="op">+</span> (<span class="ident">y0</span> <span class="op">-</span> <span class="ident">y1</span>) <span class="op">*</span> <span class="ident">rand_num</span>(<span class="ident">rng</span>, <span class="number">0f64</span>, <span class="number">1f64</span>);
+        } <span class="kw">else</span> {
+            <span class="ident">x</span> <span class="op">=</span> <span class="ident">PARAM_R</span> <span class="op">-</span> (<span class="number">1.0</span> <span class="op">-</span> <span class="ident">rand_num</span>(<span class="ident">rng</span>, <span class="number">0f64</span>, <span class="number">1f64</span>).<span class="ident">ln</span>()) <span class="op">/</span> <span class="ident">PARAM_R</span>;
+            <span class="ident">y</span> <span class="op">=</span> (<span class="op">-</span><span class="ident">PARAM_R</span> <span class="op">*</span> (<span class="ident">x</span> <span class="op">-</span> <span class="number">0.5</span> <span class="op">*</span> <span class="ident">PARAM_R</span>)).<span class="ident">exp</span>() <span class="op">*</span> <span class="ident">rand_num</span>(<span class="ident">rng</span>, <span class="number">0f64</span>, <span class="number">1f64</span>);
+        }
+
+        <span class="kw">if</span> <span class="ident">y</span> <span class="op">&lt;</span> (<span class="op">-</span><span class="number">0.5</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">x</span>).<span class="ident">exp</span>() {
+            <span class="kw">break</span>;
+        }
+    }
+
+    <span class="kw">if</span> <span class="ident">sign</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
+        <span class="ident">sigma</span> <span class="op">*</span> <span class="ident">x</span>
+    } <span class="kw">else</span> {
+        <span class="op">-</span><span class="ident">sigma</span> <span class="op">*</span> <span class="ident">x</span>
+    }
+}
+</pre></div>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p><p>You can look for items with an exact name by putting double quotes around your request: <code>"string"</code></p><p>Look for items inside another one by searching for a path: <code>vec::Vec</code></p></div></div></aside><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
