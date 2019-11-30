@@ -825,8 +825,8 @@
                 }
                 <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">tab</span>(<span class="ident">k</span>, <span class="ident">space</span>));
                 <span class="ident">space_map</span>.<span class="ident">insert</span>(<span class="ident">k</span>.<span class="ident">to_string</span>(), <span class="ident">space</span>);
-                <span class="ident">result</span>.<span class="ident">push</span>(<span class="string">&#39;\n&#39;</span>);
             }
+            <span class="ident">result</span>.<span class="ident">push</span>(<span class="string">&#39;\n&#39;</span>);
 
             <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="number">5</span> {
                 <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">tab</span>(<span class="kw-2">&amp;</span><span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;r[{}]&quot;</span>, <span class="ident">i</span>), <span class="ident">lc1</span>));
