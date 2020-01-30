@@ -14,7 +14,7 @@
     });
 </script>
 
-<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form js-only"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -443,20 +443,54 @@
 <span id="427">427</span>
 <span id="428">428</span>
 <span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
+<span id="460">460</span>
+<span id="461">461</span>
+<span id="462">462</span>
+<span id="463">463</span>
+<span id="464">464</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Probabilistic distributions</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Probability Distribution</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * There are some famous pdf in Peroxide (not checked pdfs will be implemented soon)</span>
-<span class="doccomment">//!     * \[x\] Bernoulli</span>
-<span class="doccomment">//!     * \[x\] Beta</span>
-<span class="doccomment">//!     * \[ \] Dirichlet</span>
-<span class="doccomment">//!     * \[x\] Gamma</span>
-<span class="doccomment">//!     * \[x\] Normal</span>
-<span class="doccomment">//!     * \[ \] Student&#39;s t</span>
-<span class="doccomment">//!     * \[x\] Uniform</span>
-<span class="doccomment">//!     * \[ \] Wishart</span>
+<span class="doccomment">//!     * Bernoulli</span>
+<span class="doccomment">//!     * Beta</span>
+<span class="doccomment">//!     * Dirichlet</span>
+<span class="doccomment">//!     * Gamma</span>
+<span class="doccomment">//!     * Normal</span>
+<span class="doccomment">//!     * Student&#39;s t</span>
+<span class="doccomment">//!     * Uniform</span>
 <span class="doccomment">//! * There are two enums to represent probability distribution</span>
 <span class="doccomment">//!     * `OPDist&lt;T&gt;` : One parameter distribution (Bernoulli)</span>
 <span class="doccomment">//!     * `TPDist&lt;T&gt;` : Two parameter distribution (Uniform, Normal, Beta, Gamma)</span>
@@ -546,8 +580,9 @@
 <span class="doccomment">//! * To generate normal random number, there are two famous algorithms</span>
 <span class="doccomment">//!     * Marsaglia-Polar method</span>
 <span class="doccomment">//!     * Ziggurat algorithm</span>
-<span class="doccomment">//! * In peroxide, main algorithm is Ziggurat - most efficient algorithm to generate random normal samples.</span>
-<span class="doccomment">//!     * Code is based on a [C implementation](https://www.seehuhn.de/pages/ziggurat.html) by Jochen Voss.</span>
+<span class="doccomment">//! * In peroxide (after ver 0.19.1), use `rand_distr` to generate random normal samples.</span>
+<span class="doccomment">//! * &lt;del&gt;In peroxide, main algorithm is Ziggurat - most efficient algorithm to generate random normal samples.&lt;/del&gt;</span>
+<span class="doccomment">//!     * &lt;del&gt;Code is based on a [C implementation](https://www.seehuhn.de/pages/ziggurat.html) by Jochen Voss.&lt;/del&gt;</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
 <span class="doccomment">//!     use peroxide::*;</span>
@@ -568,12 +603,14 @@
 <span class="doccomment">//! ### Gamma Distribution</span>
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand_distr</span>;
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">rand</span>::<span class="ident">distributions</span>::<span class="ident">uniform</span>::<span class="ident">SampleUniform</span>;
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">rand</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="self">self</span>::<span class="ident">rand_distr</span>::<span class="ident">Distribution</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">OPDist</span>::<span class="kw-2">*</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">TPDist</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">special</span>::<span class="ident">function</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">statistics</span>::<span class="ident">rand</span>::<span class="ident">ziggurat</span>;
+<span class="comment">//use statistics::rand::ziggurat;</span>
 <span class="kw">use</span> <span class="ident">statistics</span>::<span class="ident">stat</span>::<span class="ident">Statistics</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">E</span>;
@@ -585,6 +622,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="ident">Bernoulli</span>(<span class="ident">T</span>),
+    <span class="ident">StudentT</span>(<span class="ident">T</span>),
 }
 
 <span class="doccomment">/// Two parameter distribution</span>
@@ -612,6 +650,7 @@
     <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Parameter</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>(),
         }
     }
 }
@@ -667,6 +706,11 @@
                 }
                 <span class="ident">v</span>
             }
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
+                <span class="kw">let</span> <span class="ident">stud</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">StudentT</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
+                <span class="ident">stud</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
+            }
         }
     }
 
@@ -678,6 +722,11 @@
                 } <span class="kw">else</span> {
                     <span class="number">1f64</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>()
                 }
+            }
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="ident">dof</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
+                <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
+                <span class="number">1f64</span> <span class="op">/</span> (<span class="ident">dof</span>.<span class="ident">sqrt</span>() <span class="op">*</span> <span class="ident">beta</span>(<span class="number">0.5f64</span>, <span class="ident">dof</span> <span class="op">/</span> <span class="number">2f64</span>)) <span class="op">*</span> (<span class="number">1f64</span> <span class="op">+</span> <span class="ident">t</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="ident">dof</span>).<span class="ident">powf</span>(<span class="op">-</span>(<span class="ident">dof</span> <span class="op">+</span> <span class="number">1f64</span>) <span class="op">/</span> <span class="number">2f64</span>)
             }
         }
     }
@@ -698,64 +747,79 @@
             }
             <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-                    <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ziggurat</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>, (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>()) <span class="op">+</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>();
-                }
-                <span class="ident">v</span>
+                <span class="kw">let</span> <span class="ident">normal</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">Normal</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
+                <span class="ident">normal</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
             }
+<span class="comment">//            Normal(m, s) =&gt; {</span>
+<span class="comment">//                let mut rng = thread_rng();</span>
+<span class="comment">//                let mut v = vec![0f64; n];</span>
+<span class="comment">//</span>
+<span class="comment">//                for i in 0..n {</span>
+<span class="comment">//                    v[i] = ziggurat(&amp;mut rng, (*s).into()) + (*m).into();</span>
+<span class="comment">//                }</span>
+<span class="comment">//                v</span>
+<span class="comment">//            }</span>
             <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng1</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng2</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-
-                <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-
-                <span class="comment">// For acceptance-rejection method</span>
-                <span class="kw">let</span> <span class="ident">c_x</span> <span class="op">=</span> (<span class="ident">a_f64</span> <span class="op">-</span> <span class="number">1f64</span>) <span class="op">/</span> (<span class="ident">a_f64</span> <span class="op">+</span> <span class="ident">b_f64</span> <span class="op">-</span> <span class="number">2f64</span>);
-                <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pdf</span>(<span class="ident">c_x</span>); <span class="comment">// Beta(mode(x) | a, b)</span>
-
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter_num</span> <span class="op">=</span> <span class="number">0usize</span>;
-
-                <span class="kw">while</span> <span class="ident">iter_num</span> <span class="op">&lt;</span> <span class="ident">n</span> {
-                    <span class="kw">let</span> <span class="ident">u1</span> <span class="op">=</span> <span class="ident">rng1</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>, <span class="number">1f64</span>);
-                    <span class="kw">let</span> <span class="ident">u2</span> <span class="op">=</span> <span class="ident">rng2</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>, <span class="number">1f64</span>);
-
-                    <span class="kw">if</span> <span class="ident">u2</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">1f64</span> <span class="op">/</span> <span class="ident">c</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">pdf</span>(<span class="ident">u1</span>) {
-                        <span class="ident">v</span>[<span class="ident">iter_num</span>] <span class="op">=</span> <span class="ident">u1</span>;
-                        <span class="ident">iter_num</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                    }
-                }
-                <span class="ident">v</span>
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
+                <span class="kw">let</span> <span class="ident">beta</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">Beta</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
+                <span class="ident">beta</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
             }
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-
-                <span class="comment">// for Marsaglia &amp; Tsang&#39;s Method</span>
-                <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">a_f64</span> <span class="op">-</span> <span class="number">1f64</span> <span class="op">/</span> <span class="number">3f64</span>;
-                <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="number">1f64</span> <span class="op">/</span> (<span class="number">9f64</span> <span class="op">*</span> <span class="ident">d</span>).<span class="ident">sqrt</span>();
-
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng1</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng2</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter_num</span> <span class="op">=</span> <span class="number">0usize</span>;
-
-                <span class="kw">while</span> <span class="ident">iter_num</span> <span class="op">&lt;</span> <span class="ident">n</span> {
-                    <span class="kw">let</span> <span class="ident">u</span> <span class="op">=</span> <span class="ident">rng1</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>, <span class="number">1f64</span>);
-                    <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="ident">ziggurat</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng2</span>, <span class="number">1f64</span>);
-                    <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> (<span class="number">1f64</span> <span class="op">+</span> <span class="ident">c</span> <span class="op">*</span> <span class="ident">z</span>).<span class="ident">powi</span>(<span class="number">3</span>);
-
-                    <span class="kw">if</span> <span class="ident">z</span> <span class="op">&gt;</span><span class="op">=</span> <span class="op">-</span><span class="number">1f64</span> <span class="op">/</span> <span class="ident">c</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">u</span>.<span class="ident">ln</span>() <span class="op">&lt;</span> <span class="number">0.5</span> <span class="op">*</span> <span class="ident">z</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">+</span> <span class="ident">d</span> <span class="op">-</span> <span class="ident">d</span> <span class="op">*</span> <span class="ident">w</span> <span class="op">+</span> <span class="ident">d</span> <span class="op">*</span> <span class="ident">w</span>.<span class="ident">ln</span>() {
-                        <span class="ident">v</span>[<span class="ident">iter_num</span>] <span class="op">=</span> <span class="ident">d</span> <span class="op">*</span> <span class="ident">w</span> <span class="op">/</span> <span class="ident">b_f64</span>;
-                        <span class="ident">iter_num</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                    }
-                }
-                <span class="ident">v</span>
+<span class="comment">//            Beta(a, b) =&gt; {</span>
+<span class="comment">//                let mut rng1 = thread_rng();</span>
+<span class="comment">//                let mut rng2 = thread_rng();</span>
+<span class="comment">//                let mut v = vec![0f64; n];</span>
+<span class="comment">//</span>
+<span class="comment">//                let a_f64 = (*a).into();</span>
+<span class="comment">//                let b_f64 = (*b).into();</span>
+<span class="comment">//</span>
+<span class="comment">//                // For acceptance-rejection method</span>
+<span class="comment">//                let c_x = (a_f64 - 1f64) / (a_f64 + b_f64 - 2f64);</span>
+<span class="comment">//                let c = self.pdf(c_x); // Beta(mode(x) | a, b)</span>
+<span class="comment">//</span>
+<span class="comment">//                let mut iter_num = 0usize;</span>
+<span class="comment">//</span>
+<span class="comment">//                while iter_num &lt; n {</span>
+<span class="comment">//                    let u1 = rng1.gen_range(0f64, 1f64);</span>
+<span class="comment">//                    let u2 = rng2.gen_range(0f64, 1f64);</span>
+<span class="comment">//</span>
+<span class="comment">//                    if u2 &lt;= 1f64 / c * self.pdf(u1) {</span>
+<span class="comment">//                        v[iter_num] = u1;</span>
+<span class="comment">//                        iter_num += 1;</span>
+<span class="comment">//                    }</span>
+<span class="comment">//                }</span>
+<span class="comment">//                v</span>
+<span class="comment">//            }</span>
+            <span class="ident">Gamma</span>(<span class="ident">shape</span>, <span class="ident">scale</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
+                <span class="kw">let</span> <span class="ident">gamma</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">Gamma</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">shape</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">scale</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
+                <span class="ident">gamma</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
             }
+<span class="comment">//            Gamma(a, b) =&gt; {</span>
+<span class="comment">//                let a_f64 = (*a).into();</span>
+<span class="comment">//                let b_f64 = (*b).into();</span>
+<span class="comment">//</span>
+<span class="comment">//                // for Marsaglia &amp; Tsang&#39;s Method</span>
+<span class="comment">//                let d = a_f64 - 1f64 / 3f64;</span>
+<span class="comment">//                let c = 1f64 / (9f64 * d).sqrt();</span>
+<span class="comment">//</span>
+<span class="comment">//                let mut rng1 = thread_rng();</span>
+<span class="comment">//                let mut rng2 = thread_rng();</span>
+<span class="comment">//</span>
+<span class="comment">//                let mut v = vec![0f64; n];</span>
+<span class="comment">//                let mut iter_num = 0usize;</span>
+<span class="comment">//</span>
+<span class="comment">//                while iter_num &lt; n {</span>
+<span class="comment">//                    let u = rng1.gen_range(0f64, 1f64);</span>
+<span class="comment">//                    let z = ziggurat(&amp;mut rng2, 1f64);</span>
+<span class="comment">//                    let w = (1f64 + c * z).powi(3);</span>
+<span class="comment">//</span>
+<span class="comment">//                    if z &gt;= -1f64 / c &amp;&amp; u.ln() &lt; 0.5 * z.powi(2) + d - d * w + d * w.ln() {</span>
+<span class="comment">//                        v[iter_num] = d * w / b_f64;</span>
+<span class="comment">//                        iter_num += 1;</span>
+<span class="comment">//                    }</span>
+<span class="comment">//                }</span>
+<span class="comment">//                v</span>
+<span class="comment">//            }</span>
         }
     }
 
@@ -803,6 +867,7 @@
     <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="number">0f64</span>,
         }
     }
 
@@ -812,12 +877,17 @@
                 <span class="kw">let</span> <span class="ident">mu_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>();
                 <span class="ident">mu_f64</span> <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> <span class="ident">mu_f64</span>)
             }
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="ident">nu_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
+                <span class="ident">nu_f64</span> <span class="op">/</span> (<span class="ident">nu_f64</span> <span class="op">-</span> <span class="number">2f64</span>)
+            }
         }
     }
 
     <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident">Bernoulli</span>(<span class="ident">_mu</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
+            <span class="ident">StudentT</span>(<span class="ident">_nu</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
         }
     }
 
@@ -874,4 +944,4 @@
     }
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><aside id="help" class="hidden"><div><h1 class="hidden">Help</h1><div class="shortcuts"><h2>Keyboard Shortcuts</h2><dl><dt><kbd>?</kbd></dt><dd>Show this help dialog</dd><dt><kbd>S</kbd></dt><dd>Focus the search field</dd><dt><kbd>↑</kbd></dt><dd>Move up in search results</dd><dt><kbd>↓</kbd></dt><dd>Move down in search results</dd><dt><kbd>↹</kbd></dt><dd>Switch tab</dd><dt><kbd>&#9166;</kbd></dt><dd>Go to active search result</dd><dt><kbd>+</kbd></dt><dd>Expand all sections</dd><dt><kbd>-</kbd></dt><dd>Collapse all sections</dd></dl></div><div class="infos"><h2>Search Tricks</h2><p>Prefix searches with a type followed by a colon (e.g., <code>fn:</code>) to restrict the search to a given type.</p><p>Accepted types are: <code>fn</code>, <code>mod</code>, <code>struct</code>, <code>enum</code>, <code>trait</code>, <code>type</code>, <code>macro</code>, and <code>const</code>.</p><p>Search functions by type signature (e.g., <code>vec -> usize</code> or <code>* -> vec</code>)</p><p>Search multiple things at once by splitting your query with comma (e.g., <code>str,u8</code> or <code>String,struct:Vec,test</code>)</p><p>You can look for items with an exact name by putting double quotes around your request: <code>"string"</code></p><p>Look for items inside another one by searching for a path: <code>vec::Vec</code></p></div></div></aside><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

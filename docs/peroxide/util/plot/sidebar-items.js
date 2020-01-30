@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["Grid",""],["Markers",""],["PlotOptions",""]],"struct":[["Plot2D",""]],"trait":[["Plot",""]]});
