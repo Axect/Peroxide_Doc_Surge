@@ -771,6 +771,25 @@
 <span id="755">755</span>
 <span id="756">756</span>
 <span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
+<span id="760">760</span>
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
+<span id="768">768</span>
+<span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+<span id="772">772</span>
+<span id="773">773</span>
+<span id="774">774</span>
+<span id="775">775</span>
+<span id="776">776</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Extra tools for `Vec&lt;f64&gt;`</span>
 <span class="doccomment">//!</span>
@@ -845,6 +864,7 @@
 <span class="doccomment">//!     * `div(&amp;self, other: Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt;`</span>
 <span class="doccomment">//!     * `dot(&amp;self, other: Vec&lt;f64&gt;) -&gt; f64`</span>
 <span class="doccomment">//!     * `norm(&amp;self) -&gt; f64`</span>
+<span class="doccomment">//!     * `sum(&amp;self) -&gt; f64`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
@@ -860,6 +880,7 @@
 <span class="doccomment">//!         a.div(&amp;b).print();</span>
 <span class="doccomment">//!         a.dot(&amp;b).print();</span>
 <span class="doccomment">//!         a.norm().print();</span>
+<span class="doccomment">//!         a.sum().print();</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!         // [5, 5, 5, 5]</span>
 <span class="doccomment">//!         // [-3, -1, 1, 3]</span>
@@ -867,6 +888,7 @@
 <span class="doccomment">//!         // [0.25, 0.6667, 1.5, 4]</span>
 <span class="doccomment">//!         // 20</span>
 <span class="doccomment">//!         // 5.477225575051661 // sqrt(30)</span>
+<span class="doccomment">//!         // 10</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//!</span>
@@ -1039,7 +1061,7 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">blas</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">blas</span>::{<span class="ident">daxpy</span>, <span class="ident">ddot</span>, <span class="ident">dnrm2</span>, <span class="ident">dscal</span>, <span class="ident">idamax</span>};
+<span class="kw">use</span> <span class="ident">blas</span>::{<span class="ident">daxpy</span>, <span class="ident">ddot</span>, <span class="ident">dnrm2</span>, <span class="ident">dscal</span>, <span class="ident">idamax</span>, <span class="ident">dasum</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">packed_simd</span>;
@@ -1301,7 +1323,7 @@
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">arg_max</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
         <span class="kw">match</span> () {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;native&quot;</span>)]</span>
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
             () <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">n_i32</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i32</span>;
                 <span class="kw">let</span> <span class="ident">idx</span>: <span class="ident">usize</span>;
@@ -1331,6 +1353,7 @@
     <span class="kw">fn</span> <span class="ident">s_mul</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
     <span class="kw">fn</span> <span class="ident">s_div</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
     <span class="kw">fn</span> <span class="ident">dot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
+    <span class="kw">fn</span> <span class="ident">sum</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
     <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
     <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
 }
@@ -1484,6 +1507,21 @@
                 <span class="ident">res</span>
             }
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>).<span class="ident">reduce</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>),
+        }
+    }
+
+    <span class="kw">fn</span> <span class="ident">sum</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
+        <span class="kw">match</span> () {
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
+            () <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="ident">n_i32</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i32</span>;
+                <span class="kw">let</span> <span class="ident">res</span>: <span class="ident">f64</span>;
+                <span class="kw">unsafe</span> {
+                    <span class="ident">res</span> <span class="op">=</span> <span class="ident">dasum</span>(<span class="ident">n_i32</span>, <span class="self">self</span>, <span class="number">1</span>);
+                }
+                <span class="ident">res</span>
+            }
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">reduce</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="number">0f64</span>, <span class="self">self</span>)
         }
     }
 
