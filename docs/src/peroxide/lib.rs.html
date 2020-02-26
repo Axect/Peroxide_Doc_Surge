@@ -268,6 +268,10 @@
 <span id="252">252</span>
 <span id="253">253</span>
 <span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.</span>
 <span class="doccomment">//!</span>
@@ -317,44 +321,48 @@
 <span class="doccomment">//!     * [Plot with `matplotlib`](util/plot/index.html)</span>
 <span class="doccomment">//! * [DataFrame](structure/dataframe/index.html)</span>
 <span class="doccomment">//!     * Read &amp; Write with `netcdf` or `csv` format</span>
+<span class="doccomment">//! * Macros</span>
+<span class="doccomment">//!     * [R macros](macros/r_macro/index.html)</span>
+<span class="doccomment">//!     * [Matlab macros](macros/matlab_macro/index.html)</span>
+<span class="doccomment">//!     * [Julia macros](macros/julia_macro/index.html)</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Quick Start</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ### Cargo.toml</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * To use `peroxide`, you should edit `Cargo.toml`</span>
-<span class="doccomment">//! * Current document version is corresponding to `0.18.0`</span>
+<span class="doccomment">//! * Current document version is corresponding to `0.20.1`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! 1. Default</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies]</span>
-<span class="doccomment">//!     peroxide = &quot;0.18&quot;</span>
+<span class="doccomment">//!     peroxide = &quot;0.20&quot;</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 2. OpenBLAS &amp; SIMD</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.18&quot;</span>
+<span class="doccomment">//!     version = &quot;0.20&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;O3&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 3. Plot</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.18&quot;</span>
+<span class="doccomment">//!     version = &quot;0.20&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;plot&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 4. DataFrame</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.18&quot;</span>
+<span class="doccomment">//!     version = &quot;0.20&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;dataframe&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 5. Together</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.18&quot;</span>
+<span class="doccomment">//!     version = &quot;0.20&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;O3&quot;, &quot;plot&quot;, &quot;dataframe&quot;]</span>
 <span class="doccomment">//!     ```</span>
