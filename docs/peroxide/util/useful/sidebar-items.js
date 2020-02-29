@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["choose_longer_vec",""],["choose_shorter_string",""],["choose_shorter_vec",""],["max",""],["min",""],["nearly_eq","Near equal"],["quot_rem",""],["tab",""]]});
+initSidebarItems({"fn":[["choose_longer_vec",""],["choose_shorter_string",""],["choose_shorter_vec",""],["max",""],["min",""],["nearly_eq","Near equal"],["quot_rem",""],["sgn","Signum function"],["tab",""]]});

@@ -274,7 +274,6 @@
 <span id="258">258</span>
 <span id="259">259</span>
 <span id="260">260</span>
-<span id="261">261</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.</span>
 <span class="doccomment">//!</span>
@@ -411,6 +410,8 @@
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">order_stat</span>;
 
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">puruspe</span>;
+
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">statistics</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">structure</span>;
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
@@ -419,7 +420,6 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">numerical</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">operation</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">redox</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;specials&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">special</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">util</span>;
 
@@ -496,7 +496,6 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">statistics</span>::<span class="ident">dist</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;specials&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">special</span>::<span class="ident">function</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
@@ -525,7 +524,6 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">numerical</span>::<span class="ident">optimize</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;specials&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">special</span>::<span class="ident">legendre</span>::<span class="kw-2">*</span>;
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>

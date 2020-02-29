@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["function",""],["legendre",""]]});
+initSidebarItems({"mod":[["function",""],["lanczos",""],["legendre",""]]});

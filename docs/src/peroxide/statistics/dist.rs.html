@@ -548,11 +548,6 @@
 <span id="532">532</span>
 <span id="533">533</span>
 <span id="534">534</span>
-<span id="535">535</span>
-<span id="536">536</span>
-<span id="537">537</span>
-<span id="538">538</span>
-<span id="539">539</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Probabilistic distributions</span>
 <span class="doccomment">//!</span>
@@ -684,7 +679,6 @@
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">rand_distr</span>::<span class="ident">Distribution</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">OPDist</span>::<span class="kw-2">*</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">TPDist</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;specials&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">special</span>::<span class="ident">function</span>::<span class="kw-2">*</span>;
 <span class="comment">//use statistics::rand::ziggurat;</span>
 <span class="kw">use</span> <span class="ident">statistics</span>::<span class="ident">stat</span>::<span class="ident">Statistics</span>;
@@ -748,7 +742,6 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Methods</span>
 <span class="doccomment">/// * `sample`: extract samples</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;specials&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RNG</span> {
     <span class="doccomment">/// Extract samples of distributions</span>
     <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
@@ -767,7 +760,6 @@
 }
 
 <span class="doccomment">/// RNG for OPDist</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;specials&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">RNG</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
@@ -807,7 +799,6 @@
                     <span class="number">1f64</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>()
                 }
             }
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;specials&quot;</span>)]</span>
             <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">dof</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
@@ -849,7 +840,6 @@
 }
 
 <span class="doccomment">/// RNG for TPDist</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;specials&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">RNG</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
