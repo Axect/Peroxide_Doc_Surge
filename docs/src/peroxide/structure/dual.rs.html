@@ -959,6 +959,16 @@
 <span id="943">943</span>
 <span id="944">944</span>
 <span id="945">945</span>
+<span id="946">946</span>
+<span id="947">947</span>
+<span id="948">948</span>
+<span id="949">949</span>
+<span id="950">950</span>
+<span id="951">951</span>
+<span id="952">952</span>
+<span id="953">953</span>
+<span id="954">954</span>
+<span id="955">955</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Dual number system for Automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -1448,7 +1458,17 @@
         <span class="ident">Dual</span>::<span class="ident">new</span>(<span class="ident">val</span>, <span class="ident">dval</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">if</span> <span class="ident">f</span> <span class="op">=</span><span class="op">=</span> <span class="number">0f64</span> {
+            <span class="kw">return</span> <span class="ident">Dual</span>::<span class="ident">new</span>(<span class="number">1f64</span>, <span class="number">0f64</span>);
+        }
+        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">x</span>;
+        <span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span>);
+        <span class="kw">let</span> <span class="ident">dval</span> <span class="op">=</span> <span class="ident">f</span> <span class="op">*</span> <span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span> <span class="op">-</span> <span class="number">1f64</span>) <span class="op">*</span> <span class="self">self</span>.<span class="ident">dx</span>;
+        <span class="ident">Dual</span>::<span class="ident">new</span>(<span class="ident">val</span>, <span class="ident">dval</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">pow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">value</span>();
         <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">slope</span>();
         <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">value</span>();
@@ -1457,7 +1477,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">sqrt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">powf</span>(<span class="ident">Dual</span>::<span class="ident">new</span>(<span class="number">0.5f64</span>, <span class="number">0f64</span>))
+        <span class="self">self</span>.<span class="ident">powf</span>(<span class="number">0.5</span>)
     }
 }
 

@@ -435,6 +435,13 @@
 <span id="419">419</span>
 <span id="420">420</span>
 <span id="421">421</span>
+<span id="422">422</span>
+<span id="423">423</span>
+<span id="424">424</span>
+<span id="425">425</span>
+<span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Hyper dual number system for Automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -837,7 +844,14 @@
         <span class="ident">s</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span>);
+        <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">dx</span> <span class="op">*</span> <span class="ident">f</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span> <span class="op">-</span> <span class="number">1f64</span>);
+        <span class="kw">let</span> <span class="ident">ddx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ddx</span> <span class="op">*</span> <span class="ident">f</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span> <span class="op">-</span> <span class="number">1f64</span>) <span class="op">+</span> <span class="self">self</span>.<span class="ident">dx</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">*</span> <span class="ident">f</span> <span class="op">*</span> (<span class="ident">f</span> <span class="op">-</span> <span class="number">1f64</span>) <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span> <span class="op">-</span> <span class="number">2f64</span>);
+        <span class="self">Self</span>::<span class="ident">new</span>(<span class="ident">x</span>, <span class="ident">dx</span>, <span class="ident">ddx</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">pow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">value</span>();
         <span class="kw">let</span> <span class="ident">dn</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">slope</span>();
         <span class="kw">let</span> <span class="ident">ddn</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">accel</span>();
@@ -854,7 +868,7 @@
     }
 
     <span class="kw">fn</span> <span class="ident">sqrt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">powf</span>(<span class="ident">HyperDual</span>::<span class="ident">new</span>(<span class="number">0.5f64</span>, <span class="number">0f64</span>, <span class="number">0f64</span>))
+        <span class="self">self</span>.<span class="ident">pow</span>(<span class="ident">HyperDual</span>::<span class="ident">new</span>(<span class="number">0.5f64</span>, <span class="number">0f64</span>, <span class="number">0f64</span>))
     }
 }
 </pre></div>

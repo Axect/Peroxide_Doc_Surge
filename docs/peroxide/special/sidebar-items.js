@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["function",""],["lanczos",""],["legendre",""]]});
+initSidebarItems({"mod":[["function",""],["lanczos","Lanczos approximation Coefficient generator"],["legendre",""]]});

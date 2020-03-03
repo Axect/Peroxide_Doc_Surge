@@ -274,6 +274,11 @@
 <span id="258">258</span>
 <span id="259">259</span>
 <span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.</span>
 <span class="doccomment">//!</span>
@@ -286,6 +291,7 @@
 <span class="doccomment">//!         * `+,-,*,/`</span>
 <span class="doccomment">//!         * LU, Determinant, Inverse</span>
 <span class="doccomment">//!     * [Vector](structure/vector/index.html) operations</span>
+<span class="doccomment">//!     * [Redox](redox/index.html) for convenient Vector operations</span>
 <span class="doccomment">//! * Statistics</span>
 <span class="doccomment">//!     * [Statistical operations](statistics/stat/index.html)</span>
 <span class="doccomment">//!         * `mean, var, sd`</span>
@@ -296,11 +302,14 @@
 <span class="doccomment">//!         * Normal</span>
 <span class="doccomment">//!         * Gamma</span>
 <span class="doccomment">//!         * Beta</span>
-<span class="doccomment">//! * [Special functions](special/function/index.html) (Using `special` crate)</span>
+<span class="doccomment">//!         * Student&#39;s t</span>
+<span class="doccomment">//! * [Special functions](special/function/index.html) (Using `puruspe` crate)</span>
 <span class="doccomment">//!     * Gaussian</span>
 <span class="doccomment">//!     * Gamma</span>
 <span class="doccomment">//!     * Beta</span>
 <span class="doccomment">//!     * Error</span>
+<span class="doccomment">//!     * Incomplete Gamma</span>
+<span class="doccomment">//!     * Incomplete Beta</span>
 <span class="doccomment">//! * Automatic Differentiation</span>
 <span class="doccomment">//!     * [Dual number system](structure/dual/index.html)</span>
 <span class="doccomment">//!     * [Hyper dual number system](structure/hyper_dual/index.html)</span>
@@ -309,6 +318,7 @@
 <span class="doccomment">//!     * [Spline](numerical/spline/index.html)</span>
 <span class="doccomment">//!     * [Polynomial](structure/polynomial/index.html)</span>
 <span class="doccomment">//!     * [Gauss-Legendre Quadrature](special/legendre/fn.gauss_legendre_quadrature.html)</span>
+<span class="doccomment">//!     * [Lanczos Approximation](special/lanczos/index.html)</span>
 <span class="doccomment">//! * [Optimization](numerical/optimize/index.html)</span>
 <span class="doccomment">//!     * Gradient Descent</span>
 <span class="doccomment">//!     * Levenberg-Marquardt</span>
@@ -333,38 +343,38 @@
 <span class="doccomment">//! ### Cargo.toml</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * To use `peroxide`, you should edit `Cargo.toml`</span>
-<span class="doccomment">//! * Current document version is corresponding to `0.20.1`</span>
+<span class="doccomment">//! * Current document version is corresponding to `0.21.1`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! 1. Default</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies]</span>
-<span class="doccomment">//!     peroxide = &quot;0.20&quot;</span>
+<span class="doccomment">//!     peroxide = &quot;0.21&quot;</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 2. OpenBLAS &amp; SIMD</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.20&quot;</span>
+<span class="doccomment">//!     version = &quot;0.21&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;O3&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 3. Plot</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.20&quot;</span>
+<span class="doccomment">//!     version = &quot;0.21&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;plot&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 4. DataFrame</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.20&quot;</span>
+<span class="doccomment">//!     version = &quot;0.21&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;dataframe&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 5. Together</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.20&quot;</span>
+<span class="doccomment">//!     version = &quot;0.21&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;O3&quot;, &quot;plot&quot;, &quot;dataframe&quot;]</span>
 <span class="doccomment">//!     ```</span>

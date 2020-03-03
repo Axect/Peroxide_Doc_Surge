@@ -420,6 +420,13 @@
 <span id="404">404</span>
 <span id="405">405</span>
 <span id="406">406</span>
+<span id="407">407</span>
+<span id="408">408</span>
+<span id="409">409</span>
+<span id="410">410</span>
+<span id="411">411</span>
+<span id="412">412</span>
+<span id="413">413</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">operation</span>::<span class="ident">extra_ops</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">Real</span>, <span class="ident">TrigOps</span>};
 <span class="kw">use</span> <span class="ident">operation</span>::<span class="ident">number</span>::<span class="ident">Number</span>::{<span class="ident">D</span>, <span class="ident">F</span>};
@@ -704,13 +711,20 @@
         }
     }
 
+    <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
+            <span class="ident">F</span>(<span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">F</span>(<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span>)),
+            <span class="ident">D</span>(<span class="ident">x</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">D</span>(<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span>)),
+        }
+    }
+
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unreachable_patterns</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">pow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">match</span> (<span class="self">self</span>, <span class="kw-2">&amp;</span><span class="ident">f</span>) {
             (<span class="ident">F</span>(<span class="ident">x</span>), <span class="ident">F</span>(<span class="ident">y</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">F</span>(<span class="ident">x</span>.<span class="ident">powf</span>(<span class="kw-2">*</span><span class="ident">y</span>)),
-            (<span class="ident">F</span>(<span class="ident">x</span>), <span class="ident">D</span>(<span class="ident">y</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">D</span>(<span class="ident">Dual</span>::<span class="ident">from_f64</span>(<span class="kw-2">*</span><span class="ident">x</span>).<span class="ident">powf</span>(<span class="kw-2">*</span><span class="ident">y</span>)),
-            (<span class="ident">D</span>(<span class="ident">x</span>), <span class="ident">F</span>(<span class="ident">y</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">D</span>(<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">Dual</span>::<span class="ident">from_f64</span>(<span class="kw-2">*</span><span class="ident">y</span>))),
-            (<span class="ident">D</span>(<span class="ident">x</span>), <span class="ident">D</span>(<span class="ident">y</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">D</span>(<span class="ident">x</span>.<span class="ident">powf</span>(<span class="kw-2">*</span><span class="ident">y</span>)),
+            (<span class="ident">F</span>(<span class="ident">x</span>), <span class="ident">D</span>(<span class="ident">y</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">D</span>(<span class="ident">Dual</span>::<span class="ident">from_f64</span>(<span class="kw-2">*</span><span class="ident">x</span>).<span class="ident">pow</span>(<span class="kw-2">*</span><span class="ident">y</span>)),
+            (<span class="ident">D</span>(<span class="ident">x</span>), <span class="ident">F</span>(<span class="ident">y</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">D</span>(<span class="ident">x</span>.<span class="ident">pow</span>(<span class="ident">Dual</span>::<span class="ident">from_f64</span>(<span class="kw-2">*</span><span class="ident">y</span>))),
+            (<span class="ident">D</span>(<span class="ident">x</span>), <span class="ident">D</span>(<span class="ident">y</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">D</span>(<span class="ident">x</span>.<span class="ident">pow</span>(<span class="kw-2">*</span><span class="ident">y</span>)),
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable</span><span class="macro">!</span>(),
         }
     }
