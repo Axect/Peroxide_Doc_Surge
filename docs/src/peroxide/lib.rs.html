@@ -284,6 +284,15 @@
 <span id="268">268</span>
 <span id="269">269</span>
 <span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.</span>
 <span class="doccomment">//!</span>
@@ -349,7 +358,7 @@
 <span class="doccomment">//! ### Cargo.toml</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * To use `peroxide`, you should edit `Cargo.toml`</span>
-<span class="doccomment">//! * Current document version is corresponding to `0.21.2`</span>
+<span class="doccomment">//! * Current document version is corresponding to `0.21.4`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! 1. Default</span>
 <span class="doccomment">//!     ```toml</span>
@@ -397,6 +406,13 @@
 <span class="doccomment">//!         //Some codes...</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## Useful tips for features</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * After `0.21.4`, if size of matrix is smaller than `1000 x 1000`, default is more effective than `O3` feature.</span>
+<span class="doccomment">//! * To plot, use `dataframe` to export data as netcdf format and use python to draw plot.</span>
+<span class="doccomment">//!     * `plot` feature has limited plot abilities.</span>
+<span class="doccomment">//!     * There is a template of python code. - [Socialst](https://github.com/Axect/Socialst/blob/master/Templates/PyPlot_Template/nc_plot.py)</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">blas</span>;
@@ -427,6 +443,8 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">order_stat</span>;
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">puruspe</span>;
+
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">matrixmultiply</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">statistics</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">structure</span>;
