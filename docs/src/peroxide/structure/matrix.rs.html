@@ -3230,6 +3230,45 @@
 <span id="3214">3214</span>
 <span id="3215">3215</span>
 <span id="3216">3216</span>
+<span id="3217">3217</span>
+<span id="3218">3218</span>
+<span id="3219">3219</span>
+<span id="3220">3220</span>
+<span id="3221">3221</span>
+<span id="3222">3222</span>
+<span id="3223">3223</span>
+<span id="3224">3224</span>
+<span id="3225">3225</span>
+<span id="3226">3226</span>
+<span id="3227">3227</span>
+<span id="3228">3228</span>
+<span id="3229">3229</span>
+<span id="3230">3230</span>
+<span id="3231">3231</span>
+<span id="3232">3232</span>
+<span id="3233">3233</span>
+<span id="3234">3234</span>
+<span id="3235">3235</span>
+<span id="3236">3236</span>
+<span id="3237">3237</span>
+<span id="3238">3238</span>
+<span id="3239">3239</span>
+<span id="3240">3240</span>
+<span id="3241">3241</span>
+<span id="3242">3242</span>
+<span id="3243">3243</span>
+<span id="3244">3244</span>
+<span id="3245">3245</span>
+<span id="3246">3246</span>
+<span id="3247">3247</span>
+<span id="3248">3248</span>
+<span id="3249">3249</span>
+<span id="3250">3250</span>
+<span id="3251">3251</span>
+<span id="3252">3252</span>
+<span id="3253">3253</span>
+<span id="3254">3254</span>
+<span id="3255">3255</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Matrix for Scientific computation</span>
 <span class="doccomment">//!</span>
@@ -3861,12 +3900,46 @@
 <span class="doccomment">/// Main matrix structure</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Matrix</span> {
+    <span class="doccomment">/// Raw pointer for `self.data`</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">f64</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>[<span class="number">0</span>] <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">f64</span>
     }
 
+    <span class="doccomment">/// Raw mutable pointer for `self.data`</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mut_ptr</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">f64</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>[<span class="number">0</span>] <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">f64</span>
+    }
+
+    <span class="doccomment">/// Slice of `self.data`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// extern crate peroxide;</span>
+    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// </span>
+    <span class="doccomment">/// let a = matrix(vec![1,2,3,4], 2, 2, Col);</span>
+    <span class="doccomment">/// let b = a.as_slice();</span>
+    <span class="doccomment">/// assert_eq!(b, &amp;[1f64,2f64,3f64,4f64]);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">f64</span>] {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>[..]
+    }
+
+    <span class="doccomment">/// Mutable slice of `self.data`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// extern crate peroxide;</span>
+    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let mut a = matrix(vec![1,2,3,4], 2, 2, Col);</span>
+    <span class="doccomment">/// let mut b = a.as_mut_slice();</span>
+    <span class="doccomment">/// b[0] = 5f64;</span>
+    <span class="doccomment">/// assert_eq!(b, &amp;[5f64, 2f64, 3f64, 4f64]);</span>
+    <span class="doccomment">/// assert_eq!(a, matrix(vec![5,2,3,4], 2, 2, Col));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">f64</span>] {
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>[..]
     }
 
     <span class="doccomment">/// Change Bindings</span>
@@ -3898,7 +3971,7 @@
                     <span class="ident">data</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_data</span>[<span class="ident">s</span>];
                 }
                 <span class="ident">data</span>[<span class="ident">l</span>] <span class="op">=</span> <span class="ident">ref_data</span>[<span class="ident">l</span>];
-                <span class="ident">matrix</span>(<span class="ident">data</span>.<span class="ident">clone</span>(),<span class="ident">r</span>,<span class="ident">c</span>,<span class="ident">Col</span>)
+                <span class="ident">matrix</span>(<span class="ident">data</span>,<span class="ident">r</span>,<span class="ident">c</span>,<span class="ident">Col</span>)
             }
             <span class="ident">Col</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
@@ -3906,7 +3979,7 @@
                     <span class="ident">data</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_data</span>[<span class="ident">s</span>];
                 }
                 <span class="ident">data</span>[<span class="ident">l</span>] <span class="op">=</span> <span class="ident">ref_data</span>[<span class="ident">l</span>];
-                <span class="ident">matrix</span>(<span class="ident">data</span>.<span class="ident">clone</span>(),<span class="ident">r</span>,<span class="ident">c</span>,<span class="ident">Row</span>)
+                <span class="ident">matrix</span>(<span class="ident">data</span>,<span class="ident">r</span>,<span class="ident">c</span>,<span class="ident">Row</span>)
             }
         }
     }
@@ -4279,13 +4352,16 @@
 
 <span class="doccomment">/// Common trait for Matrix &amp; Vector</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">LinearOps</span> {
+    <span class="kw">type</span> <span class="ident">Operator</span>;
     <span class="kw">fn</span> <span class="ident">from_matrix</span>(<span class="ident">m</span>: <span class="ident">Matrix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
     <span class="kw">fn</span> <span class="ident">to_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span>;
-    <span class="kw">fn</span> <span class="ident">transpose</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span>;
-    <span class="kw">fn</span> <span class="ident">t</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span>;
+    <span class="kw">fn</span> <span class="ident">transpose</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Operator</span>;
+    <span class="kw">fn</span> <span class="ident">t</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Operator</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">LinearOps</span> <span class="kw">for</span> <span class="ident">Matrix</span> {
+    <span class="kw">type</span> <span class="ident">Operator</span> <span class="op">=</span> <span class="self">Self</span>;
+
     <span class="doccomment">/// Just Clone</span>
     <span class="kw">fn</span> <span class="ident">from_matrix</span>(<span class="ident">m</span>: <span class="ident">Matrix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">m</span>
@@ -4328,7 +4404,9 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">LinearOps</span> <span class="kw">for</span> <span class="ident">Vector</span> {
+<span class="kw">impl</span> <span class="ident">LinearOps</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">Operator</span> <span class="op">=</span> <span class="ident">Matrix</span>;
+
     <span class="kw">fn</span> <span class="ident">from_matrix</span>(<span class="ident">m</span>: <span class="ident">Matrix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">m</span>.<span class="ident">data</span>
     }

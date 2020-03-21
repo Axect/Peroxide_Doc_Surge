@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["EigenMethod",""]],"fn":[["eigen",""],["jacobi",""]],"struct":[["Eigen",""],["JacobiTemp","To do Jacobi method"]]});

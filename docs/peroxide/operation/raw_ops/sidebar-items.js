@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["RawMatrix","Pointer for col or row"]]});

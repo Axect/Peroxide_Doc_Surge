@@ -279,6 +279,11 @@
 <span id="263">263</span>
 <span id="264">264</span>
 <span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.</span>
 <span class="doccomment">//!</span>
@@ -292,6 +297,7 @@
 <span class="doccomment">//!         * LU, Determinant, Inverse</span>
 <span class="doccomment">//!     * [Vector](structure/vector/index.html) operations</span>
 <span class="doccomment">//!     * [Redox](redox/index.html) for convenient Vector operations</span>
+<span class="doccomment">//!     * [Eigenvalue, Eigenvector](numerical/eigen/index.html) algorithms </span>
 <span class="doccomment">//! * Statistics</span>
 <span class="doccomment">//!     * [Statistical operations](statistics/stat/index.html)</span>
 <span class="doccomment">//!         * `mean, var, sd`</span>
@@ -343,7 +349,7 @@
 <span class="doccomment">//! ### Cargo.toml</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * To use `peroxide`, you should edit `Cargo.toml`</span>
-<span class="doccomment">//! * Current document version is corresponding to `0.21.1`</span>
+<span class="doccomment">//! * Current document version is corresponding to `0.21.2`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! 1. Default</span>
 <span class="doccomment">//!     ```toml</span>
@@ -545,5 +551,9 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;dataframe&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">dataframe</span>::<span class="kw-2">*</span>;
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">numerical</span>::<span class="ident">eigen</span>::<span class="kw-2">*</span>;
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">operation</span>::<span class="ident">raw_ops</span>::<span class="kw-2">*</span>;
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../";window.currentCrate = "peroxide";</script><script src="../../aliases.js"></script><script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script><script defer src="../../search-index.js"></script></body></html>
