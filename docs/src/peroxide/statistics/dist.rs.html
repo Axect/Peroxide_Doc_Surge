@@ -683,7 +683,7 @@
 <span class="comment">//use statistics::rand::ziggurat;</span>
 <span class="kw">use</span> <span class="ident">statistics</span>::<span class="ident">stat</span>::<span class="ident">Statistics</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::{<span class="ident">E</span>, <span class="ident">PI</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">E</span>;
 
 <span class="doccomment">/// One parameter distribution</span>
 <span class="doccomment">///</span>
@@ -822,7 +822,7 @@
             <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">nu</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">odd_nu</span> <span class="op">=</span> (<span class="ident">nu</span> <span class="op">+</span> <span class="number">1f64</span>) <span class="op">/</span> <span class="number">2f64</span>;
+                <span class="kw">let</span> <span class="ident">_odd_nu</span> <span class="op">=</span> (<span class="ident">nu</span> <span class="op">+</span> <span class="number">1f64</span>) <span class="op">/</span> <span class="number">2f64</span>;
                 <span class="kw">let</span> <span class="ident">even_nu</span> <span class="op">=</span> <span class="ident">nu</span> <span class="op">/</span> <span class="number">2f64</span>;
 
                 <span class="kw">if</span> <span class="ident">x</span> <span class="op">&gt;</span> <span class="number">0f64</span> {

@@ -305,8 +305,8 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">diag</span>();
         <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">d</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">h</span> <span class="op">=</span> <span class="number">0f64</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">n_rot</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">n_rot</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">h</span>: <span class="ident">f64</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_n_rot</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">n_rot</span>;
 
         <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span> .. <span class="number">51</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sm</span> <span class="op">=</span> <span class="number">0f64</span>;
@@ -362,7 +362,7 @@
                         <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">n</span> {
                             <span class="ident">rot</span>(<span class="ident">v</span>, <span class="ident">s</span>, <span class="ident">tau</span>, <span class="ident">j</span>, <span class="ident">ip</span>, <span class="ident">j</span>, <span class="ident">iq</span>);
                         }
-                        <span class="ident">n_rot</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        <span class="ident">_n_rot</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                     }
                 }
             }
@@ -387,7 +387,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// * Reference : Press, William H., and William T. Vetterling. *Numerical Recipes.* Cambridge: Cambridge Univ. Press, 2007.</span>
 <span class="kw">fn</span> <span class="ident">eigsrt</span>(<span class="ident">d</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Matrix</span>) {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">k</span> <span class="op">=</span> <span class="number">0usize</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">k</span>: <span class="ident">usize</span>;
     <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">d</span>.<span class="ident">len</span>();
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">n</span><span class="op">-</span><span class="number">1</span> {
         <span class="ident">k</span> <span class="op">=</span> <span class="ident">i</span>;
