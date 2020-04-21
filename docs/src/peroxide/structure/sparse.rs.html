@@ -207,6 +207,14 @@
 <span id="191">191</span>
 <span id="192">192</span>
 <span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Sparse matrix (CCS format)</span>
 <span class="doccomment">//!</span>
@@ -216,6 +224,7 @@
 <span class="kw">use</span> ::{<span class="ident">Matrix</span>, <span class="ident">zeros</span>};
 <span class="kw">use</span> ::{<span class="ident">LinearAlgebra</span>, <span class="ident">Norm</span>};
 <span class="kw">use</span> ::{<span class="ident">PQLU</span>, <span class="ident">LinearOps</span>};
+<span class="kw">use</span> <span class="ident">QR</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SPMatrix</span> {
@@ -351,6 +360,10 @@
         <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">lu</span>()
     }
 
+    <span class="kw">fn</span> <span class="ident">qr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">QR</span> {
+        <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">qr</span>()
+    }
+
     <span class="kw">fn</span> <span class="ident">det</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
         <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">det</span>()
     }
@@ -365,6 +378,9 @@
 
     <span class="kw">fn</span> <span class="ident">pseudo_inv</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Matrix</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">pseudo_inv</span>()
+    }
+    <span class="kw">fn</span> <span class="ident">rref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> { 
+        <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">rref</span>()
     }
 }
 
