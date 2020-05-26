@@ -305,6 +305,36 @@
 <span id="289">289</span>
 <span id="290">290</span>
 <span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::{<span class="ident">max</span>, <span class="ident">min</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Index</span>, <span class="ident">Range</span>};
@@ -491,6 +521,36 @@
     {
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
 
+        <span class="self">self</span>.<span class="ident">polynomial</span>(<span class="ident">x</span>).<span class="ident">eval</span>(<span class="ident">x</span>)
+    }
+
+    <span class="doccomment">/// Returns a reference the `Polynomial` at the given point `x`.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Examples</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// extern crate peroxide;</span>
+    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let x = c!(0.9, 1.3, 1.9, 2.1);</span>
+    <span class="doccomment">/// let y = c!(1.3, 1.5, 1.85, 2.1);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let s = CubicSpline::from_nodes(x, y);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let p = s.polynomial(2.0);</span>
+    <span class="doccomment">/// let v = p.eval(1.9);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!((v * 100.0).round() / 100.0, 1.85)</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// If `x` is outside of the range of polynomials, the first or last polynomial will be</span>
+    <span class="doccomment">/// returned, depending if `x` is lower of the first interpolation point or higher of the last</span>
+    <span class="doccomment">/// interpolation point.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">polynomial</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Polynomial</span>
+        <span class="kw">where</span>
+        <span class="ident">T</span>: <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+    {
+        <span class="kw">let</span> <span class="ident">x</span>  <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
+
         <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">polynomials</span>.<span class="ident">binary_search_by</span>(<span class="op">|</span>(<span class="ident">range</span>, <span class="kw">_</span>)<span class="op">|</span> {
             <span class="kw">if</span> <span class="ident">range</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">x</span>) {
                 <span class="ident">core</span>::<span class="ident">cmp</span>::<span class="ident">Ordering</span>::<span class="ident">Equal</span>
@@ -504,7 +564,7 @@
             <span class="prelude-val">Err</span>(<span class="ident">index</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">max</span>(<span class="number">0</span>, <span class="ident">min</span>(<span class="ident">index</span>, <span class="self">self</span>.<span class="ident">polynomials</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>)),
         };
 
-        <span class="self">self</span>.<span class="ident">polynomials</span>[<span class="ident">index</span>].<span class="number">1</span>.<span class="ident">eval</span>(<span class="ident">x</span>)
+        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">polynomials</span>[<span class="ident">index</span>].<span class="number">1</span>
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extend_with_nodes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">node_x</span>: <span class="ident">Vector</span>, <span class="ident">node_y</span>: <span class="ident">Vector</span>) {

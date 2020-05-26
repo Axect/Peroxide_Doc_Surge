@@ -969,6 +969,29 @@
 <span id="953">953</span>
 <span id="954">954</span>
 <span id="955">955</span>
+<span id="956">956</span>
+<span id="957">957</span>
+<span id="958">958</span>
+<span id="959">959</span>
+<span id="960">960</span>
+<span id="961">961</span>
+<span id="962">962</span>
+<span id="963">963</span>
+<span id="964">964</span>
+<span id="965">965</span>
+<span id="966">966</span>
+<span id="967">967</span>
+<span id="968">968</span>
+<span id="969">969</span>
+<span id="970">970</span>
+<span id="971">971</span>
+<span id="972">972</span>
+<span id="973">973</span>
+<span id="974">974</span>
+<span id="975">975</span>
+<span id="976">976</span>
+<span id="977">977</span>
+<span id="978">978</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Dual number system for Automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -1614,6 +1637,29 @@
     }
 
     <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
+        <span class="macro">unimplemented</span><span class="macro">!</span>()
+    }
+
+    <span class="doccomment">/// Norm L1, also known as Manhattan Norm</span>
+    <span class="doccomment">/// Sum of the absolute value of each element</span>
+    <span class="kw">fn</span> <span class="ident">norm_l1</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>  {
+        <span class="macro">unimplemented</span><span class="macro">!</span>()
+    }
+
+    <span class="doccomment">/// Norm L2, also known as Euclidean Norm</span>
+    <span class="doccomment">/// Square root of the sum of the square of each element</span>
+    <span class="kw">fn</span> <span class="ident">norm_l2</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>  {
+        <span class="macro">unimplemented</span><span class="macro">!</span>()
+    }
+
+    <span class="doccomment">/// Norm L-Infinity, also known as Maximum Norm</span>
+    <span class="doccomment">/// Maximum of the absolute value of the elements</span>
+    <span class="kw">fn</span> <span class="ident">norm_linf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>  {
+        <span class="macro">unimplemented</span><span class="macro">!</span>()
+    }
+
+    <span class="doccomment">/// Norm L-p, also known as p-Norm</span>
+    <span class="kw">fn</span> <span class="ident">norm_lp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>  {
         <span class="macro">unimplemented</span><span class="macro">!</span>()
     }
 

@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["chebyshev_nodes",""],["lagrange_polynomial",""]]});
+initSidebarItems({"fn":[["chebyshev_nodes",""]]});

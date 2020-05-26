@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Integral",""]],"fn":[["integrate","Numerical Integration"]]});

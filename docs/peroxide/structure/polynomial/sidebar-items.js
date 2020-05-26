@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["poly","Convenient to declare polynomial"]],"struct":[["Polynomial","Polynomial Structure"]],"trait":[["Calculus",""]]});
+initSidebarItems({"fn":[["lagrange_polynomial",""],["legendre_polynomial","Legendre Polynomial"],["poly","Convenient to declare polynomial"]],"struct":[["Polynomial","Polynomial Structure"]],"trait":[["Calculus",""]]});
