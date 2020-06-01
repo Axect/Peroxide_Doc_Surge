@@ -416,6 +416,8 @@
 <span id="400">400</span>
 <span id="401">401</span>
 <span id="402">402</span>
+<span id="403">403</span>
+<span id="404">404</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Plotting module for peroxide</span>
 <span class="doccomment">//!</span>
@@ -425,8 +427,9 @@
 <span class="doccomment">//! Let&#39;s see next ordinary code file.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```rust</span>
+<span class="doccomment">//! #[macro_use]</span>
 <span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::*;</span>
+<span class="doccomment">//! use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! fn main() {</span>
 <span class="doccomment">//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));</span>
@@ -454,8 +457,9 @@
 <span class="doccomment">//! Now, let&#39;s modify this code to below. Then it works surprisingly!</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```rust</span>
+<span class="doccomment">//! #[macro_use]</span>
 <span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::*;</span>
+<span class="doccomment">//! use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! fn main() {</span>
 <span class="doccomment">//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));</span>

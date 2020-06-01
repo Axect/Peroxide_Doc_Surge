@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Norm","Kinds of Vector & Matrix norm"]],"trait":[["InnerProduct","Inner product Vector"],["LinearOp","Linear operation for Vector"],["Normed","Normed Vector"],["Vector","Mathematical Vector"]]});

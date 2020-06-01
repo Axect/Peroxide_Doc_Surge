@@ -904,6 +904,13 @@
 <span id="888">888</span>
 <span id="889">889</span>
 <span id="890">890</span>
+<span id="891">891</span>
+<span id="892">892</span>
+<span id="893">893</span>
+<span id="894">894</span>
+<span id="895">895</span>
+<span id="896">896</span>
+<span id="897">897</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Solver for ordinary differential equations</span>
 <span class="doccomment">//!</span>
@@ -918,7 +925,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::{Real, State, BoundaryCondition};</span>
+<span class="doccomment">//!     use peroxide::fuga::{Real, State, BoundaryCondition};</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     pub trait ODE {</span>
 <span class="doccomment">//!         type Records;</span>
@@ -962,7 +969,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::Real;</span>
+<span class="doccomment">//!     use peroxide::fuga::Real;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     #[derive(Debug, Clone, Default)]</span>
 <span class="doccomment">//!     pub struct State&lt;T: Real&gt; {</span>
@@ -998,7 +1005,7 @@
 <span class="doccomment">//! ```rust</span>
 <span class="doccomment">//! extern crate peroxide;</span>
 <span class="doccomment">//! use std::collections::HashMap;</span>
-<span class="doccomment">//! use peroxide::{State, ExMethod, BoundaryCondition, ODEOptions};</span>
+<span class="doccomment">//! use peroxide::fuga::{State, ExMethod, BoundaryCondition, ODEOptions};</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! #[derive(Clone)]</span>
 <span class="doccomment">//! pub struct ExplicitODE {</span>
@@ -1030,7 +1037,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```rust</span>
 <span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::*;</span>
+<span class="doccomment">//! use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! fn main() {</span>
 <span class="doccomment">//!     // =========================================</span>
@@ -1082,8 +1089,9 @@
 <span class="doccomment">//! $$\begin{gathered} \frac{dy}{dx} = \frac{5x^2 - y}{e^{x+y}} \\\ y(0) = 1 \end{gathered}$$</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```rust</span>
+<span class="doccomment">//! #[macro_use]</span>
 <span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::*;</span>
+<span class="doccomment">//! use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! fn main() {</span>
 <span class="doccomment">//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));</span>
@@ -1113,16 +1121,22 @@
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ExMethod</span>::{<span class="ident">Euler</span>, <span class="ident">RK4</span>};
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ODEOptions</span>::{<span class="ident">BoundCond</span>, <span class="ident">InitCond</span>, <span class="ident">Method</span>, <span class="ident">StepSize</span>, <span class="ident">StopCond</span>, <span class="ident">Times</span>};
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ImMethod</span>::{<span class="ident">BDF1</span>, <span class="ident">GL4</span>};
-<span class="kw">use</span> <span class="ident">operation</span>::<span class="ident">extra_ops</span>::<span class="ident">Real</span>;
-<span class="kw">use</span> <span class="ident">operation</span>::<span class="ident">mut_ops</span>::<span class="ident">MutFP</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">dual</span>::<span class="ident">Dual</span>;
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">matrix</span>::{<span class="ident">Matrix</span>, <span class="ident">FP</span>, <span class="ident">LinearAlgebra</span>};
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">vector</span>::<span class="ident">FPVector</span>;
-<span class="kw">use</span> <span class="ident">numerical</span>::<span class="ident">utils</span>::<span class="ident">jacobian_real</span>;
-<span class="kw">use</span> <span class="ident">util</span>::<span class="ident">non_macro</span>::{<span class="ident">cat</span>, <span class="ident">concat</span>, <span class="ident">zeros</span>, <span class="ident">eye</span>};
-<span class="kw">use</span> <span class="ident">util</span>::<span class="ident">print</span>::<span class="ident">Printable</span>;
-<span class="kw">use</span> {<span class="ident">VecOps</span>, <span class="ident">VecWithDual</span>, <span class="ident">Dualist</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::{
+    <span class="ident">dual</span>::{<span class="ident">Dual</span>, <span class="ident">Dualist</span>, <span class="ident">VecWithDual</span>},
+    <span class="ident">matrix</span>::{<span class="ident">Matrix</span>, <span class="ident">LinearAlgebra</span>},
+};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">numerical</span>::<span class="ident">utils</span>::<span class="ident">jacobian_real</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::{
+    <span class="ident">non_macro</span>::{<span class="ident">cat</span>, <span class="ident">concat</span>, <span class="ident">zeros</span>, <span class="ident">eye</span>},
+    <span class="ident">print</span>::<span class="ident">Printable</span>,
+};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
+    <span class="ident">mutable</span>::<span class="ident">MutFP</span>,
+    <span class="ident">fp</span>::{<span class="ident">FPVector</span>, <span class="ident">FPMatrix</span>},
+    <span class="ident">math</span>::{<span class="ident">Vector</span>, <span class="ident">Normed</span>, <span class="ident">Norm</span>},
+    <span class="ident">num</span>::<span class="ident">Real</span>,
+};
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;oxidize&quot;</span>)]</span>
 <span class="kw">use</span> {<span class="ident">blas_daxpy</span>, <span class="ident">blas_daxpy_return</span>};
 
@@ -1334,7 +1348,7 @@
                 (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>);
 
                 <span class="kw">let</span> <span class="ident">k1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>.<span class="ident">clone</span>();
-                <span class="kw">let</span> <span class="ident">k1_add</span> <span class="op">=</span> <span class="ident">k1</span>.<span class="ident">s_mul</span>(<span class="ident">h2</span>);
+                <span class="kw">let</span> <span class="ident">k1_add</span> <span class="op">=</span> <span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="ident">h2</span>);
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span><span class="op">=</span> <span class="ident">h2</span>;
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k1_add</span>);
                 (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>);
@@ -1600,16 +1614,16 @@
                     <span class="ident">concat</span>(
                         <span class="ident">f</span>(
                             <span class="ident">t1</span>,
-                            <span class="ident">yn</span>.<span class="ident">add</span>(
-                                <span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">s_mul</span>(<span class="ident">GL4_TAB</span>[<span class="number">0</span>][<span class="number">1</span>] <span class="op">*</span> <span class="ident">h</span>)
-                                    .<span class="ident">add</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">s_mul</span>(<span class="ident">GL4_TAB</span>[<span class="number">0</span>][<span class="number">2</span>]<span class="kw-2">*</span><span class="ident">h</span>)),
+                            <span class="ident">yn</span>.<span class="ident">add_vec</span>(
+                                <span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="ident">GL4_TAB</span>[<span class="number">0</span>][<span class="number">1</span>] <span class="op">*</span> <span class="ident">h</span>)
+                                    .<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">mul_scalar</span>(<span class="ident">GL4_TAB</span>[<span class="number">0</span>][<span class="number">2</span>]<span class="kw-2">*</span><span class="ident">h</span>)),
                             ),
                         ),
                         <span class="ident">f</span>(
                             <span class="ident">t2</span>,
-                            <span class="ident">yn</span>.<span class="ident">add</span>(
-                                <span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">s_mul</span>(<span class="ident">GL4_TAB</span>[<span class="number">1</span>][<span class="number">1</span>] <span class="op">*</span> <span class="ident">h</span>)
-                                    .<span class="ident">add</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">s_mul</span>(<span class="ident">GL4_TAB</span>[<span class="number">1</span>][<span class="number">2</span>] <span class="op">*</span> <span class="ident">h</span>)),
+                            <span class="ident">yn</span>.<span class="ident">add_vec</span>(
+                                <span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="ident">GL4_TAB</span>[<span class="number">1</span>][<span class="number">1</span>] <span class="op">*</span> <span class="ident">h</span>)
+                                    .<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">mul_scalar</span>(<span class="ident">GL4_TAB</span>[<span class="number">1</span>][<span class="number">2</span>] <span class="op">*</span> <span class="ident">h</span>)),
                             ),
                         ),
                     )
@@ -1621,19 +1635,19 @@
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">Dg</span> <span class="op">=</span> <span class="ident">jacobian_real</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">g</span>), <span class="kw-2">&amp;</span><span class="ident">k_curr</span>);
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">DG</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">I</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">Dg</span>;
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">DG_inv</span> <span class="op">=</span> <span class="ident">DG</span>.<span class="ident">inv</span>().<span class="ident">unwrap</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">conv_dual</span>()).<span class="ident">values</span>());
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">conv_dual</span>()).<span class="ident">values</span>());
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">num_iter</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0</span>;
 
                 <span class="comment">// 3. Iteration</span>
                 <span class="kw">while</span> <span class="ident">err</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">rtol</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">num_iter</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">10</span> {
                     <span class="kw">let</span> <span class="ident">DGG</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">DG_inv</span> <span class="op">*</span> <span class="kw-2">&amp;</span><span class="ident">G</span>;
                     <span class="kw">let</span> <span class="ident">k_prev</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">clone</span>();
-                    <span class="ident">k_curr</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">DGG</span>.<span class="ident">col</span>(<span class="number">0</span>));
+                    <span class="ident">k_curr</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">DGG</span>);
                     <span class="ident">Dg</span> <span class="op">=</span> <span class="ident">jacobian_real</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">g</span>), <span class="kw-2">&amp;</span><span class="ident">k_curr</span>);
                     <span class="ident">DG</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">I</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">Dg</span>;
                     <span class="ident">DG_inv</span> <span class="op">=</span> <span class="ident">DG</span>.<span class="ident">inv</span>().<span class="ident">unwrap</span>();
-                    <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">conv_dual</span>()).<span class="ident">values</span>());
-                    <span class="ident">err</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="ident">k_prev</span>).<span class="ident">norm</span>();
+                    <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">conv_dual</span>()).<span class="ident">values</span>());
+                    <span class="ident">err</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k_prev</span>).<span class="ident">norm</span>(<span class="ident">Norm</span>::<span class="ident">L2</span>);
                     <span class="ident">num_iter</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                 }
 
@@ -1645,7 +1659,7 @@
 
                 <span class="comment">// 5. Merge k1, k2</span>
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y_curr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">values</span>();
-                <span class="ident">y_curr</span> <span class="op">=</span> <span class="ident">y_curr</span>.<span class="ident">add</span>(<span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">s_mul</span>(<span class="number">0.5</span> <span class="op">*</span> <span class="ident">h</span>).<span class="ident">add</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">s_mul</span>(<span class="number">0.5</span> <span class="op">*</span> <span class="ident">h</span>)));
+                <span class="ident">y_curr</span> <span class="op">=</span> <span class="ident">y_curr</span>.<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="number">0.5</span> <span class="op">*</span> <span class="ident">h</span>).<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">mul_scalar</span>(<span class="number">0.5</span> <span class="op">*</span> <span class="ident">h</span>)));
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span> <span class="op">=</span> <span class="ident">y_curr</span>.<span class="ident">conv_dual</span>();
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span> <span class="ident">h</span>;
             }

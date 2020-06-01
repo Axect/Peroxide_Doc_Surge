@@ -73,37 +73,29 @@
 <span id="57">57</span>
 <span id="58">58</span>
 <span id="59">59</span>
-<span id="60">60</span>
-<span id="61">61</span>
-<span id="62">62</span>
-<span id="63">63</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">statistics</span>::<span class="ident">stat</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">polynomial</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">vector</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">polynomial</span>::<span class="ident">Polynomial</span>;
 
 <span class="doccomment">/// Simple Least Square 2D</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Type</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// (Vector, Vector) -&gt; Polynomial</span>
+<span class="doccomment">/// (Vec&lt;f64&gt;, Vec&lt;f64&gt;) -&gt; Polynomial</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">/// #[macro_use]</span>
 <span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::*;</span>
+<span class="doccomment">/// use peroxide::fuga::*;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// let a = c!(1,2,3,4,5);</span>
-<span class="doccomment">/// let b = c!(1.2, 1.8, 3.2, 3.8, 5.0);</span>
-<span class="doccomment">/// let ls = least_square(a, b);</span>
-<span class="doccomment">/// ls.print(); // 0.96x + 0.1200</span>
+<span class="doccomment">/// fn main() {</span>
+<span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
+<span class="doccomment">///     let b = c!(1.2, 1.8, 3.2, 3.8, 5.0);</span>
+<span class="doccomment">///     let ls = least_square(a, b);</span>
+<span class="doccomment">///     ls.print(); // 0.96x + 0.1200</span>
+<span class="doccomment">/// }</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">least_square</span>(<span class="ident">node_x</span>: <span class="ident">Vector</span>, <span class="ident">node_y</span>: <span class="ident">Vector</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Polynomial</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">least_square</span>(<span class="ident">node_x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">node_y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Polynomial</span> {
     <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">node_x</span>.<span class="ident">len</span>();
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">l</span>, <span class="ident">node_y</span>.<span class="ident">len</span>());
 
@@ -135,7 +127,7 @@
 }
 
 <span class="comment">// Polynomial Regression</span>
-<span class="comment">//pub fn poly_reg(node_x: Vector, node_y: Vector) -&gt; Polynomial {</span>
+<span class="comment">//pub fn poly_reg(node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;) -&gt; Polynomial {</span>
 <span class="comment">//    let n = node_x.len();</span>
 <span class="comment">//    assert_eq!(n, node_y.len());</span>
 <span class="comment">//    let a = matrix(vec![1f64; n], n, 1, Col);</span>

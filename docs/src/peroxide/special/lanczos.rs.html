@@ -132,14 +132,16 @@
 <span id="116">116</span>
 <span id="117">117</span>
 <span id="118">118</span>
+<span id="119">119</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Lanczos approximation Coefficient generator</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>;
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="ident">Matrix</span>;
-<span class="kw">use</span> <span class="ident">util</span>::<span class="ident">non_macro</span>::<span class="ident">zeros</span>;
-<span class="kw">use</span> <span class="ident">util</span>::<span class="ident">useful</span>::<span class="ident">sgn</span>;
-<span class="kw">use</span> <span class="ident">statistics</span>::<span class="ident">ops</span>::{<span class="ident">C</span>, <span class="ident">factorial</span>, <span class="ident">double_factorial</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="ident">Matrix</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">non_macro</span>::<span class="ident">zeros</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">useful</span>::<span class="ident">sgn</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">statistics</span>::<span class="ident">ops</span>::{<span class="ident">C</span>, <span class="ident">factorial</span>, <span class="ident">double_factorial</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">pointer</span>::<span class="ident">Oxide</span>;
 
 <span class="kw">const</span> <span class="ident">G</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">5f64</span>;
 <span class="kw">const</span> <span class="ident">N</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">7</span>;
@@ -182,11 +184,11 @@
 }
 
 <span class="doccomment">/// Lanczos Approximation Coefficient</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tlg1</span>(<span class="ident">g</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
-    <span class="ident">lanczos_coeff</span>(<span class="ident">g</span>, <span class="ident">n</span><span class="op">-</span><span class="number">1</span>) <span class="op">*</span> <span class="ident">g</span>.<span class="ident">exp</span>() <span class="op">/</span> (<span class="number">2f64</span> <span class="op">*</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>).<span class="ident">sqrt</span>()
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tlg1</span>(<span class="ident">g</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    (<span class="ident">lanczos_coeff</span>(<span class="ident">g</span>, <span class="ident">n</span><span class="op">-</span><span class="number">1</span>).<span class="ident">ox</span>() <span class="op">*</span> <span class="ident">g</span>.<span class="ident">exp</span>() <span class="op">/</span> (<span class="number">2f64</span> <span class="op">*</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>).<span class="ident">sqrt</span>()).<span class="ident">red</span>()
 }
 
-<span class="kw">fn</span> <span class="ident">lanczos_coeff</span>(<span class="ident">g</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
+<span class="kw">fn</span> <span class="ident">lanczos_coeff</span>(<span class="ident">g</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">dr_gen</span>(<span class="ident">n</span>) <span class="op">*</span> <span class="ident">b_gen</span>(<span class="ident">n</span>) <span class="op">*</span> (<span class="ident">c_gen</span>(<span class="ident">n</span>) <span class="op">*</span> <span class="ident">dc_gen</span>(<span class="ident">n</span>));
     <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">f_gen</span>(<span class="ident">g</span>, <span class="ident">n</span>);
     <span class="ident">m</span> <span class="op">*</span> <span class="ident">f</span>

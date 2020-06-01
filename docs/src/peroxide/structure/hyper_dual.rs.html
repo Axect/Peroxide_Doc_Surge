@@ -442,6 +442,37 @@
 <span id="426">426</span>
 <span id="427">427</span>
 <span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
+<span id="457">457</span>
+<span id="458">458</span>
+<span id="459">459</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Hyper dual number system for Automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -457,7 +488,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let x = hyper_dual(1, 1, 0); // x at x = 1</span>
@@ -471,7 +502,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let x = hyper_dual(1,1,0);</span>
@@ -481,13 +512,15 @@
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 
-<span class="kw">use</span> <span class="ident">operation</span>::<span class="ident">extra_ops</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">TrigOps</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">dual</span>::<span class="ident">dual</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">dual</span>::{<span class="ident">dual</span>, <span class="ident">Dual</span>};
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">vector</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">vector</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
+    <span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">TrigOps</span>, <span class="ident">Real</span>}
+};
 
 <span class="doccomment">/// Hyper Dual number</span>
 <span class="doccomment">///</span>
@@ -871,5 +904,33 @@
         <span class="self">self</span>.<span class="ident">pow</span>(<span class="ident">HyperDual</span>::<span class="ident">new</span>(<span class="number">0.5f64</span>, <span class="number">0f64</span>, <span class="number">0f64</span>))
     }
 }
-</pre></div>
+
+<span class="comment">// =============================================================================</span>
+<span class="comment">// Real trait for HyperDual</span>
+<span class="comment">// =============================================================================</span>
+<span class="kw">impl</span> <span class="ident">Real</span> <span class="kw">for</span> <span class="ident">HyperDual</span> {
+    <span class="kw">fn</span> <span class="ident">to_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+        <span class="self">self</span>.<span class="ident">value</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">from_f64</span>(<span class="ident">f</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">HyperDual</span>::<span class="ident">new</span>(<span class="ident">f</span>, <span class="number">0f64</span>, <span class="number">0f64</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_dual</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Dual</span> {
+        <span class="ident">Dual</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">value</span>(), <span class="self">self</span>.<span class="ident">slope</span>())
+    }
+
+    <span class="kw">fn</span> <span class="ident">from_dual</span>(<span class="ident">d</span>: <span class="ident">Dual</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">HyperDual</span>::<span class="ident">new</span>(<span class="ident">d</span>.<span class="ident">value</span>(), <span class="ident">d</span>.<span class="ident">slope</span>(), <span class="number">0f64</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_hyper_dual</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HyperDual</span> {
+        <span class="kw-2">*</span><span class="self">self</span>
+    }
+
+    <span class="kw">fn</span> <span class="ident">from_hyper_dual</span>(<span class="ident">h</span>: <span class="ident">HyperDual</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">h</span>
+    }
+}</pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

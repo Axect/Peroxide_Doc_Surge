@@ -992,6 +992,15 @@
 <span id="976">976</span>
 <span id="977">977</span>
 <span id="978">978</span>
+<span id="979">979</span>
+<span id="980">980</span>
+<span id="981">981</span>
+<span id="982">982</span>
+<span id="983">983</span>
+<span id="984">984</span>
+<span id="985">985</span>
+<span id="986">986</span>
+<span id="987">987</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Dual number system for Automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -1016,7 +1025,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let x = dual(1, 1); // x at x = 1</span>
@@ -1036,7 +1045,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let x = dual(1,1);</span>
@@ -1046,12 +1055,17 @@
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 
-<span class="kw">use</span> <span class="ident">operation</span>::<span class="ident">extra_ops</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">TrigOps</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
 <span class="doccomment">/// Structure for Automatic Differentiation</span>
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Rem</span>, <span class="ident">Sub</span>};
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">vector</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
+    <span class="ident">fp</span>::<span class="ident">FPVector</span>,
+    <span class="ident">math</span>::{<span class="ident">Vector</span>, <span class="ident">Normed</span>, <span class="ident">Norm</span>, <span class="ident">InnerProduct</span>},
+    <span class="ident">pointer</span>::{<span class="ident">Redox</span>, <span class="ident">Oxide</span>},
+    <span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">TrigOps</span>, <span class="ident">Real</span>},
+};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">hyper_dual</span>::<span class="ident">HyperDual</span>;
 <span class="comment">//use self::num_traits::{Num, Zero, One, NumCast, ToPrimitive};</span>
 <span class="comment">//use std::num::ParseFloatError;</span>
 
@@ -1091,7 +1105,7 @@
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// use peroxide::fuga::*;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// let a = Dual::new(2, 1); // y = x at x = 2</span>
     <span class="doccomment">/// a.print();</span>
@@ -1505,6 +1519,34 @@
 }
 
 <span class="comment">// =============================================================================</span>
+<span class="comment">// Real trait for Dual</span>
+<span class="comment">// =============================================================================</span>
+<span class="kw">impl</span> <span class="ident">Real</span> <span class="kw">for</span> <span class="ident">Dual</span> {
+    <span class="kw">fn</span> <span class="ident">to_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+        <span class="self">self</span>.<span class="ident">value</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">from_f64</span>(<span class="ident">f</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">Dual</span>::<span class="ident">new</span>(<span class="ident">f</span>, <span class="number">0f64</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_dual</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Dual</span> {
+        <span class="kw-2">*</span><span class="self">self</span>
+    }
+
+    <span class="kw">fn</span> <span class="ident">from_dual</span>(<span class="ident">d</span>: <span class="ident">Dual</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">d</span>
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_hyper_dual</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HyperDual</span> {
+        <span class="ident">HyperDual</span>::<span class="ident">new</span>(<span class="self">self</span>.<span class="ident">value</span>(), <span class="self">self</span>.<span class="ident">slope</span>(), <span class="number">0f64</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">from_hyper_dual</span>(<span class="ident">h</span>: <span class="ident">HyperDual</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">Dual</span>::<span class="ident">new</span>(<span class="ident">h</span>.<span class="ident">value</span>(), <span class="ident">h</span>.<span class="ident">slope</span>())
+    }
+}
+<span class="comment">// =============================================================================</span>
 <span class="comment">// Dual List</span>
 <span class="comment">// =============================================================================</span>
 <span class="doccomment">/// Convert Vector &lt;=&gt; Dual</span>
@@ -1605,28 +1647,53 @@
     <span class="kw">fn</span> <span class="ident">skip</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">skip</span>(<span class="ident">n</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span><span class="op">&gt;</span>()
     }
+
+    <span class="kw">fn</span> <span class="ident">sum</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">dual</span>(<span class="number">0f64</span>, <span class="number">0f64</span>);
+        <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="self">self</span> {
+            <span class="ident">s</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">+</span> <span class="kw-2">*</span><span class="ident">x</span>;
+        }
+        <span class="ident">s</span>
+    }
+
+    <span class="kw">fn</span> <span class="ident">prod</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">dual</span>(<span class="number">1f64</span>, <span class="number">0f64</span>);
+        <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="self">self</span> {
+            <span class="ident">p</span> <span class="op">=</span> <span class="ident">p</span> <span class="op">*</span> <span class="kw-2">*</span><span class="ident">x</span>;
+        }
+        <span class="ident">p</span>
+    }
 }
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_variables</span>)]</span>
-<span class="kw">impl</span> <span class="ident">VecOps</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">Dual</span>;
-
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+<span class="kw">impl</span> <span class="ident">Vector</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="ident">other</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="ident">other</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">y</span>, <span class="ident">other</span>)
+    <span class="kw">fn</span> <span class="ident">mul_scalar</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">into</span>();
+        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">scalar</span>)
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">Normed</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">Dual</span>;
+
+    <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_kind</span>: <span class="ident">Norm</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
+        <span class="macro">unimplemented</span><span class="macro">!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">y</span>, <span class="ident">other</span>)
+    <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_kind</span>: <span class="ident">Norm</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span> {
+        <span class="macro">unimplemented</span><span class="macro">!</span>()
     }
+}
 
+<span class="kw">impl</span> <span class="ident">InnerProduct</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">dot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
         <span class="comment">// dot product of Dual is similar to Complex with \epsilon^2 = 0</span>
         <span class="self">self</span>.<span class="ident">clone</span>()
@@ -1635,60 +1702,11 @@
             .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">x</span>, <span class="ident">y</span>)<span class="op">|</span> <span class="ident">x</span>.<span class="ident">mul</span>(<span class="ident">y</span>))
             .<span class="ident">fold</span>(<span class="self">Self</span>::<span class="ident">Scalar</span>::<span class="ident">new</span>(<span class="number">0.</span>, <span class="number">0.</span>), <span class="op">|</span><span class="ident">sum</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>, <span class="ident">x</span><span class="op">|</span> <span class="ident">sum</span>.<span class="ident">add</span>(<span class="ident">x</span>))
     }
+}
 
-    <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
-        <span class="macro">unimplemented</span><span class="macro">!</span>()
-    }
-
-    <span class="doccomment">/// Norm L1, also known as Manhattan Norm</span>
-    <span class="doccomment">/// Sum of the absolute value of each element</span>
-    <span class="kw">fn</span> <span class="ident">norm_l1</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>  {
-        <span class="macro">unimplemented</span><span class="macro">!</span>()
-    }
-
-    <span class="doccomment">/// Norm L2, also known as Euclidean Norm</span>
-    <span class="doccomment">/// Square root of the sum of the square of each element</span>
-    <span class="kw">fn</span> <span class="ident">norm_l2</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>  {
-        <span class="macro">unimplemented</span><span class="macro">!</span>()
-    }
-
-    <span class="doccomment">/// Norm L-Infinity, also known as Maximum Norm</span>
-    <span class="doccomment">/// Maximum of the absolute value of the elements</span>
-    <span class="kw">fn</span> <span class="ident">norm_linf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>  {
-        <span class="macro">unimplemented</span><span class="macro">!</span>()
-    }
-
-    <span class="doccomment">/// Norm L-p, also known as p-Norm</span>
-    <span class="kw">fn</span> <span class="ident">norm_lp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>  {
-        <span class="macro">unimplemented</span><span class="macro">!</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="macro">unimplemented</span><span class="macro">!</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">s_add</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">scala</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">s_sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">scala</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">s_mul</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">scala</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">s_div</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">scala</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">sum</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">dual</span>(<span class="number">0f64</span>, <span class="number">0f64</span>);
-        <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="self">self</span> {
-            <span class="ident">s</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">+</span> <span class="kw-2">*</span><span class="ident">x</span>;
-        }
-        <span class="ident">s</span>
+<span class="kw">impl</span> <span class="ident">Oxide</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">ox</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Redox</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="ident">Redox</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from_vec</span>(<span class="self">self</span>)
     }
 }
 

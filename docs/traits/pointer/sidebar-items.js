@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["Redox",""]],"trait":[["MatrixPtr","Pointer for col or row"],["Oxide",""]]});

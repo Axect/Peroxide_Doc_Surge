@@ -847,11 +847,6 @@
 <span id="831">831</span>
 <span id="832">832</span>
 <span id="833">833</span>
-<span id="834">834</span>
-<span id="835">835</span>
-<span id="836">836</span>
-<span id="837">837</span>
-<span id="838">838</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Extra tools for `Vec&lt;f64&gt;`</span>
 <span class="doccomment">//!</span>
@@ -863,7 +858,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = vec![2f64.sqrt()];</span>
@@ -885,15 +880,16 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     // Rust</span>
+<span class="doccomment">//!     #[macro_use]</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ## From ranges to Vector</span>
+<span class="doccomment">//! ## From ranges to Vec&lt;f64&gt;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * For `R`, there is `seq` to declare sequence.</span>
 <span class="doccomment">//!</span>
@@ -908,7 +904,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = seq(1, 4, 1);</span>
@@ -917,64 +913,30 @@
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ## Vector Operation</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * There are some vector-wise operations</span>
-<span class="doccomment">//!     * `add(&amp;self, other: Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt;`</span>
-<span class="doccomment">//!     * `sub(&amp;self, other: Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt;`</span>
-<span class="doccomment">//!     * `mul(&amp;self, other: Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt;`</span>
-<span class="doccomment">//!     * `div(&amp;self, other: Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt;`</span>
-<span class="doccomment">//!     * `dot(&amp;self, other: Vec&lt;f64&gt;) -&gt; f64`</span>
-<span class="doccomment">//!     * `norm(&amp;self) -&gt; f64`</span>
-<span class="doccomment">//!     * `norm_l1(&amp;self) -&gt; f64`</span>
-<span class="doccomment">//!     * `norm_l2(&amp;self) -&gt; f64`</span>
-<span class="doccomment">//!     * `norm_linf(&amp;self) -&gt; f64`</span>
-<span class="doccomment">//!     * `norm_lp(&amp;self, p: f64) -&gt; f64`</span>
-<span class="doccomment">//!     * `sum(&amp;self) -&gt; f64`</span>
-<span class="doccomment">//!     * `s_add(&amp;self, scalar: f64) -&gt; Self`</span>
-<span class="doccomment">//!     * `s_sub(&amp;self, scalar: f64) -&gt; Self`</span>
-<span class="doccomment">//!     * `s_mul(&amp;self, scalar: f64) -&gt; Self`</span>
-<span class="doccomment">//!     * `s_div(&amp;self, scalar: f64) -&gt; Self`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         let a = c!(1,2,3,4);</span>
-<span class="doccomment">//!         let b = c!(4,3,2,1);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         a.add(&amp;b).print();</span>
-<span class="doccomment">//!         a.sub(&amp;b).print();</span>
-<span class="doccomment">//!         a.mul(&amp;b).print();</span>
-<span class="doccomment">//!         a.div(&amp;b).print();</span>
-<span class="doccomment">//!         a.dot(&amp;b).print();</span>
-<span class="doccomment">//!         a.norm().print();</span>
-<span class="doccomment">//!         a.sum().print();</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         // [5, 5, 5, 5]</span>
-<span class="doccomment">//!         // [-3, -1, 1, 3]</span>
-<span class="doccomment">//!         // [4, 6, 6, 4]</span>
-<span class="doccomment">//!         // [0.25, 0.6667, 1.5, 4]</span>
-<span class="doccomment">//!         // 20</span>
-<span class="doccomment">//!         // 5.477225575051661 // sqrt(30)</span>
-<span class="doccomment">//!         // 10</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         let scalar = 2.0;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         a.s_add(scalar).print();</span>
-<span class="doccomment">//!         a.s_sub(scalar).print();</span>
-<span class="doccomment">//!         a.s_mul(scalar).print();</span>
-<span class="doccomment">//!         a.s_div(scalar).print();</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         // [3, 4, 5, 6]</span>
-<span class="doccomment">//!         // [-1, 0, 1, 2]</span>
-<span class="doccomment">//!         // [2, 4, 6, 8]</span>
-<span class="doccomment">//!         // [0.5, 1, 1.5, 3]</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * If you want to find more flexible operations, see [Redox](../../redox/index.html)</span>
+<span class="doccomment">//! ## Vec&lt;f64&gt; Operation</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! There are two ways to do vector operations.</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! * Use functional programming tools</span>
+<span class="doccomment">//! * Use redox</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! Here, I explain second method - for functional programming, see below.</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! To use redox, you only need to understand two things - `ox()`, `red()`.</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! * `ox()` : Makes vector to `Redox&lt;T: Vector&gt;`</span>
+<span class="doccomment">//! * `red()` : Makes `Redox&lt;T: Vector&gt;` to vector.</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//! #[macro_use]</span>
+<span class="doccomment">//! extern crate peroxide;</span>
+<span class="doccomment">//! use peroxide::fuga::*;</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! fn main() {</span>
+<span class="doccomment">//!     let a = c!(1, 2, 3);</span>
+<span class="doccomment">//!     assert_eq!((a.ox() * 2f64 - 1f64).red(), c!(1f64, 3f64, 5f64));</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Concatenation</span>
 <span class="doccomment">//!</span>
@@ -984,8 +946,9 @@
 <span class="doccomment">//! * `concat(Vec&lt;T&gt;, Vec&lt;T&gt;) -&gt; Vec&lt;T&gt;`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     #[macro_use]</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
@@ -1000,28 +963,29 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Conversion to Matrix</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! There are two ways to convert vector to matrix.</span>
+<span class="doccomment">//! There are two ways to convert Vec&lt;f64&gt; to matrix.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! * `to_matrix(&amp;self) -&gt; Matrix` : Vector to column matrix</span>
-<span class="doccomment">//! * `transpose(&amp;self) -&gt; Matrix` : Vector to row matrix</span>
+<span class="doccomment">//! * `into(self) -&gt; Matrix` : Vec&lt;f64&gt; to column matrix</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     #[macro_use]</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
+<span class="doccomment">//!         let a_col: Matrix = a.into();</span>
 <span class="doccomment">//!         let m_col = matrix(c!(1,2,3,4), 4, 1, Col); // (4,1) Matrix</span>
-<span class="doccomment">//!         assert_eq!(a.to_matrix(), m_col);</span>
+<span class="doccomment">//!         assert_eq!(a_col, m_col);</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!         let m_row = matrix(c!(1,2,3,4), 1, 4, Row); // (1,4) Matrix</span>
-<span class="doccomment">//!         assert_eq!(a.transpose(), m_row);</span>
+<span class="doccomment">//!         assert_eq!(a_col.t(), m_row);</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Functional Programming {#functional}</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ## FP for Vector</span>
+<span class="doccomment">//! ## FP for Vec&lt;f64&gt;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * There are some functional programming tools for `Vec&lt;f64&gt;`</span>
 <span class="doccomment">//!</span>
@@ -1031,8 +995,9 @@
 <span class="doccomment">//! * But different to original `map` - Only `f64 -&gt; f64` allowed.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     #[macro_use]</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
@@ -1056,8 +1021,9 @@
 <span class="doccomment">//! * `reduce` is syntactic sugar for `fold`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     #[macro_use]</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
@@ -1078,8 +1044,9 @@
 <span class="doccomment">//! * `zip_with` is composed of `zip` &amp; `map`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     #[macro_use]</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
@@ -1104,8 +1071,9 @@
 <span class="doccomment">//! * `filter` is just syntactic sugar for `filter`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     #[macro_use]</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
@@ -1119,8 +1087,9 @@
 <span class="doccomment">//! * `take` is syntactic sugar for `take`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     #[macro_use]</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
@@ -1132,8 +1101,9 @@
 <span class="doccomment">//! * `skip` is syntactic sugar for `skip`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     #[macro_use]</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
@@ -1145,122 +1115,120 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">blas</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">blas</span>::{<span class="ident">daxpy</span>, <span class="ident">ddot</span>, <span class="ident">dnrm2</span>, <span class="ident">dscal</span>, <span class="ident">idamax</span>, <span class="ident">dasum</span>};
+<span class="kw">use</span> <span class="ident">blas</span>::{<span class="ident">daxpy</span>, <span class="ident">ddot</span>, <span class="ident">dnrm2</span>, <span class="ident">idamax</span>, <span class="ident">dasum</span>};
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">packed_simd</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">packed_simd</span>::{<span class="ident">f64x8</span>, <span class="ident">f64x4</span>};
 
-<span class="kw">use</span> <span class="ident">operation</span>::<span class="ident">extra_ops</span>::<span class="ident">Real</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">min</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">MIN</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
+    <span class="ident">fp</span>::<span class="ident">FPVector</span>,
+    <span class="ident">mutable</span>::<span class="ident">MutFP</span>,
+    <span class="ident">general</span>::<span class="ident">Algorithm</span>,
+    <span class="ident">math</span>::{<span class="ident">Vector</span>, <span class="ident">Normed</span>, <span class="ident">Norm</span>, <span class="ident">InnerProduct</span>, <span class="ident">LinearOp</span>},
+    <span class="ident">pointer</span>::{<span class="ident">Redox</span>, <span class="ident">Oxide</span>},
+    <span class="ident">num</span>::<span class="ident">Real</span>,
+};
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Vector</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
-
-<span class="doccomment">/// Functional Programming tools for Vector</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">FPVector</span> {
-    <span class="kw">type</span> <span class="ident">Scalar</span>;
-
-    <span class="kw">fn</span> <span class="ident">fmap</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">reduce</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">init</span>: <span class="ident">T</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="self">Self</span>::<span class="ident">Scalar</span>, <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>,
-        <span class="ident">T</span>: <span class="ident">convert</span>::<span class="ident">Into</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Scalar</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">zip_with</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="self">Self</span>::<span class="ident">Scalar</span>, <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">filter</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">take</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">skip</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-}
-
-<span class="kw">impl</span> <span class="ident">FPVector</span> <span class="kw">for</span> <span class="ident">Vector</span> {
+<span class="kw">impl</span> <span class="ident">FPVector</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">f64</span>;
 
-    <span class="doccomment">/// fmap for Vector</span>
+    <span class="doccomment">/// fmap for Vec&lt;f64&gt;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #[macro_use]</span>
     <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// use peroxide::fuga::*;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">/// assert_eq!(a.fmap(|x| x*2f64), seq!(2,10,2));</span>
+    <span class="doccomment">/// fn main() {</span>
+    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
+    <span class="doccomment">///     assert_eq!(a.fmap(|x| x*2f64), seq!(2,10,2));</span>
+    <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">fmap</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vector</span>
+    <span class="kw">fn</span> <span class="ident">fmap</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span>,
     {
-        <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">f</span>(<span class="ident">x</span>)).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span>()
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
+        <span class="ident">v</span>.<span class="ident">iter_mut</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="ident">f</span>(<span class="kw-2">*</span><span class="ident">x</span>));
+        <span class="ident">v</span>
     }
 
-    <span class="doccomment">/// reduce for Vector</span>
+    <span class="doccomment">/// reduce for Vec&lt;f64&gt;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #[macro_use]</span>
     <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// use peroxide::fuga::*;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let a = seq!(1,100,1);</span>
-    <span class="doccomment">/// assert_eq!(a.reduce(0, |x,y| x + y), 5050f64);</span>
+    <span class="doccomment">/// fn main() {</span>
+    <span class="doccomment">///     let a = seq!(1,100,1);</span>
+    <span class="doccomment">///     assert_eq!(a.reduce(0, |x,y| x + y), 5050f64);</span>
+    <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">reduce</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">init</span>: <span class="ident">T</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>, <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span>,
         <span class="ident">T</span>: <span class="ident">convert</span>::<span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
     {
-        <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">fold</span>(<span class="ident">init</span>.<span class="ident">into</span>(), <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">f</span>(<span class="ident">x</span>, <span class="ident">y</span>))
+        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="ident">init</span>.<span class="ident">into</span>(), <span class="op">|</span><span class="ident">x</span>, <span class="kw-2">&amp;</span><span class="ident">y</span><span class="op">|</span> <span class="ident">f</span>(<span class="ident">x</span>, <span class="ident">y</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">zip_with</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Vector</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vector</span>
+    <span class="kw">fn</span> <span class="ident">zip_with</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>, <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span>,
     {
         <span class="self">self</span>.<span class="ident">into_iter</span>()
             .<span class="ident">zip</span>(<span class="ident">other</span>)
             .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">x</span>, <span class="ident">y</span>)<span class="op">|</span> <span class="ident">f</span>(<span class="kw-2">*</span><span class="ident">x</span>, <span class="kw-2">*</span><span class="ident">y</span>))
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span>()
+            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>()
     }
 
-    <span class="doccomment">/// Filter for Vector</span>
+    <span class="doccomment">/// Filter for Vec&lt;f64&gt;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #[macro_use]</span>
     <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// use peroxide::fuga::*;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">/// let b = a.filter(|x| x &gt; 3.);</span>
-    <span class="doccomment">/// assert_eq!(b, c!(4,5));</span>
+    <span class="doccomment">/// fn main() {</span>
+    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
+    <span class="doccomment">///     let b = a.filter(|x| x &gt; 3.);</span>
+    <span class="doccomment">///     assert_eq!(b, c!(4,5));</span>
+    <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">filter</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vector</span>
+    <span class="kw">fn</span> <span class="ident">filter</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>,
     {
         <span class="self">self</span>.<span class="ident">clone</span>()
             .<span class="ident">into_iter</span>()
             .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">f</span>(<span class="kw-2">*</span><span class="ident">x</span>))
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span>()
+            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>()
     }
 
-    <span class="doccomment">/// Take for Vector</span>
+    <span class="doccomment">/// Take for Vec&lt;f64&gt;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #[macro_use]</span>
     <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// use peroxide::fuga::*;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">/// let b = a.take(3);</span>
-    <span class="doccomment">/// assert_eq!(b, c!(1,2,3));</span>
+    <span class="doccomment">/// fn main() {</span>
+    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
+    <span class="doccomment">///     let b = a.take(3);</span>
+    <span class="doccomment">///     assert_eq!(b, c!(1,2,3));</span>
+    <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">take</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vector</span> {
+    <span class="kw">fn</span> <span class="ident">take</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
         <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
             <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="self">self</span>[<span class="ident">i</span>];
@@ -1268,18 +1236,21 @@
         <span class="kw">return</span> <span class="ident">v</span>;
     }
 
-    <span class="doccomment">/// Skip for Vector</span>
+    <span class="doccomment">/// Skip for Vec&lt;f64&gt;</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #[macro_use]</span>
     <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// use peroxide::fuga::*;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">/// let b = a.skip(3);</span>
-    <span class="doccomment">/// assert_eq!(b, c!(4,5));</span>
+    <span class="doccomment">/// fn main() {</span>
+    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
+    <span class="doccomment">///     let b = a.skip(3);</span>
+    <span class="doccomment">///     assert_eq!(b, c!(4,5));</span>
+    <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">skip</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vector</span> {
+    <span class="kw">fn</span> <span class="ident">skip</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">l</span> <span class="op">-</span> <span class="ident">n</span>];
         <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">j</span>) <span class="kw">in</span> (<span class="ident">n</span>..<span class="ident">l</span>).<span class="ident">enumerate</span>() {
@@ -1287,8 +1258,17 @@
         }
         <span class="kw">return</span> <span class="ident">v</span>;
     }
+
+    <span class="kw">fn</span> <span class="ident">sum</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">sum</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">prod</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">product</span>()
+    }
 }
 
+<span class="doccomment">/// Explicit version of `map`</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">map</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">xs</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
@@ -1302,6 +1282,7 @@
     <span class="ident">result</span>
 }
 
+<span class="doccomment">/// Explicit version of `reduce`</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reduce</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">init</span>: <span class="ident">T</span>, <span class="ident">xs</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
 <span class="kw">where</span>
     <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>, <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
@@ -1314,6 +1295,7 @@
     <span class="ident">s</span>
 }
 
+<span class="doccomment">/// Explicit version of `zip_with`</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zip_with</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">xs</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">ys</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>, <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>,
@@ -1327,23 +1309,41 @@
     <span class="ident">result</span>
 }
 
-<span class="doccomment">/// Some algorithms for Vector</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Algorithm</span> {
-    <span class="kw">fn</span> <span class="ident">rank</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">sign</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span>;
-    <span class="kw">fn</span> <span class="ident">arg_max</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>;
+<span class="kw">impl</span> <span class="ident">MutFP</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">f64</span>;
+
+    <span class="kw">fn</span> <span class="ident">mut_map</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>)
+        <span class="kw">where</span>
+            <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>,
+    {
+        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span>() {
+            <span class="self">self</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">f</span>(<span class="self">self</span>[<span class="ident">i</span>]);
+        }
+    }
+
+    <span class="kw">fn</span> <span class="ident">mut_zip_with</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>)
+        <span class="kw">where</span>
+            <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="self">Self</span>::<span class="ident">Scalar</span>, <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>,
+    {
+        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">len</span>() {
+            <span class="self">self</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">f</span>(<span class="self">self</span>[<span class="ident">i</span>], <span class="ident">other</span>[<span class="ident">i</span>]);
+        }
+    }
 }
 
-<span class="kw">impl</span> <span class="ident">Algorithm</span> <span class="kw">for</span> <span class="ident">Vector</span> {
+<span class="kw">impl</span> <span class="ident">Algorithm</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Assign rank</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #[macro_use]</span>
     <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// use peroxide::fuga::*;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let v = c!(7, 5, 9, 2, 8);</span>
-    <span class="doccomment">/// assert_eq!(v.rank(), vec![2,3,0,4,1]);</span>
+    <span class="doccomment">/// fn main() {</span>
+    <span class="doccomment">///     let v = c!(7, 5, 9, 2, 8);</span>
+    <span class="doccomment">///     assert_eq!(v.rank(), vec![2,3,0,4,1]);</span>
+    <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">rank</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
@@ -1365,14 +1365,17 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #[macro_use]</span>
     <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// use peroxide::fuga::*;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let a = c!(1,0,2);</span>
-    <span class="doccomment">/// let b = c!(1,2,0);</span>
-    <span class="doccomment">/// let c = c!(0,1,2);</span>
+    <span class="doccomment">/// fn main() {</span>
+    <span class="doccomment">///     let a = c!(1,0,2);</span>
+    <span class="doccomment">///     let b = c!(1,2,0);</span>
+    <span class="doccomment">///     let c = c!(0,1,2);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!((a.sign(), b.sign(), c.sign()), (-1f64, 1f64, 1f64));</span>
+    <span class="doccomment">///     assert_eq!((a.sign(), b.sign(), c.sign()), (-1f64, 1f64, 1f64));</span>
+    <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">sign</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
         <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>();
@@ -1396,14 +1399,17 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Examples</span>
     <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// #[macro_use]</span>
     <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::*;</span>
+    <span class="doccomment">/// use peroxide::fuga::*;</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let v = c!(1,3,2,4,3,7);</span>
-    <span class="doccomment">/// assert_eq!(v.arg_max(),5);</span>
+    <span class="doccomment">/// fn main() {</span>
+    <span class="doccomment">///     let v = c!(1,3,2,4,3,7);</span>
+    <span class="doccomment">///     assert_eq!(v.arg_max(),5);</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// let v2 = c!(1,3,2,5,6,6);</span>
-    <span class="doccomment">/// assert_eq!(v2.arg_max(),4);</span>
+    <span class="doccomment">///     let v2 = c!(1,3,2,5,6,6);</span>
+    <span class="doccomment">///     assert_eq!(v2.arg_max(),4);</span>
+    <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
     <span class="kw">fn</span> <span class="ident">arg_max</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
         <span class="kw">match</span> () {
@@ -1425,252 +1431,236 @@
     }
 }
 
-<span class="doccomment">/// Convenient Vector Operation trait</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">VecOps</span> {
-    <span class="kw">type</span> <span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">s_add</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">s_sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">s_mul</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">s_div</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">dot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">sum</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">norm_l1</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">norm_l2</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">norm_linf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">norm_lp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
+<span class="kw">impl</span> <span class="ident">Vector</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="ident">rhs</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="ident">rhs</span>)
+    }
+
+    <span class="kw">fn</span> <span class="ident">mul_scalar</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="kw">let</span> <span class="ident">alpha</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">rhs</span>.<span class="ident">into</span>();
+        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">alpha</span>)
+    }
 }
 
-<span class="doccomment">/// Convenient Vector Operations (No Clone, No Copy)</span>
-<span class="kw">impl</span> <span class="ident">VecOps</span> <span class="kw">for</span> <span class="ident">Vector</span> {
+<span class="kw">impl</span> <span class="ident">Normed</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">f64</span>;
-
-    <span class="doccomment">/// Addition</span>
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="ident">other</span>)
-    }
-
-    <span class="doccomment">/// Subtraction</span>
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="ident">other</span>)
-    }
-
-    <span class="doccomment">/// Multiplication</span>
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">y</span>, <span class="ident">other</span>)
-    }
-
-    <span class="doccomment">/// Division</span>
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">y</span>, <span class="ident">other</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">s_add</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">match</span> () {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-            () <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">len</span>() {
-                    <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">8</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-                        <span class="self">self</span>.<span class="ident">chunks_exact</span>(<span class="number">8</span>)
-                            .<span class="ident">map</span>(<span class="ident">f64x8</span>::<span class="ident">from_slice_unaligned</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">scala</span>)
-                            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">write_to_slice_unaligned</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">z</span>));
-                        <span class="ident">z</span>
+    <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">kind</span>: <span class="ident">Norm</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+        <span class="kw">match</span> <span class="ident">kind</span> {
+            <span class="ident">Norm</span>::<span class="ident">L1</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">abs</span>()).<span class="ident">sum</span>()
+            }
+            <span class="ident">Norm</span>::<span class="ident">L2</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">match</span> () {
+                    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
+                    () <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="kw">let</span> <span class="ident">n_i32</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i32</span>;
+                        <span class="kw">let</span> <span class="ident">res</span>: <span class="ident">f64</span>;
+                        <span class="kw">unsafe</span> {
+                            <span class="ident">res</span> <span class="op">=</span> <span class="ident">dnrm2</span>(<span class="ident">n_i32</span>, <span class="self">self</span>, <span class="number">1</span>);
+                        }
+                        <span class="ident">res</span>
                     }
-                    <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">4</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-                        <span class="self">self</span>.<span class="ident">chunks_exact</span>(<span class="number">4</span>)
-                            .<span class="ident">map</span>(<span class="ident">f64x4</span>::<span class="ident">from_slice_unaligned</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">scala</span>)
-                            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">write_to_slice_unaligned</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">z</span>));
-                        <span class="ident">z</span>
-                    }
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">scala</span>)
+                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">powi</span>(<span class="number">2</span>)).<span class="ident">sum</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>().<span class="ident">sqrt</span>()
                 }
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">scala</span>),
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">s_sub</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">match</span> () {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-            () <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">len</span>() {
-                    <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">8</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-                        <span class="self">self</span>.<span class="ident">chunks_exact</span>(<span class="number">8</span>)
-                            .<span class="ident">map</span>(<span class="ident">f64x8</span>::<span class="ident">from_slice_unaligned</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">scala</span>)
-                            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">write_to_slice_unaligned</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">z</span>));
-                        <span class="ident">z</span>
-                    }
-                    <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">4</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-                        <span class="self">self</span>.<span class="ident">chunks_exact</span>(<span class="number">4</span>)
-                            .<span class="ident">map</span>(<span class="ident">f64x4</span>::<span class="ident">from_slice_unaligned</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">scala</span>)
-                            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">write_to_slice_unaligned</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">z</span>));
-                        <span class="ident">z</span>
-                    }
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">scala</span>)
-                }
+            <span class="ident">Norm</span>::<span class="ident">Lp</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="macro">assert</span><span class="macro">!</span>(<span class="ident">p</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">1f64</span>, <span class="macro">format</span><span class="macro">!</span>(<span class="string">&quot;lp norm is only defined for p&gt;=1, the given value was p={}&quot;</span>, <span class="ident">p</span>));
+                <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">p</span>)).<span class="ident">sum</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>().<span class="ident">powf</span>(<span class="number">1f64</span><span class="op">/</span><span class="ident">p</span>)
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">scala</span>),
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">s_mul</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">match</span> () {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-            () <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">len</span>() {
-                    <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">8</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-                        <span class="self">self</span>.<span class="ident">chunks_exact</span>(<span class="number">8</span>)
-                            .<span class="ident">map</span>(<span class="ident">f64x8</span>::<span class="ident">from_slice_unaligned</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">scala</span>)
-                            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">write_to_slice_unaligned</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">z</span>));
-                        <span class="ident">z</span>
-                    }
-                    <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">4</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-                        <span class="self">self</span>.<span class="ident">chunks_exact</span>(<span class="number">4</span>)
-                            .<span class="ident">map</span>(<span class="ident">f64x4</span>::<span class="ident">from_slice_unaligned</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">scala</span>)
-                            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">write_to_slice_unaligned</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">z</span>));
-                        <span class="ident">z</span>
-                    }
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">scala</span>)
-                }
+            <span class="ident">Norm</span>::<span class="ident">LInf</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">fold</span>(<span class="number">0f64</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">max</span>(<span class="ident">y</span>.<span class="ident">abs</span>()))
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">scala</span> <span class="op">*</span> <span class="ident">x</span>),
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">s_div</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">scala</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">match</span> () {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-            () <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">len</span>() {
-                    <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">8</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-                        <span class="self">self</span>.<span class="ident">chunks_exact</span>(<span class="number">8</span>)
-                            .<span class="ident">map</span>(<span class="ident">f64x8</span>::<span class="ident">from_slice_unaligned</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">scala</span>)
-                            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">write_to_slice_unaligned</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">z</span>));
-                        <span class="ident">z</span>
-                    }
-                    <span class="ident">n</span> <span class="kw">if</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">4</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-                        <span class="self">self</span>.<span class="ident">chunks_exact</span>(<span class="number">4</span>)
-                            .<span class="ident">map</span>(<span class="ident">f64x4</span>::<span class="ident">from_slice_unaligned</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">scala</span>)
-                            .<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">write_to_slice_unaligned</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">z</span>));
-                        <span class="ident">z</span>
-                    }
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">scala</span>)
-                }
+            <span class="ident">Norm</span>::<span class="ident">F</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="macro">unimplemented</span><span class="macro">!</span>()
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">scala</span>),
-        }
-    }
-
-    <span class="doccomment">/// Dot product</span>
-    <span class="kw">fn</span> <span class="ident">dot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
-        <span class="kw">match</span> () {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-            () <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">n_i32</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i32</span>;
-                <span class="kw">let</span> <span class="ident">res</span>: <span class="ident">f64</span>;
-                <span class="kw">unsafe</span> {
-                    <span class="ident">res</span> <span class="op">=</span> <span class="ident">ddot</span>(<span class="ident">n_i32</span>, <span class="self">self</span>, <span class="number">1</span>, <span class="ident">other</span>, <span class="number">1</span>);
-                }
-                <span class="ident">res</span>
+            <span class="ident">Norm</span>::<span class="ident">Lpq</span>(<span class="kw">_</span>, <span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="macro">unimplemented</span><span class="macro">!</span>()
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>).<span class="ident">reduce</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>),
         }
     }
-
-    <span class="kw">fn</span> <span class="ident">sum</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
-        <span class="kw">match</span> () {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-            () <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">n_i32</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i32</span>;
-                <span class="kw">let</span> <span class="ident">res</span>: <span class="ident">f64</span>;
-                <span class="kw">unsafe</span> {
-                    <span class="ident">res</span> <span class="op">=</span> <span class="ident">dasum</span>(<span class="ident">n_i32</span>, <span class="self">self</span>, <span class="number">1</span>);
-                }
-                <span class="ident">res</span>
-            }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">reduce</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="number">0f64</span>, <span class="self">self</span>)
-        }
-    }
-
-    <span class="doccomment">/// Norm</span>
-    <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
-        <span class="kw">match</span> () {
-            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-            () <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">n_i32</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i32</span>;
-                <span class="kw">let</span> <span class="ident">res</span>: <span class="ident">f64</span>;
-                <span class="kw">unsafe</span> {
-                    <span class="ident">res</span> <span class="op">=</span> <span class="ident">dnrm2</span>(<span class="ident">n_i32</span>, <span class="self">self</span>, <span class="number">1</span>);
-                }
-                <span class="ident">res</span>
-            }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">dot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>).<span class="ident">sqrt</span>(),
-        }
-    }
-
-    <span class="doccomment">/// Norm L1, also known as Manhattan Norm</span>
-    <span class="doccomment">/// Sum of the absolute value of each element</span>
-    <span class="kw">fn</span> <span class="ident">norm_l1</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
-        <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">abs</span>()).<span class="ident">sum</span>()
-    }
-
-    <span class="doccomment">/// Norm L2, also known as Euclidean Norm</span>
-    <span class="doccomment">/// Square root of the sum of the square of each element</span>
-    <span class="kw">fn</span> <span class="ident">norm_l2</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
-        <span class="kw">let</span> <span class="ident">sum_squared</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">powi</span>(<span class="number">2</span>)).<span class="ident">sum</span>();
-        <span class="ident">sum_squared</span>.<span class="ident">sqrt</span>()
-    }
-
-    <span class="doccomment">/// Norm L-Infinity, also known as Maximum Norm</span>
-    <span class="doccomment">/// Maximum of the absolute value of the elements</span>
-    <span class="kw">fn</span> <span class="ident">norm_linf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">max</span> <span class="op">=</span> <span class="self">self</span>[<span class="number">0</span>].<span class="ident">abs</span>();
-
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="self">self</span>.<span class="ident">len</span>() {
-            <span class="ident">max</span> <span class="op">=</span> <span class="ident">max</span>.<span class="ident">max</span>(<span class="self">self</span>[<span class="ident">i</span>].<span class="ident">abs</span>());
-        }
-
-        <span class="ident">max</span>
-    }
-
-    <span class="doccomment">/// Norm L-p, also known as p-Norm</span>
-    <span class="doccomment">/// p=1 is the L1-norm (Manhattan Norm)</span>
-    <span class="doccomment">/// p=2 is the L2-norm (Euclidean Norm)</span>
-    <span class="kw">fn</span> <span class="ident">norm_lp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
-        <span class="kw">if</span> <span class="ident">p</span> <span class="op">&lt;</span> <span class="number">1.0</span> {
-            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;L-p norm is only defined for p&gt;=1, the given value was p={}&quot;</span>, <span class="ident">p</span>)
-        }
-        <span class="kw">let</span> <span class="ident">sum_p</span> : <span class="ident">f64</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">abs</span>().<span class="ident">powf</span>(<span class="ident">p</span>)).<span class="ident">sum</span>();
-        <span class="ident">sum_p</span>.<span class="ident">powf</span>(<span class="number">1.0</span><span class="op">/</span><span class="ident">p</span>)
-    }
-
-    <span class="doccomment">/// Normalize</span>
-    <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">alpha</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">norm</span>();
-        <span class="self">self</span>.<span class="ident">s_mul</span>(<span class="number">1f64</span> <span class="op">/</span> <span class="ident">alpha</span>)
+    <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">kind</span>: <span class="ident">Norm</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> <span class="kw">where</span> <span class="self">Self</span>: <span class="ident">Sized</span> { 
+        <span class="kw">let</span> <span class="ident">denom</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">norm</span>(<span class="ident">kind</span>);
+        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">denom</span>)
     }
 }
+
+<span class="kw">impl</span> <span class="ident">InnerProduct</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">dot</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+        <span class="kw">match</span> () {
+            <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
+            () <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="ident">n_i32</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i32</span>;
+                <span class="kw">let</span> <span class="ident">res</span>: <span class="ident">f64</span>;
+                <span class="kw">unsafe</span> {
+                    <span class="ident">res</span> <span class="op">=</span> <span class="ident">ddot</span>(<span class="ident">n_i32</span>, <span class="self">self</span>, <span class="number">1</span>, <span class="ident">rhs</span>, <span class="number">1</span>);
+                }
+                <span class="ident">res</span>
+            }
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">rhs</span>.<span class="ident">iter</span>()).<span class="ident">fold</span>(<span class="number">0f64</span>, <span class="op">|</span><span class="ident">x</span>, (<span class="ident">y1</span>, <span class="ident">y2</span>)<span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y1</span> <span class="op">*</span> <span class="ident">y2</span>)
+        }
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">LinearOp</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">f64</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+        <span class="self">self</span>.<span class="ident">dot</span>(<span class="ident">rhs</span>)
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">Oxide</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">ox</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Redox</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="ident">Redox</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>::<span class="ident">from_vec</span>(<span class="self">self</span>)
+    }
+}
+
+<span class="comment">// /// Convenient Vec&lt;f64&gt; Operations (No Clone, No Copy)</span>
+<span class="comment">// impl VecOps for Vec&lt;f64&gt; {</span>
+<span class="comment">//     fn s_add(&amp;self, scala: f64) -&gt; Self {</span>
+<span class="comment">//         match () {</span>
+<span class="comment">//             #[cfg(feature = &quot;O3&quot;)]</span>
+<span class="comment">//             () =&gt; {</span>
+<span class="comment">//                 match self.len() {</span>
+<span class="comment">//                     n if n % 8 == 0 =&gt; {</span>
+<span class="comment">//                         let mut z = vec![0f64; n];</span>
+<span class="comment">//                         self.chunks_exact(8)</span>
+<span class="comment">//                             .map(f64x8::from_slice_unaligned)</span>
+<span class="comment">//                             .map(|x| x + scala)</span>
+<span class="comment">//                             .for_each(|x| x.write_to_slice_unaligned(&amp;mut z));</span>
+<span class="comment">//                         z</span>
+<span class="comment">//                     }</span>
+<span class="comment">//                     n if n % 4 == 0 =&gt; {</span>
+<span class="comment">//                         let mut z = vec![0f64; n];</span>
+<span class="comment">//                         self.chunks_exact(4)</span>
+<span class="comment">//                             .map(f64x4::from_slice_unaligned)</span>
+<span class="comment">//                             .map(|x| x + scala)</span>
+<span class="comment">//                             .for_each(|x| x.write_to_slice_unaligned(&amp;mut z));</span>
+<span class="comment">//                         z</span>
+<span class="comment">//                     }</span>
+<span class="comment">//                     _ =&gt; self.fmap(|x| x + scala)</span>
+<span class="comment">//                 }</span>
+<span class="comment">//             }</span>
+<span class="comment">//             _ =&gt; self.fmap(|x| x + scala),</span>
+<span class="comment">//         }</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn s_sub(&amp;self, scala: f64) -&gt; Self {</span>
+<span class="comment">//         match () {</span>
+<span class="comment">//             #[cfg(feature = &quot;O3&quot;)]</span>
+<span class="comment">//             () =&gt; {</span>
+<span class="comment">//                 match self.len() {</span>
+<span class="comment">//                     n if n % 8 == 0 =&gt; {</span>
+<span class="comment">//                         let mut z = vec![0f64; n];</span>
+<span class="comment">//                         self.chunks_exact(8)</span>
+<span class="comment">//                             .map(f64x8::from_slice_unaligned)</span>
+<span class="comment">//                             .map(|x| x - scala)</span>
+<span class="comment">//                             .for_each(|x| x.write_to_slice_unaligned(&amp;mut z));</span>
+<span class="comment">//                         z</span>
+<span class="comment">//                     }</span>
+<span class="comment">//                     n if n % 4 == 0 =&gt; {</span>
+<span class="comment">//                         let mut z = vec![0f64; n];</span>
+<span class="comment">//                         self.chunks_exact(4)</span>
+<span class="comment">//                             .map(f64x4::from_slice_unaligned)</span>
+<span class="comment">//                             .map(|x| x - scala)</span>
+<span class="comment">//                             .for_each(|x| x.write_to_slice_unaligned(&amp;mut z));</span>
+<span class="comment">//                         z</span>
+<span class="comment">//                     }</span>
+<span class="comment">//                     _ =&gt; self.fmap(|x| x - scala)</span>
+<span class="comment">//                 }</span>
+<span class="comment">//             }</span>
+<span class="comment">//             _ =&gt; self.fmap(|x| x - scala),</span>
+<span class="comment">//         }</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn s_mul(&amp;self, scala: f64) -&gt; Self {</span>
+<span class="comment">//         match () {</span>
+<span class="comment">//             #[cfg(feature = &quot;O3&quot;)]</span>
+<span class="comment">//             () =&gt; {</span>
+<span class="comment">//                 match self.len() {</span>
+<span class="comment">//                     n if n % 8 == 0 =&gt; {</span>
+<span class="comment">//                         let mut z = vec![0f64; n];</span>
+<span class="comment">//                         self.chunks_exact(8)</span>
+<span class="comment">//                             .map(f64x8::from_slice_unaligned)</span>
+<span class="comment">//                             .map(|x| x * scala)</span>
+<span class="comment">//                             .for_each(|x| x.write_to_slice_unaligned(&amp;mut z));</span>
+<span class="comment">//                         z</span>
+<span class="comment">//                     }</span>
+<span class="comment">//                     n if n % 4 == 0 =&gt; {</span>
+<span class="comment">//                         let mut z = vec![0f64; n];</span>
+<span class="comment">//                         self.chunks_exact(4)</span>
+<span class="comment">//                             .map(f64x4::from_slice_unaligned)</span>
+<span class="comment">//                             .map(|x| x * scala)</span>
+<span class="comment">//                             .for_each(|x| x.write_to_slice_unaligned(&amp;mut z));</span>
+<span class="comment">//                         z</span>
+<span class="comment">//                     }</span>
+<span class="comment">//                     _ =&gt; self.fmap(|x| x * scala)</span>
+<span class="comment">//                 }</span>
+<span class="comment">//             }</span>
+<span class="comment">//             _ =&gt; self.fmap(|x| scala * x),</span>
+<span class="comment">//         }</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn s_div(&amp;self, scala: f64) -&gt; Self {</span>
+<span class="comment">//         match () {</span>
+<span class="comment">//             #[cfg(feature = &quot;O3&quot;)]</span>
+<span class="comment">//             () =&gt; {</span>
+<span class="comment">//                 match self.len() {</span>
+<span class="comment">//                     n if n % 8 == 0 =&gt; {</span>
+<span class="comment">//                         let mut z = vec![0f64; n];</span>
+<span class="comment">//                         self.chunks_exact(8)</span>
+<span class="comment">//                             .map(f64x8::from_slice_unaligned)</span>
+<span class="comment">//                             .map(|x| x / scala)</span>
+<span class="comment">//                             .for_each(|x| x.write_to_slice_unaligned(&amp;mut z));</span>
+<span class="comment">//                         z</span>
+<span class="comment">//                     }</span>
+<span class="comment">//                     n if n % 4 == 0 =&gt; {</span>
+<span class="comment">//                         let mut z = vec![0f64; n];</span>
+<span class="comment">//                         self.chunks_exact(4)</span>
+<span class="comment">//                             .map(f64x4::from_slice_unaligned)</span>
+<span class="comment">//                             .map(|x| x / scala)</span>
+<span class="comment">//                             .for_each(|x| x.write_to_slice_unaligned(&amp;mut z));</span>
+<span class="comment">//                         z</span>
+<span class="comment">//                     }</span>
+<span class="comment">//                     _ =&gt; self.fmap(|x| x / scala)</span>
+<span class="comment">//                 }</span>
+<span class="comment">//             }</span>
+<span class="comment">//             _ =&gt; self.fmap(|x| x / scala),</span>
+<span class="comment">//         }</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     /// Dot product</span>
+<span class="comment">//     fn dot(&amp;self, other: &amp;Self) -&gt; f64 {</span>
+<span class="comment">//         match () {</span>
+<span class="comment">//             #[cfg(feature = &quot;O3&quot;)]</span>
+<span class="comment">//             () =&gt; {</span>
+<span class="comment">//                 let n_i32 = self.len() as i32;</span>
+<span class="comment">//                 let res: f64;</span>
+<span class="comment">//                 unsafe {</span>
+<span class="comment">//                     res = ddot(n_i32, self, 1, other, 1);</span>
+<span class="comment">//                 }</span>
+<span class="comment">//                 res</span>
+<span class="comment">//             }</span>
+<span class="comment">//             _ =&gt; zip_with(|x, y| x * y, &amp;self, other).reduce(0, |x, y| x + y),</span>
+<span class="comment">//         }</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn sum(&amp;self) -&gt; Self::Scalar {</span>
+<span class="comment">//         match () {</span>
+<span class="comment">//             #[cfg(feature = &quot;O3&quot;)]</span>
+<span class="comment">//             () =&gt; {</span>
+<span class="comment">//                 let n_i32 = self.len() as i32;</span>
+<span class="comment">//                 let res: f64;</span>
+<span class="comment">//                 unsafe {</span>
+<span class="comment">//                     res = dasum(n_i32, self, 1);</span>
+<span class="comment">//                 }</span>
+<span class="comment">//                 res</span>
+<span class="comment">//             }</span>
+<span class="comment">//             _ =&gt; reduce(|x, y| x + y, 0f64, self)</span>
+<span class="comment">//         }</span>
+<span class="comment">//     }</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">blas_daxpy</span>(<span class="ident">a</span>: <span class="ident">f64</span>, <span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">y</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) {

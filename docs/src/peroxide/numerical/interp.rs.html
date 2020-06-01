@@ -32,20 +32,14 @@
 <span id="16">16</span>
 <span id="17">17</span>
 <span id="18">18</span>
-<span id="19">19</span>
-<span id="20">20</span>
-<span id="21">21</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">polynomial</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">vector</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">polynomial</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>;
 
-
-
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chebyshev_nodes</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">num</span>: <span class="ident">usize</span>, <span class="ident">start</span>: <span class="ident">T</span>, <span class="ident">end</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vector</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chebyshev_nodes</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">num</span>: <span class="ident">usize</span>, <span class="ident">start</span>: <span class="ident">T</span>, <span class="ident">end</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
 {

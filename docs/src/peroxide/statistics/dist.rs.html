@@ -597,14 +597,14 @@
 <span class="doccomment">//! * Representative value</span>
 <span class="doccomment">//!     * Mean: $\mu$</span>
 <span class="doccomment">//!     * Var : $\mu(1 - \mu)$</span>
-<span class="doccomment">//! * In peroxide, to generate $\text{Bern}(x | \mu)$, use simple algorithm</span>
+<span class="doccomment">//! * In peroxide, to generate $\text{Bern}(x | \mu)$, use simple traits</span>
 <span class="doccomment">//!     1. Generate $U \sim \text{Unif}(0, 1)$</span>
 <span class="doccomment">//!     2. If $U \leq \mu$, then $X = 1$ else $X = 0$</span>
 <span class="doccomment">//! * Usage is very simple</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let b = Bernoulli(0.1); // Bern(x | 0.1)</span>
@@ -627,7 +627,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         // Uniform(start, end)</span>
@@ -649,13 +649,13 @@
 <span class="doccomment">//!     * Var: $\sigma^2$</span>
 <span class="doccomment">//! * To generate normal random number, there are two famous algorithms</span>
 <span class="doccomment">//!     * Marsaglia-Polar method</span>
-<span class="doccomment">//!     * Ziggurat algorithm</span>
+<span class="doccomment">//!     * Ziggurat traits</span>
 <span class="doccomment">//! * In peroxide (after ver 0.19.1), use `rand_distr` to generate random normal samples.</span>
-<span class="doccomment">//! * &lt;del&gt;In peroxide, main algorithm is Ziggurat - most efficient algorithm to generate random normal samples.&lt;/del&gt;</span>
+<span class="doccomment">//! * &lt;del&gt;In peroxide, main traits is Ziggurat - most efficient traits to generate random normal samples.&lt;/del&gt;</span>
 <span class="doccomment">//!     * &lt;del&gt;Code is based on a [C implementation](https://www.seehuhn.de/pages/ziggurat.html) by Jochen Voss.&lt;/del&gt;</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::*;</span>
+<span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         // Normal(mean, std)</span>
@@ -679,9 +679,9 @@
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">rand_distr</span>::<span class="ident">Distribution</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">OPDist</span>::<span class="kw-2">*</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">TPDist</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">special</span>::<span class="ident">function</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">special</span>::<span class="ident">function</span>::<span class="kw-2">*</span>;
 <span class="comment">//use statistics::rand::ziggurat;</span>
-<span class="kw">use</span> <span class="ident">statistics</span>::<span class="ident">stat</span>::<span class="ident">Statistics</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">statistics</span>::<span class="ident">stat</span>::<span class="ident">Statistics</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">E</span>;
 

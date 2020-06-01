@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["RedoxVector","Smart pointer of Vector"]],"trait":[["Redoxable","Redox wrap for Vector"]]});

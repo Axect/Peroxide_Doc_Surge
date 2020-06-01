@@ -216,18 +216,18 @@
 <span id="200">200</span>
 <span id="201">201</span>
 <span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Macro to non macro function</span>
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">rand</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
-
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">statistics</span>::<span class="ident">stat</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">vector</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::{
+    <span class="ident">matrix</span>::{<span class="ident">Matrix</span>, <span class="ident">matrix</span>, <span class="ident">Shape</span>},
+    <span class="ident">matrix</span>::<span class="ident">Shape</span>::{<span class="ident">Row</span>, <span class="ident">Col</span>},
+};
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
 
@@ -236,12 +236,12 @@
 <span class="doccomment">/// # Example</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::*;</span>
+<span class="doccomment">/// use peroxide::fuga::*;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let a = seq(1, 10, 2);</span>
 <span class="doccomment">/// assert_eq!(a, vec![1f64,3f64,5f64,7f64,9f64]);</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">seq</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">start</span>: <span class="ident">S</span>, <span class="ident">end</span>: <span class="ident">T</span>, <span class="ident">step</span>: <span class="ident">U</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vector</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">seq</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">start</span>: <span class="ident">S</span>, <span class="ident">end</span>: <span class="ident">T</span>, <span class="ident">step</span>: <span class="ident">U</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
     <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
@@ -268,7 +268,7 @@
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::*;</span>
+<span class="doccomment">/// use peroxide::fuga::*;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let a = zeros(2, 2);</span>
 <span class="doccomment">/// assert_eq!(a, matrix(vec![0f64;4], 2, 2, Row));</span>
@@ -316,7 +316,7 @@
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::*;</span>
+<span class="doccomment">/// use peroxide::fuga::*;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let a = eye(2);</span>
 <span class="doccomment">/// assert_eq!(a, MATLAB::new(&quot;1 0;0 1&quot;));</span>
@@ -342,13 +342,16 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">/// #[macro_use]</span>
 <span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let a = matrix!(1;4;1, 2, 2, Col);</span>
-<span class="doccomment">/// let b = matrix!(5;8;1, 2, 2, Col);</span>
-<span class="doccomment">/// let c = matrix!(1;8;1, 2, 4, Col);</span>
-<span class="doccomment">/// assert_eq!(cbind(a,b), c);</span>
+<span class="doccomment">/// use peroxide::fuga::*;</span>
+<span class="doccomment">/// </span>
+<span class="doccomment">/// fn main() {</span>
+<span class="doccomment">///     let a = matrix!(1;4;1, 2, 2, Col);</span>
+<span class="doccomment">///     let b = matrix!(5;8;1, 2, 2, Col);</span>
+<span class="doccomment">///     let c = matrix!(1;8;1, 2, 4, Col);</span>
+<span class="doccomment">///     assert_eq!(cbind(a,b), c);</span>
+<span class="doccomment">/// }</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cbind</span>(<span class="ident">m1</span>: <span class="ident">Matrix</span>, <span class="ident">m2</span>: <span class="ident">Matrix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">m1</span>;
@@ -375,13 +378,16 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">/// ```</span>
+<span class="doccomment">/// #[macro_use]</span>
 <span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::*;</span>
+<span class="doccomment">/// use peroxide::fuga::*;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// let a = matrix!(1;4;1, 2, 2, Row);</span>
-<span class="doccomment">/// let b = matrix!(5;8;1, 2, 2, Row);</span>
-<span class="doccomment">/// let c = matrix!(1;8;1, 4, 2, Row);</span>
-<span class="doccomment">/// assert_eq!(rbind(a,b), c);</span>
+<span class="doccomment">/// fn main() {</span>
+<span class="doccomment">///     let a = matrix!(1;4;1, 2, 2, Row);</span>
+<span class="doccomment">///     let b = matrix!(5;8;1, 2, 2, Row);</span>
+<span class="doccomment">///     let c = matrix!(1;8;1, 4, 2, Row);</span>
+<span class="doccomment">///     assert_eq!(rbind(a,b), c);</span>
+<span class="doccomment">/// }</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rbind</span>(<span class="ident">m1</span>: <span class="ident">Matrix</span>, <span class="ident">m2</span>: <span class="ident">Matrix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">m1</span>;

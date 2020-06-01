@@ -442,14 +442,14 @@
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">u32</span>;
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="kw-2">*</span>;
 
 <span class="doccomment">/// Simple uniform random number generator with ThreadRng</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::*;</span>
+<span class="doccomment">/// use peroxide::fuga::*;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let mut rng = thread_rng();</span>
 <span class="doccomment">/// println!(&quot;{}&quot;, rand_num(&amp;mut rng, 1, 7));       // Roll a dice</span>
