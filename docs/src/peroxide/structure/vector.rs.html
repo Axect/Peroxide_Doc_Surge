@@ -847,6 +847,19 @@
 <span id="831">831</span>
 <span id="832">832</span>
 <span id="833">833</span>
+<span id="834">834</span>
+<span id="835">835</span>
+<span id="836">836</span>
+<span id="837">837</span>
+<span id="838">838</span>
+<span id="839">839</span>
+<span id="840">840</span>
+<span id="841">841</span>
+<span id="842">842</span>
+<span id="843">843</span>
+<span id="844">844</span>
+<span id="845">845</span>
+<span id="846">846</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Extra tools for `Vec&lt;f64&gt;`</span>
 <span class="doccomment">//!</span>
@@ -952,11 +965,11 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = c!(1,2,3,4);</span>
-<span class="doccomment">//!         cat(0f64, a.clone()).print();</span>
+<span class="doccomment">//!         cat(0f64, &amp;a).print();</span>
 <span class="doccomment">//!         // [0, 1, 2, 3, 4]</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!         let b = c!(5,6,7,8);</span>
-<span class="doccomment">//!         concat(a, b).print();</span>
+<span class="doccomment">//!         concat(&amp;a, &amp;b).print();</span>
 <span class="doccomment">//!         // [1, 2, 3, 4, 5, 6, 7, 8]</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
@@ -1124,7 +1137,6 @@
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">cmp</span>::<span class="ident">min</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">MIN</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
     <span class="ident">fp</span>::<span class="ident">FPVector</span>,
     <span class="ident">mutable</span>::<span class="ident">MutFP</span>,
@@ -1423,10 +1435,24 @@
                 <span class="ident">idx</span>
             }
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
-                <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>().<span class="ident">fold</span>(<span class="ident">MIN</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">max</span>(<span class="ident">y</span>));
-                <span class="ident">v</span>.<span class="ident">into_iter</span>().<span class="ident">position</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="ident">m</span>).<span class="ident">unwrap</span>()
+                <span class="comment">//self.into_iter().enumerate().max_by(|x1, x2| x1.1.partial_cmp(&amp;x2.1).unwrap()).unwrap().0</span>
+                <span class="self">self</span>.<span class="ident">into_iter</span>().<span class="ident">enumerate</span>().<span class="ident">fold</span>(
+                    (<span class="number">0usize</span>, <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">MIN</span>),
+                    <span class="op">|</span><span class="ident">acc</span>, (<span class="ident">ics</span>, <span class="kw-2">&amp;</span><span class="ident">val</span>)<span class="op">|</span> {
+                        <span class="kw">if</span> <span class="ident">acc</span>.<span class="number">1</span> <span class="op">&lt;</span> <span class="ident">val</span> {
+                            (<span class="ident">ics</span>, <span class="ident">val</span>)
+                        } <span class="kw">else</span> {
+                            <span class="ident">acc</span>
+                        }
+                    }
+                ).<span class="number">0</span>
             }
+        }
+    }
+
+    <span class="kw">fn</span> <span class="ident">swap_with_perm</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">p</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>) {
+        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">j</span>) <span class="kw">in</span> <span class="ident">p</span>.<span class="ident">iter</span>() {
+            <span class="self">self</span>.<span class="ident">swap</span>(<span class="kw-2">*</span><span class="ident">i</span>, <span class="kw-2">*</span><span class="ident">j</span>);
         }
     }
 }
@@ -1682,4 +1708,4 @@
     <span class="ident">result</span>
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

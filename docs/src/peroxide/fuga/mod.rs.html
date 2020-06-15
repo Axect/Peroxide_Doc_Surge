@@ -166,6 +166,11 @@
 <span id="150">150</span>
 <span id="151">151</span>
 <span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Choose what you want.</span>
 <span class="doccomment">//! </span>
@@ -259,6 +264,7 @@
     <span class="ident">general</span>::<span class="ident">Algorithm</span>,
     <span class="ident">num</span>::{<span class="ident">PowOps</span>, <span class="ident">ExpLogOps</span>, <span class="ident">TrigOps</span>, <span class="ident">Real</span>, <span class="ident">Number</span>, <span class="ident">NumberVector</span>},
     <span class="ident">pointer</span>::{<span class="ident">Redox</span>, <span class="ident">Oxide</span>, <span class="ident">MatrixPtr</span>},
+    <span class="ident">sugar</span>::{<span class="ident">VecOps</span>, <span class="ident">Scalable</span>, <span class="ident">ScalableMut</span>},
 };
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
@@ -318,5 +324,10 @@
 <span class="comment">// =============================================================================</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">numerical</span>::<span class="ident">integral</span>::<span class="ident">Integral</span>::{<span class="ident">GaussLegendre</span>, <span class="ident">NewtonCotes</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">num</span>::<span class="ident">Number</span>::{<span class="ident">D</span>, <span class="ident">F</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">statistics</span>::<span class="ident">stat</span>::<span class="ident">QType</span>::{<span class="ident">Type1</span>, <span class="ident">Type2</span>, <span class="ident">Type3</span>, <span class="ident">Type4</span>, <span class="ident">Type5</span>, <span class="ident">Type6</span>, <span class="ident">Type7</span>, <span class="ident">Type8</span>, <span class="ident">Type9</span>};</pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">statistics</span>::<span class="ident">stat</span>::<span class="ident">QType</span>::{<span class="ident">Type1</span>, <span class="ident">Type2</span>, <span class="ident">Type3</span>, <span class="ident">Type4</span>, <span class="ident">Type5</span>, <span class="ident">Type6</span>, <span class="ident">Type7</span>, <span class="ident">Type8</span>, <span class="ident">Type9</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::{
+    <span class="ident">Form</span>::{<span class="ident">Diagonal</span>, <span class="ident">Identity</span>},
+    <span class="ident">SolveKind</span>::{<span class="ident">LU</span>, <span class="ident">WAZ</span>},
+};
+</pre></div>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

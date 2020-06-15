@@ -14,7 +14,7 @@
     });
 </script>
 
-<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a><p class='location'>Module matrix</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../../index.html'>peroxide</a>::<wbr><a href='../index.html'>structure</a></p><script>window.sidebarCurrent = {name: 'matrix', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../../../src/peroxide/structure/matrix.rs.html#1-3658' title='goto source code'>[src]</a></span><span class='in-band'>Module <a href='../../index.html'>peroxide</a>::<wbr><a href='../index.html'>structure</a>::<wbr><a class="mod" href=''>matrix</a></span></h1><div class='docblock'><p>Matrix for Scientific computation</p>
+<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a><p class='location'>Module matrix</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'><a href='../../index.html'>peroxide</a>::<wbr><a href='../index.html'>structure</a></p><script>window.sidebarCurrent = {name: 'matrix', ty: 'mod', relpath: '../'};</script><script defer src="../sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../../../src/peroxide/structure/matrix.rs.html#1-3979' title='goto source code'>[src]</a></span><span class='in-band'>Module <a href='../../index.html'>peroxide</a>::<wbr><a href='../index.html'>structure</a>::<wbr><a class="mod" href=''>matrix</a></span></h1><div class='docblock'><p>Matrix for Scientific computation</p>
 <h2 id="declare-matrix" class="section-header"><a href="#declare-matrix">Declare matrix</a></h2>
 <ul>
 <li>You can declare matrix by various ways.
@@ -401,7 +401,7 @@ print(a)
 <p>Since there are lots of causes to generate error, you should use <code>Option</code></p>
 </li>
 <li>
-<p><code>lu</code> returns <code>Option&lt;PQLU&gt;</code></p>
+<p><code>lu</code> returns <code>PQLU</code></p>
 <ul>
 <li><code>PQLU</code> has four field - <code>p</code>, <code>q</code>, <code>l</code> , <code>u</code></li>
 <li><code>p</code> means row permutations</li>
@@ -419,13 +419,11 @@ print(a)
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PQLU</span> {
-    <span class="kw">pub</span> <span class="ident">p</span>: <span class="ident">Perms</span>,
-    <span class="kw">pub</span> <span class="ident">q</span>: <span class="ident">Perms</span>,
+    <span class="kw">pub</span> <span class="ident">p</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">q</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">l</span>: <span class="ident">Matrix</span>,
     <span class="kw">pub</span> <span class="ident">u</span>: <span class="ident">Matrix</span>,
-}
-
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Perms</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>;</pre></div>
+}</pre></div>
 </li>
 <li>
 <p>Example of LU decomposition:</p>
@@ -437,10 +435,10 @@ print(a)
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">c</span><span class="macro">!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="kw">let</span> <span class="ident">pqlu</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">lu</span>().<span class="ident">unwrap</span>(); <span class="comment">// unwrap because of Option</span>
+    <span class="kw">let</span> <span class="ident">pqlu</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">lu</span>();
     <span class="kw">let</span> (<span class="ident">p</span>,<span class="ident">q</span>,<span class="ident">l</span>,<span class="ident">u</span>) <span class="op">=</span> (<span class="ident">pqlu</span>.<span class="ident">p</span>, <span class="ident">pqlu</span>.<span class="ident">q</span>, <span class="ident">pqlu</span>.<span class="ident">l</span>, <span class="ident">pqlu</span>.<span class="ident">u</span>);
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">p</span>, <span class="macro">vec</span><span class="macro">!</span>[(<span class="number">0</span>,<span class="number">1</span>)]); <span class="comment">// swap 0 &amp; 1 (Row)</span>
-    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">q</span>, <span class="macro">vec</span><span class="macro">!</span>[(<span class="number">0</span>,<span class="number">1</span>)]); <span class="comment">// swap 0 &amp; 1 (Col)</span>
+    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">p</span>, <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>]); <span class="comment">// swap 0 &amp; 1 (Row)</span>
+    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">q</span>, <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1</span>]); <span class="comment">// swap 0 &amp; 1 (Col)</span>
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">l</span>, <span class="ident">matrix</span>(<span class="macro">c</span><span class="macro">!</span>(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0.5</span>,<span class="number">1</span>),<span class="number">2</span>,<span class="number">2</span>,<span class="ident">Row</span>));
     <span class="comment">//      c[0] c[1]</span>
     <span class="comment">// r[0]    1    0</span>
@@ -470,7 +468,7 @@ print(a)
 </ul>
 <h2 id="inverse-matrix" class="section-header"><a href="#inverse-matrix">Inverse matrix</a></h2>
 <ul>
-<li>Peroxide uses LU decomposition to obtain inverse matrix.</li>
+<li>Peroxide uses LU decomposition (via GECP) to obtain inverse matrix.</li>
 <li>It needs two sub functions - <code>inv_l</code>, <code>inv_u</code>
 <ul>
 <li>For inverse of <code>L, U</code>, I use block partitioning. For example, for lower triangular matrix :
@@ -484,7 +482,7 @@ $$ \begin{aligned} L &amp;= \begin{pmatrix} L_1 &amp; \mathbf{0} \\ L_2 &amp; L_
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix</span><span class="macro">!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="ident">a</span>.<span class="ident">inv</span>().<span class="ident">unwrap</span>().<span class="ident">print</span>();
+    <span class="ident">a</span>.<span class="ident">inv</span>().<span class="ident">print</span>();
     <span class="comment">//      c[0] c[1]</span>
     <span class="comment">// r[0]   -2    1</span>
     <span class="comment">// r[1]  1.5 -0.5</span>
@@ -503,8 +501,8 @@ $$ \begin{aligned} L &amp;= \begin{pmatrix} L_1 &amp; \mathbf{0} \\ L_2 &amp; L_
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix</span><span class="macro">!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="kw">let</span> <span class="ident">pinv_a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">pseudo_inv</span>().<span class="ident">unwrap</span>();
-    <span class="kw">let</span> <span class="ident">inv_a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">inv</span>().<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">pinv_a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">pseudo_inv</span>();
+    <span class="kw">let</span> <span class="ident">inv_a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">inv</span>();
 
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">inv_a</span>, <span class="ident">pinv_a</span>); <span class="comment">// Nearly equal (not actually equal)</span>
 }</pre></div>
@@ -516,9 +514,9 @@ $$ \begin{aligned} L &amp;= \begin{pmatrix} L_1 &amp; \mathbf{0} \\ L_2 &amp; L_
 </td></tr><tr class='module-item'><td><a class="struct" href="struct.DGETRF.html" title='peroxide::structure::matrix::DGETRF struct'>DGETRF</a></td><td class='docblock-short'><p>Temporary data structure from <code>dgetrf</code></p>
 </td></tr><tr class='module-item'><td><a class="struct" href="struct.Matrix.html" title='peroxide::structure::matrix::Matrix struct'>Matrix</a></td><td class='docblock-short'><p>R-like matrix structure</p>
 </td></tr><tr class='module-item'><td><a class="struct" href="struct.PQLU.html" title='peroxide::structure::matrix::PQLU struct'>PQLU</a></td><td class='docblock-short'><p>Data structure for Complete Pivoting LU decomposition</p>
-</td></tr><tr class='module-item'><td><a class="struct" href="struct.QR.html" title='peroxide::structure::matrix::QR struct'>QR</a></td><td class='docblock-short'></td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
-<table><tr class='module-item'><td><a class="enum" href="enum.LAPACK_STATUS.html" title='peroxide::structure::matrix::LAPACK_STATUS enum'>LAPACK_STATUS</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="enum" href="enum.Shape.html" title='peroxide::structure::matrix::Shape enum'>Shape</a></td><td class='docblock-short'><p>To select matrices' binding.</p>
-</td></tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
+</td></tr><tr class='module-item'><td><a class="struct" href="struct.QR.html" title='peroxide::structure::matrix::QR struct'>QR</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="struct" href="struct.WAZD.html" title='peroxide::structure::matrix::WAZD struct'>WAZD</a></td><td class='docblock-short'></td></tr></table><h2 id='enums' class='section-header'><a href="#enums">Enums</a></h2>
+<table><tr class='module-item'><td><a class="enum" href="enum.Form.html" title='peroxide::structure::matrix::Form enum'>Form</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="enum" href="enum.LAPACK_STATUS.html" title='peroxide::structure::matrix::LAPACK_STATUS enum'>LAPACK_STATUS</a></td><td class='docblock-short'></td></tr><tr class='module-item'><td><a class="enum" href="enum.Shape.html" title='peroxide::structure::matrix::Shape enum'>Shape</a></td><td class='docblock-short'><p>To select matrices' binding.</p>
+</td></tr><tr class='module-item'><td><a class="enum" href="enum.SolveKind.html" title='peroxide::structure::matrix::SolveKind enum'>SolveKind</a></td><td class='docblock-short'></td></tr></table><h2 id='traits' class='section-header'><a href="#traits">Traits</a></h2>
 <table><tr class='module-item'><td><a class="trait" href="trait.Error.html" title='peroxide::structure::matrix::Error trait'>Error</a></td><td class='docblock-short'><p><code>Error</code> is a trait representing the basic expectations for error values,
 i.e., values of type <code>E</code> in <a href="../result/enum.Result.html"><code>Result&lt;T, E&gt;</code></a>. Errors must describe
 themselves through the <a href="../fmt/trait.Display.html"><code>Display</code></a> and <a href="../fmt/trait.Debug.html"><code>Debug</code></a> traits, and may provide
@@ -541,4 +539,4 @@ cause chain information:</p>
 </td></tr><tr class='module-item'><td><a class="fn" href="fn.py_matrix.html" title='peroxide::structure::matrix::py_matrix fn'>py_matrix</a></td><td class='docblock-short'><p>Python-like matrix constructor</p>
 </td></tr><tr class='module-item'><td><a class="fn" href="fn.r_matrix.html" title='peroxide::structure::matrix::r_matrix fn'>r_matrix</a></td><td class='docblock-short'><p>R-like matrix constructor (Explicit ver.)</p>
 </td></tr><tr class='module-item'><td><a class="fn" href="fn.solve.html" title='peroxide::structure::matrix::solve fn'>solve</a></td><td class='docblock-short'></td></tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
-<table><tr class='module-item'><td><a class="type" href="type.Perms.html" title='peroxide::structure::matrix::Perms type'>Perms</a></td><td class='docblock-short'></td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../aliases.js"></script><script src="../../../main.js"></script><script defer src="../../../search-index.js"></script></body></html>
+<table><tr class='module-item'><td><a class="type" href="type.Perms.html" title='peroxide::structure::matrix::Perms type'>Perms</a></td><td class='docblock-short'></td></tr></table></section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script defer src="../../../search-index.js"></script></body></html>
