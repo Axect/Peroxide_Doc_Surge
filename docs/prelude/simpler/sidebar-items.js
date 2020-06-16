@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["eigen","Simple Eigenpair"],["integrate","Simple integrate"]],"trait":[["SimpleNorm","Simple Norm"]]});
+initSidebarItems({"fn":[["eigen","Simple Eigenpair"],["integrate","Simple integrate"],["solve","Simple solve"]],"trait":[["SimpleNorm","Simple Norm"],["SimplerLinearAlgebra","Simple Linear algebra"]]});
