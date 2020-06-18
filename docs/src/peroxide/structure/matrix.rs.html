@@ -3993,6 +3993,12 @@
 <span id="3977">3977</span>
 <span id="3978">3978</span>
 <span id="3979">3979</span>
+<span id="3980">3980</span>
+<span id="3981">3981</span>
+<span id="3982">3982</span>
+<span id="3983">3983</span>
+<span id="3984">3984</span>
+<span id="3985">3985</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Matrix for Scientific computation</span>
 <span class="doccomment">//!</span>
@@ -4487,8 +4493,8 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Shape</span> {
-    <span class="ident">Row</span>,
     <span class="ident">Col</span>,
+    <span class="ident">Row</span>
 }
 
 <span class="doccomment">/// Print for Shape</span>
@@ -4499,6 +4505,12 @@
             <span class="ident">Col</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;Col&quot;</span>,
         };
         <span class="macro">write</span><span class="macro">!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">to_display</span>)
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Shape</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="ident">Shape</span>::<span class="ident">Col</span>
     }
 }
 
@@ -4517,7 +4529,7 @@
 <span class="doccomment">///     shape: Row,</span>
 <span class="doccomment">/// }; // [[1,2],[3,4]]</span>
 <span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Matrix</span> {
     <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">row</span>: <span class="ident">usize</span>,

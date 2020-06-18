@@ -911,6 +911,90 @@
 <span id="895">895</span>
 <span id="896">896</span>
 <span id="897">897</span>
+<span id="898">898</span>
+<span id="899">899</span>
+<span id="900">900</span>
+<span id="901">901</span>
+<span id="902">902</span>
+<span id="903">903</span>
+<span id="904">904</span>
+<span id="905">905</span>
+<span id="906">906</span>
+<span id="907">907</span>
+<span id="908">908</span>
+<span id="909">909</span>
+<span id="910">910</span>
+<span id="911">911</span>
+<span id="912">912</span>
+<span id="913">913</span>
+<span id="914">914</span>
+<span id="915">915</span>
+<span id="916">916</span>
+<span id="917">917</span>
+<span id="918">918</span>
+<span id="919">919</span>
+<span id="920">920</span>
+<span id="921">921</span>
+<span id="922">922</span>
+<span id="923">923</span>
+<span id="924">924</span>
+<span id="925">925</span>
+<span id="926">926</span>
+<span id="927">927</span>
+<span id="928">928</span>
+<span id="929">929</span>
+<span id="930">930</span>
+<span id="931">931</span>
+<span id="932">932</span>
+<span id="933">933</span>
+<span id="934">934</span>
+<span id="935">935</span>
+<span id="936">936</span>
+<span id="937">937</span>
+<span id="938">938</span>
+<span id="939">939</span>
+<span id="940">940</span>
+<span id="941">941</span>
+<span id="942">942</span>
+<span id="943">943</span>
+<span id="944">944</span>
+<span id="945">945</span>
+<span id="946">946</span>
+<span id="947">947</span>
+<span id="948">948</span>
+<span id="949">949</span>
+<span id="950">950</span>
+<span id="951">951</span>
+<span id="952">952</span>
+<span id="953">953</span>
+<span id="954">954</span>
+<span id="955">955</span>
+<span id="956">956</span>
+<span id="957">957</span>
+<span id="958">958</span>
+<span id="959">959</span>
+<span id="960">960</span>
+<span id="961">961</span>
+<span id="962">962</span>
+<span id="963">963</span>
+<span id="964">964</span>
+<span id="965">965</span>
+<span id="966">966</span>
+<span id="967">967</span>
+<span id="968">968</span>
+<span id="969">969</span>
+<span id="970">970</span>
+<span id="971">971</span>
+<span id="972">972</span>
+<span id="973">973</span>
+<span id="974">974</span>
+<span id="975">975</span>
+<span id="976">976</span>
+<span id="977">977</span>
+<span id="978">978</span>
+<span id="979">979</span>
+<span id="980">980</span>
+<span id="981">981</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Solver for ordinary differential equations</span>
 <span class="doccomment">//!</span>
@@ -925,9 +1009,9 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     ```rust</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::{Real, State, BoundaryCondition};</span>
+<span class="doccomment">//!     use peroxide::fuga::{Real, State, BoundaryCondition, Environment};</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//!     pub trait ODE {</span>
+<span class="doccomment">//!     pub trait ODE&lt;E: Environment&gt; {</span>
 <span class="doccomment">//!         type Records;</span>
 <span class="doccomment">//!         type Vector;</span>
 <span class="doccomment">//!         type Param;</span>
@@ -946,6 +1030,7 @@
 <span class="doccomment">//!         fn set_stop_condition(&amp;mut self, f: fn(&amp;Self) -&gt; bool) -&gt; &amp;mut Self;</span>
 <span class="doccomment">//!         fn set_times(&amp;mut self, n: usize) -&gt; &amp;mut Self;</span>
 <span class="doccomment">//!         fn check_enough(&amp;self) -&gt; bool;</span>
+<span class="doccomment">//!         fn set_env(&amp;mut self, env: E) -&gt; &amp;mut Self;</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//!</span>
@@ -961,6 +1046,7 @@
 <span class="doccomment">//!         * `ImMethod` : Implicit method **(to be implemented)**</span>
 <span class="doccomment">//!             * `BDF` : Backward Euler 1st order</span>
 <span class="doccomment">//!             * `GL4` : Gauss Legendre 4th order</span>
+<span class="doccomment">//!     * `Environment` : External environment (CubicSpline, Vec&lt;f64&gt;, Matrix or Another external table)</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ### `State&lt;T&gt;` structure</span>
@@ -997,6 +1083,52 @@
 <span class="doccomment">//! * `to_f64(&amp;self) -&gt; State&lt;f64&gt;`</span>
 <span class="doccomment">//! * `to_dual(&amp;self) -&gt; State&lt;Dual&gt;`</span>
 <span class="doccomment">//! * `new(T, Vec&lt;T&gt;, Vec&lt;T&gt;) -&gt; Self`</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! ### `Environment`</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! * `Environment` needs just `Default`</span>
+<span class="doccomment">//! * To use custom `Environment`, just type follows : `impl Environment for CustomType {}`</span>
+<span class="doccomment">//! * If you don&#39;t want to use `Environment`, then use `NoEnv`</span>
+<span class="doccomment">//! * Implemented Data Types</span>
+<span class="doccomment">//!     * `Vec&lt;f64&gt;`</span>
+<span class="doccomment">//!     * `Polynomial`</span>
+<span class="doccomment">//!     * `Matrix`</span>
+<span class="doccomment">//!     * `CubicSpline`</span>
+<span class="doccomment">//!     * `NoEnv`</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//! #[macro_use]</span>
+<span class="doccomment">//! extern crate peroxide;</span>
+<span class="doccomment">//! use peroxide::fuga::*;</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! fn main() {</span>
+<span class="doccomment">//!     let x = seq(0, 10, 1);</span>
+<span class="doccomment">//!     x.print();</span>
+<span class="doccomment">//!     let y = x.iter().enumerate().map(|(i, &amp;t)| t.powi(5-i as i32)).collect::&lt;Vec&lt;f64&gt;&gt;();</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//!     let c = CubicSpline::from_nodes(x, y);</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//!     let mut ode_solver = ExplicitODE::new(test_fn);</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//!     ode_solver</span>
+<span class="doccomment">//!         .set_method(ExMethod::RK4)</span>
+<span class="doccomment">//!         .set_initial_condition(init_state)</span>
+<span class="doccomment">//!         .set_step_size(0.01)</span>
+<span class="doccomment">//!         .set_times(1000)</span>
+<span class="doccomment">//!         .set_env(c);</span>
+<span class="doccomment">//!     </span>
+<span class="doccomment">//!     let result = ode_solver.integrate();</span>
+<span class="doccomment">//!     result.print();</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;, env: &amp;CubicSpline) {</span>
+<span class="doccomment">//!     let x = st.param;</span>
+<span class="doccomment">//!     let dy = &amp;mut st.deriv;</span>
+<span class="doccomment">//!     dy[0] = env.eval(x);</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ### `ExplicitODE` struct</span>
 <span class="doccomment">//!</span>
@@ -1005,12 +1137,12 @@
 <span class="doccomment">//! ```rust</span>
 <span class="doccomment">//! extern crate peroxide;</span>
 <span class="doccomment">//! use std::collections::HashMap;</span>
-<span class="doccomment">//! use peroxide::fuga::{State, ExMethod, BoundaryCondition, ODEOptions};</span>
+<span class="doccomment">//! use peroxide::fuga::{State, ExMethod, BoundaryCondition, ODEOptions, Environment};</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! #[derive(Clone)]</span>
-<span class="doccomment">//! pub struct ExplicitODE {</span>
+<span class="doccomment">//! pub struct ExplicitODE&lt;E: Environment&gt; {</span>
 <span class="doccomment">//!     state: State&lt;f64&gt;,</span>
-<span class="doccomment">//!     func: fn(&amp;mut State&lt;f64&gt;),</span>
+<span class="doccomment">//!     func: fn(&amp;mut State&lt;f64&gt;, &amp;E),</span>
 <span class="doccomment">//!     step_size: f64,</span>
 <span class="doccomment">//!     method: ExMethod,</span>
 <span class="doccomment">//!     init_cond: State&lt;f64&gt;,</span>
@@ -1019,6 +1151,7 @@
 <span class="doccomment">//!     stop_cond: fn(&amp;Self) -&gt; bool,</span>
 <span class="doccomment">//!     times: usize,</span>
 <span class="doccomment">//!     to_use: HashMap&lt;ODEOptions, bool&gt;,</span>
+<span class="doccomment">//!     env: E,</span>
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
@@ -1030,6 +1163,7 @@
 <span class="doccomment">//! * `stop_cond` : Stop condition (stop before `times`)</span>
 <span class="doccomment">//! * `times` : How many times do you want to update?</span>
 <span class="doccomment">//! * `to_use` : Just check whether information is enough</span>
+<span class="doccomment">//! * `env` : Environment</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Example</span>
 <span class="doccomment">//!</span>
@@ -1069,7 +1203,7 @@
 <span class="doccomment">//!     // Plot or extract</span>
 <span class="doccomment">//! }</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! fn f(st: &amp;mut State&lt;f64&gt;) {</span>
+<span class="doccomment">//! fn f(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {</span>
 <span class="doccomment">//!     let x = &amp;st.value;</span>
 <span class="doccomment">//!     let dx = &amp;mut st.deriv;</span>
 <span class="doccomment">//!     dx[0] = 10f64 * (x[1] - x[0]);</span>
@@ -1109,7 +1243,7 @@
 <span class="doccomment">//!     // Plot or Extract..</span>
 <span class="doccomment">//! }</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;) {</span>
+<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {</span>
 <span class="doccomment">//!     let x = st.param;</span>
 <span class="doccomment">//!     let y = &amp;st.value;</span>
 <span class="doccomment">//!     let dy = &amp;mut st.deriv;</span>
@@ -1125,8 +1259,12 @@
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::{
     <span class="ident">dual</span>::{<span class="ident">Dual</span>, <span class="ident">Dualist</span>, <span class="ident">VecWithDual</span>},
     <span class="ident">matrix</span>::{<span class="ident">Matrix</span>, <span class="ident">LinearAlgebra</span>},
+    <span class="ident">polynomial</span>::<span class="ident">Polynomial</span>,
 };
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">numerical</span>::<span class="ident">utils</span>::<span class="ident">jacobian_real</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">numerical</span>::{
+    <span class="ident">utils</span>::<span class="ident">jacobian_real</span>,
+    <span class="ident">spline</span>::<span class="ident">CubicSpline</span>,
+};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::{
     <span class="ident">non_macro</span>::{<span class="ident">cat</span>, <span class="ident">concat</span>, <span class="ident">zeros</span>, <span class="ident">eye</span>},
     <span class="ident">print</span>::<span class="ident">Printable</span>,
@@ -1183,6 +1321,8 @@
     <span class="ident">StepSize</span>,
     <span class="ident">Times</span>,
 }
+
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Environment</span>: <span class="ident">Default</span> {}
 
 <span class="doccomment">/// State for ODE</span>
 <span class="doccomment">///</span>
@@ -1242,15 +1382,12 @@
     }
 }
 
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ExUpdater</span> <span class="op">=</span> <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>);
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ImUpdater</span> <span class="op">=</span> <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span>);
-
 <span class="doccomment">/// ODE solver</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// * `Records` : Type of container to contain results</span>
 <span class="doccomment">/// * `Param` : Type of parameter</span>
 <span class="doccomment">/// * `ODEMethod` : Explicit or Implicit</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ODE</span> {
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Records</span>;
     <span class="kw">type</span> <span class="ident">Param</span>;
     <span class="kw">type</span> <span class="ident">ODEMethod</span>;
@@ -1269,12 +1406,13 @@
     <span class="kw">fn</span> <span class="ident">set_stop_condition</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>;
     <span class="kw">fn</span> <span class="ident">set_times</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>;
     <span class="kw">fn</span> <span class="ident">check_enough</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+    <span class="kw">fn</span> <span class="ident">set_env</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">env</span>: <span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span>;
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExplicitODE</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExplicitODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
     <span class="ident">state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>),
+    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>),
     <span class="ident">step_size</span>: <span class="ident">f64</span>,
     <span class="ident">method</span>: <span class="ident">ExMethod</span>,
     <span class="ident">init_cond</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
@@ -1283,10 +1421,11 @@
     <span class="ident">stop_cond</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>,
     <span class="ident">times</span>: <span class="ident">usize</span>,
     <span class="ident">options</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
+    <span class="ident">env</span>: <span class="ident">E</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">ExplicitODE</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="ident">ExUpdater</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ExplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>)) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">default_to_use</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">new</span>();
         <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">InitCond</span>, <span class="bool-val">false</span>);
         <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">StepSize</span>, <span class="bool-val">false</span>);
@@ -1306,6 +1445,7 @@
             <span class="ident">stop_cond</span>: <span class="op">|</span><span class="ident">_x</span><span class="op">|</span> <span class="bool-val">false</span>,
             <span class="ident">times</span>: <span class="number">0</span>,
             <span class="ident">options</span>: <span class="ident">default_to_use</span>,
+            <span class="ident">env</span>: <span class="ident">E</span>::<span class="ident">default</span>(),
         }
     }
 
@@ -1314,7 +1454,7 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">ODE</span> <span class="kw">for</span> <span class="ident">ExplicitODE</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ExplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Records</span> <span class="op">=</span> <span class="ident">Matrix</span>;
     <span class="kw">type</span> <span class="ident">Param</span> <span class="op">=</span> <span class="ident">f64</span>;
     <span class="kw">type</span> <span class="ident">ODEMethod</span> <span class="op">=</span> <span class="ident">ExMethod</span>;
@@ -1323,7 +1463,7 @@
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">method</span> {
             <span class="ident">Euler</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="comment">// Set Derivative from state</span>
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>);
+                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
                 <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_size</span>;
 
                 <span class="kw">match</span> () {
@@ -1345,24 +1485,24 @@
 
                 <span class="comment">// Set Derivative from state</span>
                 <span class="kw">let</span> <span class="ident">yn</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">clone</span>();
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>);
+                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
 
                 <span class="kw">let</span> <span class="ident">k1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>.<span class="ident">clone</span>();
                 <span class="kw">let</span> <span class="ident">k1_add</span> <span class="op">=</span> <span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="ident">h2</span>);
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span><span class="op">=</span> <span class="ident">h2</span>;
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k1_add</span>);
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>);
+                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
 
                 <span class="kw">let</span> <span class="ident">k2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>.<span class="ident">clone</span>();
                 <span class="kw">let</span> <span class="ident">k2_add</span> <span class="op">=</span> <span class="ident">k2</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">h2</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k1_add</span>);
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k2_add</span>);
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>);
+                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
 
                 <span class="kw">let</span> <span class="ident">k3</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>.<span class="ident">clone</span>();
                 <span class="kw">let</span> <span class="ident">k3_add</span> <span class="op">=</span> <span class="ident">k3</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">h</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k2_add</span>);
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span><span class="op">=</span> <span class="ident">h2</span>;
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k3_add</span>);
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>);
+                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
 
                 <span class="kw">let</span> <span class="ident">k4</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>.<span class="ident">clone</span>();
 
@@ -1516,12 +1656,17 @@
         }
         <span class="bool-val">true</span>
     }
+
+    <span class="kw">fn</span> <span class="ident">set_env</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">env</span>: <span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">env</span> <span class="op">=</span> <span class="ident">env</span>;
+        <span class="self">self</span>
+    }
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ImplicitODE</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
     <span class="ident">state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span>,
-    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span>),
+    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>),
     <span class="ident">step_size</span>: <span class="ident">f64</span>,
     <span class="ident">rtol</span>: <span class="ident">f64</span>,
     <span class="ident">method</span>: <span class="ident">ImMethod</span>,
@@ -1531,10 +1676,11 @@
     <span class="ident">stop_cond</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>,
     <span class="ident">times</span>: <span class="ident">usize</span>,
     <span class="ident">options</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
+    <span class="ident">env</span>: <span class="ident">E</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">ImplicitODE</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="ident">ImUpdater</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>)) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">default_to_use</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">new</span>();
         <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">InitCond</span>, <span class="bool-val">false</span>);
         <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">StepSize</span>, <span class="bool-val">false</span>);
@@ -1555,6 +1701,7 @@
             <span class="ident">stop_cond</span>: <span class="op">|</span><span class="ident">_x</span><span class="op">|</span> <span class="bool-val">false</span>,
             <span class="ident">times</span>: <span class="number">0</span>,
             <span class="ident">options</span>: <span class="ident">default_to_use</span>,
+            <span class="ident">env</span>: <span class="ident">E</span>::<span class="ident">default</span>()
         }
     }
 
@@ -1578,7 +1725,7 @@
 ];
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
-<span class="kw">impl</span> <span class="ident">ODE</span> <span class="kw">for</span> <span class="ident">ImplicitODE</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Records</span> <span class="op">=</span> <span class="ident">Matrix</span>;
     <span class="kw">type</span> <span class="ident">Param</span> <span class="op">=</span> <span class="ident">Dual</span>;
     <span class="kw">type</span> <span class="ident">ODEMethod</span> <span class="op">=</span> <span class="ident">ImMethod</span>;
@@ -1590,7 +1737,7 @@
             <span class="ident">GL4</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="op">|</span><span class="ident">t</span>: <span class="ident">Dual</span>, <span class="ident">y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span><span class="op">|</span> {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">st</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">new</span>(<span class="ident">t</span>, <span class="ident">y</span>.<span class="ident">clone</span>(), <span class="ident">y</span>);
-                    (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">st</span>);
+                    (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">st</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
                     <span class="ident">st</span>.<span class="ident">deriv</span>
                 };
 
@@ -1655,7 +1802,7 @@
                 <span class="kw">let</span> (<span class="ident">k1</span>, <span class="ident">k2</span>) <span class="op">=</span> (<span class="ident">k_curr</span>.<span class="ident">take</span>(<span class="ident">n</span>), <span class="ident">k_curr</span>.<span class="ident">skip</span>(<span class="ident">n</span>));
 
                 <span class="comment">// Set Derivative from state</span>
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>);
+                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
 
                 <span class="comment">// 5. Merge k1, k2</span>
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y_curr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">values</span>();
@@ -1807,7 +1954,28 @@
             }
         }
         <span class="bool-val">true</span>
+    }
+
+    <span class="kw">fn</span> <span class="ident">set_env</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">env</span>: <span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">env</span> <span class="op">=</span> <span class="ident">env</span>;
+        <span class="self">self</span>
     }    
 }
+
+<span class="comment">// =============================================================================</span>
+<span class="comment">// Some Environments</span>
+<span class="comment">// =============================================================================</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NoEnv</span> {}
+
+<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">NoEnv</span> {}
+
+<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">CubicSpline</span> {}
+
+<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">Matrix</span> {}
+
+<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {}
+
+<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {}
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
