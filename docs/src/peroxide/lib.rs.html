@@ -210,6 +210,9 @@
 <span id="194">194</span>
 <span id="195">195</span>
 <span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.</span>
 <span class="doccomment">//!</span>
@@ -244,8 +247,9 @@
 <span class="doccomment">//!     * Incomplete Gamma</span>
 <span class="doccomment">//!     * Incomplete Beta</span>
 <span class="doccomment">//! * Automatic Differentiation</span>
-<span class="doccomment">//!     * [Dual number system](structure/dual/index.html)</span>
-<span class="doccomment">//!     * [Hyper dual number system](structure/hyper_dual/index.html)</span>
+<span class="doccomment">//!     * &lt;del&gt;[Dual number system](structure/dual/index.html)&lt;/del&gt;</span>
+<span class="doccomment">//!     * &lt;del&gt;[Hyper dual number system](structure/hyper_dual/index.html)&lt;/del&gt;</span>
+<span class="doccomment">//!     * [Taylor mode forward AD](structure/ad/index.html)</span>
 <span class="doccomment">//! * Numerical Utils</span>
 <span class="doccomment">//!     * [Interpolation](numerical/interp/index.html)</span>
 <span class="doccomment">//!     * [Spline](numerical/spline/index.html)</span>
@@ -286,38 +290,38 @@
 <span class="doccomment">//! ### Cargo.toml</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * To use `peroxide`, you should edit `Cargo.toml`</span>
-<span class="doccomment">//! * Current document version is corresponding to `0.23.0`</span>
+<span class="doccomment">//! * Current document version is corresponding to `0.25.0`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! 1. Default</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies]</span>
-<span class="doccomment">//!     peroxide = &quot;0.23&quot;</span>
+<span class="doccomment">//!     peroxide = &quot;0.25&quot;</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 2. OpenBLAS &amp; SIMD</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.23&quot;</span>
+<span class="doccomment">//!     version = &quot;0.25&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;O3&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 3. Plot</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.23&quot;</span>
+<span class="doccomment">//!     version = &quot;0.25&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;plot&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 4. DataFrame</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.23&quot;</span>
+<span class="doccomment">//!     version = &quot;0.25&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;dataframe&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 5. Together</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.23&quot;</span>
+<span class="doccomment">//!     version = &quot;0.25&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;O3&quot;, &quot;plot&quot;, &quot;dataframe&quot;]</span>
 <span class="doccomment">//!     ```</span>
@@ -394,6 +398,8 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">puruspe</span>;
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">matrixmultiply</span>;
+
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide_ad</span>;
 
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">macros</span>;

@@ -446,7 +446,7 @@
 <span class="doccomment">//!     result.write(&quot;example_data/test.csv&quot;);</span>
 <span class="doccomment">//! }</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;) {</span>
+<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {</span>
 <span class="doccomment">//!     let x = st.param;</span>
 <span class="doccomment">//!     let y = &amp;st.value;</span>
 <span class="doccomment">//!     let dy = &amp;mut st.deriv;</span>
@@ -490,7 +490,7 @@
 <span class="doccomment">//!     //plt.savefig();</span>
 <span class="doccomment">//! }</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;) {</span>
+<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {</span>
 <span class="doccomment">//!     let x = st.param;</span>
 <span class="doccomment">//!     let y = &amp;st.value;</span>
 <span class="doccomment">//!     let dy = &amp;mut st.deriv;</span>
