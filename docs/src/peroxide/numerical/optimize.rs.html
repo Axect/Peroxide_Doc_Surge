@@ -316,6 +316,12 @@
 <span id="300">300</span>
 <span id="301">301</span>
 <span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! To optimize parametric model (non-linear regression)</span>
 <span class="doccomment">//!</span>
@@ -425,12 +431,10 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">OptMethod</span>::{<span class="ident">GaussNewton</span>, <span class="ident">GradientDescent</span>, <span class="ident">LevenbergMarquardt</span>};
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">OptOption</span>::{<span class="ident">InitParam</span>, <span class="ident">MaxIter</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">numerical</span>::<span class="ident">utils</span>::<span class="ident">jacobian</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::{<span class="ident">LinearAlgebra</span>, <span class="ident">Matrix</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">num</span>::{<span class="ident">Number</span>, <span class="ident">NumberVector</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">useful</span>::<span class="ident">max</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
-    <span class="ident">num</span>::{<span class="ident">Number</span>, <span class="ident">NumberVector</span>},
-};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OptMethod</span> {
@@ -454,7 +458,10 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Caution</span>
 <span class="doccomment">/// * `func` should be boxed. (This allows more generic function)</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Optimizer</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Optimizer</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+{
     <span class="ident">domain</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
     <span class="ident">observed</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
     <span class="ident">func</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>,
@@ -465,7 +472,10 @@
     <span class="ident">option</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">OptOption</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">Optimizer</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> <span class="ident">Optimizer</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+{
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">data</span>: <span class="ident">Matrix</span>, <span class="ident">func</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">default_option</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">OptOption</span>, <span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">new</span>();
         <span class="ident">default_option</span>.<span class="ident">insert</span>(<span class="ident">InitParam</span>, <span class="bool-val">false</span>);
@@ -584,7 +594,8 @@
                             <span class="kw">let</span> <span class="ident">y_hat_temp</span>: <span class="ident">Matrix</span> <span class="op">=</span> <span class="ident">value</span>.<span class="ident">to_f64_vec</span>().<span class="ident">into</span>();
                             <span class="kw">let</span> <span class="ident">chi2_temp</span> <span class="op">=</span> ((<span class="kw-2">&amp;</span><span class="ident">y</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">y_hat_temp</span>).<span class="ident">t</span>() <span class="op">*</span> (<span class="kw-2">&amp;</span><span class="ident">y</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">y_hat_temp</span>))[(<span class="number">0</span>, <span class="number">0</span>)];
                             <span class="kw">let</span> <span class="ident">rho</span> <span class="op">=</span> (<span class="ident">chi2</span> <span class="op">-</span> <span class="ident">chi2_temp</span>)
-                                <span class="op">/</span> (<span class="ident">h</span>.<span class="ident">t</span>() <span class="op">*</span> (<span class="ident">lambda</span> <span class="op">*</span> <span class="ident">jtj</span>.<span class="ident">to_diag</span>() <span class="op">*</span> <span class="ident">h</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="ident">j</span>.<span class="ident">t</span>() <span class="op">*</span> (<span class="kw-2">&amp;</span><span class="ident">y</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">y_hat</span>)))
+                                <span class="op">/</span> (<span class="ident">h</span>.<span class="ident">t</span>()
+                                    <span class="op">*</span> (<span class="ident">lambda</span> <span class="op">*</span> <span class="ident">jtj</span>.<span class="ident">to_diag</span>() <span class="op">*</span> <span class="ident">h</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="ident">j</span>.<span class="ident">t</span>() <span class="op">*</span> (<span class="kw-2">&amp;</span><span class="ident">y</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">y_hat</span>)))
                                     [(<span class="number">0</span>, <span class="number">0</span>)];
                             <span class="kw">if</span> <span class="ident">rho</span> <span class="op">&gt;</span> <span class="number">0f64</span> {
                                 <span class="ident">p</span> <span class="op">=</span> <span class="ident">p_temp</span>;
@@ -594,7 +605,8 @@
                                 <span class="ident">jtj</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">j</span>.<span class="ident">t</span>() <span class="op">*</span> <span class="kw-2">&amp;</span><span class="ident">j</span>;
                                 <span class="ident">y_hat</span> <span class="op">=</span> <span class="ident">y_hat_temp</span>;
                                 <span class="ident">chi2</span> <span class="op">=</span> <span class="ident">chi2_temp</span>;
-                                <span class="ident">lambda</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">max</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">1f64</span> <span class="op">/</span> <span class="number">3f64</span>, <span class="number">1f64</span> <span class="op">-</span> (<span class="number">2f64</span> <span class="op">*</span> <span class="ident">rho</span> <span class="op">-</span> <span class="number">1f64</span>).<span class="ident">powi</span>(<span class="number">3</span>)]);
+                                <span class="ident">lambda</span> <span class="kw-2">*</span><span class="op">=</span>
+                                    <span class="ident">max</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">1f64</span> <span class="op">/</span> <span class="number">3f64</span>, <span class="number">1f64</span> <span class="op">-</span> (<span class="number">2f64</span> <span class="op">*</span> <span class="ident">rho</span> <span class="op">-</span> <span class="number">1f64</span>).<span class="ident">powi</span>(<span class="number">3</span>)]);
                                 <span class="ident">nu</span> <span class="op">=</span> <span class="number">2f64</span>;
                             } <span class="kw">else</span> {
                                 <span class="ident">lambda</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">nu</span>;
@@ -602,7 +614,7 @@
                             }
                         }
                         <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
-                            <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">max_iter</span> <span class="op">-</span> <span class="number">1</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">err_stack</span> <span class="op">&lt;</span> <span class="number">3</span> { 
+                            <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">max_iter</span> <span class="op">-</span> <span class="number">1</span> <span class="kw-2">&amp;</span><span class="op">&amp;</span> <span class="ident">err_stack</span> <span class="op">&lt;</span> <span class="number">3</span> {
                                 <span class="ident">p</span> <span class="op">=</span> <span class="ident">p_temp</span>;
                                 <span class="ident">err_stack</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                             } <span class="kw">else</span> {

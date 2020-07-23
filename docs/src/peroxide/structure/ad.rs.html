@@ -159,6 +159,101 @@
 <span id="143">143</span>
 <span id="144">144</span>
 <span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Taylor mode forward automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -201,7 +296,7 @@
 <span class="doccomment">//! * `len(&amp;self) -&gt; usize`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Implemented Operations</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! * `Add, Sub, Mul, Div`</span>
 <span class="doccomment">//! * `sin, cos, tan`</span>
 <span class="doccomment">//! * `sinh, cosh, tanh`</span>
@@ -210,7 +305,7 @@
 <span class="doccomment">//! * `powi, powf, sqrt`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Not yet implemented</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! * `asin`, `acos`, `atan`</span>
 <span class="doccomment">//! * `asinh`, `acosh`, `atanh`</span>
 <span class="doccomment">//! * `pow`</span>
@@ -232,7 +327,7 @@
 <span class="doccomment">//!     let c = AD2::from(a);</span>
 <span class="doccomment">//!     // Zeros</span>
 <span class="doccomment">//!     let d = AD2::default();</span>
-<span class="doccomment">//!     </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//!     assert_eq!(c, AD2::new(2f64, 1f64, 0f64));</span>
 <span class="doccomment">//!     assert_eq!(d, AD2::new(0f64, 0f64, 0f64));</span>
 <span class="doccomment">//! }</span>
@@ -259,32 +354,36 @@
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
+<span class="doccomment">//! ### Generic</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * All of `AD{i}` implements `AD` trait</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```</span>
+<span class="doccomment">//! extern crate peroxide;</span>
+<span class="doccomment">//! use peroxide::fuga::*;</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! fn main() {</span>
+<span class="doccomment">//!     let a = AD1::new(2f64, 1f64);</span>
+<span class="doccomment">//!     let b = AD2::new(4f64, 4f64, 2f64);</span>
+<span class="doccomment">//!     assert_eq!(f(a, b), AD1::new(6f64, 5f64));</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! fn f&lt;T: AD, S: AD&gt;(x: T, y: S) -&gt; T {</span>
+<span class="doccomment">//!     T::from(x.to_ad2() + y.to_ad2())</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//! ```</span>
 
-<span class="kw">use</span> <span class="ident">peroxide_ad</span>::{
-    <span class="ident">ad_struct_def</span>,
-    <span class="ident">ad_display</span>,
-    <span class="ident">ad_impl</span>,
-    <span class="ident">ad_impl_from</span>,
-    <span class="ident">ad_iter_def</span>,
-    <span class="ident">ad_impl_into_iter</span>,
-    <span class="ident">ad_impl_from_iter</span>,
-    <span class="ident">ad_impl_double_ended_iter</span>,
-    <span class="ident">ad_impl_exact_size_iter</span>,
-    <span class="ident">ad_impl_iter</span>,
-    <span class="ident">ad_impl_index</span>,
-    <span class="ident">ad_impl_neg</span>,
-    <span class="ident">ad_impl_add</span>,
-    <span class="ident">ad_impl_sub</span>,
-    <span class="ident">ad_impl_mul</span>,
-    <span class="ident">ad_impl_div</span>,
-    <span class="ident">ad_impl_explogops</span>,
-    <span class="ident">ad_impl_powops</span>,
-    <span class="ident">ad_impl_trigops</span>,
-};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">statistics</span>::<span class="ident">ops</span>::<span class="ident">C</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">TrigOps</span>};
+<span class="kw">use</span> <span class="ident">peroxide_ad</span>::{
+    <span class="ident">ad_display</span>, <span class="ident">ad_impl</span>, <span class="ident">ad_impl_ad</span>, <span class="ident">ad_impl_add</span>, <span class="ident">ad_impl_div</span>, <span class="ident">ad_impl_double_ended_iter</span>,
+    <span class="ident">ad_impl_exact_size_iter</span>, <span class="ident">ad_impl_explogops</span>, <span class="ident">ad_impl_from</span>, <span class="ident">ad_impl_from_iter</span>, <span class="ident">ad_impl_index</span>,
+    <span class="ident">ad_impl_into_iter</span>, <span class="ident">ad_impl_iter</span>, <span class="ident">ad_impl_mul</span>, <span class="ident">ad_impl_neg</span>, <span class="ident">ad_impl_powops</span>, <span class="ident">ad_impl_sub</span>,
+    <span class="ident">ad_impl_trigops</span>, <span class="ident">ad_iter_def</span>, <span class="ident">ad_struct_def</span>, <span class="ident">ad_impl_from_type</span>, <span class="ident">ad_impl_add_f64</span>, <span class="ident">ad_impl_sub_f64</span>,
+    <span class="ident">ad_impl_mul_f64</span>, <span class="ident">ad_impl_div_f64</span>, <span class="ident">f64_impl_add_ad</span>, <span class="ident">f64_impl_sub_ad</span>, <span class="ident">f64_impl_mul_ad</span>, <span class="ident">f64_impl_div_ad</span>,
+};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">FromIterator</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Neg</span>, <span class="ident">Add</span>, <span class="ident">Sub</span>, <span class="ident">Mul</span>, <span class="ident">Div</span>, <span class="ident">Index</span>, <span class="ident">IndexMut</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Index</span>, <span class="ident">IndexMut</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
 
 <span class="macro">ad_struct_def</span><span class="macro">!</span>();
 <span class="macro">ad_display</span><span class="macro">!</span>();
@@ -305,5 +404,96 @@
 <span class="macro">ad_impl_explogops</span><span class="macro">!</span>();
 <span class="macro">ad_impl_powops</span><span class="macro">!</span>();
 <span class="macro">ad_impl_trigops</span><span class="macro">!</span>();
+<span class="macro">ad_impl_ad</span><span class="macro">!</span>();
+<span class="macro">ad_impl_from_type</span><span class="macro">!</span>(<span class="ident">f64</span>);
+<span class="macro">ad_impl_from_type</span><span class="macro">!</span>(<span class="ident">f32</span>);
+<span class="macro">ad_impl_from_type</span><span class="macro">!</span>(<span class="ident">i64</span>);
+<span class="macro">ad_impl_from_type</span><span class="macro">!</span>(<span class="ident">i32</span>);
+<span class="macro">ad_impl_add_f64</span><span class="macro">!</span>();
+<span class="macro">ad_impl_sub_f64</span><span class="macro">!</span>();
+<span class="macro">ad_impl_mul_f64</span><span class="macro">!</span>();
+<span class="macro">ad_impl_div_f64</span><span class="macro">!</span>();
+<span class="macro">f64_impl_add_ad</span><span class="macro">!</span>();
+<span class="macro">f64_impl_sub_ad</span><span class="macro">!</span>();
+<span class="macro">f64_impl_mul_ad</span><span class="macro">!</span>();
+<span class="macro">f64_impl_div_ad</span><span class="macro">!</span>();
+
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">AD</span>:
+    <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Display</span>
+    <span class="op">+</span> <span class="ident">Clone</span>
+    <span class="op">+</span> <span class="ident">Copy</span>
+    <span class="op">+</span> <span class="ident">PartialEq</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD1</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD2</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD3</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD4</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD5</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD6</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD7</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD8</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD9</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD10</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD1</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD2</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD3</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD4</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD5</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD6</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD7</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD8</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD9</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD10</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">f64</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">FromIterator</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">IndexMut</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">PowOps</span>
+    <span class="op">+</span> <span class="ident">ExpLogOps</span>
+    <span class="op">+</span> <span class="ident">TrigOps</span>
+{
+    <span class="kw">fn</span> <span class="ident">to_ad1</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD1</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_ad2</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD2</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_ad3</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD3</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_ad4</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD4</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_ad5</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD5</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_ad6</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD6</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_ad7</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD7</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_ad8</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD8</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_ad9</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD9</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">to_ad10</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD10</span> {
+        <span class="self">self</span>.<span class="ident">into</span>()
+    }
+}
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

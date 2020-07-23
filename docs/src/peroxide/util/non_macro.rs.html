@@ -210,8 +210,8 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">rand</span>::<span class="ident">prelude</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::{
-    <span class="ident">matrix</span>::{<span class="ident">Matrix</span>, <span class="ident">matrix</span>, <span class="ident">Shape</span>},
-    <span class="ident">matrix</span>::<span class="ident">Shape</span>::{<span class="ident">Row</span>, <span class="ident">Col</span>},
+    <span class="ident">matrix</span>::<span class="ident">Shape</span>::{<span class="ident">Col</span>, <span class="ident">Row</span>},
+    <span class="ident">matrix</span>::{<span class="ident">matrix</span>, <span class="ident">Matrix</span>, <span class="ident">Shape</span>},
 };
 
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
@@ -315,7 +315,7 @@
 <span class="doccomment">/// #[macro_use]</span>
 <span class="doccomment">/// extern crate peroxide;</span>
 <span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">/// </span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// fn main() {</span>
 <span class="doccomment">///     let a = matrix!(1;4;1, 2, 2, Col);</span>
 <span class="doccomment">///     let b = matrix!(5;8;1, 2, 2, Col);</span>

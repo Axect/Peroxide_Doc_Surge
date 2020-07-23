@@ -627,24 +627,24 @@
 <span class="doccomment">//!         // r[1] -1.0000       1</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! ### For `DataFrame`</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! * Similar to Matrix but, `Value` is `DataFrame`</span>
 <span class="doccomment">//! * `cov` means covariance matrix.</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! ```rust</span>
 <span class="doccomment">//! #[macro_use]</span>
 <span class="doccomment">//! extern crate peroxide;</span>
 <span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//! </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//! fn main() {</span>
 <span class="doccomment">//!     #[cfg(feature = &quot;dataframe&quot;)]</span>
 <span class="doccomment">//!     {</span>
 <span class="doccomment">//!         let mut m = DataFrame::with_header(vec![&quot;x&quot;, &quot;y&quot;]);</span>
 <span class="doccomment">//!         m[&quot;x&quot;] = c!(1,2,3);</span>
 <span class="doccomment">//!         m[&quot;y&quot;] = c!(3,2,1);</span>
-<span class="doccomment">//!         </span>
+<span class="doccomment">//!</span>
 <span class="doccomment">//!         m.cov().print();</span>
 <span class="doccomment">//!         //         c[0]    c[1]</span>
 <span class="doccomment">//!         // r[0]  1.0000 -1.0000</span>
@@ -653,12 +653,12 @@
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="self">self</span>::<span class="ident">QType</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;dataframe&quot;</span>)]</span>
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">dataframe</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">order_stat</span>::{<span class="ident">kth_by</span>};
-<span class="kw">use</span> <span class="self">self</span>::<span class="ident">QType</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">fp</span>::<span class="ident">FPVector</span>;
+<span class="kw">use</span> <span class="ident">order_stat</span>::<span class="ident">kth_by</span>;
 
 <span class="doccomment">/// Statistics Trait</span>
 <span class="doccomment">///</span>
@@ -1026,7 +1026,7 @@
     <span class="kw">fn</span> <span class="ident">quantiles</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">q</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">qtype</span>: <span class="ident">QType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Array</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">q</span>.<span class="ident">len</span>()];
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">q</span>.<span class="ident">len</span>() {
+        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">q</span>.<span class="ident">len</span>() {
             <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">quantile_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">m</span>, <span class="ident">q</span>[<span class="ident">i</span>], <span class="ident">qtype</span>);
         }
         <span class="ident">v</span>
@@ -1046,24 +1046,24 @@
             } <span class="kw">else</span> {
                 <span class="ident">k</span> <span class="op">-</span> <span class="number">1</span>
             };
-            <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>,<span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
+            <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
         }
         <span class="ident">Type2</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">if</span> <span class="ident">q</span> <span class="op">-</span> (<span class="ident">k</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> <span class="ident">p</span> <span class="op">&gt;</span> <span class="number">0f64</span> {
-                <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>,<span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
+                <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">q</span> <span class="op">=</span><span class="op">=</span> <span class="number">0f64</span> {
                 <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>,<span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
+                <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">q</span> <span class="op">=</span><span class="op">=</span> <span class="number">1f64</span> {
                 <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="ident">l</span> <span class="op">-</span> <span class="number">1</span>;
-                <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>,<span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
+                <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
             } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span><span class="op">-</span><span class="number">1</span>, <span class="op">|</span><span class="ident">x</span>,<span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>());
-                <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>,<span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>());
+                <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span> <span class="op">-</span> <span class="number">1</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>());
+                <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>());
                 (<span class="ident">prev</span> <span class="op">+</span> <span class="ident">next</span>) <span class="op">/</span> <span class="number">2f64</span>
             }
         }
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>()
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
     }
 }
 

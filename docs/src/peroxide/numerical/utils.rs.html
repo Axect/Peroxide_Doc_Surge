@@ -171,8 +171,8 @@
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">dual</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">num</span>::{<span class="ident">Number</span>, <span class="ident">NumberVector</span>, <span class="ident">Real</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">non_macro</span>::{<span class="ident">cat</span>, <span class="ident">zeros</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">num</span>::{<span class="ident">Real</span>, <span class="ident">Number</span>, <span class="ident">NumberVector</span>};
 
 <span class="doccomment">/// Jacobian Matrix</span>
 <span class="doccomment">///</span>
@@ -187,7 +187,7 @@
 <span class="doccomment">/// #[macro_use]</span>
 <span class="doccomment">/// extern crate peroxide;</span>
 <span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">/// </span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// fn main() {</span>
 <span class="doccomment">///     let x = c!(1, 1);</span>
 <span class="doccomment">///     let j = jacobian(f, &amp;x);</span>
@@ -230,7 +230,7 @@
 <span class="doccomment">/// #[macro_use]</span>
 <span class="doccomment">/// extern crate peroxide;</span>
 <span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">/// </span>
+<span class="doccomment">///</span>
 <span class="doccomment">/// fn main() {</span>
 <span class="doccomment">///     let x = c!(1, 1);</span>
 <span class="doccomment">///     let j = jacobian_real(Box::new(f), &amp;x);</span>

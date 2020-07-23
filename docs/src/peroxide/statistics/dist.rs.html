@@ -548,7 +548,6 @@
 <span id="532">532</span>
 <span id="533">533</span>
 <span id="534">534</span>
-<span id="535">535</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Probabilistic distributions</span>
 <span class="doccomment">//!</span>
@@ -804,7 +803,8 @@
             <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">dof</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-                <span class="number">1f64</span> <span class="op">/</span> (<span class="ident">dof</span>.<span class="ident">sqrt</span>() <span class="op">*</span> <span class="ident">beta</span>(<span class="number">0.5f64</span>, <span class="ident">dof</span> <span class="op">/</span> <span class="number">2f64</span>)) <span class="op">*</span> (<span class="number">1f64</span> <span class="op">+</span> <span class="ident">t</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="ident">dof</span>).<span class="ident">powf</span>(<span class="op">-</span>(<span class="ident">dof</span> <span class="op">+</span> <span class="number">1f64</span>) <span class="op">/</span> <span class="number">2f64</span>)
+                <span class="number">1f64</span> <span class="op">/</span> (<span class="ident">dof</span>.<span class="ident">sqrt</span>() <span class="op">*</span> <span class="ident">beta</span>(<span class="number">0.5f64</span>, <span class="ident">dof</span> <span class="op">/</span> <span class="number">2f64</span>))
+                    <span class="op">*</span> (<span class="number">1f64</span> <span class="op">+</span> <span class="ident">t</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="ident">dof</span>).<span class="ident">powf</span>(<span class="op">-</span>(<span class="ident">dof</span> <span class="op">+</span> <span class="number">1f64</span>) <span class="op">/</span> <span class="number">2f64</span>)
             }
         }
     }
@@ -859,76 +859,76 @@
                 <span class="kw">let</span> <span class="ident">normal</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">Normal</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
                 <span class="ident">normal</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
             }
-<span class="comment">//            Normal(m, s) =&gt; {</span>
-<span class="comment">//                let mut rng = thread_rng();</span>
-<span class="comment">//                let mut v = vec![0f64; n];</span>
-<span class="comment">//</span>
-<span class="comment">//                for i in 0..n {</span>
-<span class="comment">//                    v[i] = ziggurat(&amp;mut rng, (*s).into()) + (*m).into();</span>
-<span class="comment">//                }</span>
-<span class="comment">//                v</span>
-<span class="comment">//            }</span>
+            <span class="comment">//            Normal(m, s) =&gt; {</span>
+            <span class="comment">//                let mut rng = thread_rng();</span>
+            <span class="comment">//                let mut v = vec![0f64; n];</span>
+            <span class="comment">//</span>
+            <span class="comment">//                for i in 0..n {</span>
+            <span class="comment">//                    v[i] = ziggurat(&amp;mut rng, (*s).into()) + (*m).into();</span>
+            <span class="comment">//                }</span>
+            <span class="comment">//                v</span>
+            <span class="comment">//            }</span>
             <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
                 <span class="kw">let</span> <span class="ident">beta</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">Beta</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
                 <span class="ident">beta</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
             }
-<span class="comment">//            Beta(a, b) =&gt; {</span>
-<span class="comment">//                let mut rng1 = thread_rng();</span>
-<span class="comment">//                let mut rng2 = thread_rng();</span>
-<span class="comment">//                let mut v = vec![0f64; n];</span>
-<span class="comment">//</span>
-<span class="comment">//                let a_f64 = (*a).into();</span>
-<span class="comment">//                let b_f64 = (*b).into();</span>
-<span class="comment">//</span>
-<span class="comment">//                // For acceptance-rejection method</span>
-<span class="comment">//                let c_x = (a_f64 - 1f64) / (a_f64 + b_f64 - 2f64);</span>
-<span class="comment">//                let c = self.pdf(c_x); // Beta(mode(x) | a, b)</span>
-<span class="comment">//</span>
-<span class="comment">//                let mut iter_num = 0usize;</span>
-<span class="comment">//</span>
-<span class="comment">//                while iter_num &lt; n {</span>
-<span class="comment">//                    let u1 = rng1.gen_range(0f64, 1f64);</span>
-<span class="comment">//                    let u2 = rng2.gen_range(0f64, 1f64);</span>
-<span class="comment">//</span>
-<span class="comment">//                    if u2 &lt;= 1f64 / c * self.pdf(u1) {</span>
-<span class="comment">//                        v[iter_num] = u1;</span>
-<span class="comment">//                        iter_num += 1;</span>
-<span class="comment">//                    }</span>
-<span class="comment">//                }</span>
-<span class="comment">//                v</span>
-<span class="comment">//            }</span>
+            <span class="comment">//            Beta(a, b) =&gt; {</span>
+            <span class="comment">//                let mut rng1 = thread_rng();</span>
+            <span class="comment">//                let mut rng2 = thread_rng();</span>
+            <span class="comment">//                let mut v = vec![0f64; n];</span>
+            <span class="comment">//</span>
+            <span class="comment">//                let a_f64 = (*a).into();</span>
+            <span class="comment">//                let b_f64 = (*b).into();</span>
+            <span class="comment">//</span>
+            <span class="comment">//                // For acceptance-rejection method</span>
+            <span class="comment">//                let c_x = (a_f64 - 1f64) / (a_f64 + b_f64 - 2f64);</span>
+            <span class="comment">//                let c = self.pdf(c_x); // Beta(mode(x) | a, b)</span>
+            <span class="comment">//</span>
+            <span class="comment">//                let mut iter_num = 0usize;</span>
+            <span class="comment">//</span>
+            <span class="comment">//                while iter_num &lt; n {</span>
+            <span class="comment">//                    let u1 = rng1.gen_range(0f64, 1f64);</span>
+            <span class="comment">//                    let u2 = rng2.gen_range(0f64, 1f64);</span>
+            <span class="comment">//</span>
+            <span class="comment">//                    if u2 &lt;= 1f64 / c * self.pdf(u1) {</span>
+            <span class="comment">//                        v[iter_num] = u1;</span>
+            <span class="comment">//                        iter_num += 1;</span>
+            <span class="comment">//                    }</span>
+            <span class="comment">//                }</span>
+            <span class="comment">//                v</span>
+            <span class="comment">//            }</span>
             <span class="ident">Gamma</span>(<span class="ident">shape</span>, <span class="ident">scale</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="ident">gamma</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">Gamma</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">shape</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">scale</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
+                <span class="kw">let</span> <span class="ident">gamma</span> <span class="op">=</span>
+                    <span class="ident">rand_distr</span>::<span class="ident">Gamma</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">shape</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">scale</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
                 <span class="ident">gamma</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
-            }
-<span class="comment">//            Gamma(a, b) =&gt; {</span>
-<span class="comment">//                let a_f64 = (*a).into();</span>
-<span class="comment">//                let b_f64 = (*b).into();</span>
-<span class="comment">//</span>
-<span class="comment">//                // for Marsaglia &amp; Tsang&#39;s Method</span>
-<span class="comment">//                let d = a_f64 - 1f64 / 3f64;</span>
-<span class="comment">//                let c = 1f64 / (9f64 * d).sqrt();</span>
-<span class="comment">//</span>
-<span class="comment">//                let mut rng1 = thread_rng();</span>
-<span class="comment">//                let mut rng2 = thread_rng();</span>
-<span class="comment">//</span>
-<span class="comment">//                let mut v = vec![0f64; n];</span>
-<span class="comment">//                let mut iter_num = 0usize;</span>
-<span class="comment">//</span>
-<span class="comment">//                while iter_num &lt; n {</span>
-<span class="comment">//                    let u = rng1.gen_range(0f64, 1f64);</span>
-<span class="comment">//                    let z = ziggurat(&amp;mut rng2, 1f64);</span>
-<span class="comment">//                    let w = (1f64 + c * z).powi(3);</span>
-<span class="comment">//</span>
-<span class="comment">//                    if z &gt;= -1f64 / c &amp;&amp; u.ln() &lt; 0.5 * z.powi(2) + d - d * w + d * w.ln() {</span>
-<span class="comment">//                        v[iter_num] = d * w / b_f64;</span>
-<span class="comment">//                        iter_num += 1;</span>
-<span class="comment">//                    }</span>
-<span class="comment">//                }</span>
-<span class="comment">//                v</span>
-<span class="comment">//            }</span>
+            } <span class="comment">//            Gamma(a, b) =&gt; {</span>
+              <span class="comment">//                let a_f64 = (*a).into();</span>
+              <span class="comment">//                let b_f64 = (*b).into();</span>
+              <span class="comment">//</span>
+              <span class="comment">//                // for Marsaglia &amp; Tsang&#39;s Method</span>
+              <span class="comment">//                let d = a_f64 - 1f64 / 3f64;</span>
+              <span class="comment">//                let c = 1f64 / (9f64 * d).sqrt();</span>
+              <span class="comment">//</span>
+              <span class="comment">//                let mut rng1 = thread_rng();</span>
+              <span class="comment">//                let mut rng2 = thread_rng();</span>
+              <span class="comment">//</span>
+              <span class="comment">//                let mut v = vec![0f64; n];</span>
+              <span class="comment">//                let mut iter_num = 0usize;</span>
+              <span class="comment">//</span>
+              <span class="comment">//                while iter_num &lt; n {</span>
+              <span class="comment">//                    let u = rng1.gen_range(0f64, 1f64);</span>
+              <span class="comment">//                    let z = ziggurat(&amp;mut rng2, 1f64);</span>
+              <span class="comment">//                    let w = (1f64 + c * z).powi(3);</span>
+              <span class="comment">//</span>
+              <span class="comment">//                    if z &gt;= -1f64 / c &amp;&amp; u.ln() &lt; 0.5 * z.powi(2) + d - d * w + d * w.ln() {</span>
+              <span class="comment">//                        v[iter_num] = d * w / b_f64;</span>
+              <span class="comment">//                        iter_num += 1;</span>
+              <span class="comment">//                    }</span>
+              <span class="comment">//                }</span>
+              <span class="comment">//                v</span>
+              <span class="comment">//            }</span>
         }
     }
 
@@ -983,9 +983,7 @@
                     <span class="number">1f64</span>
                 }
             }
-            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="ident">phi</span>((<span class="ident">x</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>()) <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>())
-            }
+            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">phi</span>((<span class="ident">x</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>()) <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>()),
             <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">a</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">b</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();

@@ -476,7 +476,6 @@
 <span id="460">460</span>
 <span id="461">461</span>
 <span id="462">462</span>
-<span id="463">463</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Hyper dual number system for Automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -516,15 +515,13 @@
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">dual</span>::{<span class="ident">dual</span>, <span class="ident">Dual</span>};
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">vector</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
-    <span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">TrigOps</span>, <span class="ident">Real</span>}
-};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">Real</span>, <span class="ident">TrigOps</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
 
 <span class="doccomment">/// Hyper Dual number</span>
 <span class="doccomment">///</span>
@@ -888,7 +885,8 @@
     <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span>);
         <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">dx</span> <span class="op">*</span> <span class="ident">f</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span> <span class="op">-</span> <span class="number">1f64</span>);
-        <span class="kw">let</span> <span class="ident">ddx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ddx</span> <span class="op">*</span> <span class="ident">f</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span> <span class="op">-</span> <span class="number">1f64</span>) <span class="op">+</span> <span class="self">self</span>.<span class="ident">dx</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">*</span> <span class="ident">f</span> <span class="op">*</span> (<span class="ident">f</span> <span class="op">-</span> <span class="number">1f64</span>) <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span> <span class="op">-</span> <span class="number">2f64</span>);
+        <span class="kw">let</span> <span class="ident">ddx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ddx</span> <span class="op">*</span> <span class="ident">f</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span> <span class="op">-</span> <span class="number">1f64</span>)
+            <span class="op">+</span> <span class="self">self</span>.<span class="ident">dx</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">*</span> <span class="ident">f</span> <span class="op">*</span> (<span class="ident">f</span> <span class="op">-</span> <span class="number">1f64</span>) <span class="op">*</span> <span class="self">self</span>.<span class="ident">x</span>.<span class="ident">powf</span>(<span class="ident">f</span> <span class="op">-</span> <span class="number">2f64</span>);
         <span class="self">Self</span>::<span class="ident">new</span>(<span class="ident">x</span>, <span class="ident">dx</span>, <span class="ident">ddx</span>)
     }
 
@@ -940,5 +938,6 @@
     <span class="kw">fn</span> <span class="ident">from_hyper_dual</span>(<span class="ident">h</span>: <span class="ident">HyperDual</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">h</span>
     }
-}</pre></div>
+}
+</pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

@@ -138,14 +138,14 @@
 <span id="122">122</span>
 <span id="123">123</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">math</span>::{<span class="ident">Normed</span>, <span class="ident">Norm</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::{<span class="self">self</span>, <span class="ident">Matrix</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">numerical</span>::{
-    <span class="ident">integral</span>,
-    <span class="ident">integral</span>::<span class="ident">Integral</span>::<span class="ident">GaussLegendre</span>,
     <span class="ident">eigen</span>,
     <span class="ident">eigen</span>::{<span class="ident">Eigen</span>, <span class="ident">EigenMethod</span>::<span class="ident">Jacobi</span>},
+    <span class="ident">integral</span>,
+    <span class="ident">integral</span>::<span class="ident">Integral</span>::<span class="ident">GaussLegendre</span>,
 };
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::{<span class="self">self</span>, <span class="ident">Matrix</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">math</span>::{<span class="ident">Norm</span>, <span class="ident">Normed</span>};
 
 <span class="doccomment">/// Simple Norm</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SimpleNorm</span>: <span class="ident">Normed</span> {

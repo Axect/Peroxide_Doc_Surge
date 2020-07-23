@@ -143,8 +143,8 @@
 <span id="127">127</span>
 <span id="128">128</span>
 </pre><div class="example-wrap"><pre class="rust ">
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">special</span>::<span class="ident">lanczos</span>::{<span class="ident">gamma_approx</span>, <span class="ident">ln_gamma_approx</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>;
 
 <span class="doccomment">/// Gaussian function</span>
 <span class="doccomment">///</span>
@@ -180,7 +180,7 @@
 <span class="doccomment">/// Pochhammer symbol</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poch</span>(<span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">1f64</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">n</span> {
+    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
         <span class="ident">s</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span>;
     }
     <span class="ident">s</span>
@@ -203,7 +203,7 @@
 <span class="doccomment">/// Inverse of regularized incomplete gamma integral (Lower)</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `invgammp` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_inc_gamma</span>(<span class="ident">p</span>: <span class="ident">f64</span>, <span class="ident">a</span>:<span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_inc_gamma</span>(<span class="ident">p</span>: <span class="ident">f64</span>, <span class="ident">a</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">invgammp</span>(<span class="ident">p</span>, <span class="ident">a</span>)
 }
 
@@ -225,7 +225,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `inverf` function of `puruspe` crate</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_erf</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
-   <span class="ident">puruspe</span>::<span class="ident">inverf</span>(<span class="ident">x</span>)
+    <span class="ident">puruspe</span>::<span class="ident">inverf</span>(<span class="ident">x</span>)
 }
 
 <span class="doccomment">/// Inverse complementary error function</span>
@@ -270,5 +270,6 @@
 <span class="comment">//     unsafe {</span>
 <span class="comment">//         special_fun::unsafe_cephes_double::hyp2f1(a, b, c, x)</span>
 <span class="comment">//     }</span>
-<span class="comment">// }</span></pre></div>
+<span class="comment">// }</span>
+</pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

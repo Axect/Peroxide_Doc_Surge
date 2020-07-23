@@ -133,15 +133,16 @@
 <span id="117">117</span>
 <span id="118">118</span>
 <span id="119">119</span>
+<span id="120">120</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Lanczos approximation Coefficient generator</span>
 
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">statistics</span>::<span class="ident">ops</span>::{<span class="ident">double_factorial</span>, <span class="ident">factorial</span>, <span class="ident">C</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="ident">Matrix</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">pointer</span>::<span class="ident">Oxide</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">non_macro</span>::<span class="ident">zeros</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">useful</span>::<span class="ident">sgn</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">statistics</span>::<span class="ident">ops</span>::{<span class="ident">C</span>, <span class="ident">factorial</span>, <span class="ident">double_factorial</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">pointer</span>::<span class="ident">Oxide</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>;
 
 <span class="kw">const</span> <span class="ident">G</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">5f64</span>;
 <span class="kw">const</span> <span class="ident">N</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">7</span>;
@@ -154,14 +155,14 @@
     <span class="number">24.01409824118972</span>,
     <span class="op">-</span><span class="number">1.2317395783752254</span>,
     <span class="number">0.0012086577526594748</span>,
-    <span class="op">-</span><span class="number">0.00000539702438713199</span>
+    <span class="op">-</span><span class="number">0.00000539702438713199</span>,
 ];
 
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ln_gamma_approx</span>(<span class="ident">z</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="kw">let</span> <span class="ident">z</span> <span class="op">=</span> <span class="ident">z</span> <span class="op">-</span> <span class="number">1f64</span>;
     <span class="kw">let</span> <span class="ident">base</span> <span class="op">=</span> <span class="ident">z</span> <span class="op">+</span> <span class="ident">G</span> <span class="op">+</span> <span class="number">0.5</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span> .. <span class="ident">N</span> {
+    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">N</span> {
         <span class="ident">s</span> <span class="op">+</span><span class="op">=</span> <span class="ident">LG5N7</span>[<span class="ident">i</span>] <span class="op">/</span> (<span class="ident">z</span> <span class="op">+</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span>);
     }
     <span class="ident">s</span> <span class="op">+</span><span class="op">=</span> <span class="ident">LG5N7</span>[<span class="number">0</span>];
@@ -172,7 +173,7 @@
     <span class="kw">if</span> <span class="ident">z</span> <span class="op">&gt;</span> <span class="number">1f64</span> {
         <span class="kw">let</span> <span class="ident">z_int</span> <span class="op">=</span> <span class="ident">z</span> <span class="kw">as</span> <span class="ident">usize</span>;
         <span class="kw">if</span> <span class="ident">z</span> <span class="op">-</span> (<span class="ident">z_int</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">=</span><span class="op">=</span> <span class="number">0f64</span> {
-            <span class="kw">return</span> <span class="ident">factorial</span>(<span class="ident">z_int</span><span class="op">-</span><span class="number">1</span>) <span class="kw">as</span> <span class="ident">f64</span>;
+            <span class="kw">return</span> <span class="ident">factorial</span>(<span class="ident">z_int</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">f64</span>;
         }
     }
 
@@ -185,7 +186,7 @@
 
 <span class="doccomment">/// Lanczos Approximation Coefficient</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tlg1</span>(<span class="ident">g</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    (<span class="ident">lanczos_coeff</span>(<span class="ident">g</span>, <span class="ident">n</span><span class="op">-</span><span class="number">1</span>).<span class="ident">ox</span>() <span class="op">*</span> <span class="ident">g</span>.<span class="ident">exp</span>() <span class="op">/</span> (<span class="number">2f64</span> <span class="op">*</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>).<span class="ident">sqrt</span>()).<span class="ident">red</span>()
+    (<span class="ident">lanczos_coeff</span>(<span class="ident">g</span>, <span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>).<span class="ident">ox</span>() <span class="op">*</span> <span class="ident">g</span>.<span class="ident">exp</span>() <span class="op">/</span> (<span class="number">2f64</span> <span class="op">*</span> <span class="ident">std</span>::<span class="ident">f64</span>::<span class="ident">consts</span>::<span class="ident">PI</span>).<span class="ident">sqrt</span>()).<span class="ident">red</span>()
 }
 
 <span class="kw">fn</span> <span class="ident">lanczos_coeff</span>(<span class="ident">g</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
@@ -200,12 +201,12 @@
             <span class="kw">if</span> <span class="ident">i</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
                 <span class="number">1f64</span>
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">j</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">i</span> {
-                <span class="ident">sgn</span>(<span class="ident">j</span> <span class="op">-</span> <span class="ident">i</span>) <span class="op">*</span> <span class="ident">C</span>(<span class="ident">i</span><span class="op">+</span><span class="ident">j</span><span class="op">-</span><span class="number">1</span>, <span class="ident">j</span><span class="op">-</span><span class="ident">i</span>) <span class="kw">as</span> <span class="ident">f64</span>
+                <span class="ident">sgn</span>(<span class="ident">j</span> <span class="op">-</span> <span class="ident">i</span>) <span class="op">*</span> <span class="ident">C</span>(<span class="ident">i</span> <span class="op">+</span> <span class="ident">j</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">j</span> <span class="op">-</span> <span class="ident">i</span>) <span class="kw">as</span> <span class="ident">f64</span>
             } <span class="kw">else</span> {
                 <span class="number">0f64</span>
             }
         },
-        (<span class="ident">n</span><span class="op">+</span><span class="number">1</span>, <span class="ident">n</span><span class="op">+</span><span class="number">1</span>)
+        (<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>),
     )
 }
 
@@ -217,27 +218,28 @@
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">j</span> <span class="op">&gt;</span> <span class="ident">i</span> {
                 <span class="number">0f64</span>
             } <span class="kw">else</span> {
-                <span class="ident">sgn</span>(<span class="ident">i</span><span class="op">-</span><span class="ident">j</span>) <span class="op">*</span> <span class="number">4f64</span>.<span class="ident">powi</span>(<span class="ident">j</span> <span class="kw">as</span> <span class="ident">i32</span>) <span class="op">*</span> (<span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> (<span class="ident">C</span>(<span class="ident">i</span><span class="op">+</span><span class="ident">j</span>, <span class="number">2</span><span class="kw-2">*</span><span class="ident">j</span>) <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">/</span> (<span class="ident">i</span><span class="op">+</span><span class="ident">j</span>) <span class="kw">as</span> <span class="ident">f64</span>
+                <span class="ident">sgn</span>(<span class="ident">i</span> <span class="op">-</span> <span class="ident">j</span>) <span class="op">*</span> <span class="number">4f64</span>.<span class="ident">powi</span>(<span class="ident">j</span> <span class="kw">as</span> <span class="ident">i32</span>) <span class="op">*</span> (<span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> (<span class="ident">C</span>(<span class="ident">i</span> <span class="op">+</span> <span class="ident">j</span>, <span class="number">2</span> <span class="op">*</span> <span class="ident">j</span>) <span class="kw">as</span> <span class="ident">f64</span>)
+                    <span class="op">/</span> (<span class="ident">i</span> <span class="op">+</span> <span class="ident">j</span>) <span class="kw">as</span> <span class="ident">f64</span>
             }
         },
-        (<span class="ident">n</span><span class="op">+</span><span class="number">1</span>, <span class="ident">n</span><span class="op">+</span><span class="number">1</span>)
+        (<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>),
     )
 }
 
 <span class="kw">fn</span> <span class="ident">dc_gen</span>(<span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="ident">n</span><span class="op">+</span><span class="number">1</span>, <span class="ident">n</span><span class="op">+</span><span class="number">1</span>);
-    <span class="ident">m</span>[(<span class="number">0</span>,<span class="number">0</span>)] <span class="op">=</span> <span class="number">2f64</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span> .. <span class="ident">n</span><span class="op">+</span><span class="number">1</span> {
-        <span class="ident">m</span>[(<span class="ident">i</span>,<span class="ident">i</span>)] <span class="op">=</span> <span class="number">2f64</span> <span class="op">*</span> <span class="ident">double_factorial</span>(<span class="number">2</span><span class="kw-2">*</span><span class="ident">i</span><span class="op">-</span><span class="number">1</span>) <span class="kw">as</span> <span class="ident">f64</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>);
+    <span class="ident">m</span>[(<span class="number">0</span>, <span class="number">0</span>)] <span class="op">=</span> <span class="number">2f64</span>;
+    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span> {
+        <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">i</span>)] <span class="op">=</span> <span class="number">2f64</span> <span class="op">*</span> <span class="ident">double_factorial</span>(<span class="number">2</span> <span class="op">*</span> <span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>) <span class="kw">as</span> <span class="ident">f64</span>;
     }
     <span class="ident">m</span>
 }
 
 <span class="kw">fn</span> <span class="ident">dr_gen</span>(<span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="ident">n</span><span class="op">+</span><span class="number">1</span>, <span class="ident">n</span><span class="op">+</span><span class="number">1</span>);
-    <span class="ident">m</span>[(<span class="number">0</span>,<span class="number">0</span>)] <span class="op">=</span> <span class="number">1f64</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span> .. <span class="ident">n</span><span class="op">+</span><span class="number">1</span> {
-        <span class="ident">m</span>[(<span class="ident">i</span>,<span class="ident">i</span>)] <span class="op">=</span> <span class="op">-</span> ((<span class="ident">i</span> <span class="op">*</span> <span class="ident">C</span>(<span class="number">2</span><span class="kw-2">*</span><span class="ident">i</span><span class="op">-</span><span class="number">1</span>, <span class="ident">i</span>)) <span class="kw">as</span> <span class="ident">f64</span>);
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>);
+    <span class="ident">m</span>[(<span class="number">0</span>, <span class="number">0</span>)] <span class="op">=</span> <span class="number">1f64</span>;
+    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span> {
+        <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">i</span>)] <span class="op">=</span> <span class="op">-</span>((<span class="ident">i</span> <span class="op">*</span> <span class="ident">C</span>(<span class="number">2</span> <span class="op">*</span> <span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">i</span>)) <span class="kw">as</span> <span class="ident">f64</span>);
     }
     <span class="ident">m</span>
 }
@@ -247,10 +249,11 @@
 }
 
 <span class="kw">fn</span> <span class="ident">f_gen</span>(<span class="ident">g</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span><span class="op">+</span><span class="number">1</span>];
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">n</span><span class="op">+</span><span class="number">1</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>];
+    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> <span class="op">+</span> <span class="number">1</span> {
         <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">f</span>(<span class="ident">g</span>, <span class="ident">i</span>);
     }
     <span class="ident">v</span>
-}</pre></div>
+}
+</pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
