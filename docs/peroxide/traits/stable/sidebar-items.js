@@ -1,0 +1,1 @@
+initSidebarItems({"trait":[["StableFn","Stable Fn trait"]]});

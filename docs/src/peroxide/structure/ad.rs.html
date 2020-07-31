@@ -254,6 +254,99 @@
 <span id="238">238</span>
 <span id="239">239</span>
 <span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Taylor mode forward automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -374,16 +467,21 @@
 <span class="doccomment">//! ```</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">statistics</span>::<span class="ident">ops</span>::<span class="ident">C</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">TrigOps</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
+    <span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">TrigOps</span>},
+    <span class="ident">stable</span>::<span class="ident">StableFn</span>,
+};
 <span class="kw">use</span> <span class="ident">peroxide_ad</span>::{
     <span class="ident">ad_display</span>, <span class="ident">ad_impl</span>, <span class="ident">ad_impl_ad</span>, <span class="ident">ad_impl_add</span>, <span class="ident">ad_impl_div</span>, <span class="ident">ad_impl_double_ended_iter</span>,
     <span class="ident">ad_impl_exact_size_iter</span>, <span class="ident">ad_impl_explogops</span>, <span class="ident">ad_impl_from</span>, <span class="ident">ad_impl_from_iter</span>, <span class="ident">ad_impl_index</span>,
     <span class="ident">ad_impl_into_iter</span>, <span class="ident">ad_impl_iter</span>, <span class="ident">ad_impl_mul</span>, <span class="ident">ad_impl_neg</span>, <span class="ident">ad_impl_powops</span>, <span class="ident">ad_impl_sub</span>,
     <span class="ident">ad_impl_trigops</span>, <span class="ident">ad_iter_def</span>, <span class="ident">ad_struct_def</span>, <span class="ident">ad_impl_from_type</span>, <span class="ident">ad_impl_add_f64</span>, <span class="ident">ad_impl_sub_f64</span>,
     <span class="ident">ad_impl_mul_f64</span>, <span class="ident">ad_impl_div_f64</span>, <span class="ident">f64_impl_add_ad</span>, <span class="ident">f64_impl_sub_ad</span>, <span class="ident">f64_impl_mul_ad</span>, <span class="ident">f64_impl_div_ad</span>,
+    <span class="ident">f64_impl_from_ad</span>, <span class="ident">ad_impl_stable_fn</span>,
 };
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">FromIterator</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Index</span>, <span class="ident">IndexMut</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
 
 <span class="macro">ad_struct_def</span><span class="macro">!</span>();
 <span class="macro">ad_display</span><span class="macro">!</span>();
@@ -417,6 +515,8 @@
 <span class="macro">f64_impl_sub_ad</span><span class="macro">!</span>();
 <span class="macro">f64_impl_mul_ad</span><span class="macro">!</span>();
 <span class="macro">f64_impl_div_ad</span><span class="macro">!</span>();
+<span class="macro">f64_impl_from_ad</span><span class="macro">!</span>();
+<span class="macro">ad_impl_stable_fn</span><span class="macro">!</span>();
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">AD</span>:
     <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Display</span>
@@ -443,14 +543,16 @@
     <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD8</span><span class="op">&gt;</span>
     <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD9</span><span class="op">&gt;</span>
     <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD10</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">f64</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">FromIterator</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">IndexMut</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
     <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
     <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
     <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
     <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
     <span class="op">+</span> <span class="ident">PowOps</span>
     <span class="op">+</span> <span class="ident">ExpLogOps</span>
     <span class="op">+</span> <span class="ident">TrigOps</span>
@@ -495,5 +597,89 @@
         <span class="self">self</span>.<span class="ident">into</span>()
     }
 }
+
+<span class="comment">//impl AD for f64 {}</span>
+
+<span class="doccomment">/// Lift AD functions</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Description</span>
+<span class="doccomment">/// To lift `AD` functions</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Implementation</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// * All `Fn(T) -&gt; T where T:AD` functions can be lift to `Fn(f64) -&gt; f64`</span>
+<span class="doccomment">/// * If `j &gt; i`, then `Fn(AD{j}) -&gt; AD{j}` can be lift to `Fn(AD{i}) -&gt; AD{i}`</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Usage</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">/// extern crate peroxide;</span>
+<span class="doccomment">/// use peroxide::fuga::*;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// fn main() {</span>
+<span class="doccomment">///     let ad0 = 2f64;</span>
+<span class="doccomment">///     let ad1 = AD1::new(2f64, 1f64);</span>
+<span class="doccomment">///     </span>
+<span class="doccomment">///     let lift1 = ADLift::&lt;_, AD1&gt;::new(f_ad);</span>
+<span class="doccomment">///     let lift2 = ADLift::&lt;_, AD2&gt;::new(f_ad2);</span>
+<span class="doccomment">///</span>
+<span class="doccomment">///     let ans_ad0 = ad0.powi(2);</span>
+<span class="doccomment">///     let ans_ad1 = ad1.powi(2);</span>
+<span class="doccomment">///</span>
+<span class="doccomment">///     // All AD function can be lift to f64</span>
+<span class="doccomment">///     assert_eq!(ans_ad0, lift1.call_stable(ad0));</span>
+<span class="doccomment">///     assert_eq!(ans_ad0, lift2.call_stable(ad0));</span>
+<span class="doccomment">///</span>
+<span class="doccomment">///     // AD2 is higher than AD1 (AD2 -&gt; AD1 lifting is allowed)</span>
+<span class="doccomment">///     assert_eq!(ans_ad1, lift2.call_stable(ad1));</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// fn f_ad&lt;T: AD&gt;(x: T) -&gt; T {</span>
+<span class="doccomment">///     x.powi(2)</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// fn f_ad2(x: AD2) -&gt; AD2 {</span>
+<span class="doccomment">///     x.powi(2)</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// ```</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="ident">f</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>,
+    <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">Self</span> {
+            <span class="ident">f</span>: <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">f</span>),
+            <span class="ident">_marker</span>: <span class="ident">PhantomData</span>
+        }
+    }
+
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">f</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">t</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
+        (<span class="self">self</span>.<span class="ident">f</span>)(<span class="ident">t</span>)
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>, <span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span> <span class="ident">StableFn</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">f64</span>;
+    <span class="kw">fn</span> <span class="ident">call_stable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">target</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+        <span class="self">self</span>.<span class="ident">f</span>(<span class="ident">T</span>::<span class="ident">from</span>(<span class="ident">target</span>)).<span class="ident">into</span>()
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>, <span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span> <span class="ident">StableFn</span><span class="op">&lt;</span><span class="ident">AD1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">AD1</span>;
+    <span class="kw">fn</span> <span class="ident">call_stable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">target</span>: <span class="ident">AD1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+        <span class="self">self</span>.<span class="ident">f</span>(<span class="ident">T</span>::<span class="ident">from</span>(<span class="ident">target</span>)).<span class="ident">into</span>()
+    }
+}
+
+<span class="comment">// Nightly only</span>
+<span class="comment">//pub struct ADLift&lt;F&gt;(F);</span>
+<span class="comment">//</span>
+<span class="comment">//impl&lt;F: FnOnce&lt;(T)&gt;, T&gt; FnOnce&lt;f64&gt; for ADLift&lt;F&gt; {</span>
+<span class="comment">//    type Output = f64;</span>
+<span class="comment">//    </span>
+<span class="comment">//}</span>
+
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
