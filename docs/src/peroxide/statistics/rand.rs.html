@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/statistics/rand.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rand.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/statistics/rand.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rand.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -455,7 +455,7 @@
 <span class="doccomment">/// println!(&quot;{}&quot;, rand_num(&amp;mut rng, 1, 7));       // Roll a dice</span>
 <span class="doccomment">/// println!(&quot;{}&quot;, rand_num(&amp;mut rng, 0f64, 1f64)); // Uniform [0,1)</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rand_num</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThreadRng</span>, <span class="ident">start</span>: <span class="ident">T</span>, <span class="ident">end</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rand_num</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThreadRng</span>, <span class="ident">start</span>: <span class="ident">T</span>, <span class="ident">end</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span>,
 {
@@ -467,13 +467,13 @@
 <span class="comment">// =============================================================================</span>
 
 <span class="doccomment">/// Gaussian random number generator using Marsaglia polar form</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">marsaglia_polar</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThreadRng</span>, <span class="ident">m</span>: <span class="ident">f64</span>, <span class="ident">s</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">marsaglia_polar</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThreadRng</span>, <span class="ident">m</span>: <span class="ident">f64</span>, <span class="ident">s</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x1</span> <span class="op">=</span> <span class="number">0f64</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x2</span> <span class="op">=</span> <span class="number">0f64</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_y2</span> <span class="op">=</span> <span class="number">0f64</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">w</span> <span class="op">=</span> <span class="number">0f64</span>;
 
-    <span class="kw">while</span> <span class="ident">w</span> <span class="op">=</span><span class="op">=</span> <span class="number">0.</span> <span class="op">|</span><span class="op">|</span> <span class="ident">w</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">1.</span> {
+    <span class="kw">while</span> <span class="ident">w</span> <span class="op">==</span> <span class="number">0.</span> <span class="op">||</span> <span class="ident">w</span> <span class="op">&gt;=</span> <span class="number">1.</span> {
         <span class="ident">x1</span> <span class="op">=</span> <span class="number">2.0</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>, <span class="number">1f64</span>) <span class="op">-</span> <span class="number">1.0</span>;
         <span class="ident">x2</span> <span class="op">=</span> <span class="number">2.0</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>, <span class="number">1f64</span>) <span class="op">-</span> <span class="number">1.0</span>;
         <span class="ident">w</span> <span class="op">=</span> <span class="ident">x1</span> <span class="op">*</span> <span class="ident">x1</span> <span class="op">+</span> <span class="ident">x2</span> <span class="op">*</span> <span class="ident">x2</span>;
@@ -783,7 +783,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// [1]: https://www.seehuhn.de/pages/ziggurat.html</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_assignments</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ziggurat</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThreadRng</span>, <span class="ident">sigma</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ziggurat</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ThreadRng</span>, <span class="ident">sigma</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
     <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">u</span>, <span class="kw-2">mut</span> <span class="ident">i</span>, <span class="kw-2">mut</span> <span class="ident">sign</span>, <span class="kw-2">mut</span> <span class="ident">j</span>) <span class="op">=</span> (<span class="number">0u32</span>, <span class="number">0usize</span>, <span class="number">0u32</span>, <span class="number">0u32</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">0f64</span>;
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="number">0f64</span>;
@@ -792,7 +792,7 @@
         <span class="ident">u</span> <span class="op">=</span> <span class="ident">rand_num</span>(<span class="ident">rng</span>, <span class="ident">u32</span>::<span class="ident">MIN</span>, <span class="ident">u32</span>::<span class="ident">MAX</span>);
         <span class="ident">i</span> <span class="op">=</span> (<span class="ident">u</span> <span class="op">&amp;</span> <span class="number">0x0000007F</span>) <span class="kw">as</span> <span class="ident">usize</span>; <span class="comment">// 7 bit to choose the step</span>
         <span class="ident">sign</span> <span class="op">=</span> <span class="ident">u</span> <span class="op">&amp;</span> <span class="number">0x00000080</span>; <span class="comment">// 1 bit for the sign</span>
-        <span class="ident">j</span> <span class="op">=</span> <span class="ident">u</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">8</span>; <span class="comment">// 24 bit for the x-value</span>
+        <span class="ident">j</span> <span class="op">=</span> <span class="ident">u</span> <span class="op">&gt;&gt;</span> <span class="number">8</span>; <span class="comment">// 24 bit for the x-value</span>
 
         <span class="ident">x</span> <span class="op">=</span> <span class="ident">j</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">*</span> <span class="ident">WTAB</span>[<span class="ident">i</span>];
         <span class="kw">if</span> <span class="ident">j</span> <span class="op">&lt;</span> <span class="ident">KTAB</span>[<span class="ident">i</span>] {
@@ -813,7 +813,7 @@
         }
     }
 
-    <span class="kw">if</span> <span class="ident">sign</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
+    <span class="kw">if</span> <span class="ident">sign</span> <span class="op">!=</span> <span class="number">0</span> {
         <span class="ident">sigma</span> <span class="op">*</span> <span class="ident">x</span>
     } <span class="kw">else</span> {
         <span class="op">-</span><span class="ident">sigma</span> <span class="op">*</span> <span class="ident">x</span>

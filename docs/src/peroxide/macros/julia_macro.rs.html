@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/macros/julia_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>julia_macro.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/macros/julia_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>julia_macro.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -81,7 +81,7 @@
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">hstack</span> {
     <span class="comment">// Two</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {
         {
             <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>.<span class="ident">len</span>();
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
@@ -91,7 +91,7 @@
     };
 
     <span class="comment">// Multi</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=</span><span class="op">&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=&gt;</span> {
         {
             <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>.<span class="ident">len</span>();
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp0</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>;
@@ -102,7 +102,7 @@
                 <span class="comment">// Must equal row</span>
                 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">r</span>, <span class="ident">temp</span>.<span class="ident">len</span>());
                 <span class="comment">// Add column</span>
-                <span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="ident">c</span> <span class="op">+=</span> <span class="number">1</span>;
                 <span class="ident">temp0</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>[..]);
             )<span class="op">*</span>
             <span class="ident">matrix</span>(<span class="ident">temp0</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Col</span>)
@@ -113,7 +113,7 @@
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">vstack</span> {
     <span class="comment">// Two</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {
         {
             <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>.<span class="ident">len</span>();
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
@@ -123,7 +123,7 @@
     };
 
     <span class="comment">// Multi</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=</span><span class="op">&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=&gt;</span> {
         {
             <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>.<span class="ident">len</span>();
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp0</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>;
@@ -134,7 +134,7 @@
                 <span class="comment">// Must equal row</span>
                 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">c</span>, <span class="ident">temp</span>.<span class="ident">len</span>());
                 <span class="comment">// Add column</span>
-                <span class="ident">r</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="ident">r</span> <span class="op">+=</span> <span class="number">1</span>;
                 <span class="ident">temp0</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>[..]);
             )<span class="op">*</span>
             <span class="ident">matrix</span>(<span class="ident">temp0</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)

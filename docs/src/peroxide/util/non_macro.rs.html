@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/util/non_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>non_macro.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/util/non_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>non_macro.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -226,7 +226,7 @@
 <span class="doccomment">/// let a = seq(1, 10, 2);</span>
 <span class="doccomment">/// assert_eq!(a, vec![1f64,3f64,5f64,7f64,9f64]);</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">seq</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">start</span>: <span class="ident">S</span>, <span class="ident">end</span>: <span class="ident">T</span>, <span class="ident">step</span>: <span class="ident">U</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">seq</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">start</span>: <span class="ident">S</span>, <span class="ident">end</span>: <span class="ident">T</span>, <span class="ident">step</span>: <span class="ident">U</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
     <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
@@ -258,23 +258,23 @@
 <span class="doccomment">/// let a = zeros(2, 2);</span>
 <span class="doccomment">/// assert_eq!(a, matrix(vec![0f64;4], 2, 2, Row));</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeros</span>(<span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeros</span>(<span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Matrix</span> {
     <span class="ident">matrix</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">r</span> <span class="op">*</span> <span class="ident">c</span>], <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)
 }
 
 <span class="doccomment">/// Zeros with custom shape</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeros_shape</span>(<span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>, <span class="ident">shape</span>: <span class="ident">Shape</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeros_shape</span>(<span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>, <span class="ident">shape</span>: <span class="ident">Shape</span>) <span class="op">-&gt;</span> <span class="ident">Matrix</span> {
     <span class="ident">matrix</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">r</span> <span class="op">*</span> <span class="ident">c</span>], <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">shape</span>)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">concat</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Default</span><span class="op">&gt;</span>(<span class="ident">v1</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">v2</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">concat</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Default</span><span class="op">&gt;</span>(<span class="ident">v1</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">v2</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">v1</span>.<span class="ident">clone</span>();
     <span class="ident">v</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v2</span>[..]);
 
     <span class="ident">v</span>
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cat</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Default</span><span class="op">&gt;</span>(<span class="ident">val</span>: <span class="ident">T</span>, <span class="ident">vec</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cat</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Default</span><span class="op">&gt;</span>(<span class="ident">val</span>: <span class="ident">T</span>, <span class="ident">vec</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="ident">val</span>];
     <span class="ident">v</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">vec</span>[..]);
 
@@ -291,7 +291,7 @@
 <span class="doccomment">/// let a = eye(2);</span>
 <span class="doccomment">/// assert_eq!(a, MATLAB::new(&quot;1 0;0 1&quot;));</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eye</span>(<span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eye</span>(<span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Matrix</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="ident">n</span>, <span class="ident">n</span>);
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
         <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">i</span>)] <span class="op">=</span> <span class="number">1f64</span>;
@@ -300,7 +300,7 @@
 }
 
 <span class="doccomment">/// eye with custom shape</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eye_shape</span>(<span class="ident">n</span>: <span class="ident">usize</span>, <span class="ident">shape</span>: <span class="ident">Shape</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eye_shape</span>(<span class="ident">n</span>: <span class="ident">usize</span>, <span class="ident">shape</span>: <span class="ident">Shape</span>) <span class="op">-&gt;</span> <span class="ident">Matrix</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros_shape</span>(<span class="ident">n</span>, <span class="ident">n</span>, <span class="ident">shape</span>);
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
         <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">i</span>)] <span class="op">=</span> <span class="number">1f64</span>;
@@ -323,14 +323,14 @@
 <span class="doccomment">///     assert_eq!(cbind(a,b), c);</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cbind</span>(<span class="ident">m1</span>: <span class="ident">Matrix</span>, <span class="ident">m2</span>: <span class="ident">Matrix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cbind</span>(<span class="ident">m1</span>: <span class="ident">Matrix</span>, <span class="ident">m2</span>: <span class="ident">Matrix</span>) <span class="op">-&gt;</span> <span class="ident">Matrix</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">m1</span>;
-    <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
+    <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Col</span> {
         <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
     }
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">m2</span>;
-    <span class="kw">if</span> <span class="ident">temp2</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
+    <span class="kw">if</span> <span class="ident">temp2</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Col</span> {
         <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">change_shape</span>();
     }
 
@@ -340,7 +340,7 @@
 
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">r</span>, <span class="ident">temp2</span>.<span class="ident">row</span>);
     <span class="ident">v</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">temp2</span>.<span class="ident">data</span>[..]);
-    <span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">col</span>;
+    <span class="ident">c</span> <span class="op">+=</span> <span class="ident">temp2</span>.<span class="ident">col</span>;
     <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Col</span>)
 }
 
@@ -359,14 +359,14 @@
 <span class="doccomment">///     assert_eq!(rbind(a,b), c);</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rbind</span>(<span class="ident">m1</span>: <span class="ident">Matrix</span>, <span class="ident">m2</span>: <span class="ident">Matrix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rbind</span>(<span class="ident">m1</span>: <span class="ident">Matrix</span>, <span class="ident">m2</span>: <span class="ident">Matrix</span>) <span class="op">-&gt;</span> <span class="ident">Matrix</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">m1</span>;
-    <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
+    <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Row</span> {
         <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
     }
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">m2</span>;
-    <span class="kw">if</span> <span class="ident">temp2</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
+    <span class="kw">if</span> <span class="ident">temp2</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Row</span> {
         <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">change_shape</span>();
     }
 
@@ -376,7 +376,7 @@
 
     <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">c</span>, <span class="ident">temp2</span>.<span class="ident">col</span>);
     <span class="ident">v</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">temp2</span>.<span class="ident">data</span>[..]);
-    <span class="ident">r</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">row</span>;
+    <span class="ident">r</span> <span class="op">+=</span> <span class="ident">temp2</span>.<span class="ident">row</span>;
     <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)
 }
 
@@ -385,7 +385,7 @@
 <span class="doccomment">/// # Description</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Range = from 0 to 1</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rand</span>(<span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rand</span>(<span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Matrix</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="ident">r</span>, <span class="ident">c</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">r</span> {

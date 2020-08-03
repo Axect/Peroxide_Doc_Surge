@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `root` mod in crate `peroxide`."><meta name="keywords" content="rust, rustlang, rust-lang, root"><title>peroxide::numerical::root - Rust</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="API documentation for the Rust `root` mod in crate `peroxide`."><meta name="keywords" content="rust, rustlang, rust-lang, root"><title>peroxide::numerical::root - Rust</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -61,7 +61,7 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
 <span class="kw">use</span> <span class="ident">peroxide</span>::<span class="ident">fuga</span>::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">RootError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">RootError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">init</span> <span class="op">=</span> <span class="ident">RootState</span>::<span class="ident">I</span>(<span class="number">1f64</span>, <span class="number">4f64</span>);
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rf</span> <span class="op">=</span> <span class="ident">RootFinder</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">AD1</span><span class="op">&gt;</span>::<span class="ident">new</span>(<span class="ident">init</span>, <span class="ident">Bisection</span>, <span class="ident">f</span>)<span class="question-mark">?</span>;
     <span class="ident">rf</span>.<span class="ident">set_tol</span>(<span class="number">1e-15</span>)       <span class="comment">// Default: 1e-10</span>
@@ -71,7 +71,7 @@
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">f</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
+<span class="kw">fn</span> <span class="ident">f</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span> {
     <span class="ident">x</span>.<span class="ident">sin</span>()
 }</pre></div>
 <h1 id="high-level-api" class="section-header"><a href="#high-level-api">High-level API</a></h1><h2 id="members-1" class="section-header"><a href="#members-1">Members</a></h2>
@@ -87,13 +87,13 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
 <span class="kw">use</span> <span class="ident">peroxide</span>::<span class="ident">fuga</span>::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">RootError</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">RootError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">root</span> <span class="op">=</span> <span class="ident">bisection</span>(<span class="ident">f</span>, (<span class="number">1f64</span>, <span class="number">4f64</span>), <span class="number">100</span>, <span class="number">1e-15</span>)<span class="question-mark">?</span>;
     <span class="ident">root</span>.<span class="ident">print</span>();
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">f</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
+<span class="kw">fn</span> <span class="ident">f</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span> {
     <span class="ident">x</span>.<span class="ident">sin</span>()
 }</pre></div>
 <h1 id="reference" class="section-header"><a href="#reference">Reference</a></h1>

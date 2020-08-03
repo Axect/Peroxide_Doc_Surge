@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/structure/ad.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ad.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css"><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/structure/ad.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ad.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="../../../favicon.ico"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -347,6 +347,7 @@
 <span id="331">331</span>
 <span id="332">332</span>
 <span id="333">333</span>
+<span id="334">334</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Taylor mode forward automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -477,7 +478,7 @@
     <span class="ident">ad_impl_into_iter</span>, <span class="ident">ad_impl_iter</span>, <span class="ident">ad_impl_mul</span>, <span class="ident">ad_impl_neg</span>, <span class="ident">ad_impl_powops</span>, <span class="ident">ad_impl_sub</span>,
     <span class="ident">ad_impl_trigops</span>, <span class="ident">ad_iter_def</span>, <span class="ident">ad_struct_def</span>, <span class="ident">ad_impl_from_type</span>, <span class="ident">ad_impl_add_f64</span>, <span class="ident">ad_impl_sub_f64</span>,
     <span class="ident">ad_impl_mul_f64</span>, <span class="ident">ad_impl_div_f64</span>, <span class="ident">f64_impl_add_ad</span>, <span class="ident">f64_impl_sub_ad</span>, <span class="ident">f64_impl_mul_ad</span>, <span class="ident">f64_impl_div_ad</span>,
-    <span class="ident">f64_impl_from_ad</span>, <span class="ident">ad_impl_stable_fn</span>,
+    <span class="ident">f64_impl_from_ad</span>, <span class="ident">ad_impl_stable_fn</span>, <span class="ident">def_ad</span>
 };
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">FromIterator</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Index</span>, <span class="ident">IndexMut</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
@@ -503,10 +504,11 @@
 <span class="macro">ad_impl_powops</span><span class="macro">!</span>();
 <span class="macro">ad_impl_trigops</span><span class="macro">!</span>();
 <span class="macro">ad_impl_ad</span><span class="macro">!</span>();
+<span class="macro">def_ad</span><span class="macro">!</span>();
 <span class="macro">ad_impl_from_type</span><span class="macro">!</span>(<span class="ident">f64</span>);
-<span class="macro">ad_impl_from_type</span><span class="macro">!</span>(<span class="ident">f32</span>);
-<span class="macro">ad_impl_from_type</span><span class="macro">!</span>(<span class="ident">i64</span>);
-<span class="macro">ad_impl_from_type</span><span class="macro">!</span>(<span class="ident">i32</span>);
+<span class="comment">// ad_impl_from_type!(f32);</span>
+<span class="comment">// ad_impl_from_type!(i64);</span>
+<span class="comment">// ad_impl_from_type!(i32);</span>
 <span class="macro">ad_impl_add_f64</span><span class="macro">!</span>();
 <span class="macro">ad_impl_sub_f64</span><span class="macro">!</span>();
 <span class="macro">ad_impl_mul_f64</span><span class="macro">!</span>();
@@ -518,85 +520,85 @@
 <span class="macro">f64_impl_from_ad</span><span class="macro">!</span>();
 <span class="macro">ad_impl_stable_fn</span><span class="macro">!</span>();
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">AD</span>:
-    <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Display</span>
-    <span class="op">+</span> <span class="ident">Clone</span>
-    <span class="op">+</span> <span class="ident">Copy</span>
-    <span class="op">+</span> <span class="ident">PartialEq</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD1</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD2</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD3</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD4</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD5</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD6</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD7</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD8</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD9</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">AD10</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD1</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD2</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD3</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD4</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD5</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD6</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD7</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD8</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD9</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">AD10</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">PowOps</span>
-    <span class="op">+</span> <span class="ident">ExpLogOps</span>
-    <span class="op">+</span> <span class="ident">TrigOps</span>
-{
-    <span class="kw">fn</span> <span class="ident">to_ad1</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD1</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_ad2</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD2</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_ad3</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD3</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_ad4</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD4</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_ad5</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD5</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_ad6</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD6</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_ad7</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD7</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_ad8</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD8</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_ad9</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD9</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">to_ad10</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">AD10</span> {
-        <span class="self">self</span>.<span class="ident">into</span>()
-    }
-}
+<span class="comment">// pub trait AD:</span>
+<span class="comment">//     std::fmt::Display</span>
+<span class="comment">//     + Clone</span>
+<span class="comment">//     + Copy</span>
+<span class="comment">//     + PartialEq</span>
+<span class="comment">//     + From&lt;AD1&gt;</span>
+<span class="comment">//     + From&lt;AD2&gt;</span>
+<span class="comment">//     + From&lt;AD3&gt;</span>
+<span class="comment">//     + From&lt;AD4&gt;</span>
+<span class="comment">//     + From&lt;AD5&gt;</span>
+<span class="comment">//     + From&lt;AD6&gt;</span>
+<span class="comment">//     + From&lt;AD7&gt;</span>
+<span class="comment">//     + From&lt;AD8&gt;</span>
+<span class="comment">//     + From&lt;AD9&gt;</span>
+<span class="comment">//     + From&lt;AD10&gt;</span>
+<span class="comment">//     + Into&lt;AD1&gt;</span>
+<span class="comment">//     + Into&lt;AD2&gt;</span>
+<span class="comment">//     + Into&lt;AD3&gt;</span>
+<span class="comment">//     + Into&lt;AD4&gt;</span>
+<span class="comment">//     + Into&lt;AD5&gt;</span>
+<span class="comment">//     + Into&lt;AD6&gt;</span>
+<span class="comment">//     + Into&lt;AD7&gt;</span>
+<span class="comment">//     + Into&lt;AD8&gt;</span>
+<span class="comment">//     + Into&lt;AD9&gt;</span>
+<span class="comment">//     + Into&lt;AD10&gt;</span>
+<span class="comment">//     + From&lt;f64&gt;</span>
+<span class="comment">//     + Into&lt;f64&gt;</span>
+<span class="comment">//     + Add&lt;Output = Self&gt;</span>
+<span class="comment">//     + Sub&lt;Output = Self&gt;</span>
+<span class="comment">//     + Mul&lt;Output = Self&gt;</span>
+<span class="comment">//     + Div&lt;Output = Self&gt;</span>
+<span class="comment">//     + Add&lt;f64, Output = Self&gt;</span>
+<span class="comment">//     + Sub&lt;f64, Output = Self&gt;</span>
+<span class="comment">//     + Mul&lt;f64, Output = Self&gt;</span>
+<span class="comment">//     + Div&lt;f64, Output = Self&gt;</span>
+<span class="comment">//     + PowOps</span>
+<span class="comment">//     + ExpLogOps</span>
+<span class="comment">//     + TrigOps</span>
+<span class="comment">// {</span>
+<span class="comment">//     fn to_ad1(self) -&gt; AD1 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn to_ad2(self) -&gt; AD2 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn to_ad3(self) -&gt; AD3 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn to_ad4(self) -&gt; AD4 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn to_ad5(self) -&gt; AD5 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn to_ad6(self) -&gt; AD6 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn to_ad7(self) -&gt; AD7 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn to_ad8(self) -&gt; AD8 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn to_ad9(self) -&gt; AD9 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">//</span>
+<span class="comment">//     fn to_ad10(self) -&gt; AD10 {</span>
+<span class="comment">//         self.into()</span>
+<span class="comment">//     }</span>
+<span class="comment">// }</span>
 
 <span class="comment">//impl AD for f64 {}</span>
 
@@ -646,29 +648,29 @@
     <span class="ident">_marker</span>: <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">f</span>: <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">f</span>),
             <span class="ident">_marker</span>: <span class="ident">PhantomData</span>
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">f</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">t</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">f</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">t</span>: <span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span> {
         (<span class="self">self</span>.<span class="ident">f</span>)(<span class="ident">t</span>)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>, <span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span> <span class="ident">StableFn</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span>, <span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span> <span class="ident">StableFn</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">f64</span>;
-    <span class="kw">fn</span> <span class="ident">call_stable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">target</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">call_stable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">target</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>.<span class="ident">f</span>(<span class="ident">T</span>::<span class="ident">from</span>(<span class="ident">target</span>)).<span class="ident">into</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>, <span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span> <span class="ident">StableFn</span><span class="op">&lt;</span><span class="ident">AD1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">T</span>) <span class="op">-&gt;</span> <span class="ident">T</span>, <span class="ident">T</span>: <span class="ident">AD</span><span class="op">&gt;</span> <span class="ident">StableFn</span><span class="op">&lt;</span><span class="ident">AD1</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ADLift</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">AD1</span>;
-    <span class="kw">fn</span> <span class="ident">call_stable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">target</span>: <span class="ident">AD1</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
+    <span class="kw">fn</span> <span class="ident">call_stable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">target</span>: <span class="ident">AD1</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Output</span> {
         <span class="self">self</span>.<span class="ident">f</span>(<span class="ident">T</span>::<span class="ident">from</span>(<span class="ident">target</span>)).<span class="ident">into</span>()
     }
 }
