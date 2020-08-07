@@ -862,6 +862,33 @@
 <span id="846">846</span>
 <span id="847">847</span>
 <span id="848">848</span>
+<span id="849">849</span>
+<span id="850">850</span>
+<span id="851">851</span>
+<span id="852">852</span>
+<span id="853">853</span>
+<span id="854">854</span>
+<span id="855">855</span>
+<span id="856">856</span>
+<span id="857">857</span>
+<span id="858">858</span>
+<span id="859">859</span>
+<span id="860">860</span>
+<span id="861">861</span>
+<span id="862">862</span>
+<span id="863">863</span>
+<span id="864">864</span>
+<span id="865">865</span>
+<span id="866">866</span>
+<span id="867">867</span>
+<span id="868">868</span>
+<span id="869">869</span>
+<span id="870">870</span>
+<span id="871">871</span>
+<span id="872">872</span>
+<span id="873">873</span>
+<span id="874">874</span>
+<span id="875">875</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Extra tools for `Vec&lt;f64&gt;`</span>
 <span class="doccomment">//!</span>
@@ -1137,10 +1164,11 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">packed_simd</span>::{<span class="ident">f64x4</span>, <span class="ident">f64x8</span>};
 
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::{<span class="ident">matrix</span>, <span class="ident">Matrix</span>, <span class="ident">Row</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
     <span class="ident">fp</span>::<span class="ident">FPVector</span>,
     <span class="ident">general</span>::<span class="ident">Algorithm</span>,
-    <span class="ident">math</span>::{<span class="ident">InnerProduct</span>, <span class="ident">LinearOp</span>, <span class="ident">Norm</span>, <span class="ident">Normed</span>, <span class="ident">Vector</span>},
+    <span class="ident">math</span>::{<span class="ident">InnerProduct</span>, <span class="ident">LinearOp</span>, <span class="ident">Norm</span>, <span class="ident">Normed</span>, <span class="ident">Vector</span>, <span class="ident">VectorProduct</span>},
     <span class="ident">mutable</span>::<span class="ident">MutFP</span>,
     <span class="ident">num</span>::<span class="ident">Real</span>,
     <span class="ident">pointer</span>::{<span class="ident">Oxide</span>, <span class="ident">Redox</span>},
@@ -1544,6 +1572,32 @@
 <span class="kw">impl</span> <span class="ident">Oxide</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">ox</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Redox</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span> {
         <span class="ident">Redox</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span>::<span class="ident">from_vec</span>(<span class="self">self</span>)
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">VectorProduct</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">cross</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+        <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">len</span>(), <span class="ident">other</span>.<span class="ident">len</span>());
+        <span class="comment">// 2D cross product is ill-defined</span>
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">2</span> {
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="number">1</span>];
+            <span class="ident">v</span>[<span class="number">0</span>] <span class="op">=</span> <span class="self">self</span>[<span class="number">0</span>] <span class="op">*</span> <span class="ident">other</span>[<span class="number">1</span>] <span class="op">-</span> <span class="self">self</span>[<span class="number">1</span>] <span class="op">*</span> <span class="ident">other</span>[<span class="number">0</span>];
+            <span class="ident">v</span>
+        } <span class="kw">else</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">3</span> {
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="number">3</span>];
+            <span class="ident">v</span>[<span class="number">0</span>] <span class="op">=</span> <span class="self">self</span>[<span class="number">1</span>] <span class="op">*</span> <span class="ident">other</span>[<span class="number">2</span>] <span class="op">-</span> <span class="self">self</span>[<span class="number">2</span>] <span class="op">*</span> <span class="ident">other</span>[<span class="number">1</span>];
+            <span class="ident">v</span>[<span class="number">1</span>] <span class="op">=</span> <span class="self">self</span>[<span class="number">2</span>] <span class="op">*</span> <span class="ident">other</span>[<span class="number">0</span>] <span class="op">-</span> <span class="self">self</span>[<span class="number">0</span>] <span class="op">*</span> <span class="ident">other</span>[<span class="number">2</span>];
+            <span class="ident">v</span>[<span class="number">2</span>] <span class="op">=</span> <span class="self">self</span>[<span class="number">0</span>] <span class="op">*</span> <span class="ident">other</span>[<span class="number">1</span>] <span class="op">-</span> <span class="self">self</span>[<span class="number">1</span>] <span class="op">*</span> <span class="ident">other</span>[<span class="number">0</span>];
+            <span class="ident">v</span>
+        } <span class="kw">else</span> {
+            <span class="macro">panic</span><span class="macro">!</span>(<span class="string">&quot;Cross product can be defined only in 2 or 3 dimension&quot;</span>)
+        }
+    }
+
+    <span class="kw">fn</span> <span class="ident">outer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-&gt;</span> <span class="ident">Matrix</span> {
+        <span class="kw">let</span> <span class="ident">m</span>: <span class="ident">Matrix</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">into</span>();
+        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="ident">other</span>.<span class="ident">to_owned</span>(), <span class="number">1</span>, <span class="ident">other</span>.<span class="ident">len</span>(), <span class="ident">Row</span>);
+        <span class="ident">m</span> <span class="op">*</span> <span class="ident">n</span>
     }
 }
 

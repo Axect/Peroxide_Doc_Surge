@@ -347,7 +347,6 @@
 <span id="331">331</span>
 <span id="332">332</span>
 <span id="333">333</span>
-<span id="334">334</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Taylor mode forward automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -473,16 +472,16 @@
     <span class="ident">stable</span>::<span class="ident">StableFn</span>,
 };
 <span class="kw">use</span> <span class="ident">peroxide_ad</span>::{
-    <span class="ident">ad_display</span>, <span class="ident">ad_impl</span>, <span class="ident">ad_impl_ad</span>, <span class="ident">ad_impl_add</span>, <span class="ident">ad_impl_div</span>, <span class="ident">ad_impl_double_ended_iter</span>,
-    <span class="ident">ad_impl_exact_size_iter</span>, <span class="ident">ad_impl_explogops</span>, <span class="ident">ad_impl_from</span>, <span class="ident">ad_impl_from_iter</span>, <span class="ident">ad_impl_index</span>,
-    <span class="ident">ad_impl_into_iter</span>, <span class="ident">ad_impl_iter</span>, <span class="ident">ad_impl_mul</span>, <span class="ident">ad_impl_neg</span>, <span class="ident">ad_impl_powops</span>, <span class="ident">ad_impl_sub</span>,
-    <span class="ident">ad_impl_trigops</span>, <span class="ident">ad_iter_def</span>, <span class="ident">ad_struct_def</span>, <span class="ident">ad_impl_from_type</span>, <span class="ident">ad_impl_add_f64</span>, <span class="ident">ad_impl_sub_f64</span>,
-    <span class="ident">ad_impl_mul_f64</span>, <span class="ident">ad_impl_div_f64</span>, <span class="ident">f64_impl_add_ad</span>, <span class="ident">f64_impl_sub_ad</span>, <span class="ident">f64_impl_mul_ad</span>, <span class="ident">f64_impl_div_ad</span>,
-    <span class="ident">f64_impl_from_ad</span>, <span class="ident">ad_impl_stable_fn</span>, <span class="ident">def_ad</span>
+    <span class="ident">ad_display</span>, <span class="ident">ad_impl</span>, <span class="ident">ad_impl_ad</span>, <span class="ident">ad_impl_add</span>, <span class="ident">ad_impl_add_f64</span>, <span class="ident">ad_impl_div</span>, <span class="ident">ad_impl_div_f64</span>,
+    <span class="ident">ad_impl_double_ended_iter</span>, <span class="ident">ad_impl_exact_size_iter</span>, <span class="ident">ad_impl_explogops</span>, <span class="ident">ad_impl_from</span>,
+    <span class="ident">ad_impl_from_iter</span>, <span class="ident">ad_impl_from_type</span>, <span class="ident">ad_impl_index</span>, <span class="ident">ad_impl_into_iter</span>, <span class="ident">ad_impl_iter</span>,
+    <span class="ident">ad_impl_mul</span>, <span class="ident">ad_impl_mul_f64</span>, <span class="ident">ad_impl_neg</span>, <span class="ident">ad_impl_powops</span>, <span class="ident">ad_impl_stable_fn</span>, <span class="ident">ad_impl_sub</span>,
+    <span class="ident">ad_impl_sub_f64</span>, <span class="ident">ad_impl_trigops</span>, <span class="ident">ad_iter_def</span>, <span class="ident">ad_struct_def</span>, <span class="ident">def_ad</span>, <span class="ident">f64_impl_add_ad</span>,
+    <span class="ident">f64_impl_div_ad</span>, <span class="ident">f64_impl_from_ad</span>, <span class="ident">f64_impl_mul_ad</span>, <span class="ident">f64_impl_sub_ad</span>,
 };
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">iter</span>::<span class="ident">FromIterator</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Index</span>, <span class="ident">IndexMut</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">marker</span>::<span class="ident">PhantomData</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Index</span>, <span class="ident">IndexMut</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
 
 <span class="macro">ad_struct_def</span><span class="macro">!</span>();
 <span class="macro">ad_display</span><span class="macro">!</span>();
@@ -652,7 +651,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">f</span>: <span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">f</span>),
-            <span class="ident">_marker</span>: <span class="ident">PhantomData</span>
+            <span class="ident">_marker</span>: <span class="ident">PhantomData</span>,
         }
     }
 
@@ -680,8 +679,7 @@
 <span class="comment">//</span>
 <span class="comment">//impl&lt;F: FnOnce&lt;(T)&gt;, T&gt; FnOnce&lt;f64&gt; for ADLift&lt;F&gt; {</span>
 <span class="comment">//    type Output = f64;</span>
-<span class="comment">//    </span>
+<span class="comment">//</span>
 <span class="comment">//}</span>
-
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
