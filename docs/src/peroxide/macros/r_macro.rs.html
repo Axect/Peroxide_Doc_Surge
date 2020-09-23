@@ -14,7 +14,8 @@
     });
 </script>
 
-<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -533,18 +534,18 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">c</span> {
-    ( $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=&gt;</span> {
+    ( $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=</span><span class="op">&gt;</span> {
         {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">l</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0</span>;
             $(
                 <span class="ident">v</span>.<span class="ident">push</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>);
-                <span class="ident">l</span> <span class="op">+=</span> <span class="number">1</span>;
+                <span class="ident">l</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
             )<span class="op">*</span>
             <span class="ident">v</span>
         }
     };
-    ( $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> );<span class="op">*</span> ) <span class="op">=&gt;</span> {
+    ( $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> );<span class="op">*</span> ) <span class="op">=</span><span class="op">&gt;</span> {
         {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="ident">new</span>();
             $(
@@ -570,7 +571,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">seq</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">step</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span> <span class="kw">as</span> <span class="ident">f64</span>;
@@ -586,7 +587,7 @@
         }
         <span class="ident">v</span>
     }};
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="macro">seq</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>)
     };
 }
@@ -611,11 +612,11 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">matrix</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="ident">matrix</span>(<span class="macro">seq</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>)
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="ident">matrix</span>(<span class="macro">vec</span><span class="macro">!</span>[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span> <span class="kw">as</span> <span class="ident">f64</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span> <span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>], <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>)
     }};
 }
@@ -639,10 +640,10 @@
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">cbind</span> {
     <span class="comment">// Two</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {
         {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
-            <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Col</span> {
+            <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
                 <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
             }
 
@@ -652,16 +653,16 @@
 
             <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>.<span class="ident">row</span>);
             <span class="ident">v</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>.<span class="ident">data</span>.<span class="ident">clone</span>());
-            <span class="ident">c</span> <span class="op">+=</span> <span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>.<span class="ident">col</span>;
+            <span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>.<span class="ident">col</span>;
             <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Col</span>)
         }
     };
 
     <span class="comment">// Multi</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=</span><span class="op">&gt;</span> {
         {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp0</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>;
-            <span class="kw">if</span> <span class="ident">temp0</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Col</span> {
+            <span class="kw">if</span> <span class="ident">temp0</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
                 <span class="ident">temp0</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">change_shape</span>();
             }
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">data</span>;
@@ -669,13 +670,13 @@
             <span class="kw">let</span> <span class="ident">r</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">row</span>;
             $(
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
-                <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Col</span> {
+                <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
                     <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
                 }
                 <span class="comment">// Must equal row</span>
                 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">r</span>, <span class="ident">temp</span>.<span class="ident">row</span>);
                 <span class="comment">// Add column</span>
-                <span class="ident">c</span> <span class="op">+=</span> <span class="ident">temp</span>.<span class="ident">col</span>;
+                <span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp</span>.<span class="ident">col</span>;
                 <span class="ident">v</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>.<span class="ident">data</span>.<span class="ident">clone</span>());
             )<span class="op">*</span>
             <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Col</span>)
@@ -702,15 +703,15 @@
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">rbind</span> {
     <span class="comment">// Two</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {
         {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
-            <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Row</span> {
+            <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
                 <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
             }
 
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp2</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>;
-            <span class="kw">if</span> <span class="ident">temp2</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Row</span> {
+            <span class="kw">if</span> <span class="ident">temp2</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
                 <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">change_shape</span>();
             }
 
@@ -720,16 +721,16 @@
 
             <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">c</span>, <span class="ident">temp2</span>.<span class="ident">col</span>);
             <span class="ident">v</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="ident">temp2</span>.<span class="ident">data</span>.<span class="ident">clone</span>());
-            <span class="ident">r</span> <span class="op">+=</span> <span class="ident">temp2</span>.<span class="ident">row</span>;
+            <span class="ident">r</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">row</span>;
             <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)
         }
     };
 
     <span class="comment">// Multi</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) <span class="op">=</span><span class="op">&gt;</span> {
         {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp0</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>;
-            <span class="kw">if</span> <span class="ident">temp0</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Row</span> {
+            <span class="kw">if</span> <span class="ident">temp0</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
                 <span class="ident">temp0</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">change_shape</span>();
             }
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">data</span>;
@@ -737,13 +738,13 @@
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">row</span>;
             $(
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
-                <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!=</span> <span class="ident">Row</span> {
+                <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
                     <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
                 }
                 <span class="comment">// Must equal row</span>
                 <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">c</span>, <span class="ident">temp</span>.<span class="ident">col</span>);
                 <span class="comment">// Add column</span>
-                <span class="ident">r</span> <span class="op">+=</span> <span class="ident">temp</span>.<span class="ident">row</span>;
+                <span class="ident">r</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp</span>.<span class="ident">row</span>;
                 <span class="ident">v</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>.<span class="ident">data</span>.<span class="ident">clone</span>());
             )<span class="op">*</span>
             <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)
@@ -769,7 +770,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">runif</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">n</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
 
@@ -781,7 +782,7 @@
         <span class="ident">v</span>
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="macro">runif</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>, <span class="number">0</span>, <span class="number">1</span>)
     }};
 }
@@ -804,13 +805,13 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">rnorm</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">n</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>;
         <span class="kw">let</span> <span class="ident">normal</span> <span class="op">=</span> <span class="ident">Normal</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span> <span class="kw">as</span> <span class="ident">f64</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span> <span class="kw">as</span> <span class="ident">f64</span>);
         <span class="ident">normal</span>.<span class="ident">sample</span>(<span class="ident">n</span>)
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="macro">rnorm</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>, <span class="number">0</span>, <span class="number">1</span>)
     }};
 }
@@ -833,7 +834,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">dnorm</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">mean</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">sd</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span> <span class="kw">as</span> <span class="ident">f64</span>;
@@ -841,7 +842,7 @@
         <span class="ident">normal</span>.<span class="ident">pdf</span>(<span class="ident">x</span>)
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="macro">dnorm</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>, <span class="number">0</span>, <span class="number">1</span>)
     }};
 }
@@ -864,7 +865,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">pnorm</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">mean</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">sd</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span> <span class="kw">as</span> <span class="ident">f64</span>;
@@ -872,7 +873,7 @@
         <span class="ident">normal</span>.<span class="ident">cdf</span>(<span class="ident">x</span>)
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="macro">pnorm</span><span class="macro">!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>, <span class="number">0</span>, <span class="number">1</span>)
     };
 }
@@ -892,7 +893,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">rt</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">n</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>;
         <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">StudentT</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span> <span class="kw">as</span> <span class="ident">f64</span>);
         <span class="ident">t</span>.<span class="ident">sample</span>(<span class="ident">n</span>)
@@ -914,7 +915,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">dt</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">df</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">StudentT</span>(<span class="ident">df</span>);
@@ -937,7 +938,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">pt</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span>:<span class="ident">expr</span> ) <span class="op">=&gt;</span> {{
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span>:<span class="ident">expr</span> ) <span class="op">=</span><span class="op">&gt;</span> {{
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">df</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span> <span class="kw">as</span> <span class="ident">f64</span>;
         <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">StudentT</span>(<span class="ident">df</span>);
@@ -967,7 +968,7 @@
 <span class="doccomment">/// ```</span>
 <span class="attribute">#[<span class="ident">macro_export</span>]</span>
 <span class="macro">macro_rules</span><span class="macro">!</span> <span class="ident">lm</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">tt</span> ~ <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span> ) <span class="op">=&gt;</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">tt</span> ~ <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span> ) <span class="op">=</span><span class="op">&gt;</span> {
         <span class="ident">lm</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>, <span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>)
     };
 }

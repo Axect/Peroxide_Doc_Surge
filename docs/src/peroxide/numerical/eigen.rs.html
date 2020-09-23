@@ -14,7 +14,8 @@
     });
 </script>
 
-<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -237,14 +238,14 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Eigen</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extract</span>(<span class="self">self</span>) <span class="op">-&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Matrix</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extract</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Matrix</span>) {
         (<span class="self">self</span>.<span class="ident">eigenvalue</span>, <span class="self">self</span>.<span class="ident">eigenvector</span>)
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eigen</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span>, <span class="ident">em</span>: <span class="ident">EigenMethod</span>) <span class="op">-&gt;</span> <span class="ident">Eigen</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eigen</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span>, <span class="ident">em</span>: <span class="ident">EigenMethod</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Eigen</span> {
     <span class="kw">match</span> <span class="ident">em</span> {
-        <span class="ident">Jacobi</span> <span class="op">=&gt;</span> {
+        <span class="ident">Jacobi</span> <span class="op">=</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="ident">mat</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">clone</span>();
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">jacobi</span>(<span class="ident">mat</span>);
             <span class="ident">j</span>.<span class="ident">iter</span>();
@@ -268,7 +269,7 @@
     <span class="kw">pub</span> <span class="ident">n_rot</span>: <span class="ident">usize</span>,
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">jacobi</span>(<span class="ident">m</span>: <span class="ident">Matrix</span>) <span class="op">-&gt;</span> <span class="ident">JacobiTemp</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">jacobi</span>(<span class="ident">m</span>: <span class="ident">Matrix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">JacobiTemp</span> {
     <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">row</span>;
     <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">eye_shape</span>(<span class="ident">n</span>, <span class="ident">m</span>.<span class="ident">shape</span>);
     <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">diag</span>();
@@ -284,11 +285,11 @@
 }
 
 <span class="kw">impl</span> <span class="ident">JacobiTemp</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">m</span>: <span class="ident">Matrix</span>) <span class="op">-&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">m</span>: <span class="ident">Matrix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">jacobi</span>(<span class="ident">m</span>)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extract</span>(<span class="self">self</span>) <span class="op">-&gt;</span> <span class="ident">Eigen</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extract</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Eigen</span> {
         <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">v</span>;
         <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">d</span>;
         <span class="ident">Eigen</span> {
@@ -314,10 +315,10 @@
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sm</span> <span class="op">=</span> <span class="number">0f64</span>;
             <span class="kw">for</span> <span class="ident">ip</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span> {
                 <span class="kw">for</span> <span class="ident">iq</span> <span class="kw">in</span> <span class="ident">ip</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">n</span> {
-                    <span class="ident">sm</span> <span class="op">+=</span> <span class="ident">a</span>[(<span class="ident">ip</span>, <span class="ident">iq</span>)].<span class="ident">abs</span>();
+                    <span class="ident">sm</span> <span class="op">+</span><span class="op">=</span> <span class="ident">a</span>[(<span class="ident">ip</span>, <span class="ident">iq</span>)].<span class="ident">abs</span>();
                 }
             }
-            <span class="kw">if</span> <span class="ident">sm</span> <span class="op">==</span> <span class="number">0f64</span> {
+            <span class="kw">if</span> <span class="ident">sm</span> <span class="op">=</span><span class="op">=</span> <span class="number">0f64</span> {
                 <span class="ident">eigsrt</span>(<span class="ident">d</span>, <span class="ident">v</span>);
                 <span class="kw">return</span> ();
             }
@@ -329,11 +330,11 @@
             <span class="kw">for</span> <span class="ident">ip</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span> {
                 <span class="kw">for</span> <span class="ident">iq</span> <span class="kw">in</span> <span class="ident">ip</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">n</span> {
                     <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="number">100f64</span> <span class="op">*</span> <span class="ident">a</span>[(<span class="ident">ip</span>, <span class="ident">iq</span>)].<span class="ident">abs</span>();
-                    <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">4</span> <span class="op">&amp;&amp;</span> <span class="ident">g</span> <span class="op">&lt;=</span> <span class="ident">EPSILON</span> <span class="op">*</span> <span class="ident">d</span>[<span class="ident">ip</span>].<span class="ident">abs</span>() <span class="op">&amp;&amp;</span> <span class="ident">g</span> <span class="op">&lt;=</span> <span class="ident">EPSILON</span> <span class="op">*</span> <span class="ident">d</span>[<span class="ident">iq</span>].<span class="ident">abs</span>() {
+                    <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">4</span> <span class="op">&amp;&amp;</span> <span class="ident">g</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">EPSILON</span> <span class="op">*</span> <span class="ident">d</span>[<span class="ident">ip</span>].<span class="ident">abs</span>() <span class="op">&amp;&amp;</span> <span class="ident">g</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">EPSILON</span> <span class="op">*</span> <span class="ident">d</span>[<span class="ident">iq</span>].<span class="ident">abs</span>() {
                         <span class="ident">a</span>[(<span class="ident">ip</span>, <span class="ident">iq</span>)] <span class="op">=</span> <span class="number">0f64</span>;
                     } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">a</span>[(<span class="ident">ip</span>, <span class="ident">iq</span>)].<span class="ident">abs</span>() <span class="op">&gt;</span> <span class="ident">tresh</span> {
                         <span class="ident">h</span> <span class="op">=</span> <span class="ident">d</span>[<span class="ident">iq</span>] <span class="op">-</span> <span class="ident">d</span>[<span class="ident">ip</span>];
-                        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">g</span> <span class="op">&lt;=</span> <span class="ident">EPSILON</span> <span class="op">*</span> <span class="ident">h</span>.<span class="ident">abs</span>() {
+                        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">g</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">EPSILON</span> <span class="op">*</span> <span class="ident">h</span>.<span class="ident">abs</span>() {
                             <span class="ident">a</span>[(<span class="ident">ip</span>, <span class="ident">iq</span>)] <span class="op">/</span> <span class="ident">h</span>
                         } <span class="kw">else</span> {
                             <span class="kw">let</span> <span class="ident">theta</span> <span class="op">=</span> <span class="number">0.5</span> <span class="op">*</span> <span class="ident">h</span> <span class="op">/</span> <span class="ident">a</span>[(<span class="ident">ip</span>, <span class="ident">iq</span>)];
@@ -347,10 +348,10 @@
                         <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">t</span> <span class="op">*</span> <span class="ident">c</span>;
                         <span class="kw">let</span> <span class="ident">tau</span> <span class="op">=</span> <span class="ident">s</span> <span class="op">/</span> (<span class="number">1f64</span> <span class="op">+</span> <span class="ident">c</span>);
                         <span class="ident">h</span> <span class="op">=</span> <span class="ident">t</span> <span class="op">*</span> <span class="ident">a</span>[(<span class="ident">ip</span>, <span class="ident">iq</span>)];
-                        <span class="ident">z</span>[<span class="ident">ip</span>] <span class="op">-=</span> <span class="ident">h</span>;
-                        <span class="ident">z</span>[<span class="ident">iq</span>] <span class="op">+=</span> <span class="ident">h</span>;
-                        <span class="ident">d</span>[<span class="ident">ip</span>] <span class="op">-=</span> <span class="ident">h</span>;
-                        <span class="ident">d</span>[<span class="ident">iq</span>] <span class="op">+=</span> <span class="ident">h</span>;
+                        <span class="ident">z</span>[<span class="ident">ip</span>] <span class="op">-</span><span class="op">=</span> <span class="ident">h</span>;
+                        <span class="ident">z</span>[<span class="ident">iq</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">h</span>;
+                        <span class="ident">d</span>[<span class="ident">ip</span>] <span class="op">-</span><span class="op">=</span> <span class="ident">h</span>;
+                        <span class="ident">d</span>[<span class="ident">iq</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">h</span>;
                         <span class="ident">a</span>[(<span class="ident">ip</span>, <span class="ident">iq</span>)] <span class="op">=</span> <span class="number">0f64</span>;
                         <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">ip</span> {
                             <span class="ident">rot</span>(<span class="ident">a</span>, <span class="ident">s</span>, <span class="ident">tau</span>, <span class="ident">j</span>, <span class="ident">ip</span>, <span class="ident">j</span>, <span class="ident">iq</span>);
@@ -364,12 +365,12 @@
                         <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
                             <span class="ident">rot</span>(<span class="ident">v</span>, <span class="ident">s</span>, <span class="ident">tau</span>, <span class="ident">j</span>, <span class="ident">ip</span>, <span class="ident">j</span>, <span class="ident">iq</span>);
                         }
-                        <span class="ident">_n_rot</span> <span class="op">+=</span> <span class="number">1</span>;
+                        <span class="ident">_n_rot</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                     }
                 }
             }
             <span class="kw">for</span> <span class="ident">ip</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-                <span class="ident">b</span>[<span class="ident">ip</span>] <span class="op">+=</span> <span class="ident">z</span>[<span class="ident">ip</span>];
+                <span class="ident">b</span>[<span class="ident">ip</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">z</span>[<span class="ident">ip</span>];
                 <span class="ident">d</span>[<span class="ident">ip</span>] <span class="op">=</span> <span class="ident">b</span>[<span class="ident">ip</span>];
                 <span class="ident">z</span>[<span class="ident">ip</span>] <span class="op">=</span> <span class="number">0f64</span>;
             }
@@ -395,12 +396,12 @@
         <span class="ident">k</span> <span class="op">=</span> <span class="ident">i</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">d</span>[<span class="ident">k</span>];
         <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="ident">i</span>..<span class="ident">n</span> {
-            <span class="kw">if</span> <span class="ident">d</span>[<span class="ident">j</span>] <span class="op">&gt;=</span> <span class="ident">p</span> {
+            <span class="kw">if</span> <span class="ident">d</span>[<span class="ident">j</span>] <span class="op">&gt;</span><span class="op">=</span> <span class="ident">p</span> {
                 <span class="ident">k</span> <span class="op">=</span> <span class="ident">j</span>;
                 <span class="ident">p</span> <span class="op">=</span> <span class="ident">d</span>[<span class="ident">k</span>];
             }
         }
-        <span class="kw">if</span> <span class="ident">k</span> <span class="op">!=</span> <span class="ident">i</span> {
+        <span class="kw">if</span> <span class="ident">k</span> <span class="op">!</span><span class="op">=</span> <span class="ident">i</span> {
             <span class="ident">d</span>[<span class="ident">k</span>] <span class="op">=</span> <span class="ident">d</span>[<span class="ident">i</span>];
             <span class="ident">d</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">p</span>;
             <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {

@@ -14,7 +14,8 @@
     });
 </script>
 
-<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -149,7 +150,7 @@
 <span class="doccomment">/// Gaussian function</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// `N(x|μ,σ) = 1/√(2πσ^2) exp(-(x-μ)^2/(2σ^2))`</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gaussian</span>(<span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">mu</span>: <span class="ident">f64</span>, <span class="ident">sigma</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gaussian</span>(<span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">mu</span>: <span class="ident">f64</span>, <span class="ident">sigma</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="number">1f64</span> <span class="op">/</span> ((<span class="number">2f64</span> <span class="op">*</span> <span class="ident">PI</span>).<span class="ident">sqrt</span>() <span class="op">*</span> <span class="ident">sigma</span>) <span class="op">*</span> (<span class="op">-</span><span class="number">0.5</span> <span class="op">*</span> ((<span class="ident">x</span> <span class="op">-</span> <span class="ident">mu</span>) <span class="op">/</span> <span class="ident">sigma</span>).<span class="ident">powi</span>(<span class="number">2</span>)).<span class="ident">exp</span>()
 }
 
@@ -161,7 +162,7 @@
 <span class="doccomment">/// # References</span>
 <span class="doccomment">/// * [Robert Munafo, Coefficients for the Lanczos Approximation to the Gamma Function](https://mrob.com/pub/ries/lanczos-gamma.html)</span>
 <span class="doccomment">/// * [Paul Godfrey, A note on the computation of the convergent Lanczos complex Gamma approximation (web page), 2001.](http://my.fit.edu/~gabdo/gamma.txt)</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gamma</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gamma</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">gamma_approx</span>(<span class="ident">x</span>)
 }
 
@@ -173,15 +174,15 @@
 <span class="doccomment">/// # References</span>
 <span class="doccomment">/// * [Robert Munafo, Coefficients for the Lanczos Approximation to the Gamma Function](https://mrob.com/pub/ries/lanczos-gamma.html)</span>
 <span class="doccomment">/// * [Paul Godfrey, A note on the computation of the convergent Lanczos complex Gamma approximation (web page), 2001.](http://my.fit.edu/~gabdo/gamma.txt)</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ln_gamma</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ln_gamma</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">ln_gamma_approx</span>(<span class="ident">x</span>)
 }
 
 <span class="doccomment">/// Pochhammer symbol</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poch</span>(<span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poch</span>(<span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">1f64</span>;
     <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-        <span class="ident">s</span> <span class="op">*=</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span>;
+        <span class="ident">s</span> <span class="kw-2">*</span><span class="op">=</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span>;
     }
     <span class="ident">s</span>
 }
@@ -196,70 +197,70 @@
 <span class="doccomment">/// Regularized incomplete gamma integral (Lower)</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `gammp` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inc_gamma</span>(<span class="ident">a</span>: <span class="ident">f64</span>, <span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inc_gamma</span>(<span class="ident">a</span>: <span class="ident">f64</span>, <span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">gammp</span>(<span class="ident">a</span>, <span class="ident">x</span>)
 }
 
 <span class="doccomment">/// Inverse of regularized incomplete gamma integral (Lower)</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `invgammp` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_inc_gamma</span>(<span class="ident">p</span>: <span class="ident">f64</span>, <span class="ident">a</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_inc_gamma</span>(<span class="ident">p</span>: <span class="ident">f64</span>, <span class="ident">a</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">invgammp</span>(<span class="ident">p</span>, <span class="ident">a</span>)
 }
 
 <span class="doccomment">/// Error function</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `erf` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">erf</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">erf</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">erf</span>(<span class="ident">x</span>)
 }
 
 <span class="doccomment">/// Complement error function</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `erfc` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">erfc</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">erfc</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">erfc</span>(<span class="ident">x</span>)
 }
 
 <span class="doccomment">/// Inverse error function</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `inverf` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_erf</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_erf</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">inverf</span>(<span class="ident">x</span>)
 }
 
 <span class="doccomment">/// Inverse complementary error function</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `inverfc` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_erfc</span>(<span class="ident">p</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_erfc</span>(<span class="ident">p</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">inverfc</span>(<span class="ident">p</span>)
 }
 
 <span class="doccomment">/// Beta function</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `beta` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">beta</span>(<span class="ident">a</span>: <span class="ident">f64</span>, <span class="ident">b</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">beta</span>(<span class="ident">a</span>: <span class="ident">f64</span>, <span class="ident">b</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">beta</span>(<span class="ident">a</span>, <span class="ident">b</span>)
 }
 
 <span class="doccomment">/// Regularized incomplete Beta function</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `betai` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inc_beta</span>(<span class="ident">a</span>: <span class="ident">f64</span>, <span class="ident">b</span>: <span class="ident">f64</span>, <span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inc_beta</span>(<span class="ident">a</span>: <span class="ident">f64</span>, <span class="ident">b</span>: <span class="ident">f64</span>, <span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">betai</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">x</span>)
 }
 
 <span class="doccomment">/// Inverse regularized incomplete beta function</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Wrapper of `invbetai` function of `puruspe` crate</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_inv_beta</span>(<span class="ident">p</span>: <span class="ident">f64</span>, <span class="ident">a</span>: <span class="ident">f64</span>, <span class="ident">b</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inv_inv_beta</span>(<span class="ident">p</span>: <span class="ident">f64</span>, <span class="ident">a</span>: <span class="ident">f64</span>, <span class="ident">b</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="ident">puruspe</span>::<span class="ident">invbetai</span>(<span class="ident">p</span>, <span class="ident">a</span>, <span class="ident">b</span>)
 }
 
 <span class="doccomment">/// Phi (CDF for Normal Dist)</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// $$\Phi(x) = \frac{1}{2}\left[1 + \text{erf}\left(\frac{x}{\sqrt{2}}\right) \right]$$</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">phi</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">phi</span>(<span class="ident">x</span>: <span class="ident">f64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
     <span class="number">0.5</span> <span class="op">*</span> (<span class="number">1f64</span> <span class="op">+</span> <span class="ident">erf</span>(<span class="ident">x</span> <span class="op">/</span> <span class="number">2f64</span>.<span class="ident">sqrt</span>()))
 }
 

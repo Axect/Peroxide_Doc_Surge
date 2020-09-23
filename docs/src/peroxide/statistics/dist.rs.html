@@ -14,7 +14,8 @@
     });
 </script>
 
-<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
+<style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -728,7 +729,7 @@
 <span class="doccomment">/// # Distributions</span>
 <span class="doccomment">/// * `Bernoulli(prob)`: Bernoulli distribution</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span> {
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="ident">Bernoulli</span>(<span class="ident">T</span>),
     <span class="ident">StudentT</span>(<span class="ident">T</span>),
 }
@@ -739,7 +740,7 @@
 <span class="doccomment">/// * `Uniform(start, end)`: Uniform distribution</span>
 <span class="doccomment">/// * `Normal(mean, std)`: Normal distribution</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span> {
+<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="ident">Uniform</span>(<span class="ident">T</span>, <span class="ident">T</span>),
     <span class="ident">Binomial</span>(<span class="ident">usize</span>, <span class="ident">T</span>),
     <span class="ident">Normal</span>(<span class="ident">T</span>, <span class="ident">T</span>),
@@ -750,30 +751,30 @@
 <span class="doccomment">/// Extract parameter</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ParametricDist</span> {
     <span class="kw">type</span> <span class="ident">Parameter</span>;
-    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Parameter</span>;
+    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Parameter</span>;
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span> <span class="ident">ParametricDist</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ParametricDist</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Parameter</span> <span class="op">=</span> <span class="ident">f64</span>;
 
-    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Parameter</span> {
+    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Parameter</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>(),
+            <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>(),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span> <span class="ident">ParametricDist</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ParametricDist</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Parameter</span> <span class="op">=</span> (<span class="ident">f64</span>, <span class="ident">f64</span>);
 
-    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Parameter</span> {
+    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Parameter</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
-            <span class="ident">Binomial</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">a</span> <span class="kw">as</span> <span class="ident">f64</span>, (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
-            <span class="ident">Normal</span>(<span class="ident">mu</span>, <span class="ident">sigma</span>) <span class="op">=&gt;</span> ((<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">sigma</span>).<span class="ident">into</span>()),
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
+            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
+            <span class="ident">Binomial</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">a</span> <span class="kw">as</span> <span class="ident">f64</span>, (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
+            <span class="ident">Normal</span>(<span class="ident">mu</span>, <span class="ident">sigma</span>) <span class="op">=</span><span class="op">&gt;</span> ((<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">sigma</span>).<span class="ident">into</span>()),
+            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
+            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
         }
     }
 }
@@ -784,28 +785,28 @@
 <span class="doccomment">/// * `sample`: extract samples</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RNG</span> {
     <span class="doccomment">/// Extract samples of distributions</span>
-    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Probability Distribution Function</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Type</span>
     <span class="doccomment">/// `f64 -&gt; f64`</span>
-    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="ident">f64</span>;
+    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span>;
 
     <span class="doccomment">/// Cumulative Distribution Function</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Type</span>
     <span class="doccomment">/// `f64` -&gt; `f64`</span>
-    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="ident">f64</span>;
+    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span>;
 }
 
 <span class="doccomment">/// RNG for OPDist</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span> <span class="ident">RNG</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">RNG</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">prob</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Bernoulli</span>(<span class="ident">prob</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="macro">assert</span><span class="macro">!</span>(
-                    (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>() <span class="op">&lt;=</span> <span class="number">1f64</span>,
+                    (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="number">1f64</span>,
                     <span class="string">&quot;Probability should be smaller than 1&quot;</span>
                 );
 
@@ -814,7 +815,7 @@
 
                 <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
                     <span class="kw">let</span> <span class="ident">uniform</span> <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>, <span class="number">1f64</span>);
-                    <span class="kw">if</span> <span class="ident">uniform</span> <span class="op">&lt;=</span> (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>() {
+                    <span class="kw">if</span> <span class="ident">uniform</span> <span class="op">&lt;</span><span class="op">=</span> (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>() {
                         <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="number">1f64</span>;
                     } <span class="kw">else</span> {
                         <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="number">0f64</span>;
@@ -822,7 +823,7 @@
                 }
                 <span class="ident">v</span>
             }
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=&gt;</span> {
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
                 <span class="kw">let</span> <span class="ident">stud</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">StudentT</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
                 <span class="ident">stud</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
@@ -830,16 +831,16 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">prob</span>) <span class="op">=&gt;</span> {
-                <span class="kw">if</span> <span class="ident">x</span>.<span class="ident">into</span>() <span class="op">==</span> <span class="number">1f64</span> {
+            <span class="ident">Bernoulli</span>(<span class="ident">prob</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">if</span> <span class="ident">x</span>.<span class="ident">into</span>() <span class="op">=</span><span class="op">=</span> <span class="number">1f64</span> {
                     (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>()
                 } <span class="kw">else</span> {
                     <span class="number">1f64</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>()
                 }
             }
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=&gt;</span> {
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">dof</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
                 <span class="number">1f64</span> <span class="op">/</span> (<span class="ident">dof</span>.<span class="ident">sqrt</span>() <span class="op">*</span> <span class="ident">beta</span>(<span class="number">0.5f64</span>, <span class="ident">dof</span> <span class="op">/</span> <span class="number">2f64</span>))
@@ -848,9 +849,9 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">prob</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Bernoulli</span>(<span class="ident">prob</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">k</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
                 <span class="kw">if</span> <span class="ident">k</span> <span class="op">&lt;</span> <span class="number">0f64</span> {
                     <span class="number">0f64</span>
@@ -860,7 +861,7 @@
                     <span class="number">1f64</span>
                 }
             }
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=&gt;</span> {
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">nu</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">_odd_nu</span> <span class="op">=</span> (<span class="ident">nu</span> <span class="op">+</span> <span class="number">1f64</span>) <span class="op">/</span> <span class="number">2f64</span>;
@@ -881,10 +882,10 @@
 }
 
 <span class="doccomment">/// RNG for TPDist</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span> <span class="ident">RNG</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">RNG</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">start</span>, <span class="ident">end</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Uniform</span>(<span class="ident">start</span>, <span class="ident">end</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
 
@@ -894,7 +895,7 @@
                 <span class="ident">v</span>
             }
 
-            <span class="ident">Binomial</span>(<span class="ident">num</span>, <span class="ident">mu</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Binomial</span>(<span class="ident">num</span>, <span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
                 <span class="kw">let</span> <span class="ident">binom</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">Binomial</span>::<span class="ident">new</span>(<span class="kw-2">*</span><span class="ident">num</span> <span class="kw">as</span> <span class="ident">u64</span>, (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
                 <span class="ident">binom</span>
@@ -904,7 +905,7 @@
                     .<span class="ident">collect</span>()
             }
 
-            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
                 <span class="kw">let</span> <span class="ident">normal</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">Normal</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
                 <span class="ident">normal</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
@@ -918,7 +919,7 @@
             <span class="comment">//                }</span>
             <span class="comment">//                v</span>
             <span class="comment">//            }</span>
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
                 <span class="kw">let</span> <span class="ident">beta</span> <span class="op">=</span> <span class="ident">rand_distr</span>::<span class="ident">Beta</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
                 <span class="ident">beta</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
@@ -948,7 +949,7 @@
             <span class="comment">//                }</span>
             <span class="comment">//                v</span>
             <span class="comment">//            }</span>
-            <span class="ident">Gamma</span>(<span class="ident">shape</span>, <span class="ident">scale</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Gamma</span>(<span class="ident">shape</span>, <span class="ident">scale</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
                 <span class="kw">let</span> <span class="ident">gamma</span> <span class="op">=</span>
                     <span class="ident">rand_distr</span>::<span class="ident">Gamma</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>::<span class="ident">new</span>((<span class="kw-2">*</span><span class="ident">shape</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">scale</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
@@ -982,38 +983,38 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-                <span class="kw">if</span> <span class="ident">val</span> <span class="op">&gt;=</span> <span class="ident">a_f64</span> <span class="op">&amp;&amp;</span> <span class="ident">val</span> <span class="op">&lt;=</span> <span class="ident">b_f64</span> {
+                <span class="kw">if</span> <span class="ident">val</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">a_f64</span> <span class="op">&amp;&amp;</span> <span class="ident">val</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">b_f64</span> {
                     <span class="kw">let</span> <span class="ident">length</span> <span class="op">=</span> <span class="ident">b_f64</span> <span class="op">-</span> <span class="ident">a_f64</span>;
                     <span class="number">1f64</span> <span class="op">/</span> <span class="ident">length</span>
                 } <span class="kw">else</span> {
                     <span class="number">0f64</span>
                 }
             }
-            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">n</span>;
                 <span class="kw">let</span> <span class="ident">mu</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>() <span class="kw">as</span> <span class="ident">usize</span>;
                 (<span class="ident">C</span>(<span class="ident">n</span>, <span class="ident">m</span>) <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> <span class="ident">mu</span>.<span class="ident">powi</span>(<span class="ident">m</span> <span class="kw">as</span> <span class="ident">i32</span>) <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> <span class="ident">mu</span>).<span class="ident">powi</span>((<span class="ident">n</span> <span class="op">-</span> <span class="ident">m</span>) <span class="kw">as</span> <span class="ident">i32</span>)
             }
-            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">mean</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">std</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>();
                 <span class="ident">gaussian</span>(<span class="ident">x</span>.<span class="ident">into</span>(), <span class="ident">mean</span>, <span class="ident">std</span>)
             }
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
                 <span class="number">1f64</span> <span class="op">/</span> <span class="ident">beta</span>(<span class="ident">a_f64</span>, <span class="ident">b_f64</span>)
                     <span class="op">*</span> <span class="ident">x</span>.<span class="ident">into</span>().<span class="ident">powf</span>(<span class="ident">a_f64</span> <span class="op">-</span> <span class="number">1f64</span>)
                     <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> <span class="ident">x</span>.<span class="ident">into</span>()).<span class="ident">powf</span>(<span class="ident">b_f64</span> <span class="op">-</span> <span class="number">1f64</span>)
             }
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
                 <span class="number">1f64</span> <span class="op">/</span> <span class="ident">gamma</span>(<span class="ident">a_f64</span>)
@@ -1024,36 +1025,36 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-&gt;</span> <span class="ident">f64</span> {
+    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
         <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">a</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">b</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
 
                 <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="ident">a</span> {
                     <span class="number">0f64</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;=</span> <span class="ident">b</span> {
+                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">b</span> {
                     (<span class="ident">x</span> <span class="op">-</span> <span class="ident">a</span>) <span class="op">/</span> (<span class="ident">b</span> <span class="op">-</span> <span class="ident">a</span>)
                 } <span class="kw">else</span> {
                     <span class="number">1f64</span>
                 }
             }
-            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">n</span>;
                 <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">q</span> <span class="op">=</span> <span class="number">1f64</span> <span class="op">-</span> <span class="ident">p</span>;
                 <span class="kw">let</span> <span class="ident">k</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
                 <span class="ident">inc_beta</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">-</span> <span class="ident">k</span>, <span class="ident">k</span> <span class="op">+</span> <span class="number">1f64</span>, <span class="ident">q</span>)
             }
-            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) <span class="op">=&gt;</span> <span class="ident">phi</span>((<span class="ident">x</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>()) <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>()),
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">phi</span>((<span class="ident">x</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>()) <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>()),
+            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">a</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">b</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
 
                 <span class="ident">inc_beta</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">x</span>)
             }
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">a</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">b</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
 
@@ -1063,89 +1064,89 @@
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span> <span class="ident">Statistics</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Statistics</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Array</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
     <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">f64</span>;
 
-    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
+    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
-            <span class="ident">StudentT</span>(<span class="kw">_</span>) <span class="op">=&gt;</span> <span class="number">0f64</span>,
+            <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
+            <span class="ident">StudentT</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="number">0f64</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
+    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">mu_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>();
                 <span class="ident">mu_f64</span> <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> <span class="ident">mu_f64</span>)
             }
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=&gt;</span> {
+            <span class="ident">StudentT</span>(<span class="ident">nu</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">nu_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
                 <span class="ident">nu_f64</span> <span class="op">/</span> (<span class="ident">nu_f64</span> <span class="op">-</span> <span class="number">2f64</span>)
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
+    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">_mu</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
-            <span class="ident">StudentT</span>(<span class="ident">_nu</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
+            <span class="ident">Bernoulli</span>(<span class="ident">_mu</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
+            <span class="ident">StudentT</span>(<span class="ident">_nu</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Array</span> {
+    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Array</span> {
         <span class="macro">unimplemented</span><span class="macro">!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Array</span> {
+    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Array</span> {
         <span class="macro">unimplemented</span><span class="macro">!</span>()
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;&gt;</span> <span class="ident">Statistics</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Statistics</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Array</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
     <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">f64</span>;
 
-    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
+    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">+</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()) <span class="op">/</span> <span class="number">2f64</span>,
-            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">n</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
-            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">_s</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>(),
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">/</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">+</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>(),
+            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">+</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()) <span class="op">/</span> <span class="number">2f64</span>,
+            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">n</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
+            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">_s</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>(),
+            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">/</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">+</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
+            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
+    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> ((<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>() <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>()).<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="number">12f64</span>,
-            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">n</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>() <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>()),
-            <span class="ident">Normal</span>(<span class="ident">_m</span>, <span class="ident">s</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>().<span class="ident">powi</span>(<span class="number">2</span>),
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> {
+            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> ((<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>() <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>()).<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="number">12f64</span>,
+            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">n</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>() <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>()),
+            <span class="ident">Normal</span>(<span class="ident">_m</span>, <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>().<span class="ident">powi</span>(<span class="number">2</span>),
+            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
                 <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
                 <span class="ident">a_f64</span> <span class="op">*</span> <span class="ident">b_f64</span> <span class="op">/</span> ((<span class="ident">a_f64</span> <span class="op">+</span> <span class="ident">b_f64</span>).<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">*</span> (<span class="ident">a_f64</span> <span class="op">+</span> <span class="ident">b_f64</span> <span class="op">+</span> <span class="number">1f64</span>))
             }
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>().<span class="ident">powi</span>(<span class="number">2</span>),
+            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>().<span class="ident">powi</span>(<span class="number">2</span>),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
+    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Value</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">_a</span>, <span class="ident">_b</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
-            <span class="ident">Binomial</span>(<span class="ident">_n</span>, <span class="ident">_mu</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
-            <span class="ident">Normal</span>(<span class="ident">_m</span>, <span class="ident">s</span>) <span class="op">=&gt;</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>(),
-            <span class="ident">Beta</span>(<span class="ident">_a</span>, <span class="ident">_b</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
-            <span class="ident">Gamma</span>(<span class="ident">_a</span>, <span class="ident">_b</span>) <span class="op">=&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
+            <span class="ident">Uniform</span>(<span class="ident">_a</span>, <span class="ident">_b</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
+            <span class="ident">Binomial</span>(<span class="ident">_n</span>, <span class="ident">_mu</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
+            <span class="ident">Normal</span>(<span class="ident">_m</span>, <span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>(),
+            <span class="ident">Beta</span>(<span class="ident">_a</span>, <span class="ident">_b</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
+            <span class="ident">Gamma</span>(<span class="ident">_a</span>, <span class="ident">_b</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Array</span> {
+    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Array</span> {
         <span class="macro">unimplemented</span><span class="macro">!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-&gt;</span> <span class="self">Self</span>::<span class="ident">Array</span> {
+    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Array</span> {
         <span class="macro">unimplemented</span><span class="macro">!</span>()
     }
 }
