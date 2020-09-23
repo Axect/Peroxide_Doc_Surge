@@ -885,11 +885,6 @@
 <span id="868">868</span>
 <span id="869">869</span>
 <span id="870">870</span>
-<span id="871">871</span>
-<span id="872">872</span>
-<span id="873">873</span>
-<span id="874">874</span>
-<span id="875">875</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Extra tools for `Vec&lt;f64&gt;`</span>
 <span class="doccomment">//!</span>
@@ -1159,11 +1154,6 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">blas</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">blas</span>::{<span class="ident">dasum</span>, <span class="ident">daxpy</span>, <span class="ident">ddot</span>, <span class="ident">dnrm2</span>, <span class="ident">idamax</span>};
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">packed_simd</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-<span class="kw">use</span> <span class="self">self</span>::<span class="ident">packed_simd</span>::{<span class="ident">f64x4</span>, <span class="ident">f64x8</span>};
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::{<span class="ident">matrix</span>, <span class="ident">Matrix</span>, <span class="ident">Row</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{

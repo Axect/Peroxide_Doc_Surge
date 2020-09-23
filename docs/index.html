@@ -14,8 +14,8 @@
     });
 </script>
 
-<style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../peroxide/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate peroxide</p><div class='block version'><p>Version 0.26.2</p></div><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all peroxide's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'peroxide', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
-                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/peroxide/lib.rs.html#1-206' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>peroxide</a></span></h1><div class='docblock'><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
+<style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../peroxide/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><p class='location'>Crate peroxide</p><div class='block version'><p>Version 0.26.3</p></div><div class="sidebar-elems"><a id='all-types' href='all.html'><p>See all peroxide's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'peroxide', ty: 'mod', relpath: '../'};</script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!"><img src="../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices"></div></div><script src="../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><span class="help-button">?</span>
+                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class='fqn'><span class='out-of-band'><span id='render-detail'><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class='inner'>&#x2212;</span>]</a></span><a class='srclink' href='../src/peroxide/lib.rs.html#1-204' title='goto source code'>[src]</a></span><span class='in-band'>Crate <a class="mod" href=''>peroxide</a></span></h1><div class='docblock'><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
 <h2 id="components" class="section-header"><a href="#components">Components</a></h2>
 <p><code>peroxide</code> has various components for scientific computation.</p>
 <ul>
@@ -26,6 +26,7 @@
 <li><code>+,-,*,/</code></li>
 <li>LU, Determinant, Inverse</li>
 <li>QR Decomposition</li>
+<li>Singular Value Decomposition</li>
 <li>Reduced Row Echelon Form</li>
 </ul>
 </li>
@@ -145,38 +146,38 @@
 <h2 id="quick-start" class="section-header"><a href="#quick-start">Quick Start</a></h2><h3 id="cargotoml" class="section-header"><a href="#cargotoml">Cargo.toml</a></h3>
 <ul>
 <li>To use <code>peroxide</code>, you should edit <code>Cargo.toml</code></li>
-<li>Current document version is corresponding to <code>0.25.0</code></li>
+<li>Current document version is corresponding to <code>0.26.3</code></li>
 </ul>
 <ol>
 <li>Default
 <pre><code class="language-toml">[dependencies]
-peroxide = &quot;0.25&quot;
+peroxide = &quot;0.26&quot;
 </code></pre>
 </li>
-<li>OpenBLAS &amp; SIMD
+<li>OpenBLAS
 <pre><code class="language-toml">[dependencies.peroxide]
-version = &quot;0.25&quot;
+version = &quot;0.26&quot;
 default-features = false
 features = [&quot;O3&quot;]
 </code></pre>
 </li>
 <li>Plot
 <pre><code class="language-toml">[dependencies.peroxide]
-version = &quot;0.25&quot;
+version = &quot;0.26&quot;
 default-features = false
 features = [&quot;plot&quot;]
 </code></pre>
 </li>
 <li>DataFrame
 <pre><code class="language-toml">[dependencies.peroxide]
-version = &quot;0.25&quot;
+version = &quot;0.26&quot;
 default-features = false
 features = [&quot;dataframe&quot;]
 </code></pre>
 </li>
 <li>Together
 <pre><code class="language-toml">[dependencies.peroxide]
-version = &quot;0.25&quot;
+version = &quot;0.26&quot;
 default-features = false
 features = [&quot;O3&quot;, &quot;plot&quot;, &quot;dataframe&quot;]
 </code></pre>
