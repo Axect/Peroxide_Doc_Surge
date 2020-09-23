@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Scalable",""],["ScalableMut",""],["VecOps","Syntactic sugar for Vector operations"]]});
+initSidebarItems({"trait":[["ConvToMat",""],["Scalable",""],["ScalableMut",""],["VecOps","Syntactic sugar for Vector operations"]]});
