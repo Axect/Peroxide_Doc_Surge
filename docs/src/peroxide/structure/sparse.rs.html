@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/structure/sparse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sparse.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/structure/sparse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sparse.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script src="../../../storage.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png">
 <link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
@@ -235,13 +235,15 @@
 <span id="216">216</span>
 <span id="217">217</span>
 <span id="218">218</span>
+<span id="219">219</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Sparse matrix (CCS format)</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * Reference : Press, William H., and William T. Vetterling. *Numerical Recipes.* Cambridge: Cambridge Univ. Press, 2007.</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::{<span class="ident">Form</span>, <span class="ident">LinearAlgebra</span>, <span class="ident">Matrix</span>, <span class="ident">SolveKind</span>, <span class="ident">PQLU</span>, <span class="ident">QR</span>, <span class="ident">WAZD</span>, <span class="ident">SVD</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">math</span>::{<span class="ident">InnerProduct</span>, <span class="ident">LinearOp</span>, <span class="ident">Norm</span>, <span class="ident">Normed</span>, <span class="ident">Vector</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">math</span>::<span class="ident">LinearOp</span>;
+<span class="comment">//use crate::traits::math::{InnerProduct, LinearOp, Norm, Normed, Vector};</span>
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">non_macro</span>::<span class="ident">zeros</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::<span class="ident">Mul</span>;
 

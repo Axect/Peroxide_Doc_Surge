@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["DataFrame",""]],"trait":[["WithCSV","To deal with CSV file format"],["WithJSON",""],["WithNetCDF","To deal with NetCDF file format"]]});
+initSidebarItems({"enum":[["DType","Data Type enum"],["DTypeArray","Vector with `DType`"],["DTypeValue","Scalar with `DType`"]],"struct":[["DataFrame","Generic `DataFrame` structure"],["Scalar","Generic Scalar"],["Series","Generic Series"]],"trait":[["TypedScalar",""],["TypedVector",""],["WithCSV","To handle CSV file format"],["WithNetCDF","To handle with NetCDF file format"]]});

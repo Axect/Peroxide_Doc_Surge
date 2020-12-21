@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source to the Rust file `src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs.html -- source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script src="../../storage.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg">
 <link rel="alternate icon" type="image/png" href="../../favicon-16x16.png">
 <link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
@@ -221,7 +221,6 @@
 <span id="202">202</span>
 <span id="203">203</span>
 <span id="204">204</span>
-<span id="205">205</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.</span>
 <span class="doccomment">//!</span>
@@ -312,42 +311,42 @@
 <span class="doccomment">//! 1. Default</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies]</span>
-<span class="doccomment">//!     peroxide = &quot;0.27&quot;</span>
+<span class="doccomment">//!     peroxide = &quot;0.28&quot;</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 2. OpenBLAS</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.27&quot;</span>
+<span class="doccomment">//!     version = &quot;0.28&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;O3&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 3. Plot</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.27&quot;</span>
+<span class="doccomment">//!     version = &quot;0.28&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
 <span class="doccomment">//!     features = [&quot;plot&quot;]</span>
 <span class="doccomment">//!     ```</span>
-<span class="doccomment">//! 4. DataFrame</span>
+<span class="doccomment">//! 4. `netcdf` dependency for DataFrame</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.27&quot;</span>
+<span class="doccomment">//!     version = &quot;0.28&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
-<span class="doccomment">//!     features = [&quot;dataframe&quot;]</span>
+<span class="doccomment">//!     features = [&quot;nc&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//! 5. Together</span>
 <span class="doccomment">//!     ```toml</span>
 <span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.27&quot;</span>
+<span class="doccomment">//!     version = &quot;0.28&quot;</span>
 <span class="doccomment">//!     default-features = false</span>
-<span class="doccomment">//!     features = [&quot;O3&quot;, &quot;plot&quot;, &quot;dataframe&quot;]</span>
+<span class="doccomment">//!     features = [&quot;O3&quot;, &quot;plot&quot;, &quot;nc&quot;]</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Import all at once</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Peroxide has two options.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! * [`prelude`](prelude/inde.html) : To simple use</span>
+<span class="doccomment">//! * [`prelude`](prelude/index.html) : To simple use</span>
 <span class="doccomment">//! * [`fuga`](fuga/index.html) : To control numerical algorithms</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! To see differences, follow above two links.</span>
@@ -378,10 +377,11 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Useful tips for features</span>
 <span class="doccomment">//!</span>
+<span class="doccomment">//! * After `0.28.0`, `dataframe` feature is replaced by `nc` feature.</span>
 <span class="doccomment">//! * If you want to use `QR` or `SVD` then should use `O3` feature (there are no implementations for these decompositions in `default`)</span>
-<span class="doccomment">//! * If you want to write your numerical results, then use `dataframe` feature and `netcdf` format. (It is much more effective than `csv` and `json`.)</span>
+<span class="doccomment">//! * If you want to write your numerical results, then use `nc` feature and `netcdf` format. (It is much more effective than `csv` and `json`.)</span>
 <span class="doccomment">//! * After `0.23.0`, there are two options - `fuga`, `prelude`. Choose proper option for your computations.</span>
-<span class="doccomment">//! * To plot, use `dataframe` to export data as netcdf format and use python to draw plot.</span>
+<span class="doccomment">//! * To plot, use `nc` feature to export data as netcdf format and use python to draw plot.</span>
 <span class="doccomment">//!     * `plot` feature has limited plot abilities.</span>
 <span class="doccomment">//!     * There is a template of python code. - [Socialst](https://github.com/Axect/Socialst/blob/master/Templates/PyPlot_Template/nc_plot.py)</span>
 
@@ -399,13 +399,8 @@
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;dataframe&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">indexmap</span>;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;dataframe&quot;</span>)]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">netcdf</span>;
-
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;dataframe&quot;</span>)]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">json</span>;
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">order_stat</span>;
@@ -415,6 +410,9 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">matrixmultiply</span>;
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide_ad</span>;
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nc&quot;</span>)]</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">netcdf</span>;
 
 <span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">macros</span>;
