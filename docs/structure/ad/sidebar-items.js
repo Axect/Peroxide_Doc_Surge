@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["AD1",""],["AD2",""],["AD3",""],["AD4",""],["AD5",""],["ADIntoIter1",""],["ADIntoIter2",""],["ADIntoIter3",""],["ADIntoIter4",""],["ADIntoIter5",""],["ADIter1",""],["ADIter2",""],["ADIter3",""],["ADIter4",""],["ADIter5",""],["ADIterMut1",""],["ADIterMut2",""],["ADIterMut3",""],["ADIterMut4",""],["ADIterMut5",""],["ADLift","Lift AD functions"]],"trait":[["AD",""]]});
+initSidebarItems({"enum":[["AD",""]],"struct":[["ADIntoIter",""],["ADIter",""],["ADIterMut",""],["ADLift","Lift AD functions"]]});
