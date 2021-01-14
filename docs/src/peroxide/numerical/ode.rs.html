@@ -1052,8 +1052,8 @@
 <span class="doccomment">//!     * `Records` : The type to save results of ODE. Usually `Matrix` is used.</span>
 <span class="doccomment">//!     * `Vector` : Vector can be below things.</span>
 <span class="doccomment">//!         * `Vec&lt;f64&gt;` : Used for `ExplicitODE`</span>
-<span class="doccomment">//!         * `Vec&lt;Dual&gt;` : Used for `ImplicitODE`</span>
-<span class="doccomment">//!     * `Param` : Also it can be `f64` or `Dual`</span>
+<span class="doccomment">//!         * `Vec&lt;AD&gt;` : Used for `ImplicitODE`</span>
+<span class="doccomment">//!     * `Param` : Also it can be `f64` or `AD`</span>
 <span class="doccomment">//!     * `ODEMethod` : Method for solving ODE</span>
 <span class="doccomment">//!         * `ExMethod` : Explicit method</span>
 <span class="doccomment">//!             * `Euler` : Euler first order</span>
@@ -1080,7 +1080,7 @@
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//!     * `T` can be `f64` or `Dual`</span>
+<span class="doccomment">//!     * `T` can be `f64` or `AD`</span>
 <span class="doccomment">//!     * `param` is parameter for ODE. Usually it is represented by time.</span>
 <span class="doccomment">//!     * `value` is value of each node.</span>
 <span class="doccomment">//!     * `deriv` is value of derivative of each node.</span>
@@ -1096,7 +1096,7 @@
 <span class="doccomment">//! Methods for `State&lt;T&gt;` are as follows.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * `to_f64(&amp;self) -&gt; State&lt;f64&gt;`</span>
-<span class="doccomment">//! * `to_dual(&amp;self) -&gt; State&lt;Dual&gt;`</span>
+<span class="doccomment">//! * `to_ad(&amp;self) -&gt; State&lt;AD&gt;`</span>
 <span class="doccomment">//! * `new(T, Vec&lt;T&gt;, Vec&lt;T&gt;) -&gt; Self`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ### `Environment`</span>
@@ -1270,9 +1270,9 @@
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ExMethod</span>::{<span class="ident">Euler</span>, <span class="ident">RK4</span>};
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ImMethod</span>::{<span class="ident">BDF1</span>, <span class="ident">GL4</span>};
 <span class="kw">use</span> <span class="self">self</span>::<span class="ident">ODEOptions</span>::{<span class="ident">BoundCond</span>, <span class="ident">InitCond</span>, <span class="ident">Method</span>, <span class="ident">StepSize</span>, <span class="ident">StopCond</span>, <span class="ident">Times</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">numerical</span>::{<span class="ident">spline</span>::<span class="ident">CubicSpline</span>, <span class="ident">utils</span>::<span class="ident">jacobian_real</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">numerical</span>::{<span class="ident">spline</span>::<span class="ident">CubicSpline</span>, <span class="ident">utils</span>::<span class="ident">jacobian</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::{
-    <span class="ident">dual</span>::{<span class="ident">Dual</span>, <span class="ident">Dualist</span>, <span class="ident">VecWithDual</span>},
+    <span class="ident">ad</span>::{<span class="ident">AD</span>, <span class="ident">ADVec</span>, <span class="ident">AD</span>::<span class="kw-2">*</span>},
     <span class="ident">matrix</span>::{<span class="ident">LinearAlgebra</span>, <span class="ident">Matrix</span>},
     <span class="ident">polynomial</span>::<span class="ident">Polynomial</span>,
 };
@@ -1287,8 +1287,8 @@
     <span class="ident">print</span>::<span class="ident">Printable</span>,
 };
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">collections</span>::<span class="ident">HashMap</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;oxidize&quot;</span>)]</span>
-<span class="kw">use</span> {<span class="ident">blas_daxpy</span>, <span class="ident">blas_daxpy_return</span>};
+<span class="comment">//#[cfg(feature = &quot;O3&quot;)]</span>
+<span class="comment">//use {blas_daxpy, blas_daxpy_return};</span>
 
 <span class="doccomment">/// Explicit ODE Methods</span>
 <span class="doccomment">///</span>
@@ -1367,21 +1367,21 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_dual</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_ad</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span> {
         <span class="ident">State</span> {
-            <span class="ident">param</span>: <span class="self">self</span>.<span class="ident">param</span>.<span class="ident">to_dual</span>(),
+            <span class="ident">param</span>: <span class="self">self</span>.<span class="ident">param</span>.<span class="ident">to_ad</span>(),
             <span class="ident">value</span>: <span class="self">self</span>
                 .<span class="ident">value</span>
                 .<span class="ident">clone</span>()
                 .<span class="ident">into_iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_dual</span>())
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
+                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_ad</span>())
+                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
             <span class="ident">deriv</span>: <span class="self">self</span>
                 .<span class="ident">deriv</span>
                 .<span class="ident">clone</span>()
                 .<span class="ident">into_iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_dual</span>())
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
+                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_ad</span>())
+                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
         }
     }
 
@@ -1482,17 +1482,17 @@
                 (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
                 <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_size</span>;
 
-                <span class="kw">match</span> () {
-                    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;oxidize&quot;</span>)]</span>
-                    () <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="ident">blas_daxpy</span>(<span class="ident">dt</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>);
-                    }
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="comment">//match () {</span>
+                <span class="comment">//    #[cfg(feature = &quot;oxidize&quot;)]</span>
+                <span class="comment">//    () =&gt; {</span>
+                <span class="comment">//        blas_daxpy(dt, &amp;self.state.deriv, &amp;mut self.state.value);</span>
+                <span class="comment">//    }</span>
+                <span class="comment">//    _ =&gt; {</span>
                         <span class="self">self</span>.<span class="ident">state</span>
                             .<span class="ident">value</span>
                             .<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span> <span class="op">*</span> <span class="ident">dt</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>);
-                    }
-                }
+                <span class="comment">//    }</span>
+                <span class="comment">//}</span>
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span><span class="op">=</span> <span class="ident">dt</span>;
             }
             <span class="ident">RK4</span> <span class="op">=</span><span class="op">&gt;</span> {
@@ -1681,8 +1681,8 @@
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
-    <span class="ident">state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span>,
-    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>),
+    <span class="ident">state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>,
+    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>),
     <span class="ident">step_size</span>: <span class="ident">f64</span>,
     <span class="ident">rtol</span>: <span class="ident">f64</span>,
     <span class="ident">method</span>: <span class="ident">ImMethod</span>,
@@ -1696,7 +1696,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>)) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>)) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">default_to_use</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap</span>::<span class="ident">new</span>();
         <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">InitCond</span>, <span class="bool-val">false</span>);
         <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">StepSize</span>, <span class="bool-val">false</span>);
@@ -1706,7 +1706,7 @@
         <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">Times</span>, <span class="bool-val">false</span>);
 
         <span class="ident">ImplicitODE</span> {
-            <span class="ident">state</span>: <span class="ident">Default</span>::<span class="ident">default</span>(),
+            <span class="ident">state</span>: <span class="ident">State</span>::<span class="ident">new</span>(<span class="ident">AD0</span>(<span class="number">0f64</span>), <span class="macro">vec</span><span class="macro">!</span>[], <span class="macro">vec</span><span class="macro">!</span>[]),
             <span class="ident">func</span>: <span class="ident">f</span>,
             <span class="ident">step_size</span>: <span class="number">0.0</span>,
             <span class="ident">rtol</span>: <span class="number">1e-6</span>,
@@ -1721,7 +1721,7 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_state</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">State</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_state</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>
     }
 
@@ -1747,13 +1747,13 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Records</span> <span class="op">=</span> <span class="ident">Matrix</span>;
-    <span class="kw">type</span> <span class="ident">Param</span> <span class="op">=</span> <span class="ident">Dual</span>;
+    <span class="kw">type</span> <span class="ident">Param</span> <span class="op">=</span> <span class="ident">AD</span>;
     <span class="kw">type</span> <span class="ident">ODEMethod</span> <span class="op">=</span> <span class="ident">ImMethod</span>;
     <span class="kw">fn</span> <span class="ident">mut_update</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">method</span> {
             <span class="ident">BDF1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented</span><span class="macro">!</span>(),
             <span class="ident">GL4</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="op">|</span><span class="ident">t</span>: <span class="ident">Dual</span>, <span class="ident">y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span><span class="op">|</span> {
+                <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="op">|</span><span class="ident">t</span>: <span class="ident">AD</span>, <span class="ident">y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">|</span> {
                     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">st</span> <span class="op">=</span> <span class="ident">State</span>::<span class="ident">new</span>(<span class="ident">t</span>, <span class="ident">y</span>.<span class="ident">clone</span>(), <span class="ident">y</span>);
                     (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">st</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
                     <span class="ident">st</span>.<span class="ident">deriv</span>
@@ -1761,19 +1761,19 @@
 
                 <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_size</span>;
                 <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>;
-                <span class="kw">let</span> <span class="ident">t1</span>: <span class="ident">Dual</span> <span class="op">=</span> <span class="ident">t</span> <span class="op">+</span> <span class="ident">GL4_TAB</span>[<span class="number">0</span>][<span class="number">0</span>] <span class="op">*</span> <span class="ident">h</span>;
-                <span class="kw">let</span> <span class="ident">t2</span>: <span class="ident">Dual</span> <span class="op">=</span> <span class="ident">t</span> <span class="op">+</span> <span class="ident">GL4_TAB</span>[<span class="number">1</span>][<span class="number">0</span>] <span class="op">*</span> <span class="ident">h</span>;
+                <span class="kw">let</span> <span class="ident">t1</span>: <span class="ident">AD</span> <span class="op">=</span> <span class="ident">t</span> <span class="op">+</span> <span class="ident">GL4_TAB</span>[<span class="number">0</span>][<span class="number">0</span>] <span class="op">*</span> <span class="ident">h</span>;
+                <span class="kw">let</span> <span class="ident">t2</span>: <span class="ident">AD</span> <span class="op">=</span> <span class="ident">t</span> <span class="op">+</span> <span class="ident">GL4_TAB</span>[<span class="number">1</span>][<span class="number">0</span>] <span class="op">*</span> <span class="ident">h</span>;
                 <span class="kw">let</span> <span class="ident">yn</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>;
                 <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">yn</span>.<span class="ident">len</span>();
 
                 <span class="comment">// 0. Initial Guess</span>
-                <span class="kw">let</span> <span class="ident">k1_init</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">t</span>, <span class="ident">yn</span>.<span class="ident">clone</span>()).<span class="ident">values</span>();
-                <span class="kw">let</span> <span class="ident">k2_init</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">t</span>, <span class="ident">yn</span>.<span class="ident">clone</span>()).<span class="ident">values</span>();
+                <span class="kw">let</span> <span class="ident">k1_init</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">t</span>, <span class="ident">yn</span>.<span class="ident">clone</span>()).<span class="ident">to_f64_vec</span>();
+                <span class="kw">let</span> <span class="ident">k2_init</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">t</span>, <span class="ident">yn</span>.<span class="ident">clone</span>()).<span class="ident">to_f64_vec</span>();
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">k_curr</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">concat</span>(<span class="kw-2">&amp;</span><span class="ident">k1_init</span>, <span class="kw-2">&amp;</span><span class="ident">k2_init</span>);
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="number">1f64</span>;
 
                 <span class="comment">// 1. Combine two functions to one function</span>
-                <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="op">|</span><span class="ident">k</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span><span class="op">|</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="op">|</span><span class="ident">k</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">|</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span> {
                     <span class="kw">let</span> <span class="ident">k1</span> <span class="op">=</span> <span class="ident">k</span>.<span class="ident">take</span>(<span class="ident">n</span>);
                     <span class="kw">let</span> <span class="ident">k2</span> <span class="op">=</span> <span class="ident">k</span>.<span class="ident">skip</span>(<span class="ident">n</span>);
                     <span class="ident">concat</span>(
@@ -1797,10 +1797,10 @@
                 <span class="comment">// 2. Obtain Jacobian</span>
                 <span class="kw">let</span> <span class="ident">I</span> <span class="op">=</span> <span class="ident">eye</span>(<span class="number">2</span> <span class="op">*</span> <span class="ident">n</span>);
 
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">Dg</span> <span class="op">=</span> <span class="ident">jacobian_real</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">g</span>), <span class="kw-2">&amp;</span><span class="ident">k_curr</span>);
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">Dg</span> <span class="op">=</span> <span class="ident">jacobian</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">g</span>), <span class="kw-2">&amp;</span><span class="ident">k_curr</span>);
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">DG</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">I</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">Dg</span>;
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">DG_inv</span> <span class="op">=</span> <span class="ident">DG</span>.<span class="ident">inv</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">conv_dual</span>()).<span class="ident">values</span>());
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">to_ad_vec</span>()).<span class="ident">to_f64_vec</span>());
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">num_iter</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0</span>;
 
                 <span class="comment">// 3. Iteration</span>
@@ -1808,10 +1808,10 @@
                     <span class="kw">let</span> <span class="ident">DGG</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">DG_inv</span> <span class="op">*</span> <span class="kw-2">&amp;</span><span class="ident">G</span>;
                     <span class="kw">let</span> <span class="ident">k_prev</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">clone</span>();
                     <span class="ident">k_curr</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">DGG</span>);
-                    <span class="ident">Dg</span> <span class="op">=</span> <span class="ident">jacobian_real</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">g</span>), <span class="kw-2">&amp;</span><span class="ident">k_curr</span>);
+                    <span class="ident">Dg</span> <span class="op">=</span> <span class="ident">jacobian</span>(<span class="ident">Box</span>::<span class="ident">new</span>(<span class="ident">g</span>), <span class="kw-2">&amp;</span><span class="ident">k_curr</span>);
                     <span class="ident">DG</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">I</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">Dg</span>;
                     <span class="ident">DG_inv</span> <span class="op">=</span> <span class="ident">DG</span>.<span class="ident">inv</span>();
-                    <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">conv_dual</span>()).<span class="ident">values</span>());
+                    <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">to_ad_vec</span>()).<span class="ident">to_f64_vec</span>());
                     <span class="ident">err</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k_prev</span>).<span class="ident">norm</span>(<span class="ident">Norm</span>::<span class="ident">L2</span>);
                     <span class="ident">num_iter</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                 }
@@ -1823,9 +1823,9 @@
                 (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
 
                 <span class="comment">// 5. Merge k1, k2</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y_curr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">values</span>();
+                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y_curr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>();
                 <span class="ident">y_curr</span> <span class="op">=</span> <span class="ident">y_curr</span>.<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="number">0.5</span> <span class="op">*</span> <span class="ident">h</span>).<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">mul_scalar</span>(<span class="number">0.5</span> <span class="op">*</span> <span class="ident">h</span>)));
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span> <span class="op">=</span> <span class="ident">y_curr</span>.<span class="ident">conv_dual</span>();
+                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span> <span class="op">=</span> <span class="ident">y_curr</span>.<span class="ident">to_ad_vec</span>();
                 <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span> <span class="ident">h</span>;
             }
         }
@@ -1838,7 +1838,7 @@
 
         <span class="ident">result</span>.<span class="ident">subs_row</span>(
             <span class="number">0</span>,
-            <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">values</span>()),
+            <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>()),
         );
 
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">StopCond</span>) {
@@ -1848,13 +1848,13 @@
                     <span class="self">self</span>.<span class="ident">mut_update</span>();
                     <span class="ident">result</span>.<span class="ident">subs_row</span>(
                         <span class="ident">i</span>,
-                        <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">values</span>()),
+                        <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>()),
                     );
                     <span class="ident">key</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                     <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">stop_cond</span>)(<span class="kw-2">&amp;</span><span class="self">self</span>) {
                         <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;Reach the stop condition!&quot;</span>);
                         <span class="macro">print</span><span class="macro">!</span>(<span class="string">&quot;Current values are: &quot;</span>);
-                        <span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">values</span>()).<span class="ident">print</span>();
+                        <span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>()).<span class="ident">print</span>();
                         <span class="kw">break</span>;
                     }
                 }
@@ -1865,7 +1865,7 @@
                     <span class="self">self</span>.<span class="ident">mut_update</span>();
                     <span class="ident">result</span>.<span class="ident">subs_row</span>(
                         <span class="ident">i</span>,
-                        <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">values</span>()),
+                        <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>()),
                     );
                 }
                 <span class="kw">return</span> <span class="ident">result</span>;
@@ -1878,7 +1878,7 @@
             <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
         }
         <span class="self">self</span>.<span class="ident">init_cond</span> <span class="op">=</span> <span class="ident">init</span>.<span class="ident">to_f64</span>();
-        <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">init</span>.<span class="ident">to_dual</span>();
+        <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">init</span>.<span class="ident">to_ad</span>();
         <span class="self">self</span>
     }
 

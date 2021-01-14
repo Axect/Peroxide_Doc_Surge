@@ -178,6 +178,8 @@
 <span id="159">159</span>
 <span id="160">160</span>
 <span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Choose what you want.</span>
 <span class="doccomment">//!</span>
@@ -293,14 +295,20 @@
     <span class="ident">general</span>::<span class="ident">Algorithm</span>,
     <span class="ident">math</span>::{<span class="ident">InnerProduct</span>, <span class="ident">LinearOp</span>, <span class="ident">MatrixProduct</span>, <span class="ident">Norm</span>, <span class="ident">Normed</span>, <span class="ident">Vector</span>, <span class="ident">VectorProduct</span>},
     <span class="ident">mutable</span>::{<span class="ident">MutFP</span>, <span class="ident">MutMatrix</span>},
-    <span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">Number</span>, <span class="ident">NumberVector</span>, <span class="ident">PowOps</span>, <span class="ident">Real</span>, <span class="ident">TrigOps</span>},
-    <span class="ident">pointer</span>::{<span class="ident">MatrixPtr</span>, <span class="ident">Oxide</span>, <span class="ident">Redox</span>},
+    <span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">Real</span>, <span class="ident">TrigOps</span>},
+    <span class="ident">pointer</span>::{<span class="ident">MatrixPtr</span>, <span class="ident">Oxide</span>, <span class="ident">Redox</span>, <span class="ident">RedoxCommon</span>},
     <span class="ident">stable</span>::<span class="ident">StableFn</span>,
     <span class="ident">sugar</span>::{<span class="ident">Scalable</span>, <span class="ident">ScalableMut</span>, <span class="ident">VecOps</span>, <span class="ident">ConvToMat</span>},
 };
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::{<span class="ident">dual</span>::<span class="kw-2">*</span>, <span class="ident">hyper_dual</span>::<span class="kw-2">*</span>, <span class="ident">matrix</span>::<span class="kw-2">*</span>, <span class="ident">polynomial</span>::<span class="kw-2">*</span>, <span class="ident">vector</span>::<span class="kw-2">*</span>, <span class="ident">dataframe</span>::<span class="kw-2">*</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::{
+    <span class="ident">matrix</span>::<span class="kw-2">*</span>, 
+    <span class="ident">polynomial</span>::<span class="kw-2">*</span>, 
+    <span class="ident">vector</span>::<span class="kw-2">*</span>, 
+    <span class="ident">dataframe</span>::<span class="kw-2">*</span>,
+    <span class="ident">ad</span>::<span class="kw-2">*</span>,
+};
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::{<span class="ident">api</span>::<span class="kw-2">*</span>, <span class="ident">low_level</span>::<span class="kw-2">*</span>, <span class="ident">non_macro</span>::<span class="kw-2">*</span>, <span class="ident">print</span>::<span class="kw-2">*</span>, <span class="ident">useful</span>::<span class="kw-2">*</span>, <span class="ident">wrapper</span>::<span class="kw-2">*</span>};
 
@@ -322,9 +330,6 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;plot&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">plot</span>::<span class="kw-2">*</span>;
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">ad</span>::<span class="kw-2">*</span>;
-
 <span class="comment">// =============================================================================</span>
 <span class="comment">// Enums</span>
 <span class="comment">// =============================================================================</span>
@@ -337,7 +342,7 @@
     <span class="ident">Form</span>::{<span class="ident">Diagonal</span>, <span class="ident">Identity</span>},
     <span class="ident">SolveKind</span>::{<span class="ident">LU</span>, <span class="ident">WAZ</span>},
 };
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">num</span>::<span class="ident">Number</span>::{<span class="ident">D</span>, <span class="ident">F</span>};
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">dataframe</span>::<span class="ident">DType</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">ad</span>::<span class="ident">AD</span>::<span class="kw-2">*</span>;</pre></div>
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">ad</span>::<span class="ident">AD</span>::<span class="kw-2">*</span>;
+</pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

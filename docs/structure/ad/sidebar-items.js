@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["AD",""]],"struct":[["ADIntoIter",""],["ADIter",""],["ADIterMut",""],["ADLift","Lift AD functions"]]});
+initSidebarItems({"enum":[["AD",""]],"struct":[["ADFn","Generic AD functions"],["ADIntoIter",""],["ADIter",""],["ADIterMut",""]],"trait":[["ADVec",""]]});

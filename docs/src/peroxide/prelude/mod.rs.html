@@ -172,8 +172,6 @@
 <span id="153">153</span>
 <span id="154">154</span>
 <span id="155">155</span>
-<span id="156">156</span>
-<span id="157">157</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Do not disturbed. Just use.</span>
 <span class="doccomment">//!</span>
@@ -287,8 +285,8 @@
     <span class="ident">general</span>::<span class="ident">Algorithm</span>,
     <span class="ident">math</span>::{<span class="ident">InnerProduct</span>, <span class="ident">LinearOp</span>, <span class="ident">MatrixProduct</span>, <span class="ident">Vector</span>, <span class="ident">VectorProduct</span>},
     <span class="ident">mutable</span>::{<span class="ident">MutFP</span>, <span class="ident">MutMatrix</span>},
-    <span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">Number</span>, <span class="ident">NumberVector</span>, <span class="ident">PowOps</span>, <span class="ident">Real</span>, <span class="ident">TrigOps</span>},
-    <span class="ident">pointer</span>::{<span class="ident">MatrixPtr</span>, <span class="ident">Oxide</span>, <span class="ident">Redox</span>},
+    <span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">Real</span>, <span class="ident">TrigOps</span>},
+    <span class="ident">pointer</span>::{<span class="ident">MatrixPtr</span>, <span class="ident">Oxide</span>, <span class="ident">Redox</span>, <span class="ident">RedoxCommon</span>},
     <span class="ident">sugar</span>::{<span class="ident">Scalable</span>, <span class="ident">ScalableMut</span>, <span class="ident">VecOps</span>, <span class="ident">ConvToMat</span>},
 };
 
@@ -298,8 +296,6 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::{
     <span class="ident">ad</span>::<span class="kw-2">*</span>,
     <span class="ident">ad</span>::<span class="ident">AD</span>::<span class="kw-2">*</span>,
-    <span class="ident">dual</span>::<span class="kw-2">*</span>,
-    <span class="ident">hyper_dual</span>::<span class="kw-2">*</span>,
     <span class="ident">matrix</span>::{
         <span class="ident">combine</span>, <span class="ident">diag</span>, <span class="ident">gemm</span>, <span class="ident">gemv</span>, <span class="ident">gen_householder</span>, <span class="ident">inv_l</span>, <span class="ident">inv_u</span>, <span class="ident">matrix</span>, <span class="ident">ml_matrix</span>, <span class="ident">py_matrix</span>,
         <span class="ident">r_matrix</span>, <span class="ident">Col</span>, <span class="ident">Matrix</span>, <span class="ident">Row</span>, <span class="ident">Shape</span>, <span class="ident">PQLU</span>, <span class="ident">QR</span>, <span class="ident">WAZD</span>,

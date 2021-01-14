@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["hyper_dual",""]],"struct":[["HyperDual","Hyper Dual number"]]});

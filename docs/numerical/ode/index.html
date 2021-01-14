@@ -60,10 +60,10 @@
 <li><code>Vector</code> : Vector can be below things.
 <ul>
 <li><code>Vec&lt;f64&gt;</code> : Used for <code>ExplicitODE</code></li>
-<li><code>Vec&lt;Dual&gt;</code> : Used for <code>ImplicitODE</code></li>
+<li><code>Vec&lt;AD&gt;</code> : Used for <code>ImplicitODE</code></li>
 </ul>
 </li>
-<li><code>Param</code> : Also it can be <code>f64</code> or <code>Dual</code></li>
+<li><code>Param</code> : Also it can be <code>f64</code> or <code>AD</code></li>
 <li><code>ODEMethod</code> : Method for solving ODE
 <ul>
 <li><code>ExMethod</code> : Explicit method
@@ -100,7 +100,7 @@
     <span class="kw">pub</span> <span class="ident">deriv</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 }</pre></div>
 <ul>
-<li><code>T</code> can be <code>f64</code> or <code>Dual</code></li>
+<li><code>T</code> can be <code>f64</code> or <code>AD</code></li>
 <li><code>param</code> is parameter for ODE. Usually it is represented by time.</li>
 <li><code>value</code> is value of each node.</li>
 <li><code>deriv</code> is value of derivative of each node.</li>
@@ -117,7 +117,7 @@
 <p>Methods for <code>State&lt;T&gt;</code> are as follows.</p>
 <ul>
 <li><code>to_f64(&amp;self) -&gt; State&lt;f64&gt;</code></li>
-<li><code>to_dual(&amp;self) -&gt; State&lt;Dual&gt;</code></li>
+<li><code>to_ad(&amp;self) -&gt; State&lt;AD&gt;</code></li>
 <li><code>new(T, Vec&lt;T&gt;, Vec&lt;T&gt;) -&gt; Self</code></li>
 </ul>
 <h3 id="environment" class="section-header"><a href="#environment"><code>Environment</code></a></h3>

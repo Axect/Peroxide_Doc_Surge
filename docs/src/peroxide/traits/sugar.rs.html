@@ -453,22 +453,65 @@
 <span id="434">434</span>
 <span id="435">435</span>
 <span id="436">436</span>
+<span id="437">437</span>
+<span id="438">438</span>
+<span id="439">439</span>
+<span id="440">440</span>
+<span id="441">441</span>
+<span id="442">442</span>
+<span id="443">443</span>
+<span id="444">444</span>
+<span id="445">445</span>
+<span id="446">446</span>
+<span id="447">447</span>
+<span id="448">448</span>
+<span id="449">449</span>
+<span id="450">450</span>
+<span id="451">451</span>
+<span id="452">452</span>
+<span id="453">453</span>
+<span id="454">454</span>
+<span id="455">455</span>
+<span id="456">456</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::{<span class="ident">Matrix</span>, <span class="ident">Shape</span>, <span class="ident">matrix</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{<span class="ident">fp</span>::<span class="ident">FPVector</span>, <span class="ident">math</span>::<span class="ident">Vector</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">fp</span>::<span class="ident">FPVector</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">util</span>::<span class="ident">non_macro</span>::<span class="ident">zeros_shape</span>;
+<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">ops</span>::{<span class="ident">Add</span>, <span class="ident">Sub</span>, <span class="ident">Mul</span>, <span class="ident">Div</span>};
 
 <span class="doccomment">/// Syntactic sugar for Vector operations</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">VecOps</span>: <span class="ident">Vector</span> {
-    <span class="kw">type</span> <span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">add_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">sub_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">mul_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">div_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">add_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">sub_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">mul_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">div_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">VecOps</span>: <span class="ident">Sized</span> <span class="op">+</span> <span class="ident">FPVector</span> 
+<span class="kw">where</span> <span class="self">Self</span>::<span class="ident">Scalar</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Clone</span>
+    <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Scalar</span>, <span class="ident">Output</span><span class="op">=</span><span class="self">Self</span>::<span class="ident">Scalar</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Scalar</span>, <span class="ident">Output</span><span class="op">=</span><span class="self">Self</span>::<span class="ident">Scalar</span><span class="op">&gt;</span> 
+    <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Scalar</span>, <span class="ident">Output</span><span class="op">=</span><span class="self">Self</span>::<span class="ident">Scalar</span><span class="op">&gt;</span>
+    <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="self">Self</span>::<span class="ident">Scalar</span>, <span class="ident">Output</span><span class="op">=</span><span class="self">Self</span>::<span class="ident">Scalar</span><span class="op">&gt;</span>
+{
+    <span class="comment">//type Scalar;</span>
+    <span class="kw">fn</span> <span class="ident">add_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="ident">v</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">sub_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="ident">v</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">mul_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">y</span>, <span class="ident">v</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">div_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">y</span>, <span class="ident">v</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">add_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">s</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">sub_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">s</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">mul_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">s</span>)
+    }
+    <span class="kw">fn</span> <span class="ident">div_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">s</span>)
+    }
 }
 
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Scalable</span> {
@@ -494,145 +537,142 @@
 <span class="comment">// Implementations</span>
 <span class="comment">// =============================================================================</span>
 
-<span class="kw">impl</span> <span class="ident">VecOps</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">f64</span>;
-
-    <span class="doccomment">/// Vector + Vector</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">///     let b = c!(5,4,3,2,1);</span>
-    <span class="doccomment">///     assert_eq!(a.add_v(&amp;b), c!(6,6,6,6,6));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">add_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>)
-    }
-
-    <span class="doccomment">/// Vector - Vector</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">///     let b = c!(5,4,3,2,1);</span>
-    <span class="doccomment">///     assert_eq!(a.sub_v(&amp;b), c!(-4, -2, 0, 2, 4));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">sub_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="ident">v</span>)
-    }
-
-    <span class="doccomment">/// Vector * Vector</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">///     let b = c!(5,4,3,2,1);</span>
-    <span class="doccomment">///     assert_eq!(a.mul_v(&amp;b), c!(5, 8, 9, 8, 5));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">mul_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">y</span>, <span class="ident">v</span>)
-    }
-
-    <span class="doccomment">/// Vector / Vector</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(2, 4, 6, 8, 10);</span>
-    <span class="doccomment">///     let b = c!(2, 2, 2, 2, 2);</span>
-    <span class="doccomment">///     assert_eq!(a.div_v(&amp;b), c!(1,2,3,4,5));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">div_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">y</span>, <span class="ident">v</span>)
-    }
-
-    <span class="doccomment">/// Vector + Scalar</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">///     let b = 1f64;</span>
-    <span class="doccomment">///     assert_eq!(a.add_s(b), c!(2,3,4,5,6));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">add_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">s</span>)
-    }
-
-    <span class="doccomment">/// Vector - Scalar</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">///     let b = 1f64;</span>
-    <span class="doccomment">///     assert_eq!(a.sub_s(b), c!(0,1,2,3,4));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">sub_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">s</span>)
-    }
-
-    <span class="doccomment">/// Vector * Scalar</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">///     let b = 2f64;</span>
-    <span class="doccomment">///     assert_eq!(a.mul_s(b), c!(2,4,6,8,10));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">mul_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">mul_scalar</span>(<span class="ident">s</span>)
-    }
-
-    <span class="doccomment">/// Vector / Scalar</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(2,4,6,8,10);</span>
-    <span class="doccomment">///     let b = 2f64;</span>
-    <span class="doccomment">///     assert_eq!(a.div_s(b), c!(1,2,3,4,5));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">div_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">s</span>)
-    }
-}
+<span class="kw">impl</span> <span class="ident">VecOps</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {}
+<span class="comment">//    /// Vector + Vector</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    /// #[macro_use]</span>
+<span class="comment">//    /// extern crate peroxide;</span>
+<span class="comment">//    /// use peroxide::fuga::*;</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// fn main() {</span>
+<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
+<span class="comment">//    ///     let b = c!(5,4,3,2,1);</span>
+<span class="comment">//    ///     assert_eq!(a.add_v(&amp;b), c!(6,6,6,6,6));</span>
+<span class="comment">//    /// }</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    fn add_v(&amp;self, v: &amp;Self) -&gt; Self {</span>
+<span class="comment">//        self.add_vec(&amp;v)</span>
+<span class="comment">//    }</span>
+<span class="comment">//</span>
+<span class="comment">//    /// Vector - Vector</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    /// #[macro_use]</span>
+<span class="comment">//    /// extern crate peroxide;</span>
+<span class="comment">//    /// use peroxide::fuga::*;</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// fn main() {</span>
+<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
+<span class="comment">//    ///     let b = c!(5,4,3,2,1);</span>
+<span class="comment">//    ///     assert_eq!(a.sub_v(&amp;b), c!(-4, -2, 0, 2, 4));</span>
+<span class="comment">//    /// }</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    fn sub_v(&amp;self, v: &amp;Self) -&gt; Self {</span>
+<span class="comment">//        self.zip_with(|x, y| x - y, v)</span>
+<span class="comment">//    }</span>
+<span class="comment">//</span>
+<span class="comment">//    /// Vector * Vector</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    /// #[macro_use]</span>
+<span class="comment">//    /// extern crate peroxide;</span>
+<span class="comment">//    /// use peroxide::fuga::*;</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// fn main() {</span>
+<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
+<span class="comment">//    ///     let b = c!(5,4,3,2,1);</span>
+<span class="comment">//    ///     assert_eq!(a.mul_v(&amp;b), c!(5, 8, 9, 8, 5));</span>
+<span class="comment">//    /// }</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    fn mul_v(&amp;self, v: &amp;Self) -&gt; Self {</span>
+<span class="comment">//        self.zip_with(|x, y| x * y, v)</span>
+<span class="comment">//    }</span>
+<span class="comment">//</span>
+<span class="comment">//    /// Vector / Vector</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    /// #[macro_use]</span>
+<span class="comment">//    /// extern crate peroxide;</span>
+<span class="comment">//    /// use peroxide::fuga::*;</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// fn main() {</span>
+<span class="comment">//    ///     let a = c!(2, 4, 6, 8, 10);</span>
+<span class="comment">//    ///     let b = c!(2, 2, 2, 2, 2);</span>
+<span class="comment">//    ///     assert_eq!(a.div_v(&amp;b), c!(1,2,3,4,5));</span>
+<span class="comment">//    /// }</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    fn div_v(&amp;self, v: &amp;Self) -&gt; Self {</span>
+<span class="comment">//        self.zip_with(|x, y| x / y, v)</span>
+<span class="comment">//    }</span>
+<span class="comment">//</span>
+<span class="comment">//    /// Vector + Scalar</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    /// #[macro_use]</span>
+<span class="comment">//    /// extern crate peroxide;</span>
+<span class="comment">//    /// use peroxide::fuga::*;</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// fn main() {</span>
+<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
+<span class="comment">//    ///     let b = 1f64;</span>
+<span class="comment">//    ///     assert_eq!(a.add_s(b), c!(2,3,4,5,6));</span>
+<span class="comment">//    /// }</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    fn add_s(&amp;self, s: Self::Scalar) -&gt; Self {</span>
+<span class="comment">//        self.fmap(|x| x + s)</span>
+<span class="comment">//    }</span>
+<span class="comment">//</span>
+<span class="comment">//    /// Vector - Scalar</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    /// #[macro_use]</span>
+<span class="comment">//    /// extern crate peroxide;</span>
+<span class="comment">//    /// use peroxide::fuga::*;</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// fn main() {</span>
+<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
+<span class="comment">//    ///     let b = 1f64;</span>
+<span class="comment">//    ///     assert_eq!(a.sub_s(b), c!(0,1,2,3,4));</span>
+<span class="comment">//    /// }</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    fn sub_s(&amp;self, s: Self::Scalar) -&gt; Self {</span>
+<span class="comment">//        self.fmap(|x| x - s)</span>
+<span class="comment">//    }</span>
+<span class="comment">//</span>
+<span class="comment">//    /// Vector * Scalar</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    /// #[macro_use]</span>
+<span class="comment">//    /// extern crate peroxide;</span>
+<span class="comment">//    /// use peroxide::fuga::*;</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// fn main() {</span>
+<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
+<span class="comment">//    ///     let b = 2f64;</span>
+<span class="comment">//    ///     assert_eq!(a.mul_s(b), c!(2,4,6,8,10));</span>
+<span class="comment">//    /// }</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    fn mul_s(&amp;self, s: Self::Scalar) -&gt; Self {</span>
+<span class="comment">//        self.mul_scalar(s)</span>
+<span class="comment">//    }</span>
+<span class="comment">//</span>
+<span class="comment">//    /// Vector / Scalar</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    /// #[macro_use]</span>
+<span class="comment">//    /// extern crate peroxide;</span>
+<span class="comment">//    /// use peroxide::fuga::*;</span>
+<span class="comment">//    ///</span>
+<span class="comment">//    /// fn main() {</span>
+<span class="comment">//    ///     let a = c!(2,4,6,8,10);</span>
+<span class="comment">//    ///     let b = 2f64;</span>
+<span class="comment">//    ///     assert_eq!(a.div_s(b), c!(1,2,3,4,5));</span>
+<span class="comment">//    /// }</span>
+<span class="comment">//    /// ```</span>
+<span class="comment">//    fn div_s(&amp;self, s: Self::Scalar) -&gt; Self {</span>
+<span class="comment">//        self.fmap(|x| x / s)</span>
+<span class="comment">//    }</span>
 
 <span class="kw">impl</span> <span class="ident">Scalable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Vec</span> <span class="op">=</span> <span class="self">Self</span>;

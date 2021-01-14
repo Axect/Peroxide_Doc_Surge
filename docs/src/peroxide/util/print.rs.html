@@ -461,9 +461,6 @@
 <span id="442">442</span>
 <span id="443">443</span>
 <span id="444">444</span>
-<span id="445">445</span>
-<span id="446">446</span>
-<span id="447">447</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Easy to print any structures</span>
 
@@ -471,14 +468,11 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::{
     <span class="ident">ad</span>::<span class="ident">AD</span>,
-    <span class="ident">dual</span>::{<span class="ident">Dual</span>, <span class="ident">Dualist</span>},
-    <span class="ident">hyper_dual</span>::<span class="ident">HyperDual</span>,
     <span class="ident">matrix</span>::<span class="ident">Matrix</span>,
     <span class="ident">multinomial</span>::<span class="ident">Multinomial</span>,
     <span class="ident">polynomial</span>::<span class="ident">Polynomial</span>,
     <span class="ident">dataframe</span>::{<span class="ident">DataFrame</span>, <span class="ident">DTypeArray</span>, <span class="ident">Series</span>, <span class="ident">Scalar</span>, <span class="ident">DType</span>},
 };
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::<span class="ident">num</span>::<span class="ident">Number</span>;
 <span class="kw">use</span> <span class="ident">rand</span>::<span class="ident">distributions</span>::<span class="ident">uniform</span>::<span class="ident">SampleUniform</span>;
 <span class="kw">use</span> <span class="ident">std</span>::<span class="ident">fmt</span>::<span class="ident">Debug</span>;
 
@@ -801,11 +795,11 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Dual</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
-    }
-}
+<span class="comment">//impl Printable for Dual {</span>
+<span class="comment">//    fn print(&amp;self) {</span>
+<span class="comment">//        println!(&quot;{}&quot;, self);</span>
+<span class="comment">//    }</span>
+<span class="comment">//}</span>
 
 <span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Multinomial</span> {
     <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
@@ -813,20 +807,20 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Dual</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;value:&quot;</span>);
-        <span class="self">self</span>.<span class="ident">values</span>().<span class="ident">print</span>();
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;slope:&quot;</span>);
-        <span class="self">self</span>.<span class="ident">slopes</span>().<span class="ident">print</span>();
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">HyperDual</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
-    }
-}
+<span class="comment">//impl Printable for Vec&lt;Dual&gt; {</span>
+<span class="comment">//    fn print(&amp;self) {</span>
+<span class="comment">//        println!(&quot;value:&quot;);</span>
+<span class="comment">//        self.values().print();</span>
+<span class="comment">//        println!(&quot;slope:&quot;);</span>
+<span class="comment">//        self.slopes().print();</span>
+<span class="comment">//    }</span>
+<span class="comment">//}</span>
+<span class="comment">//</span>
+<span class="comment">//impl Printable for HyperDual {</span>
+<span class="comment">//    fn print(&amp;self) {</span>
+<span class="comment">//        println!(&quot;{}&quot;, self);</span>
+<span class="comment">//    }</span>
+<span class="comment">//}</span>
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
@@ -840,17 +834,17 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Number</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>)
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Number</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="macro">println</span><span class="macro">!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
-    }
-}
+<span class="comment">//impl Printable for Number {</span>
+<span class="comment">//    fn print(&amp;self) {</span>
+<span class="comment">//        println!(&quot;{:?}&quot;, self)</span>
+<span class="comment">//    }</span>
+<span class="comment">//}</span>
+<span class="comment">//</span>
+<span class="comment">//impl Printable for Vec&lt;Number&gt; {</span>
+<span class="comment">//    fn print(&amp;self) {</span>
+<span class="comment">//        println!(&quot;{:?}&quot;, self);</span>
+<span class="comment">//    }</span>
+<span class="comment">//}</span>
 
 <span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">DType</span> {
     <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {

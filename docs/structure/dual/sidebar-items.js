@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["dual",""],["merge_dual",""]],"struct":[["Dual","Dual - Structure for AD"]],"trait":[["Dualist",""],["VecWithDual","Convert Vector <=> Dual"]]});
