@@ -172,6 +172,7 @@
 <span id="153">153</span>
 <span id="154">154</span>
 <span id="155">155</span>
+<span id="156">156</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Do not disturbed. Just use.</span>
 <span class="doccomment">//!</span>
@@ -300,9 +301,10 @@
         <span class="ident">combine</span>, <span class="ident">diag</span>, <span class="ident">gemm</span>, <span class="ident">gemv</span>, <span class="ident">gen_householder</span>, <span class="ident">inv_l</span>, <span class="ident">inv_u</span>, <span class="ident">matrix</span>, <span class="ident">ml_matrix</span>, <span class="ident">py_matrix</span>,
         <span class="ident">r_matrix</span>, <span class="ident">Col</span>, <span class="ident">Matrix</span>, <span class="ident">Row</span>, <span class="ident">Shape</span>, <span class="ident">PQLU</span>, <span class="ident">QR</span>, <span class="ident">WAZD</span>,
     },
-    <span class="ident">polynomial</span>::<span class="kw-2">*</span>,
+    <span class="ident">polynomial</span>::{<span class="ident">Polynomial</span>,<span class="ident">poly</span>,<span class="ident">Calculus</span>,<span class="ident">lagrange_polynomial</span>,<span class="ident">legendre_polynomial</span>},
     <span class="ident">vector</span>::<span class="kw-2">*</span>,
     <span class="ident">dataframe</span>::<span class="kw-2">*</span>,
+    <span class="comment">//complex::C64,</span>
 };
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">simpler</span>::{<span class="ident">solve</span>, <span class="ident">SimplerLinearAlgebra</span>};
@@ -327,6 +329,6 @@
     <span class="ident">utils</span>::<span class="kw-2">*</span>,
 };
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">simpler</span>::{<span class="ident">eigen</span>, <span class="ident">integrate</span>};
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">simpler</span>::{<span class="ident">eigen</span>, <span class="ident">integrate</span>, <span class="ident">chebyshev_polynomial</span>};
 </pre></div>
 </section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

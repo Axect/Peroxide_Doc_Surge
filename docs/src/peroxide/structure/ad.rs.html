@@ -1291,6 +1291,8 @@
 <span id="1272">1272</span>
 <span id="1273">1273</span>
 <span id="1274">1274</span>
+<span id="1275">1275</span>
+<span id="1276">1276</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Taylor mode forward automatic differentiation</span>
 <span class="doccomment">//!</span>
@@ -2552,6 +2554,8 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Vector</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span> {
+    <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">AD</span>;
+
     <span class="kw">fn</span> <span class="ident">add_vec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">add_v</span>(<span class="ident">rhs</span>)
     }
@@ -2560,8 +2564,8 @@
         <span class="self">self</span>.<span class="ident">sub_v</span>(<span class="ident">rhs</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">mul_scalar</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">mul_s</span>(<span class="ident">AD</span>::<span class="ident">from</span>(<span class="ident">rhs</span>.<span class="ident">into</span>()))
+    <span class="kw">fn</span> <span class="ident">mul_scalar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span>.<span class="ident">mul_s</span>(<span class="ident">rhs</span>)
     }
 }
 

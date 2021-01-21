@@ -114,9 +114,10 @@
 <span id="95">95</span>
 <span id="96">96</span>
 <span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="ident">Matrix</span>;
-<span class="kw">use</span> <span class="ident">std</span>::<span class="ident">convert</span>::<span class="ident">Into</span>;
 
 <span class="doccomment">/// Mathematical Vector</span>
 <span class="doccomment">///</span>
@@ -124,9 +125,10 @@
 <span class="doccomment">/// Vector has two operations : addition, scalar multiplication.</span>
 <span class="doccomment">/// And a space of the vector should closed for that operations.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Vector</span> {
+    <span class="kw">type</span> <span class="ident">Scalar</span>;
     <span class="kw">fn</span> <span class="ident">add_vec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
     <span class="kw">fn</span> <span class="ident">sub_vec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">mul_scalar</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
+    <span class="kw">fn</span> <span class="ident">mul_scalar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
 }
 
 <span class="doccomment">/// Kinds of Vector &amp; Matrix norm</span>
@@ -152,8 +154,8 @@
 
 <span class="doccomment">/// Normed Vector</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Normed</span>: <span class="ident">Vector</span> {
-    <span class="kw">type</span> <span class="ident">Scalar</span>;
-    <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">kind</span>: <span class="ident">Norm</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span>;
+    <span class="kw">type</span> <span class="ident">UnsignedScalar</span>;
+    <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">kind</span>: <span class="ident">Norm</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">UnsignedScalar</span>;
     <span class="kw">fn</span> <span class="ident">normalize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">kind</span>: <span class="ident">Norm</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="self">Self</span>: <span class="ident">Sized</span>;
@@ -186,6 +188,8 @@
 <span class="comment">// =============================================================================</span>
 
 <span class="kw">impl</span> <span class="ident">Vector</span> <span class="kw">for</span> <span class="ident">f64</span> {
+    <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="self">Self</span>;
+
     <span class="kw">fn</span> <span class="ident">add_vec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="self">self</span> <span class="op">+</span> <span class="ident">rhs</span>
     }
@@ -194,13 +198,13 @@
         <span class="self">self</span> <span class="op">-</span> <span class="ident">rhs</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">mul_scalar</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">self</span> <span class="op">*</span> <span class="ident">rhs</span>.<span class="ident">into</span>()
+    <span class="kw">fn</span> <span class="ident">mul_scalar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">self</span> <span class="op">*</span> <span class="ident">rhs</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Normed</span> <span class="kw">for</span> <span class="ident">f64</span> {
-    <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">f64</span>;
+    <span class="kw">type</span> <span class="ident">UnsignedScalar</span> <span class="op">=</span> <span class="ident">f64</span>;
     <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_kind</span>: <span class="ident">Norm</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>::<span class="ident">Scalar</span> {
         <span class="self">self</span>.<span class="ident">abs</span>()
     }

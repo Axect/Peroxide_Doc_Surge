@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["eigen","Simple Eigenpair"],["integrate","Simple integrate"],["solve","Simple solve"]],"trait":[["SimpleNorm","Simple Norm"],["SimplerLinearAlgebra","Simple Linear algebra"]]});
+initSidebarItems({"fn":[["chebyshev_polynomial","Simple Chebyshev Polynomial (First Kind)"],["eigen","Simple Eigenpair"],["integrate","Simple integrate"],["solve","Simple solve"]],"trait":[["SimpleNorm","Simple Norm"],["SimplerLinearAlgebra","Simple Linear algebra"]]});

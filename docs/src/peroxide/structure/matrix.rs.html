@@ -4407,6 +4407,8 @@
 <span id="4388">4388</span>
 <span id="4389">4389</span>
 <span id="4390">4390</span>
+<span id="4391">4391</span>
+<span id="4392">4392</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Matrix for Scientific computation</span>
 <span class="doccomment">//!</span>
@@ -4949,8 +4951,8 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::<span class="ident">Shape</span>::{<span class="ident">Col</span>, <span class="ident">Row</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">numerical</span>::<span class="ident">eigen</span>::{<span class="ident">eigen</span>, <span class="ident">EigenMethod</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">traits</span>::{
-    <span class="ident">fp</span>::{<span class="ident">FPMatrix</span>, <span class="ident">FPVector</span>},
     <span class="ident">general</span>::<span class="ident">Algorithm</span>,
+    <span class="ident">fp</span>::{<span class="ident">FPMatrix</span>, <span class="ident">FPVector</span>},
     <span class="ident">math</span>::{<span class="ident">InnerProduct</span>, <span class="ident">LinearOp</span>, <span class="ident">MatrixProduct</span>, <span class="ident">Norm</span>, <span class="ident">Normed</span>, <span class="ident">Vector</span>},
     <span class="ident">mutable</span>::<span class="ident">MutMatrix</span>,
 };
@@ -5799,6 +5801,8 @@
 <span class="comment">// Mathematics for Matrix</span>
 <span class="comment">// =============================================================================</span>
 <span class="kw">impl</span> <span class="ident">Vector</span> <span class="kw">for</span> <span class="ident">Matrix</span> {
+    <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">f64</span>;
+
     <span class="kw">fn</span> <span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">row</span>, <span class="ident">other</span>.<span class="ident">row</span>);
         <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="self">self</span>.<span class="ident">col</span>, <span class="ident">other</span>.<span class="ident">col</span>);
@@ -5860,13 +5864,13 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">mul_scalar</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">mul_scalar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>::<span class="ident">Scalar</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="kw">match</span> () {
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
             () <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>;
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="macro">vec</span><span class="macro">!</span>[<span class="number">0f64</span>; <span class="ident">x</span>.<span class="ident">len</span>()];
-                <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">into</span>();
+                <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> <span class="ident">other</span>;
                 <span class="kw">let</span> <span class="ident">n_i32</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">i32</span>;
 
                 <span class="kw">unsafe</span> {
@@ -5875,7 +5879,7 @@
                 <span class="ident">matrix</span>(<span class="ident">y</span>, <span class="self">self</span>.<span class="ident">row</span>, <span class="self">self</span>.<span class="ident">col</span>, <span class="self">self</span>.<span class="ident">shape</span>)
             }
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">into</span>();
+                <span class="kw">let</span> <span class="ident">scalar</span> <span class="op">=</span> <span class="ident">other</span>;
                 <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">scalar</span>)
             }
         }
@@ -5883,7 +5887,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Normed</span> <span class="kw">for</span> <span class="ident">Matrix</span> {
-    <span class="kw">type</span> <span class="ident">Scalar</span> <span class="op">=</span> <span class="ident">f64</span>;
+    <span class="kw">type</span> <span class="ident">UnsignedScalar</span> <span class="op">=</span> <span class="ident">f64</span>;
     <span class="kw">fn</span> <span class="ident">norm</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">kind</span>: <span class="ident">Norm</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f64</span> {
         <span class="kw">match</span> <span class="ident">kind</span> {
             <span class="ident">Norm</span>::<span class="ident">F</span> <span class="op">=</span><span class="op">&gt;</span> {
