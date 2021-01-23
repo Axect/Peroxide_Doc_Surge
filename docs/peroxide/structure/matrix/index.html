@@ -17,7 +17,7 @@
 </script>
 
 <style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 8]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu">&#9776;</div><a href='../../../peroxide/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a><p class="location">Module matrix</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class="location"><a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a></p><script>window.sidebarCurrent = {name: "matrix", ty: "mod", relpath: "../"};</script><script defer src="../sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../../../brush.svg" width="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><script src="../../../theme.js"></script><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" class="help-button">?</button>
-                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../../src/peroxide/structure/matrix.rs.html#1-4392" title="goto source code">[src]</a></span><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="">matrix</a></span></h1><div class="docblock"><p>Matrix for Scientific computation</p>
+                <a id="settings-menu" href="../../../settings.html"><img src="../../../wheel.svg" width="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../../src/peroxide/structure/matrix.rs.html#1-4450" title="goto source code">[src]</a></span><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="">matrix</a></span></h1><div class="docblock"><p>Matrix for Scientific computation</p>
 <h2 id="declare-matrix" class="section-header"><a href="#declare-matrix">Declare matrix</a></h2>
 <ul>
 <li>You can declare matrix by various ways.
@@ -186,7 +186,7 @@ print(a)
 </ul>
 <h2 id="read--write" class="section-header"><a href="#read--write">Read &amp; Write</a></h2>
 <p>In peroxide, we can write matrix to <code>csv</code></p>
-<h3 id="csv-legacy" class="section-header"><a href="#csv-legacy">CSV (Legacy)</a></h3>
+<h3 id="csv-not-recommended" class="section-header"><a href="#csv-not-recommended">CSV (Not recommended)</a></h3>
 <ul>
 <li>
 <p><code>csv</code> feature should be required</p>
@@ -225,15 +225,46 @@ print(a)
 <span class="kw">use</span> <span class="ident">peroxide</span>::<span class="ident">fuga</span>::<span class="kw-2">*</span>;
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="comment">//let a = Matrix::read(&quot;example_data/matrix.csv&quot;, false, &#39;,&#39;)</span>
-    <span class="comment">//    .expect(&quot;Can&#39;t read matrix.csv file&quot;);</span>
-    <span class="comment">//a.print();</span>
-    <span class="comment">////       c[0] c[1]</span>
-    <span class="comment">//// r[0]     1    2</span>
-    <span class="comment">//// r[1]     3    4</span>
+    <span class="comment">// `csv` feature should be required</span>
+    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">Matrix</span>::<span class="ident">read</span>(<span class="string">&quot;example_data/matrix.csv&quot;</span>, <span class="bool-val">false</span>, <span class="string">&#39;,&#39;</span>)
+        .<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t read matrix.csv file&quot;</span>);
+    <span class="ident">a</span>.<span class="ident">print</span>();
+    <span class="comment">//       c[0] c[1]</span>
+    <span class="comment">// r[0]     1    2</span>
+    <span class="comment">// r[1]     3    4</span>
 }</pre></div>
 </li>
 </ul>
+<h3 id="convert-to-dataframe-recommended" class="section-header"><a href="#convert-to-dataframe-recommended">Convert to DataFrame (Recommended)</a></h3>
+<p>To write columns or rows, <code>DataFrame</code> and <code>nc</code> feature could be the best choice.</p>
+<ul>
+<li><code>nc</code> feature should be required - <code>netcdf</code> or <code>libnetcdf</code> are prerequisites.</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="attribute">#[<span class="ident">macro_use</span>]</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
+<span class="kw">use</span> <span class="ident">peroxide</span>::<span class="ident">fuga</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">c</span><span class="macro">!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>), <span class="number">3</span>, <span class="number">2</span>, <span class="ident">Col</span>);
+
+    <span class="comment">// Construct DataFrame</span>
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">df</span> <span class="op">=</span> <span class="ident">DataFrame</span>::<span class="ident">new</span>(<span class="macro">vec</span><span class="macro">!</span>[]);
+    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;x&quot;</span>, <span class="ident">Series</span>::<span class="ident">new</span>(<span class="ident">a</span>.<span class="ident">col</span>(<span class="number">0</span>)));
+    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;y&quot;</span>, <span class="ident">Series</span>::<span class="ident">new</span>(<span class="ident">a</span>.<span class="ident">col</span>(<span class="number">1</span>)));
+
+    <span class="comment">// Write nc file (`nc` feature should be required)</span>
+    <span class="ident">df</span>.<span class="ident">write_nc</span>(<span class="string">&quot;data.nc&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t write data.nc&quot;</span>);
+
+    <span class="comment">// Read nc file (`nc` feature should be required)</span>
+    <span class="kw">let</span> <span class="ident">dg</span> <span class="op">=</span> <span class="ident">DataFrame</span>::<span class="ident">read_nc</span>(<span class="string">&quot;data.nc&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t read data.nc&quot;</span>);
+    <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">dg</span>[<span class="string">&quot;x&quot;</span>].<span class="ident">to_vec</span>();
+    <span class="kw">let</span> <span class="ident">y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">dg</span>[<span class="string">&quot;y&quot;</span>].<span class="ident">to_vec</span>();
+
+    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">a</span>.<span class="ident">col</span>(<span class="number">0</span>), <span class="ident">x</span>);
+    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">a</span>.<span class="ident">col</span>(<span class="number">1</span>), <span class="ident">y</span>);
+}</pre></div>
 <h2 id="concatenation" class="section-header"><a href="#concatenation">Concatenation</a></h2>
 <p>There are two options to concatenate matrices.</p>
 <ul>
@@ -348,6 +379,7 @@ print(a)
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix</span><span class="macro">!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
     <span class="ident">a</span>.<span class="ident">row</span>(<span class="number">0</span>).<span class="ident">print</span>(); <span class="comment">// [1, 2]</span>
+    <span class="macro">assert_eq</span><span class="macro">!</span>(<span class="ident">a</span>.<span class="ident">row</span>(<span class="number">0</span>), <span class="macro">vec</span><span class="macro">!</span>[<span class="number">1f64</span>, <span class="number">2f64</span>]);
 }</pre></div>
 </li>
 </ul>
@@ -496,6 +528,22 @@ $$ \begin{aligned} L &amp;= \begin{pmatrix} L_1 &amp; \mathbf{0} \\ L_2 &amp; L_
 }</pre></div>
 </li>
 </ul>
+<h2 id="tips-for-lu-det-inverse" class="section-header"><a href="#tips-for-lu-det-inverse">Tips for LU, Det, Inverse</a></h2>
+<ul>
+<li>If you save <code>self.lu()</code> rather than the direct use of <code>self.det()</code> or <code>self.lu()</code> then you
+can get better performance (via memoization)</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered">
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
+<span class="kw">use</span> <span class="ident">peroxide</span>::<span class="ident">fuga</span>::<span class="kw-2">*</span>;
+
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2;3 4&quot;</span>);
+    <span class="kw">let</span> <span class="ident">pqlu</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">lu</span>();  <span class="comment">// Memoization of LU</span>
+    <span class="ident">pqlu</span>.<span class="ident">det</span>().<span class="ident">print</span>(); <span class="comment">// Same as a.det() but do not need an additional LU</span>
+    <span class="ident">pqlu</span>.<span class="ident">inv</span>().<span class="ident">print</span>(); <span class="comment">// Same as a.inv() but do not need an additional LU</span>
+}</pre></div>
 <h2 id="qr-decomposition-o3-feature-only" class="section-header"><a href="#qr-decomposition-o3-feature-only">QR Decomposition (<code>O3</code> feature only)</a></h2>
 <ul>
 <li>

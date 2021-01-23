@@ -4409,6 +4409,64 @@
 <span id="4390">4390</span>
 <span id="4391">4391</span>
 <span id="4392">4392</span>
+<span id="4393">4393</span>
+<span id="4394">4394</span>
+<span id="4395">4395</span>
+<span id="4396">4396</span>
+<span id="4397">4397</span>
+<span id="4398">4398</span>
+<span id="4399">4399</span>
+<span id="4400">4400</span>
+<span id="4401">4401</span>
+<span id="4402">4402</span>
+<span id="4403">4403</span>
+<span id="4404">4404</span>
+<span id="4405">4405</span>
+<span id="4406">4406</span>
+<span id="4407">4407</span>
+<span id="4408">4408</span>
+<span id="4409">4409</span>
+<span id="4410">4410</span>
+<span id="4411">4411</span>
+<span id="4412">4412</span>
+<span id="4413">4413</span>
+<span id="4414">4414</span>
+<span id="4415">4415</span>
+<span id="4416">4416</span>
+<span id="4417">4417</span>
+<span id="4418">4418</span>
+<span id="4419">4419</span>
+<span id="4420">4420</span>
+<span id="4421">4421</span>
+<span id="4422">4422</span>
+<span id="4423">4423</span>
+<span id="4424">4424</span>
+<span id="4425">4425</span>
+<span id="4426">4426</span>
+<span id="4427">4427</span>
+<span id="4428">4428</span>
+<span id="4429">4429</span>
+<span id="4430">4430</span>
+<span id="4431">4431</span>
+<span id="4432">4432</span>
+<span id="4433">4433</span>
+<span id="4434">4434</span>
+<span id="4435">4435</span>
+<span id="4436">4436</span>
+<span id="4437">4437</span>
+<span id="4438">4438</span>
+<span id="4439">4439</span>
+<span id="4440">4440</span>
+<span id="4441">4441</span>
+<span id="4442">4442</span>
+<span id="4443">4443</span>
+<span id="4444">4444</span>
+<span id="4445">4445</span>
+<span id="4446">4446</span>
+<span id="4447">4447</span>
+<span id="4448">4448</span>
+<span id="4449">4449</span>
+<span id="4450">4450</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="doccomment">//! Matrix for Scientific computation</span>
 <span class="doccomment">//!</span>
@@ -4556,7 +4614,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! In peroxide, we can write matrix to `csv`</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! ### CSV (Legacy)</span>
+<span class="doccomment">//! ### CSV (Not recommended)</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * `csv` feature should be required</span>
 <span class="doccomment">//! * `write(&amp;self, file_path: &amp;str)`: Write matrix to csv</span>
@@ -4585,19 +4643,58 @@
 <span class="doccomment">//! * Type: `read(&amp;str, bool, char) -&gt; Result&lt;Matrix, Box&lt;Error&gt;&gt;`</span>
 <span class="doccomment">//! * Description: `read(file_path, is_header, delimiter)`</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
+<span class="doccomment">//!     ```no_run</span>
 <span class="doccomment">//!     extern crate peroxide;</span>
 <span class="doccomment">//!     use peroxide::fuga::*;</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         //let a = Matrix::read(&quot;example_data/matrix.csv&quot;, false, &#39;,&#39;)</span>
-<span class="doccomment">//!         //    .expect(&quot;Can&#39;t read matrix.csv file&quot;);</span>
-<span class="doccomment">//!         //a.print();</span>
-<span class="doccomment">//!         ////       c[0] c[1]</span>
-<span class="doccomment">//!         //// r[0]     1    2</span>
-<span class="doccomment">//!         //// r[1]     3    4</span>
+<span class="doccomment">//!         # #[cfg(feature=&quot;csv&quot;)]</span>
+<span class="doccomment">//!         # {</span>
+<span class="doccomment">//!         // `csv` feature should be required</span>
+<span class="doccomment">//!         let a = Matrix::read(&quot;example_data/matrix.csv&quot;, false, &#39;,&#39;)</span>
+<span class="doccomment">//!             .expect(&quot;Can&#39;t read matrix.csv file&quot;);</span>
+<span class="doccomment">//!         a.print();</span>
+<span class="doccomment">//!         # }</span>
+<span class="doccomment">//!         //       c[0] c[1]</span>
+<span class="doccomment">//!         // r[0]     1    2</span>
+<span class="doccomment">//!         // r[1]     3    4</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ### Convert to DataFrame (Recommended)</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! To write columns or rows, `DataFrame` and `nc` feature could be the best choice.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * `nc` feature should be required - `netcdf` or `libnetcdf` are prerequisites.</span>
+<span class="doccomment">//! </span>
+<span class="doccomment">//! ```no_run</span>
+<span class="doccomment">//! #[macro_use]</span>
+<span class="doccomment">//! extern crate peroxide;</span>
+<span class="doccomment">//! use peroxide::fuga::*;</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! fn main() {</span>
+<span class="doccomment">//!     let a = matrix(c!(1,2,3,4,5,6), 3, 2, Col);</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!     // Construct DataFrame</span>
+<span class="doccomment">//!     let mut df = DataFrame::new(vec![]);</span>
+<span class="doccomment">//!     df.push(&quot;x&quot;, Series::new(a.col(0)));</span>
+<span class="doccomment">//!     df.push(&quot;y&quot;, Series::new(a.col(1)));</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!     // Write nc file (`nc` feature should be required)</span>
+<span class="doccomment">//!     # #[cfg(feature=&quot;nc&quot;)]</span>
+<span class="doccomment">//!     # {</span>
+<span class="doccomment">//!     df.write_nc(&quot;data.nc&quot;).expect(&quot;Can&#39;t write data.nc&quot;);</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!     // Read nc file (`nc` feature should be required)</span>
+<span class="doccomment">//!     let dg = DataFrame::read_nc(&quot;data.nc&quot;).expect(&quot;Can&#39;t read data.nc&quot;);</span>
+<span class="doccomment">//!     let x: Vec&lt;f64&gt; = dg[&quot;x&quot;].to_vec();</span>
+<span class="doccomment">//!     let y: Vec&lt;f64&gt; = dg[&quot;y&quot;].to_vec();</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//!     assert_eq!(a.col(0), x);</span>
+<span class="doccomment">//!     assert_eq!(a.col(1), y);</span>
+<span class="doccomment">//!     # }</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Concatenation</span>
 <span class="doccomment">//!</span>
@@ -4706,6 +4803,7 @@
 <span class="doccomment">//!     fn main() {</span>
 <span class="doccomment">//!         let a = matrix!(1;4;1, 2, 2, Row);</span>
 <span class="doccomment">//!         a.row(0).print(); // [1, 2]</span>
+<span class="doccomment">//!         assert_eq!(a.row(0), vec![1f64, 2f64]);</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
 <span class="doccomment">//!</span>
@@ -4835,6 +4933,23 @@
 <span class="doccomment">//!         // r[1]  1.5 -0.5</span>
 <span class="doccomment">//!     }</span>
 <span class="doccomment">//!     ```</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ## Tips for LU, Det, Inverse</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! * If you save `self.lu()` rather than the direct use of `self.det()` or `self.lu()` then you</span>
+<span class="doccomment">//! can get better performance (via memoization)</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ```rust</span>
+<span class="doccomment">//! extern crate peroxide;</span>
+<span class="doccomment">//! use peroxide::fuga::*;</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! fn main() {</span>
+<span class="doccomment">//!     let a = ml_matrix(&quot;1 2;3 4&quot;);</span>
+<span class="doccomment">//!     let pqlu = a.lu();  // Memoization of LU</span>
+<span class="doccomment">//!     pqlu.det().print(); // Same as a.det() but do not need an additional LU</span>
+<span class="doccomment">//!     pqlu.inv().print(); // Same as a.inv() but do not need an additional LU</span>
+<span class="doccomment">//! }</span>
+<span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## QR Decomposition (`O3` feature only)</span>
 <span class="doccomment">//!</span>
@@ -5045,6 +5160,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// fn main() {</span>
 <span class="doccomment">///     let a = matrix(c!(1,2,3,4), 2, 2, Row);</span>
+<span class="doccomment">///     a.print(); // Print matrix</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">/// ```</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">matrix</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>, <span class="ident">shape</span>: <span class="ident">Shape</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix</span>
