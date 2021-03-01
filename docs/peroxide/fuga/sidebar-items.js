@@ -1,1 +1,1 @@
-initSidebarItems({});
+initSidebarItems({"attr":[["ad_function",""]],"macro":[["ad_closure",""]]});

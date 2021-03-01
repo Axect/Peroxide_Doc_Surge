@@ -120,6 +120,43 @@
 <span id="101">101</span>
 <span id="102">102</span>
 <span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
 </pre><div class="example-wrap"><pre class="rust ">
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">matrix</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="ident">structure</span>::<span class="ident">ad</span>::<span class="kw-2">*</span>;
@@ -177,6 +214,43 @@
     <span class="ident">J</span>
 }
 
+<span class="comment">///// Hessian Matrix</span>
+<span class="comment">//#[allow(non_snake_case)]</span>
+<span class="comment">//pub fn hessian&lt;F: Fn(&amp;Vec&lt;AD&gt;) -&gt; AD&gt;(f: F, x: &amp;Vec&lt;f64&gt;) -&gt; Matrix {</span>
+<span class="comment">//    let l = x.len();</span>
+<span class="comment">//    let mut x_ad: Vec&lt;AD&gt; = x.iter().map(|&amp;x| AD2(x, 0f64, 0f64)).collect();</span>
+<span class="comment">//</span>
+<span class="comment">//    let mut H = zeros(l, l);</span>
+<span class="comment">//</span>
+<span class="comment">//    for i in 0 .. l {</span>
+<span class="comment">//        for j in 0 .. l {</span>
+<span class="comment">//        }</span>
+<span class="comment">//    }</span>
+<span class="comment">//</span>
+<span class="comment">//    unimplemented!()</span>
+<span class="comment">//}</span>
+
+<span class="comment">//#[allow(non_snake_case)]</span>
+<span class="comment">//pub fn jacobian_ad&lt;F: Fn(&amp;Vec&lt;AD&gt;) -&gt; Vec&lt;AD&gt;&gt;(f: F, x: &amp;Vec&lt;AD&gt;) -&gt; Vec&lt;Vec&lt;AD&gt;&gt; {</span>
+<span class="comment">//    let l = x.len();</span>
+<span class="comment">//    let mut x_ad: Vec&lt;AD&gt; = x.clone().into_iter().map(|mut t| {</span>
+<span class="comment">//        t.iter_mut().skip(1).for_each(|k| *k = 0f64);</span>
+<span class="comment">//        t</span>
+<span class="comment">//    }).collect();</span>
+<span class="comment">//    let l2 = f(&amp;x_ad).len();</span>
+<span class="comment">//</span>
+<span class="comment">//    let mut JT: Vec&lt;Vec&lt;AD&gt;&gt; = vec![vec![AD0(0f64); l2]; l];</span>
+<span class="comment">//</span>
+<span class="comment">//    for i in 0 .. l {</span>
+<span class="comment">//        x_ad[i][1] = 1f64;</span>
+<span class="comment">//        let ads = f(&amp;x_ad);</span>
+<span class="comment">//        JT[i] = ads;</span>
+<span class="comment">//        x_ad[i][1] = 0f64;</span>
+<span class="comment">//    }</span>
+<span class="comment">//    JT</span>
+<span class="comment">//}</span>
+
+
 <span class="doccomment">/// TriDiagonal Matrix Algorithm (TDMA)</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Description</span>
@@ -225,4 +299,5 @@
     <span class="ident">x</span>.<span class="ident">into</span>()
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide"></div>
+    <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

@@ -779,7 +779,7 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
 
         <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span> <span class="kw">as</span> <span class="ident">f64</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span> <span class="kw">as</span> <span class="ident">f64</span>);
+            <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span> <span class="kw">as</span> <span class="ident">f64</span>..<span class="op">=</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span> <span class="kw">as</span> <span class="ident">f64</span>);
         }
         <span class="ident">v</span>
     }};
@@ -975,4 +975,5 @@
     };
 }
 </pre></div>
-</section><section id="search" class="content hidden"></section><section class="footer"></section><script>window.rootPath = "../../../";window.currentCrate = "peroxide";</script><script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>
+</section><section id="search" class="content hidden"></section><section class="footer"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide"></div>
+    <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script><script defer src="../../../search-index.js"></script></body></html>

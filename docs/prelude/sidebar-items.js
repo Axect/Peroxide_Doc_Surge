@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["simpler",""]]});
+initSidebarItems({"attr":[["ad_function",""]],"macro":[["ad_closure",""]],"mod":[["simpler",""]]});
