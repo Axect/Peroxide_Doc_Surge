@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["QType","R Quantile Type enums"]],"fn":[["cor","Pearson's correlation coefficient"],["cov","Covariance (to Value)"],["lm","R like linear regression"],["quantile",""]],"trait":[["OrderedStat","Trait for Ordered Statistics"],["Statistics","Statistics Trait"]]});
+initSidebarItems({"enum":[["QType","R Quantile Type enums"]],"fn":[["cor","Pearson’s correlation coefficient"],["cov","Covariance (to Value)"],["lm","R like linear regression"],["quantile",""]],"trait":[["OrderedStat","Trait for Ordered Statistics"],["Statistics","Statistics Trait"]]});
