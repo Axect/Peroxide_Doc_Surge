@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["peroxide","svd"];
+window.ALL_CRATES = ["peroxide"];

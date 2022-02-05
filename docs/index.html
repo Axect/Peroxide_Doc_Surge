@@ -1,6 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="`peroxide` is comprehensive numerical library for Rust."><meta name="keywords" content="rust, rustlang, rust-lang, peroxide"><title>peroxide - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings"></script><script src="../storage.js"></script><script src="../crates.js"></script><noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<link rel="alternate icon" type="image/png" href="../favicon-16x16.png">
-<link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="`peroxide` is comprehensive numerical library for Rust."><meta name="keywords" content="rust, rustlang, rust-lang, peroxide"><title>peroxide - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../dark.css" disabled><link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../storage.js"></script><script src="../crates.js"></script><script defer src="../main.js"></script>
+    <noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -16,9 +15,13 @@
     });
 </script>
 
-<style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../peroxide/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><p class="location">Crate peroxide</p><div class="block version"><p>Version 0.30.9</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all peroxide's items</p></a><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li></ul></div><p class="location"></p><div id="sidebar-vars" data-name="peroxide" data-ty="mod" data-relpath="../"></div><script defer src="../sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu"><img src="../brush.svg" width="18" height="18" alt="Pick another theme!"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button">?</button>
-                <a id="settings-menu" href="../settings.html"><img src="../wheel.svg" width="18" height="18" alt="Change settings"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="">peroxide</a><button id="copy-path" onclick="copy_path(this)"><img src="../clipboard.svg" width="19" height="18" alt="Copy item import"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/peroxide/lib.rs.html#1-207" title="goto source code">[src]</a></span></h1><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
-<h2 id="components" class="section-header"><a href="#components">Components</a></h2>
+</head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"><a href="#">Crate peroxide</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.30.10</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li></ul></div><div id="sidebar-vars" data-name="peroxide" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../peroxide/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">peroxide</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/peroxide/lib.rs.html#1-207">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
+<h3 id="components" class="section-header"><a href="#components">Components</a></h3>
 <p><code>peroxide</code> has various components for scientific computation.</p>
 <ul>
 <li>Linear Algebra (with BLAS &amp; LAPACK)
@@ -143,54 +146,36 @@
 </ul>
 </li>
 </ul>
-<h2 id="quick-start" class="section-header"><a href="#quick-start">Quick Start</a></h2><h3 id="cargotoml" class="section-header"><a href="#cargotoml">Cargo.toml</a></h3>
+<h3 id="quick-start" class="section-header"><a href="#quick-start">Quick Start</a></h3><h4 id="cargotoml" class="section-header"><a href="#cargotoml">Cargo.toml</a></h4>
 <ul>
 <li>To use <code>peroxide</code>, you should edit <code>Cargo.toml</code></li>
 <li>Current document version is corresponding to <code>0.30.2</code></li>
 </ul>
 <ol>
-<li>Default
-<pre><code class="language-toml">[dependencies]
-peroxide = &quot;0.30&quot;
-</code></pre>
-</li>
-<li>OpenBLAS
-<pre><code class="language-toml">[dependencies.peroxide]
+<li>Default<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
+peroxide = &quot;0.30&quot;</code></pre></div></li>
+<li>OpenBLAS<div class="example-wrap"><pre class="language-toml"><code>[dependencies.peroxide]
 version = &quot;0.30&quot;
 default-features = false
-features = [&quot;O3&quot;]
-</code></pre>
-</li>
-<li>Plot
-<pre><code class="language-toml">[dependencies.peroxide]
+features = [&quot;O3&quot;]</code></pre></div></li>
+<li>Plot<div class="example-wrap"><pre class="language-toml"><code>[dependencies.peroxide]
 version = &quot;0.30&quot;
 default-features = false
-features = [&quot;plot&quot;]
-</code></pre>
-</li>
-<li><code>netcdf</code> dependency for DataFrame
-<pre><code class="language-toml">[dependencies.peroxide]
+features = [&quot;plot&quot;]</code></pre></div></li>
+<li><code>netcdf</code> dependency for DataFrame<div class="example-wrap"><pre class="language-toml"><code>[dependencies.peroxide]
 version = &quot;0.30&quot;
 default-features = false
-features = [&quot;nc&quot;]
-</code></pre>
-</li>
-<li><code>csv</code> dependency for DataFrame
-<pre><code class="language-toml">[dependencies.peroxide]
+features = [&quot;nc&quot;]</code></pre></div></li>
+<li><code>csv</code> dependency for DataFrame<div class="example-wrap"><pre class="language-toml"><code>[dependencies.peroxide]
 version = &quot;0.30&quot;
 default-features = false
-features = [&quot;csv&quot;]
-</code></pre>
-</li>
-<li>Together
-<pre><code class="language-toml">[dependencies.peroxide]
+features = [&quot;csv&quot;]</code></pre></div></li>
+<li>Together<div class="example-wrap"><pre class="language-toml"><code>[dependencies.peroxide]
 version = &quot;0.30&quot;
 default-features = false
-features = [&quot;O3&quot;, &quot;plot&quot;, &quot;nc&quot;]
-</code></pre>
-</li>
+features = [&quot;O3&quot;, &quot;plot&quot;, &quot;nc&quot;]</code></pre></div></li>
 </ol>
-<h2 id="import-all-at-once" class="section-header"><a href="#import-all-at-once">Import all at once</a></h2>
+<h3 id="import-all-at-once" class="section-header"><a href="#import-all-at-once">Import all at once</a></h3>
 <p>Peroxide has two options.</p>
 <ul>
 <li><a href="prelude/index.html"><code>prelude</code></a> : To simple use</li>
@@ -202,27 +187,25 @@ features = [&quot;O3&quot;, &quot;plot&quot;, &quot;nc&quot;]
 <li><code>prelude</code></li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="attribute">#[<span class="ident">macro_use</span>]</span>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
 <span class="kw">use</span> <span class="ident">peroxide::prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="comment">// Write what you want</span>
-}</pre></div>
+}</code></pre></div>
 <ul>
 <li><code>fuga</code></li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered">
-<span class="attribute">#[<span class="ident">macro_use</span>]</span>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
 <span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
 
 <span class="kw">fn</span> <span class="ident">main</span>() {
     <span class="comment">// Write what you want</span>
-}</pre></div>
-<h2 id="useful-tips-for-features" class="section-header"><a href="#useful-tips-for-features">Useful tips for features</a></h2>
+}</code></pre></div>
+<h3 id="useful-tips-for-features" class="section-header"><a href="#useful-tips-for-features">Useful tips for features</a></h3>
 <ul>
 <li>After <code>0.28.0</code>, <code>dataframe</code> feature is replaced by <code>nc</code> feature.</li>
 <li>If you want to use <code>QR</code> or <code>SVD</code> then should use <code>O3</code> feature (there are no implementations for these decompositions in <code>default</code>)</li>
@@ -235,33 +218,33 @@ features = [&quot;O3&quot;, &quot;plot&quot;, &quot;nc&quot;]
 </ul>
 </li>
 </ul>
-</div></details><h2 id="modules" class="section-header"><a href="#modules">Modules</a></h2>
-<table><tr class="module-item"><td><a class="mod" href="fuga/index.html" title="peroxide::fuga mod">fuga</a></td><td class="docblock-short"><p>Choose what you want.</p>
-</td></tr><tr class="module-item"><td><a class="mod" href="macros/index.html" title="peroxide::macros mod">macros</a></td><td class="docblock-short"><p>Useful macros</p>
-</td></tr><tr class="module-item"><td><a class="mod" href="ml/index.html" title="peroxide::ml mod">ml</a></td><td class="docblock-short"><p>Machine learning tools</p>
-</td></tr><tr class="module-item"><td><a class="mod" href="numerical/index.html" title="peroxide::numerical mod">numerical</a></td><td class="docblock-short"><p>Differential equations &amp; Numerical Analysis tools</p>
-</td></tr><tr class="module-item"><td><a class="mod" href="prelude/index.html" title="peroxide::prelude mod">prelude</a></td><td class="docblock-short"><p>Do not disturbed. Just use.</p>
-</td></tr><tr class="module-item"><td><a class="mod" href="special/index.html" title="peroxide::special mod">special</a></td><td class="docblock-short"><p>Special function module</p>
-</td></tr><tr class="module-item"><td><a class="mod" href="statistics/index.html" title="peroxide::statistics mod">statistics</a></td><td class="docblock-short"><p>Statistical Modules</p>
-</td></tr><tr class="module-item"><td><a class="mod" href="structure/index.html" title="peroxide::structure mod">structure</a></td><td class="docblock-short"><p>Main structures for peroxide</p>
-</td></tr><tr class="module-item"><td><a class="mod" href="traits/index.html" title="peroxide::traits mod">traits</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="mod" href="util/index.html" title="peroxide::util mod">util</a></td><td class="docblock-short"><p>Utility - plot, print, pickle and etc.</p>
-</td></tr></table><h2 id="macros" class="section-header"><a href="#macros">Macros</a></h2>
-<table><tr class="module-item"><td><a class="macro" href="macro.c.html" title="peroxide::c macro">c</a></td><td class="docblock-short"><p>R like concatenate (Type: Vec&lt;f64&gt;)</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.cbind.html" title="peroxide::cbind macro">cbind</a></td><td class="docblock-short"><p>R like cbind</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.dnorm.html" title="peroxide::dnorm macro">dnorm</a></td><td class="docblock-short"><p>R like <code>dnorm</code></p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.dt.html" title="peroxide::dt macro">dt</a></td><td class="docblock-short"><p>R like <code>dt</code></p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.eye.html" title="peroxide::eye macro">eye</a></td><td class="docblock-short"><p>MATLAB like eye - identity matrix</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.hstack.html" title="peroxide::hstack macro">hstack</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="macro" href="macro.linspace.html" title="peroxide::linspace macro">linspace</a></td><td class="docblock-short"><p>MATLAB like linspace</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.lm.html" title="peroxide::lm macro">lm</a></td><td class="docblock-short"><p>R like lm</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.matrix.html" title="peroxide::matrix macro">matrix</a></td><td class="docblock-short"><p>More R like Matrix constructor (Macro)</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.pnorm.html" title="peroxide::pnorm macro">pnorm</a></td><td class="docblock-short"><p>R like <code>pnorm</code></p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.pt.html" title="peroxide::pt macro">pt</a></td><td class="docblock-short"><p>R like <code>pt</code></p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.rand.html" title="peroxide::rand macro">rand</a></td><td class="docblock-short"><p>MATLAB like rand - random matrix</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.rbind.html" title="peroxide::rbind macro">rbind</a></td><td class="docblock-short"><p>R like rbind</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.rnorm.html" title="peroxide::rnorm macro">rnorm</a></td><td class="docblock-short"><p>R like random normal</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.rt.html" title="peroxide::rt macro">rt</a></td><td class="docblock-short"><p>R like random Student’s t</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.runif.html" title="peroxide::runif macro">runif</a></td><td class="docblock-short"><p>R like random uniform</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.seq.html" title="peroxide::seq macro">seq</a></td><td class="docblock-short"><p>R like seq macro</p>
-</td></tr><tr class="module-item"><td><a class="macro" href="macro.vstack.html" title="peroxide::vstack macro">vstack</a></td><td class="docblock-short"></td></tr><tr class="module-item"><td><a class="macro" href="macro.zeros.html" title="peroxide::zeros macro">zeros</a></td><td class="docblock-short"><p>MATLAB like zeros - zero matrix</p>
-</td></tr></table></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="peroxide" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
-    <script src="../main.js"></script></body></html>
+</div></details><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="fuga/index.html" title="peroxide::fuga mod">fuga</a></div><div class="item-right docblock-short"><p>Choose what you want.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="macros/index.html" title="peroxide::macros mod">macros</a></div><div class="item-right docblock-short"><p>Useful macros</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="ml/index.html" title="peroxide::ml mod">ml</a></div><div class="item-right docblock-short"><p>Machine learning tools</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="numerical/index.html" title="peroxide::numerical mod">numerical</a></div><div class="item-right docblock-short"><p>Differential equations &amp; Numerical Analysis tools</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="prelude/index.html" title="peroxide::prelude mod">prelude</a></div><div class="item-right docblock-short"><p>Do not disturbed. Just use.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="special/index.html" title="peroxide::special mod">special</a></div><div class="item-right docblock-short"><p>Special function module</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="statistics/index.html" title="peroxide::statistics mod">statistics</a></div><div class="item-right docblock-short"><p>Statistical Modules</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="structure/index.html" title="peroxide::structure mod">structure</a></div><div class="item-right docblock-short"><p>Main structures for peroxide</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="traits/index.html" title="peroxide::traits mod">traits</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="util/index.html" title="peroxide::util mod">util</a></div><div class="item-right docblock-short"><p>Utility - plot, print, pickle and etc.</p>
+</div></div></div><h2 id="macros" class="small-section-header"><a href="#macros">Macros</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.c.html" title="peroxide::c macro">c</a></div><div class="item-right docblock-short"><p>R like concatenate (Type: Vec&lt;f64&gt;)</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.cbind.html" title="peroxide::cbind macro">cbind</a></div><div class="item-right docblock-short"><p>R like cbind</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.dnorm.html" title="peroxide::dnorm macro">dnorm</a></div><div class="item-right docblock-short"><p>R like <code>dnorm</code></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.dt.html" title="peroxide::dt macro">dt</a></div><div class="item-right docblock-short"><p>R like <code>dt</code></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.eye.html" title="peroxide::eye macro">eye</a></div><div class="item-right docblock-short"><p>MATLAB like eye - identity matrix</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.hstack.html" title="peroxide::hstack macro">hstack</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.linspace.html" title="peroxide::linspace macro">linspace</a></div><div class="item-right docblock-short"><p>MATLAB like linspace</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.lm.html" title="peroxide::lm macro">lm</a></div><div class="item-right docblock-short"><p>R like lm</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.matrix.html" title="peroxide::matrix macro">matrix</a></div><div class="item-right docblock-short"><p>More R like Matrix constructor (Macro)</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.pnorm.html" title="peroxide::pnorm macro">pnorm</a></div><div class="item-right docblock-short"><p>R like <code>pnorm</code></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.pt.html" title="peroxide::pt macro">pt</a></div><div class="item-right docblock-short"><p>R like <code>pt</code></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.rand.html" title="peroxide::rand macro">rand</a></div><div class="item-right docblock-short"><p>MATLAB like rand - random matrix</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.rbind.html" title="peroxide::rbind macro">rbind</a></div><div class="item-right docblock-short"><p>R like rbind</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.rnorm.html" title="peroxide::rnorm macro">rnorm</a></div><div class="item-right docblock-short"><p>R like random normal</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.rt.html" title="peroxide::rt macro">rt</a></div><div class="item-right docblock-short"><p>R like random Student’s t</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.runif.html" title="peroxide::runif macro">runif</a></div><div class="item-right docblock-short"><p>R like random uniform</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.seq.html" title="peroxide::seq macro">seq</a></div><div class="item-right docblock-short"><p>R like seq macro</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.vstack.html" title="peroxide::vstack macro">vstack</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="macro" href="macro.zeros.html" title="peroxide::zeros macro">zeros</a></div><div class="item-right docblock-short"><p>MATLAB like zeros - zero matrix</p>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (71226d717 2022-02-04)" ></div>
+</body></html>
