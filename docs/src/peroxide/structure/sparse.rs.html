@@ -238,6 +238,15 @@
 <span id="217">217</span>
 <span id="218">218</span>
 <span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Sparse matrix (CCS format)</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * Reference : Press, William H., and William T. Vetterling. *Numerical Recipes.* Cambridge: Cambridge Univ. Press, 2007.</span>
@@ -247,6 +256,7 @@
 <span class="comment">//use crate::traits::math::{InnerProduct, LinearOp, Norm, Normed, Vector};</span>
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::non_macro::zeros</span>;
 <span class="kw">use</span> <span class="ident">std::ops::Mul</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::fuga::UPLO</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SPMatrix</span> {
@@ -426,6 +436,14 @@
     }
 
     <span class="kw">fn</span> <span class="ident">svd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">SVD</span> {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">cholesky</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">uplo</span>: <span class="ident">UPLO</span>) -&gt; <span class="ident">Matrix</span> {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn</span> <span class="ident">is_symmetric</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="macro">unimplemented!</span>()
     }
 }

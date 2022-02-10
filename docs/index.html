@@ -19,8 +19,8 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"><a href="#">Crate peroxide</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.30.10</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li></ul></div><div id="sidebar-vars" data-name="peroxide" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../peroxide/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">peroxide</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/peroxide/lib.rs.html#1-207">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
+        </a><h2 class="location"><a href="#">Crate peroxide</a></h2><div class="sidebar-elems"><div class="block"><ul><li class="version">Version 0.30.11</li><li><a id="all-types" href="all.html">All Items</a></li></div></ul><div class="block items"><ul><li><a href="#modules">Modules</a></li><li><a href="#macros">Macros</a></li></ul></div><div id="sidebar-vars" data-name="peroxide" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../peroxide/index.html"><img class="rust-logo" src="../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+    <h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">peroxide</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../src/peroxide/lib.rs.html#1-208">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p><code>peroxide</code> is comprehensive numerical library for Rust.</p>
 <h3 id="components" class="section-header"><a href="#components">Components</a></h3>
 <p><code>peroxide</code> has various components for scientific computation.</p>
 <ul>
@@ -29,9 +29,10 @@
 <li><a href="structure/matrix/index.html">Matrix</a> operations
 <ul>
 <li><code>+,-,*,/</code></li>
-<li>LU, Determinant, Inverse</li>
+<li>LU Decomposition, Determinant, Inverse</li>
 <li>QR Decomposition (<code>O3</code> feature needed)</li>
 <li>Singular Value Decomposition (<code>O3</code> feature needed)</li>
+<li>Cholesky Decomposition (<code>O3</code> feature needed)</li>
 <li>Reduced Row Echelon Form</li>
 </ul>
 </li>
@@ -149,7 +150,7 @@
 <h3 id="quick-start" class="section-header"><a href="#quick-start">Quick Start</a></h3><h4 id="cargotoml" class="section-header"><a href="#cargotoml">Cargo.toml</a></h4>
 <ul>
 <li>To use <code>peroxide</code>, you should edit <code>Cargo.toml</code></li>
-<li>Current document version is corresponding to <code>0.30.2</code></li>
+<li>Current document version is corresponding to <code>0.30.11</code></li>
 </ul>
 <ol>
 <li>Default<div class="example-wrap"><pre class="language-toml"><code>[dependencies]
@@ -208,7 +209,7 @@ features = [&quot;O3&quot;, &quot;plot&quot;, &quot;nc&quot;]</code></pre></div>
 <h3 id="useful-tips-for-features" class="section-header"><a href="#useful-tips-for-features">Useful tips for features</a></h3>
 <ul>
 <li>After <code>0.28.0</code>, <code>dataframe</code> feature is replaced by <code>nc</code> feature.</li>
-<li>If you want to use <code>QR</code> or <code>SVD</code> then should use <code>O3</code> feature (there are no implementations for these decompositions in <code>default</code>)</li>
+<li>If you want to use <em>QR</em> or <em>SVD</em> or <em>Cholesky Decomposition</em> then should use <code>O3</code> feature (there are no implementations for these decompositions in <code>default</code>)</li>
 <li>If you want to write your numerical results, then use <code>nc</code> feature and <code>netcdf</code> format. (It is much more effective than <code>csv</code> and <code>json</code>.)</li>
 <li>After <code>0.23.0</code>, there are two options - <code>fuga</code>, <code>prelude</code>. Choose proper option for your computations.</li>
 <li>To plot, use <code>nc</code> feature to export data as netcdf format and use python to draw plot.

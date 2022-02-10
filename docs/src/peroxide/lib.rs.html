@@ -226,6 +226,7 @@
 <span id="205">205</span>
 <span id="206">206</span>
 <span id="207">207</span>
+<span id="208">208</span>
 </pre><pre class="rust"><code><span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Components</span>
@@ -235,9 +236,10 @@
 <span class="doccomment">//! * Linear Algebra (with BLAS &amp; LAPACK)</span>
 <span class="doccomment">//!     * [Matrix](structure/matrix/index.html) operations</span>
 <span class="doccomment">//!         * `+,-,*,/`</span>
-<span class="doccomment">//!         * LU, Determinant, Inverse</span>
+<span class="doccomment">//!         * LU Decomposition, Determinant, Inverse</span>
 <span class="doccomment">//!         * QR Decomposition (`O3` feature needed)</span>
 <span class="doccomment">//!         * Singular Value Decomposition (`O3` feature needed)</span>
+<span class="doccomment">//!         * Cholesky Decomposition (`O3` feature needed)</span>
 <span class="doccomment">//!         * Reduced Row Echelon Form</span>
 <span class="doccomment">//!     * [Vector](structure/vector/index.html) operations</span>
 <span class="doccomment">//!     * [Eigenvalue, Eigenvector](numerical/eigen/index.html) algorithms</span>
@@ -308,7 +310,7 @@
 <span class="doccomment">//! ### Cargo.toml</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * To use `peroxide`, you should edit `Cargo.toml`</span>
-<span class="doccomment">//! * Current document version is corresponding to `0.30.2`</span>
+<span class="doccomment">//! * Current document version is corresponding to `0.30.11`</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! 1. Default</span>
 <span class="doccomment">//!     ```toml</span>
@@ -387,7 +389,7 @@
 <span class="doccomment">//! ## Useful tips for features</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! * After `0.28.0`, `dataframe` feature is replaced by `nc` feature.</span>
-<span class="doccomment">//! * If you want to use `QR` or `SVD` then should use `O3` feature (there are no implementations for these decompositions in `default`)</span>
+<span class="doccomment">//! * If you want to use *QR* or *SVD* or *Cholesky Decomposition* then should use `O3` feature (there are no implementations for these decompositions in `default`)</span>
 <span class="doccomment">//! * If you want to write your numerical results, then use `nc` feature and `netcdf` format. (It is much more effective than `csv` and `json`.)</span>
 <span class="doccomment">//! * After `0.23.0`, there are two options - `fuga`, `prelude`. Choose proper option for your computations.</span>
 <span class="doccomment">//! * To plot, use `nc` feature to export data as netcdf format and use python to draw plot.</span>
