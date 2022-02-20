@@ -19,9 +19,9 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"><a href="#">Module vector</a></h2><div class="sidebar-elems"><div class="block items"><ul><li><a href="#functions">Functions</a></li></ul></div><div id="sidebar-vars" data-name="vector" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+        </a><h2 class="location"><a href="#">Module vector</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#functions">Functions</a></li></ul></div></section><div id="sidebar-vars" data-name="vector" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
     <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">vector</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/structure/vector.rs.html#1-870">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Extra tools for <code>Vec&lt;f64&gt;</code></p>
-<h3 id="print-vecf64" class="section-header"><a href="#print-vecf64">Print <code>Vec&lt;f64&gt;</code></a></h3>
+<h3 id="print-vecf64"><a href="#print-vecf64">Print <code>Vec&lt;f64&gt;</code></a></h3>
 <ul>
 <li>
 <p>There are two ways to print vector</p>
@@ -39,7 +39,7 @@
 }</code></pre></div>
 </li>
 </ul>
-<h3 id="syntactic-sugar-for-vecf64" class="section-header"><a href="#syntactic-sugar-for-vecf64">Syntactic sugar for <code>Vec&lt;f64&gt;</code></a></h3>
+<h3 id="syntactic-sugar-for-vecf64"><a href="#syntactic-sugar-for-vecf64">Syntactic sugar for <code>Vec&lt;f64&gt;</code></a></h3>
 <ul>
 <li>
 <p>There is useful macro for <code>Vec&lt;f64&gt;</code></p>
@@ -60,7 +60,7 @@
 }</code></pre></div>
 </li>
 </ul>
-<h3 id="from-ranges-to-vec" class="section-header"><a href="#from-ranges-to-vec">From ranges to Vec<f64></a></h3>
+<h3 id="from-ranges-to-vec"><a href="#from-ranges-to-vec">From ranges to Vec<f64></a></h3>
 <ul>
 <li>
 <p>For <code>R</code>, there is <code>seq</code> to declare sequence.</p>
@@ -79,7 +79,7 @@ print(a)</code></pre></div></li>
 }</code></pre></div>
 </li>
 </ul>
-<h3 id="vec-operation" class="section-header"><a href="#vec-operation">Vec<f64> Operation</a></h3>
+<h3 id="vec-operation"><a href="#vec-operation">Vec<f64> Operation</a></h3>
 <p>There are two ways to do vector operations.</p>
 <ul>
 <li>Use functional programming tools</li>
@@ -100,7 +100,7 @@ print(a)</code></pre></div></li>
     <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">c!</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);
     <span class="macro">assert_eq!</span>((<span class="ident">a</span>.<span class="ident">ox</span>() <span class="op">*</span> <span class="number">2f64</span> <span class="op">-</span> <span class="number">1f64</span>).<span class="ident">red</span>(), <span class="macro">c!</span>(<span class="number">1f64</span>, <span class="number">3f64</span>, <span class="number">5f64</span>));
 }</code></pre></div>
-<h3 id="concatenation" class="section-header"><a href="#concatenation">Concatenation</a></h3>
+<h3 id="concatenation"><a href="#concatenation">Concatenation</a></h3>
 <p>There are two concatenation operations.</p>
 <ul>
 <li>
@@ -124,7 +124,7 @@ print(a)</code></pre></div></li>
 }</code></pre></div>
 </li>
 </ul>
-<h3 id="conversion-to-matrix" class="section-header"><a href="#conversion-to-matrix">Conversion to Matrix</a></h3>
+<h3 id="conversion-to-matrix"><a href="#conversion-to-matrix">Conversion to Matrix</a></h3>
 <p>There are two ways to convert Vec<f64> to matrix.</p>
 <ul>
 <li>
@@ -145,11 +145,11 @@ print(a)</code></pre></div></li>
 }</code></pre></div>
 </li>
 </ul>
-<h2 id="functional-programming-functional" class="section-header"><a href="#functional-programming-functional">Functional Programming {#functional}</a></h2><h3 id="fp-for-vec" class="section-header"><a href="#fp-for-vec">FP for Vec<f64></a></h3>
+<h2 id="functional-programming-functional"><a href="#functional-programming-functional">Functional Programming {#functional}</a></h2><h3 id="fp-for-vec"><a href="#fp-for-vec">FP for Vec<f64></a></h3>
 <ul>
 <li>There are some functional programming tools for <code>Vec&lt;f64&gt;</code></li>
 </ul>
-<h4 id="fmap" class="section-header"><a href="#fmap">fmap</a></h4>
+<h4 id="fmap"><a href="#fmap">fmap</a></h4>
 <ul>
 <li>
 <p><code>fmap</code> is syntactic sugar for <code>map</code></p>
@@ -178,7 +178,7 @@ print(a)</code></pre></div></li>
 }</code></pre></div>
 </li>
 </ul>
-<h4 id="reduce" class="section-header"><a href="#reduce">reduce</a></h4>
+<h4 id="reduce"><a href="#reduce">reduce</a></h4>
 <ul>
 <li>
 <p><code>reduce</code> is syntactic sugar for <code>fold</code></p>
@@ -201,7 +201,7 @@ print(a)</code></pre></div></li>
 }</code></pre></div>
 </li>
 </ul>
-<h4 id="zip_with" class="section-header"><a href="#zip_with">zip_with</a></h4>
+<h4 id="zip_with"><a href="#zip_with">zip_with</a></h4>
 <ul>
 <li>
 <p><code>zip_with</code> is composed of <code>zip</code> &amp; <code>map</code></p>
@@ -228,7 +228,7 @@ print(a)</code></pre></div></li>
 }</code></pre></div>
 </li>
 </ul>
-<h4 id="filter" class="section-header"><a href="#filter">filter</a></h4>
+<h4 id="filter"><a href="#filter">filter</a></h4>
 <ul>
 <li>
 <p><code>filter</code> is just syntactic sugar for <code>filter</code></p>
@@ -244,7 +244,7 @@ print(a)</code></pre></div></li>
 }</code></pre></div>
 </li>
 </ul>
-<h4 id="take--skip" class="section-header"><a href="#take--skip">take &amp; skip</a></h4>
+<h4 id="take--skip"><a href="#take--skip">take &amp; skip</a></h4>
 <ul>
 <li>
 <p><code>take</code> is syntactic sugar for <code>take</code></p>
@@ -277,5 +277,5 @@ print(a)</code></pre></div></li>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.blas_daxpy.html" title="peroxide::structure::vector::blas_daxpy fn">blas_daxpy</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.blas_daxpy_return.html" title="peroxide::structure::vector::blas_daxpy_return fn">blas_daxpy_return</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.map.html" title="peroxide::structure::vector::map fn">map</a></div><div class="item-right docblock-short"><p>Explicit version of <code>map</code></p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.reduce.html" title="peroxide::structure::vector::reduce fn">reduce</a></div><div class="item-right docblock-short"><p>Explicit version of <code>reduce</code></p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.zip_with.html" title="peroxide::structure::vector::zip_with fn">zip_with</a></div><div class="item-right docblock-short"><p>Explicit version of <code>zip_with</code></p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (71226d717 2022-02-04)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (3b348d932 2022-02-19)" ></div>
 </body></html>

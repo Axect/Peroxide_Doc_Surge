@@ -19,9 +19,9 @@
         </a><h2 class="location"></h2>
     </nav>
     <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"><a href="#">Module dist</a></h2><div class="sidebar-elems"><div class="block items"><ul><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div><div id="sidebar-vars" data-name="dist" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
+        </a><h2 class="location"><a href="#">Module dist</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div></section><div id="sidebar-vars" data-name="dist" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
     <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">statistics</a>::<wbr><a class="mod" href="#">dist</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/statistics/dist.rs.html#1-567">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Probabilistic distributions</p>
-<h3 id="probability-distribution" class="section-header"><a href="#probability-distribution">Probability Distribution</a></h3>
+<h3 id="probability-distribution"><a href="#probability-distribution">Probability Distribution</a></h3>
 <ul>
 <li>There are some famous pdf in Peroxide (not checked pdfs will be implemented soon)
 <ul>
@@ -52,7 +52,7 @@
 </ul>
 </li>
 </ul>
-<h4 id="rng-trait" class="section-header"><a href="#rng-trait"><code>RNG</code> trait</a></h4>
+<h4 id="rng-trait"><a href="#rng-trait"><code>RNG</code> trait</a></h4>
 <ul>
 <li><code>RNG</code> trait is composed of two fields
 <ul>
@@ -75,7 +75,7 @@
 }</code></pre></div>
 </li>
 </ul>
-<h4 id="bernoulli-distribution" class="section-header"><a href="#bernoulli-distribution">Bernoulli Distribution</a></h4>
+<h4 id="bernoulli-distribution"><a href="#bernoulli-distribution">Bernoulli Distribution</a></h4>
 <ul>
 <li>
 <p>Definition
@@ -111,7 +111,7 @@ $$ \text{Bern}(x | \mu) = \mu^x (1-\mu)^{1-x} $$</p>
 }</code></pre></div>
 </li>
 </ul>
-<h4 id="uniform-distribution" class="section-header"><a href="#uniform-distribution">Uniform Distribution</a></h4>
+<h4 id="uniform-distribution"><a href="#uniform-distribution">Uniform Distribution</a></h4>
 <ul>
 <li>
 <p>Definition
@@ -144,7 +144,7 @@ $$\text{Unif}(x | a, b) = \begin{cases} \frac{1}{b - a} &amp; x \in [a,b]\\ 0 &a
 }</code></pre></div>
 </li>
 </ul>
-<h4 id="normal-distribution" class="section-header"><a href="#normal-distribution">Normal Distribution</a></h4>
+<h4 id="normal-distribution"><a href="#normal-distribution">Normal Distribution</a></h4>
 <ul>
 <li>Definition
 $$\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp{\left( - \frac{(x - \mu)^2}{2\sigma^2}\right)}$$</li>
@@ -180,12 +180,12 @@ $$\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp{\left( - 
 }</code></pre></div>
 </li>
 </ul>
-<h4 id="beta-distribution" class="section-header"><a href="#beta-distribution">Beta Distribution</a></h4><h4 id="gamma-distribution" class="section-header"><a href="#gamma-distribution">Gamma Distribution</a></h4><h4 id="binomial-distribution" class="section-header"><a href="#binomial-distribution">Binomial Distribution</a></h4></div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
+<h4 id="beta-distribution"><a href="#beta-distribution">Beta Distribution</a></h4><h4 id="gamma-distribution"><a href="#gamma-distribution">Gamma Distribution</a></h4><h4 id="binomial-distribution"><a href="#binomial-distribution">Binomial Distribution</a></h4></div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left import-item"><code>pub use self::<a class="enum" href="enum.OPDist.html" title="enum peroxide::statistics::dist::OPDist">OPDist</a>::*;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use self::<a class="enum" href="enum.TPDist.html" title="enum peroxide::statistics::dist::TPDist">TPDist</a>::*;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.OPDist.html" title="peroxide::statistics::dist::OPDist enum">OPDist</a></div><div class="item-right docblock-short"><p>One parameter distribution</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.TPDist.html" title="peroxide::statistics::dist::TPDist enum">TPDist</a></div><div class="item-right docblock-short"><p>Two parameter distribution</p>
 </div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
 <div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ParametricDist.html" title="peroxide::statistics::dist::ParametricDist trait">ParametricDist</a></div><div class="item-right docblock-short"><p>Extract parameter</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.RNG.html" title="peroxide::statistics::dist::RNG trait">RNG</a></div><div class="item-right docblock-short"><p>Random Number Generator trait</p>
-</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.60.0-nightly (71226d717 2022-02-04)" ></div>
+</div></div></div></section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (3b348d932 2022-02-19)" ></div>
 </body></html>
