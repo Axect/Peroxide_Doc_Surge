@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["dist","Probabilistic distributions"],["ops",""],["rand","Simple random number generator"],["stat","Basic statistics"]]});
+initSidebarItems({"mod":[["dist","Probabilistic distributions"],["ops",""],["rand","Random number generator"],["stat","Basic statistics"]]});

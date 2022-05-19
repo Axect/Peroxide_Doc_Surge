@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["cubic_spline","Cubic Spline (Natural)"]],"struct":[["CubicSpline","Cubic Spline (Natural)"]]});
+initSidebarItems({"enum":[["SlopeMethod",""]],"fn":[["cubic_hermite_spline",""],["cubic_spline","Cubic Spline (Natural)"]],"struct":[["CubicHermiteSpline",""],["CubicSpline","Cubic Spline (Natural)"]],"trait":[["Spline","Trait for spline interpolation"]]});

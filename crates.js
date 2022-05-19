@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["peroxide"];
+window.ALL_CRATES = ["cubic_hermite","lagrange","peroxide","poly"];
