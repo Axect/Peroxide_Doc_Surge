@@ -3052,7 +3052,7 @@
             <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">len</span>() {
                 <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>[<span class="ident">i</span>];
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">space</span> <span class="op">=</span> <span class="number">0usize</span>;
-                <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">5</span> {
+                <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">v</span>.<span class="ident">len</span>().<span class="ident">min</span>(<span class="number">5</span>) {
                     <span class="kw">let</span> <span class="ident">elem</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">at</span>(<span class="ident">j</span>);
                     <span class="macro">set_space!</span>(<span class="ident">elem</span>, <span class="ident">space</span>);
                 }
@@ -3454,5 +3454,5 @@
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (4c5f6e627 2022-05-17)" ></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0-nightly (b2eed72a6 2022-05-22)" ></div>
 </body></html>
