@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["cubic_hermite","df_print","lagrange","peroxide","poly"];
+window.ALL_CRATES = ["peroxide"];
