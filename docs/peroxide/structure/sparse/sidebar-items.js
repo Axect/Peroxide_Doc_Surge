@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["SPMatrix",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["SPMatrix",""]]};

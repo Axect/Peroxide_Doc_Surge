@@ -7,11 +7,12 @@ yes | cp ../Peroxide/target/doc/*.css ./
 yes | cp ../Peroxide/target/doc/*.svg ./
 yes | cp ../Peroxide/target/doc/*.png ./
 yes | cp ../Peroxide/target/doc/*.txt ./
-yes | cp ../Peroxide/target/doc/*.woff ./
+#yes | cp ../Peroxide/target/doc/*.woff ./
+yes | cp ../Peroxide/target/doc/*.woff2 ./
 yes | cp ../Peroxide/target/doc/*.html ./
 cp *.css docs/
 cp *.js docs/
-cp *.woff docs/
+cp *.woff2 docs/
 cp *.svg docs/
 cp *.ico docs/
 cp *.png docs/

@@ -1,5 +1,6 @@
 var sourcesIndex = {};
 sourcesIndex["cubic_hermite"] = {"name":"","files":["cubic_hermite.rs"]};
+sourcesIndex["df_print"] = {"name":"","files":["df_print.rs"]};
 sourcesIndex["lagrange"] = {"name":"","files":["lagrange.rs"]};
 sourcesIndex["peroxide"] = {"name":"","dirs":[{"name":"fuga","files":["mod.rs"]},{"name":"macros","files":["julia_macro.rs","matlab_macro.rs","mod.rs","r_macro.rs"]},{"name":"ml","files":["mod.rs","reg.rs"]},{"name":"numerical","files":["eigen.rs","integral.rs","interp.rs","mod.rs","newton.rs","ode.rs","optimize.rs","root.rs","spline.rs","utils.rs"]},{"name":"prelude","files":["mod.rs","simpler.rs"]},{"name":"special","files":["function.rs","lanczos.rs","mod.rs"]},{"name":"statistics","files":["dist.rs","mod.rs","ops.rs","rand.rs","stat.rs"]},{"name":"structure","files":["ad.rs","dataframe.rs","matrix.rs","mod.rs","multinomial.rs","polynomial.rs","sparse.rs","vector.rs"]},{"name":"traits","files":["fp.rs","general.rs","math.rs","mod.rs","mutable.rs","num.rs","pointer.rs","stable.rs","sugar.rs"]},{"name":"util","files":["api.rs","low_level.rs","mod.rs","non_macro.rs","plot.rs","print.rs","useful.rs","wrapper.rs","writer.rs"]}],"files":["lib.rs"]};
 sourcesIndex["poly"] = {"name":"","files":["poly.rs"]};

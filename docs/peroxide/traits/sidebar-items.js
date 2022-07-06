@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["fp",""],["general",""],["math",""],["mutable",""],["num","Missing operations & comprehensive number structures"],["pointer","Pointer toolbox"],["stable","Stable implementations for nightly-only features"],["sugar",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["fp",""],["general",""],["math",""],["mutable",""],["num","Missing operations & comprehensive number structures"],["pointer","Pointer toolbox"],["stable","Stable implementations for nightly-only features"],["sugar",""]]};

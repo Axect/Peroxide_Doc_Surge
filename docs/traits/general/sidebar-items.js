@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Algorithm","Some algorithms for Vector"]]});
+window.SIDEBAR_ITEMS = {"trait":[["Algorithm","Some algorithms for Vector"]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["jacobian","Jacobian Matrix"],["tdma","TriDiagonal Matrix Algorithm (TDMA)"]]});
+window.SIDEBAR_ITEMS = {"fn":[["jacobian","Jacobian Matrix"],["tdma","TriDiagonal Matrix Algorithm (TDMA)"]]};

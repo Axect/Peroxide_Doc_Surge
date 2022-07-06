@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["Printable",""]]});
+window.SIDEBAR_ITEMS = {"trait":[["LowerExpWithPlus","Format float number into lower exponent notation with ‘+’ sign"],["Printable",""],["UpperExpWithPlus","Format float number into upper exponent notation with ‘+’ sign"]]};

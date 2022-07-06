@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["FPMatrix","Functional Programming for Matrix"],["FPVector","Functional Programming tools for Vector"]]});
+window.SIDEBAR_ITEMS = {"trait":[["FPMatrix","Functional Programming for Matrix"],["FPVector","Functional Programming tools for Vector"]]};

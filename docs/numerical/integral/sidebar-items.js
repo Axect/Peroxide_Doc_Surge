@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Integral",""]],"fn":[["gauss_kronrod_quadrature","Gauss Kronrod Quadrature"],["gauss_legendre_quadrature","Gauss Legendre Quadrature"],["integrate","Numerical Integration"],["kronrod_quadrature",""],["newton_cotes_quadrature","Newton Cotes Quadrature"]]});
+window.SIDEBAR_ITEMS = {"enum":[["Integral",""]],"fn":[["gauss_kronrod_quadrature","Gauss Kronrod Quadrature"],["gauss_legendre_quadrature","Gauss Legendre Quadrature"],["integrate","Numerical Integration"],["kronrod_quadrature",""],["newton_cotes_quadrature","Newton Cotes Quadrature"]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Queue",""],["ToWriter",""]],"struct":[["SimpleWriter","Simple Matrix Writer"]]});
+window.SIDEBAR_ITEMS = {"enum":[["Queue",""],["ToWriter",""]],"struct":[["SimpleWriter","Simple Matrix Writer"]]};

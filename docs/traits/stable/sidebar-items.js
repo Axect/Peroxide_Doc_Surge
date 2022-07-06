@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["StableFn","Stable Fn trait"]]});
+window.SIDEBAR_ITEMS = {"trait":[["StableFn","Stable Fn trait"]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["MATLAB",""],["PYTHON",""],["R",""]]});
+window.SIDEBAR_ITEMS = {"trait":[["MATLAB",""],["PYTHON",""],["R",""]]};

@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["gamma_approx",""],["ln_gamma_approx",""],["tlg1","Lanczos Approximation Coefficient"]]});
+window.SIDEBAR_ITEMS = {"fn":[["gamma_approx",""],["ln_gamma_approx",""],["tlg1","Lanczos Approximation Coefficient"]]};

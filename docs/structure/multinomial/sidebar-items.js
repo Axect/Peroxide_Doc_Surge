@@ -1,1 +1,1 @@
-initSidebarItems({"struct":[["Multinomial",""]]});
+window.SIDEBAR_ITEMS = {"struct":[["Multinomial",""]]};

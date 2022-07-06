@@ -1,1 +1,1 @@
-initSidebarItems({"trait":[["SampleRNG","Extract no-duplicate sample from Vector"]]});
+window.SIDEBAR_ITEMS = {"trait":[["SampleRNG","Extract no-duplicate sample from Vector"]]};

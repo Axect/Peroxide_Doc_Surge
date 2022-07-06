@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["least_square","Simple Least Square 2D"]]});
+window.SIDEBAR_ITEMS = {"fn":[["least_square","Simple Least Square 2D"]]};

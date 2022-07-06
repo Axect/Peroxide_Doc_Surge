@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["julia_macro",""],["matlab_macro",""],["r_macro","R like macros"]]});
+window.SIDEBAR_ITEMS = {"mod":[["julia_macro",""],["matlab_macro",""],["r_macro","R like macros"]]};

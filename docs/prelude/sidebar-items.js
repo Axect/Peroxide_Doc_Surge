@@ -1,1 +1,1 @@
-initSidebarItems({"attr":[["ad_function",""]],"macro":[["ad_closure",""]],"mod":[["simpler",""]]});
+window.SIDEBAR_ITEMS = {"attr":[["ad_function",""]],"macro":[["ad_closure",""]],"mod":[["simpler",""]]};
