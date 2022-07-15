@@ -782,6 +782,16 @@
 <span id="760">760</span>
 <span id="761">761</span>
 <span id="762">762</span>
+<span id="763">763</span>
+<span id="764">764</span>
+<span id="765">765</span>
+<span id="766">766</span>
+<span id="767">767</span>
+<span id="768">768</span>
+<span id="769">769</span>
+<span id="770">770</span>
+<span id="771">771</span>
+<span id="772">772</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Spline interpolations</span>
 <span class="doccomment">//! </span>
 <span class="doccomment">//! # Available splines</span>
@@ -799,6 +809,8 @@
 <span class="doccomment">//! * `fn polynomial_at&lt;T&gt;(&amp;self, x: T) -&gt; &amp;Polynomial` : Get the polynomial at x</span>
 <span class="doccomment">//! * `fn number_of_polynomials(&amp;self) -&gt; usize` : Get the number of polynomials</span>
 <span class="doccomment">//! * `fn get_ranged_polynomials(&amp;self) -&gt; &amp;Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;` : Get the polynomials</span>
+<span class="doccomment">//! * `fn eval_with_cond&lt;F&gt;(&amp;self, x: f64, cond: F) -&gt; f64` : Evaluate the spline at x, with a condition</span>
+<span class="doccomment">//! * `fn eval_vec_with_cond&lt;F&gt;(&amp;self, v: &amp;[f64], cond: F) -&gt; Vec&lt;f64&gt;` : Evaluate spline values for an array v, with a condition</span>
 <span class="doccomment">//! </span>
 <span class="doccomment">//! # Low-level interface</span>
 <span class="doccomment">//! </span>
@@ -1039,6 +1051,14 @@
     }
 
     <span class="kw">fn</span> <span class="ident">get_ranged_polynomials</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span>;
+
+    <span class="kw">fn</span> <span class="ident">eval_with_cond</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">cond</span>: <span class="ident">F</span>) -&gt; <span class="ident">f64</span> {
+        <span class="ident">cond</span>(<span class="self">self</span>.<span class="ident">eval</span>(<span class="ident">x</span>))
+    }
+
+    <span class="kw">fn</span> <span class="ident">eval_vec_with_cond</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">cond</span>: <span class="ident">F</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+        <span class="ident">x</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">eval_with_cond</span>(<span class="ident">x</span>, <span class="ident">cond</span>)).<span class="ident">collect</span>()
+    }
 }
 
 <span class="comment">// =============================================================================</span>
@@ -1543,6 +1563,7 @@
     }
 
     <span class="ident">m</span>
-}</code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (27eb6d701 2022-07-04)" ></div>
+}
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
 </body></html>
