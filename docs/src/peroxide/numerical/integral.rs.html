@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/integral.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>integral.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/integral.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>integral.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -1169,360 +1163,360 @@
 <span id="1147">1147</span>
 <span id="1148">1148</span>
 <span id="1149">1149</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::polynomial</span>::{<span class="ident">lagrange_polynomial</span>, <span class="ident">Calculus</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traits::fp::FPVector</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::non_macro::seq</span>;
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::structure::polynomial::{lagrange_polynomial, Calculus};
+<span class="kw">use </span><span class="kw">crate</span>::traits::fp::FPVector;
+<span class="kw">use </span><span class="kw">crate</span>::util::non_macro::seq;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Integral</span> {
-    <span class="ident">GaussLegendre</span>(<span class="ident">usize</span>),
-    <span class="ident">NewtonCotes</span>(<span class="ident">usize</span>),
-    <span class="ident">G7K15</span>(<span class="ident">f64</span>),
-    <span class="ident">G10K21</span>(<span class="ident">f64</span>),
-    <span class="ident">G15K31</span>(<span class="ident">f64</span>),
-    <span class="ident">G20K41</span>(<span class="ident">f64</span>),
-    <span class="ident">G25K51</span>(<span class="ident">f64</span>),
-    <span class="ident">G30K61</span>(<span class="ident">f64</span>),
+<span class="attribute">#[derive(Debug, Copy, Clone, PartialEq)]
+</span><span class="kw">pub enum </span>Integral {
+    GaussLegendre(usize),
+    NewtonCotes(usize),
+    G7K15(f64),
+    G10K21(f64),
+    G15K31(f64),
+    G20K41(f64),
+    G25K51(f64),
+    G30K61(f64),
 }
 
-<span class="doccomment">/// Numerical Integration</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Description</span>
-<span class="doccomment">/// `fn integrate(f, (a,b), method) -&gt; f64`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// * `f`: Target function (`Fn(f64) -&gt; f64`)</span>
-<span class="doccomment">/// * `(a,b)` : Target interval</span>
-<span class="doccomment">/// * `method` : Numerical integration method</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Method</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// * Gauss-Legendre Quadrature (up to order 30) : `GaussLegendre(usize)`</span>
-<span class="doccomment">/// * Newton-Cotes Quadrature: `NewtonCotes(usize)`</span>
-<span class="doccomment">/// * Gauss-Kronrod Quadrature</span>
-<span class="doccomment">///     * `G7K15`</span>
-<span class="doccomment">///     * `G10K21`</span>
-<span class="doccomment">///     * `G15K31`</span>
-<span class="doccomment">///     * `G20K41`</span>
-<span class="doccomment">///     * `G25K51`</span>
-<span class="doccomment">///     * `G30K61`</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">integrate</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, (<span class="ident">a</span>, <span class="ident">b</span>): (<span class="ident">f64</span>, <span class="ident">f64</span>), <span class="ident">method</span>: <span class="ident">Integral</span>) -&gt; <span class="ident">f64</span>
-<span class="kw">where</span>
-    <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span> <span class="op">+</span> <span class="ident">Copy</span>,
+<span class="doccomment">/// Numerical Integration
+///
+/// # Description
+/// `fn integrate(f, (a,b), method) -&gt; f64`
+///
+/// * `f`: Target function (`Fn(f64) -&gt; f64`)
+/// * `(a,b)` : Target interval
+/// * `method` : Numerical integration method
+///
+/// # Method
+///
+/// * Gauss-Legendre Quadrature (up to order 30) : `GaussLegendre(usize)`
+/// * Newton-Cotes Quadrature: `NewtonCotes(usize)`
+/// * Gauss-Kronrod Quadrature
+///     * `G7K15`
+///     * `G10K21`
+///     * `G15K31`
+///     * `G20K41`
+///     * `G25K51`
+///     * `G30K61`
+</span><span class="kw">pub fn </span>integrate&lt;F&gt;(f: F, (a, b): (f64, f64), method: Integral) -&gt; f64
+<span class="kw">where
+    </span>F: Fn(f64) -&gt; f64 + Copy,
 {
-    <span class="kw">match</span> <span class="ident">method</span> {
-        <span class="ident">Integral::GaussLegendre</span>(<span class="ident">n</span>) =&gt; <span class="ident">gauss_legendre_quadrature</span>(<span class="ident">f</span>, <span class="ident">n</span>, (<span class="ident">a</span>, <span class="ident">b</span>)),
-        <span class="ident">Integral::NewtonCotes</span>(<span class="ident">n</span>) =&gt; <span class="ident">newton_cotes_quadrature</span>(<span class="ident">f</span>, <span class="ident">n</span>, (<span class="ident">a</span>, <span class="ident">b</span>)),
-        <span class="ident">Integral::G7K15</span>(<span class="ident">tol</span>) =&gt; <span class="ident">gauss_kronrod_quadrature</span>(<span class="ident">f</span>, (<span class="ident">a</span>, <span class="ident">b</span>), <span class="ident">Integral::G7K15</span>(<span class="ident">tol</span>)),
-        <span class="ident">Integral::G10K21</span>(<span class="ident">tol</span>) =&gt; <span class="ident">gauss_kronrod_quadrature</span>(<span class="ident">f</span>, (<span class="ident">a</span>, <span class="ident">b</span>), <span class="ident">Integral::G10K21</span>(<span class="ident">tol</span>)),
-        <span class="ident">Integral::G15K31</span>(<span class="ident">tol</span>) =&gt; <span class="ident">gauss_kronrod_quadrature</span>(<span class="ident">f</span>, (<span class="ident">a</span>, <span class="ident">b</span>), <span class="ident">Integral::G15K31</span>(<span class="ident">tol</span>)),
-        <span class="ident">Integral::G20K41</span>(<span class="ident">tol</span>) =&gt; <span class="ident">gauss_kronrod_quadrature</span>(<span class="ident">f</span>, (<span class="ident">a</span>, <span class="ident">b</span>), <span class="ident">Integral::G20K41</span>(<span class="ident">tol</span>)),
-        <span class="ident">Integral::G25K51</span>(<span class="ident">tol</span>) =&gt; <span class="ident">gauss_kronrod_quadrature</span>(<span class="ident">f</span>, (<span class="ident">a</span>, <span class="ident">b</span>), <span class="ident">Integral::G25K51</span>(<span class="ident">tol</span>)),
-        <span class="ident">Integral::G30K61</span>(<span class="ident">tol</span>) =&gt; <span class="ident">gauss_kronrod_quadrature</span>(<span class="ident">f</span>, (<span class="ident">a</span>, <span class="ident">b</span>), <span class="ident">Integral::G30K61</span>(<span class="ident">tol</span>)),
+    <span class="kw">match </span>method {
+        Integral::GaussLegendre(n) =&gt; gauss_legendre_quadrature(f, n, (a, b)),
+        Integral::NewtonCotes(n) =&gt; newton_cotes_quadrature(f, n, (a, b)),
+        Integral::G7K15(tol) =&gt; gauss_kronrod_quadrature(f, (a, b), Integral::G7K15(tol)),
+        Integral::G10K21(tol) =&gt; gauss_kronrod_quadrature(f, (a, b), Integral::G10K21(tol)),
+        Integral::G15K31(tol) =&gt; gauss_kronrod_quadrature(f, (a, b), Integral::G15K31(tol)),
+        Integral::G20K41(tol) =&gt; gauss_kronrod_quadrature(f, (a, b), Integral::G20K41(tol)),
+        Integral::G25K51(tol) =&gt; gauss_kronrod_quadrature(f, (a, b), Integral::G25K51(tol)),
+        Integral::G30K61(tol) =&gt; gauss_kronrod_quadrature(f, (a, b), Integral::G30K61(tol)),
     }
 }
 
-<span class="doccomment">/// Newton Cotes Quadrature</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">newton_cotes_quadrature</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">n</span>: <span class="ident">usize</span>, (<span class="ident">a</span>, <span class="ident">b</span>): (<span class="ident">f64</span>, <span class="ident">f64</span>)) -&gt; <span class="ident">f64</span>
-<span class="kw">where</span>
-    <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span>,
+<span class="doccomment">/// Newton Cotes Quadrature
+</span><span class="kw">pub fn </span>newton_cotes_quadrature&lt;F&gt;(f: F, n: usize, (a, b): (f64, f64)) -&gt; f64
+<span class="kw">where
+    </span>F: Fn(f64) -&gt; f64,
 {
-    <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> (<span class="ident">b</span> <span class="op">-</span> <span class="ident">a</span>) <span class="op">/</span> (<span class="ident">n</span> <span class="kw">as</span> <span class="ident">f64</span>);
-    <span class="kw">let</span> <span class="ident">node_x</span> <span class="op">=</span> <span class="ident">seq</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">h</span>);
-    <span class="kw">let</span> <span class="ident">node_y</span> <span class="op">=</span> <span class="ident">node_x</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">f</span>(<span class="ident">x</span>));
-    <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">lagrange_polynomial</span>(<span class="ident">node_x</span>, <span class="ident">node_y</span>);
-    <span class="kw">let</span> <span class="ident">q</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">integral</span>();
+    <span class="kw">let </span>h = (b - a) / (n <span class="kw">as </span>f64);
+    <span class="kw">let </span>node_x = seq(a, b, h);
+    <span class="kw">let </span>node_y = node_x.fmap(|x| f(x));
+    <span class="kw">let </span>p = lagrange_polynomial(node_x, node_y);
+    <span class="kw">let </span>q = p.integral();
 
-    <span class="ident">q</span>.<span class="ident">eval</span>(<span class="ident">b</span>) <span class="op">-</span> <span class="ident">q</span>.<span class="ident">eval</span>(<span class="ident">a</span>)
+    q.eval(b) - q.eval(a)
 }
 
-<span class="doccomment">/// Gauss Legendre Quadrature</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Type</span>
-<span class="doccomment">/// * `f, n, (a,b) -&gt; f64`</span>
-<span class="doccomment">///     * `f`: Numerical function (`Fn(f64) -&gt; f64`)</span>
-<span class="doccomment">///     * `n`: Order of Legendre polynomial (up to 16)</span>
-<span class="doccomment">///     * `(a,b)`: Interval of integration</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Reference</span>
-<span class="doccomment">/// * A. N. Lowan et al. (1942)</span>
-<span class="doccomment">/// * [Keisan Online Calculator](https://keisan.casio.com/exec/system/1329114617)</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gauss_legendre_quadrature</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">n</span>: <span class="ident">usize</span>, (<span class="ident">a</span>, <span class="ident">b</span>): (<span class="ident">f64</span>, <span class="ident">f64</span>)) -&gt; <span class="ident">f64</span>
-<span class="kw">where</span>
-    <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span>,
+<span class="doccomment">/// Gauss Legendre Quadrature
+///
+/// # Type
+/// * `f, n, (a,b) -&gt; f64`
+///     * `f`: Numerical function (`Fn(f64) -&gt; f64`)
+///     * `n`: Order of Legendre polynomial (up to 16)
+///     * `(a,b)`: Interval of integration
+///
+/// # Reference
+/// * A. N. Lowan et al. (1942)
+/// * [Keisan Online Calculator](https://keisan.casio.com/exec/system/1329114617)
+</span><span class="kw">pub fn </span>gauss_legendre_quadrature&lt;F&gt;(f: F, n: usize, (a, b): (f64, f64)) -&gt; f64
+<span class="kw">where
+    </span>F: Fn(f64) -&gt; f64,
 {
-    (<span class="ident">b</span> <span class="op">-</span> <span class="ident">a</span>) <span class="op">/</span> <span class="number">2f64</span> <span class="op">*</span> <span class="ident">unit_gauss_legendre_quadrature</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">f</span>(<span class="ident">x</span> <span class="op">*</span> (<span class="ident">b</span> <span class="op">-</span> <span class="ident">a</span>) <span class="op">/</span> <span class="number">2f64</span> <span class="op">+</span> (<span class="ident">a</span> <span class="op">+</span> <span class="ident">b</span>) <span class="op">/</span> <span class="number">2f64</span>), <span class="ident">n</span>)
+    (b - a) / <span class="number">2f64 </span>* unit_gauss_legendre_quadrature(|x| f(x * (b - a) / <span class="number">2f64 </span>+ (a + b) / <span class="number">2f64</span>), n)
 }
 
-<span class="doccomment">/// Gauss Kronrod Quadrature</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Type</span>
-<span class="doccomment">/// * `f, (a,b), method -&gt; f64`</span>
-<span class="doccomment">///     * `f`: Numerical function (`Fn(f64) -&gt; f64 + Copy`)</span>
-<span class="doccomment">///     * `(a,b)`: Interval of integration</span>
-<span class="doccomment">///     * `method`: Integration method</span>
-<span class="doccomment">///         * `G7K15(tol)`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Reference</span>
-<span class="doccomment">/// * arXiv: [1003.4629](https://arxiv.org/abs/1003.4629)</span>
-<span class="doccomment">/// * [Keisan Online Calculator](https://keisan.casio.com/exec/system/1329114617)</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gauss_kronrod_quadrature</span><span class="op">&lt;</span><span class="ident">F</span>, <span class="ident">T</span>, <span class="ident">S</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, (<span class="ident">a</span>, <span class="ident">b</span>): (<span class="ident">T</span>, <span class="ident">S</span>), <span class="ident">method</span>: <span class="ident">Integral</span>) -&gt; <span class="ident">f64</span>
-<span class="kw">where</span>
-     <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span> <span class="op">+</span> <span class="ident">Copy</span>,
-     <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-     <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Gauss Kronrod Quadrature
+///
+/// # Type
+/// * `f, (a,b), method -&gt; f64`
+///     * `f`: Numerical function (`Fn(f64) -&gt; f64 + Copy`)
+///     * `(a,b)`: Interval of integration
+///     * `method`: Integration method
+///         * `G7K15(tol)`
+///
+/// # Reference
+/// * arXiv: [1003.4629](https://arxiv.org/abs/1003.4629)
+/// * [Keisan Online Calculator](https://keisan.casio.com/exec/system/1329114617)
+</span><span class="attribute">#[allow(non_snake_case)]
+</span><span class="kw">pub fn </span>gauss_kronrod_quadrature&lt;F, T, S&gt;(f: F, (a, b): (T, S), method: Integral) -&gt; f64
+<span class="kw">where
+     </span>F: Fn(f64) -&gt; f64 + Copy,
+     T: Into&lt;f64&gt;,
+     S: Into&lt;f64&gt;,
 {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">I</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">S</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[];
-    <span class="ident">S</span>.<span class="ident">push</span>((<span class="ident">a</span>.<span class="ident">into</span>(), <span class="ident">b</span>.<span class="ident">into</span>()));
-    <span class="kw">let</span> (<span class="ident">g</span>, <span class="ident">k</span>, <span class="ident">tol</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">method</span> {
-        <span class="ident">Integral::G7K15</span>(<span class="ident">tol</span>) =&gt; (<span class="number">7</span>, <span class="number">15</span>, <span class="ident">tol</span>),
-        <span class="ident">Integral::G10K21</span>(<span class="ident">tol</span>) =&gt; (<span class="number">10</span>, <span class="number">21</span>, <span class="ident">tol</span>),
-        <span class="ident">Integral::G15K31</span>(<span class="ident">tol</span>) =&gt; (<span class="number">15</span>, <span class="number">31</span>, <span class="ident">tol</span>),
-        <span class="ident">Integral::G20K41</span>(<span class="ident">tol</span>) =&gt; (<span class="number">20</span>, <span class="number">41</span>, <span class="ident">tol</span>),
-        <span class="ident">Integral::G25K51</span>(<span class="ident">tol</span>) =&gt; (<span class="number">25</span>, <span class="number">51</span>, <span class="ident">tol</span>),
-        <span class="ident">Integral::G30K61</span>(<span class="ident">tol</span>) =&gt; (<span class="number">30</span>, <span class="number">61</span>, <span class="ident">tol</span>),
-        <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Please input proper Gauss Kronrod order&quot;</span>),
+    <span class="kw">let </span><span class="kw-2">mut </span>I = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>S: Vec&lt;(f64, f64)&gt; = <span class="macro">vec!</span>[];
+    S.push((a.into(), b.into()));
+    <span class="kw">let </span>(g, k, tol) = <span class="kw">match </span>method {
+        Integral::G7K15(tol) =&gt; (<span class="number">7</span>, <span class="number">15</span>, tol),
+        Integral::G10K21(tol) =&gt; (<span class="number">10</span>, <span class="number">21</span>, tol),
+        Integral::G15K31(tol) =&gt; (<span class="number">15</span>, <span class="number">31</span>, tol),
+        Integral::G20K41(tol) =&gt; (<span class="number">20</span>, <span class="number">41</span>, tol),
+        Integral::G25K51(tol) =&gt; (<span class="number">25</span>, <span class="number">51</span>, tol),
+        Integral::G30K61(tol) =&gt; (<span class="number">30</span>, <span class="number">61</span>, tol),
+        <span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Please input proper Gauss Kronrod order&quot;</span>),
     };
-    <span class="kw">loop</span> {
-        <span class="kw">match</span> <span class="ident">S</span>.<span class="ident">pop</span>() {
-            <span class="prelude-val">Some</span>((<span class="ident">a</span>, <span class="ident">b</span>)) =&gt; {
-                <span class="kw">let</span> <span class="ident">G</span> <span class="op">=</span> <span class="ident">gauss_legendre_quadrature</span>(<span class="ident">f</span>, <span class="ident">g</span>, (<span class="ident">a</span>, <span class="ident">b</span>));
-                <span class="kw">let</span> <span class="ident">K</span> <span class="op">=</span> <span class="ident">kronrod_quadrature</span>(<span class="ident">f</span>, <span class="ident">k</span>, (<span class="ident">a</span>, <span class="ident">b</span>));
-                <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> (<span class="ident">a</span> <span class="op">+</span> <span class="ident">b</span>) <span class="op">/</span> <span class="number">2f64</span>;
-                <span class="kw">if</span> (<span class="ident">G</span> <span class="op">-</span> <span class="ident">K</span>).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">tol</span> <span class="op">|</span><span class="op">|</span> <span class="ident">a</span> <span class="op">==</span> <span class="ident">b</span> {
-                    <span class="ident">I</span> <span class="op">+</span><span class="op">=</span> <span class="ident">G</span>;
-                } <span class="kw">else</span> {
-                    <span class="ident">S</span>.<span class="ident">push</span>((<span class="ident">a</span>, <span class="ident">m</span>));
-                    <span class="ident">S</span>.<span class="ident">push</span>((<span class="ident">m</span>, <span class="ident">b</span>));
+    <span class="kw">loop </span>{
+        <span class="kw">match </span>S.pop() {
+            <span class="prelude-val">Some</span>((a, b)) =&gt; {
+                <span class="kw">let </span>G = gauss_legendre_quadrature(f, g, (a, b));
+                <span class="kw">let </span>K = kronrod_quadrature(f, k, (a, b));
+                <span class="kw">let </span>m = (a + b) / <span class="number">2f64</span>;
+                <span class="kw">if </span>(G - K).abs() &lt; tol || a == b {
+                    I += G;
+                } <span class="kw">else </span>{
+                    S.push((a, m));
+                    S.push((m, b));
                 }
             }
-            <span class="prelude-val">None</span> =&gt; <span class="kw">break</span>,
+            <span class="prelude-val">None </span>=&gt; <span class="kw">break</span>,
         }
     }
-    <span class="ident">I</span>
+    I
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">kronrod_quadrature</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">n</span>: <span class="ident">usize</span>, (<span class="ident">a</span>, <span class="ident">b</span>): (<span class="ident">f64</span>, <span class="ident">f64</span>)) -&gt; <span class="ident">f64</span> 
-<span class="kw">where</span>
-    <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span>,
+<span class="kw">pub fn </span>kronrod_quadrature&lt;F&gt;(f: F, n: usize, (a, b): (f64, f64)) -&gt; f64 
+<span class="kw">where
+    </span>F: Fn(f64) -&gt; f64,
 {
-    (<span class="ident">b</span> <span class="op">-</span> <span class="ident">a</span>) <span class="op">/</span> <span class="number">2f64</span> <span class="op">*</span> <span class="ident">unit_kronrod_quadrature</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">f</span>(<span class="ident">x</span> <span class="op">*</span> (<span class="ident">b</span><span class="op">-</span><span class="ident">a</span>) <span class="op">/</span> <span class="number">2f64</span> <span class="op">+</span> (<span class="ident">a</span> <span class="op">+</span> <span class="ident">b</span>) <span class="op">/</span> <span class="number">2f64</span>), <span class="ident">n</span>)   
+    (b - a) / <span class="number">2f64 </span>* unit_kronrod_quadrature(|x| f(x * (b-a) / <span class="number">2f64 </span>+ (a + b) / <span class="number">2f64</span>), n)   
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Gauss Legendre Backends</span>
-<span class="comment">// =============================================================================</span>
-<span class="kw">fn</span> <span class="ident">unit_gauss_legendre_quadrature</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">f64</span>
-<span class="kw">where</span>
-    <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span>,
+<span class="comment">// =============================================================================
+// Gauss Legendre Backends
+// =============================================================================
+</span><span class="kw">fn </span>unit_gauss_legendre_quadrature&lt;F&gt;(f: F, n: usize) -&gt; f64
+<span class="kw">where
+    </span>F: Fn(f64) -&gt; f64,
 {
-    <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">x</span>) <span class="op">=</span> <span class="ident">gauss_legendre_table</span>(<span class="ident">n</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">a</span>.<span class="ident">len</span>() {
-        <span class="ident">s</span> <span class="op">+</span><span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span>] <span class="op">*</span> <span class="ident">f</span>(<span class="ident">x</span>[<span class="ident">i</span>]);
+    <span class="kw">let </span>(a, x) = gauss_legendre_table(n);
+    <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="number">0f64</span>;
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..a.len() {
+        s += a[i] * f(x[i]);
     }
-    <span class="ident">s</span>
+    s
 }
 
-<span class="kw">fn</span> <span class="ident">gauss_legendre_table</span>(<span class="ident">n</span>: <span class="ident">usize</span>) -&gt; (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result_root</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result_weight</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-    <span class="kw">let</span> <span class="ident">ref_root</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>] <span class="op">=</span> <span class="kw">match</span> <span class="ident">n</span> {
-        <span class="number">2</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_2</span>[..],
-        <span class="number">3</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_3</span>[..],
-        <span class="number">4</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_4</span>[..],
-        <span class="number">5</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_5</span>[..],
-        <span class="number">6</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_6</span>[..],
-        <span class="number">7</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_7</span>[..],
-        <span class="number">8</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_8</span>[..],
-        <span class="number">9</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_9</span>[..],
-        <span class="number">10</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_10</span>[..],
-        <span class="number">11</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_11</span>[..],
-        <span class="number">12</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_12</span>[..],
-        <span class="number">13</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_13</span>[..],
-        <span class="number">14</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_14</span>[..],
-        <span class="number">15</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_15</span>[..],
-        <span class="number">16</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_16</span>[..],
-        <span class="number">17</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_17</span>[..],
-        <span class="number">18</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_18</span>[..],
-        <span class="number">19</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_19</span>[..],
-        <span class="number">20</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_20</span>[..],
-        <span class="number">21</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_21</span>[..],
-        <span class="number">22</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_22</span>[..],
-        <span class="number">23</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_23</span>[..],
-        <span class="number">24</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_24</span>[..],
-        <span class="number">25</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_25</span>[..],
-        <span class="number">26</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_26</span>[..],
-        <span class="number">27</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_27</span>[..],
-        <span class="number">28</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_28</span>[..],
-        <span class="number">29</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_29</span>[..],
-        <span class="number">30</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_ROOT_30</span>[..],
-        <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Legendre quadrature is limited up to n = 16&quot;</span>),
+<span class="kw">fn </span>gauss_legendre_table(n: usize) -&gt; (Vec&lt;f64&gt;, Vec&lt;f64&gt;) {
+    <span class="kw">let </span><span class="kw-2">mut </span>result_root = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+    <span class="kw">let </span><span class="kw-2">mut </span>result_weight = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+    <span class="kw">let </span>ref_root: <span class="kw-2">&amp;</span>[f64] = <span class="kw">match </span>n {
+        <span class="number">2 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_2[..],
+        <span class="number">3 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_3[..],
+        <span class="number">4 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_4[..],
+        <span class="number">5 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_5[..],
+        <span class="number">6 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_6[..],
+        <span class="number">7 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_7[..],
+        <span class="number">8 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_8[..],
+        <span class="number">9 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_9[..],
+        <span class="number">10 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_10[..],
+        <span class="number">11 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_11[..],
+        <span class="number">12 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_12[..],
+        <span class="number">13 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_13[..],
+        <span class="number">14 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_14[..],
+        <span class="number">15 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_15[..],
+        <span class="number">16 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_16[..],
+        <span class="number">17 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_17[..],
+        <span class="number">18 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_18[..],
+        <span class="number">19 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_19[..],
+        <span class="number">20 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_20[..],
+        <span class="number">21 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_21[..],
+        <span class="number">22 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_22[..],
+        <span class="number">23 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_23[..],
+        <span class="number">24 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_24[..],
+        <span class="number">25 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_25[..],
+        <span class="number">26 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_26[..],
+        <span class="number">27 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_27[..],
+        <span class="number">28 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_28[..],
+        <span class="number">29 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_29[..],
+        <span class="number">30 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_ROOT_30[..],
+        <span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Legendre quadrature is limited up to n = 16&quot;</span>),
     };
 
-    <span class="kw">let</span> <span class="ident">ref_weight</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>] <span class="op">=</span> <span class="kw">match</span> <span class="ident">n</span> {
-        <span class="number">2</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_2</span>[..],
-        <span class="number">3</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_3</span>[..],
-        <span class="number">4</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_4</span>[..],
-        <span class="number">5</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_5</span>[..],
-        <span class="number">6</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_6</span>[..],
-        <span class="number">7</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_7</span>[..],
-        <span class="number">8</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_8</span>[..],
-        <span class="number">9</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_9</span>[..],
-        <span class="number">10</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_10</span>[..],
-        <span class="number">11</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_11</span>[..],
-        <span class="number">12</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_12</span>[..],
-        <span class="number">13</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_13</span>[..],
-        <span class="number">14</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_14</span>[..],
-        <span class="number">15</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_15</span>[..],
-        <span class="number">16</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_16</span>[..],
-        <span class="number">17</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_17</span>[..],
-        <span class="number">18</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_18</span>[..],
-        <span class="number">19</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_19</span>[..],
-        <span class="number">20</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_20</span>[..],
-        <span class="number">21</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_21</span>[..],
-        <span class="number">22</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_22</span>[..],
-        <span class="number">23</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_23</span>[..],
-        <span class="number">24</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_24</span>[..],
-        <span class="number">25</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_25</span>[..],
-        <span class="number">26</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_26</span>[..],
-        <span class="number">27</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_27</span>[..],
-        <span class="number">28</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_28</span>[..],
-        <span class="number">29</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_29</span>[..],
-        <span class="number">30</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">LEGENDRE_WEIGHT_30</span>[..],
-        <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Legendre quadrature is limited up to n = 16&quot;</span>),
+    <span class="kw">let </span>ref_weight: <span class="kw-2">&amp;</span>[f64] = <span class="kw">match </span>n {
+        <span class="number">2 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_2[..],
+        <span class="number">3 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_3[..],
+        <span class="number">4 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_4[..],
+        <span class="number">5 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_5[..],
+        <span class="number">6 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_6[..],
+        <span class="number">7 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_7[..],
+        <span class="number">8 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_8[..],
+        <span class="number">9 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_9[..],
+        <span class="number">10 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_10[..],
+        <span class="number">11 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_11[..],
+        <span class="number">12 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_12[..],
+        <span class="number">13 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_13[..],
+        <span class="number">14 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_14[..],
+        <span class="number">15 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_15[..],
+        <span class="number">16 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_16[..],
+        <span class="number">17 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_17[..],
+        <span class="number">18 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_18[..],
+        <span class="number">19 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_19[..],
+        <span class="number">20 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_20[..],
+        <span class="number">21 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_21[..],
+        <span class="number">22 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_22[..],
+        <span class="number">23 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_23[..],
+        <span class="number">24 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_24[..],
+        <span class="number">25 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_25[..],
+        <span class="number">26 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_26[..],
+        <span class="number">27 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_27[..],
+        <span class="number">28 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_28[..],
+        <span class="number">29 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_29[..],
+        <span class="number">30 </span>=&gt; <span class="kw-2">&amp;</span>LEGENDRE_WEIGHT_30[..],
+        <span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Legendre quadrature is limited up to n = 16&quot;</span>),
     };
 
-    <span class="kw">match</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">2</span> {
-        <span class="number">0</span> =&gt; {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">ref_root</span>.<span class="ident">len</span>() {
-                <span class="ident">result_root</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_root</span>[<span class="ident">i</span>];
-                <span class="ident">result_weight</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_weight</span>[<span class="ident">i</span>];
+    <span class="kw">match </span>n % <span class="number">2 </span>{
+        <span class="number">0 </span>=&gt; {
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..ref_root.len() {
+                result_root[i] = ref_root[i];
+                result_weight[i] = ref_weight[i];
             }
 
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">ref_root</span>.<span class="ident">len</span>()..<span class="ident">n</span> {
-                <span class="ident">result_root</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="op">-</span><span class="ident">ref_root</span>[<span class="ident">n</span> <span class="op">-</span> <span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>];
-                <span class="ident">result_weight</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_weight</span>[<span class="ident">n</span> <span class="op">-</span> <span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>];
+            <span class="kw">for </span>i <span class="kw">in </span>ref_root.len()..n {
+                result_root[i] = -ref_root[n - i - <span class="number">1</span>];
+                result_weight[i] = ref_weight[n - i - <span class="number">1</span>];
             }
         }
-        <span class="number">1</span> =&gt; {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">ref_root</span>.<span class="ident">len</span>() {
-                <span class="ident">result_root</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_root</span>[<span class="ident">i</span>];
-                <span class="ident">result_weight</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_weight</span>[<span class="ident">i</span>];
+        <span class="number">1 </span>=&gt; {
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..ref_root.len() {
+                result_root[i] = ref_root[i];
+                result_weight[i] = ref_weight[i];
             }
 
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">ref_root</span>.<span class="ident">len</span>()..<span class="ident">n</span> {
-                <span class="ident">result_root</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="op">-</span><span class="ident">ref_root</span>[<span class="ident">n</span> <span class="op">-</span> <span class="ident">i</span>];
-                <span class="ident">result_weight</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_weight</span>[<span class="ident">n</span> <span class="op">-</span> <span class="ident">i</span>];
+            <span class="kw">for </span>i <span class="kw">in </span>ref_root.len()..n {
+                result_root[i] = -ref_root[n - i];
+                result_weight[i] = ref_weight[n - i];
             }
         }
-        <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
+        <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>(),
     }
-    (<span class="ident">result_weight</span>, <span class="ident">result_root</span>)
+    (result_weight, result_root)
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Gauss Kronrod Backends</span>
-<span class="comment">// =============================================================================</span>
+<span class="comment">// =============================================================================
+// Gauss Kronrod Backends
+// =============================================================================
 
-<span class="kw">fn</span> <span class="ident">unit_kronrod_quadrature</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">f64</span>
-<span class="kw">where</span>
-    <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span>,
+</span><span class="kw">fn </span>unit_kronrod_quadrature&lt;F&gt;(f: F, n: usize) -&gt; f64
+<span class="kw">where
+    </span>F: Fn(f64) -&gt; f64,
 {
-    <span class="kw">let</span> (<span class="ident">a</span>,<span class="ident">x</span>) <span class="op">=</span> <span class="ident">kronrod_table</span>(<span class="ident">n</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">a</span>.<span class="ident">len</span>() {
-        <span class="ident">s</span> <span class="op">+</span><span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span>] <span class="op">*</span> <span class="ident">f</span>(<span class="ident">x</span>[<span class="ident">i</span>]);
+    <span class="kw">let </span>(a,x) = kronrod_table(n);
+    <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="number">0f64</span>;
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. a.len() {
+        s += a[i] * f(x[i]);
     }
-    <span class="ident">s</span>
+    s
 }
 
-<span class="kw">fn</span> <span class="ident">kronrod_table</span>(<span class="ident">n</span>: <span class="ident">usize</span>) -&gt; (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result_node</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result_weight</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-    <span class="kw">let</span> <span class="ident">ref_node</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>] <span class="op">=</span> <span class="kw">match</span> <span class="ident">n</span> {
-        <span class="number">15</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_NODES_15</span>[..],
-        <span class="number">21</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_NODES_21</span>[..],
-        <span class="number">31</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_NODES_31</span>[..],
-        <span class="number">41</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_NODES_41</span>[..],
-        <span class="number">51</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_NODES_51</span>[..],
-        <span class="number">61</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_NODES_61</span>[..],
-        <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Not yet implemented&quot;</span>),
+<span class="kw">fn </span>kronrod_table(n: usize) -&gt; (Vec&lt;f64&gt;, Vec&lt;f64&gt;) {
+    <span class="kw">let </span><span class="kw-2">mut </span>result_node = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+    <span class="kw">let </span><span class="kw-2">mut </span>result_weight = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+    <span class="kw">let </span>ref_node: <span class="kw-2">&amp;</span>[f64] = <span class="kw">match </span>n {
+        <span class="number">15 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_NODES_15[..],
+        <span class="number">21 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_NODES_21[..],
+        <span class="number">31 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_NODES_31[..],
+        <span class="number">41 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_NODES_41[..],
+        <span class="number">51 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_NODES_51[..],
+        <span class="number">61 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_NODES_61[..],
+        <span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Not yet implemented&quot;</span>),
     };
-    <span class="kw">let</span> <span class="ident">ref_weight</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>] <span class="op">=</span> <span class="kw">match</span> <span class="ident">n</span> {
-        <span class="number">15</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_WEIGHTS_15</span>[..],
-        <span class="number">21</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_WEIGHTS_21</span>[..],
-        <span class="number">31</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_WEIGHTS_31</span>[..],
-        <span class="number">41</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_WEIGHTS_41</span>[..],
-        <span class="number">51</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_WEIGHTS_51</span>[..],
-        <span class="number">61</span> =&gt; <span class="kw-2">&amp;</span><span class="ident">KRONROD_WEIGHTS_61</span>[..],
-        <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Not yet implemented&quot;</span>),
+    <span class="kw">let </span>ref_weight: <span class="kw-2">&amp;</span>[f64] = <span class="kw">match </span>n {
+        <span class="number">15 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_WEIGHTS_15[..],
+        <span class="number">21 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_WEIGHTS_21[..],
+        <span class="number">31 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_WEIGHTS_31[..],
+        <span class="number">41 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_WEIGHTS_41[..],
+        <span class="number">51 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_WEIGHTS_51[..],
+        <span class="number">61 </span>=&gt; <span class="kw-2">&amp;</span>KRONROD_WEIGHTS_61[..],
+        <span class="kw">_ </span>=&gt; <span class="macro">panic!</span>(<span class="string">&quot;Not yet implemented&quot;</span>),
     };
 
-    <span class="kw">match</span> <span class="ident">n</span> <span class="op">%</span> <span class="number">2</span> {
-        <span class="number">0</span> =&gt; {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">ref_node</span>.<span class="ident">len</span>() {
-                <span class="ident">result_node</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_node</span>[<span class="ident">i</span>];
-                <span class="ident">result_weight</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_weight</span>[<span class="ident">i</span>];
+    <span class="kw">match </span>n % <span class="number">2 </span>{
+        <span class="number">0 </span>=&gt; {
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. ref_node.len() {
+                result_node[i] = ref_node[i];
+                result_weight[i] = ref_weight[i];
             }
 
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">ref_node</span>.<span class="ident">len</span>() .. <span class="ident">n</span> {
-                <span class="ident">result_node</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="op">-</span><span class="ident">ref_node</span>[<span class="ident">n</span><span class="op">-</span><span class="ident">i</span><span class="op">-</span><span class="number">1</span>];
-                <span class="ident">result_weight</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_weight</span>[<span class="ident">n</span><span class="op">-</span><span class="ident">i</span><span class="op">-</span><span class="number">1</span>];
+            <span class="kw">for </span>i <span class="kw">in </span>ref_node.len() .. n {
+                result_node[i] = -ref_node[n-i-<span class="number">1</span>];
+                result_weight[i] = ref_weight[n-i-<span class="number">1</span>];
             }
         }
-        <span class="number">1</span> =&gt; {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">ref_node</span>.<span class="ident">len</span>() {
-                <span class="ident">result_node</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_node</span>[<span class="ident">i</span>];
-                <span class="ident">result_weight</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_weight</span>[<span class="ident">i</span>];
+        <span class="number">1 </span>=&gt; {
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. ref_node.len() {
+                result_node[i] = ref_node[i];
+                result_weight[i] = ref_weight[i];
             }
 
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">ref_node</span>.<span class="ident">len</span>() .. <span class="ident">n</span> {
-                <span class="ident">result_node</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="op">-</span><span class="ident">ref_node</span>[<span class="ident">n</span><span class="op">-</span><span class="ident">i</span>];
-                <span class="ident">result_weight</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">ref_weight</span>[<span class="ident">n</span><span class="op">-</span><span class="ident">i</span>];
+            <span class="kw">for </span>i <span class="kw">in </span>ref_node.len() .. n {
+                result_node[i] = -ref_node[n-i];
+                result_weight[i] = ref_weight[n-i];
             }
         }
-        <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>()
+        <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>()
     }
-    (<span class="ident">result_weight</span>, <span class="ident">result_node</span>)
+    (result_weight, result_node)
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Table for Gauss-Legendre Quadrature (ref. A. N. Lowan et al. (1942))</span>
-<span class="comment">// =============================================================================</span>
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_2</span>: [<span class="ident">f64</span>; <span class="number">1</span>] <span class="op">=</span> [<span class="number">0.577350269189626</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_3</span>: [<span class="ident">f64</span>; <span class="number">2</span>] <span class="op">=</span> [<span class="number">0f64</span>, <span class="number">0.774596669241483</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_4</span>: [<span class="ident">f64</span>; <span class="number">2</span>] <span class="op">=</span> [<span class="number">0.339981043584856</span>, <span class="number">0.861136311594053</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_5</span>: [<span class="ident">f64</span>; <span class="number">3</span>] <span class="op">=</span> [<span class="number">0f64</span>, <span class="number">0.538469310105683</span>, <span class="number">0.906179845938664</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_6</span>: [<span class="ident">f64</span>; <span class="number">3</span>] <span class="op">=</span> [<span class="number">0.238619186083197</span>, <span class="number">0.661209386466265</span>, <span class="number">0.932469514203152</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_7</span>: [<span class="ident">f64</span>; <span class="number">4</span>] <span class="op">=</span> [
+<span class="comment">// =============================================================================
+// Table for Gauss-Legendre Quadrature (ref. A. N. Lowan et al. (1942))
+// =============================================================================
+</span><span class="kw">const </span>LEGENDRE_ROOT_2: [f64; <span class="number">1</span>] = [<span class="number">0.577350269189626</span>];
+<span class="kw">const </span>LEGENDRE_ROOT_3: [f64; <span class="number">2</span>] = [<span class="number">0f64</span>, <span class="number">0.774596669241483</span>];
+<span class="kw">const </span>LEGENDRE_ROOT_4: [f64; <span class="number">2</span>] = [<span class="number">0.339981043584856</span>, <span class="number">0.861136311594053</span>];
+<span class="kw">const </span>LEGENDRE_ROOT_5: [f64; <span class="number">3</span>] = [<span class="number">0f64</span>, <span class="number">0.538469310105683</span>, <span class="number">0.906179845938664</span>];
+<span class="kw">const </span>LEGENDRE_ROOT_6: [f64; <span class="number">3</span>] = [<span class="number">0.238619186083197</span>, <span class="number">0.661209386466265</span>, <span class="number">0.932469514203152</span>];
+<span class="kw">const </span>LEGENDRE_ROOT_7: [f64; <span class="number">4</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.405845151377397</span>,
     <span class="number">0.741531185599394</span>,
     <span class="number">0.949107912342759</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_8</span>: [<span class="ident">f64</span>; <span class="number">4</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_8: [f64; <span class="number">4</span>] = [
     <span class="number">0.183434642495650</span>,
     <span class="number">0.525532409916329</span>,
     <span class="number">0.796666477413627</span>,
     <span class="number">0.960289856497536</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_9</span>: [<span class="ident">f64</span>; <span class="number">5</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_9: [f64; <span class="number">5</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.324253423403809</span>,
     <span class="number">0.613371432700590</span>,
     <span class="number">0.836031107326636</span>,
     <span class="number">0.968160239507626</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_10</span>: [<span class="ident">f64</span>; <span class="number">5</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_10: [f64; <span class="number">5</span>] = [
     <span class="number">0.148874338981631</span>,
     <span class="number">0.433395394129247</span>,
     <span class="number">0.679409568299024</span>,
     <span class="number">0.865063366688985</span>,
     <span class="number">0.973906528517172</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_11</span>: [<span class="ident">f64</span>; <span class="number">6</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_11: [f64; <span class="number">6</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.269543155952345</span>,
     <span class="number">0.519096129110681</span>,
@@ -1530,7 +1524,7 @@
     <span class="number">0.887062599768095</span>,
     <span class="number">0.978228658146057</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_12</span>: [<span class="ident">f64</span>; <span class="number">6</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_12: [f64; <span class="number">6</span>] = [
     <span class="number">0.125333408511469</span>,
     <span class="number">0.367831498918180</span>,
     <span class="number">0.587317954286617</span>,
@@ -1538,7 +1532,7 @@
     <span class="number">0.904117256370475</span>,
     <span class="number">0.981560634246719</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_13</span>: [<span class="ident">f64</span>; <span class="number">7</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_13: [f64; <span class="number">7</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.230458315955135</span>,
     <span class="number">0.448492751036447</span>,
@@ -1547,7 +1541,7 @@
     <span class="number">0.917598399222978</span>,
     <span class="number">0.984183054718588</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_14</span>: [<span class="ident">f64</span>; <span class="number">7</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_14: [f64; <span class="number">7</span>] = [
     <span class="number">0.108054948707344</span>,
     <span class="number">0.319112368927890</span>,
     <span class="number">0.515248636358154</span>,
@@ -1556,7 +1550,7 @@
     <span class="number">0.928434883663574</span>,
     <span class="number">0.986283808696812</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_15</span>: [<span class="ident">f64</span>; <span class="number">8</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_15: [f64; <span class="number">8</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.201194093997435</span>,
     <span class="number">0.394151347077563</span>,
@@ -1566,7 +1560,7 @@
     <span class="number">0.937273392400706</span>,
     <span class="number">0.987992518020485</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_16</span>: [<span class="ident">f64</span>; <span class="number">8</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_16: [f64; <span class="number">8</span>] = [
     <span class="number">0.095012509837637</span>,
     <span class="number">0.281603550779259</span>,
     <span class="number">0.458016777657227</span>,
@@ -1576,7 +1570,7 @@
     <span class="number">0.944575023073233</span>,
     <span class="number">0.989400934991650</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_17</span>: [<span class="ident">f64</span>; <span class="number">9</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_17: [f64; <span class="number">9</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.178484181495847856</span>,
     <span class="number">0.351231763453876315</span>,
@@ -1587,7 +1581,7 @@
     <span class="number">0.950675521768767761</span>,
     <span class="number">0.99057547531441734</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_18</span>: [<span class="ident">f64</span>; <span class="number">9</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_18: [f64; <span class="number">9</span>] = [
     <span class="number">0.084775013041735301</span>,
     <span class="number">0.25188622569150551</span>,
     <span class="number">0.411751161462842646</span>,
@@ -1598,7 +1592,7 @@
     <span class="number">0.955823949571397755</span>,
     <span class="number">0.991565168420930947</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_19</span>: [<span class="ident">f64</span>; <span class="number">10</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_19: [f64; <span class="number">10</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.160358645640225376</span>,
     <span class="number">0.316564099963629832</span>,
@@ -1610,7 +1604,7 @@
     <span class="number">0.960208152134830031</span>,
     <span class="number">0.992406843843584403</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_20</span>: [<span class="ident">f64</span>; <span class="number">10</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_20: [f64; <span class="number">10</span>] = [
     <span class="number">0.076526521133497334</span>,
     <span class="number">0.227785851141645078</span>,
     <span class="number">0.373706088715419561</span>,
@@ -1622,7 +1616,7 @@
     <span class="number">0.963971927277913791</span>,
     <span class="number">0.993128599185094925</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_21</span>: [<span class="ident">f64</span>; <span class="number">11</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_21: [f64; <span class="number">11</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.145561854160895091</span>,
     <span class="number">0.288021316802401097</span>,
@@ -1635,7 +1629,7 @@
     <span class="number">0.967226838566306294</span>,
     <span class="number">0.9937521706203895</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_22</span>: [<span class="ident">f64</span>; <span class="number">11</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_22: [f64; <span class="number">11</span>] = [
     <span class="number">0.069739273319722221</span>,
     <span class="number">0.207860426688221285</span>,
     <span class="number">0.341935820892084225</span>,
@@ -1648,7 +1642,7 @@
     <span class="number">0.970060497835428727</span>,
     <span class="number">0.994294585482399292</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_23</span>: [<span class="ident">f64</span>; <span class="number">12</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_23: [f64; <span class="number">12</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.133256824298466111</span>,
     <span class="number">0.26413568097034493</span>,
@@ -1662,7 +1656,7 @@
     <span class="number">0.972542471218115232</span>,
     <span class="number">0.994769334997552124</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_24</span>: [<span class="ident">f64</span>; <span class="number">12</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_24: [f64; <span class="number">12</span>] = [
     <span class="number">0.064056892862605626</span>,
     <span class="number">0.191118867473616309</span>,
     <span class="number">0.315042679696163374</span>,
@@ -1676,7 +1670,7 @@
     <span class="number">0.974728555971309498</span>,
     <span class="number">0.99518721999702136</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_25</span>: [<span class="ident">f64</span>; <span class="number">13</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_25: [f64; <span class="number">13</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.122864692610710396</span>,
     <span class="number">0.243866883720988432</span>,
@@ -1691,7 +1685,7 @@
     <span class="number">0.976663921459517512</span>,
     <span class="number">0.995556969790498098</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_26</span>: [<span class="ident">f64</span>; <span class="number">13</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_26: [f64; <span class="number">13</span>] = [
     <span class="number">0.059230093429313207</span>,
     <span class="number">0.176858820356890184</span>,
     <span class="number">0.292004839485956895</span>,
@@ -1706,7 +1700,7 @@
     <span class="number">0.97838544595647099</span>,
     <span class="number">0.99588570114561693</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_27</span>: [<span class="ident">f64</span>; <span class="number">14</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_27: [f64; <span class="number">14</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.113972585609529967</span>,
     <span class="number">0.226459365439536859</span>,
@@ -1722,7 +1716,7 @@
     <span class="number">0.979923475961501223</span>,
     <span class="number">0.996179262888988567</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_28</span>: [<span class="ident">f64</span>; <span class="number">14</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_28: [f64; <span class="number">14</span>] = [
     <span class="number">0.0550792898840342704</span>,
     <span class="number">0.164569282133380771</span>,
     <span class="number">0.272061627635178078</span>,
@@ -1738,7 +1732,7 @@
     <span class="number">0.981303165370872754</span>,
     <span class="number">0.99644249757395445</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_29</span>: [<span class="ident">f64</span>; <span class="number">15</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_29: [f64; <span class="number">15</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.10627823013267923</span>,
     <span class="number">0.211352286166001075</span>,
@@ -1755,7 +1749,7 @@
     <span class="number">0.982545505261413175</span>,
     <span class="number">0.996679442260596586</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_ROOT_30</span>: [<span class="ident">f64</span>; <span class="number">15</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_ROOT_30: [f64; <span class="number">15</span>] = [
     <span class="number">0.051471842555317696</span>,
     <span class="number">0.153869913608583547</span>,
     <span class="number">0.254636926167889846</span>,
@@ -1772,38 +1766,38 @@
     <span class="number">0.98366812327974721</span>,
     <span class="number">0.99689348407464954</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_2</span>: [<span class="ident">f64</span>; <span class="number">1</span>] <span class="op">=</span> [<span class="number">1f64</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_3</span>: [<span class="ident">f64</span>; <span class="number">2</span>] <span class="op">=</span> [<span class="number">0.888888888888889</span>, <span class="number">0.555555555555556</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_4</span>: [<span class="ident">f64</span>; <span class="number">2</span>] <span class="op">=</span> [<span class="number">0.652145154862546</span>, <span class="number">0.347854845137454</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_5</span>: [<span class="ident">f64</span>; <span class="number">3</span>] <span class="op">=</span> [<span class="number">0.568888888888889</span>, <span class="number">0.478628670499366</span>, <span class="number">0.236926885056189</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_6</span>: [<span class="ident">f64</span>; <span class="number">3</span>] <span class="op">=</span> [<span class="number">0.467913934572691</span>, <span class="number">0.360761573048139</span>, <span class="number">0.171324492379170</span>];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_7</span>: [<span class="ident">f64</span>; <span class="number">4</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_2: [f64; <span class="number">1</span>] = [<span class="number">1f64</span>];
+<span class="kw">const </span>LEGENDRE_WEIGHT_3: [f64; <span class="number">2</span>] = [<span class="number">0.888888888888889</span>, <span class="number">0.555555555555556</span>];
+<span class="kw">const </span>LEGENDRE_WEIGHT_4: [f64; <span class="number">2</span>] = [<span class="number">0.652145154862546</span>, <span class="number">0.347854845137454</span>];
+<span class="kw">const </span>LEGENDRE_WEIGHT_5: [f64; <span class="number">3</span>] = [<span class="number">0.568888888888889</span>, <span class="number">0.478628670499366</span>, <span class="number">0.236926885056189</span>];
+<span class="kw">const </span>LEGENDRE_WEIGHT_6: [f64; <span class="number">3</span>] = [<span class="number">0.467913934572691</span>, <span class="number">0.360761573048139</span>, <span class="number">0.171324492379170</span>];
+<span class="kw">const </span>LEGENDRE_WEIGHT_7: [f64; <span class="number">4</span>] = [
     <span class="number">0.417959183673469</span>,
     <span class="number">0.381830050505119</span>,
     <span class="number">0.279705391489277</span>,
     <span class="number">0.129484966168870</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_8</span>: [<span class="ident">f64</span>; <span class="number">4</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_8: [f64; <span class="number">4</span>] = [
     <span class="number">0.362683783378362</span>,
     <span class="number">0.313706645877887</span>,
     <span class="number">0.222381034453374</span>,
     <span class="number">0.101228536290376</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_9</span>: [<span class="ident">f64</span>; <span class="number">5</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_9: [f64; <span class="number">5</span>] = [
     <span class="number">0.330239355001260</span>,
     <span class="number">0.312347077040003</span>,
     <span class="number">0.260610696402935</span>,
     <span class="number">0.180648160694857</span>,
     <span class="number">0.081274388361574</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_10</span>: [<span class="ident">f64</span>; <span class="number">5</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_10: [f64; <span class="number">5</span>] = [
     <span class="number">0.295524224714753</span>,
     <span class="number">0.269266719309996</span>,
     <span class="number">0.219086362515982</span>,
     <span class="number">0.149451349150581</span>,
     <span class="number">0.066671344308688</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_11</span>: [<span class="ident">f64</span>; <span class="number">6</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_11: [f64; <span class="number">6</span>] = [
     <span class="number">0.272925086777901</span>,
     <span class="number">0.262804544510247</span>,
     <span class="number">0.233193764591990</span>,
@@ -1811,7 +1805,7 @@
     <span class="number">0.125580369464905</span>,
     <span class="number">0.055668567116174</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_12</span>: [<span class="ident">f64</span>; <span class="number">6</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_12: [f64; <span class="number">6</span>] = [
     <span class="number">0.249147045813403</span>,
     <span class="number">0.233492536538355</span>,
     <span class="number">0.203167426723066</span>,
@@ -1819,7 +1813,7 @@
     <span class="number">0.106939325995318</span>,
     <span class="number">0.047175336386512</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_13</span>: [<span class="ident">f64</span>; <span class="number">7</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_13: [f64; <span class="number">7</span>] = [
     <span class="number">0.232551553230874</span>,
     <span class="number">0.226283180262897</span>,
     <span class="number">0.207816047536889</span>,
@@ -1828,7 +1822,7 @@
     <span class="number">0.092121499837728</span>,
     <span class="number">0.040484004765316</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_14</span>: [<span class="ident">f64</span>; <span class="number">7</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_14: [f64; <span class="number">7</span>] = [
     <span class="number">0.215263853463158</span>,
     <span class="number">0.205198463721290</span>,
     <span class="number">0.185538397477938</span>,
@@ -1837,7 +1831,7 @@
     <span class="number">0.080158087159760</span>,
     <span class="number">0.035119460331752</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_15</span>: [<span class="ident">f64</span>; <span class="number">8</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_15: [f64; <span class="number">8</span>] = [
     <span class="number">0.202578241925561</span>,
     <span class="number">0.198431485327111</span>,
     <span class="number">0.186161000015562</span>,
@@ -1847,7 +1841,7 @@
     <span class="number">0.070366047488108</span>,
     <span class="number">0.030753241996117</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_16</span>: [<span class="ident">f64</span>; <span class="number">8</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_16: [f64; <span class="number">8</span>] = [
     <span class="number">0.189450610455069</span>,
     <span class="number">0.182603415044924</span>,
     <span class="number">0.169156519395003</span>,
@@ -1857,7 +1851,7 @@
     <span class="number">0.062253523938648</span>,
     <span class="number">0.027152459411754</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_17</span>: [<span class="ident">f64</span>; <span class="number">9</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_17: [f64; <span class="number">9</span>] = [
     <span class="number">0.179446470356206526</span>,
     <span class="number">0.17656270536699265</span>,
     <span class="number">0.168004102156450045</span>,
@@ -1868,7 +1862,7 @@
     <span class="number">0.055459529373987201</span>,
     <span class="number">0.024148302868547932</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_18</span>: [<span class="ident">f64</span>; <span class="number">9</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_18: [f64; <span class="number">9</span>] = [
     <span class="number">0.169142382963143592</span>,
     <span class="number">0.16427648374583272</span>,
     <span class="number">0.15468467512626524</span>,
@@ -1879,7 +1873,7 @@
     <span class="number">0.049714548894969796</span>,
     <span class="number">0.02161601352648331</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_19</span>: [<span class="ident">f64</span>; <span class="number">10</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_19: [f64; <span class="number">10</span>] = [
     <span class="number">0.161054449848783696</span>,
     <span class="number">0.158968843393954348</span>,
     <span class="number">0.152766042065859667</span>,
@@ -1891,7 +1885,7 @@
     <span class="number">0.0448142267656996</span>,
     <span class="number">0.019461788229726477</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_20</span>: [<span class="ident">f64</span>; <span class="number">10</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_20: [f64; <span class="number">10</span>] = [
     <span class="number">0.15275338713072585</span>,
     <span class="number">0.149172986472603747</span>,
     <span class="number">0.142096109318382051</span>,
@@ -1903,7 +1897,7 @@
     <span class="number">0.040601429800386941</span>,
     <span class="number">0.0176140071391521183</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_21</span>: [<span class="ident">f64</span>; <span class="number">11</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_21: [f64; <span class="number">11</span>] = [
     <span class="number">0.146081133649690427</span>,
     <span class="number">0.144524403989970059</span>,
     <span class="number">0.139887394791073155</span>,
@@ -1916,7 +1910,7 @@
     <span class="number">0.036953789770852494</span>,
     <span class="number">0.0160172282577743333</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_22</span>: [<span class="ident">f64</span>; <span class="number">11</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_22: [f64; <span class="number">11</span>] = [
     <span class="number">0.139251872855631993</span>,
     <span class="number">0.136541498346015171</span>,
     <span class="number">0.131173504787062371</span>,
@@ -1929,7 +1923,7 @@
     <span class="number">0.033774901584814155</span>,
     <span class="number">0.014627995298272201</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_23</span>: [<span class="ident">f64</span>; <span class="number">12</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_23: [f64; <span class="number">12</span>] = [
     <span class="number">0.13365457218610618</span>,
     <span class="number">0.13246203940469662</span>,
     <span class="number">0.12890572218808215</span>,
@@ -1943,7 +1937,7 @@
     <span class="number">0.030988005856979444</span>,
     <span class="number">0.013411859487141772</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_24</span>: [<span class="ident">f64</span>; <span class="number">12</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_24: [f64; <span class="number">12</span>] = [
     <span class="number">0.127938195346752157</span>,
     <span class="number">0.1258374563468283</span>,
     <span class="number">0.121670472927803391</span>,
@@ -1957,7 +1951,7 @@
     <span class="number">0.028531388628933663</span>,
     <span class="number">0.0123412297999872</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_25</span>: [<span class="ident">f64</span>; <span class="number">13</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_25: [f64; <span class="number">13</span>] = [
     <span class="number">0.123176053726715451</span>,
     <span class="number">0.122242442990310042</span>,
     <span class="number">0.11945576353578477</span>,
@@ -1972,7 +1966,7 @@
     <span class="number">0.026354986615032137</span>,
     <span class="number">0.011393798501026288</span>,    
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_26</span>: [<span class="ident">f64</span>; <span class="number">13</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_26: [f64; <span class="number">13</span>] = [
     <span class="number">0.118321415279262277</span>,
     <span class="number">0.116660443485296582</span>,
     <span class="number">0.11336181654631967</span>,
@@ -1987,7 +1981,7 @@
     <span class="number">0.024417851092631909</span>,
     <span class="number">0.01055137261734301</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_27</span>: [<span class="ident">f64</span>; <span class="number">14</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_27: [f64; <span class="number">14</span>] = [
     <span class="number">0.114220867378956989</span>,
     <span class="number">0.11347634610896515</span>,
     <span class="number">0.111252488356845193</span>,
@@ -2003,7 +1997,7 @@
     <span class="number">0.02268623159618062</span>,
     <span class="number">0.00979899605129436</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_28</span>: [<span class="ident">f64</span>; <span class="number">14</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_28: [f64; <span class="number">14</span>] = [
     <span class="number">0.1100470130164752</span>,
     <span class="number">0.108711192258294135</span>,
     <span class="number">0.10605576592284642</span>,
@@ -2019,7 +2013,7 @@
     <span class="number">0.02113211259277126</span>,
     <span class="number">0.00912428259309452</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_29</span>: [<span class="ident">f64</span>; <span class="number">15</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_29: [f64; <span class="number">15</span>] = [
     <span class="number">0.106479381718314244</span>,
     <span class="number">0.10587615509732094</span>,
     <span class="number">0.104073310077729374</span>,
@@ -2036,7 +2030,7 @@
     <span class="number">0.019732085056122706</span>,
     <span class="number">0.00851690387874641</span>,
 ];
-<span class="kw">const</span> <span class="ident">LEGENDRE_WEIGHT_30</span>: [<span class="ident">f64</span>; <span class="number">15</span>] <span class="op">=</span> [
+<span class="kw">const </span>LEGENDRE_WEIGHT_30: [f64; <span class="number">15</span>] = [
     <span class="number">0.10285265289355884</span>,
     <span class="number">0.1017623897484055</span>,
     <span class="number">0.09959342058679527</span>,
@@ -2054,10 +2048,10 @@
     <span class="number">0.007968192496166606</span>,
 ];
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Table for Kronrod Quadrature</span>
-<span class="comment">// =============================================================================</span>
-<span class="kw">const</span> <span class="ident">KRONROD_NODES_15</span>: [<span class="ident">f64</span>; <span class="number">8</span>] <span class="op">=</span> [
+<span class="comment">// =============================================================================
+// Table for Kronrod Quadrature
+// =============================================================================
+</span><span class="kw">const </span>KRONROD_NODES_15: [f64; <span class="number">8</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.207784955007898468</span>,
     <span class="number">0.405845151377397167</span>,
@@ -2068,7 +2062,7 @@
     <span class="number">0.991455371120812639</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_WEIGHTS_15</span>: [<span class="ident">f64</span>; <span class="number">8</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_WEIGHTS_15: [f64; <span class="number">8</span>] = [
     <span class="number">0.20948214108472783</span>,
     <span class="number">0.204432940075298892</span>,
     <span class="number">0.19035057806478541</span>,
@@ -2079,7 +2073,7 @@
     <span class="number">0.022935322010529225</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_NODES_21</span>: [<span class="ident">f64</span>; <span class="number">11</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_NODES_21: [f64; <span class="number">11</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.148874338981631211</span>,
     <span class="number">0.294392862701460198</span>,
@@ -2093,7 +2087,7 @@
     <span class="number">0.995657163025808081</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_WEIGHTS_21</span>: [<span class="ident">f64</span>; <span class="number">11</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_WEIGHTS_21: [f64; <span class="number">11</span>] = [
     <span class="number">0.149445554002916906</span>,
     <span class="number">0.14773910490133849</span>,
     <span class="number">0.142775938577060081</span>,
@@ -2107,7 +2101,7 @@
     <span class="number">0.011694638867371874</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_NODES_31</span>: [<span class="ident">f64</span>; <span class="number">16</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_NODES_31: [f64; <span class="number">16</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.101142066918717499</span>,
     <span class="number">0.20119409399743452</span>,
@@ -2126,7 +2120,7 @@
     <span class="number">0.99800229869339706</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_WEIGHTS_31</span>: [<span class="ident">f64</span>; <span class="number">16</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_WEIGHTS_31: [f64; <span class="number">16</span>] = [
     <span class="number">0.101330007014791549</span>,
     <span class="number">0.100769845523875595</span>,
     <span class="number">0.09917359872179196</span>,
@@ -2145,7 +2139,7 @@
     <span class="number">0.005377479872923349</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_NODES_41</span>: [<span class="ident">f64</span>; <span class="number">21</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_NODES_41: [f64; <span class="number">21</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.076526521133497334</span>,
     <span class="number">0.152605465240922676</span>,
@@ -2169,7 +2163,7 @@
     <span class="number">0.998859031588277664</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_WEIGHTS_41</span>: [<span class="ident">f64</span>; <span class="number">21</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_WEIGHTS_41: [f64; <span class="number">21</span>] = [
     <span class="number">0.07660071191799966</span>,
     <span class="number">0.076377867672080737</span>,
     <span class="number">0.07570449768455667</span>,
@@ -2193,7 +2187,7 @@
     <span class="number">0.00307358371852053</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_NODES_51</span>: [<span class="ident">f64</span>; <span class="number">26</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_NODES_51: [f64; <span class="number">26</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.061544483005685079</span>,
     <span class="number">0.122864692610710396</span>,
@@ -2222,7 +2216,7 @@
     <span class="number">0.999262104992609834</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_WEIGHTS_51</span>: [<span class="ident">f64</span>; <span class="number">26</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_WEIGHTS_51: [f64; <span class="number">26</span>] = [
     <span class="number">0.061580818067832935</span>,
     <span class="number">0.061471189871425317</span>,
     <span class="number">0.06112850971705305</span>,
@@ -2251,7 +2245,7 @@
     <span class="number">0.001987383892330316</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_NODES_61</span>: [<span class="ident">f64</span>; <span class="number">31</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_NODES_61: [f64; <span class="number">31</span>] = [
     <span class="number">0f64</span>,
     <span class="number">0.051471842555317696</span>,
     <span class="number">0.10280693796673703</span>,
@@ -2285,7 +2279,7 @@
     <span class="number">0.999484410050490638</span>,
 ];
 
-<span class="kw">const</span> <span class="ident">KRONROD_WEIGHTS_61</span>: [<span class="ident">f64</span>; <span class="number">31</span>] <span class="op">=</span> [
+<span class="kw">const </span>KRONROD_WEIGHTS_61: [f64; <span class="number">31</span>] = [
     <span class="number">0.05149472942945157</span>,
     <span class="number">0.051426128537459026</span>,
     <span class="number">0.051221547849258772</span>,
@@ -2319,5 +2313,4 @@
     <span class="number">0.001389013698677008</span>,
 ];
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

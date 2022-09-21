@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/ode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/ode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>ode.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -1085,719 +1079,719 @@
 <span id="1063">1063</span>
 <span id="1064">1064</span>
 <span id="1065">1065</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Solver for ordinary differential equations</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Introduce `ODE` Trait &amp; Structure</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `ODE` Trait</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * `ODE` structures are divided by two kinds</span>
-<span class="doccomment">//!     * `ExplicitODE`</span>
-<span class="doccomment">//!     * `ImplicitODE`</span>
-<span class="doccomment">//! * `ODE` trait is given as</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::{Real, State, BoundaryCondition, Environment};</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     pub trait ODE&lt;E: Environment&gt; {</span>
-<span class="doccomment">//!         type Records;</span>
-<span class="doccomment">//!         type Vector;</span>
-<span class="doccomment">//!         type Param;</span>
-<span class="doccomment">//!         type ODEMethod;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         fn mut_update(&amp;mut self);</span>
-<span class="doccomment">//!         fn integrate(&amp;mut self) -&gt; Self::Records;</span>
-<span class="doccomment">//!         fn set_initial_condition&lt;T: Real&gt;(&amp;mut self, init: State&lt;T&gt;) -&gt; &amp;mut Self;</span>
-<span class="doccomment">//!         fn set_boundary_condition&lt;T: Real&gt;(</span>
-<span class="doccomment">//!             &amp;mut self,</span>
-<span class="doccomment">//!             bound1: (State&lt;T&gt;, BoundaryCondition),</span>
-<span class="doccomment">//!             bound2: (State&lt;T&gt;, BoundaryCondition),</span>
-<span class="doccomment">//!         ) -&gt; &amp;mut Self;</span>
-<span class="doccomment">//!         fn set_step_size(&amp;mut self, dt: f64) -&gt; &amp;mut Self;</span>
-<span class="doccomment">//!         fn set_method(&amp;mut self, method: Self::ODEMethod) -&gt; &amp;mut Self;</span>
-<span class="doccomment">//!         fn set_stop_condition(&amp;mut self, f: fn(&amp;Self) -&gt; bool) -&gt; &amp;mut Self;</span>
-<span class="doccomment">//!         fn set_times(&amp;mut self, n: usize) -&gt; &amp;mut Self;</span>
-<span class="doccomment">//!         fn check_enough(&amp;self) -&gt; bool;</span>
-<span class="doccomment">//!         fn set_env(&amp;mut self, env: E) -&gt; &amp;mut Self;</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     * `Records` : The type to save results of ODE. Usually `Matrix` is used.</span>
-<span class="doccomment">//!     * `Vector` : Vector can be below things.</span>
-<span class="doccomment">//!         * `Vec&lt;f64&gt;` : Used for `ExplicitODE`</span>
-<span class="doccomment">//!         * `Vec&lt;AD&gt;` : Used for `ImplicitODE`</span>
-<span class="doccomment">//!     * `Param` : Also it can be `f64` or `AD`</span>
-<span class="doccomment">//!     * `ODEMethod` : Method for solving ODE</span>
-<span class="doccomment">//!         * `ExMethod` : Explicit method</span>
-<span class="doccomment">//!             * `Euler` : Euler first order</span>
-<span class="doccomment">//!             * `RK4` : Runge Kutta 4th order</span>
-<span class="doccomment">//!         * `ImMethod` : Implicit method</span>
-<span class="doccomment">//!             * `BDF` : Backward Euler 1st order (To be fixed)</span>
-<span class="doccomment">//!             * `GL4` : Gauss Legendre 4th order</span>
-<span class="doccomment">//!     * `Environment` : External environment (CubicSpline, Vec&lt;f64&gt;, Matrix or Another external table)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `State&lt;T&gt;` structure</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * To use `ODE` trait, you should understand `State&lt;T&gt;` first.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::Real;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     #[derive(Debug, Clone, Default)]</span>
-<span class="doccomment">//!     pub struct State&lt;T: Real&gt; {</span>
-<span class="doccomment">//!         pub param: T,</span>
-<span class="doccomment">//!         pub value: Vec&lt;T&gt;,</span>
-<span class="doccomment">//!         pub deriv: Vec&lt;T&gt;,</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     * `T` can be `f64` or `AD`</span>
-<span class="doccomment">//!         * `f64` for `ExplicitODE`</span>
-<span class="doccomment">//!         * `AD` for `ImplicitODE`</span>
-<span class="doccomment">//!     * `param` is parameter for ODE. Usually it is represented by time.</span>
-<span class="doccomment">//!     * `value` is value of each node.</span>
-<span class="doccomment">//!     * `deriv` is value of derivative of each node.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! For example,</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! $$ \frac{dy_n}{dt} = f(t, y_n) $$</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * $t$ is `param`</span>
-<span class="doccomment">//! * $y_n$ is `value`</span>
-<span class="doccomment">//! * $f(t,y_n)$ is `deriv`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Methods for `State&lt;T&gt;` are as follows.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * `to_f64(&amp;self) -&gt; State&lt;f64&gt;`</span>
-<span class="doccomment">//! * `to_ad(&amp;self) -&gt; State&lt;AD&gt;`</span>
-<span class="doccomment">//! * `new(T, Vec&lt;T&gt;, Vec&lt;T&gt;) -&gt; Self`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `Environment`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * `Environment` needs just `Default`</span>
-<span class="doccomment">//! * To use custom `Environment`, just type follows : `impl Environment for CustomType {}`</span>
-<span class="doccomment">//! * If you don&#39;t want to use `Environment`, then use `NoEnv`</span>
-<span class="doccomment">//! * Implemented Data Types</span>
-<span class="doccomment">//!     * `Vec&lt;f64&gt;`</span>
-<span class="doccomment">//!     * `Polynomial`</span>
-<span class="doccomment">//!     * `Matrix`</span>
-<span class="doccomment">//!     * `CubicSpline`</span>
-<span class="doccomment">//!     * `NoEnv`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let x = seq(0, 10, 1);</span>
-<span class="doccomment">//!     x.print();</span>
-<span class="doccomment">//!     let y = x.iter().enumerate().map(|(i, &amp;t)| t.powi(5-i as i32)).collect::&lt;Vec&lt;f64&gt;&gt;();</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let c = CubicSpline::from_nodes(&amp;x, &amp;y);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let mut ode_solver = ExplicitODE::new(test_fn);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ode_solver</span>
-<span class="doccomment">//!         .set_method(ExMethod::RK4)</span>
-<span class="doccomment">//!         .set_initial_condition(init_state)</span>
-<span class="doccomment">//!         .set_step_size(0.01)</span>
-<span class="doccomment">//!         .set_times(1000)</span>
-<span class="doccomment">//!         .set_env(c);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let result = ode_solver.integrate();</span>
-<span class="doccomment">//!     result.print();</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;, env: &amp;CubicSpline) {</span>
-<span class="doccomment">//!     let x = st.param;</span>
-<span class="doccomment">//!     let dy = &amp;mut st.deriv;</span>
-<span class="doccomment">//!     dy[0] = env.eval(x);</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `ExplicitODE` struct</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `ExplicitODE` is given as follow :</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use std::collections::HashMap;</span>
-<span class="doccomment">//! use peroxide::fuga::{State, ExMethod, BoundaryCondition, ODEOptions, Environment};</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #[derive(Clone)]</span>
-<span class="doccomment">//! pub struct ExplicitODE&lt;E: Environment&gt; {</span>
-<span class="doccomment">//!     state: State&lt;f64&gt;,</span>
-<span class="doccomment">//!     func: fn(&amp;mut State&lt;f64&gt;, &amp;E),</span>
-<span class="doccomment">//!     step_size: f64,</span>
-<span class="doccomment">//!     method: ExMethod,</span>
-<span class="doccomment">//!     init_cond: State&lt;f64&gt;,</span>
-<span class="doccomment">//!     bound_cond1: (State&lt;f64&gt;, BoundaryCondition),</span>
-<span class="doccomment">//!     bound_cond2: (State&lt;f64&gt;, BoundaryCondition),</span>
-<span class="doccomment">//!     stop_cond: fn(&amp;Self) -&gt; bool,</span>
-<span class="doccomment">//!     times: usize,</span>
-<span class="doccomment">//!     to_use: HashMap&lt;ODEOptions, bool&gt;,</span>
-<span class="doccomment">//!     env: E,</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * `state` : Current param, value, derivative</span>
-<span class="doccomment">//! * `func` : Function to update `state`</span>
-<span class="doccomment">//! * `init_cond` : Initial condition</span>
-<span class="doccomment">//! * `bound_cond1` : If boundary problem, then first boundary condition</span>
-<span class="doccomment">//! * `bound_cond2` : second boundary condition</span>
-<span class="doccomment">//! * `stop_cond` : Stop condition (stop before `times`)</span>
-<span class="doccomment">//! * `times` : How many times do you want to update?</span>
-<span class="doccomment">//! * `to_use` : Just check whether information is enough</span>
-<span class="doccomment">//! * `env` : Environment</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # `ImplicitODE` struct</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `ImplicitODE` is struct to solve stiff ODE with implicit methods.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```no_run</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use std::collections::HashMap;</span>
-<span class="doccomment">//! use peroxide::fuga::{State, ImMethod, BoundaryCondition, ODEOptions, Environment, AD};</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! #[derive(Clone)]</span>
-<span class="doccomment">//! pub struct ImplicitODE&lt;E: Environment&gt; {</span>
-<span class="doccomment">//!     state: State&lt;AD&gt;,</span>
-<span class="doccomment">//!     func: fn(&amp;mut State&lt;AD&gt;, &amp;E),</span>
-<span class="doccomment">//!     step_size: f64,</span>
-<span class="doccomment">//!     method: ImMethod,</span>
-<span class="doccomment">//!     init_cond: State&lt;AD&gt;,</span>
-<span class="doccomment">//!     bound_cond1: (State&lt;AD&gt;, BoundaryCondition),</span>
-<span class="doccomment">//!     bound_cond2: (State&lt;AD&gt;, BoundaryCondition),</span>
-<span class="doccomment">//!     stop_cond: fn(&amp;Self) -&gt; bool,</span>
-<span class="doccomment">//!     times: usize,</span>
-<span class="doccomment">//!     to_use: HashMap&lt;ODEOptions, bool&gt;,</span>
-<span class="doccomment">//!     env: E,</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Example</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Lorenz Butterfly</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     // =========================================</span>
-<span class="doccomment">//!     //  Declare ODE (Euler)</span>
-<span class="doccomment">//!     // =========================================</span>
-<span class="doccomment">//!     let mut ex_test = ExplicitODE::new(f);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let init_state: State&lt;f64&gt; = State::new(</span>
-<span class="doccomment">//!         0.0,</span>
-<span class="doccomment">//!         vec![10.0, 1.0, 1.0],</span>
-<span class="doccomment">//!         vec![0.0, 0.0, 0.0],</span>
-<span class="doccomment">//!     );</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ex_test</span>
-<span class="doccomment">//!         .set_initial_condition(init_state)</span>
-<span class="doccomment">//!         .set_method(ExMethod::Euler)</span>
-<span class="doccomment">//!         .set_step_size(0.01f64)</span>
-<span class="doccomment">//!         .set_times(10000);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     // =========================================</span>
-<span class="doccomment">//!     //  Declare ODE (RK4)</span>
-<span class="doccomment">//!     // =========================================</span>
-<span class="doccomment">//!     let mut ex_test2 = ex_test.clone();</span>
-<span class="doccomment">//!     ex_test2.set_method(ExMethod::RK4);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     // =========================================</span>
-<span class="doccomment">//!     //  Declare ODE (GL4)</span>
-<span class="doccomment">//!     // =========================================</span>
-<span class="doccomment">//!     let mut im_test = ImplicitODE::new(g);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let init_state: State&lt;AD&gt; = State::new(</span>
-<span class="doccomment">//!         AD0(0.0),</span>
-<span class="doccomment">//!         vec![AD0(10f64), AD0(1f64), AD0(1f64)],</span>
-<span class="doccomment">//!         vec![AD0(0.0), AD0(0.0), AD0(0.0)],</span>
-<span class="doccomment">//!     );</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     im_test</span>
-<span class="doccomment">//!         .set_initial_condition(init_state)</span>
-<span class="doccomment">//!         .set_method(ImMethod::GL4)</span>
-<span class="doccomment">//!         .set_step_size(0.01f64)</span>
-<span class="doccomment">//!         .set_times(10000);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     // =========================================</span>
-<span class="doccomment">//!     //  Save results</span>
-<span class="doccomment">//!     // =========================================</span>
-<span class="doccomment">//!     let results = ex_test.integrate();</span>
-<span class="doccomment">//!     let results2 = ex_test2.integrate();</span>
-<span class="doccomment">//!     let results3 = im_test.integrate();</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     // Extract data</span>
-<span class="doccomment">//!     let mut df = DataFrame::new(vec![]);</span>
-<span class="doccomment">//!     df.push(&quot;x_euler&quot;, Series::new(results.col(1)));</span>
-<span class="doccomment">//!     df.push(&quot;z_euler&quot;, Series::new(results.col(3)));</span>
-<span class="doccomment">//!     df.push(&quot;x_rk4&quot;, Series::new(results2.col(1)));</span>
-<span class="doccomment">//!     df.push(&quot;z_rk4&quot;, Series::new(results2.col(3)));</span>
-<span class="doccomment">//!     df.push(&quot;x_gl4&quot;, Series::new(results3.col(1)));</span>
-<span class="doccomment">//!     df.push(&quot;z_gl4&quot;, Series::new(results3.col(3)));</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     # #[cfg(feature=&quot;nc&quot;)]</span>
-<span class="doccomment">//!     # {</span>
-<span class="doccomment">//!     // Write netcdf file (`nc` feature required)</span>
-<span class="doccomment">//!     df.write_nc(&quot;example_data/lorenz.nc&quot;)</span>
-<span class="doccomment">//!         .expect(&quot;Can&#39;t write lorenz.nc&quot;);</span>
-<span class="doccomment">//!     # }</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn f(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {</span>
-<span class="doccomment">//!     let x = &amp;st.value;</span>
-<span class="doccomment">//!     let dx = &amp;mut st.deriv;</span>
-<span class="doccomment">//!     dx[0] = 10f64 * (x[1] - x[0]);</span>
-<span class="doccomment">//!     dx[1] = 28f64 * x[0] - x[1] - x[0] * x[2];</span>
-<span class="doccomment">//!     dx[2] = -8f64/3f64 * x[2] + x[0] * x[1];</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn g(st: &amp;mut State&lt;AD&gt;, _: &amp;NoEnv) {</span>
-<span class="doccomment">//!     let x = &amp;st.value;</span>
-<span class="doccomment">//!     let dx = &amp;mut st.deriv;</span>
-<span class="doccomment">//!     dx[0] = 10f64 * (x[1] - x[0]);</span>
-<span class="doccomment">//!     dx[1] = 28f64 * x[0] - x[1] - x[0] * x[2];</span>
-<span class="doccomment">//!     dx[2] = -8f64/3f64 * x[2] + x[0] * x[1];</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! If plotting pickle data with python, then</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ![Lorenz with Euler](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_euler.png)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ![Lorenz with RK4](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_rk4.png)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ![Lorenz with GL4](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_gl4.png)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Simple 1D Runge-Kutta</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! $$\begin{gathered} \frac{dy}{dx} = \frac{5x^2 - y}{e^{x+y}} \\\ y(0) = 1 \end{gathered}$$</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let mut ode_solver = ExplicitODE::new(test_fn);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ode_solver</span>
-<span class="doccomment">//!         .set_method(ExMethod::RK4)</span>
-<span class="doccomment">//!         .set_initial_condition(init_state)</span>
-<span class="doccomment">//!         .set_step_size(0.01)</span>
-<span class="doccomment">//!         .set_times(1000);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let result = ode_solver.integrate();</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     // Plot or Extract..</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {</span>
-<span class="doccomment">//!     let x = st.param;</span>
-<span class="doccomment">//!     let y = &amp;st.value;</span>
-<span class="doccomment">//!     let dy = &amp;mut st.deriv;</span>
-<span class="doccomment">//!     dy[0] = (5f64*x.powi(2) - y[0]) / (x + y[0]).exp();</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Solver for ordinary differential equations
+//!
+//! ## Introduce `ODE` Trait &amp; Structure
+//!
+//! ### `ODE` Trait
+//!
+//! * `ODE` structures are divided by two kinds
+//!     * `ExplicitODE`
+//!     * `ImplicitODE`
+//! * `ODE` trait is given as
+//!
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::{Real, State, BoundaryCondition, Environment};
+//!
+//!     pub trait ODE&lt;E: Environment&gt; {
+//!         type Records;
+//!         type Vector;
+//!         type Param;
+//!         type ODEMethod;
+//!
+//!         fn mut_update(&amp;mut self);
+//!         fn integrate(&amp;mut self) -&gt; Self::Records;
+//!         fn set_initial_condition&lt;T: Real&gt;(&amp;mut self, init: State&lt;T&gt;) -&gt; &amp;mut Self;
+//!         fn set_boundary_condition&lt;T: Real&gt;(
+//!             &amp;mut self,
+//!             bound1: (State&lt;T&gt;, BoundaryCondition),
+//!             bound2: (State&lt;T&gt;, BoundaryCondition),
+//!         ) -&gt; &amp;mut Self;
+//!         fn set_step_size(&amp;mut self, dt: f64) -&gt; &amp;mut Self;
+//!         fn set_method(&amp;mut self, method: Self::ODEMethod) -&gt; &amp;mut Self;
+//!         fn set_stop_condition(&amp;mut self, f: fn(&amp;Self) -&gt; bool) -&gt; &amp;mut Self;
+//!         fn set_times(&amp;mut self, n: usize) -&gt; &amp;mut Self;
+//!         fn check_enough(&amp;self) -&gt; bool;
+//!         fn set_env(&amp;mut self, env: E) -&gt; &amp;mut Self;
+//!     }
+//!     ```
+//!
+//!     * `Records` : The type to save results of ODE. Usually `Matrix` is used.
+//!     * `Vector` : Vector can be below things.
+//!         * `Vec&lt;f64&gt;` : Used for `ExplicitODE`
+//!         * `Vec&lt;AD&gt;` : Used for `ImplicitODE`
+//!     * `Param` : Also it can be `f64` or `AD`
+//!     * `ODEMethod` : Method for solving ODE
+//!         * `ExMethod` : Explicit method
+//!             * `Euler` : Euler first order
+//!             * `RK4` : Runge Kutta 4th order
+//!         * `ImMethod` : Implicit method
+//!             * `BDF` : Backward Euler 1st order (To be fixed)
+//!             * `GL4` : Gauss Legendre 4th order
+//!     * `Environment` : External environment (CubicSpline, Vec&lt;f64&gt;, Matrix or Another external table)
+//!
+//!
+//! ### `State&lt;T&gt;` structure
+//!
+//! * To use `ODE` trait, you should understand `State&lt;T&gt;` first.
+//!
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::Real;
+//!
+//!     #[derive(Debug, Clone, Default)]
+//!     pub struct State&lt;T: Real&gt; {
+//!         pub param: T,
+//!         pub value: Vec&lt;T&gt;,
+//!         pub deriv: Vec&lt;T&gt;,
+//!     }
+//!     ```
+//!
+//!     * `T` can be `f64` or `AD`
+//!         * `f64` for `ExplicitODE`
+//!         * `AD` for `ImplicitODE`
+//!     * `param` is parameter for ODE. Usually it is represented by time.
+//!     * `value` is value of each node.
+//!     * `deriv` is value of derivative of each node.
+//!
+//! For example,
+//!
+//! $$ \frac{dy_n}{dt} = f(t, y_n) $$
+//!
+//! * $t$ is `param`
+//! * $y_n$ is `value`
+//! * $f(t,y_n)$ is `deriv`
+//!
+//! Methods for `State&lt;T&gt;` are as follows.
+//!
+//! * `to_f64(&amp;self) -&gt; State&lt;f64&gt;`
+//! * `to_ad(&amp;self) -&gt; State&lt;AD&gt;`
+//! * `new(T, Vec&lt;T&gt;, Vec&lt;T&gt;) -&gt; Self`
+//!
+//! ### `Environment`
+//!
+//! * `Environment` needs just `Default`
+//! * To use custom `Environment`, just type follows : `impl Environment for CustomType {}`
+//! * If you don&#39;t want to use `Environment`, then use `NoEnv`
+//! * Implemented Data Types
+//!     * `Vec&lt;f64&gt;`
+//!     * `Polynomial`
+//!     * `Matrix`
+//!     * `CubicSpline`
+//!     * `NoEnv`
+//!
+//! ```
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     let x = seq(0, 10, 1);
+//!     x.print();
+//!     let y = x.iter().enumerate().map(|(i, &amp;t)| t.powi(5-i as i32)).collect::&lt;Vec&lt;f64&gt;&gt;();
+//!
+//!     let c = CubicSpline::from_nodes(&amp;x, &amp;y);
+//!
+//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));
+//!
+//!     let mut ode_solver = ExplicitODE::new(test_fn);
+//!
+//!     ode_solver
+//!         .set_method(ExMethod::RK4)
+//!         .set_initial_condition(init_state)
+//!         .set_step_size(0.01)
+//!         .set_times(1000)
+//!         .set_env(c);
+//!
+//!     let result = ode_solver.integrate();
+//!     result.print();
+//! }
+//!
+//! fn test_fn(st: &amp;mut State&lt;f64&gt;, env: &amp;CubicSpline) {
+//!     let x = st.param;
+//!     let dy = &amp;mut st.deriv;
+//!     dy[0] = env.eval(x);
+//! }
+//! ```
+//!
+//! ### `ExplicitODE` struct
+//!
+//! `ExplicitODE` is given as follow :
+//!
+//! ```rust
+//! extern crate peroxide;
+//! use std::collections::HashMap;
+//! use peroxide::fuga::{State, ExMethod, BoundaryCondition, ODEOptions, Environment};
+//!
+//! #[derive(Clone)]
+//! pub struct ExplicitODE&lt;E: Environment&gt; {
+//!     state: State&lt;f64&gt;,
+//!     func: fn(&amp;mut State&lt;f64&gt;, &amp;E),
+//!     step_size: f64,
+//!     method: ExMethod,
+//!     init_cond: State&lt;f64&gt;,
+//!     bound_cond1: (State&lt;f64&gt;, BoundaryCondition),
+//!     bound_cond2: (State&lt;f64&gt;, BoundaryCondition),
+//!     stop_cond: fn(&amp;Self) -&gt; bool,
+//!     times: usize,
+//!     to_use: HashMap&lt;ODEOptions, bool&gt;,
+//!     env: E,
+//! }
+//! ```
+//!
+//! * `state` : Current param, value, derivative
+//! * `func` : Function to update `state`
+//! * `init_cond` : Initial condition
+//! * `bound_cond1` : If boundary problem, then first boundary condition
+//! * `bound_cond2` : second boundary condition
+//! * `stop_cond` : Stop condition (stop before `times`)
+//! * `times` : How many times do you want to update?
+//! * `to_use` : Just check whether information is enough
+//! * `env` : Environment
+//!
+//! # `ImplicitODE` struct
+//!
+//! `ImplicitODE` is struct to solve stiff ODE with implicit methods.
+//!
+//! ```no_run
+//! extern crate peroxide;
+//! use std::collections::HashMap;
+//! use peroxide::fuga::{State, ImMethod, BoundaryCondition, ODEOptions, Environment, AD};
+//!
+//! #[derive(Clone)]
+//! pub struct ImplicitODE&lt;E: Environment&gt; {
+//!     state: State&lt;AD&gt;,
+//!     func: fn(&amp;mut State&lt;AD&gt;, &amp;E),
+//!     step_size: f64,
+//!     method: ImMethod,
+//!     init_cond: State&lt;AD&gt;,
+//!     bound_cond1: (State&lt;AD&gt;, BoundaryCondition),
+//!     bound_cond2: (State&lt;AD&gt;, BoundaryCondition),
+//!     stop_cond: fn(&amp;Self) -&gt; bool,
+//!     times: usize,
+//!     to_use: HashMap&lt;ODEOptions, bool&gt;,
+//!     env: E,
+//! }
+//! ```
+//!
+//! ## Example
+//!
+//! ### Lorenz Butterfly
+//!
+//! ```rust
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     // =========================================
+//!     //  Declare ODE (Euler)
+//!     // =========================================
+//!     let mut ex_test = ExplicitODE::new(f);
+//!
+//!     let init_state: State&lt;f64&gt; = State::new(
+//!         0.0,
+//!         vec![10.0, 1.0, 1.0],
+//!         vec![0.0, 0.0, 0.0],
+//!     );
+//!
+//!     ex_test
+//!         .set_initial_condition(init_state)
+//!         .set_method(ExMethod::Euler)
+//!         .set_step_size(0.01f64)
+//!         .set_times(10000);
+//!
+//!     // =========================================
+//!     //  Declare ODE (RK4)
+//!     // =========================================
+//!     let mut ex_test2 = ex_test.clone();
+//!     ex_test2.set_method(ExMethod::RK4);
+//!
+//!     // =========================================
+//!     //  Declare ODE (GL4)
+//!     // =========================================
+//!     let mut im_test = ImplicitODE::new(g);
+//!
+//!     let init_state: State&lt;AD&gt; = State::new(
+//!         AD0(0.0),
+//!         vec![AD0(10f64), AD0(1f64), AD0(1f64)],
+//!         vec![AD0(0.0), AD0(0.0), AD0(0.0)],
+//!     );
+//!
+//!     im_test
+//!         .set_initial_condition(init_state)
+//!         .set_method(ImMethod::GL4)
+//!         .set_step_size(0.01f64)
+//!         .set_times(10000);
+//!
+//!     // =========================================
+//!     //  Save results
+//!     // =========================================
+//!     let results = ex_test.integrate();
+//!     let results2 = ex_test2.integrate();
+//!     let results3 = im_test.integrate();
+//!
+//!     // Extract data
+//!     let mut df = DataFrame::new(vec![]);
+//!     df.push(&quot;x_euler&quot;, Series::new(results.col(1)));
+//!     df.push(&quot;z_euler&quot;, Series::new(results.col(3)));
+//!     df.push(&quot;x_rk4&quot;, Series::new(results2.col(1)));
+//!     df.push(&quot;z_rk4&quot;, Series::new(results2.col(3)));
+//!     df.push(&quot;x_gl4&quot;, Series::new(results3.col(1)));
+//!     df.push(&quot;z_gl4&quot;, Series::new(results3.col(3)));
+//!
+//!     # #[cfg(feature=&quot;nc&quot;)]
+//!     # {
+//!     // Write netcdf file (`nc` feature required)
+//!     df.write_nc(&quot;example_data/lorenz.nc&quot;)
+//!         .expect(&quot;Can&#39;t write lorenz.nc&quot;);
+//!     # }
+//! }
+//!
+//! fn f(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {
+//!     let x = &amp;st.value;
+//!     let dx = &amp;mut st.deriv;
+//!     dx[0] = 10f64 * (x[1] - x[0]);
+//!     dx[1] = 28f64 * x[0] - x[1] - x[0] * x[2];
+//!     dx[2] = -8f64/3f64 * x[2] + x[0] * x[1];
+//! }
+//!
+//! fn g(st: &amp;mut State&lt;AD&gt;, _: &amp;NoEnv) {
+//!     let x = &amp;st.value;
+//!     let dx = &amp;mut st.deriv;
+//!     dx[0] = 10f64 * (x[1] - x[0]);
+//!     dx[1] = 28f64 * x[0] - x[1] - x[0] * x[2];
+//!     dx[2] = -8f64/3f64 * x[2] + x[0] * x[1];
+//! }
+//! ```
+//!
+//! If plotting pickle data with python, then
+//!
+//! ![Lorenz with Euler](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_euler.png)
+//!
+//! ![Lorenz with RK4](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_rk4.png)
+//!
+//! ![Lorenz with GL4](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_gl4.png)
+//!
+//! ### Simple 1D Runge-Kutta
+//!
+//! $$\begin{gathered} \frac{dy}{dx} = \frac{5x^2 - y}{e^{x+y}} \\\ y(0) = 1 \end{gathered}$$
+//!
+//! ```rust
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));
+//!
+//!     let mut ode_solver = ExplicitODE::new(test_fn);
+//!
+//!     ode_solver
+//!         .set_method(ExMethod::RK4)
+//!         .set_initial_condition(init_state)
+//!         .set_step_size(0.01)
+//!         .set_times(1000);
+//!
+//!     let result = ode_solver.integrate();
+//!
+//!     // Plot or Extract..
+//! }
+//!
+//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {
+//!     let x = st.param;
+//!     let y = &amp;st.value;
+//!     let dy = &amp;mut st.deriv;
+//!     dy[0] = (5f64*x.powi(2) - y[0]) / (x + y[0]).exp();
+//! }
+//! ```
 
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::BoundaryCondition::Dirichlet</span>;
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::ExMethod</span>::{<span class="ident">Euler</span>, <span class="ident">RK4</span>};
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::ImMethod</span>::{<span class="ident">BDF1</span>, <span class="ident">GL4</span>};
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::ODEOptions</span>::{<span class="ident">BoundCond</span>, <span class="ident">InitCond</span>, <span class="ident">Method</span>, <span class="ident">StepSize</span>, <span class="ident">StopCond</span>, <span class="ident">Times</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::numerical</span>::{<span class="ident">spline::CubicSpline</span>, <span class="ident">utils::jacobian</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure</span>::{
-    <span class="ident">ad</span>::{<span class="ident">AD</span>, <span class="ident">ADVec</span>, <span class="ident">AD</span>::<span class="kw-2">*</span>},
-    <span class="ident">matrix</span>::{<span class="ident">LinearAlgebra</span>, <span class="ident">Matrix</span>},
-    <span class="ident">polynomial::Polynomial</span>,
+</span><span class="kw">use </span><span class="self">self</span>::BoundaryCondition::Dirichlet;
+<span class="kw">use </span><span class="self">self</span>::ExMethod::{Euler, RK4};
+<span class="kw">use </span><span class="self">self</span>::ImMethod::{BDF1, GL4};
+<span class="kw">use </span><span class="self">self</span>::ODEOptions::{BoundCond, InitCond, Method, StepSize, StopCond, Times};
+<span class="kw">use </span><span class="kw">crate</span>::numerical::{spline::CubicSpline, utils::jacobian};
+<span class="kw">use </span><span class="kw">crate</span>::structure::{
+    ad::{AD, ADVec, AD::<span class="kw-2">*</span>},
+    matrix::{LinearAlgebra, Matrix},
+    polynomial::Polynomial,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traits</span>::{
-    <span class="ident">fp</span>::{<span class="ident">FPMatrix</span>, <span class="ident">FPVector</span>},
-    <span class="ident">math</span>::{<span class="ident">Norm</span>, <span class="ident">Normed</span>, <span class="ident">Vector</span>},
-    <span class="ident">mutable::MutFP</span>,
-    <span class="ident">num::Real</span>,
+<span class="kw">use </span><span class="kw">crate</span>::traits::{
+    fp::{FPMatrix, FPVector},
+    math::{Norm, Normed, Vector},
+    mutable::MutFP,
+    num::Real,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util</span>::{
-    <span class="ident">non_macro</span>::{<span class="ident">cat</span>, <span class="ident">concat</span>, <span class="ident">eye</span>, <span class="ident">zeros</span>},
-    <span class="ident">print::Printable</span>,
+<span class="kw">use </span><span class="kw">crate</span>::util::{
+    non_macro::{cat, concat, eye, zeros},
+    print::Printable,
 };
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="comment">//#[cfg(feature = &quot;O3&quot;)]</span>
-<span class="comment">//use {blas_daxpy, blas_daxpy_return};</span>
+<span class="kw">use </span>std::collections::HashMap;
+<span class="comment">//#[cfg(feature = &quot;O3&quot;)]
+//use {blas_daxpy, blas_daxpy_return};
 
-<span class="doccomment">/// Explicit ODE Methods</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// * Euler : Euler 1st Order</span>
-<span class="doccomment">/// * RK4 : Runge-Kutta 4th Order</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialOrd</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ExMethod</span> {
-    <span class="ident">Euler</span>,
-    <span class="ident">RK4</span>,
+</span><span class="doccomment">/// Explicit ODE Methods
+///
+/// * Euler : Euler 1st Order
+/// * RK4 : Runge-Kutta 4th Order
+</span><span class="attribute">#[derive(Debug, Copy, Clone, Hash, PartialOrd, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>ExMethod {
+    Euler,
+    RK4,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialOrd</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ImMethod</span> {
-    <span class="ident">BDF1</span>,
-    <span class="ident">GL4</span>,
+<span class="attribute">#[derive(Debug, Copy, Clone, Hash, PartialOrd, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>ImMethod {
+    BDF1,
+    GL4,
 }
 
-<span class="doccomment">/// Kinds of Boundary Conditions</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// * Dirichlet</span>
-<span class="doccomment">/// * Neumann</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialOrd</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">BoundaryCondition</span> {
-    <span class="ident">Dirichlet</span>,
-    <span class="ident">Neumann</span>,
+<span class="doccomment">/// Kinds of Boundary Conditions
+///
+/// * Dirichlet
+/// * Neumann
+</span><span class="attribute">#[derive(Debug, Copy, Clone, Hash, PartialOrd, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>BoundaryCondition {
+    Dirichlet,
+    Neumann,
 }
 
-<span class="doccomment">/// Options for ODE</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// * `InitCond` : Initial condition</span>
-<span class="doccomment">/// * `BoundCond` : Boundary condition</span>
-<span class="doccomment">/// * `Method` : methods of `ExMethod` or `ImMethod`</span>
-<span class="doccomment">/// * `StopCond` : Stop condition</span>
-<span class="doccomment">/// * `StepSize` : Step size</span>
-<span class="doccomment">/// * `Times` : A number of times to integrate with specific step size</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Hash</span>, <span class="ident">PartialOrd</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ODEOptions</span> {
-    <span class="ident">InitCond</span>,
-    <span class="ident">BoundCond</span>,
-    <span class="ident">Method</span>,
-    <span class="ident">StopCond</span>,
-    <span class="ident">StepSize</span>,
-    <span class="ident">Times</span>,
+<span class="doccomment">/// Options for ODE
+///
+/// * `InitCond` : Initial condition
+/// * `BoundCond` : Boundary condition
+/// * `Method` : methods of `ExMethod` or `ImMethod`
+/// * `StopCond` : Stop condition
+/// * `StepSize` : Step size
+/// * `Times` : A number of times to integrate with specific step size
+</span><span class="attribute">#[derive(Debug, Clone, Copy, Hash, PartialOrd, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>ODEOptions {
+    InitCond,
+    BoundCond,
+    Method,
+    StopCond,
+    StepSize,
+    Times,
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Environment</span>: <span class="ident">Default</span> {}
+<span class="kw">pub trait </span>Environment: Default {}
 
-<span class="doccomment">/// State for ODE</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// * `param` : Parameter of ODE (ex) time)</span>
-<span class="doccomment">/// * `value` : Current value of ODE</span>
-<span class="doccomment">/// * `deriv` : Current differential of values</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">param</span>: <span class="ident">T</span>,
-    <span class="kw">pub</span> <span class="ident">value</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">deriv</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="doccomment">/// State for ODE
+///
+/// * `param` : Parameter of ODE (ex) time)
+/// * `value` : Current value of ODE
+/// * `deriv` : Current differential of values
+</span><span class="attribute">#[derive(Debug, Clone, Default)]
+</span><span class="kw">pub struct </span>State&lt;T: Real&gt; {
+    <span class="kw">pub </span>param: T,
+    <span class="kw">pub </span>value: Vec&lt;T&gt;,
+    <span class="kw">pub </span>deriv: Vec&lt;T&gt;,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="ident">State</span> {
-            <span class="ident">param</span>: <span class="self">self</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(),
-            <span class="ident">value</span>: <span class="self">self</span>
-                .<span class="ident">value</span>
-                .<span class="ident">clone</span>()
-                .<span class="ident">into_iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_f64</span>())
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
-            <span class="ident">deriv</span>: <span class="self">self</span>
-                .<span class="ident">deriv</span>
-                .<span class="ident">clone</span>()
-                .<span class="ident">into_iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_f64</span>())
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
+<span class="kw">impl</span>&lt;T: Real&gt; State&lt;T&gt; {
+    <span class="kw">pub fn </span>to_f64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; State&lt;f64&gt; {
+        State {
+            param: <span class="self">self</span>.param.to_f64(),
+            value: <span class="self">self
+                </span>.value
+                .clone()
+                .into_iter()
+                .map(|x| x.to_f64())
+                .collect::&lt;Vec&lt;f64&gt;&gt;(),
+            deriv: <span class="self">self
+                </span>.deriv
+                .clone()
+                .into_iter()
+                .map(|x| x.to_f64())
+                .collect::&lt;Vec&lt;f64&gt;&gt;(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_ad</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span> {
-        <span class="ident">State</span> {
-            <span class="ident">param</span>: <span class="self">self</span>.<span class="ident">param</span>.<span class="ident">to_ad</span>(),
-            <span class="ident">value</span>: <span class="self">self</span>
-                .<span class="ident">value</span>
-                .<span class="ident">clone</span>()
-                .<span class="ident">into_iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_ad</span>())
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
-            <span class="ident">deriv</span>: <span class="self">self</span>
-                .<span class="ident">deriv</span>
-                .<span class="ident">clone</span>()
-                .<span class="ident">into_iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_ad</span>())
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
+    <span class="kw">pub fn </span>to_ad(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; State&lt;AD&gt; {
+        State {
+            param: <span class="self">self</span>.param.to_ad(),
+            value: <span class="self">self
+                </span>.value
+                .clone()
+                .into_iter()
+                .map(|x| x.to_ad())
+                .collect::&lt;Vec&lt;AD&gt;&gt;(),
+            deriv: <span class="self">self
+                </span>.deriv
+                .clone()
+                .into_iter()
+                .map(|x| x.to_ad())
+                .collect::&lt;Vec&lt;AD&gt;&gt;(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">param</span>: <span class="ident">T</span>, <span class="ident">state</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">deriv</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">State</span> {
-            <span class="ident">param</span>,
-            <span class="ident">value</span>: <span class="ident">state</span>,
-            <span class="ident">deriv</span>,
+    <span class="kw">pub fn </span>new(param: T, state: Vec&lt;T&gt;, deriv: Vec&lt;T&gt;) -&gt; <span class="self">Self </span>{
+        State {
+            param,
+            value: state,
+            deriv,
         }
     }
 }
 
-<span class="doccomment">/// ODE solver</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// * `Records` : Type of container to contain results</span>
-<span class="doccomment">/// * `Param` : Type of parameter</span>
-<span class="doccomment">/// * `ODEMethod` : Explicit or Implicit</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Records</span>;
-    <span class="kw">type</span> <span class="ident">Param</span>;
-    <span class="kw">type</span> <span class="ident">ODEMethod</span>;
+<span class="doccomment">/// ODE solver
+///
+/// * `Records` : Type of container to contain results
+/// * `Param` : Type of parameter
+/// * `ODEMethod` : Explicit or Implicit
+</span><span class="kw">pub trait </span>ODE&lt;E: Environment&gt; {
+    <span class="kw">type </span>Records;
+    <span class="kw">type </span>Param;
+    <span class="kw">type </span>ODEMethod;
 
-    <span class="kw">fn</span> <span class="ident">mut_update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>);
-    <span class="comment">//fn mut_integrate(&amp;mut self, rec: &amp;mut Self::Records);</span>
-    <span class="kw">fn</span> <span class="ident">integrate</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Records</span>;
-    <span class="kw">fn</span> <span class="ident">set_initial_condition</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">init</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_boundary_condition</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">bound1</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-        <span class="ident">bound2</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_step_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dt</span>: <span class="ident">f64</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_method</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">method</span>: <span class="ident"><span class="self">Self</span>::ODEMethod</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_stop_condition</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_times</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">check_enough</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">set_env</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">env</span>: <span class="ident">E</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
+    <span class="kw">fn </span>mut_update(<span class="kw-2">&amp;mut </span><span class="self">self</span>);
+    <span class="comment">//fn mut_integrate(&amp;mut self, rec: &amp;mut Self::Records);
+    </span><span class="kw">fn </span>integrate(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Records;
+    <span class="kw">fn </span>set_initial_condition&lt;T: Real&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, init: State&lt;T&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_boundary_condition&lt;T: Real&gt;(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        bound1: (State&lt;T&gt;, BoundaryCondition),
+        bound2: (State&lt;T&gt;, BoundaryCondition),
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_step_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dt: f64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_method(<span class="kw-2">&amp;mut </span><span class="self">self</span>, method: <span class="self">Self</span>::ODEMethod) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_stop_condition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_times(<span class="kw-2">&amp;mut </span><span class="self">self</span>, n: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>check_enough(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
+    <span class="kw">fn </span>set_env(<span class="kw-2">&amp;mut </span><span class="self">self</span>, env: E) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExplicitODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
-    <span class="ident">state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>),
-    <span class="ident">step_size</span>: <span class="ident">f64</span>,
-    <span class="ident">method</span>: <span class="ident">ExMethod</span>,
-    <span class="ident">init_cond</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">bound_cond1</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    <span class="ident">bound_cond2</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    <span class="ident">stop_cond</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span>,
-    <span class="ident">times</span>: <span class="ident">usize</span>,
-    <span class="ident">options</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
-    <span class="ident">env</span>: <span class="ident">E</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>ExplicitODE&lt;E: Environment&gt; {
+    state: State&lt;f64&gt;,
+    func: <span class="kw">fn</span>(<span class="kw-2">&amp;mut </span>State&lt;f64&gt;, <span class="kw-2">&amp;</span>E),
+    step_size: f64,
+    method: ExMethod,
+    init_cond: State&lt;f64&gt;,
+    bound_cond1: (State&lt;f64&gt;, BoundaryCondition),
+    bound_cond2: (State&lt;f64&gt;, BoundaryCondition),
+    stop_cond: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool,
+    times: usize,
+    options: HashMap&lt;ODEOptions, bool&gt;,
+    env: E,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ExplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>)) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">default_to_use</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">InitCond</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">StepSize</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">BoundCond</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">Method</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">StopCond</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">Times</span>, <span class="bool-val">false</span>);
+<span class="kw">impl</span>&lt;E: Environment&gt; ExplicitODE&lt;E&gt; {
+    <span class="kw">pub fn </span>new(f: <span class="kw">fn</span>(<span class="kw-2">&amp;mut </span>State&lt;f64&gt;, <span class="kw-2">&amp;</span>E)) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>default_to_use: HashMap&lt;ODEOptions, bool&gt; = HashMap::new();
+        default_to_use.insert(InitCond, <span class="bool-val">false</span>);
+        default_to_use.insert(StepSize, <span class="bool-val">false</span>);
+        default_to_use.insert(BoundCond, <span class="bool-val">false</span>);
+        default_to_use.insert(Method, <span class="bool-val">false</span>);
+        default_to_use.insert(StopCond, <span class="bool-val">false</span>);
+        default_to_use.insert(Times, <span class="bool-val">false</span>);
 
-        <span class="ident">ExplicitODE</span> {
-            <span class="ident">state</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">func</span>: <span class="ident">f</span>,
-            <span class="ident">step_size</span>: <span class="number">0.0</span>,
-            <span class="ident">method</span>: <span class="ident">Euler</span>,
-            <span class="ident">init_cond</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">bound_cond1</span>: (<span class="ident">Default::default</span>(), <span class="ident">Dirichlet</span>),
-            <span class="ident">bound_cond2</span>: (<span class="ident">Default::default</span>(), <span class="ident">Dirichlet</span>),
-            <span class="ident">stop_cond</span>: <span class="op">|</span><span class="ident">_x</span><span class="op">|</span> <span class="bool-val">false</span>,
-            <span class="ident">times</span>: <span class="number">0</span>,
-            <span class="ident">options</span>: <span class="ident">default_to_use</span>,
-            <span class="ident">env</span>: <span class="ident">E::default</span>(),
+        ExplicitODE {
+            state: Default::default(),
+            func: f,
+            step_size: <span class="number">0.0</span>,
+            method: Euler,
+            init_cond: Default::default(),
+            bound_cond1: (Default::default(), Dirichlet),
+            bound_cond2: (Default::default(), Dirichlet),
+            stop_cond: |_x| <span class="bool-val">false</span>,
+            times: <span class="number">0</span>,
+            options: default_to_use,
+            env: E::default(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_state</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>
+    <span class="kw">pub fn </span>get_state(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>State&lt;f64&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.state
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_env</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">E</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>
+    <span class="kw">pub fn </span>get_env(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>E {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.env
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ExplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Records</span> <span class="op">=</span> <span class="ident">Matrix</span>;
-    <span class="kw">type</span> <span class="ident">Param</span> <span class="op">=</span> <span class="ident">f64</span>;
-    <span class="kw">type</span> <span class="ident">ODEMethod</span> <span class="op">=</span> <span class="ident">ExMethod</span>;
+<span class="kw">impl</span>&lt;E: Environment&gt; ODE&lt;E&gt; <span class="kw">for </span>ExplicitODE&lt;E&gt; {
+    <span class="kw">type </span>Records = Matrix;
+    <span class="kw">type </span>Param = f64;
+    <span class="kw">type </span>ODEMethod = ExMethod;
 
-    <span class="kw">fn</span> <span class="ident">mut_update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">method</span> {
-            <span class="ident">Euler</span> =&gt; {
-                <span class="comment">// Set Derivative from state</span>
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
-                <span class="kw">let</span> <span class="ident">dt</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_size</span>;
+    <span class="kw">fn </span>mut_update(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">match </span><span class="self">self</span>.method {
+            Euler =&gt; {
+                <span class="comment">// Set Derivative from state
+                </span>(<span class="self">self</span>.func)(<span class="kw-2">&amp;mut </span><span class="self">self</span>.state, <span class="kw-2">&amp;</span><span class="self">self</span>.env);
+                <span class="kw">let </span>dt = <span class="self">self</span>.step_size;
 
-                <span class="comment">//match () {</span>
-                <span class="comment">//    #[cfg(feature = &quot;oxidize&quot;)]</span>
-                <span class="comment">//    () =&gt; {</span>
-                <span class="comment">//        blas_daxpy(dt, &amp;self.state.deriv, &amp;mut self.state.value);</span>
-                <span class="comment">//    }</span>
-                <span class="comment">//    _ =&gt; {</span>
-                        <span class="self">self</span>.<span class="ident">state</span>
-                            .<span class="ident">value</span>
-                            .<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span> <span class="op">*</span> <span class="ident">dt</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>);
-                <span class="comment">//    }</span>
-                <span class="comment">//}</span>
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span><span class="op">=</span> <span class="ident">dt</span>;
+                <span class="comment">//match () {
+                //    #[cfg(feature = &quot;oxidize&quot;)]
+                //    () =&gt; {
+                //        blas_daxpy(dt, &amp;self.state.deriv, &amp;mut self.state.value);
+                //    }
+                //    _ =&gt; {
+                        </span><span class="self">self</span>.state
+                            .value
+                            .mut_zip_with(|x, y| x + y * dt, <span class="kw-2">&amp;</span><span class="self">self</span>.state.deriv);
+                <span class="comment">//    }
+                //}
+                </span><span class="self">self</span>.state.param += dt;
             }
-            <span class="ident">RK4</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_size</span>;
-                <span class="kw">let</span> <span class="ident">h2</span> <span class="op">=</span> <span class="ident">h</span> <span class="op">/</span> <span class="number">2f64</span>;
+            RK4 =&gt; {
+                <span class="kw">let </span>h = <span class="self">self</span>.step_size;
+                <span class="kw">let </span>h2 = h / <span class="number">2f64</span>;
 
-                <span class="comment">// Set Derivative from state</span>
-                <span class="kw">let</span> <span class="ident">yn</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">clone</span>();
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
+                <span class="comment">// Set Derivative from state
+                </span><span class="kw">let </span>yn = <span class="self">self</span>.state.value.clone();
+                (<span class="self">self</span>.func)(<span class="kw-2">&amp;mut </span><span class="self">self</span>.state, <span class="kw-2">&amp;</span><span class="self">self</span>.env);
 
-                <span class="kw">let</span> <span class="ident">k1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>.<span class="ident">clone</span>();
-                <span class="kw">let</span> <span class="ident">k1_add</span> <span class="op">=</span> <span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="ident">h2</span>);
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span><span class="op">=</span> <span class="ident">h2</span>;
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k1_add</span>);
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
+                <span class="kw">let </span>k1 = <span class="self">self</span>.state.deriv.clone();
+                <span class="kw">let </span>k1_add = k1.mul_scalar(h2);
+                <span class="self">self</span>.state.param += h2;
+                <span class="self">self</span>.state.value.mut_zip_with(|x, y| x + y, <span class="kw-2">&amp;</span>k1_add);
+                (<span class="self">self</span>.func)(<span class="kw-2">&amp;mut </span><span class="self">self</span>.state, <span class="kw-2">&amp;</span><span class="self">self</span>.env);
 
-                <span class="kw">let</span> <span class="ident">k2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>.<span class="ident">clone</span>();
-                <span class="kw">let</span> <span class="ident">k2_add</span> <span class="op">=</span> <span class="ident">k2</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">h2</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k1_add</span>);
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k2_add</span>);
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
+                <span class="kw">let </span>k2 = <span class="self">self</span>.state.deriv.clone();
+                <span class="kw">let </span>k2_add = k2.zip_with(|x, y| h2 * x - y, <span class="kw-2">&amp;</span>k1_add);
+                <span class="self">self</span>.state.value.mut_zip_with(|x, y| x + y, <span class="kw-2">&amp;</span>k2_add);
+                (<span class="self">self</span>.func)(<span class="kw-2">&amp;mut </span><span class="self">self</span>.state, <span class="kw-2">&amp;</span><span class="self">self</span>.env);
 
-                <span class="kw">let</span> <span class="ident">k3</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>.<span class="ident">clone</span>();
-                <span class="kw">let</span> <span class="ident">k3_add</span> <span class="op">=</span> <span class="ident">k3</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">h</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k2_add</span>);
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span><span class="op">=</span> <span class="ident">h2</span>;
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">k3_add</span>);
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
+                <span class="kw">let </span>k3 = <span class="self">self</span>.state.deriv.clone();
+                <span class="kw">let </span>k3_add = k3.zip_with(|x, y| h * x - y, <span class="kw-2">&amp;</span>k2_add);
+                <span class="self">self</span>.state.param += h2;
+                <span class="self">self</span>.state.value.mut_zip_with(|x, y| x + y, <span class="kw-2">&amp;</span>k3_add);
+                (<span class="self">self</span>.func)(<span class="kw-2">&amp;mut </span><span class="self">self</span>.state, <span class="kw-2">&amp;</span><span class="self">self</span>.env);
 
-                <span class="kw">let</span> <span class="ident">k4</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">deriv</span>.<span class="ident">clone</span>();
+                <span class="kw">let </span>k4 = <span class="self">self</span>.state.deriv.clone();
 
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">k1</span>.<span class="ident">len</span>() {
-                    <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>[<span class="ident">i</span>] <span class="op">=</span>
-                        <span class="ident">yn</span>[<span class="ident">i</span>] <span class="op">+</span> (<span class="ident">k1</span>[<span class="ident">i</span>] <span class="op">+</span> <span class="number">2f64</span> <span class="op">*</span> <span class="ident">k2</span>[<span class="ident">i</span>] <span class="op">+</span> <span class="number">2f64</span> <span class="op">*</span> <span class="ident">k3</span>[<span class="ident">i</span>] <span class="op">+</span> <span class="ident">k4</span>[<span class="ident">i</span>]) <span class="op">*</span> <span class="ident">h</span> <span class="op">/</span> <span class="number">6f64</span>;
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..k1.len() {
+                    <span class="self">self</span>.state.value[i] =
+                        yn[i] + (k1[i] + <span class="number">2f64 </span>* k2[i] + <span class="number">2f64 </span>* k3[i] + k4[i]) * h / <span class="number">6f64</span>;
                 }
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">integrate</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Records</span> {
-        <span class="macro">assert!</span>(<span class="self">self</span>.<span class="ident">check_enough</span>(), <span class="string">&quot;Not enough fields!&quot;</span>);
+    <span class="kw">fn </span>integrate(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Records {
+        <span class="macro">assert!</span>(<span class="self">self</span>.check_enough(), <span class="string">&quot;Not enough fields!&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="self">self</span>.<span class="ident">times</span> <span class="op">+</span> <span class="number">1</span>, <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">1</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>result = zeros(<span class="self">self</span>.times + <span class="number">1</span>, <span class="self">self</span>.state.value.len() + <span class="number">1</span>);
 
-        <span class="ident">result</span>.<span class="ident">subs_row</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>));
+        result.subs_row(<span class="number">0</span>, <span class="kw-2">&amp;</span>cat(<span class="self">self</span>.state.param, <span class="kw-2">&amp;</span><span class="self">self</span>.state.value));
 
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">StopCond</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">stop</span>) <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">stop</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">key</span> <span class="op">=</span> <span class="number">1usize</span>;
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="self">self</span>.<span class="ident">times</span> <span class="op">+</span> <span class="number">1</span> {
-                    <span class="self">self</span>.<span class="ident">mut_update</span>();
-                    <span class="ident">result</span>.<span class="ident">subs_row</span>(<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>));
-                    <span class="ident">key</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">stop_cond</span>)(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>StopCond) {
+            <span class="prelude-val">Some</span>(stop) <span class="kw">if </span><span class="kw-2">*</span>stop =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>key = <span class="number">1usize</span>;
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..<span class="self">self</span>.times + <span class="number">1 </span>{
+                    <span class="self">self</span>.mut_update();
+                    result.subs_row(i, <span class="kw-2">&amp;</span>cat(<span class="self">self</span>.state.param, <span class="kw-2">&amp;</span><span class="self">self</span>.state.value));
+                    key += <span class="number">1</span>;
+                    <span class="kw">if </span>(<span class="self">self</span>.stop_cond)(<span class="kw-2">&amp;</span><span class="self">self</span>) {
                         <span class="macro">println!</span>(<span class="string">&quot;Reach the stop condition!&quot;</span>);
                         <span class="macro">print!</span>(<span class="string">&quot;Current values are: &quot;</span>);
-                        <span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>).<span class="ident">print</span>();
+                        cat(<span class="self">self</span>.state.param, <span class="kw-2">&amp;</span><span class="self">self</span>.state.value).print();
                         <span class="kw">break</span>;
                     }
                 }
-                <span class="kw">return</span> <span class="ident">result</span>.<span class="ident">take_row</span>(<span class="ident">key</span>);
+                <span class="kw">return </span>result.take_row(key);
             }
-            <span class="kw">_</span> =&gt; {
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="self">self</span>.<span class="ident">times</span> <span class="op">+</span> <span class="number">1</span> {
-                    <span class="self">self</span>.<span class="ident">mut_update</span>();
-                    <span class="ident">result</span>.<span class="ident">subs_row</span>(<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>));
+            <span class="kw">_ </span>=&gt; {
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..<span class="self">self</span>.times + <span class="number">1 </span>{
+                    <span class="self">self</span>.mut_update();
+                    result.subs_row(i, <span class="kw-2">&amp;</span>cat(<span class="self">self</span>.state.param, <span class="kw-2">&amp;</span><span class="self">self</span>.state.value));
                 }
-                <span class="kw">return</span> <span class="ident">result</span>;
+                <span class="kw">return </span>result;
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">set_initial_condition</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">init</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">InitCond</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">init_cond</span> <span class="op">=</span> <span class="ident">init</span>.<span class="ident">to_f64</span>();
-        <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">init</span>.<span class="ident">to_f64</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_initial_condition&lt;T: Real&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, init: State&lt;T&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>InitCond) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.init_cond = init.to_f64();
+        <span class="self">self</span>.state = init.to_f64();
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_boundary_condition</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">bound1</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-        <span class="ident">bound2</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">BoundCond</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">bound_cond1</span> <span class="op">=</span> (<span class="ident">bound1</span>.<span class="number">0</span>.<span class="ident">to_f64</span>(), <span class="ident">bound1</span>.<span class="number">1</span>);
-        <span class="self">self</span>.<span class="ident">bound_cond2</span> <span class="op">=</span> (<span class="ident">bound2</span>.<span class="number">0</span>.<span class="ident">to_f64</span>(), <span class="ident">bound2</span>.<span class="number">1</span>);
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_boundary_condition&lt;T: Real&gt;(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        bound1: (State&lt;T&gt;, BoundaryCondition),
+        bound2: (State&lt;T&gt;, BoundaryCondition),
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>BoundCond) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.bound_cond1 = (bound1.<span class="number">0</span>.to_f64(), bound1.<span class="number">1</span>);
+        <span class="self">self</span>.bound_cond2 = (bound2.<span class="number">0</span>.to_f64(), bound2.<span class="number">1</span>);
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_step_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dt</span>: <span class="ident">f64</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">StepSize</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">step_size</span> <span class="op">=</span> <span class="ident">dt</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_step_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dt: f64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>StepSize) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.step_size = dt;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_method</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">method</span>: <span class="ident"><span class="self">Self</span>::ODEMethod</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Method</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">method</span> <span class="op">=</span> <span class="ident">method</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_method(<span class="kw-2">&amp;mut </span><span class="self">self</span>, method: <span class="self">Self</span>::ODEMethod) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Method) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.method = method;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_stop_condition</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">StopCond</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">stop_cond</span> <span class="op">=</span> <span class="ident">f</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_stop_condition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>StopCond) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.stop_cond = f;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_times</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Times</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">times</span> <span class="op">=</span> <span class="ident">n</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_times(<span class="kw-2">&amp;mut </span><span class="self">self</span>, n: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Times) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.times = n;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">check_enough</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="comment">// Method</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Method</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
-                }
-            }
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
-            }
-        }
-
-        <span class="comment">// Step size</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">StepSize</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
+    <span class="kw">fn </span>check_enough(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="comment">// Method
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>Method) {
+            <span class="prelude-val">Some</span>(x) =&gt; {
+                <span class="kw">if </span>!<span class="kw-2">*</span>x {
+                    <span class="kw">return </span><span class="bool-val">false</span>;
                 }
             }
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
         }
 
-        <span class="comment">// Initial or Boundary</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">InitCond</span>) {
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="comment">// Step size
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>StepSize) {
+            <span class="prelude-val">Some</span>(x) =&gt; {
+                <span class="kw">if </span>!<span class="kw-2">*</span>x {
+                    <span class="kw">return </span><span class="bool-val">false</span>;
+                }
             }
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> {
-                    <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">BoundCond</span>) {
-                        <span class="prelude-val">None</span> =&gt; {
-                            <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">return </span><span class="bool-val">false</span>;
+            }
+        }
+
+        <span class="comment">// Initial or Boundary
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>InitCond) {
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">return </span><span class="bool-val">false</span>;
+            }
+            <span class="prelude-val">Some</span>(x) =&gt; {
+                <span class="kw">if </span>!<span class="kw-2">*</span>x {
+                    <span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>BoundCond) {
+                        <span class="prelude-val">None </span>=&gt; {
+                            <span class="kw">return </span><span class="bool-val">false</span>;
                         }
                         <span class="prelude-val">Some</span>(<span class="kw">_</span>) =&gt; (),
                     }
@@ -1805,309 +1799,309 @@
             }
         }
 
-        <span class="comment">// Set Time?</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Times</span>) {
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="comment">// Set Time?
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>Times) {
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="prelude-val">Some</span>(x) =&gt; {
+                <span class="kw">if </span>!<span class="kw-2">*</span>x {
+                    <span class="kw">return </span><span class="bool-val">false</span>;
                 }
             }
         }
-        <span class="bool-val">true</span>
-    }
+        <span class="bool-val">true
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_env</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">env</span>: <span class="ident">E</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">env</span> <span class="op">=</span> <span class="ident">env</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_env(<span class="kw-2">&amp;mut </span><span class="self">self</span>, env: E) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.env = env;
+        <span class="self">self
+    </span>}
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
-    <span class="ident">state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>,
-    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>),
-    <span class="ident">step_size</span>: <span class="ident">f64</span>,
-    <span class="ident">rtol</span>: <span class="ident">f64</span>,
-    <span class="ident">method</span>: <span class="ident">ImMethod</span>,
-    <span class="ident">init_cond</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">bound_cond1</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    <span class="ident">bound_cond2</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    <span class="ident">stop_cond</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span>,
-    <span class="ident">times</span>: <span class="ident">usize</span>,
-    <span class="ident">options</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
-    <span class="ident">env</span>: <span class="ident">E</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>ImplicitODE&lt;E: Environment&gt; {
+    state: State&lt;AD&gt;,
+    func: <span class="kw">fn</span>(<span class="kw-2">&amp;mut </span>State&lt;AD&gt;, <span class="kw-2">&amp;</span>E),
+    step_size: f64,
+    rtol: f64,
+    method: ImMethod,
+    init_cond: State&lt;f64&gt;,
+    bound_cond1: (State&lt;f64&gt;, BoundaryCondition),
+    bound_cond2: (State&lt;f64&gt;, BoundaryCondition),
+    stop_cond: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool,
+    times: usize,
+    options: HashMap&lt;ODEOptions, bool&gt;,
+    env: E,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>)) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">default_to_use</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">InitCond</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">StepSize</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">BoundCond</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">Method</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">StopCond</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_use</span>.<span class="ident">insert</span>(<span class="ident">Times</span>, <span class="bool-val">false</span>);
+<span class="kw">impl</span>&lt;E: Environment&gt; ImplicitODE&lt;E&gt; {
+    <span class="kw">pub fn </span>new(f: <span class="kw">fn</span>(<span class="kw-2">&amp;mut </span>State&lt;AD&gt;, <span class="kw-2">&amp;</span>E)) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>default_to_use: HashMap&lt;ODEOptions, bool&gt; = HashMap::new();
+        default_to_use.insert(InitCond, <span class="bool-val">false</span>);
+        default_to_use.insert(StepSize, <span class="bool-val">false</span>);
+        default_to_use.insert(BoundCond, <span class="bool-val">false</span>);
+        default_to_use.insert(Method, <span class="bool-val">false</span>);
+        default_to_use.insert(StopCond, <span class="bool-val">false</span>);
+        default_to_use.insert(Times, <span class="bool-val">false</span>);
 
-        <span class="ident">ImplicitODE</span> {
-            <span class="ident">state</span>: <span class="ident">State::new</span>(<span class="ident">AD0</span>(<span class="number">0f64</span>), <span class="macro">vec!</span>[], <span class="macro">vec!</span>[]),
-            <span class="ident">func</span>: <span class="ident">f</span>,
-            <span class="ident">step_size</span>: <span class="number">0.0</span>,
-            <span class="ident">rtol</span>: <span class="number">1e-6</span>,
-            <span class="ident">method</span>: <span class="ident">GL4</span>,
-            <span class="ident">init_cond</span>: <span class="ident">Default::default</span>(),
-            <span class="ident">bound_cond1</span>: (<span class="ident">Default::default</span>(), <span class="ident">Dirichlet</span>),
-            <span class="ident">bound_cond2</span>: (<span class="ident">Default::default</span>(), <span class="ident">Dirichlet</span>),
-            <span class="ident">stop_cond</span>: <span class="op">|</span><span class="ident">_x</span><span class="op">|</span> <span class="bool-val">false</span>,
-            <span class="ident">times</span>: <span class="number">0</span>,
-            <span class="ident">options</span>: <span class="ident">default_to_use</span>,
-            <span class="ident">env</span>: <span class="ident">E::default</span>(),
+        ImplicitODE {
+            state: State::new(AD0(<span class="number">0f64</span>), <span class="macro">vec!</span>[], <span class="macro">vec!</span>[]),
+            func: f,
+            step_size: <span class="number">0.0</span>,
+            rtol: <span class="number">1e-6</span>,
+            method: GL4,
+            init_cond: Default::default(),
+            bound_cond1: (Default::default(), Dirichlet),
+            bound_cond2: (Default::default(), Dirichlet),
+            stop_cond: |_x| <span class="bool-val">false</span>,
+            times: <span class="number">0</span>,
+            options: default_to_use,
+            env: E::default(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_state</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>
+    <span class="kw">pub fn </span>get_state(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>State&lt;AD&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.state
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_rtol</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">rtol</span>: <span class="ident">f64</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">rtol</span> <span class="op">=</span> <span class="ident">rtol</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">pub fn </span>set_rtol(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rtol: f64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.rtol = rtol;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_env</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">E</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>
+    <span class="kw">pub fn </span>get_env(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>E {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.env
     }
 }
 
-<span class="doccomment">/// Value of 3f64.sqrt()</span>
-<span class="kw">const</span> <span class="ident">SQRT3</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">1.7320508075688772</span>;
+<span class="doccomment">/// Value of 3f64.sqrt()
+</span><span class="kw">const </span>SQRT3: f64 = <span class="number">1.7320508075688772</span>;
 
-<span class="doccomment">/// Butcher tableau for Gauss_legendre 4th order</span>
-<span class="kw">const</span> <span class="ident">GL4_TAB</span>: [[<span class="ident">f64</span>; <span class="number">3</span>]; <span class="number">2</span>] <span class="op">=</span> [
-    [<span class="number">0.5</span> <span class="op">-</span> <span class="ident">SQRT3</span> <span class="op">/</span> <span class="number">6f64</span>, <span class="number">0.25</span>, <span class="number">0.25</span> <span class="op">-</span> <span class="ident">SQRT3</span> <span class="op">/</span> <span class="number">6f64</span>],
-    [<span class="number">0.5</span> <span class="op">+</span> <span class="ident">SQRT3</span> <span class="op">/</span> <span class="number">6f64</span>, <span class="number">0.25</span> <span class="op">+</span> <span class="ident">SQRT3</span> <span class="op">/</span> <span class="number">6f64</span>, <span class="number">0.25</span>],
+<span class="doccomment">/// Butcher tableau for Gauss_legendre 4th order
+</span><span class="kw">const </span>GL4_TAB: [[f64; <span class="number">3</span>]; <span class="number">2</span>] = [
+    [<span class="number">0.5 </span>- SQRT3 / <span class="number">6f64</span>, <span class="number">0.25</span>, <span class="number">0.25 </span>- SQRT3 / <span class="number">6f64</span>],
+    [<span class="number">0.5 </span>+ SQRT3 / <span class="number">6f64</span>, <span class="number">0.25 </span>+ SQRT3 / <span class="number">6f64</span>, <span class="number">0.25</span>],
 ];
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> <span class="ident">ODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Records</span> <span class="op">=</span> <span class="ident">Matrix</span>;
-    <span class="kw">type</span> <span class="ident">Param</span> <span class="op">=</span> <span class="ident">AD</span>;
-    <span class="kw">type</span> <span class="ident">ODEMethod</span> <span class="op">=</span> <span class="ident">ImMethod</span>;
-    <span class="kw">fn</span> <span class="ident">mut_update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">method</span> {
-            <span class="ident">BDF1</span> =&gt; <span class="macro">unimplemented!</span>(),
-            <span class="ident">GL4</span> =&gt; {
-                <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="op">|</span><span class="ident">t</span>: <span class="ident">AD</span>, <span class="ident">y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">|</span> {
-                    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">st</span> <span class="op">=</span> <span class="ident">State::new</span>(<span class="ident">t</span>, <span class="ident">y</span>.<span class="ident">clone</span>(), <span class="ident">y</span>);
-                    (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;mut</span> <span class="ident">st</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
-                    <span class="ident">st</span>.<span class="ident">deriv</span>
+<span class="attribute">#[allow(non_snake_case)]
+</span><span class="kw">impl</span>&lt;E: Environment&gt; ODE&lt;E&gt; <span class="kw">for </span>ImplicitODE&lt;E&gt; {
+    <span class="kw">type </span>Records = Matrix;
+    <span class="kw">type </span>Param = AD;
+    <span class="kw">type </span>ODEMethod = ImMethod;
+    <span class="kw">fn </span>mut_update(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        <span class="kw">match </span><span class="self">self</span>.method {
+            BDF1 =&gt; <span class="macro">unimplemented!</span>(),
+            GL4 =&gt; {
+                <span class="kw">let </span>f = |t: AD, y: Vec&lt;AD&gt;| {
+                    <span class="kw">let </span><span class="kw-2">mut </span>st = State::new(t, y.clone(), y);
+                    (<span class="self">self</span>.func)(<span class="kw-2">&amp;mut </span>st, <span class="kw-2">&amp;</span><span class="self">self</span>.env);
+                    st.deriv
                 };
 
-                <span class="kw">let</span> <span class="ident">h</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">step_size</span>;
-                <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>;
-                <span class="kw">let</span> <span class="ident">t1</span>: <span class="ident">AD</span> <span class="op">=</span> <span class="ident">t</span> <span class="op">+</span> <span class="ident">GL4_TAB</span>[<span class="number">0</span>][<span class="number">0</span>] <span class="op">*</span> <span class="ident">h</span>;
-                <span class="kw">let</span> <span class="ident">t2</span>: <span class="ident">AD</span> <span class="op">=</span> <span class="ident">t</span> <span class="op">+</span> <span class="ident">GL4_TAB</span>[<span class="number">1</span>][<span class="number">0</span>] <span class="op">*</span> <span class="ident">h</span>;
-                <span class="kw">let</span> <span class="ident">yn</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>;
-                <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">yn</span>.<span class="ident">len</span>();
+                <span class="kw">let </span>h = <span class="self">self</span>.step_size;
+                <span class="kw">let </span>t = <span class="self">self</span>.state.param;
+                <span class="kw">let </span>t1: AD = t + GL4_TAB[<span class="number">0</span>][<span class="number">0</span>] * h;
+                <span class="kw">let </span>t2: AD = t + GL4_TAB[<span class="number">1</span>][<span class="number">0</span>] * h;
+                <span class="kw">let </span>yn = <span class="kw-2">&amp;</span><span class="self">self</span>.state.value;
+                <span class="kw">let </span>n = yn.len();
 
-                <span class="comment">// 0. Initial Guess</span>
-                <span class="kw">let</span> <span class="ident">k1_init</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">t</span>, <span class="ident">yn</span>.<span class="ident">clone</span>()).<span class="ident">to_f64_vec</span>();
-                <span class="kw">let</span> <span class="ident">k2_init</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">t</span>, <span class="ident">yn</span>.<span class="ident">clone</span>()).<span class="ident">to_f64_vec</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">k_curr</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">concat</span>(<span class="kw-2">&amp;</span><span class="ident">k1_init</span>, <span class="kw-2">&amp;</span><span class="ident">k2_init</span>);
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">err</span> <span class="op">=</span> <span class="number">1f64</span>;
+                <span class="comment">// 0. Initial Guess
+                </span><span class="kw">let </span>k1_init: Vec&lt;f64&gt; = f(t, yn.clone()).to_f64_vec();
+                <span class="kw">let </span>k2_init: Vec&lt;f64&gt; = f(t, yn.clone()).to_f64_vec();
+                <span class="kw">let </span><span class="kw-2">mut </span>k_curr: Vec&lt;f64&gt; = concat(<span class="kw-2">&amp;</span>k1_init, <span class="kw-2">&amp;</span>k2_init);
+                <span class="kw">let </span><span class="kw-2">mut </span>err = <span class="number">1f64</span>;
 
-                <span class="comment">// 1. Combine two functions to one function</span>
-                <span class="kw">let</span> <span class="ident">g</span> <span class="op">=</span> <span class="op">|</span><span class="ident">k</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">|</span> -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">k1</span> <span class="op">=</span> <span class="ident">k</span>.<span class="ident">take</span>(<span class="ident">n</span>);
-                    <span class="kw">let</span> <span class="ident">k2</span> <span class="op">=</span> <span class="ident">k</span>.<span class="ident">skip</span>(<span class="ident">n</span>);
-                    <span class="ident">concat</span>(
-                        <span class="kw-2">&amp;</span><span class="ident">f</span>(
-                            <span class="ident">t1</span>,
-                            <span class="ident">yn</span>.<span class="ident">add_vec</span>(
-                                <span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="ident">AD::from</span>(<span class="ident">GL4_TAB</span>[<span class="number">0</span>][<span class="number">1</span>] <span class="op">*</span> <span class="ident">h</span>))
-                                    .<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">mul_scalar</span>(<span class="ident">AD::from</span>(<span class="ident">GL4_TAB</span>[<span class="number">0</span>][<span class="number">2</span>] <span class="op">*</span> <span class="ident">h</span>))),
+                <span class="comment">// 1. Combine two functions to one function
+                </span><span class="kw">let </span>g = |k: <span class="kw-2">&amp;</span>Vec&lt;AD&gt;| -&gt; Vec&lt;AD&gt; {
+                    <span class="kw">let </span>k1 = k.take(n);
+                    <span class="kw">let </span>k2 = k.skip(n);
+                    concat(
+                        <span class="kw-2">&amp;</span>f(
+                            t1,
+                            yn.add_vec(
+                                <span class="kw-2">&amp;</span>k1.mul_scalar(AD::from(GL4_TAB[<span class="number">0</span>][<span class="number">1</span>] * h))
+                                    .add_vec(<span class="kw-2">&amp;</span>k2.mul_scalar(AD::from(GL4_TAB[<span class="number">0</span>][<span class="number">2</span>] * h))),
                             ),
                         ),
-                        <span class="kw-2">&amp;</span><span class="ident">f</span>(
-                            <span class="ident">t2</span>,
-                            <span class="ident">yn</span>.<span class="ident">add_vec</span>(
-                                <span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="ident">AD::from</span>(<span class="ident">GL4_TAB</span>[<span class="number">1</span>][<span class="number">1</span>] <span class="op">*</span> <span class="ident">h</span>))
-                                    .<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">mul_scalar</span>(<span class="ident">AD::from</span>(<span class="ident">GL4_TAB</span>[<span class="number">1</span>][<span class="number">2</span>] <span class="op">*</span> <span class="ident">h</span>))),
+                        <span class="kw-2">&amp;</span>f(
+                            t2,
+                            yn.add_vec(
+                                <span class="kw-2">&amp;</span>k1.mul_scalar(AD::from(GL4_TAB[<span class="number">1</span>][<span class="number">1</span>] * h))
+                                    .add_vec(<span class="kw-2">&amp;</span>k2.mul_scalar(AD::from(GL4_TAB[<span class="number">1</span>][<span class="number">2</span>] * h))),
                             ),
                         ),
                     )
                 };
 
-                <span class="comment">// 2. Obtain Jacobian</span>
-                <span class="kw">let</span> <span class="ident">I</span> <span class="op">=</span> <span class="ident">eye</span>(<span class="number">2</span> <span class="op">*</span> <span class="ident">n</span>);
+                <span class="comment">// 2. Obtain Jacobian
+                </span><span class="kw">let </span>I = eye(<span class="number">2 </span>* n);
 
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">Dg</span> <span class="op">=</span> <span class="ident">jacobian</span>(<span class="ident">Box::new</span>(<span class="ident">g</span>), <span class="kw-2">&amp;</span><span class="ident">k_curr</span>);
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">DG</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">I</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">Dg</span>;
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">DG_inv</span> <span class="op">=</span> <span class="ident">DG</span>.<span class="ident">inv</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">to_ad_vec</span>()).<span class="ident">to_f64_vec</span>());
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">num_iter</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0</span>;
+                <span class="kw">let </span><span class="kw-2">mut </span>Dg = jacobian(Box::new(g), <span class="kw-2">&amp;</span>k_curr);
+                <span class="kw">let </span><span class="kw-2">mut </span>DG = <span class="kw-2">&amp;</span>I - <span class="kw-2">&amp;</span>Dg;
+                <span class="kw">let </span><span class="kw-2">mut </span>DG_inv = DG.inv();
+                <span class="kw">let </span><span class="kw-2">mut </span>G = k_curr.sub_vec(<span class="kw-2">&amp;</span>g(<span class="kw-2">&amp;</span>k_curr.to_ad_vec()).to_f64_vec());
+                <span class="kw">let </span><span class="kw-2">mut </span>num_iter: usize = <span class="number">0</span>;
 
-                <span class="comment">// 3. Iteration</span>
-                <span class="kw">while</span> <span class="ident">err</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">rtol</span> <span class="op">&amp;&amp;</span> <span class="ident">num_iter</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">10</span> {
-                    <span class="kw">let</span> <span class="ident">DGG</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">DG_inv</span> <span class="op">*</span> <span class="kw-2">&amp;</span><span class="ident">G</span>;
-                    <span class="kw">let</span> <span class="ident">k_prev</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">clone</span>();
-                    <span class="ident">k_curr</span>.<span class="ident">mut_zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">DGG</span>);
-                    <span class="ident">Dg</span> <span class="op">=</span> <span class="ident">jacobian</span>(<span class="ident">Box::new</span>(<span class="ident">g</span>), <span class="kw-2">&amp;</span><span class="ident">k_curr</span>);
-                    <span class="ident">DG</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">I</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">Dg</span>;
-                    <span class="ident">DG_inv</span> <span class="op">=</span> <span class="ident">DG</span>.<span class="ident">inv</span>();
-                    <span class="ident">G</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">g</span>(<span class="kw-2">&amp;</span><span class="ident">k_curr</span>.<span class="ident">to_ad_vec</span>()).<span class="ident">to_f64_vec</span>());
-                    <span class="ident">err</span> <span class="op">=</span> <span class="ident">k_curr</span>.<span class="ident">sub_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k_prev</span>).<span class="ident">norm</span>(<span class="ident">Norm::L2</span>);
-                    <span class="ident">num_iter</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                <span class="comment">// 3. Iteration
+                </span><span class="kw">while </span>err &gt;= <span class="self">self</span>.rtol &amp;&amp; num_iter &lt;= <span class="number">10 </span>{
+                    <span class="kw">let </span>DGG = <span class="kw-2">&amp;</span>DG_inv * <span class="kw-2">&amp;</span>G;
+                    <span class="kw">let </span>k_prev = k_curr.clone();
+                    k_curr.mut_zip_with(|x, y| x - y, <span class="kw-2">&amp;</span>DGG);
+                    Dg = jacobian(Box::new(g), <span class="kw-2">&amp;</span>k_curr);
+                    DG = <span class="kw-2">&amp;</span>I - <span class="kw-2">&amp;</span>Dg;
+                    DG_inv = DG.inv();
+                    G = k_curr.sub_vec(<span class="kw-2">&amp;</span>g(<span class="kw-2">&amp;</span>k_curr.to_ad_vec()).to_f64_vec());
+                    err = k_curr.sub_vec(<span class="kw-2">&amp;</span>k_prev).norm(Norm::L2);
+                    num_iter += <span class="number">1</span>;
                 }
 
-                <span class="comment">// 4. Find k1, k2</span>
-                <span class="kw">let</span> (<span class="ident">k1</span>, <span class="ident">k2</span>) <span class="op">=</span> (<span class="ident">k_curr</span>.<span class="ident">take</span>(<span class="ident">n</span>), <span class="ident">k_curr</span>.<span class="ident">skip</span>(<span class="ident">n</span>));
+                <span class="comment">// 4. Find k1, k2
+                </span><span class="kw">let </span>(k1, k2) = (k_curr.take(n), k_curr.skip(n));
 
-                <span class="comment">// Set Derivative from state</span>
-                (<span class="self">self</span>.<span class="ident">func</span>)(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">state</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">env</span>);
+                <span class="comment">// Set Derivative from state
+                </span>(<span class="self">self</span>.func)(<span class="kw-2">&amp;mut </span><span class="self">self</span>.state, <span class="kw-2">&amp;</span><span class="self">self</span>.env);
 
-                <span class="comment">// 5. Merge k1, k2</span>
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y_curr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>();
-                <span class="ident">y_curr</span> <span class="op">=</span> <span class="ident">y_curr</span>.<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k1</span>.<span class="ident">mul_scalar</span>(<span class="number">0.5</span> <span class="op">*</span> <span class="ident">h</span>).<span class="ident">add_vec</span>(<span class="kw-2">&amp;</span><span class="ident">k2</span>.<span class="ident">mul_scalar</span>(<span class="number">0.5</span> <span class="op">*</span> <span class="ident">h</span>)));
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span> <span class="op">=</span> <span class="ident">y_curr</span>.<span class="ident">to_ad_vec</span>();
-                <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span> <span class="op">+</span> <span class="ident">h</span>;
+                <span class="comment">// 5. Merge k1, k2
+                </span><span class="kw">let </span><span class="kw-2">mut </span>y_curr = <span class="self">self</span>.state.value.to_f64_vec();
+                y_curr = y_curr.add_vec(<span class="kw-2">&amp;</span>k1.mul_scalar(<span class="number">0.5 </span>* h).add_vec(<span class="kw-2">&amp;</span>k2.mul_scalar(<span class="number">0.5 </span>* h)));
+                <span class="self">self</span>.state.value = y_curr.to_ad_vec();
+                <span class="self">self</span>.state.param = <span class="self">self</span>.state.param + h;
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">integrate</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Records</span> {
-        <span class="macro">assert!</span>(<span class="self">self</span>.<span class="ident">check_enough</span>(), <span class="string">&quot;Not enough fields!&quot;</span>);
+    <span class="kw">fn </span>integrate(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Records {
+        <span class="macro">assert!</span>(<span class="self">self</span>.check_enough(), <span class="string">&quot;Not enough fields!&quot;</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="self">self</span>.<span class="ident">times</span> <span class="op">+</span> <span class="number">1</span>, <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">1</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>result = zeros(<span class="self">self</span>.times + <span class="number">1</span>, <span class="self">self</span>.state.value.len() + <span class="number">1</span>);
 
-        <span class="ident">result</span>.<span class="ident">subs_row</span>(
+        result.subs_row(
             <span class="number">0</span>,
-            <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>()),
+            <span class="kw-2">&amp;</span>cat(<span class="self">self</span>.state.param.to_f64(), <span class="kw-2">&amp;</span><span class="self">self</span>.state.value.to_f64_vec()),
         );
 
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">StopCond</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">stop</span>) <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">stop</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">key</span> <span class="op">=</span> <span class="number">1usize</span>;
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="self">self</span>.<span class="ident">times</span> <span class="op">+</span> <span class="number">1</span> {
-                    <span class="self">self</span>.<span class="ident">mut_update</span>();
-                    <span class="ident">result</span>.<span class="ident">subs_row</span>(
-                        <span class="ident">i</span>,
-                        <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>()),
+        <span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>StopCond) {
+            <span class="prelude-val">Some</span>(stop) <span class="kw">if </span><span class="kw-2">*</span>stop =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>key = <span class="number">1usize</span>;
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..<span class="self">self</span>.times + <span class="number">1 </span>{
+                    <span class="self">self</span>.mut_update();
+                    result.subs_row(
+                        i,
+                        <span class="kw-2">&amp;</span>cat(<span class="self">self</span>.state.param.to_f64(), <span class="kw-2">&amp;</span><span class="self">self</span>.state.value.to_f64_vec()),
                     );
-                    <span class="ident">key</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="kw">if</span> (<span class="self">self</span>.<span class="ident">stop_cond</span>)(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+                    key += <span class="number">1</span>;
+                    <span class="kw">if </span>(<span class="self">self</span>.stop_cond)(<span class="kw-2">&amp;</span><span class="self">self</span>) {
                         <span class="macro">println!</span>(<span class="string">&quot;Reach the stop condition!&quot;</span>);
                         <span class="macro">print!</span>(<span class="string">&quot;Current values are: &quot;</span>);
-                        <span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>()).<span class="ident">print</span>();
+                        cat(<span class="self">self</span>.state.param.to_f64(), <span class="kw-2">&amp;</span><span class="self">self</span>.state.value.to_f64_vec()).print();
                         <span class="kw">break</span>;
                     }
                 }
-                <span class="kw">return</span> <span class="ident">result</span>.<span class="ident">take_row</span>(<span class="ident">key</span>);
+                <span class="kw">return </span>result.take_row(key);
             }
-            <span class="kw">_</span> =&gt; {
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="self">self</span>.<span class="ident">times</span> <span class="op">+</span> <span class="number">1</span> {
-                    <span class="self">self</span>.<span class="ident">mut_update</span>();
-                    <span class="ident">result</span>.<span class="ident">subs_row</span>(
-                        <span class="ident">i</span>,
-                        <span class="kw-2">&amp;</span><span class="ident">cat</span>(<span class="self">self</span>.<span class="ident">state</span>.<span class="ident">param</span>.<span class="ident">to_f64</span>(), <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">state</span>.<span class="ident">value</span>.<span class="ident">to_f64_vec</span>()),
+            <span class="kw">_ </span>=&gt; {
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..<span class="self">self</span>.times + <span class="number">1 </span>{
+                    <span class="self">self</span>.mut_update();
+                    result.subs_row(
+                        i,
+                        <span class="kw-2">&amp;</span>cat(<span class="self">self</span>.state.param.to_f64(), <span class="kw-2">&amp;</span><span class="self">self</span>.state.value.to_f64_vec()),
                     );
                 }
-                <span class="kw">return</span> <span class="ident">result</span>;
+                <span class="kw">return </span>result;
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">set_initial_condition</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">init</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">InitCond</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">init_cond</span> <span class="op">=</span> <span class="ident">init</span>.<span class="ident">to_f64</span>();
-        <span class="self">self</span>.<span class="ident">state</span> <span class="op">=</span> <span class="ident">init</span>.<span class="ident">to_ad</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_initial_condition&lt;T: Real&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, init: State&lt;T&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>InitCond) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.init_cond = init.to_f64();
+        <span class="self">self</span>.state = init.to_ad();
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_boundary_condition</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">bound1</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-        <span class="ident">bound2</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">BoundCond</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">bound_cond1</span> <span class="op">=</span> (<span class="ident">bound1</span>.<span class="number">0</span>.<span class="ident">to_f64</span>(), <span class="ident">bound1</span>.<span class="number">1</span>);
-        <span class="self">self</span>.<span class="ident">bound_cond2</span> <span class="op">=</span> (<span class="ident">bound2</span>.<span class="number">0</span>.<span class="ident">to_f64</span>(), <span class="ident">bound2</span>.<span class="number">1</span>);
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_boundary_condition&lt;T: Real&gt;(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        bound1: (State&lt;T&gt;, BoundaryCondition),
+        bound2: (State&lt;T&gt;, BoundaryCondition),
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>BoundCond) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.bound_cond1 = (bound1.<span class="number">0</span>.to_f64(), bound1.<span class="number">1</span>);
+        <span class="self">self</span>.bound_cond2 = (bound2.<span class="number">0</span>.to_f64(), bound2.<span class="number">1</span>);
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_step_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dt</span>: <span class="ident">f64</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">StepSize</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">step_size</span> <span class="op">=</span> <span class="ident">dt</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_step_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dt: f64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>StepSize) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.step_size = dt;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_method</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">method</span>: <span class="ident"><span class="self">Self</span>::ODEMethod</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Method</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">method</span> <span class="op">=</span> <span class="ident">method</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_method(<span class="kw-2">&amp;mut </span><span class="self">self</span>, method: <span class="self">Self</span>::ODEMethod) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Method) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.method = method;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_stop_condition</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">StopCond</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">stop_cond</span> <span class="op">=</span> <span class="ident">f</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_stop_condition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>StopCond) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.stop_cond = f;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_times</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Times</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">times</span> <span class="op">=</span> <span class="ident">n</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_times(<span class="kw-2">&amp;mut </span><span class="self">self</span>, n: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Times) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.times = n;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">check_enough</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
-        <span class="comment">// Method</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Method</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
+    <span class="kw">fn </span>check_enough(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="comment">// Method
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>Method) {
+            <span class="prelude-val">Some</span>(x) =&gt; {
+                <span class="kw">if </span>!<span class="kw-2">*</span>x {
+                    <span class="kw">return </span><span class="bool-val">false</span>;
                 }
             }
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
         }
 
-        <span class="comment">// Step size</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">StepSize</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="comment">// Step size
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>StepSize) {
+            <span class="prelude-val">Some</span>(x) =&gt; {
+                <span class="kw">if </span>!<span class="kw-2">*</span>x {
+                    <span class="kw">return </span><span class="bool-val">false</span>;
                 }
             }
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
         }
 
-        <span class="comment">// Initial or Boundary</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">InitCond</span>) {
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="comment">// Initial or Boundary
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>InitCond) {
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> {
-                    <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">BoundCond</span>) {
-                        <span class="prelude-val">None</span> =&gt; {
-                            <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="prelude-val">Some</span>(x) =&gt; {
+                <span class="kw">if </span>!<span class="kw-2">*</span>x {
+                    <span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>BoundCond) {
+                        <span class="prelude-val">None </span>=&gt; {
+                            <span class="kw">return </span><span class="bool-val">false</span>;
                         }
                         <span class="prelude-val">Some</span>(<span class="kw">_</span>) =&gt; (),
                     }
@@ -2115,41 +2109,40 @@
             }
         }
 
-        <span class="comment">// Set Time?</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Times</span>) {
-            <span class="prelude-val">None</span> =&gt; {
-                <span class="kw">return</span> <span class="bool-val">false</span>;
+        <span class="comment">// Set Time?
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>Times) {
+            <span class="prelude-val">None </span>=&gt; {
+                <span class="kw">return </span><span class="bool-val">false</span>;
             }
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) =&gt; {
-                <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> {
-                    <span class="kw">return</span> <span class="bool-val">false</span>;
+            <span class="prelude-val">Some</span>(x) =&gt; {
+                <span class="kw">if </span>!<span class="kw-2">*</span>x {
+                    <span class="kw">return </span><span class="bool-val">false</span>;
                 }
             }
         }
-        <span class="bool-val">true</span>
-    }
+        <span class="bool-val">true
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_env</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">env</span>: <span class="ident">E</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">env</span> <span class="op">=</span> <span class="ident">env</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_env(<span class="kw-2">&amp;mut </span><span class="self">self</span>, env: E) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.env = env;
+        <span class="self">self
+    </span>}
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Some Environments</span>
-<span class="comment">// =============================================================================</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">NoEnv</span> {}
+<span class="comment">// =============================================================================
+// Some Environments
+// =============================================================================
+</span><span class="attribute">#[derive(Debug, Copy, Clone, Default)]
+</span><span class="kw">pub struct </span>NoEnv {}
 
-<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">NoEnv</span> {}
+<span class="kw">impl </span>Environment <span class="kw">for </span>NoEnv {}
 
-<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">CubicSpline</span> {}
+<span class="kw">impl </span>Environment <span class="kw">for </span>CubicSpline {}
 
-<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">Matrix</span> {}
+<span class="kw">impl </span>Environment <span class="kw">for </span>Matrix {}
 
-<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {}
+<span class="kw">impl </span>Environment <span class="kw">for </span>Vec&lt;f64&gt; {}
 
-<span class="kw">impl</span> <span class="ident">Environment</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {}
+<span class="kw">impl </span>Environment <span class="kw">for </span>Polynomial {}
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

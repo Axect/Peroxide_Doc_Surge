@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/useful.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>useful.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/useful.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>useful.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -264,249 +258,248 @@
 <span id="242">242</span>
 <span id="243">243</span>
 <span id="244">244</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Useful missing tools</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Useful missing tools
 
-<span class="kw">use</span> <span class="ident">std::convert</span>;
-<span class="kw">use</span> <span class="ident">std::f64::MAX</span>;
-<span class="kw">use</span> <span class="ident">std::ops::Range</span>;
+</span><span class="kw">use </span>std::convert;
+<span class="kw">use </span>std::f64::MAX;
+<span class="kw">use </span>std::ops::Range;
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Fundamental Utils</span>
-<span class="comment">// =============================================================================</span>
+<span class="comment">// =============================================================================
+// Fundamental Utils
+// =============================================================================
 
-<span class="doccomment">/// Near equal</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// assert!(nearly_eq(1.0/3.0 * 3.0, 1));</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nearly_eq</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="ident">S</span>, <span class="ident">y</span>: <span class="ident">T</span>) -&gt; <span class="ident">bool</span>
-<span class="kw">where</span>
-    <span class="ident">S</span>: <span class="ident">convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">T</span>: <span class="ident">convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
+</span><span class="doccomment">/// Near equal
+///
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// assert!(nearly_eq(1.0/3.0 * 3.0, 1));
+/// ```
+</span><span class="kw">pub fn </span>nearly_eq&lt;S, T&gt;(x: S, y: T) -&gt; bool
+<span class="kw">where
+    </span>S: convert::Into&lt;f64&gt;,
+    T: convert::Into&lt;f64&gt;,
 {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span>: <span class="ident">bool</span> <span class="op">=</span> <span class="bool-val">false</span>;
-    <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="number">1e-7</span>;
-    <span class="kw">let</span> <span class="ident">p</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>().<span class="ident">abs</span>();
-    <span class="kw">let</span> <span class="ident">q</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">y</span>.<span class="ident">into</span>().<span class="ident">abs</span>();
-    <span class="kw">if</span> (<span class="ident">p</span> <span class="op">-</span> <span class="ident">q</span>).<span class="ident">abs</span>() <span class="op">&lt;</span> <span class="ident">e</span> {
-        <span class="ident">b</span> <span class="op">=</span> <span class="bool-val">true</span>;
-    } <span class="kw">else</span> <span class="kw">if</span> (<span class="ident">p</span> <span class="op">-</span> <span class="ident">q</span>).<span class="ident">abs</span>() <span class="op">/</span> (<span class="ident">p</span> <span class="op">+</span> <span class="ident">q</span>).<span class="ident">min</span>(<span class="ident">MAX</span>) <span class="op">&lt;</span> <span class="ident">e</span> {
-        <span class="ident">b</span> <span class="op">=</span> <span class="bool-val">true</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>b: bool = <span class="bool-val">false</span>;
+    <span class="kw">let </span>e = <span class="number">1e-7</span>;
+    <span class="kw">let </span>p: f64 = x.into().abs();
+    <span class="kw">let </span>q: f64 = y.into().abs();
+    <span class="kw">if </span>(p - q).abs() &lt; e {
+        b = <span class="bool-val">true</span>;
+    } <span class="kw">else if </span>(p - q).abs() / (p + q).min(MAX) &lt; e {
+        b = <span class="bool-val">true</span>;
     }
-    <span class="ident">b</span>
+    b
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_comparisons</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tab</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">space</span>: <span class="ident">usize</span>) -&gt; <span class="ident">String</span> {
-    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">len</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span>: <span class="ident">String</span> <span class="op">=</span> <span class="ident">String::new</span>();
-    <span class="kw">let</span> <span class="ident">fs</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{}{}&quot;</span>, <span class="string">&quot; &quot;</span>.<span class="ident">repeat</span>(<span class="ident">space</span> <span class="op">-</span> <span class="ident">l</span>), <span class="ident">s</span>);
-    <span class="ident">m</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">fs</span>);
-    <span class="kw">return</span> <span class="ident">m</span>;
+<span class="attribute">#[allow(unused_comparisons)]
+</span><span class="kw">pub fn </span>tab(s: <span class="kw-2">&amp;</span>str, space: usize) -&gt; String {
+    <span class="kw">let </span>l = s.len();
+    <span class="kw">let </span><span class="kw-2">mut </span>m: String = String::new();
+    <span class="kw">let </span>fs = <span class="macro">format!</span>(<span class="string">&quot;{}{}&quot;</span>, <span class="string">&quot; &quot;</span>.repeat(space - l), s);
+    m.push_str(<span class="kw-2">&amp;</span>fs);
+    <span class="kw">return </span>m;
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">quot_rem</span>(<span class="ident">x</span>: <span class="ident">usize</span>, <span class="ident">y</span>: <span class="ident">usize</span>) -&gt; (<span class="ident">i32</span>, <span class="ident">i32</span>) {
-    ((<span class="ident">x</span> <span class="op">/</span> <span class="ident">y</span>) <span class="kw">as</span> <span class="ident">i32</span>, (<span class="ident">x</span> <span class="op">%</span> <span class="ident">y</span>) <span class="kw">as</span> <span class="ident">i32</span>)
+<span class="kw">pub fn </span>quot_rem(x: usize, y: usize) -&gt; (i32, i32) {
+    ((x / y) <span class="kw">as </span>i32, (x % y) <span class="kw">as </span>i32)
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Choose Utils</span>
-<span class="comment">// =============================================================================</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">choose_shorter_string</span>(<span class="ident">x1</span>: <span class="ident">String</span>, <span class="ident">x2</span>: <span class="ident">String</span>) -&gt; <span class="ident">String</span> {
-    <span class="kw">if</span> <span class="ident">x1</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">x2</span>.<span class="ident">len</span>() {
-        <span class="ident">x2</span>
-    } <span class="kw">else</span> {
-        <span class="ident">x1</span>
-    }
-}
-
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">choose_shorter_vec</span>(<span class="ident">x1</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">x2</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">x1</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="ident">x2</span>.<span class="ident">len</span>() {
-        <span class="ident">x2</span>.<span class="ident">clone</span>()
-    } <span class="kw">else</span> {
-        <span class="ident">x1</span>.<span class="ident">clone</span>()
+<span class="comment">// =============================================================================
+// Choose Utils
+// =============================================================================
+</span><span class="kw">pub fn </span>choose_shorter_string(x1: String, x2: String) -&gt; String {
+    <span class="kw">if </span>x1.len() &gt; x2.len() {
+        x2
+    } <span class="kw">else </span>{
+        x1
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">choose_longer_vec</span>(<span class="ident">x1</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">x2</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">x1</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">x2</span>.<span class="ident">len</span>() {
-        <span class="ident">x2</span>.<span class="ident">clone</span>()
-    } <span class="kw">else</span> {
-        <span class="ident">x1</span>.<span class="ident">clone</span>()
+<span class="kw">pub fn </span>choose_shorter_vec(x1: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, x2: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt; {
+    <span class="kw">if </span>x1.len() &gt; x2.len() {
+        x2.clone()
+    } <span class="kw">else </span>{
+        x1.clone()
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">max</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">T</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Clone</span>,
+<span class="kw">pub fn </span>choose_longer_vec(x1: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, x2: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt; {
+    <span class="kw">if </span>x1.len() &lt;= x2.len() {
+        x2.clone()
+    } <span class="kw">else </span>{
+        x1.clone()
+    }
+}
+
+<span class="kw">pub fn </span>max&lt;T&gt;(v: Vec&lt;T&gt;) -&gt; T
+<span class="kw">where
+    </span>T: PartialOrd + Copy + Clone,
 {
-    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">len</span>();
-    <span class="kw">if</span> <span class="ident">l</span> <span class="op">==</span> <span class="number">1</span> {
-        <span class="ident">v</span>[<span class="number">0</span>]
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">v</span>[<span class="number">0</span>] <span class="op">&gt;</span><span class="op">=</span> <span class="ident">v</span>[<span class="number">1</span>] { <span class="ident">v</span>[<span class="number">0</span>] } <span class="kw">else</span> { <span class="ident">v</span>[<span class="number">1</span>] };
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">2</span>..<span class="ident">v</span>.<span class="ident">len</span>() {
-            <span class="kw">if</span> <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">&gt;</span> <span class="ident">t</span> {
-                <span class="ident">t</span> <span class="op">=</span> <span class="ident">v</span>[<span class="ident">i</span>];
+    <span class="kw">let </span>l = v.len();
+    <span class="kw">if </span>l == <span class="number">1 </span>{
+        v[<span class="number">0</span>]
+    } <span class="kw">else </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>t = <span class="kw">if </span>v[<span class="number">0</span>] &gt;= v[<span class="number">1</span>] { v[<span class="number">0</span>] } <span class="kw">else </span>{ v[<span class="number">1</span>] };
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">2</span>..v.len() {
+            <span class="kw">if </span>v[i] &gt; t {
+                t = v[i];
             }
         }
-        <span class="ident">t</span>
+        t
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">min</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">T</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Clone</span>,
+<span class="kw">pub fn </span>min&lt;T&gt;(v: Vec&lt;T&gt;) -&gt; T
+<span class="kw">where
+    </span>T: PartialOrd + Copy + Clone,
 {
-    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">len</span>();
-    <span class="kw">if</span> <span class="ident">l</span> <span class="op">==</span> <span class="number">1</span> {
-        <span class="ident">v</span>[<span class="number">0</span>]
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">v</span>[<span class="number">0</span>] <span class="op">&lt;</span><span class="op">=</span> <span class="ident">v</span>[<span class="number">1</span>] { <span class="ident">v</span>[<span class="number">0</span>] } <span class="kw">else</span> { <span class="ident">v</span>[<span class="number">1</span>] };
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">2</span>..<span class="ident">v</span>.<span class="ident">len</span>() {
-            <span class="kw">if</span> <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">&lt;</span> <span class="ident">t</span> {
-                <span class="ident">t</span> <span class="op">=</span> <span class="ident">v</span>[<span class="ident">i</span>];
+    <span class="kw">let </span>l = v.len();
+    <span class="kw">if </span>l == <span class="number">1 </span>{
+        v[<span class="number">0</span>]
+    } <span class="kw">else </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>t = <span class="kw">if </span>v[<span class="number">0</span>] &lt;= v[<span class="number">1</span>] { v[<span class="number">0</span>] } <span class="kw">else </span>{ v[<span class="number">1</span>] };
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">2</span>..v.len() {
+            <span class="kw">if </span>v[i] &lt; t {
+                t = v[i];
             }
         }
-        <span class="ident">t</span>
+        t
     }
 }
 
-<span class="doccomment">/// Signum function</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sgn</span>(<span class="ident">x</span>: <span class="ident">usize</span>) -&gt; <span class="ident">f64</span> {
-    <span class="kw">if</span> <span class="ident">x</span> <span class="op">%</span> <span class="number">2</span> <span class="op">==</span> <span class="number">0</span> {
-        <span class="number">1f64</span>
-    } <span class="kw">else</span> {
-        <span class="op">-</span><span class="number">1f64</span>
-    }
+<span class="doccomment">/// Signum function
+</span><span class="kw">pub fn </span>sgn(x: usize) -&gt; f64 {
+    <span class="kw">if </span>x % <span class="number">2 </span>== <span class="number">0 </span>{
+        <span class="number">1f64
+    </span>} <span class="kw">else </span>{
+        -<span class="number">1f64
+    </span>}
 }
 
-<span class="doccomment">/// Vector compare</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eq_vec</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">y</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">tol</span>: <span class="ident">f64</span>) -&gt; <span class="ident">bool</span> {
-    <span class="ident">x</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">y</span>.<span class="ident">iter</span>()).<span class="ident">all</span>(<span class="op">|</span>(<span class="ident">x</span>, <span class="ident">y</span>)<span class="op">|</span> (<span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>).<span class="ident">abs</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">tol</span>)
+<span class="doccomment">/// Vector compare
+</span><span class="kw">pub fn </span>eq_vec(x: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, y: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, tol: f64) -&gt; bool {
+    x.iter().zip(y.iter()).all(|(x, y)| (x - y).abs() &lt;= tol)
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Vec of Tuples</span>
-<span class="comment">// =============================================================================</span>
-<span class="doccomment">/// Auto-zip</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// let a = vec![1, 2, 3];</span>
-<span class="doccomment">/// let a_zipped = auto_zip(&amp;a);</span>
-<span class="doccomment">/// assert_eq!(a_zipped, vec![(1, 2), (2, 3)]);</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">auto_zip</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">T</span>)<span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">x_head</span> <span class="op">=</span> <span class="ident">x</span>[<span class="number">0</span> .. <span class="ident">x</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>].<span class="ident">to_vec</span>();
-    <span class="kw">let</span> <span class="ident">x_tail</span> <span class="op">=</span> <span class="ident">x</span>[<span class="number">1</span> .. <span class="ident">x</span>.<span class="ident">len</span>()].<span class="ident">to_vec</span>();
-    <span class="ident">x_head</span>.<span class="ident">into_iter</span>().<span class="ident">zip</span>(<span class="ident">x_tail</span>.<span class="ident">into_iter</span>()).<span class="ident">collect</span>()
+<span class="comment">// =============================================================================
+// Vec of Tuples
+// =============================================================================
+</span><span class="doccomment">/// Auto-zip
+/// 
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+/// 
+/// let a = vec![1, 2, 3];
+/// let a_zipped = auto_zip(&amp;a);
+/// assert_eq!(a_zipped, vec![(1, 2), (2, 3)]);
+/// ```
+</span><span class="kw">pub fn </span>auto_zip&lt;T: Clone&gt;(x: <span class="kw-2">&amp;</span>Vec&lt;T&gt;) -&gt; Vec&lt;(T, T)&gt; {
+    <span class="kw">let </span>x_head = x[<span class="number">0 </span>.. x.len() - <span class="number">1</span>].to_vec();
+    <span class="kw">let </span>x_tail = x[<span class="number">1 </span>.. x.len()].to_vec();
+    x_head.into_iter().zip(x_tail.into_iter()).collect()
 }
 
-<span class="doccomment">/// Find the index of interval of x</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// let x = vec![</span>
-<span class="doccomment">///     (0, 5),</span>
-<span class="doccomment">///     (5, 7),</span>
-<span class="doccomment">///     (7, 10),</span>
-<span class="doccomment">///     (10, 15),</span>
-<span class="doccomment">///     (15, 20),</span>
-<span class="doccomment">///     (20, 30)</span>
-<span class="doccomment">/// ];</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// assert_eq!(find_interval(&amp;x, 11), 3);</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">find_interval</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">PartialEq</span><span class="op">&gt;</span>(<span class="ident">sorted_intervals</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">T</span>)<span class="op">&gt;</span>, <span class="ident">x</span>: <span class="ident">T</span>) -&gt; <span class="ident">usize</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">sorted_intervals</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>;
+<span class="doccomment">/// Find the index of interval of x
+/// 
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+/// 
+/// let x = vec![
+///     (0, 5),
+///     (5, 7),
+///     (7, 10),
+///     (10, 15),
+///     (15, 20),
+///     (20, 30)
+/// ];
+/// 
+/// assert_eq!(find_interval(&amp;x, 11), 3);
+/// ```
+</span><span class="kw">pub fn </span>find_interval&lt;T: PartialOrd + PartialEq&gt;(sorted_intervals: <span class="kw-2">&amp;</span>Vec&lt;(T, T)&gt;, x: T) -&gt; usize {
+    <span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>j = sorted_intervals.len() - <span class="number">1</span>;
 
-    <span class="comment">// Check range</span>
-    <span class="macro">assert!</span>(<span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">sorted_intervals</span>[<span class="number">0</span>].<span class="number">0</span>, <span class="string">&quot;x is smaller than the smallest interval&quot;</span>);
-    <span class="macro">assert!</span>(<span class="ident">x</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">sorted_intervals</span>[<span class="ident">sorted_intervals</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>].<span class="number">1</span>, <span class="string">&quot;x is larger than the largest interval&quot;</span>);
+    <span class="comment">// Check range
+    </span><span class="macro">assert!</span>(x &gt;= sorted_intervals[<span class="number">0</span>].<span class="number">0</span>, <span class="string">&quot;x is smaller than the smallest interval&quot;</span>);
+    <span class="macro">assert!</span>(x &lt;= sorted_intervals[sorted_intervals.len() - <span class="number">1</span>].<span class="number">1</span>, <span class="string">&quot;x is larger than the largest interval&quot;</span>);
 
-    <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">j</span> {
-        <span class="kw">let</span> <span class="ident">mid</span> <span class="op">=</span> (<span class="ident">i</span> <span class="op">+</span> <span class="ident">j</span>) <span class="op">/</span> <span class="number">2</span>;
-        <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="ident">sorted_intervals</span>[<span class="ident">mid</span>].<span class="number">0</span> {
-            <span class="ident">j</span> <span class="op">=</span> <span class="ident">mid</span> <span class="op">-</span> <span class="number">1</span>;
-        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">&gt;</span> <span class="ident">sorted_intervals</span>[<span class="ident">mid</span>].<span class="number">1</span> {
-            <span class="ident">i</span> <span class="op">=</span> <span class="ident">mid</span> <span class="op">+</span> <span class="number">1</span>;
-        } <span class="kw">else</span> {
-            <span class="kw">return</span> <span class="ident">mid</span>;
+    <span class="kw">while </span>i &lt;= j {
+        <span class="kw">let </span>mid = (i + j) / <span class="number">2</span>;
+        <span class="kw">if </span>x &lt; sorted_intervals[mid].<span class="number">0 </span>{
+            j = mid - <span class="number">1</span>;
+        } <span class="kw">else if </span>x &gt; sorted_intervals[mid].<span class="number">1 </span>{
+            i = mid + <span class="number">1</span>;
+        } <span class="kw">else </span>{
+            <span class="kw">return </span>mid;
         }
     }
-    <span class="kw">return</span> <span class="ident">i</span>;
+    <span class="kw">return </span>i;
 }
 
-<span class="doccomment">/// Generate Range of Intervals</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">/// use std::ops::Range;</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// let x = vec![1, 2, 3, 4];</span>
-<span class="doccomment">/// let r = gen_range(&amp;x);</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// let answer = vec![</span>
-<span class="doccomment">///     Range { start: 1, end: 2 },</span>
-<span class="doccomment">///     Range { start: 2, end: 3 },</span>
-<span class="doccomment">///     Range { start: 3, end: 4 },</span>
-<span class="doccomment">/// ];</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// assert_eq!(r, answer);</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">gen_range</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">PartialOrd</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">x</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span> {
-        <span class="ident">r</span>.<span class="ident">push</span>(<span class="ident">Range</span> {
-            <span class="ident">start</span>: <span class="ident">x</span>[<span class="ident">i</span>].<span class="ident">clone</span>(),
-            <span class="ident">end</span>: <span class="ident">x</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">clone</span>(),
+<span class="doccomment">/// Generate Range of Intervals
+/// 
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+/// use std::ops::Range;
+/// 
+/// let x = vec![1, 2, 3, 4];
+/// let r = gen_range(&amp;x);
+/// 
+/// let answer = vec![
+///     Range { start: 1, end: 2 },
+///     Range { start: 2, end: 3 },
+///     Range { start: 3, end: 4 },
+/// ];
+/// 
+/// assert_eq!(r, answer);
+/// ```
+</span><span class="kw">pub fn </span>gen_range&lt;T: Clone + PartialOrd&gt;(x: <span class="kw-2">&amp;</span>[T]) -&gt; Vec&lt;Range&lt;T&gt;&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>r = Vec::new();
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..x.len() - <span class="number">1 </span>{
+        r.push(Range {
+            start: x[i].clone(),
+            end: x[i + <span class="number">1</span>].clone(),
         });
     }
-    <span class="ident">r</span>
+    r
 }
 
-<span class="doccomment">/// Generate and Zip Range of Intervals</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">/// use std::ops::Range;</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// let x: Vec&lt;i32&gt; = vec![1, 2, 3, 4];</span>
-<span class="doccomment">/// let y: Vec&lt;i32&gt; = x.iter().map(|&amp;t| t.pow(2)).collect();</span>
-<span class="doccomment">/// let r = zip_range(&amp;x, &amp;y);</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// let answer = vec![</span>
-<span class="doccomment">///     (Range { start: 1, end: 2 }, 1),</span>
-<span class="doccomment">///     (Range { start: 2, end: 3 }, 4),</span>
-<span class="doccomment">///     (Range { start: 3, end: 4 }, 9),</span>
-<span class="doccomment">/// ];</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// assert_eq!(r, answer);</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zip_range</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">PartialOrd</span>, <span class="ident">U</span>: <span class="ident">Clone</span><span class="op">&gt;</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>], <span class="ident">y</span>: <span class="kw-2">&amp;</span>[<span class="ident">U</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">U</span>)<span class="op">&gt;</span> {
-    <span class="ident">y</span>[<span class="number">0</span> .. <span class="ident">x</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>].<span class="ident">into_iter</span>()
-        .<span class="ident">enumerate</span>()
-        .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="ident">yi</span>)<span class="op">|</span> (<span class="ident">Range</span> {
-            <span class="ident">start</span>: <span class="ident">x</span>[<span class="ident">i</span>].<span class="ident">clone</span>(),
-            <span class="ident">end</span>: <span class="ident">x</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>].<span class="ident">clone</span>(),
-        }, <span class="ident">yi</span>.<span class="ident">clone</span>()))
-        .<span class="ident">collect</span>()
+<span class="doccomment">/// Generate and Zip Range of Intervals
+/// 
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+/// use std::ops::Range;
+/// 
+/// let x: Vec&lt;i32&gt; = vec![1, 2, 3, 4];
+/// let y: Vec&lt;i32&gt; = x.iter().map(|&amp;t| t.pow(2)).collect();
+/// let r = zip_range(&amp;x, &amp;y);
+/// 
+/// let answer = vec![
+///     (Range { start: 1, end: 2 }, 1),
+///     (Range { start: 2, end: 3 }, 4),
+///     (Range { start: 3, end: 4 }, 9),
+/// ];
+/// 
+/// assert_eq!(r, answer);
+/// ```
+</span><span class="kw">pub fn </span>zip_range&lt;T: Clone + PartialOrd, U: Clone&gt;(x: <span class="kw-2">&amp;</span>[T], y: <span class="kw-2">&amp;</span>[U]) -&gt; Vec&lt;(Range&lt;T&gt;, U)&gt; {
+    y[<span class="number">0 </span>.. x.len() - <span class="number">1</span>].into_iter()
+        .enumerate()
+        .map(|(i, yi)| (Range {
+            start: x[i].clone(),
+            end: x[i + <span class="number">1</span>].clone(),
+        }, yi.clone()))
+        .collect()
 }</code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

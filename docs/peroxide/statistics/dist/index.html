@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Probabilistic distributions"><meta name="keywords" content="rust, rustlang, rust-lang, dist"><title>peroxide::statistics::dist - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Probabilistic distributions"><meta name="keywords" content="rust, rustlang, rust-lang, dist"><title>peroxide::statistics::dist - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,14 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"><a href="#">Module dist</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">statistics</a>::<wbr><a class="mod" href="#">dist</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/statistics/dist.rs.html#1-791">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Probabilistic distributions</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"><a href="#">Module dist</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="main-heading"><h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">statistics</a>::<wbr><a class="mod" href="#">dist</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/statistics/dist.rs.html#1-791">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Probabilistic distributions</p>
 <h3 id="probability-distribution"><a href="#probability-distribution">Probability Distribution</a></h3>
 <ul>
 <li>There are some famous pdf in Peroxide (not checked pdfs will be implemented soon)
@@ -62,18 +55,18 @@
 <li><code>pdf</code> : Calculate pdf value at specific point</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
-<span class="kw">use</span> <span class="ident">rand::distributions::uniform::SampleUniform</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>rand;
+<span class="kw">use </span>rand::distributions::uniform::SampleUniform;
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RNG</span> {
-    <span class="doccomment">/// Extract samples of distributions</span>
-    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
+<span class="kw">pub trait </span>RNG {
+    <span class="doccomment">/// Extract samples of distributions
+    </span><span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt;;
 
-    <span class="doccomment">/// Probability Distribution Function</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Type</span>
-    <span class="doccomment">/// `f64 -&gt; f64`</span>
-    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) -&gt; <span class="ident">f64</span>;
+    <span class="doccomment">/// Probability Distribution Function
+    ///
+    /// # Type
+    /// `f64 -&gt; f64`
+    </span><span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64;
 }</code></pre></div>
 </li>
 </ul>
@@ -100,17 +93,17 @@ $$ \text{Bern}(x | \mu) = \mu^x (1-\mu)^{1-x} $$</p>
 <li>
 <p>Usage is very simple</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Bernoulli</span>(<span class="number">0.1</span>); <span class="comment">// Bern(x | 0.1)</span>
-    <span class="ident">b</span>.<span class="ident">sample</span>(<span class="number">100</span>).<span class="ident">print</span>();  <span class="comment">// Generate 100 samples</span>
-    <span class="ident">b</span>.<span class="ident">pdf</span>(<span class="number">0</span>).<span class="ident">print</span>();       <span class="comment">// 0.9</span>
-    <span class="ident">b</span>.<span class="ident">mean</span>().<span class="ident">print</span>();       <span class="comment">// 0.1</span>
-    <span class="ident">b</span>.<span class="ident">var</span>().<span class="ident">print</span>();        <span class="comment">// 0.09 (approximately)</span>
-    <span class="ident">b</span>.<span class="ident">sd</span>().<span class="ident">print</span>();         <span class="comment">// 0.3  (approximately)</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>b = Bernoulli(<span class="number">0.1</span>); <span class="comment">// Bern(x | 0.1)
+    </span>b.sample(<span class="number">100</span>).print();  <span class="comment">// Generate 100 samples
+    </span>b.pdf(<span class="number">0</span>).print();       <span class="comment">// 0.9
+    </span>b.mean().print();       <span class="comment">// 0.1
+    </span>b.var().print();        <span class="comment">// 0.09 (approximately)
+    </span>b.sd().print();         <span class="comment">// 0.3  (approximately)
+</span>}</code></pre></div>
 </li>
 </ul>
 <h4 id="uniform-distribution"><a href="#uniform-distribution">Uniform Distribution</a></h4>
@@ -132,17 +125,17 @@ $$\text{Unif}(x | a, b) = \begin{cases} \frac{1}{b - a} &amp; x \in [a,b]\\ 0 &a
 <li>
 <p><strong>Caution</strong>: <code>Uniform(T, T)</code> generates <code>T</code> type samples (only for <code>Uniform</code>)</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="comment">// Uniform(start, end)</span>
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">Uniform</span>(<span class="number">0f64</span>, <span class="number">1f64</span>); <span class="comment">// It will generate `f64` samples.</span>
-    <span class="ident">a</span>.<span class="ident">sample</span>(<span class="number">100</span>).<span class="ident">print</span>();
-    <span class="ident">a</span>.<span class="ident">pdf</span>(<span class="number">0.2</span>).<span class="ident">print</span>();
-    <span class="ident">a</span>.<span class="ident">mean</span>().<span class="ident">print</span>();
-    <span class="ident">a</span>.<span class="ident">var</span>().<span class="ident">print</span>();
-    <span class="ident">a</span>.<span class="ident">sd</span>().<span class="ident">print</span>();
+<span class="kw">fn </span>main() {
+    <span class="comment">// Uniform(start, end)
+    </span><span class="kw">let </span>a = Uniform(<span class="number">0f64</span>, <span class="number">1f64</span>); <span class="comment">// It will generate `f64` samples.
+    </span>a.sample(<span class="number">100</span>).print();
+    a.pdf(<span class="number">0.2</span>).print();
+    a.mean().print();
+    a.var().print();
+    a.sd().print();
 }</code></pre></div>
 </li>
 </ul>
@@ -168,27 +161,22 @@ $$\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp{\left( - 
 <li><del>Code is based on a <a href="https://www.seehuhn.de/pages/ziggurat.html">C implementation</a> by Jochen Voss.</del></li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="comment">// Normal(mean, std)</span>
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">Normal</span>(<span class="number">0</span>, <span class="number">1</span>); <span class="comment">// Standard normal</span>
-    <span class="ident">a</span>.<span class="ident">sample</span>(<span class="number">100</span>).<span class="ident">print</span>();
-    <span class="ident">a</span>.<span class="ident">pdf</span>(<span class="number">0</span>).<span class="ident">print</span>(); <span class="comment">// Maximum probability</span>
-    <span class="ident">a</span>.<span class="ident">mean</span>().<span class="ident">print</span>();
-    <span class="ident">a</span>.<span class="ident">var</span>().<span class="ident">print</span>();
-    <span class="ident">a</span>.<span class="ident">sd</span>().<span class="ident">print</span>();
+<span class="kw">fn </span>main() {
+    <span class="comment">// Normal(mean, std)
+    </span><span class="kw">let </span>a = Normal(<span class="number">0</span>, <span class="number">1</span>); <span class="comment">// Standard normal
+    </span>a.sample(<span class="number">100</span>).print();
+    a.pdf(<span class="number">0</span>).print(); <span class="comment">// Maximum probability
+    </span>a.mean().print();
+    a.var().print();
+    a.sd().print();
 }</code></pre></div>
 </li>
 </ul>
-<h4 id="beta-distribution"><a href="#beta-distribution">Beta Distribution</a></h4><h4 id="gamma-distribution"><a href="#gamma-distribution">Gamma Distribution</a></h4><h4 id="binomial-distribution"><a href="#binomial-distribution">Binomial Distribution</a></h4></div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left import-item"><code>pub use self::<a class="enum" href="enum.OPDist.html" title="enum peroxide::statistics::dist::OPDist">OPDist</a>::*;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item"><code>pub use self::<a class="enum" href="enum.TPDist.html" title="enum peroxide::statistics::dist::TPDist">TPDist</a>::*;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.WeightedUniform.html" title="peroxide::statistics::dist::WeightedUniform struct">WeightedUniform</a></div><div class="item-right docblock-short"></div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.OPDist.html" title="peroxide::statistics::dist::OPDist enum">OPDist</a></div><div class="item-right docblock-short"><p>One parameter distribution</p>
+<h4 id="beta-distribution"><a href="#beta-distribution">Beta Distribution</a></h4><h4 id="gamma-distribution"><a href="#gamma-distribution">Gamma Distribution</a></h4><h4 id="binomial-distribution"><a href="#binomial-distribution">Binomial Distribution</a></h4></div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2><div class="item-table"><div class="item-row"><div class="item-left import-item"><code>pub use self::<a class="enum" href="enum.OPDist.html" title="enum peroxide::statistics::dist::OPDist">OPDist</a>::*;</code></div></div><div class="item-row"><div class="item-left import-item"><code>pub use self::<a class="enum" href="enum.TPDist.html" title="enum peroxide::statistics::dist::TPDist">TPDist</a>::*;</code></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.WeightedUniform.html" title="peroxide::statistics::dist::WeightedUniform struct">WeightedUniform</a></div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.OPDist.html" title="peroxide::statistics::dist::OPDist enum">OPDist</a></div><div class="item-right docblock-short"><p>One parameter distribution</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.TPDist.html" title="peroxide::statistics::dist::TPDist enum">TPDist</a></div><div class="item-right docblock-short"><p>Two parameter distribution</p>
-</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ParametricDist.html" title="peroxide::statistics::dist::ParametricDist trait">ParametricDist</a></div><div class="item-right docblock-short"><p>Extract parameter</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ParametricDist.html" title="peroxide::statistics::dist::ParametricDist trait">ParametricDist</a></div><div class="item-right docblock-short"><p>Extract parameter</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.RNG.html" title="peroxide::statistics::dist::RNG trait">RNG</a></div><div class="item-right docblock-short"><p>Random Number Generator trait</p>
-</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

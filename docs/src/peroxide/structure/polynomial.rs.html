@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/structure/polynomial.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>polynomial.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/structure/polynomial.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>polynomial.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -638,624 +632,623 @@
 <span id="616">616</span>
 <span id="617">617</span>
 <span id="618">618</span>
-</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::matrix</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::vector</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::useful</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
+</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::<span class="kw-2">*</span>;
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::vector::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::util::useful::<span class="kw-2">*</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traits</span>::{<span class="ident">fp::FPVector</span>, <span class="ident">num::PowOps</span>};
-<span class="kw">use</span> <span class="ident">std::cmp</span>::{<span class="ident">max</span>, <span class="ident">min</span>};
-<span class="kw">use</span> <span class="ident">std::convert</span>;
-<span class="kw">use</span> <span class="ident">std::fmt</span>;
-<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Add</span>, <span class="ident">Div</span>, <span class="ident">Mul</span>, <span class="ident">Neg</span>, <span class="ident">Sub</span>};
+<span class="kw">use </span><span class="kw">crate</span>::traits::{fp::FPVector, num::PowOps};
+<span class="kw">use </span>std::cmp::{max, min};
+<span class="kw">use </span>std::convert;
+<span class="kw">use </span>std::fmt;
+<span class="kw">use </span>std::ops::{Add, Div, Mul, Neg, Sub};
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Polynomial Structure</span>
-<span class="comment">// =============================================================================</span>
-<span class="doccomment">/// Polynomial Structure</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Polynomial</span> {
-    <span class="kw">pub</span> <span class="ident">coef</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
+<span class="comment">// =============================================================================
+// Polynomial Structure
+// =============================================================================
+</span><span class="doccomment">/// Polynomial Structure
+</span><span class="attribute">#[derive(Debug, Clone, Default)]
+#[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(Serialize, Deserialize))]
+</span><span class="kw">pub struct </span>Polynomial {
+    <span class="kw">pub </span>coef: Vec&lt;f64&gt;,
 }
 
-<span class="doccomment">/// Polynomial Print</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = poly(c!(1,3,2));</span>
-<span class="doccomment">///     a.print(); //x^2 + 3x + 2</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">String::new</span>();
-        <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>;
+<span class="doccomment">/// Polynomial Print
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = poly(c!(1,3,2));
+///     a.print(); //x^2 + 3x + 2
+/// }
+/// ```
+</span><span class="kw">impl </span>fmt::Display <span class="kw">for </span>Polynomial {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        <span class="kw">let </span><span class="kw-2">mut </span>result = String::new();
+        <span class="kw">let </span>l = <span class="self">self</span>.coef.len() - <span class="number">1</span>;
 
-        <span class="kw">if</span> <span class="ident">l</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="number">0</span>];
-            <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(<span class="macro">format!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">value</span>), <span class="macro">format!</span>(<span class="string">&quot;{:.4}&quot;</span>, <span class="ident">value</span>));
-            <span class="kw">return</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">temp</span>);
+        <span class="kw">if </span>l == <span class="number">0 </span>{
+            <span class="kw">let </span>value = <span class="self">self</span>.coef[<span class="number">0</span>];
+            <span class="kw">let </span>temp = choose_shorter_string(<span class="macro">format!</span>(<span class="string">&quot;{}&quot;</span>, value), <span class="macro">format!</span>(<span class="string">&quot;{:.4}&quot;</span>, value));
+            <span class="kw">return </span><span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, temp);
         }
 
-        <span class="kw">if</span> <span class="ident">l</span> <span class="op">==</span> <span class="number">1</span> {
-            <span class="kw">let</span> <span class="ident">coef_1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="number">0</span>];
-            <span class="kw">let</span> <span class="ident">coef_0</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="number">1</span>];
+        <span class="kw">if </span>l == <span class="number">1 </span>{
+            <span class="kw">let </span>coef_1 = <span class="self">self</span>.coef[<span class="number">0</span>];
+            <span class="kw">let </span>coef_0 = <span class="self">self</span>.coef[<span class="number">1</span>];
 
-            <span class="kw">if</span> <span class="ident">coef_1</span> <span class="op">==</span> <span class="number">1.</span> {
-                <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="string">&quot;x&quot;</span>);
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">coef_1</span> <span class="op">==</span> <span class="op">-</span><span class="number">1.</span> {
-                <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="string">&quot;-x&quot;</span>);
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(<span class="macro">format!</span>(<span class="string">&quot;{}x&quot;</span>, <span class="ident">coef_1</span>), <span class="macro">format!</span>(<span class="string">&quot;{:.4}x&quot;</span>, <span class="ident">coef_1</span>));
-                <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
+            <span class="kw">if </span>coef_1 == <span class="number">1. </span>{
+                result.push_str(<span class="string">&quot;x&quot;</span>);
+            } <span class="kw">else if </span>coef_1 == -<span class="number">1. </span>{
+                result.push_str(<span class="string">&quot;-x&quot;</span>);
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>temp = choose_shorter_string(<span class="macro">format!</span>(<span class="string">&quot;{}x&quot;</span>, coef_1), <span class="macro">format!</span>(<span class="string">&quot;{:.4}x&quot;</span>, coef_1));
+                result.push_str(<span class="kw-2">&amp;</span>temp);
             }
 
-            <span class="kw">if</span> <span class="ident">coef_0</span> <span class="op">&gt;</span> <span class="number">0.</span> {
-                <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span>
-                    <span class="ident">choose_shorter_string</span>(<span class="macro">format!</span>(<span class="string">&quot; + {}&quot;</span>, <span class="ident">coef_0</span>), <span class="macro">format!</span>(<span class="string">&quot; + {:.4}&quot;</span>, <span class="ident">coef_0</span>));
-                <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">coef_0</span> <span class="op">&lt;</span> <span class="number">0.</span> {
-                <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(
-                    <span class="macro">format!</span>(<span class="string">&quot; - {}&quot;</span>, <span class="ident">coef_0</span>.<span class="ident">abs</span>()),
-                    <span class="macro">format!</span>(<span class="string">&quot; - {:.4}&quot;</span>, <span class="ident">coef_0</span>.<span class="ident">abs</span>()),
+            <span class="kw">if </span>coef_0 &gt; <span class="number">0. </span>{
+                <span class="kw">let </span>temp =
+                    choose_shorter_string(<span class="macro">format!</span>(<span class="string">&quot; + {}&quot;</span>, coef_0), <span class="macro">format!</span>(<span class="string">&quot; + {:.4}&quot;</span>, coef_0));
+                result.push_str(<span class="kw-2">&amp;</span>temp);
+            } <span class="kw">else if </span>coef_0 &lt; <span class="number">0. </span>{
+                <span class="kw">let </span>temp = choose_shorter_string(
+                    <span class="macro">format!</span>(<span class="string">&quot; - {}&quot;</span>, coef_0.abs()),
+                    <span class="macro">format!</span>(<span class="string">&quot; - {:.4}&quot;</span>, coef_0.abs()),
                 );
-                <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
+                result.push_str(<span class="kw-2">&amp;</span>temp);
             }
-            <span class="kw">return</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">result</span>);
+            <span class="kw">return </span><span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, result);
         }
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> <span class="op">+</span> <span class="number">1</span> {
-            <span class="kw">match</span> <span class="ident">i</span> {
-                <span class="number">0</span> =&gt; {
-                    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="ident">i</span>];
-                    <span class="kw">if</span> <span class="ident">value</span> <span class="op">==</span> <span class="number">1.</span> {
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;x^{}&quot;</span>, <span class="ident">l</span>));
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">==</span> <span class="op">-</span><span class="number">1.</span> {
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;-x^{}&quot;</span>, <span class="ident">l</span>));
-                    } <span class="kw">else</span> {
-                        <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(
-                            <span class="macro">format!</span>(<span class="string">&quot;{}x^{}&quot;</span>, <span class="ident">value</span>, <span class="ident">l</span>),
-                            <span class="macro">format!</span>(<span class="string">&quot;{:.4}x^{}&quot;</span>, <span class="ident">value</span>, <span class="ident">l</span>),
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l + <span class="number">1 </span>{
+            <span class="kw">match </span>i {
+                <span class="number">0 </span>=&gt; {
+                    <span class="kw">let </span>value = <span class="self">self</span>.coef[i];
+                    <span class="kw">if </span>value == <span class="number">1. </span>{
+                        result.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;x^{}&quot;</span>, l));
+                    } <span class="kw">else if </span>value == -<span class="number">1. </span>{
+                        result.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;-x^{}&quot;</span>, l));
+                    } <span class="kw">else </span>{
+                        <span class="kw">let </span>temp = choose_shorter_string(
+                            <span class="macro">format!</span>(<span class="string">&quot;{}x^{}&quot;</span>, value, l),
+                            <span class="macro">format!</span>(<span class="string">&quot;{:.4}x^{}&quot;</span>, value, l),
                         );
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
+                        result.push_str(<span class="kw-2">&amp;</span>temp);
                     }
                 }
-                <span class="ident">i</span> <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="ident">l</span> =&gt; {
-                    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="ident">i</span>];
-                    <span class="kw">if</span> <span class="ident">value</span> <span class="op">&gt;</span> <span class="number">0.</span> {
-                        <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(
-                            <span class="macro">format!</span>(<span class="string">&quot; + {}&quot;</span>, <span class="ident">value</span>),
-                            <span class="macro">format!</span>(<span class="string">&quot; + {:.4}&quot;</span>, <span class="ident">value</span>),
+                i <span class="kw">if </span>i == l =&gt; {
+                    <span class="kw">let </span>value = <span class="self">self</span>.coef[i];
+                    <span class="kw">if </span>value &gt; <span class="number">0. </span>{
+                        <span class="kw">let </span>temp = choose_shorter_string(
+                            <span class="macro">format!</span>(<span class="string">&quot; + {}&quot;</span>, value),
+                            <span class="macro">format!</span>(<span class="string">&quot; + {:.4}&quot;</span>, value),
                         );
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">&lt;</span> <span class="number">0.</span> {
-                        <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(
-                            <span class="macro">format!</span>(<span class="string">&quot; - {}&quot;</span>, <span class="ident">value</span>.<span class="ident">abs</span>()),
-                            <span class="macro">format!</span>(<span class="string">&quot; - {:.4}&quot;</span>, <span class="ident">value</span>.<span class="ident">abs</span>()),
+                        result.push_str(<span class="kw-2">&amp;</span>temp);
+                    } <span class="kw">else if </span>value &lt; <span class="number">0. </span>{
+                        <span class="kw">let </span>temp = choose_shorter_string(
+                            <span class="macro">format!</span>(<span class="string">&quot; - {}&quot;</span>, value.abs()),
+                            <span class="macro">format!</span>(<span class="string">&quot; - {:.4}&quot;</span>, value.abs()),
                         );
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
+                        result.push_str(<span class="kw-2">&amp;</span>temp);
                     }
                 }
-                <span class="ident">i</span> <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="ident">l</span> <span class="op">-</span> <span class="number">1</span> =&gt; {
-                    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="ident">i</span>];
-                    <span class="kw">if</span> <span class="ident">value</span> <span class="op">==</span> <span class="number">1.</span> {
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="string">&quot; + x&quot;</span>);
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">&gt;</span> <span class="number">0.</span> {
-                        <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(
-                            <span class="macro">format!</span>(<span class="string">&quot; + {}x&quot;</span>, <span class="ident">value</span>),
-                            <span class="macro">format!</span>(<span class="string">&quot; + {:.4}x&quot;</span>, <span class="ident">value</span>),
+                i <span class="kw">if </span>i == l - <span class="number">1 </span>=&gt; {
+                    <span class="kw">let </span>value = <span class="self">self</span>.coef[i];
+                    <span class="kw">if </span>value == <span class="number">1. </span>{
+                        result.push_str(<span class="string">&quot; + x&quot;</span>);
+                    } <span class="kw">else if </span>value &gt; <span class="number">0. </span>{
+                        <span class="kw">let </span>temp = choose_shorter_string(
+                            <span class="macro">format!</span>(<span class="string">&quot; + {}x&quot;</span>, value),
+                            <span class="macro">format!</span>(<span class="string">&quot; + {:.4}x&quot;</span>, value),
                         );
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">==</span> <span class="op">-</span><span class="number">1.</span> {
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="string">&quot; - x&quot;</span>);
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">&lt;</span> <span class="number">0.</span> {
-                        <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(
-                            <span class="macro">format!</span>(<span class="string">&quot; - {}x&quot;</span>, <span class="ident">value</span>.<span class="ident">abs</span>()),
-                            <span class="macro">format!</span>(<span class="string">&quot; - {:.4}x&quot;</span>, <span class="ident">value</span>.<span class="ident">abs</span>()),
+                        result.push_str(<span class="kw-2">&amp;</span>temp);
+                    } <span class="kw">else if </span>value == -<span class="number">1. </span>{
+                        result.push_str(<span class="string">&quot; - x&quot;</span>);
+                    } <span class="kw">else if </span>value &lt; <span class="number">0. </span>{
+                        <span class="kw">let </span>temp = choose_shorter_string(
+                            <span class="macro">format!</span>(<span class="string">&quot; - {}x&quot;</span>, value.abs()),
+                            <span class="macro">format!</span>(<span class="string">&quot; - {:.4}x&quot;</span>, value.abs()),
                         );
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
+                        result.push_str(<span class="kw-2">&amp;</span>temp);
                     }
                 }
-                <span class="kw">_</span> =&gt; {
-                    <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="ident">i</span>];
-                    <span class="kw">if</span> <span class="ident">value</span> <span class="op">==</span> <span class="number">1.</span> {
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot; + x^{}&quot;</span>, <span class="ident">l</span> <span class="op">-</span> <span class="ident">i</span>));
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">&gt;</span> <span class="number">0.</span> {
-                        <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(
-                            <span class="macro">format!</span>(<span class="string">&quot; + {}x^{}&quot;</span>, <span class="ident">value</span>, <span class="ident">l</span> <span class="op">-</span> <span class="ident">i</span>),
-                            <span class="macro">format!</span>(<span class="string">&quot; + {:.4}x^{}&quot;</span>, <span class="ident">value</span>, <span class="ident">l</span> <span class="op">-</span> <span class="ident">i</span>),
+                <span class="kw">_ </span>=&gt; {
+                    <span class="kw">let </span>value = <span class="self">self</span>.coef[i];
+                    <span class="kw">if </span>value == <span class="number">1. </span>{
+                        result.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot; + x^{}&quot;</span>, l - i));
+                    } <span class="kw">else if </span>value &gt; <span class="number">0. </span>{
+                        <span class="kw">let </span>temp = choose_shorter_string(
+                            <span class="macro">format!</span>(<span class="string">&quot; + {}x^{}&quot;</span>, value, l - i),
+                            <span class="macro">format!</span>(<span class="string">&quot; + {:.4}x^{}&quot;</span>, value, l - i),
                         );
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">==</span> <span class="op">-</span><span class="number">1.</span> {
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot; - x^{}&quot;</span>, <span class="ident">l</span> <span class="op">-</span> <span class="ident">i</span>));
-                    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">value</span> <span class="op">&lt;</span> <span class="number">0.</span> {
-                        <span class="kw">let</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">choose_shorter_string</span>(
-                            <span class="macro">format!</span>(<span class="string">&quot; - {}x^{}&quot;</span>, <span class="ident">value</span>.<span class="ident">abs</span>(), <span class="ident">l</span> <span class="op">-</span> <span class="ident">i</span>),
-                            <span class="macro">format!</span>(<span class="string">&quot; - {:.4}x^{}&quot;</span>, <span class="ident">value</span>.<span class="ident">abs</span>(), <span class="ident">l</span> <span class="op">-</span> <span class="ident">i</span>),
+                        result.push_str(<span class="kw-2">&amp;</span>temp);
+                    } <span class="kw">else if </span>value == -<span class="number">1. </span>{
+                        result.push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot; - x^{}&quot;</span>, l - i));
+                    } <span class="kw">else if </span>value &lt; <span class="number">0. </span>{
+                        <span class="kw">let </span>temp = choose_shorter_string(
+                            <span class="macro">format!</span>(<span class="string">&quot; - {}x^{}&quot;</span>, value.abs(), l - i),
+                            <span class="macro">format!</span>(<span class="string">&quot; - {:.4}x^{}&quot;</span>, value.abs(), l - i),
                         );
-                        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>);
+                        result.push_str(<span class="kw-2">&amp;</span>temp);
                     }
                 }
             }
         }
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">result</span>)
+        <span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, result)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Polynomial</span> {
-    <span class="doccomment">/// Create Polynomial</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">coef</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">coef</span> }
+<span class="kw">impl </span>Polynomial {
+    <span class="doccomment">/// Create Polynomial
+    </span><span class="kw">pub fn </span>new(coef: Vec&lt;f64&gt;) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ coef }
     }
 
-    <span class="doccomment">/// Evaluate polynomial with value according to Horner&#39;s method</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = poly(c!(1,3,2));</span>
-    <span class="doccomment">///     assert_eq!(a.eval(1), 6_f64);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///     let b = poly(c!(1, 1, -2, -2));</span>
-    <span class="doccomment">///     let x = 2_f64.sqrt();</span>
-    <span class="doccomment">///     let horner_evaluation = b.eval(x);</span>
-    <span class="doccomment">///     let naive_evaluation = x.powf(3.0) + x.powf(2.0) - 2.0*x - 2.0;</span>
-    <span class="doccomment">///     assert_eq!(horner_evaluation, 0_f64);</span>
-    <span class="doccomment">///     assert_ne!(naive_evaluation, horner_evaluation);</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eval</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">T</span>) -&gt; <span class="ident">f64</span>
-    <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+    <span class="doccomment">/// Evaluate polynomial with value according to Horner&#39;s method
+    ///
+    /// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = poly(c!(1,3,2));
+    ///     assert_eq!(a.eval(1), 6_f64);
+    ///
+    ///     let b = poly(c!(1, 1, -2, -2));
+    ///     let x = 2_f64.sqrt();
+    ///     let horner_evaluation = b.eval(x);
+    ///     let naive_evaluation = x.powf(3.0) + x.powf(2.0) - 2.0*x - 2.0;
+    ///     assert_eq!(horner_evaluation, 0_f64);
+    ///     assert_ne!(naive_evaluation, horner_evaluation);
+    /// }
+    /// ```
+    </span><span class="kw">pub fn </span>eval&lt;T&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: T) -&gt; f64
+    <span class="kw">where
+        </span>T: convert::Into&lt;f64&gt; + Copy,
     {
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="number">0</span>];
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
-            <span class="ident">s</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">+</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">s</span>;
+        <span class="kw">let </span>x = x.into();
+        <span class="kw">let </span>l = <span class="self">self</span>.coef.len() - <span class="number">1</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="self">self</span>.coef[<span class="number">0</span>];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l {
+            s = <span class="self">self</span>.coef[i + <span class="number">1</span>] + x * s;
         }
-        <span class="ident">s</span>
+        s
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eval_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="ident">v</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">eval</span>(<span class="ident">t</span>))
+    <span class="kw">pub fn </span>eval_vec(<span class="kw-2">&amp;</span><span class="self">self</span>, v: Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt; {
+        v.fmap(|t| <span class="self">self</span>.eval(t))
     }
 
-    <span class="doccomment">/// Linear transformation of a polynomial by a given x according to Horner&#39;s method</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = poly(c!(1,3,2));</span>
-    <span class="doccomment">///     let translated = a.translate_x(2);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///     assert_eq!(translated.eval(3), 6_f64);</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">translate_x</span><span class="op">&lt;</span><span class="ident">X</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">X</span>) -&gt; <span class="self">Self</span>
-    <span class="kw">where</span>
-        <span class="ident">X</span>: <span class="ident">convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+    <span class="doccomment">/// Linear transformation of a polynomial by a given x according to Horner&#39;s method
+    ///
+    /// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = poly(c!(1,3,2));
+    ///     let translated = a.translate_x(2);
+    ///
+    ///     assert_eq!(translated.eval(3), 6_f64);
+    /// }
+    /// ```
+    </span><span class="kw">pub fn </span>translate_x&lt;X&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: X) -&gt; <span class="self">Self
+    </span><span class="kw">where
+        </span>X: convert::Into&lt;f64&gt; + Copy,
     {
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="ident">x</span>.<span class="ident">into</span>()]);
+        <span class="kw">let </span>d = <span class="self">Self</span>::new(<span class="macro">vec!</span>[<span class="number">1f64</span>, x.into()]);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">coef</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>()];
+        <span class="kw">let </span><span class="kw-2">mut </span>coef = <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.coef.len()];
 
-        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">p</span>, <span class="ident">ri</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">horner_division</span>(<span class="kw-2">&amp;</span><span class="ident">d</span>);
-        <span class="ident">coef</span>[<span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">ri</span>;
+        <span class="kw">let </span>(<span class="kw-2">mut </span>p, ri) = <span class="self">self</span>.horner_division(<span class="kw-2">&amp;</span>d);
+        coef[<span class="self">self</span>.coef.len() - <span class="number">1</span>] = ri;
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..(<span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>)).<span class="ident">rev</span>() {
-            <span class="kw">if</span> <span class="ident">p</span>.<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">1</span> {
-                <span class="ident">coef</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">p</span>.<span class="ident">coef</span>[<span class="number">0</span>];
+        <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..(<span class="self">self</span>.coef.len() - <span class="number">1</span>)).rev() {
+            <span class="kw">if </span>p.coef.len() == <span class="number">1 </span>{
+                coef[i] = p.coef[<span class="number">0</span>];
                 <span class="kw">break</span>;
             }
 
-            <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">p</span>.<span class="ident">horner_division</span>(<span class="kw-2">&amp;</span><span class="ident">d</span>);
-            <span class="ident">coef</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">t</span>.<span class="number">1</span>;
-            <span class="ident">p</span> <span class="op">=</span> <span class="ident">t</span>.<span class="number">0</span>;
+            <span class="kw">let </span>t = p.horner_division(<span class="kw-2">&amp;</span>d);
+            coef[i] = t.<span class="number">1</span>;
+            p = t.<span class="number">0</span>;
         }
 
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">coef</span>)
+        <span class="self">Self</span>::new(coef)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">horner_division</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; (<span class="self">Self</span>, <span class="ident">f64</span>) {
-        <span class="macro">assert_eq!</span>(<span class="ident">other</span>.<span class="ident">coef</span>.<span class="ident">len</span>(), <span class="number">2usize</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">other</span>.<span class="ident">coef</span>[<span class="number">0</span>], <span class="number">1.0f64</span>);
+    <span class="kw">pub fn </span>horner_division(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; (<span class="self">Self</span>, f64) {
+        <span class="macro">assert_eq!</span>(other.coef.len(), <span class="number">2usize</span>);
+        <span class="macro">assert_eq!</span>(other.coef[<span class="number">0</span>], <span class="number">1.0f64</span>);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">coef</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>];
-        <span class="ident">coef</span>[<span class="number">0</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="number">0</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>coef = <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.coef.len() - <span class="number">1</span>];
+        coef[<span class="number">0</span>] = <span class="self">self</span>.coef[<span class="number">0</span>];
 
-        <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">coef</span>[<span class="number">1</span>];
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">coef</span>.<span class="ident">len</span>() {
-            <span class="ident">coef</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">d</span> <span class="op">*</span> <span class="ident">coef</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>];
+        <span class="kw">let </span>d = other.coef[<span class="number">1</span>];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..coef.len() {
+            coef[i] = <span class="self">self</span>.coef[i] - d * coef[i - <span class="number">1</span>];
         }
 
-        <span class="kw">let</span> <span class="ident">remainder</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>] <span class="op">-</span> <span class="ident">d</span> <span class="op">*</span> <span class="ident">coef</span>[<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>];
-        (<span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">coef</span>), <span class="ident">remainder</span>)
+        <span class="kw">let </span>remainder = <span class="self">self</span>.coef[<span class="self">self</span>.coef.len() - <span class="number">1</span>] - d * coef[coef.len() - <span class="number">1</span>];
+        (<span class="self">Self</span>::new(coef), remainder)
     }
 }
 
-<span class="doccomment">/// Convenient to declare polynomial</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">poly</span>(<span class="ident">coef</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Polynomial</span> {
-    <span class="ident">Polynomial::new</span>(<span class="ident">coef</span>)
+<span class="doccomment">/// Convenient to declare polynomial
+</span><span class="kw">pub fn </span>poly(coef: Vec&lt;f64&gt;) -&gt; Polynomial {
+    Polynomial::new(coef)
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// std::ops for Polynomial</span>
-<span class="comment">// =============================================================================</span>
+<span class="comment">// =============================================================================
+// std::ops for Polynomial
+// =============================================================================
 
-<span class="kw">impl</span> <span class="ident">Neg</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
+</span><span class="kw">impl </span>Neg <span class="kw">for </span>Polynomial {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">neg</span>(<span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(
-            <span class="self">self</span>.<span class="ident">coef</span>
-                .<span class="ident">clone</span>()
-                .<span class="ident">into_iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="op">-</span><span class="ident">x</span>)
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
+    <span class="kw">fn </span>neg(<span class="self">self</span>) -&gt; <span class="self">Self</span>::Output {
+        <span class="self">Self</span>::new(
+            <span class="self">self</span>.coef
+                .clone()
+                .into_iter()
+                .map(|x| -x)
+                .collect::&lt;Vec&lt;f64&gt;&gt;(),
         )
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="ident">l1</span>, <span class="ident">l2</span>) <span class="op">=</span> (<span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>(), <span class="ident">other</span>.<span class="ident">coef</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> <span class="ident">l_max</span> <span class="op">=</span> <span class="ident">max</span>(<span class="ident">l1</span>, <span class="ident">l2</span>);
-        <span class="kw">let</span> <span class="ident">l_min</span> <span class="op">=</span> <span class="ident">min</span>(<span class="ident">l1</span>, <span class="ident">l2</span>);
-        <span class="kw">let</span> <span class="ident">v_max</span> <span class="op">=</span> <span class="ident">choose_longer_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">coef</span>, <span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">coef</span>);
-        <span class="kw">let</span> <span class="ident">v_min</span> <span class="op">=</span> <span class="ident">choose_shorter_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">coef</span>, <span class="kw-2">&amp;</span><span class="ident">other</span>.<span class="ident">coef</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">coef</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">l_max</span>];
+<span class="kw">impl </span>Add&lt;Polynomial&gt; <span class="kw">for </span>Polynomial {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>add(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(l1, l2) = (<span class="self">self</span>.coef.len(), other.coef.len());
+        <span class="kw">let </span>l_max = max(l1, l2);
+        <span class="kw">let </span>l_min = min(l1, l2);
+        <span class="kw">let </span>v_max = choose_longer_vec(<span class="kw-2">&amp;</span><span class="self">self</span>.coef, <span class="kw-2">&amp;</span>other.coef);
+        <span class="kw">let </span>v_min = choose_shorter_vec(<span class="kw-2">&amp;</span><span class="self">self</span>.coef, <span class="kw-2">&amp;</span>other.coef);
+        <span class="kw">let </span><span class="kw-2">mut </span>coef = <span class="macro">vec!</span>[<span class="number">0f64</span>; l_max];
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l_max</span> {
-            <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">l_max</span> <span class="op">-</span> <span class="ident">l_min</span> {
-                <span class="ident">coef</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">v_max</span>[<span class="ident">i</span>];
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">i</span> <span class="op">-</span> (<span class="ident">l_max</span> <span class="op">-</span> <span class="ident">l_min</span>);
-                <span class="ident">coef</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">v_max</span>[<span class="ident">i</span>] <span class="op">+</span> <span class="ident">v_min</span>[<span class="ident">j</span>];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l_max {
+            <span class="kw">if </span>i &lt; l_max - l_min {
+                coef[i] = v_max[i];
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>j = i - (l_max - l_min);
+                coef[i] = v_max[i] + v_min[j];
             }
         }
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">coef</span>)
+        <span class="self">Self</span>::new(coef)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Polynomial</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+<span class="kw">impl</span>&lt;T&gt; Add&lt;T&gt; <span class="kw">for </span>Polynomial
+<span class="kw">where
+    </span>T: convert::Into&lt;f64&gt; + Copy,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">add</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_coef</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">clone</span>();
-        <span class="ident">new_coef</span>[<span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">into</span>();
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">new_coef</span>)
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>add(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>new_coef = <span class="self">self</span>.coef.clone();
+        new_coef[<span class="self">self</span>.coef.len()-<span class="number">1</span>] += other.into();
+        <span class="self">Self</span>::new(new_coef)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">add</span>(<span class="ident">other</span>.<span class="ident">neg</span>())
+<span class="kw">impl </span>Sub&lt;Polynomial&gt; <span class="kw">for </span>Polynomial {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>sub(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.add(other.neg())
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Polynomial</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+<span class="kw">impl</span>&lt;T&gt; Sub&lt;T&gt; <span class="kw">for </span>Polynomial
+<span class="kw">where
+    </span>T: convert::Into&lt;f64&gt; + Copy,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">sub</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">new_coef</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">clone</span>();
-        <span class="ident">new_coef</span>[<span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>] <span class="op">-</span><span class="op">=</span> <span class="ident">other</span>.<span class="ident">into</span>();
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">new_coef</span>)
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>sub(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>new_coef = <span class="self">self</span>.coef.clone();
+        new_coef[<span class="self">self</span>.coef.len()-<span class="number">1</span>] -= other.into();
+        <span class="self">Self</span>::new(new_coef)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Polynomial</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+<span class="kw">impl</span>&lt;T&gt; Mul&lt;T&gt; <span class="kw">for </span>Polynomial
+<span class="kw">where
+    </span>T: convert::Into&lt;f64&gt; + Copy,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::new</span>(
-            <span class="self">self</span>.<span class="ident">coef</span>
-                .<span class="ident">into_iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">other</span>.<span class="ident">into</span>())
-                .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(),
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>mul(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
+        <span class="self">Self</span>::new(
+            <span class="self">self</span>.coef
+                .into_iter()
+                .map(|x| x * other.into())
+                .collect::&lt;Vec&lt;f64&gt;&gt;(),
         )
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="ident">l1</span>, <span class="ident">l2</span>) <span class="op">=</span> (<span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>(), <span class="ident">other</span>.<span class="ident">coef</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> (<span class="ident">n1</span>, <span class="ident">n2</span>) <span class="op">=</span> (<span class="ident">l1</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">l2</span> <span class="op">-</span> <span class="number">1</span>);
-        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">n1</span> <span class="op">+</span> <span class="ident">n2</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span> <span class="op">+</span> <span class="number">1</span>];
+<span class="kw">impl </span>Mul&lt;Polynomial&gt; <span class="kw">for </span>Polynomial {
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>mul(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(l1, l2) = (<span class="self">self</span>.coef.len(), other.coef.len());
+        <span class="kw">let </span>(n1, n2) = (l1 - <span class="number">1</span>, l2 - <span class="number">1</span>);
+        <span class="kw">let </span>n = n1 + n2;
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="number">0f64</span>; n + <span class="number">1</span>];
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l1</span> {
-            <span class="kw">let</span> <span class="ident">fixed_val</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">fixed_exp</span> <span class="op">=</span> <span class="ident">n1</span> <span class="op">-</span> <span class="ident">i</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l1 {
+            <span class="kw">let </span>fixed_val = <span class="self">self</span>.coef[i];
+            <span class="kw">let </span>fixed_exp = n1 - i;
 
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l2</span> {
-                <span class="kw">let</span> <span class="ident">target_val</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">coef</span>[<span class="ident">j</span>];
-                <span class="kw">let</span> <span class="ident">target_exp</span> <span class="op">=</span> <span class="ident">n2</span> <span class="op">-</span> <span class="ident">j</span>;
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..l2 {
+                <span class="kw">let </span>target_val = other.coef[j];
+                <span class="kw">let </span>target_exp = n2 - j;
 
-                <span class="kw">let</span> <span class="ident">result_val</span> <span class="op">=</span> <span class="ident">fixed_val</span> <span class="op">*</span> <span class="ident">target_val</span>;
-                <span class="kw">let</span> <span class="ident">result_exp</span> <span class="op">=</span> <span class="ident">fixed_exp</span> <span class="op">+</span> <span class="ident">target_exp</span>;
+                <span class="kw">let </span>result_val = fixed_val * target_val;
+                <span class="kw">let </span>result_exp = fixed_exp + target_exp;
 
-                <span class="ident">result</span>[<span class="ident">n</span> <span class="op">-</span> <span class="ident">result_exp</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">result_val</span>;
+                result[n - result_exp] += result_val;
             }
         }
 
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">result</span>)
+        <span class="self">Self</span>::new(result)
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Polynomial</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+<span class="kw">impl</span>&lt;T&gt; Div&lt;T&gt; <span class="kw">for </span>Polynomial
+<span class="kw">where
+    </span>T: convert::Into&lt;f64&gt; + Copy,
 {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="ident">T</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">into</span>();
-        <span class="macro">assert_ne!</span>(<span class="ident">val</span>, <span class="number">0f64</span>);
+    <span class="kw">type </span>Output = <span class="self">Self</span>;
+    <span class="kw">fn </span>div(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>val = other.into();
+        <span class="macro">assert_ne!</span>(val, <span class="number">0f64</span>);
 
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">val</span>))
+        <span class="self">Self</span>::new(<span class="self">self</span>.coef.fmap(|x| x / val))
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> (<span class="self">Self</span>, <span class="self">Self</span>);
-    <span class="kw">fn</span> <span class="ident">div</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="kw">let</span> <span class="ident">l1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">l2</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">coef</span>.<span class="ident">len</span>();
-        <span class="macro">assert!</span>(<span class="ident">l1</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">l2</span>);
+<span class="kw">impl </span>Div&lt;Polynomial&gt; <span class="kw">for </span>Polynomial {
+    <span class="kw">type </span>Output = (<span class="self">Self</span>, <span class="self">Self</span>);
+    <span class="kw">fn </span>div(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self</span>::Output {
+        <span class="kw">let </span>l1 = <span class="self">self</span>.coef.len();
+        <span class="kw">let </span>l2 = other.coef.len();
+        <span class="macro">assert!</span>(l1 &gt;= l2);
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">quot_vec</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> <span class="ident">denom</span> <span class="op">=</span> <span class="ident">other</span>.<span class="ident">coef</span>[<span class="number">0</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>temp = <span class="self">self</span>.clone();
+        <span class="kw">let </span><span class="kw-2">mut </span>quot_vec: Vec&lt;f64&gt; = Vec::new();
+        <span class="kw">let </span>denom = other.coef[<span class="number">0</span>];
 
-        <span class="kw">while</span> <span class="ident">temp</span>.<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">l2</span> {
-            <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">coef</span>.<span class="ident">len</span>();
-            <span class="kw">let</span> <span class="ident">target</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">coef</span>[<span class="number">0</span>];
-            <span class="kw">let</span> <span class="ident">nom</span> <span class="op">=</span> <span class="ident">target</span> <span class="op">/</span> <span class="ident">denom</span>;
-            <span class="ident">quot_vec</span>.<span class="ident">push</span>(<span class="ident">nom</span>);
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp_vec</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">l</span> <span class="op">-</span> <span class="number">1</span>];
+        <span class="kw">while </span>temp.coef.len() &gt;= l2 {
+            <span class="kw">let </span>l = temp.coef.len();
+            <span class="kw">let </span>target = temp.coef[<span class="number">0</span>];
+            <span class="kw">let </span>nom = target / denom;
+            quot_vec.push(nom);
+            <span class="kw">let </span><span class="kw-2">mut </span>temp_vec = <span class="macro">vec!</span>[<span class="number">0f64</span>; l - <span class="number">1</span>];
 
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">l</span> {
-                <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">l2</span> {
-                    <span class="ident">temp_vec</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">coef</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">nom</span> <span class="op">*</span> <span class="ident">other</span>.<span class="ident">coef</span>[<span class="ident">i</span>];
-                } <span class="kw">else</span> {
-                    <span class="ident">temp_vec</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">coef</span>[<span class="ident">i</span>];
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..l {
+                <span class="kw">if </span>i &lt; l2 {
+                    temp_vec[i - <span class="number">1</span>] = temp.coef[i] - nom * other.coef[i];
+                } <span class="kw">else </span>{
+                    temp_vec[i - <span class="number">1</span>] = temp.coef[i];
                 }
             }
 
-            <span class="ident">temp</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="ident">temp_vec</span>);
+            temp = poly(temp_vec);
         }
 
-        <span class="kw">let</span> <span class="ident">rem</span> <span class="op">=</span> <span class="ident">temp</span>;
+        <span class="kw">let </span>rem = temp;
 
-        (<span class="ident">poly</span>(<span class="ident">quot_vec</span>), <span class="ident">rem</span>)
+        (poly(quot_vec), rem)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">usize</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Polynomial</span>;
+<span class="kw">impl </span>Mul&lt;Polynomial&gt; <span class="kw">for </span>usize {
+    <span class="kw">type </span>Output = Polynomial;
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Polynomial</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">rhs</span>.<span class="ident">mul</span>(<span class="self">self</span> <span class="kw">as</span> <span class="ident">f64</span>)
+    <span class="kw">fn </span>mul(<span class="self">self</span>, rhs: Polynomial) -&gt; <span class="self">Self</span>::Output {
+        rhs.mul(<span class="self">self </span><span class="kw">as </span>f64)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">i32</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Polynomial</span>;
+<span class="kw">impl </span>Mul&lt;Polynomial&gt; <span class="kw">for </span>i32 {
+    <span class="kw">type </span>Output = Polynomial;
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Polynomial</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">rhs</span>.<span class="ident">mul</span>(<span class="self">self</span> <span class="kw">as</span> <span class="ident">f64</span>)
+    <span class="kw">fn </span>mul(<span class="self">self</span>, rhs: Polynomial) -&gt; <span class="self">Self</span>::Output {
+        rhs.mul(<span class="self">self </span><span class="kw">as </span>f64)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">i64</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Polynomial</span>;
+<span class="kw">impl </span>Mul&lt;Polynomial&gt; <span class="kw">for </span>i64 {
+    <span class="kw">type </span>Output = Polynomial;
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Polynomial</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">rhs</span>.<span class="ident">mul</span>(<span class="self">self</span> <span class="kw">as</span> <span class="ident">f64</span>)
+    <span class="kw">fn </span>mul(<span class="self">self</span>, rhs: Polynomial) -&gt; <span class="self">Self</span>::Output {
+        rhs.mul(<span class="self">self </span><span class="kw">as </span>f64)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">f32</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Polynomial</span>;
+<span class="kw">impl </span>Mul&lt;Polynomial&gt; <span class="kw">for </span>f32 {
+    <span class="kw">type </span>Output = Polynomial;
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Polynomial</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">rhs</span>.<span class="ident">mul</span>(<span class="self">self</span> <span class="kw">as</span> <span class="ident">f64</span>)
+    <span class="kw">fn </span>mul(<span class="self">self</span>, rhs: Polynomial) -&gt; <span class="self">Self</span>::Output {
+        rhs.mul(<span class="self">self </span><span class="kw">as </span>f64)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">f64</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Polynomial</span>;
+<span class="kw">impl </span>Mul&lt;Polynomial&gt; <span class="kw">for </span>f64 {
+    <span class="kw">type </span>Output = Polynomial;
 
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Polynomial</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="ident">rhs</span>.<span class="ident">mul</span>(<span class="self">self</span> <span class="kw">as</span> <span class="ident">f64</span>)
+    <span class="kw">fn </span>mul(<span class="self">self</span>, rhs: Polynomial) -&gt; <span class="self">Self</span>::Output {
+        rhs.mul(<span class="self">self </span><span class="kw">as </span>f64)
     }
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Extra operations for Polynomial</span>
-<span class="comment">// =============================================================================</span>
-<span class="kw">impl</span> <span class="ident">PowOps</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {
-    <span class="kw">fn</span> <span class="ident">powi</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">i32</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
-        <span class="kw">for</span> <span class="ident">_i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span> {
-            <span class="ident">result</span> <span class="op">=</span> <span class="ident">result</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">clone</span>();
+<span class="comment">// =============================================================================
+// Extra operations for Polynomial
+// =============================================================================
+</span><span class="kw">impl </span>PowOps <span class="kw">for </span>Polynomial {
+    <span class="kw">fn </span>powi(<span class="kw-2">&amp;</span><span class="self">self</span>, n: i32) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">self</span>.clone();
+        <span class="kw">for </span>_i <span class="kw">in </span><span class="number">0</span>..n - <span class="number">1 </span>{
+            result = result * <span class="self">self</span>.clone();
         }
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_f</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">fn </span>powf(<span class="kw-2">&amp;</span><span class="self">self</span>, _f: f64) -&gt; <span class="self">Self </span>{
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">pow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_f</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">fn </span>pow(<span class="kw-2">&amp;</span><span class="self">self</span>, _f: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">sqrt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
+    <span class="kw">fn </span>sqrt(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         <span class="macro">unimplemented!</span>()
     }
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Calculus for Polynomial</span>
-<span class="comment">// =============================================================================</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Calculus</span> {
-    <span class="kw">fn</span> <span class="ident">derivative</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">integral</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">integrate</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interval</span>: (<span class="ident">T</span>, <span class="ident">T</span>)) -&gt; <span class="ident">f64</span>;
+<span class="comment">// =============================================================================
+// Calculus for Polynomial
+// =============================================================================
+</span><span class="kw">pub trait </span>Calculus {
+    <span class="kw">fn </span>derivative(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>integral(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>integrate&lt;T: Into&lt;f64&gt; + Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, interval: (T, T)) -&gt; f64;
 }
 
-<span class="kw">impl</span> <span class="ident">Calculus</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {
-    <span class="kw">fn</span> <span class="ident">derivative</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">l</span>];
+<span class="kw">impl </span>Calculus <span class="kw">for </span>Polynomial {
+    <span class="kw">fn </span>derivative(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>l = <span class="self">self</span>.coef.len() - <span class="number">1</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="number">0f64</span>; l];
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
-            <span class="ident">result</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="ident">i</span>] <span class="op">*</span> (<span class="ident">l</span> <span class="op">-</span> <span class="ident">i</span>) <span class="kw">as</span> <span class="ident">f64</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l {
+            result[i] = <span class="self">self</span>.coef[i] * (l - i) <span class="kw">as </span>f64;
         }
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">result</span>)
+        <span class="self">Self</span>::new(result)
     }
 
-    <span class="kw">fn</span> <span class="ident">integral</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">l</span> <span class="op">+</span> <span class="number">1</span>];
+    <span class="kw">fn </span>integral(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>l = <span class="self">self</span>.coef.len();
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="number">0f64</span>; l + <span class="number">1</span>];
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
-            <span class="ident">result</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">coef</span>[<span class="ident">i</span>] <span class="op">/</span> (<span class="ident">l</span> <span class="op">-</span> <span class="ident">i</span>) <span class="kw">as</span> <span class="ident">f64</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l {
+            result[i] = <span class="self">self</span>.coef[i] / (l - i) <span class="kw">as </span>f64;
         }
-        <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">result</span>)
+        <span class="self">Self</span>::new(result)
     }
 
-    <span class="kw">fn</span> <span class="ident">integrate</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interval</span>: (<span class="ident">T</span>, <span class="ident">T</span>)) -&gt; <span class="ident">f64</span> {
-        <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> (<span class="ident">interval</span>.<span class="number">0</span>.<span class="ident">into</span>(), <span class="ident">interval</span>.<span class="number">1</span>.<span class="ident">into</span>());
-        <span class="kw">let</span> <span class="ident">integral</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">integral</span>();
-        <span class="ident">integral</span>.<span class="ident">eval</span>(<span class="ident">b</span>) <span class="op">-</span> <span class="ident">integral</span>.<span class="ident">eval</span>(<span class="ident">a</span>)
+    <span class="kw">fn </span>integrate&lt;T: Into&lt;f64&gt; + Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, interval: (T, T)) -&gt; f64 {
+        <span class="kw">let </span>(a, b) = (interval.<span class="number">0</span>.into(), interval.<span class="number">1</span>.into());
+        <span class="kw">let </span>integral = <span class="self">self</span>.integral();
+        integral.eval(b) - integral.eval(a)
     }
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Useful Polynomial</span>
-<span class="comment">// =============================================================================</span>
-<span class="doccomment">/// Lagrange Polynomial</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lagrange_polynomial</span>(<span class="ident">node_x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">node_y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Polynomial</span> {
-    <span class="macro">assert_eq!</span>(<span class="ident">node_x</span>.<span class="ident">len</span>(), <span class="ident">node_y</span>.<span class="ident">len</span>());
-    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">node_x</span>.<span class="ident">len</span>();
+<span class="comment">// =============================================================================
+// Useful Polynomial
+// =============================================================================
+</span><span class="doccomment">/// Lagrange Polynomial
+</span><span class="kw">pub fn </span>lagrange_polynomial(node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;) -&gt; Polynomial {
+    <span class="macro">assert_eq!</span>(node_x.len(), node_y.len());
+    <span class="kw">let </span>l = node_x.len();
 
-    <span class="kw">if</span> <span class="ident">l</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">1</span> {
+    <span class="kw">if </span>l &lt;= <span class="number">1 </span>{
         <span class="macro">panic!</span>(<span class="string">&quot;Lagrange Polynomial needs at least 2 nodes&quot;</span>);
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">l</span> <span class="op">==</span> <span class="number">2</span> {
-        <span class="kw">let</span> <span class="ident">p0</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="op">-</span><span class="ident">node_x</span>[<span class="number">0</span>]]);
-        <span class="kw">let</span> <span class="ident">p1</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="op">-</span><span class="ident">node_x</span>[<span class="number">1</span>]]);
+    } <span class="kw">else if </span>l == <span class="number">2 </span>{
+        <span class="kw">let </span>p0 = poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, -node_x[<span class="number">0</span>]]);
+        <span class="kw">let </span>p1 = poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, -node_x[<span class="number">1</span>]]);
 
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="number">1</span>] <span class="op">/</span> (<span class="ident">node_x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="number">0</span>]);
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="op">-</span><span class="ident">node_y</span>[<span class="number">0</span>] <span class="op">/</span> (<span class="ident">node_x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="number">0</span>]);
+        <span class="kw">let </span>a = node_y[<span class="number">1</span>] / (node_x[<span class="number">1</span>] - node_x[<span class="number">0</span>]);
+        <span class="kw">let </span>b = -node_y[<span class="number">0</span>] / (node_x[<span class="number">1</span>] - node_x[<span class="number">0</span>]);
 
-        <span class="ident">p0</span> <span class="op">*</span> <span class="ident">a</span> <span class="op">+</span> <span class="ident">p1</span> <span class="op">*</span> <span class="ident">b</span>
-    } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">l</span> <span class="op">==</span> <span class="number">3</span> {
-        <span class="kw">let</span> <span class="ident">p0</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="op">-</span>(<span class="ident">node_x</span>[<span class="number">0</span>] <span class="op">+</span> <span class="ident">node_x</span>[<span class="number">1</span>]), <span class="ident">node_x</span>[<span class="number">0</span>] <span class="op">*</span> <span class="ident">node_x</span>[<span class="number">1</span>]]);
-        <span class="kw">let</span> <span class="ident">p1</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="op">-</span>(<span class="ident">node_x</span>[<span class="number">0</span>] <span class="op">+</span> <span class="ident">node_x</span>[<span class="number">2</span>]), <span class="ident">node_x</span>[<span class="number">0</span>] <span class="op">*</span> <span class="ident">node_x</span>[<span class="number">2</span>]]);
-        <span class="kw">let</span> <span class="ident">p2</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="op">-</span>(<span class="ident">node_x</span>[<span class="number">1</span>] <span class="op">+</span> <span class="ident">node_x</span>[<span class="number">2</span>]), <span class="ident">node_x</span>[<span class="number">1</span>] <span class="op">*</span> <span class="ident">node_x</span>[<span class="number">2</span>]]);
+        p0 * a + p1 * b
+    } <span class="kw">else if </span>l == <span class="number">3 </span>{
+        <span class="kw">let </span>p0 = poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, -(node_x[<span class="number">0</span>] + node_x[<span class="number">1</span>]), node_x[<span class="number">0</span>] * node_x[<span class="number">1</span>]]);
+        <span class="kw">let </span>p1 = poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, -(node_x[<span class="number">0</span>] + node_x[<span class="number">2</span>]), node_x[<span class="number">0</span>] * node_x[<span class="number">2</span>]]);
+        <span class="kw">let </span>p2 = poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, -(node_x[<span class="number">1</span>] + node_x[<span class="number">2</span>]), node_x[<span class="number">1</span>] * node_x[<span class="number">2</span>]]);
 
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="number">2</span>] <span class="op">/</span> ((<span class="ident">node_x</span>[<span class="number">2</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="number">0</span>]) <span class="op">*</span> (<span class="ident">node_x</span>[<span class="number">2</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="number">1</span>]));
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="number">1</span>] <span class="op">/</span> ((<span class="ident">node_x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="number">0</span>]) <span class="op">*</span> (<span class="ident">node_x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="number">2</span>]));
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="number">0</span>] <span class="op">/</span> ((<span class="ident">node_x</span>[<span class="number">0</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="number">1</span>]) <span class="op">*</span> (<span class="ident">node_x</span>[<span class="number">0</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="number">2</span>]));
+        <span class="kw">let </span>a = node_y[<span class="number">2</span>] / ((node_x[<span class="number">2</span>] - node_x[<span class="number">0</span>]) * (node_x[<span class="number">2</span>] - node_x[<span class="number">1</span>]));
+        <span class="kw">let </span>b = node_y[<span class="number">1</span>] / ((node_x[<span class="number">1</span>] - node_x[<span class="number">0</span>]) * (node_x[<span class="number">1</span>] - node_x[<span class="number">2</span>]));
+        <span class="kw">let </span>c = node_y[<span class="number">0</span>] / ((node_x[<span class="number">0</span>] - node_x[<span class="number">1</span>]) * (node_x[<span class="number">0</span>] - node_x[<span class="number">2</span>]));
 
-        <span class="ident">p0</span> <span class="op">*</span> <span class="ident">a</span> <span class="op">+</span> <span class="ident">p1</span> <span class="op">*</span> <span class="ident">b</span> <span class="op">+</span> <span class="ident">p2</span> <span class="op">*</span> <span class="ident">c</span>
-    } <span class="kw">else</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">Polynomial::new</span>(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">l</span>]);
+        p0 * a + p1 * b + p2 * c
+    } <span class="kw">else </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = Polynomial::new(<span class="macro">vec!</span>[<span class="number">0f64</span>; l]);
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
-            <span class="kw">let</span> <span class="ident">fixed_val</span> <span class="op">=</span> <span class="ident">node_x</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">prod</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">id</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>]);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l {
+            <span class="kw">let </span>fixed_val = node_x[i];
+            <span class="kw">let </span>prod = node_y[i];
+            <span class="kw">let </span><span class="kw-2">mut </span>id = poly(<span class="macro">vec!</span>[<span class="number">1f64</span>]);
     
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
-                <span class="kw">if</span> <span class="ident">j</span> <span class="op">==</span> <span class="ident">i</span> {
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..l {
+                <span class="kw">if </span>j == i {
                     <span class="kw">continue</span>;
-                } <span class="kw">else</span> {
-                    <span class="kw">let</span> <span class="ident">target_val</span> <span class="op">=</span> <span class="ident">node_x</span>[<span class="ident">j</span>];
-                    <span class="kw">let</span> <span class="ident">denom</span> <span class="op">=</span> <span class="ident">fixed_val</span> <span class="op">-</span> <span class="ident">target_val</span>;
-                    <span class="ident">id</span> <span class="op">=</span> <span class="ident">id</span> <span class="op">*</span> (<span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="op">-</span><span class="ident">target_val</span>]) <span class="op">/</span> <span class="ident">denom</span>);
+                } <span class="kw">else </span>{
+                    <span class="kw">let </span>target_val = node_x[j];
+                    <span class="kw">let </span>denom = fixed_val - target_val;
+                    id = id * (poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, -target_val]) / denom);
                 }
             }
-            <span class="ident">result</span> <span class="op">=</span> <span class="ident">result</span> <span class="op">+</span> (<span class="ident">id</span> <span class="op">*</span> <span class="ident">prod</span>);
+            result = result + (id * prod);
         }
-        <span class="ident">result</span>
+        result
     }
 }
 
-<span class="doccomment">/// Legendre Polynomial</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Description</span>
-<span class="doccomment">/// : Generate `n`-th order of Legendre polynomial</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">legendre_polynomial</span>(<span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Polynomial</span> {
-    <span class="kw">match</span> <span class="ident">n</span> {
-        <span class="number">0</span> =&gt; <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>]),       <span class="comment">// 1</span>
-        <span class="number">1</span> =&gt; <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="number">0f64</span>]), <span class="comment">// x</span>
-        <span class="number">2</span> =&gt; <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1.5</span>, <span class="number">0f64</span>, <span class="op">-</span><span class="number">0.5</span>]),
-        <span class="number">3</span> =&gt; <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">2.5</span>, <span class="number">0f64</span>, <span class="op">-</span><span class="number">1.5</span>, <span class="number">0f64</span>]),
-        <span class="kw">_</span> =&gt; {
-            <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>;
-            <span class="kw">let</span> <span class="ident">k_f64</span> <span class="op">=</span> <span class="ident">k</span> <span class="kw">as</span> <span class="ident">f64</span>;
-            ((<span class="number">2f64</span> <span class="op">*</span> <span class="ident">k_f64</span> <span class="op">+</span> <span class="number">1f64</span>) <span class="op">*</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="number">0f64</span>]) <span class="op">*</span> <span class="ident">legendre_polynomial</span>(<span class="ident">k</span>)
-                <span class="op">-</span> <span class="ident">k_f64</span> <span class="op">*</span> <span class="ident">legendre_polynomial</span>(<span class="ident">k</span> <span class="op">-</span> <span class="number">1</span>))
-                <span class="op">/</span> (<span class="ident">k_f64</span> <span class="op">+</span> <span class="number">1f64</span>)
+<span class="doccomment">/// Legendre Polynomial
+///
+/// # Description
+/// : Generate `n`-th order of Legendre polynomial
+</span><span class="kw">pub fn </span>legendre_polynomial(n: usize) -&gt; Polynomial {
+    <span class="kw">match </span>n {
+        <span class="number">0 </span>=&gt; poly(<span class="macro">vec!</span>[<span class="number">1f64</span>]),       <span class="comment">// 1
+        </span><span class="number">1 </span>=&gt; poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="number">0f64</span>]), <span class="comment">// x
+        </span><span class="number">2 </span>=&gt; poly(<span class="macro">vec!</span>[<span class="number">1.5</span>, <span class="number">0f64</span>, -<span class="number">0.5</span>]),
+        <span class="number">3 </span>=&gt; poly(<span class="macro">vec!</span>[<span class="number">2.5</span>, <span class="number">0f64</span>, -<span class="number">1.5</span>, <span class="number">0f64</span>]),
+        <span class="kw">_ </span>=&gt; {
+            <span class="kw">let </span>k = n - <span class="number">1</span>;
+            <span class="kw">let </span>k_f64 = k <span class="kw">as </span>f64;
+            ((<span class="number">2f64 </span>* k_f64 + <span class="number">1f64</span>) * poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="number">0f64</span>]) * legendre_polynomial(k)
+                - k_f64 * legendre_polynomial(k - <span class="number">1</span>))
+                / (k_f64 + <span class="number">1f64</span>)
         }
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SpecialKind</span> {
-    <span class="ident">First</span>,
-    <span class="ident">Second</span>
+<span class="attribute">#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>SpecialKind {
+    First,
+    Second
 }
 
-<span class="doccomment">/// Chebyshev Polynomial</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">chebyshev_polynomial</span>(<span class="ident">n</span>: <span class="ident">usize</span>, <span class="ident">kind</span>: <span class="ident">SpecialKind</span>) -&gt; <span class="ident">Polynomial</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">prev</span> <span class="op">=</span> <span class="ident">Polynomial::new</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>]);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">curr</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">kind</span> {
-        <span class="ident">SpecialKind::First</span> =&gt; <span class="ident">Polynomial::new</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="number">0f64</span>]),
-        <span class="ident">SpecialKind::Second</span> =&gt; <span class="ident">Polynomial::new</span>(<span class="macro">vec!</span>[<span class="number">2f64</span>, <span class="number">0f64</span>]),
+<span class="doccomment">/// Chebyshev Polynomial
+</span><span class="kw">pub fn </span>chebyshev_polynomial(n: usize, kind: SpecialKind) -&gt; Polynomial {
+    <span class="kw">let </span><span class="kw-2">mut </span>prev = Polynomial::new(<span class="macro">vec!</span>[<span class="number">1f64</span>]);
+    <span class="kw">let </span><span class="kw-2">mut </span>curr = <span class="kw">match </span>kind {
+        SpecialKind::First =&gt; Polynomial::new(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="number">0f64</span>]),
+        SpecialKind::Second =&gt; Polynomial::new(<span class="macro">vec!</span>[<span class="number">2f64</span>, <span class="number">0f64</span>]),
     };
 
-    <span class="kw">match</span> <span class="ident">n</span> {
-        <span class="number">0</span> =&gt; <span class="ident">prev</span>,
-        <span class="number">1</span> =&gt; <span class="ident">curr</span>,
-        <span class="kw">_</span> =&gt; {
-            <span class="kw">for</span> <span class="ident">_i</span> <span class="kw">in</span> <span class="number">1</span> .. <span class="ident">n</span> {
-                <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;mut</span> <span class="ident">prev</span>, <span class="kw-2">&amp;mut</span> <span class="ident">curr</span>);
-                <span class="ident">curr</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">2f64</span>, <span class="number">0f64</span>]) <span class="op">*</span> <span class="ident">prev</span>.<span class="ident">clone</span>() <span class="op">-</span> <span class="ident">curr</span>;
+    <span class="kw">match </span>n {
+        <span class="number">0 </span>=&gt; prev,
+        <span class="number">1 </span>=&gt; curr,
+        <span class="kw">_ </span>=&gt; {
+            <span class="kw">for </span>_i <span class="kw">in </span><span class="number">1 </span>.. n {
+                std::mem::swap(<span class="kw-2">&amp;mut </span>prev, <span class="kw-2">&amp;mut </span>curr);
+                curr = poly(<span class="macro">vec!</span>[<span class="number">2f64</span>, <span class="number">0f64</span>]) * prev.clone() - curr;
             }
-            <span class="ident">curr</span>
+            curr
         }
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

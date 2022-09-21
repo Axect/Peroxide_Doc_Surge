@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/print.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>print.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/print.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>print.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -522,508 +516,507 @@
 <span id="500">500</span>
 <span id="501">501</span>
 <span id="502">502</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Easy to print any structures</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Easy to print any structures
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::statistics::dist</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure</span>::{
-    <span class="ident">ad::AD</span>,
-    <span class="ident">matrix::Matrix</span>,
-    <span class="ident">multinomial::Multinomial</span>,
-    <span class="ident">polynomial::Polynomial</span>,
-    <span class="ident">dataframe</span>::{<span class="ident">DataFrame</span>, <span class="ident">DTypeArray</span>, <span class="ident">Series</span>, <span class="ident">Scalar</span>, <span class="ident">DType</span>},
+</span><span class="kw">use </span><span class="kw">crate</span>::statistics::dist::<span class="kw-2">*</span>;
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::{
+    ad::AD,
+    matrix::Matrix,
+    multinomial::Multinomial,
+    polynomial::Polynomial,
+    dataframe::{DataFrame, DTypeArray, Series, Scalar, DType},
 };
-<span class="kw">use</span> <span class="ident">rand::distributions::uniform::SampleUniform</span>;
-<span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="ident">Debug</span>, <span class="ident">LowerExp</span>, <span class="ident">UpperExp</span>};
+<span class="kw">use </span>rand::distributions::uniform::SampleUniform;
+<span class="kw">use </span>std::fmt::{Debug, LowerExp, UpperExp};
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Printable</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>);
+<span class="kw">pub trait </span>Printable {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>);
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">usize</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>usize {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">u8</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>u8 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">u16</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>u16 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">u32</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>u32 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">u64</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>u64 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">isize</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>isize {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">i8</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>i8 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">i16</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>i16 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">i32</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>i32 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">i64</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>i64 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">f32</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>f32 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">f64</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>f64 {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">char</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>char {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">bool</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>bool {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">String</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>String {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;usize&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;u8&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;u16&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;u32&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;u64&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">isize</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;isize&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;i8&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;i16&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;i32&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;i64&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;char&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;<span class="kw-2">&amp;</span>str&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;String&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="macro">macro_rules!</span> <span class="ident">format_float_vec</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>:<span class="ident">expr</span>) =&gt; {{
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">String::new</span>();
-        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="string">&quot;[&quot;</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>.<span class="ident">len</span>() {
-            <span class="kw">let</span> <span class="ident">st1</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{:.4}&quot;</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>[<span class="ident">i</span>]);
-            <span class="kw">let</span> <span class="ident">st2</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>[<span class="ident">i</span>].<span class="ident">to_string</span>();
-            <span class="kw">let</span> <span class="ident">st</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">st1</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="ident">st2</span>.<span class="ident">len</span>() {
-                <span class="ident">st1</span>
-            } <span class="kw">else</span> {
-                <span class="ident">st2</span>
+<span class="macro">macro_rules! </span>format_float_vec {
+    (<span class="macro-nonterminal">$self</span>:expr) =&gt; {{
+        <span class="kw">let </span><span class="kw-2">mut </span>result = String::new();
+        result.push_str(<span class="string">&quot;[&quot;</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. <span class="macro-nonterminal">$self</span>.len() {
+            <span class="kw">let </span>st1 = <span class="macro-nonterminal">$self</span>[i].fmt_lower_exp(<span class="number">2</span>);
+            <span class="kw">let </span>st2 = <span class="macro-nonterminal">$self</span>[i].to_string();
+            <span class="kw">let </span>st = <span class="kw">if </span>st1.len() &lt; st2.len() {
+                st1
+            } <span class="kw">else </span>{
+                st2
             };
-            <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="ident">st</span>);
-            <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span> {
+            result.push_str(<span class="kw-2">&amp;</span>st);
+            <span class="kw">if </span>i == <span class="macro-nonterminal">$self</span>.len() - <span class="number">1 </span>{
                 <span class="kw">break</span>;
             }
-            <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="string">&quot;, &quot;</span>);
+            result.push_str(<span class="string">&quot;, &quot;</span>);
         }
-        <span class="ident">result</span>.<span class="ident">push_str</span>(<span class="string">&quot;]&quot;</span>);
-        <span class="ident">result</span>
+        result.push_str(<span class="string">&quot;]&quot;</span>);
+        result
     }};
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">format_float_vec!</span>(<span class="self">self</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">result</span>);
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;f32&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="kw">let </span>result = <span class="macro">format_float_vec!</span>(<span class="self">self</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, result);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">format_float_vec!</span>(<span class="self">self</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">result</span>);
+<span class="kw">impl </span>Printable <span class="kw">for </span>Vec&lt;f64&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="kw">let </span>result = <span class="macro">format_float_vec!</span>(<span class="self">self</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, result);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;usize&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;u8&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;u16&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;u32&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;u64&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">isize</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;isize&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i8</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;i8&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;i16&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;i32&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;i64&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">char</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;char&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;<span class="kw-2">&amp;</span>str&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;String&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">bool</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;bool&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">format_float_vec!</span>(<span class="self">self</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">result</span>);
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;f32&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="kw">let </span>result = <span class="macro">format_float_vec!</span>(<span class="self">self</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, result);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">format_float_vec!</span>(<span class="self">self</span>);
-        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">result</span>);
+<span class="kw">impl </span>Printable <span class="kw">for </span><span class="kw-2">&amp;</span>Vec&lt;f64&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="kw">let </span>result = <span class="macro">format_float_vec!</span>(<span class="self">self</span>);
+        <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, result);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Matrix</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Matrix {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Polynomial</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Polynomial {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="comment">//impl Printable for Dual {</span>
-<span class="comment">//    fn print(&amp;self) {</span>
-<span class="comment">//        println!(&quot;{}&quot;, self);</span>
-<span class="comment">//    }</span>
-<span class="comment">//}</span>
+<span class="comment">//impl Printable for Dual {
+//    fn print(&amp;self) {
+//        println!(&quot;{}&quot;, self);
+//    }
+//}
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Multinomial</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+</span><span class="kw">impl </span>Printable <span class="kw">for </span>Multinomial {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="comment">//impl Printable for Vec&lt;Dual&gt; {</span>
-<span class="comment">//    fn print(&amp;self) {</span>
-<span class="comment">//        println!(&quot;value:&quot;);</span>
-<span class="comment">//        self.values().print();</span>
-<span class="comment">//        println!(&quot;slope:&quot;);</span>
-<span class="comment">//        self.slopes().print();</span>
-<span class="comment">//    }</span>
-<span class="comment">//}</span>
-<span class="comment">//</span>
-<span class="comment">//impl Printable for HyperDual {</span>
-<span class="comment">//    fn print(&amp;self) {</span>
-<span class="comment">//        println!(&quot;{}&quot;, self);</span>
-<span class="comment">//    }</span>
-<span class="comment">//}</span>
+<span class="comment">//impl Printable for Vec&lt;Dual&gt; {
+//    fn print(&amp;self) {
+//        println!(&quot;value:&quot;);
+//        self.values().print();
+//        println!(&quot;slope:&quot;);
+//        self.slopes().print();
+//    }
+//}
+//
+//impl Printable for HyperDual {
+//    fn print(&amp;self) {
+//        println!(&quot;{}&quot;, self);
+//    }
+//}
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+</span><span class="kw">impl</span>&lt;T: Debug + PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; Printable <span class="kw">for </span>OPDist&lt;T&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl</span>&lt;T: Debug + PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; Printable <span class="kw">for </span>TPDist&lt;T&gt; {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="self">self</span>);
     }
 }
 
-<span class="comment">//impl Printable for Number {</span>
-<span class="comment">//    fn print(&amp;self) {</span>
-<span class="comment">//        println!(&quot;{:?}&quot;, self)</span>
-<span class="comment">//    }</span>
-<span class="comment">//}</span>
-<span class="comment">//</span>
-<span class="comment">//impl Printable for Vec&lt;Number&gt; {</span>
-<span class="comment">//    fn print(&amp;self) {</span>
-<span class="comment">//        println!(&quot;{:?}&quot;, self);</span>
-<span class="comment">//    }</span>
-<span class="comment">//}</span>
+<span class="comment">//impl Printable for Number {
+//    fn print(&amp;self) {
+//        println!(&quot;{:?}&quot;, self)
+//    }
+//}
+//
+//impl Printable for Vec&lt;Number&gt; {
+//    fn print(&amp;self) {
+//        println!(&quot;{:?}&quot;, self);
+//    }
+//}
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">DType</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+</span><span class="kw">impl </span>Printable <span class="kw">for </span>DType {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">DTypeArray</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>DTypeArray {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Scalar</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>Scalar {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">Series</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-        <span class="self">self</span>.<span class="ident">values</span>.<span class="ident">print</span>();
+<span class="kw">impl </span>Printable <span class="kw">for </span>Series {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+        <span class="self">self</span>.values.print();
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">DataFrame</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>DataFrame {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Printable</span> <span class="kw">for</span> <span class="ident">AD</span> {
-    <span class="kw">fn</span> <span class="ident">print</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) {
+<span class="kw">impl </span>Printable <span class="kw">for </span>AD {
+    <span class="kw">fn </span>print(<span class="kw-2">&amp;</span><span class="self">self</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="self">self</span>)
     }
 }
 
-<span class="doccomment">/// Format float number into lower exponent notation with &#39;+&#39; sign</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// # Example</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let x = 123.456;</span>
-<span class="doccomment">///     assert_eq!(x.fmt_lower_exp(2), &quot;1.23e+2&quot;);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">LowerExpWithPlus</span>: <span class="ident">LowerExp</span> {
-    <span class="kw">fn</span> <span class="ident">fmt_lower_exp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">precision</span>: <span class="ident">usize</span>) -&gt; <span class="ident">String</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{:.p$e}&quot;</span>, <span class="self">self</span>, <span class="ident">p</span><span class="op">=</span><span class="ident">precision</span>);
-        <span class="kw">let</span> <span class="ident">s_old</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">split_off</span>(<span class="ident">s</span>.<span class="ident">find</span>(<span class="string">&#39;e&#39;</span>).<span class="ident">unwrap</span>());
-        <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">starts_with</span>(<span class="string">&quot;e-&quot;</span>) {
-            <span class="ident">s_old</span>
-        } <span class="kw">else</span> {
-            <span class="ident">e</span>.<span class="ident">insert</span>(<span class="number">1</span>, <span class="string">&#39;+&#39;</span>);
-            <span class="macro">format!</span>(<span class="string">&quot;{}{}&quot;</span>, <span class="ident">s</span>, <span class="ident">e</span>)
+<span class="doccomment">/// Format float number into lower exponent notation with &#39;+&#39; sign
+/// 
+/// # Example
+/// 
+/// ```rust
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let x = 123.456;
+///     assert_eq!(x.fmt_lower_exp(2), &quot;1.23e+2&quot;);
+/// }
+/// ```
+</span><span class="kw">pub trait </span>LowerExpWithPlus: LowerExp {
+    <span class="kw">fn </span>fmt_lower_exp(<span class="kw-2">&amp;</span><span class="self">self</span>, precision: usize) -&gt; String {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="macro">format!</span>(<span class="string">&quot;{:.p$e}&quot;</span>, <span class="self">self</span>, p=precision);
+        <span class="kw">let </span>s_old = s.clone();
+        <span class="kw">let </span><span class="kw-2">mut </span>e = s.split_off(s.find(<span class="string">&#39;e&#39;</span>).unwrap());
+        <span class="kw">if </span>e.starts_with(<span class="string">&quot;e-&quot;</span>) {
+            s_old
+        } <span class="kw">else </span>{
+            e.insert(<span class="number">1</span>, <span class="string">&#39;+&#39;</span>);
+            <span class="macro">format!</span>(<span class="string">&quot;{}{}&quot;</span>, s, e)
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">LowerExpWithPlus</span> <span class="kw">for</span> <span class="ident">f32</span> {}
-<span class="kw">impl</span> <span class="ident">LowerExpWithPlus</span> <span class="kw">for</span> <span class="ident">f64</span> {}
+<span class="kw">impl </span>LowerExpWithPlus <span class="kw">for </span>f32 {}
+<span class="kw">impl </span>LowerExpWithPlus <span class="kw">for </span>f64 {}
 
-<span class="doccomment">/// Format float number into upper exponent notation with &#39;+&#39; sign</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// # Example</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let x = 123.456;</span>
-<span class="doccomment">///     assert_eq!(x.fmt_upper_exp(2), &quot;1.23E+2&quot;);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">UpperExpWithPlus</span>: <span class="ident">UpperExp</span> {
-    <span class="kw">fn</span> <span class="ident">fmt_upper_exp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">precision</span>: <span class="ident">usize</span>) -&gt; <span class="ident">String</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{:.p$E}&quot;</span>, <span class="self">self</span>, <span class="ident">p</span><span class="op">=</span><span class="ident">precision</span>);
-        <span class="kw">let</span> <span class="ident">s_old</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">split_off</span>(<span class="ident">s</span>.<span class="ident">find</span>(<span class="string">&#39;E&#39;</span>).<span class="ident">unwrap</span>());
-        <span class="kw">if</span> <span class="ident">e</span>.<span class="ident">starts_with</span>(<span class="string">&quot;E-&quot;</span>) {
-            <span class="ident">s_old</span>
-        } <span class="kw">else</span> {
-            <span class="ident">e</span>.<span class="ident">insert</span>(<span class="number">1</span>, <span class="string">&#39;+&#39;</span>);
-            <span class="macro">format!</span>(<span class="string">&quot;{}{}&quot;</span>, <span class="ident">s</span>, <span class="ident">e</span>)
+<span class="doccomment">/// Format float number into upper exponent notation with &#39;+&#39; sign
+/// 
+/// # Example
+/// 
+/// ```rust
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let x = 123.456;
+///     assert_eq!(x.fmt_upper_exp(2), &quot;1.23E+2&quot;);
+/// }
+/// ```
+</span><span class="kw">pub trait </span>UpperExpWithPlus: UpperExp {
+    <span class="kw">fn </span>fmt_upper_exp(<span class="kw-2">&amp;</span><span class="self">self</span>, precision: usize) -&gt; String {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="macro">format!</span>(<span class="string">&quot;{:.p$E}&quot;</span>, <span class="self">self</span>, p=precision);
+        <span class="kw">let </span>s_old = s.clone();
+        <span class="kw">let </span><span class="kw-2">mut </span>e = s.split_off(s.find(<span class="string">&#39;E&#39;</span>).unwrap());
+        <span class="kw">if </span>e.starts_with(<span class="string">&quot;E-&quot;</span>) {
+            s_old
+        } <span class="kw">else </span>{
+            e.insert(<span class="number">1</span>, <span class="string">&#39;+&#39;</span>);
+            <span class="macro">format!</span>(<span class="string">&quot;{}{}&quot;</span>, s, e)
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">UpperExpWithPlus</span> <span class="kw">for</span> <span class="ident">f32</span> {}
-<span class="kw">impl</span> <span class="ident">UpperExpWithPlus</span> <span class="kw">for</span> <span class="ident">f64</span> {}
+<span class="kw">impl </span>UpperExpWithPlus <span class="kw">for </span>f32 {}
+<span class="kw">impl </span>UpperExpWithPlus <span class="kw">for </span>f64 {}
 
-<span class="comment">//impl&lt;A: Array&lt;Item=f64&gt;&gt; Printable for AD&lt;A&gt; {</span>
-<span class="comment">//    fn print(&amp;self) {</span>
-<span class="comment">//        let mut result = String::new();</span>
-<span class="comment">//        result.push_str(&quot;AD [&quot;);</span>
-<span class="comment">//        for i in 0..self.len() {</span>
-<span class="comment">//            let st1 = format!(&quot;{:.4}&quot;, self[i]);</span>
-<span class="comment">//            let st2 = self[i].to_string();</span>
-<span class="comment">//            let mut st = st2.clone();</span>
-<span class="comment">//</span>
-<span class="comment">//            if st1.len() &lt; st2.len() {</span>
-<span class="comment">//                st = st1;</span>
-<span class="comment">//            }</span>
-<span class="comment">//</span>
-<span class="comment">//            result.push_str(&amp;st);</span>
-<span class="comment">//            if i == self.len() - 1 {</span>
-<span class="comment">//                break;</span>
-<span class="comment">//            }</span>
-<span class="comment">//            result.push_str(&quot;, &quot;);</span>
-<span class="comment">//        }</span>
-<span class="comment">//        result.push_str(&quot;]&quot;);</span>
-<span class="comment">//</span>
-<span class="comment">//        println!(&quot;{}&quot;, result);</span>
-<span class="comment">//    }</span>
-<span class="comment">//}</span>
-</code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+<span class="comment">//impl&lt;A: Array&lt;Item=f64&gt;&gt; Printable for AD&lt;A&gt; {
+//    fn print(&amp;self) {
+//        let mut result = String::new();
+//        result.push_str(&quot;AD [&quot;);
+//        for i in 0..self.len() {
+//            let st1 = format!(&quot;{:.4}&quot;, self[i]);
+//            let st2 = self[i].to_string();
+//            let mut st = st2.clone();
+//
+//            if st1.len() &lt; st2.len() {
+//                st = st1;
+//            }
+//
+//            result.push_str(&amp;st);
+//            if i == self.len() - 1 {
+//                break;
+//            }
+//            result.push_str(&quot;, &quot;);
+//        }
+//        result.push_str(&quot;]&quot;);
+//
+//        println!(&quot;{}&quot;, result);
+//    }
+//}
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

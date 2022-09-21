@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/rand.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rand.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/rand.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>rand.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -469,89 +463,89 @@
 <span id="447">447</span>
 <span id="448">448</span>
 <span id="449">449</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Random number generator</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Uniform random number generator</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Peroxide uses external [`rand` crate](https://crates.io/crates/rand) to generate random number</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     use rand::prelude::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         let mut rng = thread_rng();</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         let a = rng.gen_range(0f64..=1f64); // Generate random f64 number ranges from 0 to 1</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * To want more detailed explanation, see [`rand` crate](https://crates.io/crates/rand)</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ## Piece-wise Rejection Sampling</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! </span>
+</pre><pre class="rust"><code><span class="doccomment">//! Random number generator
+//!
+//! ## Uniform random number generator
+//!
+//! * Peroxide uses external [`rand` crate](https://crates.io/crates/rand) to generate random number
+//!
+//!     ```rust
+//!     use rand::prelude::*;
+//!
+//!     fn main() {
+//!         let mut rng = thread_rng();
+//!
+//!         let a = rng.gen_range(0f64..=1f64); // Generate random f64 number ranges from 0 to 1
+//!     }
+//!     ```
+//!
+//! * To want more detailed explanation, see [`rand` crate](https://crates.io/crates/rand)
+//! 
+//! ## Piece-wise Rejection Sampling
+//! 
+//! 
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::rand::distributions::uniform::SampleUniform</span>;
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::rand::prelude</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std::u32</span>;
+</span><span class="kw">extern crate </span>rand;
+<span class="kw">use </span><span class="self">self</span>::rand::distributions::uniform::SampleUniform;
+<span class="kw">use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::u32;
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::matrix</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident"><span class="kw">super</span>::dist</span>::{<span class="ident">RNG</span>, <span class="ident">WeightedUniform</span>};
+<span class="kw">use </span><span class="kw">super</span>::dist::{RNG, WeightedUniform};
 
-<span class="doccomment">/// Simple uniform random number generator with ThreadRng</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let mut rng = thread_rng();</span>
-<span class="doccomment">/// println!(&quot;{}&quot;, rand_num(&amp;mut rng, 1, 7));       // Roll a dice</span>
-<span class="doccomment">/// println!(&quot;{}&quot;, rand_num(&amp;mut rng, 0f64, 1f64)); // Uniform [0,1)</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rand_num</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ThreadRng</span>, <span class="ident">start</span>: <span class="ident">T</span>, <span class="ident">end</span>: <span class="ident">T</span>) -&gt; <span class="ident">T</span>
-<span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span>,
+<span class="doccomment">/// Simple uniform random number generator with ThreadRng
+///
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// let mut rng = thread_rng();
+/// println!(&quot;{}&quot;, rand_num(&amp;mut rng, 1, 7));       // Roll a dice
+/// println!(&quot;{}&quot;, rand_num(&amp;mut rng, 0f64, 1f64)); // Uniform [0,1)
+/// ```
+</span><span class="kw">pub fn </span>rand_num&lt;T&gt;(rng: <span class="kw-2">&amp;mut </span>ThreadRng, start: T, end: T) -&gt; T
+<span class="kw">where
+    </span>T: PartialOrd + SampleUniform + Copy,
 {
-    <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="ident">start</span>..<span class="op">=</span><span class="ident">end</span>)
+    rng.gen_range(start..=end)
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Back end utils</span>
-<span class="comment">// =============================================================================</span>
+<span class="comment">// =============================================================================
+// Back end utils
+// =============================================================================
 
-<span class="doccomment">/// Gaussian random number generator using Marsaglia polar form</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">marsaglia_polar</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ThreadRng</span>, <span class="ident">m</span>: <span class="ident">f64</span>, <span class="ident">s</span>: <span class="ident">f64</span>) -&gt; <span class="ident">f64</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x1</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x2</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">_y2</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">w</span> <span class="op">=</span> <span class="number">0f64</span>;
+</span><span class="doccomment">/// Gaussian random number generator using Marsaglia polar form
+</span><span class="kw">pub fn </span>marsaglia_polar(rng: <span class="kw-2">&amp;mut </span>ThreadRng, m: f64, s: f64) -&gt; f64 {
+    <span class="kw">let </span><span class="kw-2">mut </span>x1 = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>x2 = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>_y2 = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>w = <span class="number">0f64</span>;
 
-    <span class="kw">while</span> <span class="ident">w</span> <span class="op">==</span> <span class="number">0.</span> <span class="op">|</span><span class="op">|</span> <span class="ident">w</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">1.</span> {
-        <span class="ident">x1</span> <span class="op">=</span> <span class="number">2.0</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>..<span class="op">=</span><span class="number">1f64</span>) <span class="op">-</span> <span class="number">1.0</span>;
-        <span class="ident">x2</span> <span class="op">=</span> <span class="number">2.0</span> <span class="op">*</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>..<span class="op">=</span><span class="number">1f64</span>) <span class="op">-</span> <span class="number">1.0</span>;
-        <span class="ident">w</span> <span class="op">=</span> <span class="ident">x1</span> <span class="op">*</span> <span class="ident">x1</span> <span class="op">+</span> <span class="ident">x2</span> <span class="op">*</span> <span class="ident">x2</span>;
+    <span class="kw">while </span>w == <span class="number">0. </span>|| w &gt;= <span class="number">1. </span>{
+        x1 = <span class="number">2.0 </span>* rng.gen_range(<span class="number">0f64</span>..=<span class="number">1f64</span>) - <span class="number">1.0</span>;
+        x2 = <span class="number">2.0 </span>* rng.gen_range(<span class="number">0f64</span>..=<span class="number">1f64</span>) - <span class="number">1.0</span>;
+        w = x1 * x1 + x2 * x2;
     }
 
-    <span class="ident">w</span> <span class="op">=</span> (<span class="op">-</span><span class="number">2.0</span> <span class="op">*</span> <span class="ident">w</span>.<span class="ident">ln</span>() <span class="op">/</span> <span class="ident">w</span>).<span class="ident">sqrt</span>();
-    <span class="kw">let</span> <span class="ident">y1</span> <span class="op">=</span> <span class="ident">x1</span> <span class="op">*</span> <span class="ident">w</span>;
-    <span class="ident">_y2</span> <span class="op">=</span> <span class="ident">x2</span> <span class="op">*</span> <span class="ident">w</span>;
+    w = (-<span class="number">2.0 </span>* w.ln() / w).sqrt();
+    <span class="kw">let </span>y1 = x1 * w;
+    _y2 = x2 * w;
 
-    <span class="kw">return</span> <span class="ident">m</span> <span class="op">+</span> <span class="ident">y1</span> <span class="op">*</span> <span class="ident">s</span>;
+    <span class="kw">return </span>m + y1 * s;
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Ziggurat Table</span>
-<span class="comment">// =============================================================================</span>
+<span class="comment">// =============================================================================
+// Ziggurat Table
+// =============================================================================
 
-<span class="doccomment">/// Position of Right-most step</span>
-<span class="kw">const</span> <span class="ident">PARAM_R</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="number">3.44428647676</span>;
+</span><span class="doccomment">/// Position of Right-most step
+</span><span class="kw">const </span>PARAM_R: f64 = <span class="number">3.44428647676</span>;
 
-<span class="doccomment">/// Tabulated values for the height of the Ziggurat levels</span>
-<span class="kw">const</span> <span class="ident">YTAB</span>: [<span class="ident">f64</span>; <span class="number">128</span>] <span class="op">=</span> [
+<span class="doccomment">/// Tabulated values for the height of the Ziggurat levels
+</span><span class="kw">const </span>YTAB: [f64; <span class="number">128</span>] = [
     <span class="number">1.</span>,
     <span class="number">0.963598623011</span>,
     <span class="number">0.936280813353</span>,
@@ -682,9 +676,9 @@
     <span class="number">0.00265435214565</span>,
 ];
 
-<span class="doccomment">/// Tabulated values for 2^24 times `x[i] / x[i+1]`</span>
-<span class="doccomment">/// Used to accept for `U*x[i+1] &lt;= x[i]` without any floating point operations</span>
-<span class="kw">const</span> <span class="ident">KTAB</span>: [<span class="ident">u32</span>; <span class="number">128</span>] <span class="op">=</span> [
+<span class="doccomment">/// Tabulated values for 2^24 times `x[i] / x[i+1]`
+/// Used to accept for `U*x[i+1] &lt;= x[i]` without any floating point operations
+</span><span class="kw">const </span>KTAB: [u32; <span class="number">128</span>] = [
     <span class="number">0</span>, <span class="number">12590644</span>, <span class="number">14272653</span>, <span class="number">14988939</span>, <span class="number">15384584</span>, <span class="number">15635009</span>, <span class="number">15807561</span>, <span class="number">15933577</span>, <span class="number">16029594</span>, <span class="number">16105155</span>,
     <span class="number">16166147</span>, <span class="number">16216399</span>, <span class="number">16258508</span>, <span class="number">16294295</span>, <span class="number">16325078</span>, <span class="number">16351831</span>, <span class="number">16375291</span>, <span class="number">16396026</span>, <span class="number">16414479</span>,
     <span class="number">16431002</span>, <span class="number">16445880</span>, <span class="number">16459343</span>, <span class="number">16471578</span>, <span class="number">16482744</span>, <span class="number">16492970</span>, <span class="number">16502368</span>, <span class="number">16511031</span>, <span class="number">16519039</span>,
@@ -702,8 +696,8 @@
     <span class="number">15472926</span>,
 ];
 
-<span class="doccomment">/// Tabulated values of `2^{-24} * x[i]`</span>
-<span class="kw">const</span> <span class="ident">WTAB</span>: [<span class="ident">f64</span>; <span class="number">128</span>] <span class="op">=</span> [
+<span class="doccomment">/// Tabulated values of `2^{-24} * x[i]`
+</span><span class="kw">const </span>WTAB: [f64; <span class="number">128</span>] = [
     <span class="number">1.62318314817e-08</span>,
     <span class="number">2.16291505214e-08</span>,
     <span class="number">2.54246305087e-08</span>,
@@ -834,89 +828,88 @@
     <span class="number">2.22600839893e-07</span>,
 ];
 
-<span class="doccomment">/// Gaussian random numbers using the Ziggurat Method</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The code is based on a [C implementation][1] by Jochen Voss.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [1]: https://www.seehuhn.de/pages/ziggurat.html</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_assignments</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ziggurat</span>(<span class="ident">rng</span>: <span class="kw-2">&amp;mut</span> <span class="ident">ThreadRng</span>, <span class="ident">sigma</span>: <span class="ident">f64</span>) -&gt; <span class="ident">f64</span> {
-    <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">u</span>, <span class="kw-2">mut</span> <span class="ident">i</span>, <span class="kw-2">mut</span> <span class="ident">sign</span>, <span class="kw-2">mut</span> <span class="ident">j</span>) <span class="op">=</span> (<span class="number">0u32</span>, <span class="number">0usize</span>, <span class="number">0u32</span>, <span class="number">0u32</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="number">0f64</span>;
+<span class="doccomment">/// Gaussian random numbers using the Ziggurat Method
+///
+/// The code is based on a [C implementation][1] by Jochen Voss.
+///
+/// [1]: https://www.seehuhn.de/pages/ziggurat.html
+</span><span class="attribute">#[allow(unused_assignments)]
+</span><span class="kw">pub fn </span>ziggurat(rng: <span class="kw-2">&amp;mut </span>ThreadRng, sigma: f64) -&gt; f64 {
+    <span class="kw">let </span>(<span class="kw-2">mut </span>u, <span class="kw-2">mut </span>i, <span class="kw-2">mut </span>sign, <span class="kw-2">mut </span>j) = (<span class="number">0u32</span>, <span class="number">0usize</span>, <span class="number">0u32</span>, <span class="number">0u32</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>x = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>y = <span class="number">0f64</span>;
 
-    <span class="kw">loop</span> {
-        <span class="ident">u</span> <span class="op">=</span> <span class="ident">rand_num</span>(<span class="ident">rng</span>, <span class="ident">u32::MIN</span>, <span class="ident">u32::MAX</span>);
-        <span class="ident">i</span> <span class="op">=</span> (<span class="ident">u</span> <span class="op">&amp;</span> <span class="number">0x0000007F</span>) <span class="kw">as</span> <span class="ident">usize</span>; <span class="comment">// 7 bit to choose the step</span>
-        <span class="ident">sign</span> <span class="op">=</span> <span class="ident">u</span> <span class="op">&amp;</span> <span class="number">0x00000080</span>; <span class="comment">// 1 bit for the sign</span>
-        <span class="ident">j</span> <span class="op">=</span> <span class="ident">u</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">8</span>; <span class="comment">// 24 bit for the x-value</span>
+    <span class="kw">loop </span>{
+        u = rand_num(rng, u32::MIN, u32::MAX);
+        i = (u &amp; <span class="number">0x0000007F</span>) <span class="kw">as </span>usize; <span class="comment">// 7 bit to choose the step
+        </span>sign = u &amp; <span class="number">0x00000080</span>; <span class="comment">// 1 bit for the sign
+        </span>j = u &gt;&gt; <span class="number">8</span>; <span class="comment">// 24 bit for the x-value
 
-        <span class="ident">x</span> <span class="op">=</span> <span class="ident">j</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">*</span> <span class="ident">WTAB</span>[<span class="ident">i</span>];
-        <span class="kw">if</span> <span class="ident">j</span> <span class="op">&lt;</span> <span class="ident">KTAB</span>[<span class="ident">i</span>] {
+        </span>x = j <span class="kw">as </span>f64 * WTAB[i];
+        <span class="kw">if </span>j &lt; KTAB[i] {
             <span class="kw">break</span>;
         }
 
-        <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="number">127</span> {
-            <span class="kw">let</span> <span class="ident">y0</span> <span class="op">=</span> <span class="ident">YTAB</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">y1</span> <span class="op">=</span> <span class="ident">YTAB</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>];
-            <span class="ident">y</span> <span class="op">=</span> <span class="ident">y1</span> <span class="op">+</span> (<span class="ident">y0</span> <span class="op">-</span> <span class="ident">y1</span>) <span class="op">*</span> <span class="ident">rand_num</span>(<span class="ident">rng</span>, <span class="number">0f64</span>, <span class="number">1f64</span>);
-        } <span class="kw">else</span> {
-            <span class="ident">x</span> <span class="op">=</span> <span class="ident">PARAM_R</span> <span class="op">-</span> (<span class="number">1.0</span> <span class="op">-</span> <span class="ident">rand_num</span>(<span class="ident">rng</span>, <span class="number">0f64</span>, <span class="number">1f64</span>).<span class="ident">ln</span>()) <span class="op">/</span> <span class="ident">PARAM_R</span>;
-            <span class="ident">y</span> <span class="op">=</span> (<span class="op">-</span><span class="ident">PARAM_R</span> <span class="op">*</span> (<span class="ident">x</span> <span class="op">-</span> <span class="number">0.5</span> <span class="op">*</span> <span class="ident">PARAM_R</span>)).<span class="ident">exp</span>() <span class="op">*</span> <span class="ident">rand_num</span>(<span class="ident">rng</span>, <span class="number">0f64</span>, <span class="number">1f64</span>);
+        <span class="kw">if </span>i &lt; <span class="number">127 </span>{
+            <span class="kw">let </span>y0 = YTAB[i];
+            <span class="kw">let </span>y1 = YTAB[i + <span class="number">1</span>];
+            y = y1 + (y0 - y1) * rand_num(rng, <span class="number">0f64</span>, <span class="number">1f64</span>);
+        } <span class="kw">else </span>{
+            x = PARAM_R - (<span class="number">1.0 </span>- rand_num(rng, <span class="number">0f64</span>, <span class="number">1f64</span>).ln()) / PARAM_R;
+            y = (-PARAM_R * (x - <span class="number">0.5 </span>* PARAM_R)).exp() * rand_num(rng, <span class="number">0f64</span>, <span class="number">1f64</span>);
         }
 
-        <span class="kw">if</span> <span class="ident">y</span> <span class="op">&lt;</span> (<span class="op">-</span><span class="number">0.5</span> <span class="op">*</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">x</span>).<span class="ident">exp</span>() {
+        <span class="kw">if </span>y &lt; (-<span class="number">0.5 </span>* x * x).exp() {
             <span class="kw">break</span>;
         }
     }
 
-    <span class="kw">if</span> <span class="ident">sign</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-        <span class="ident">sigma</span> <span class="op">*</span> <span class="ident">x</span>
-    } <span class="kw">else</span> {
-        <span class="op">-</span><span class="ident">sigma</span> <span class="op">*</span> <span class="ident">x</span>
+    <span class="kw">if </span>sign != <span class="number">0 </span>{
+        sigma * x
+    } <span class="kw">else </span>{
+        -sigma * x
     }
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Rejection Sampling</span>
-<span class="comment">// =============================================================================</span>
-<span class="doccomment">/// Piecewise Rejection Sampling</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">prs</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">n</span>: <span class="ident">usize</span>, (<span class="ident">a</span>, <span class="ident">b</span>): (<span class="ident">f64</span>, <span class="ident">f64</span>), <span class="ident">m</span>: <span class="ident">usize</span>, <span class="ident">eps</span>: <span class="ident">f64</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> 
-<span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span> <span class="op">+</span> <span class="ident">Copy</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
+<span class="comment">// =============================================================================
+// Rejection Sampling
+// =============================================================================
+</span><span class="doccomment">/// Piecewise Rejection Sampling
+</span><span class="kw">pub fn </span>prs&lt;F&gt;(f: F, n: usize, (a, b): (f64, f64), m: usize, eps: f64) -&gt; Vec&lt;f64&gt; 
+<span class="kw">where </span>F: Fn(f64) -&gt; f64 + Copy {
+    <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
+    <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
 
-    <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">WeightedUniform::from_max_pool_1d</span>(<span class="ident">f</span>, (<span class="ident">a</span>, <span class="ident">b</span>), <span class="ident">m</span>, <span class="ident">eps</span>);
-    <span class="kw">if</span> <span class="ident">w</span>.<span class="ident">weights</span>().<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="ident">w</span><span class="op">|</span> <span class="ident">w</span> <span class="op">&lt;</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="number">0f64</span>) {
+    <span class="kw">let </span>w = WeightedUniform::from_max_pool_1d(f, (a, b), m, eps);
+    <span class="kw">if </span>w.weights().iter().any(|w| w &lt;= <span class="kw-2">&amp;</span><span class="number">0f64</span>) {
         <span class="macro">println!</span>(<span class="string">&quot;Warning: some weights are zero&quot;</span>);
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">iter_num</span> <span class="op">=</span> <span class="number">0usize</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>iter_num = <span class="number">0usize</span>;
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">initial_x</span> <span class="op">=</span> <span class="ident">w</span>.<span class="ident">sample</span>(<span class="ident">n</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">left_num</span> <span class="op">=</span> <span class="ident">n</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>initial_x = w.sample(n);
+    <span class="kw">let </span><span class="kw-2">mut </span>left_num = n;
 
-    <span class="kw">while</span> <span class="ident">left_num</span> <span class="op">&gt;</span> <span class="number">0</span> {
-        <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">x</span> <span class="kw">in</span> <span class="ident">initial_x</span>.<span class="ident">iter</span>() {
-            <span class="kw">let</span> <span class="ident">weight</span> <span class="op">=</span> <span class="ident">w</span>.<span class="ident">weight_at</span>(<span class="ident">x</span>);
-            <span class="kw">if</span> <span class="ident">weight</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">0f64</span> {
+    <span class="kw">while </span>left_num &gt; <span class="number">0 </span>{
+        <span class="kw">for </span><span class="kw-2">&amp;</span>x <span class="kw">in </span>initial_x.iter() {
+            <span class="kw">let </span>weight = w.weight_at(x);
+            <span class="kw">if </span>weight &lt;= <span class="number">0f64 </span>{
                 <span class="kw">continue</span>;
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span> ..<span class="op">=</span><span class="ident">weight</span>);
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>y = rng.gen_range(<span class="number">0f64 </span>..=weight);
 
-                <span class="kw">if</span> <span class="ident">y</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">f</span>(<span class="ident">x</span>) {
-                    <span class="ident">result</span>[<span class="ident">n</span> <span class="op">-</span> <span class="ident">left_num</span>] <span class="op">=</span> <span class="ident">x</span>;
-                    <span class="ident">left_num</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-                    <span class="kw">if</span> <span class="ident">left_num</span> <span class="op">==</span> <span class="number">0</span> {
-                        <span class="kw">return</span> <span class="ident">result</span>;
+                <span class="kw">if </span>y &lt;= f(x) {
+                    result[n - left_num] = x;
+                    left_num -= <span class="number">1</span>;
+                    <span class="kw">if </span>left_num == <span class="number">0 </span>{
+                        <span class="kw">return </span>result;
                     }
                 }
             }
         }
-        <span class="ident">initial_x</span> <span class="op">=</span> <span class="ident">w</span>.<span class="ident">sample</span>(<span class="ident">left_num</span>);
+        initial_x = w.sample(left_num);
     }
-    <span class="macro">panic!</span>(<span class="string">&quot;Error: failed to generate {} samples&quot;</span>, <span class="ident">n</span>);
+    <span class="macro">panic!</span>(<span class="string">&quot;Error: failed to generate {} samples&quot;</span>, n);
 }</code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

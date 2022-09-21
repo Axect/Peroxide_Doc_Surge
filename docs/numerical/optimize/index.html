@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="To optimize parametric model (non-linear regression)"><meta name="keywords" content="rust, rustlang, rust-lang, optimize"><title>peroxide::numerical::optimize - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="To optimize parametric model (non-linear regression)"><meta name="keywords" content="rust, rustlang, rust-lang, optimize"><title>peroxide::numerical::optimize - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,30 +14,23 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"><a href="#">Module optimize</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">optimize</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/numerical/optimize.rs.html#1-352">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>To optimize parametric model (non-linear regression)</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"><a href="#">Module optimize</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="main-heading"><h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">optimize</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/numerical/optimize.rs.html#1-352">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>To optimize parametric model (non-linear regression)</p>
 <h3 id="optimizer-structure"><a href="#optimizer-structure"><code>Optimizer</code> structure</a></h3><h4 id="declaration"><a href="#declaration">Declaration</a></h4>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::collections::HashMap;
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Optimizer</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>
-<span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident">domain</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">observed</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">func</span>: <span class="ident">Box</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>,
-    <span class="ident">param</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>,
-    <span class="ident">max_iter</span>: <span class="ident">usize</span>,
-    <span class="ident">error</span>: <span class="ident">f64</span>,
-    <span class="ident">method</span>: <span class="ident">OptMethod</span>,
-    <span class="ident">option</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">OptOption</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
-    <span class="ident">hyperparams</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">f64</span><span class="op">&gt;</span>,
+<span class="kw">pub struct </span>Optimizer&lt;F&gt;
+<span class="kw">where </span>F: Fn(<span class="kw-2">&amp;</span>Vec&lt;f64&gt;, Vec&lt;AD&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;AD&gt;&gt; {
+    domain: Vec&lt;f64&gt;,
+    observed: Vec&lt;f64&gt;,
+    func: Box&lt;F&gt;,
+    param: Vec&lt;AD&gt;,
+    max_iter: usize,
+    error: f64,
+    method: OptMethod,
+    option: HashMap&lt;OptOption, bool&gt;,
+    hyperparams: HashMap&lt;String, f64&gt;,
 }</code></pre></div>
 <h4 id="method-should-fill"><a href="#method-should-fill">Method (Should fill)</a></h4>
 <ul>
@@ -64,66 +57,62 @@
 <li>Optimize $y = x^n$ model with $y = x^2$ with gaussian noise.</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="comment">// To prepare noise</span>
-    <span class="kw">let</span> <span class="ident">normal</span> <span class="op">=</span> <span class="ident">Normal</span>(<span class="number">0f64</span>, <span class="number">0.1f64</span>);
-    <span class="kw">let</span> <span class="ident">normal2</span> <span class="op">=</span> <span class="ident">Normal</span>(<span class="number">0f64</span>, <span class="number">100f64</span>);
+<span class="kw">fn </span>main() {
+    <span class="comment">// To prepare noise
+    </span><span class="kw">let </span>normal = Normal(<span class="number">0f64</span>, <span class="number">0.1f64</span>);
+    <span class="kw">let </span>normal2 = Normal(<span class="number">0f64</span>, <span class="number">100f64</span>);
 
-    <span class="comment">// Noise to domain</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">seq</span>(<span class="number">0.</span>, <span class="number">99.</span>, <span class="number">1f64</span>);
-    <span class="ident">x</span> <span class="op">=</span> <span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> (<span class="ident">a</span> <span class="op">+</span> <span class="ident">b</span>).<span class="ident">abs</span>(), <span class="kw-2">&amp;</span><span class="ident">x</span>, <span class="kw-2">&amp;</span><span class="ident">normal</span>.<span class="ident">sample</span>(<span class="ident">x</span>.<span class="ident">len</span>()));
+    <span class="comment">// Noise to domain
+    </span><span class="kw">let </span><span class="kw-2">mut </span>x = seq(<span class="number">0.</span>, <span class="number">99.</span>, <span class="number">1f64</span>);
+    x = zip_with(|a, b| (a + b).abs(), <span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>normal.sample(x.len()));
 
-    <span class="comment">// Noise to image</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">powi</span>(<span class="number">2</span>));
-    <span class="ident">y</span> <span class="op">=</span> <span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">a</span>, <span class="ident">b</span><span class="op">|</span> <span class="ident">a</span> <span class="op">+</span> <span class="ident">b</span>, <span class="kw-2">&amp;</span><span class="ident">y</span>, <span class="kw-2">&amp;</span><span class="ident">normal2</span>.<span class="ident">sample</span>(<span class="ident">y</span>.<span class="ident">len</span>()));
+    <span class="comment">// Noise to image
+    </span><span class="kw">let </span><span class="kw-2">mut </span>y = x.fmap(|t| t.powi(<span class="number">2</span>));
+    y = zip_with(|a, b| a + b, <span class="kw-2">&amp;</span>y, <span class="kw-2">&amp;</span>normal2.sample(y.len()));
 
-    <span class="comment">// Initial parameter</span>
-    <span class="kw">let</span> <span class="ident">n_init</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">1f64</span>];
-    <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="macro">hstack!</span>(<span class="ident">x</span>.<span class="ident">clone</span>(), <span class="ident">y</span>.<span class="ident">clone</span>());
+    <span class="comment">// Initial parameter
+    </span><span class="kw">let </span>n_init = <span class="macro">vec!</span>[<span class="number">1f64</span>];
+    <span class="kw">let </span>data = <span class="macro">hstack!</span>(x.clone(), y.clone());
 
-    <span class="comment">// Optimizer setting</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">opt</span> <span class="op">=</span> <span class="ident">Optimizer::new</span>(<span class="ident">data</span>, <span class="ident">quad</span>);
-    <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">opt</span>.<span class="ident">set_init_param</span>(<span class="ident">n_init</span>)
-        .<span class="ident">set_max_iter</span>(<span class="number">50</span>)
-        .<span class="ident">set_method</span>(<span class="ident">LevenbergMarquardt</span>)
-        .<span class="ident">set_lambda_init</span>(<span class="number">1e-3</span>)      <span class="comment">// Optional: Set initial value of lambda (Only for `LevenbergMarquardt`)</span>
-        .<span class="ident">set_lambda_max</span>(<span class="number">1e+3</span>)       <span class="comment">// Optional: Set maximum bound of lambda (Only for `LevenbergMarquardt`)</span>
-        .<span class="ident">optimize</span>();
-    <span class="ident">p</span>.<span class="ident">print</span>();                      <span class="comment">// Optimized parameter</span>
-    <span class="ident">opt</span>.<span class="ident">get_error</span>().<span class="ident">print</span>();        <span class="comment">// Optimized RMSE</span>
+    <span class="comment">// Optimizer setting
+    </span><span class="kw">let </span><span class="kw-2">mut </span>opt = Optimizer::new(data, quad);
+    <span class="kw">let </span>p = opt.set_init_param(n_init)
+        .set_max_iter(<span class="number">50</span>)
+        .set_method(LevenbergMarquardt)
+        .set_lambda_init(<span class="number">1e-3</span>)      <span class="comment">// Optional: Set initial value of lambda (Only for `LevenbergMarquardt`)
+        </span>.set_lambda_max(<span class="number">1e+3</span>)       <span class="comment">// Optional: Set maximum bound of lambda (Only for `LevenbergMarquardt`)
+        </span>.optimize();
+    p.print();                      <span class="comment">// Optimized parameter
+    </span>opt.get_error().print();        <span class="comment">// Optimized RMSE
 
-    <span class="comment">// Plot</span>
-    <span class="comment">//#[cfg(feature = &quot;plot&quot;)]</span>
-    <span class="comment">//{</span>
-    <span class="comment">//    let z = quad(&amp;x, p.to_ad_vec()).unwrap().to_f64_vec();</span>
-    <span class="comment">//    let mut plt = Plot2D::new();</span>
-    <span class="comment">//    plt.set_domain(x)</span>
-    <span class="comment">//        .insert_image(y)    // plot data</span>
-    <span class="comment">//        .insert_image(z)    // plot fit</span>
-    <span class="comment">//        .set_legend(vec![&quot;Data&quot;, &quot;Fit&quot;])</span>
-    <span class="comment">//        .set_title(&quot;Test ($y=x^2$ with noise)&quot;)</span>
-    <span class="comment">//        .set_path(&quot;example_data/lm_test.png&quot;)</span>
-    <span class="comment">//        .set_marker(vec![Point, Line])</span>
-    <span class="comment">//        .savefig().expect(&quot;Can&#39;t draw a plot&quot;);</span>
-    <span class="comment">//}</span>
-}
+    // Plot
+    //#[cfg(feature = &quot;plot&quot;)]
+    //{
+    //    let z = quad(&amp;x, p.to_ad_vec()).unwrap().to_f64_vec();
+    //    let mut plt = Plot2D::new();
+    //    plt.set_domain(x)
+    //        .insert_image(y)    // plot data
+    //        .insert_image(z)    // plot fit
+    //        .set_legend(vec![&quot;Data&quot;, &quot;Fit&quot;])
+    //        .set_title(&quot;Test ($y=x^2$ with noise)&quot;)
+    //        .set_path(&quot;example_data/lm_test.png&quot;)
+    //        .set_marker(vec![Point, Line])
+    //        .savefig().expect(&quot;Can&#39;t draw a plot&quot;);
+    //}
+</span>}
 
-<span class="kw">fn</span> <span class="ident">quad</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">n</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+<span class="kw">fn </span>quad(x: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, n: Vec&lt;AD&gt;) -&gt; <span class="prelude-ty">Option</span>&lt;Vec&lt;AD&gt;&gt; {
     <span class="prelude-val">Some</span>(
-        <span class="ident">x</span>.<span class="ident">clone</span>().<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">AD1</span>(<span class="ident">t</span>, <span class="number">0f64</span>))
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">pow</span>(<span class="ident">n</span>[<span class="number">0</span>]))
-            .<span class="ident">collect</span>()
+        x.clone().into_iter()
+            .map(|t| AD1(t, <span class="number">0f64</span>))
+            .map(|t| t.pow(n[<span class="number">0</span>]))
+            .collect()
     )
 }</code></pre></div>
 <p><img src="https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lm_test.png" alt="LM test" /></p>
-</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left import-item" id="reexport.GaussNewton"><code>pub use self::OptMethod::<a class="enum" href="enum.OptMethod.html" title="enum peroxide::numerical::optimize::OptMethod">GaussNewton</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.GradientDescent"><code>pub use self::OptMethod::<a class="enum" href="enum.OptMethod.html" title="enum peroxide::numerical::optimize::OptMethod">GradientDescent</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.LevenbergMarquardt"><code>pub use self::OptMethod::<a class="enum" href="enum.OptMethod.html" title="enum peroxide::numerical::optimize::OptMethod">LevenbergMarquardt</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Optimizer.html" title="peroxide::numerical::optimize::Optimizer struct">Optimizer</a></div><div class="item-right docblock-short"><p>Optimizer for optimization (non-linear regression)</p>
-</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.OptMethod.html" title="peroxide::numerical::optimize::OptMethod enum">OptMethod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.OptOption.html" title="peroxide::numerical::optimize::OptOption enum">OptOption</a></div><div class="item-right docblock-short"></div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2><div class="item-table"><div class="item-row"><div class="item-left import-item" id="reexport.GaussNewton"><code>pub use self::OptMethod::<a class="enum" href="enum.OptMethod.html" title="enum peroxide::numerical::optimize::OptMethod">GaussNewton</a>;</code></div></div><div class="item-row"><div class="item-left import-item" id="reexport.GradientDescent"><code>pub use self::OptMethod::<a class="enum" href="enum.OptMethod.html" title="enum peroxide::numerical::optimize::OptMethod">GradientDescent</a>;</code></div></div><div class="item-row"><div class="item-left import-item" id="reexport.LevenbergMarquardt"><code>pub use self::OptMethod::<a class="enum" href="enum.OptMethod.html" title="enum peroxide::numerical::optimize::OptMethod">LevenbergMarquardt</a>;</code></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Optimizer.html" title="peroxide::numerical::optimize::Optimizer struct">Optimizer</a></div><div class="item-right docblock-short"><p>Optimizer for optimization (non-linear regression)</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.OptMethod.html" title="peroxide::numerical::optimize::OptMethod enum">OptMethod</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.OptOption.html" title="peroxide::numerical::optimize::OptOption enum">OptOption</a></div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

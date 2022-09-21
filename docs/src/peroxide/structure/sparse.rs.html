@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/structure/sparse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sparse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/structure/sparse.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sparse.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -248,234 +242,233 @@
 <span id="226">226</span>
 <span id="227">227</span>
 <span id="228">228</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Sparse matrix (CCS format)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Reference : Press, William H., and William T. Vetterling. *Numerical Recipes.* Cambridge: Cambridge Univ. Press, 2007.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Sparse matrix (CCS format)
+//!
+//! * Reference : Press, William H., and William T. Vetterling. *Numerical Recipes.* Cambridge: Cambridge Univ. Press, 2007.
 
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::matrix</span>::{<span class="ident">Form</span>, <span class="ident">LinearAlgebra</span>, <span class="ident">Matrix</span>, <span class="ident">SolveKind</span>, <span class="ident">PQLU</span>, <span class="ident">QR</span>, <span class="ident">WAZD</span>, <span class="ident">SVD</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traits::math::LinearOp</span>;
-<span class="comment">//use crate::traits::math::{InnerProduct, LinearOp, Norm, Normed, Vector};</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::non_macro::zeros</span>;
-<span class="kw">use</span> <span class="ident">std::ops::Mul</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::fuga::UPLO</span>;
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::{Form, LinearAlgebra, Matrix, SolveKind, PQLU, QR, WAZD, SVD};
+<span class="kw">use </span><span class="kw">crate</span>::traits::math::LinearOp;
+<span class="comment">//use crate::traits::math::{InnerProduct, LinearOp, Norm, Normed, Vector};
+</span><span class="kw">use </span><span class="kw">crate</span>::util::non_macro::zeros;
+<span class="kw">use </span>std::ops::Mul;
+<span class="kw">use </span><span class="kw">crate</span>::fuga::UPLO;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SPMatrix</span> {
-    <span class="kw">pub</span> <span class="ident">row</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">col</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">nnz</span>: <span class="ident">usize</span>,
-    <span class="kw">pub</span> <span class="ident">col_ptr</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">row_ics</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>SPMatrix {
+    <span class="kw">pub </span>row: usize,
+    <span class="kw">pub </span>col: usize,
+    <span class="kw">pub </span>nnz: usize,
+    <span class="kw">pub </span>col_ptr: Vec&lt;usize&gt;,
+    <span class="kw">pub </span>row_ics: Vec&lt;usize&gt;,
+    <span class="kw">pub </span>data: Vec&lt;f64&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">SPMatrix</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">row</span>: <span class="ident">usize</span>, <span class="ident">col</span>: <span class="ident">usize</span>, <span class="ident">nnz</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">SPMatrix</span> {
-            <span class="ident">row</span>,
-            <span class="ident">col</span>,
-            <span class="ident">nnz</span>,
-            <span class="ident">col_ptr</span>: <span class="macro">vec!</span>[<span class="number">0usize</span>; <span class="ident">col</span> <span class="op">+</span> <span class="number">1</span>],
-            <span class="ident">row_ics</span>: <span class="macro">vec!</span>[<span class="number">0usize</span>, <span class="ident">nnz</span>],
-            <span class="ident">data</span>: <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">nnz</span>],
+<span class="kw">impl </span>SPMatrix {
+    <span class="kw">pub fn </span>new(row: usize, col: usize, nnz: usize) -&gt; <span class="self">Self </span>{
+        SPMatrix {
+            row,
+            col,
+            nnz,
+            col_ptr: <span class="macro">vec!</span>[<span class="number">0usize</span>; col + <span class="number">1</span>],
+            row_ics: <span class="macro">vec!</span>[<span class="number">0usize</span>, nnz],
+            data: <span class="macro">vec!</span>[<span class="number">0f64</span>; nnz],
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_dense</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">row_ics</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">col_ptr</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0usize</span>; <span class="ident">m</span>.<span class="ident">col</span> <span class="op">+</span> <span class="number">1</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">k</span> <span class="op">=</span> <span class="number">0usize</span>;
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">m</span>.<span class="ident">col</span> {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">m</span>.<span class="ident">row</span> {
-                <span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">j</span>)];
-                <span class="kw">if</span> <span class="ident">val</span> <span class="op">!</span><span class="op">=</span> <span class="number">0f64</span> {
-                    <span class="ident">data</span>.<span class="ident">push</span>(<span class="ident">val</span>);
-                    <span class="ident">row_ics</span>.<span class="ident">push</span>(<span class="ident">i</span>);
-                    <span class="ident">k</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+    <span class="kw">pub fn </span>from_dense(m: <span class="kw-2">&amp;</span>Matrix) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>data: Vec&lt;f64&gt; = Vec::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>row_ics: Vec&lt;usize&gt; = Vec::new();
+        <span class="kw">let </span><span class="kw-2">mut </span>col_ptr: Vec&lt;usize&gt; = <span class="macro">vec!</span>[<span class="number">0usize</span>; m.col + <span class="number">1</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>k = <span class="number">0usize</span>;
+        <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..m.col {
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..m.row {
+                <span class="kw">let </span>val = m[(i, j)];
+                <span class="kw">if </span>val != <span class="number">0f64 </span>{
+                    data.push(val);
+                    row_ics.push(i);
+                    k += <span class="number">1</span>;
                 }
             }
-            <span class="ident">col_ptr</span>[<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">k</span>;
+            col_ptr[j + <span class="number">1</span>] = k;
         }
 
-        <span class="ident">SPMatrix</span> {
-            <span class="ident">row</span>: <span class="ident">m</span>.<span class="ident">row</span>,
-            <span class="ident">col</span>: <span class="ident">m</span>.<span class="ident">col</span>,
-            <span class="ident">nnz</span>: <span class="ident">data</span>.<span class="ident">len</span>(),
-            <span class="ident">col_ptr</span>,
-            <span class="ident">row_ics</span>,
-            <span class="ident">data</span>,
+        SPMatrix {
+            row: m.row,
+            col: m.col,
+            nnz: data.len(),
+            col_ptr,
+            row_ics,
+            data,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_dense</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="self">self</span>.<span class="ident">row</span>, <span class="self">self</span>.<span class="ident">col</span>);
+    <span class="kw">pub fn </span>to_dense(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
+        <span class="kw">let </span><span class="kw-2">mut </span>m = zeros(<span class="self">self</span>.row, <span class="self">self</span>.col);
 
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">col</span> {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">col_ptr</span>[<span class="ident">j</span>]..<span class="self">self</span>.<span class="ident">col_ptr</span>[<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>] {
-                <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">row_ics</span>[<span class="ident">i</span>];
-                <span class="ident">m</span>[(<span class="ident">k</span>, <span class="ident">j</span>)] <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>[<span class="ident">i</span>];
+        <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.col {
+            <span class="kw">for </span>i <span class="kw">in </span><span class="self">self</span>.col_ptr[j]..<span class="self">self</span>.col_ptr[j + <span class="number">1</span>] {
+                <span class="kw">let </span>k = <span class="self">self</span>.row_ics[i];
+                m[(k, j)] = <span class="self">self</span>.data[i];
             }
         }
-        <span class="ident">m</span>
+        m
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">col_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">col_ptr</span>
+    <span class="kw">pub fn </span>col_ptr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;usize&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.col_ptr
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">row_ics</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">row_ics</span>
+    <span class="kw">pub fn </span>row_ics(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;usize&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.row_ics
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>
+    <span class="kw">pub fn </span>data(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;f64&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.data
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">transpose</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">row</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">row</span>;
-        <span class="kw">let</span> <span class="ident">col</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>;
-        <span class="kw">let</span> <span class="ident">nnz</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">nnz</span>;
-        <span class="kw">let</span> <span class="ident">col_ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col_ptr</span>();
-        <span class="kw">let</span> <span class="ident">row_ics</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">row_ics</span>();
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">count</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0usize</span>; <span class="ident">row</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">col</span>, <span class="ident">row</span>, <span class="ident">nnz</span>);
+    <span class="kw">pub fn </span>transpose(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>row = <span class="self">self</span>.row;
+        <span class="kw">let </span>col = <span class="self">self</span>.col;
+        <span class="kw">let </span>nnz = <span class="self">self</span>.nnz;
+        <span class="kw">let </span>col_ptr = <span class="self">self</span>.col_ptr();
+        <span class="kw">let </span>row_ics = <span class="self">self</span>.row_ics();
+        <span class="kw">let </span>data = <span class="self">self</span>.data();
+        <span class="kw">let </span><span class="kw-2">mut </span>count = <span class="macro">vec!</span>[<span class="number">0usize</span>; row];
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="self">Self</span>::new(col, row, nnz);
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">col</span> {
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="ident">col_ptr</span>[<span class="ident">i</span>]..<span class="ident">col_ptr</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] {
-                <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="ident">row_ics</span>[<span class="ident">j</span>];
-                <span class="ident">count</span>[<span class="ident">k</span>] <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..col {
+            <span class="kw">for </span>j <span class="kw">in </span>col_ptr[i]..col_ptr[i + <span class="number">1</span>] {
+                <span class="kw">let </span>k = row_ics[j];
+                count[k] += <span class="number">1</span>;
             }
         }
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">row</span> {
-            <span class="ident">result</span>.<span class="ident">col_ptr</span>[<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">result</span>.<span class="ident">col_ptr</span>[<span class="ident">j</span>] <span class="op">+</span> <span class="ident">count</span>[<span class="ident">j</span>];
-            <span class="ident">count</span>[<span class="ident">j</span>] <span class="op">=</span> <span class="number">0</span>;
+        <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..row {
+            result.col_ptr[j + <span class="number">1</span>] = result.col_ptr[j] + count[j];
+            count[j] = <span class="number">0</span>;
         }
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">col</span> {
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="ident">col_ptr</span>[<span class="ident">i</span>]..<span class="ident">col_ptr</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] {
-                <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="ident">row_ics</span>[<span class="ident">j</span>];
-                <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="ident">result</span>.<span class="ident">col_ptr</span>[<span class="ident">k</span>] <span class="op">+</span> <span class="ident">count</span>[<span class="ident">k</span>];
-                <span class="ident">result</span>.<span class="ident">row_ics</span>[<span class="ident">index</span>] <span class="op">=</span> <span class="ident">i</span>;
-                <span class="ident">result</span>.<span class="ident">data</span>[<span class="ident">index</span>] <span class="op">=</span> <span class="ident">data</span>[<span class="ident">j</span>];
-                <span class="ident">count</span>[<span class="ident">k</span>] <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..col {
+            <span class="kw">for </span>j <span class="kw">in </span>col_ptr[i]..col_ptr[i + <span class="number">1</span>] {
+                <span class="kw">let </span>k = row_ics[j];
+                <span class="kw">let </span>index = result.col_ptr[k] + count[k];
+                result.row_ics[index] = i;
+                result.data[index] = data[j];
+                count[k] += <span class="number">1</span>;
             }
         }
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">t</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">transpose</span>()
+    <span class="kw">pub fn </span>t(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.transpose()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">LinearOp</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SPMatrix</span> {
-    <span class="kw">fn</span> <span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.<span class="ident">row</span>];
-        <span class="kw">let</span> <span class="ident">col_ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col_ptr</span>();
-        <span class="kw">let</span> <span class="ident">row_ics</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">row_ics</span>();
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>();
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="self">self</span>.<span class="ident">col</span> {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="ident">col_ptr</span>[<span class="ident">j</span>]..<span class="ident">col_ptr</span>[<span class="ident">j</span> <span class="op">+</span> <span class="number">1</span>] {
-                <span class="ident">y</span>[<span class="ident">row_ics</span>[<span class="ident">i</span>]] <span class="op">+</span><span class="op">=</span> <span class="ident">data</span>[<span class="ident">i</span>] <span class="op">*</span> <span class="ident">rhs</span>[<span class="ident">j</span>];
+<span class="kw">impl </span>LinearOp&lt;Vec&lt;f64&gt;, Vec&lt;f64&gt;&gt; <span class="kw">for </span>SPMatrix {
+    <span class="kw">fn </span>apply(<span class="kw-2">&amp;</span><span class="self">self</span>, rhs: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>y = <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="self">self</span>.row];
+        <span class="kw">let </span>col_ptr = <span class="self">self</span>.col_ptr();
+        <span class="kw">let </span>row_ics = <span class="self">self</span>.row_ics();
+        <span class="kw">let </span>data = <span class="self">self</span>.data();
+        <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..<span class="self">self</span>.col {
+            <span class="kw">for </span>i <span class="kw">in </span>col_ptr[j]..col_ptr[j + <span class="number">1</span>] {
+                y[row_ics[i]] += data[i] * rhs[j];
             }
         }
-        <span class="ident">y</span>
+        y
     }
 }
 
-<span class="doccomment">/// Linear algebra for sparse matrix</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// **Caution** : In every ops in this trait, there is converting process to dense matrix</span>
-<span class="kw">impl</span> <span class="ident">LinearAlgebra</span> <span class="kw">for</span> <span class="ident">SPMatrix</span> {
-    <span class="kw">fn</span> <span class="ident">back_subs</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_b</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+<span class="doccomment">/// Linear algebra for sparse matrix
+///
+/// **Caution** : In every ops in this trait, there is converting process to dense matrix
+</span><span class="kw">impl </span>LinearAlgebra <span class="kw">for </span>SPMatrix {
+    <span class="kw">fn </span>back_subs(<span class="kw-2">&amp;</span><span class="self">self</span>, _b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt; {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">forward_subs</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_b</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>forward_subs(<span class="kw-2">&amp;</span><span class="self">self</span>, _b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Vec&lt;f64&gt; {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">lu</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">PQLU</span> {
-        <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">lu</span>()
+    <span class="kw">fn </span>lu(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PQLU {
+        <span class="self">self</span>.to_dense().lu()
     }
 
-    <span class="kw">fn</span> <span class="ident">waz</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_d_form</span>: <span class="ident">Form</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">WAZD</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>waz(<span class="kw-2">&amp;</span><span class="self">self</span>, _d_form: Form) -&gt; <span class="prelude-ty">Option</span>&lt;WAZD&gt; {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">qr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">QR</span> {
-        <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">qr</span>()
+    <span class="kw">fn </span>qr(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; QR {
+        <span class="self">self</span>.to_dense().qr()
     }
 
-    <span class="kw">fn</span> <span class="ident">det</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
-        <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">det</span>()
+    <span class="kw">fn </span>det(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.to_dense().det()
     }
 
-    <span class="kw">fn</span> <span class="ident">block</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">Matrix</span>, <span class="ident">Matrix</span>, <span class="ident">Matrix</span>, <span class="ident">Matrix</span>) {
-        <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">block</span>()
+    <span class="kw">fn </span>block(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (Matrix, Matrix, Matrix, Matrix) {
+        <span class="self">self</span>.to_dense().block()
     }
 
-    <span class="kw">fn</span> <span class="ident">inv</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">inv</span>()
+    <span class="kw">fn </span>inv(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
+        <span class="self">self</span>.to_dense().inv()
     }
 
-    <span class="kw">fn</span> <span class="ident">pseudo_inv</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">pseudo_inv</span>()
+    <span class="kw">fn </span>pseudo_inv(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
+        <span class="self">self</span>.to_dense().pseudo_inv()
     }
 
-    <span class="kw">fn</span> <span class="ident">rref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="self">self</span>.<span class="ident">to_dense</span>().<span class="ident">rref</span>()
+    <span class="kw">fn </span>rref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
+        <span class="self">self</span>.to_dense().rref()
     }
 
-    <span class="kw">fn</span> <span class="ident">solve</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_b</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">_sk</span>: <span class="ident">SolveKind</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>solve(<span class="kw-2">&amp;</span><span class="self">self</span>, _b: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, _sk: SolveKind) -&gt; Vec&lt;f64&gt; {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">solve_mat</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">_m</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span>, <span class="ident">_sk</span>: <span class="ident">SolveKind</span>) -&gt; <span class="ident">Matrix</span> {
+    <span class="kw">fn </span>solve_mat(<span class="kw-2">&amp;</span><span class="self">self</span>, _m: <span class="kw-2">&amp;</span>Matrix, _sk: SolveKind) -&gt; Matrix {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">svd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">SVD</span> {
+    <span class="kw">fn </span>svd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; SVD {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">cholesky</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">uplo</span>: <span class="ident">UPLO</span>) -&gt; <span class="ident">Matrix</span> {
+    <span class="kw">fn </span>cholesky(<span class="kw-2">&amp;</span><span class="self">self</span>, uplo: UPLO) -&gt; Matrix {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">is_symmetric</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+    <span class="kw">fn </span>is_symmetric(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
         <span class="macro">unimplemented!</span>()
     }
 }
 
-<span class="doccomment">/// Matrix multiplication with vector</span>
-<span class="kw">impl</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SPMatrix</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="self">self</span>.<span class="ident">apply</span>(<span class="kw-2">&amp;</span><span class="ident">rhs</span>)
+<span class="doccomment">/// Matrix multiplication with vector
+</span><span class="kw">impl </span>Mul&lt;Vec&lt;f64&gt;&gt; <span class="kw">for </span>SPMatrix {
+    <span class="kw">type </span>Output = Vec&lt;f64&gt;;
+    <span class="kw">fn </span>mul(<span class="self">self</span>, rhs: Vec&lt;f64&gt;) -&gt; <span class="self">Self</span>::Output {
+        <span class="self">self</span>.apply(<span class="kw-2">&amp;</span>rhs)
     }
 }
 
-<span class="doccomment">/// Reference version of matrix multiplication with vector</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">SPMatrix</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">mul</span>(<span class="self">self</span>, <span class="ident">rhs</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="self">self</span>.<span class="ident">apply</span>(<span class="ident">rhs</span>)
+<span class="doccomment">/// Reference version of matrix multiplication with vector
+</span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; Mul&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>Vec&lt;f64&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>SPMatrix {
+    <span class="kw">type </span>Output = Vec&lt;f64&gt;;
+    <span class="kw">fn </span>mul(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>Vec&lt;f64&gt;) -&gt; <span class="self">Self</span>::Output {
+        <span class="self">self</span>.apply(rhs)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Matrix</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SPMatrix</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="self">self</span>.<span class="ident">to_dense</span>()
+<span class="kw">impl </span>Into&lt;Matrix&gt; <span class="kw">for </span>SPMatrix {
+    <span class="kw">fn </span>into(<span class="self">self</span>) -&gt; Matrix {
+        <span class="self">self</span>.to_dense()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">SPMatrix</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Matrix</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) -&gt; <span class="ident">SPMatrix</span> {
-        <span class="ident">SPMatrix::from_dense</span>(<span class="kw-2">&amp;</span><span class="self">self</span>)
+<span class="kw">impl </span>Into&lt;SPMatrix&gt; <span class="kw">for </span>Matrix {
+    <span class="kw">fn </span>into(<span class="self">self</span>) -&gt; SPMatrix {
+        SPMatrix::from_dense(<span class="kw-2">&amp;</span><span class="self">self</span>)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

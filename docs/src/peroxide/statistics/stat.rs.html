@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/stat.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>stat.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/stat.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>stat.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -548,534 +542,533 @@
 <span id="526">526</span>
 <span id="527">527</span>
 <span id="528">528</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Basic statistics</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## `Statistics` trait</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * To make generic code, there is `Statistics` trait</span>
-<span class="doccomment">//!     * `mean`: just mean</span>
-<span class="doccomment">//!     * `var` : variance</span>
-<span class="doccomment">//!     * `sd` : standard deviation (R-like notation)</span>
-<span class="doccomment">//!     * `cov` : covariance</span>
-<span class="doccomment">//!     * `cor` : correlation coefficient</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     pub trait Statistics {</span>
-<span class="doccomment">//!         type Array;</span>
-<span class="doccomment">//!         type Value;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         fn mean(&amp;self) -&gt; Self::Value;</span>
-<span class="doccomment">//!         fn var(&amp;self) -&gt; Self::Value;</span>
-<span class="doccomment">//!         fn sd(&amp;self) -&gt; Self::Value;</span>
-<span class="doccomment">//!         fn cov(&amp;self) -&gt; Self::Array;</span>
-<span class="doccomment">//!         fn cor(&amp;self) -&gt; Self::Array;</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### For `Vec&lt;f64&gt;`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Caution: For `Vec&lt;f64&gt;`, `cov` &amp; `cor` are unimplemented (those for `Matrix`)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     #[macro_use]</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         let a = c!(1,2,3,4,5);</span>
-<span class="doccomment">//!         a.mean().print(); // 3</span>
-<span class="doccomment">//!         a.var().print();  // 2.5</span>
-<span class="doccomment">//!         a.sd().print();   // 1.5811388300841898</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * But there are other functions to calculate `cov` &amp; `cor`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     #[macro_use]</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         let v1 = c!(1,2,3);</span>
-<span class="doccomment">//!         let v2 = c!(3,2,1);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         cov(&amp;v1, &amp;v2).print(); // -0.9999999999999998</span>
-<span class="doccomment">//!         cor(&amp;v1, &amp;v2).print(); // -0.9999999999999993</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### For `Matrix`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * For `Matrix`, `mean, var, sd` means column operations</span>
-<span class="doccomment">//! * `cov` means covariance matrix &amp; `cor` means also correlation coefficient matrix</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     #[macro_use]</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         let m = matrix(c!(1,2,3,3,2,1), 3, 2, Col);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         m.mean().print(); // [2, 2]</span>
-<span class="doccomment">//!         m.var().print();  // [1.0000, 1.0000]</span>
-<span class="doccomment">//!         m.sd().print();   // [1.0000, 1.0000]</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         m.cov().print();</span>
-<span class="doccomment">//!         //         c[0]    c[1]</span>
-<span class="doccomment">//!         // r[0]  1.0000 -1.0000</span>
-<span class="doccomment">//!         // r[1] -1.0000  1.0000</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         m.cor().print();</span>
-<span class="doccomment">//!         //         c[0]    c[1]</span>
-<span class="doccomment">//!         // r[0]       1 -1.0000</span>
-<span class="doccomment">//!         // r[1] -1.0000       1</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### For `DataFrame`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Similar to Matrix but, `Value` is `DataFrame`</span>
-<span class="doccomment">//! * `cov` means covariance matrix.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     #[cfg(feature = &quot;dataframe&quot;)]</span>
-<span class="doccomment">//!     {</span>
-<span class="doccomment">//!         let mut m = DataFrame::with_header(vec![&quot;x&quot;, &quot;y&quot;]);</span>
-<span class="doccomment">//!         m[&quot;x&quot;] = c!(1,2,3);</span>
-<span class="doccomment">//!         m[&quot;y&quot;] = c!(3,2,1);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         m.cov().print();</span>
-<span class="doccomment">//!         //         c[0]    c[1]</span>
-<span class="doccomment">//!         // r[0]  1.0000 -1.0000</span>
-<span class="doccomment">//!         // r[1] -1.0000  1.0000</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Basic statistics
+//!
+//! ## `Statistics` trait
+//!
+//! * To make generic code, there is `Statistics` trait
+//!     * `mean`: just mean
+//!     * `var` : variance
+//!     * `sd` : standard deviation (R-like notation)
+//!     * `cov` : covariance
+//!     * `cor` : correlation coefficient
+//!     ```rust
+//!     pub trait Statistics {
+//!         type Array;
+//!         type Value;
+//!
+//!         fn mean(&amp;self) -&gt; Self::Value;
+//!         fn var(&amp;self) -&gt; Self::Value;
+//!         fn sd(&amp;self) -&gt; Self::Value;
+//!         fn cov(&amp;self) -&gt; Self::Array;
+//!         fn cor(&amp;self) -&gt; Self::Array;
+//!     }
+//!     ```
+//!
+//! ### For `Vec&lt;f64&gt;`
+//!
+//! * Caution: For `Vec&lt;f64&gt;`, `cov` &amp; `cor` are unimplemented (those for `Matrix`)
+//!
+//!     ```rust
+//!     #[macro_use]
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         let a = c!(1,2,3,4,5);
+//!         a.mean().print(); // 3
+//!         a.var().print();  // 2.5
+//!         a.sd().print();   // 1.5811388300841898
+//!     }
+//!     ```
+//!
+//! * But there are other functions to calculate `cov` &amp; `cor`
+//!
+//!     ```rust
+//!     #[macro_use]
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         let v1 = c!(1,2,3);
+//!         let v2 = c!(3,2,1);
+//!
+//!         cov(&amp;v1, &amp;v2).print(); // -0.9999999999999998
+//!         cor(&amp;v1, &amp;v2).print(); // -0.9999999999999993
+//!     }
+//!     ```
+//!
+//! ### For `Matrix`
+//!
+//! * For `Matrix`, `mean, var, sd` means column operations
+//! * `cov` means covariance matrix &amp; `cor` means also correlation coefficient matrix
+//!
+//!     ```rust
+//!     #[macro_use]
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         let m = matrix(c!(1,2,3,3,2,1), 3, 2, Col);
+//!
+//!         m.mean().print(); // [2, 2]
+//!         m.var().print();  // [1.0000, 1.0000]
+//!         m.sd().print();   // [1.0000, 1.0000]
+//!
+//!         m.cov().print();
+//!         //         c[0]    c[1]
+//!         // r[0]  1.0000 -1.0000
+//!         // r[1] -1.0000  1.0000
+//!
+//!         m.cor().print();
+//!         //         c[0]    c[1]
+//!         // r[0]       1 -1.0000
+//!         // r[1] -1.0000       1
+//!     }
+//!     ```
+//!
+//! ### For `DataFrame`
+//!
+//! * Similar to Matrix but, `Value` is `DataFrame`
+//! * `cov` means covariance matrix.
+//!
+//! ```rust
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     #[cfg(feature = &quot;dataframe&quot;)]
+//!     {
+//!         let mut m = DataFrame::with_header(vec![&quot;x&quot;, &quot;y&quot;]);
+//!         m[&quot;x&quot;] = c!(1,2,3);
+//!         m[&quot;y&quot;] = c!(3,2,1);
+//!
+//!         m.cov().print();
+//!         //         c[0]    c[1]
+//!         // r[0]  1.0000 -1.0000
+//!         // r[1] -1.0000  1.0000
+//!     }
+//! }
+//! ```
 
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::QType</span>::<span class="kw-2">*</span>;
-<span class="comment">//use crate::structure::dataframe::*;</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::matrix</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traits::fp::FPVector</span>;
-<span class="kw">use</span> <span class="ident">order_stat::kth_by</span>;
+</span><span class="kw">use </span><span class="self">self</span>::QType::<span class="kw-2">*</span>;
+<span class="comment">//use crate::structure::dataframe::*;
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::traits::fp::FPVector;
+<span class="kw">use </span>order_stat::kth_by;
 
-<span class="doccomment">/// Statistics Trait</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// It contains `mean`, `var`, `sd`, `cov`</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Statistics</span> {
-    <span class="kw">type</span> <span class="ident">Array</span>;
-    <span class="kw">type</span> <span class="ident">Value</span>;
+<span class="doccomment">/// Statistics Trait
+///
+/// It contains `mean`, `var`, `sd`, `cov`
+</span><span class="kw">pub trait </span>Statistics {
+    <span class="kw">type </span>Array;
+    <span class="kw">type </span>Value;
 
-    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span>;
-    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span>;
-    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span>;
-    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span>;
-    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span>;
+    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value;
+    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value;
+    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value;
+    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array;
+    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array;
 }
 
-<span class="kw">impl</span> <span class="ident">Statistics</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Array</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">f64</span>;
+<span class="kw">impl </span>Statistics <span class="kw">for </span>Vec&lt;f64&gt; {
+    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
+    <span class="kw">type </span>Value = f64;
 
-    <span class="doccomment">/// Mean</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">///     assert_eq!(a.mean(), 3.0);</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
-        <span class="self">self</span>.<span class="ident">reduce</span>(<span class="number">0f64</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>) <span class="op">/</span> (<span class="self">self</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">f64</span>)
+    <span class="doccomment">/// Mean
+    ///
+    /// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = c!(1,2,3,4,5);
+    ///     assert_eq!(a.mean(), 3.0);
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.reduce(<span class="number">0f64</span>, |x, y| x + y) / (<span class="self">self</span>.len() <span class="kw">as </span>f64)
     }
 
-    <span class="doccomment">/// Variance</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
-    <span class="doccomment">///     assert_eq!(a.var(), 2.5);</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ss</span> <span class="op">=</span> <span class="number">0f64</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">0f64</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">l</span> <span class="op">=</span> <span class="number">0f64</span>;
+    <span class="doccomment">/// Variance
+    ///
+    /// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = c!(1,2,3,4,5);
+    ///     assert_eq!(a.var(), 2.5);
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="kw">let </span><span class="kw-2">mut </span>ss = <span class="number">0f64</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="number">0f64</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>l = <span class="number">0f64</span>;
 
-        <span class="kw">for</span> <span class="ident">x</span> <span class="kw">in</span> <span class="self">self</span>.<span class="ident">into_iter</span>() {
-            <span class="ident">ss</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span>.<span class="ident">powf</span>(<span class="number">2f64</span>);
-            <span class="ident">s</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">*</span><span class="ident">x</span>;
-            <span class="ident">l</span> <span class="op">+</span><span class="op">=</span> <span class="number">1f64</span>;
+        <span class="kw">for </span>x <span class="kw">in </span><span class="self">self</span>.into_iter() {
+            ss += x.powf(<span class="number">2f64</span>);
+            s += <span class="kw-2">*</span>x;
+            l += <span class="number">1f64</span>;
         }
-        <span class="macro">assert_ne!</span>(<span class="ident">l</span>, <span class="number">1f64</span>);
-        (<span class="ident">ss</span> <span class="op">/</span> <span class="ident">l</span> <span class="op">-</span> (<span class="ident">s</span> <span class="op">/</span> <span class="ident">l</span>).<span class="ident">powf</span>(<span class="number">2f64</span>)) <span class="op">*</span> <span class="ident">l</span> <span class="op">/</span> (<span class="ident">l</span> <span class="op">-</span> <span class="number">1f64</span>)
+        <span class="macro">assert_ne!</span>(l, <span class="number">1f64</span>);
+        (ss / l - (s / l).powf(<span class="number">2f64</span>)) * l / (l - <span class="number">1f64</span>)
     }
 
-    <span class="doccomment">/// Standard Deviation</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3);</span>
-    <span class="doccomment">///     assert!(nearly_eq(a.sd(), 1f64)); // Floating Number Error</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
-        <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>()
+    <span class="doccomment">/// Standard Deviation
+    ///
+    /// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = c!(1,2,3);
+    ///     assert!(nearly_eq(a.sd(), 1f64)); // Floating Number Error
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.var().sqrt()
     }
 
-    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt; {
         <span class="macro">unimplemented!</span>()
     }
-    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
+    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt; {
         <span class="macro">unimplemented!</span>()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Statistics</span> <span class="kw">for</span> <span class="ident">Matrix</span> {
-    <span class="kw">type</span> <span class="ident">Array</span> <span class="op">=</span> <span class="ident">Matrix</span>;
-    <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
+<span class="kw">impl </span>Statistics <span class="kw">for </span>Matrix {
+    <span class="kw">type </span>Array = Matrix;
+    <span class="kw">type </span>Value = Vec&lt;f64&gt;;
 
-    <span class="doccomment">/// Column Mean</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let m = matrix(c!(1,3,3,1), 2, 2, Col);</span>
-    <span class="doccomment">///     assert_eq!(m.mean(), c!(2,2));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">container</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>;
+    <span class="doccomment">/// Column Mean
+    ///
+    /// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let m = matrix(c!(1,3,3,1), 2, 2, Col);
+    ///     assert_eq!(m.mean(), c!(2,2));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>container: Vec&lt;f64&gt; = Vec::new();
+        <span class="kw">let </span>c = <span class="self">self</span>.col;
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-            <span class="ident">container</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">col</span>(<span class="ident">i</span>).<span class="ident">mean</span>());
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..c {
+            container.push(<span class="self">self</span>.col(i).mean());
         }
-        <span class="ident">container</span>
+        container
     }
 
-    <span class="doccomment">/// Column variance</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let m = matrix(c!(1,2,3,3,2,1), 3, 2, Col);</span>
-    <span class="doccomment">///     assert!(nearly_eq(m.var()[0], 1));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">container</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>;
+    <span class="doccomment">/// Column variance
+    ///
+    /// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let m = matrix(c!(1,2,3,3,2,1), 3, 2, Col);
+    ///     assert!(nearly_eq(m.var()[0], 1));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>container: Vec&lt;f64&gt; = Vec::new();
+        <span class="kw">let </span>c = <span class="self">self</span>.col;
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-            <span class="ident">container</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">col</span>(<span class="ident">i</span>).<span class="ident">var</span>());
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..c {
+            container.push(<span class="self">self</span>.col(i).var());
         }
-        <span class="ident">container</span>
+        container
     }
 
-    <span class="doccomment">/// Column Standard Deviation</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let m = matrix(c!(1,2,3,3,2,1), 3, 2, Col);</span>
-    <span class="doccomment">///     assert!(nearly_eq(m.sd()[0], 1));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">container</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>;
+    <span class="doccomment">/// Column Standard Deviation
+    ///
+    /// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let m = matrix(c!(1,2,3,3,2,1), 3, 2, Col);
+    ///     assert!(nearly_eq(m.sd()[0], 1));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;f64&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>container: Vec&lt;f64&gt; = Vec::new();
+        <span class="kw">let </span>c = <span class="self">self</span>.col;
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-            <span class="ident">container</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">col</span>(<span class="ident">i</span>).<span class="ident">sd</span>());
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..c {
+            container.push(<span class="self">self</span>.col(i).sd());
         }
-        <span class="ident">container</span>
+        container
     }
 
-    <span class="doccomment">/// Covariance Matrix (Column based)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let m = matrix(c!(1,2,3,3,2,1), 3, 2, Col);</span>
-    <span class="doccomment">///     println!(&quot;{}&quot;, m.cov());</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///     //         c[0]    c[1]</span>
-    <span class="doccomment">///     // r[0]  1.0000 -1.0000</span>
-    <span class="doccomment">///     // r[1] -1.0000  1.0000</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>;
+    <span class="doccomment">/// Covariance Matrix (Column based)
+    ///
+    /// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let m = matrix(c!(1,2,3,3,2,1), 3, 2, Col);
+    ///     println!(&quot;{}&quot;, m.cov());
+    ///
+    ///     //         c[0]    c[1]
+    ///     // r[0]  1.0000 -1.0000
+    ///     // r[1] -1.0000  1.0000
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>c = <span class="self">self</span>.col;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span>: <span class="self">Self</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">c</span> <span class="op">*</span> <span class="ident">c</span>], <span class="ident">c</span>, <span class="ident">c</span>, <span class="self">self</span>.<span class="ident">shape</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>m: <span class="self">Self </span>= matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; c * c], c, c, <span class="self">self</span>.shape);
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-            <span class="kw">let</span> <span class="ident">m1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>(<span class="ident">i</span>);
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-                <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>(<span class="ident">j</span>);
-                <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">j</span>)] <span class="op">=</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="ident">m1</span>, <span class="kw-2">&amp;</span><span class="ident">m2</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..c {
+            <span class="kw">let </span>m1 = <span class="self">self</span>.col(i);
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..c {
+                <span class="kw">let </span>m2 = <span class="self">self</span>.col(j);
+                m[(i, j)] = cov(<span class="kw-2">&amp;</span>m1, <span class="kw-2">&amp;</span>m2);
             }
         }
-        <span class="ident">m</span>
+        m
     }
 
-    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>;
+    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>c = <span class="self">self</span>.col;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span>: <span class="self">Self</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">c</span> <span class="op">*</span> <span class="ident">c</span>], <span class="ident">c</span>, <span class="ident">c</span>, <span class="self">self</span>.<span class="ident">shape</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>m: <span class="self">Self </span>= matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; c * c], c, c, <span class="self">self</span>.shape);
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-            <span class="kw">let</span> <span class="ident">m1</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>(<span class="ident">i</span>);
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-                <span class="kw">let</span> <span class="ident">m2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">col</span>(<span class="ident">j</span>);
-                <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">j</span>)] <span class="op">=</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="ident">m1</span>, <span class="kw-2">&amp;</span><span class="ident">m2</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..c {
+            <span class="kw">let </span>m1 = <span class="self">self</span>.col(i);
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..c {
+                <span class="kw">let </span>m2 = <span class="self">self</span>.col(j);
+                m[(i, j)] = cor(<span class="kw-2">&amp;</span>m1, <span class="kw-2">&amp;</span>m2);
             }
         }
-        <span class="ident">m</span>
+        m
     }
 }
 
-<span class="comment">//impl Statistics for DataFrame {</span>
-<span class="comment">//    type Array = Matrix;</span>
-<span class="comment">//    type Value = Self;</span>
-<span class="comment">//</span>
-<span class="comment">//    fn mean(&amp;self) -&gt; Self::Value {</span>
-<span class="comment">//        let mut df = DataFrame::with_header(self.headers().map(|x| x.as_str()).collect());</span>
-<span class="comment">//        for k in self.headers() {</span>
-<span class="comment">//            df[k] = vec![self[k].mean()];</span>
-<span class="comment">//        }</span>
-<span class="comment">//        df</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    fn var(&amp;self) -&gt; Self::Value {</span>
-<span class="comment">//        let mut df = DataFrame::with_header(self.headers().map(|x| x.as_str()).collect());</span>
-<span class="comment">//        for k in self.headers() {</span>
-<span class="comment">//            df[k] = vec![self[k].var()];</span>
-<span class="comment">//        }</span>
-<span class="comment">//        df</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    fn sd(&amp;self) -&gt; Self::Value {</span>
-<span class="comment">//        let mut df = DataFrame::with_header(self.headers().map(|x| x.as_str()).collect());</span>
-<span class="comment">//        for k in self.headers() {</span>
-<span class="comment">//            df[k] = vec![self[k].sd()];</span>
-<span class="comment">//        }</span>
-<span class="comment">//        df</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    fn cov(&amp;self) -&gt; Self::Array {</span>
-<span class="comment">//        let m: Matrix = self.into();</span>
-<span class="comment">//        m.cov()</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    fn cor(&amp;self) -&gt; Self::Array {</span>
-<span class="comment">//        self.to_matrix().cor()</span>
-<span class="comment">//    }</span>
-<span class="comment">//}</span>
+<span class="comment">//impl Statistics for DataFrame {
+//    type Array = Matrix;
+//    type Value = Self;
+//
+//    fn mean(&amp;self) -&gt; Self::Value {
+//        let mut df = DataFrame::with_header(self.headers().map(|x| x.as_str()).collect());
+//        for k in self.headers() {
+//            df[k] = vec![self[k].mean()];
+//        }
+//        df
+//    }
+//
+//    fn var(&amp;self) -&gt; Self::Value {
+//        let mut df = DataFrame::with_header(self.headers().map(|x| x.as_str()).collect());
+//        for k in self.headers() {
+//            df[k] = vec![self[k].var()];
+//        }
+//        df
+//    }
+//
+//    fn sd(&amp;self) -&gt; Self::Value {
+//        let mut df = DataFrame::with_header(self.headers().map(|x| x.as_str()).collect());
+//        for k in self.headers() {
+//            df[k] = vec![self[k].sd()];
+//        }
+//        df
+//    }
+//
+//    fn cov(&amp;self) -&gt; Self::Array {
+//        let m: Matrix = self.into();
+//        m.cov()
+//    }
+//
+//    fn cor(&amp;self) -&gt; Self::Array {
+//        self.to_matrix().cor()
+//    }
+//}
 
-<span class="doccomment">/// Covariance (to Value)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let v1 = c!(1,2,3);</span>
-<span class="doccomment">///     let v2 = c!(3,2,1);</span>
-<span class="doccomment">///     assert!(nearly_eq(cov(&amp;v1, &amp;v2), -1f64));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cov</span>(<span class="ident">v1</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">v2</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">f64</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ss</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sx</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">sy</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">l</span> <span class="op">=</span> <span class="number">0f64</span>;
+</span><span class="doccomment">/// Covariance (to Value)
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let v1 = c!(1,2,3);
+///     let v2 = c!(3,2,1);
+///     assert!(nearly_eq(cov(&amp;v1, &amp;v2), -1f64));
+/// }
+/// ```
+</span><span class="kw">pub fn </span>cov(v1: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, v2: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; f64 {
+    <span class="kw">let </span><span class="kw-2">mut </span>ss = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>sx = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>sy = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>l = <span class="number">0f64</span>;
 
-    <span class="kw">for</span> (<span class="ident">x</span>, <span class="ident">y</span>) <span class="kw">in</span> <span class="ident">v1</span>.<span class="ident">into_iter</span>().<span class="ident">zip</span>(<span class="ident">v2</span>) {
-        <span class="ident">ss</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">y</span>;
-        <span class="ident">sx</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">*</span><span class="ident">x</span>;
-        <span class="ident">sy</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">*</span><span class="ident">y</span>;
-        <span class="ident">l</span> <span class="op">+</span><span class="op">=</span> <span class="number">1f64</span>;
+    <span class="kw">for </span>(x, y) <span class="kw">in </span>v1.into_iter().zip(v2) {
+        ss += x * y;
+        sx += <span class="kw-2">*</span>x;
+        sy += <span class="kw-2">*</span>y;
+        l += <span class="number">1f64</span>;
     }
-    <span class="macro">assert_ne!</span>(<span class="ident">l</span>, <span class="number">1f64</span>);
-    (<span class="ident">ss</span> <span class="op">/</span> <span class="ident">l</span> <span class="op">-</span> (<span class="ident">sx</span> <span class="op">*</span> <span class="ident">sy</span>) <span class="op">/</span> (<span class="ident">l</span>.<span class="ident">powf</span>(<span class="number">2f64</span>))) <span class="op">*</span> <span class="ident">l</span> <span class="op">/</span> (<span class="ident">l</span> <span class="op">-</span> <span class="number">1f64</span>)
+    <span class="macro">assert_ne!</span>(l, <span class="number">1f64</span>);
+    (ss / l - (sx * sy) / (l.powf(<span class="number">2f64</span>))) * l / (l - <span class="number">1f64</span>)
 }
 
-<span class="doccomment">/// Pearson&#39;s correlation coefficient</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = c!(1,2,3);</span>
-<span class="doccomment">///     let b = c!(3,2,1);</span>
-<span class="doccomment">///     assert!(nearly_eq(cor(&amp;a, &amp;b),-1));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cor</span>(<span class="ident">v1</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">v2</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">f64</span> {
-    <span class="ident">cov</span>(<span class="ident">v1</span>, <span class="ident">v2</span>) <span class="op">/</span> (<span class="ident">v1</span>.<span class="ident">sd</span>() <span class="op">*</span> <span class="ident">v2</span>.<span class="ident">sd</span>())
+<span class="doccomment">/// Pearson&#39;s correlation coefficient
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = c!(1,2,3);
+///     let b = c!(3,2,1);
+///     assert!(nearly_eq(cor(&amp;a, &amp;b),-1));
+/// }
+/// ```
+</span><span class="kw">pub fn </span>cor(v1: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, v2: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; f64 {
+    cov(v1, v2) / (v1.sd() * v2.sd())
 }
 
-<span class="doccomment">/// R like linear regression</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a: Matrix = c!(1,2,3,4,5).into();</span>
-<span class="doccomment">///     let b: Matrix = &amp;a + &amp;Normal(0,1).sample(5).into();</span>
-<span class="doccomment">///     lm(&amp;a, &amp;b).print();</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     //        c[0]</span>
-<span class="doccomment">///     // r[0] 0.7219</span>
-<span class="doccomment">///     // r[1] 0.8058</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lm</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span>, <span class="ident">target</span>: <span class="kw-2">&amp;</span><span class="ident">Matrix</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ones</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">1f64</span>; <span class="ident">input</span>.<span class="ident">row</span> <span class="op">*</span> <span class="ident">input</span>.<span class="ident">col</span>];
-    <span class="ident">ones</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="ident">input</span>.<span class="ident">data</span>);
-    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="ident">ones</span>, <span class="ident">input</span>.<span class="ident">row</span>, <span class="ident">input</span>.<span class="ident">col</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">input</span>.<span class="ident">shape</span>);
-    <span class="kw-2">&amp;</span><span class="ident">x</span>.<span class="ident">pseudo_inv</span>() <span class="op">*</span> <span class="ident">target</span>
+<span class="doccomment">/// R like linear regression
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a: Matrix = c!(1,2,3,4,5).into();
+///     let b: Matrix = &amp;a + &amp;Normal(0,1).sample(5).into();
+///     lm(&amp;a, &amp;b).print();
+///
+///     //        c[0]
+///     // r[0] 0.7219
+///     // r[1] 0.8058
+/// }
+/// ```
+</span><span class="kw">pub fn </span>lm(input: <span class="kw-2">&amp;</span>Matrix, target: <span class="kw-2">&amp;</span>Matrix) -&gt; Matrix {
+    <span class="kw">let </span><span class="kw-2">mut </span>ones = <span class="macro">vec!</span>[<span class="number">1f64</span>; input.row * input.col];
+    ones.extend(<span class="kw-2">&amp;</span>input.data);
+    <span class="kw">let </span>x = matrix(ones, input.row, input.col + <span class="number">1</span>, input.shape);
+    <span class="kw-2">&amp;</span>x.pseudo_inv() * target
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Ordered Statistics (Use `order-stat`</span>
-<span class="comment">// =============================================================================</span>
-<span class="doccomment">/// Trait for Ordered Statistics</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// * `median`</span>
-<span class="doccomment">/// * `quantile`</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">OrderedStat</span> {
-    <span class="kw">type</span> <span class="ident">Array</span>;
-    <span class="kw">type</span> <span class="ident">Value</span>;
+<span class="comment">// =============================================================================
+// Ordered Statistics (Use `order-stat`
+// =============================================================================
+</span><span class="doccomment">/// Trait for Ordered Statistics
+///
+/// * `median`
+/// * `quantile`
+</span><span class="kw">pub trait </span>OrderedStat {
+    <span class="kw">type </span>Array;
+    <span class="kw">type </span>Value;
 
-    <span class="kw">fn</span> <span class="ident">median</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span>;
-    <span class="kw">fn</span> <span class="ident">quantile</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">q</span>: <span class="ident">f64</span>, <span class="ident">qtype</span>: <span class="ident">QType</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span>;
-    <span class="kw">fn</span> <span class="ident">quantiles</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">q</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">qtype</span>: <span class="ident">QType</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span>;
+    <span class="kw">fn </span>median(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value;
+    <span class="kw">fn </span>quantile(<span class="kw-2">&amp;</span><span class="self">self</span>, q: f64, qtype: QType) -&gt; <span class="self">Self</span>::Value;
+    <span class="kw">fn </span>quantiles(<span class="kw-2">&amp;</span><span class="self">self</span>, q: Vec&lt;f64&gt;, qtype: QType) -&gt; <span class="self">Self</span>::Array;
 }
 
-<span class="doccomment">/// R Quantile Type enums</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">QType</span> {
-    <span class="ident">Type1</span>,
-    <span class="ident">Type2</span>,
-    <span class="ident">Type3</span>,
-    <span class="ident">Type4</span>,
-    <span class="ident">Type5</span>,
-    <span class="ident">Type6</span>,
-    <span class="ident">Type7</span>,
-    <span class="ident">Type8</span>,
-    <span class="ident">Type9</span>,
+<span class="doccomment">/// R Quantile Type enums
+</span><span class="attribute">#[derive(Debug, Copy, Clone)]
+</span><span class="kw">pub enum </span>QType {
+    Type1,
+    Type2,
+    Type3,
+    Type4,
+    Type5,
+    Type6,
+    Type7,
+    Type8,
+    Type9,
 }
 
-<span class="kw">impl</span> <span class="ident">OrderedStat</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Array</span> <span class="op">=</span> <span class="self">Self</span>;
-    <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">f64</span>;
+<span class="kw">impl </span>OrderedStat <span class="kw">for </span>Vec&lt;f64&gt; {
+    <span class="kw">type </span>Array = <span class="self">Self</span>;
+    <span class="kw">type </span>Value = f64;
 
-    <span class="kw">fn</span> <span class="ident">median</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
-        <span class="self">self</span>.<span class="ident">quantile</span>(<span class="number">0.5</span>, <span class="ident">Type2</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">quantile</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">q</span>: <span class="ident">f64</span>, <span class="ident">qtype</span>: <span class="ident">QType</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
-        <span class="ident">quantile_mut</span>(<span class="kw-2">&amp;mut</span> <span class="ident">m</span>, <span class="ident">q</span>, <span class="ident">qtype</span>)
+    <span class="kw">fn </span>median(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+        <span class="self">self</span>.quantile(<span class="number">0.5</span>, Type2)
     }
 
-    <span class="kw">fn</span> <span class="ident">quantiles</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">q</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">qtype</span>: <span class="ident">QType</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">q</span>.<span class="ident">len</span>()];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">q</span>.<span class="ident">len</span>() {
-            <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">quantile_mut</span>(<span class="kw-2">&amp;mut</span> <span class="ident">m</span>, <span class="ident">q</span>[<span class="ident">i</span>], <span class="ident">qtype</span>);
+    <span class="kw">fn </span>quantile(<span class="kw-2">&amp;</span><span class="self">self</span>, q: f64, qtype: QType) -&gt; <span class="self">Self</span>::Value {
+        <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.clone();
+        quantile_mut(<span class="kw-2">&amp;mut </span>m, q, qtype)
+    }
+
+    <span class="kw">fn </span>quantiles(<span class="kw-2">&amp;</span><span class="self">self</span>, q: Vec&lt;f64&gt;, qtype: QType) -&gt; <span class="self">Self</span>::Array {
+        <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; q.len()];
+        <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.clone();
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..q.len() {
+            v[i] = quantile_mut(<span class="kw-2">&amp;mut </span>m, q[i], qtype);
         }
-        <span class="ident">v</span>
+        v
     }
 }
 
-<span class="kw">fn</span> <span class="ident">quantile_mut</span>(<span class="ident">v</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">f64</span>], <span class="ident">q</span>: <span class="ident">f64</span>, <span class="ident">t</span>: <span class="ident">QType</span>) -&gt; <span class="ident">f64</span> {
-    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">v</span>.<span class="ident">len</span>();
-    <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="number">1f64</span> <span class="op">/</span> (<span class="ident">l</span> <span class="kw">as</span> <span class="ident">f64</span>);
-    <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> (<span class="ident">q</span> <span class="op">/</span> <span class="ident">p</span>) <span class="kw">as</span> <span class="ident">usize</span>;
-    <span class="kw">match</span> <span class="ident">t</span> {
-        <span class="ident">Type1</span> =&gt; {
-            <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">q</span> <span class="op">==</span> <span class="number">0f64</span> {
-                <span class="number">0</span>
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">q</span> <span class="op">==</span> <span class="number">1f64</span> {
-                <span class="ident">l</span> <span class="op">-</span> <span class="number">1</span>
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">q</span> <span class="op">-</span> (<span class="ident">k</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> <span class="ident">p</span> <span class="op">&gt;</span> <span class="number">0f64</span> {
-                <span class="ident">k</span>
-            } <span class="kw">else</span> {
-                <span class="ident">k</span> <span class="op">-</span> <span class="number">1</span>
-            };
-            <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
+<span class="kw">fn </span>quantile_mut(v: <span class="kw-2">&amp;mut </span>[f64], q: f64, t: QType) -&gt; f64 {
+    <span class="kw">let </span>l = v.len();
+    <span class="kw">let </span>p = <span class="number">1f64 </span>/ (l <span class="kw">as </span>f64);
+    <span class="kw">let </span>k = (q / p) <span class="kw">as </span>usize;
+    <span class="kw">match </span>t {
+        Type1 =&gt; {
+            <span class="kw">let </span>k = <span class="kw">if </span>q == <span class="number">0f64 </span>{
+                <span class="number">0
+            </span>} <span class="kw">else if </span>q == <span class="number">1f64 </span>{
+                l - <span class="number">1
+            </span>} <span class="kw">else if </span>q - (k <span class="kw">as </span>f64) * p &gt; <span class="number">0f64 </span>{
+                k
+            } <span class="kw">else </span>{
+                k - <span class="number">1
+            </span>};
+            <span class="kw-2">*</span>kth_by(v, k, |x, y| x.partial_cmp(y).unwrap())
         }
-        <span class="ident">Type2</span> =&gt; {
-            <span class="kw">if</span> <span class="ident">q</span> <span class="op">==</span> <span class="number">0f64</span> {
-                <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="number">0</span>;
-                <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">q</span> <span class="op">==</span> <span class="number">1f64</span> {
-                <span class="kw">let</span> <span class="ident">k</span> <span class="op">=</span> <span class="ident">l</span> <span class="op">-</span> <span class="number">1</span>;
-                <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">q</span> <span class="op">-</span> (<span class="ident">k</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> <span class="ident">p</span> <span class="op">&gt;</span> <span class="number">0f64</span> {
-                <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>())
-            } <span class="kw">else</span> {
-                <span class="kw">let</span> <span class="ident">prev</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span> <span class="op">-</span> <span class="number">1</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>());
-                <span class="kw">let</span> <span class="ident">next</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">kth_by</span>(<span class="ident">v</span>, <span class="ident">k</span>, <span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">partial_cmp</span>(<span class="ident">y</span>).<span class="ident">unwrap</span>());
-                (<span class="ident">prev</span> <span class="op">+</span> <span class="ident">next</span>) <span class="op">/</span> <span class="number">2f64</span>
-            }
+        Type2 =&gt; {
+            <span class="kw">if </span>q == <span class="number">0f64 </span>{
+                <span class="kw">let </span>k = <span class="number">0</span>;
+                <span class="kw-2">*</span>kth_by(v, k, |x, y| x.partial_cmp(y).unwrap())
+            } <span class="kw">else if </span>q == <span class="number">1f64 </span>{
+                <span class="kw">let </span>k = l - <span class="number">1</span>;
+                <span class="kw-2">*</span>kth_by(v, k, |x, y| x.partial_cmp(y).unwrap())
+            } <span class="kw">else if </span>q - (k <span class="kw">as </span>f64) * p &gt; <span class="number">0f64 </span>{
+                <span class="kw-2">*</span>kth_by(v, k, |x, y| x.partial_cmp(y).unwrap())
+            } <span class="kw">else </span>{
+                <span class="kw">let </span>prev = <span class="kw-2">*</span>kth_by(v, k - <span class="number">1</span>, |x, y| x.partial_cmp(y).unwrap());
+                <span class="kw">let </span>next = <span class="kw-2">*</span>kth_by(v, k, |x, y| x.partial_cmp(y).unwrap());
+                (prev + next) / <span class="number">2f64
+            </span>}
         }
-        <span class="kw">_</span> =&gt; <span class="macro">unimplemented!</span>(),
+        <span class="kw">_ </span>=&gt; <span class="macro">unimplemented!</span>(),
     }
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">quantile</span>(<span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">qtype</span>: <span class="ident">QType</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">q_vec</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0.0</span>, <span class="number">0.25</span>, <span class="number">0.5</span>, <span class="number">0.75</span>, <span class="number">1.0</span>];
-    <span class="ident">v</span>.<span class="ident">quantiles</span>(<span class="ident">q_vec</span>, <span class="ident">qtype</span>)
+<span class="kw">pub fn </span>quantile(v: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;, qtype: QType) -&gt; Vec&lt;f64&gt; {
+    <span class="kw">let </span>q_vec = <span class="macro">vec!</span>[<span class="number">0.0</span>, <span class="number">0.25</span>, <span class="number">0.5</span>, <span class="number">0.75</span>, <span class="number">1.0</span>];
+    v.quantiles(q_vec, qtype)
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

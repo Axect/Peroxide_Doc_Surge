@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Pandas-like dataframe &amp; series."><meta name="keywords" content="rust, rustlang, rust-lang, dataframe"><title>peroxide::structure::dataframe - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Pandas-like dataframe &amp; series."><meta name="keywords" content="rust, rustlang, rust-lang, dataframe"><title>peroxide::structure::dataframe - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,14 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"><a href="#">Module dataframe</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">dataframe</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/structure/dataframe.rs.html#1-1719">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Pandas-like dataframe &amp; series.</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"><a href="#">Module dataframe</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="main-heading"><h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">dataframe</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/structure/dataframe.rs.html#1-1719">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Pandas-like dataframe &amp; series.</p>
 <h3 id="series"><a href="#series">Series</a></h3><h4 id="1-declare-series"><a href="#1-declare-series">1. Declare Series</a></h4>
 <ul>
 <li>To declare series, you should have <code>Vec&lt;T&gt;</code> where <code>T</code> is one of following types.</li>
@@ -52,23 +45,23 @@
 <li>
 <p><code>TypedVector&lt;T&gt; trait for Series</code></p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TypedVector</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">to_vec</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">as_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">T</span>];
-    <span class="kw">fn</span> <span class="ident">as_slice_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> [<span class="ident">T</span>];
-    <span class="kw">fn</span> <span class="ident">at_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>) -&gt; <span class="ident">T</span>;
-    <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">elem</span>: <span class="ident">T</span>);
+<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">pub trait </span>TypedVector&lt;T&gt; {
+    <span class="kw">fn </span>new(v: Vec&lt;T&gt;) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>to_vec(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Vec&lt;T&gt;;
+    <span class="kw">fn </span>as_slice(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[T];
+    <span class="kw">fn </span>as_slice_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>[T];
+    <span class="kw">fn </span>at_raw(<span class="kw-2">&amp;</span><span class="self">self</span>, i: usize) -&gt; T;
+    <span class="kw">fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, elem: T);
 }</code></pre></div>
 </li>
 <li>
 <p><code>Series</code> methods</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">impl</span> <span class="ident">Series</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Scalar</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dtype</span>: <span class="ident">DType</span>) -&gt; <span class="ident">Series</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_type</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dtype</span>: <span class="ident">DType</span>);
+<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>Series {
+    <span class="kw">pub fn </span>at(<span class="kw-2">&amp;</span><span class="self">self</span>, i: usize) -&gt; Scalar;
+    <span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize;
+    <span class="kw">pub fn </span>to_type(<span class="kw-2">&amp;</span><span class="self">self</span>, dtype: DType) -&gt; Series;
+    <span class="kw">pub fn </span>as_type(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dtype: DType);
 }</code></pre></div>
 <ul>
 <li><code>at</code> is simple getter for <code>Series</code>. It returns <code>Scalar</code>.</li>
@@ -84,19 +77,19 @@
 </li>
 </ul>
 <h4 id="3-example"><a href="#3-example">3. Example</a></h4>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;b&#39;</span>, <span class="string">&#39;c&#39;</span>, <span class="string">&#39;d&#39;</span>]);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>]);
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = Series::new(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+    <span class="kw">let </span>b = Series::new(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;b&#39;</span>, <span class="string">&#39;c&#39;</span>, <span class="string">&#39;d&#39;</span>]);
+    <span class="kw">let </span><span class="kw-2">mut </span>c = Series::new(<span class="macro">vec!</span>[<span class="bool-val">true</span>, <span class="bool-val">false</span>, <span class="bool-val">false</span>, <span class="bool-val">true</span>]);
 
-    <span class="ident">a</span>.<span class="ident">print</span>();       <span class="comment">// print for Series</span>
-    <span class="ident">b</span>.<span class="ident">dtype</span>.<span class="ident">print</span>(); <span class="comment">// print for dtype of Series (=Char)</span>
-    <span class="ident">c</span>.<span class="ident">as_type</span>(<span class="ident">U8</span>);   <span class="comment">// Bool =&gt; U8 </span>
+    a.print();       <span class="comment">// print for Series
+    </span>b.dtype.print(); <span class="comment">// print for dtype of Series (=Char)
+    </span>c.as_type(U8);   <span class="comment">// Bool =&gt; U8 
      
-    <span class="macro">assert_eq!</span>(<span class="ident">c</span>.<span class="ident">dtype</span>, <span class="ident">U8</span>);
+    </span><span class="macro">assert_eq!</span>(c.dtype, U8);
 }</code></pre></div>
 <h3 id="dataframe"><a href="#dataframe">DataFrame</a></h3><h4 id="1-declare-dataframe"><a href="#1-declare-dataframe">1. Declare DataFrame</a></h4>
 <ul>
@@ -107,48 +100,48 @@
 </li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="comment">// 1-1. Empty DataFrame</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">df</span> <span class="op">=</span> <span class="ident">DataFrame::new</span>(<span class="macro">vec!</span>[]);
+<span class="kw">fn </span>main() {
+    <span class="comment">// 1-1. Empty DataFrame
+    </span><span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[]);
 
-    <span class="comment">// 1-2. Push Series</span>
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;a&quot;</span>, <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;b&quot;</span>, <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>]));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;c&quot;</span>, <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;b&#39;</span>, <span class="string">&#39;c&#39;</span>, <span class="string">&#39;d&#39;</span>]));
+    <span class="comment">// 1-2. Push Series
+    </span>df.push(<span class="string">&quot;a&quot;</span>, Series::new(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]));
+    df.push(<span class="string">&quot;b&quot;</span>, Series::new(<span class="macro">vec!</span>[<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>]));
+    df.push(<span class="string">&quot;c&quot;</span>, Series::new(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;b&#39;</span>, <span class="string">&#39;c&#39;</span>, <span class="string">&#39;d&#39;</span>]));
 
-    <span class="comment">// 1-3. Print</span>
-    <span class="ident">df</span>.<span class="ident">print</span>();
+    <span class="comment">// 1-3. Print
+    </span>df.print();
 
-    <span class="comment">// 2-1. Construct Series first</span>
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>]);
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;b&#39;</span>, <span class="string">&#39;c&#39;</span>, <span class="string">&#39;d&#39;</span>]);
+    <span class="comment">// 2-1. Construct Series first
+    </span><span class="kw">let </span>a = Series::new(<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]);
+    <span class="kw">let </span>b = Series::new(<span class="macro">vec!</span>[<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="number">0.4</span>]);
+    <span class="kw">let </span>c = Series::new(<span class="macro">vec!</span>[<span class="string">&#39;a&#39;</span>, <span class="string">&#39;b&#39;</span>, <span class="string">&#39;c&#39;</span>, <span class="string">&#39;d&#39;</span>]);
 
-    <span class="comment">// 2-2. Declare DataFrame with exist Series</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dg</span> <span class="op">=</span> <span class="ident">DataFrame::new</span>(<span class="macro">vec!</span>[<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>]);
+    <span class="comment">// 2-2. Declare DataFrame with exist Series
+    </span><span class="kw">let </span><span class="kw-2">mut </span>dg = DataFrame::new(<span class="macro">vec!</span>[a, b, c]);
 
-    <span class="comment">// 2-3. Print or Set header</span>
-    <span class="ident">dg</span>.<span class="ident">print</span>();                         <span class="comment">// But header: 0 1 2</span>
-    <span class="ident">dg</span>.<span class="ident">set_header</span>(<span class="macro">vec!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>]); <span class="comment">// Change header</span>
-}</code></pre></div>
+    <span class="comment">// 2-3. Print or Set header
+    </span>dg.print();                         <span class="comment">// But header: 0 1 2
+    </span>dg.set_header(<span class="macro">vec!</span>[<span class="string">&quot;a&quot;</span>, <span class="string">&quot;b&quot;</span>, <span class="string">&quot;c&quot;</span>]); <span class="comment">// Change header
+</span>}</code></pre></div>
 <h4 id="2-methods-for-dataframe"><a href="#2-methods-for-dataframe">2. Methods for DataFrame</a></h4>
 <ul>
 <li>
 <p><code>DataFrame</code> method</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">impl</span> <span class="ident">DataFrame</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Series</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">header</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">header_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_header</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">new_header</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>);
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">series</span>: <span class="ident">Series</span>);
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">col_header</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>);
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">row</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">i</span>: <span class="ident">usize</span>) -&gt; <span class="ident">DataFrame</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">spread</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">String</span>;
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_types</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dtypes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">DType</span><span class="op">&gt;</span>);
+<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">impl </span>DataFrame {
+    <span class="kw">pub fn </span>new(v: Vec&lt;Series&gt;) -&gt; <span class="self">Self</span>;
+    <span class="kw">pub fn </span>header(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;String&gt;;
+    <span class="kw">pub fn </span>header_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Vec&lt;String&gt;;
+    <span class="kw">pub fn </span>set_header(<span class="kw-2">&amp;mut </span><span class="self">self</span>, new_header: Vec&lt;<span class="kw-2">&amp;</span>str&gt;);
+    <span class="kw">pub fn </span>push(<span class="kw-2">&amp;mut </span><span class="self">self</span>, name: <span class="kw-2">&amp;</span>str, series: Series);
+    <span class="kw">pub fn </span>drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>, col_header: <span class="kw-2">&amp;</span>str);
+    <span class="kw">pub fn </span>row(<span class="kw-2">&amp;</span><span class="self">self</span>, i: usize) -&gt; DataFrame;
+    <span class="kw">pub fn </span>spread(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; String;
+    <span class="kw">pub fn </span>as_types(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dtypes: Vec&lt;DType&gt;);
 }</code></pre></div>
 <ul>
 <li><code>push(&amp;mut self, name: &amp;str, series: Series)</code>: push head &amp; Series pair</li>
@@ -159,32 +152,32 @@
 <li>
 <p><code>WithCSV</code> trait</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">WithCSV</span>: <span class="ident">Sized</span> {
-    <span class="kw">fn</span> <span class="ident">write_csv</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">file_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">read_csv</span>(<span class="ident">file_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">delimiter</span>: <span class="ident">char</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">pub trait </span>WithCSV: Sized {
+    <span class="kw">fn </span>write_csv(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
+    <span class="kw">fn </span>read_csv(file_path: <span class="kw-2">&amp;</span>str, delimiter: char) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
 }</code></pre></div>
 <ul>
 <li><code>csv</code> feature should be required</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Example for CSV</span>
-<span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Example for CSV
+</span><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="comment">// Write CSV</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">df</span> <span class="op">=</span> <span class="ident">DataFrame::new</span>(<span class="macro">vec!</span>[]);
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;a&quot;</span>, <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="string">&#39;x&#39;</span>, <span class="string">&#39;y&#39;</span>, <span class="string">&#39;z&#39;</span>]));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;b&quot;</span>, <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;c&quot;</span>, <span class="ident">Series::new</span>(<span class="macro">c!</span>(<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>)));
-    <span class="ident">df</span>.<span class="ident">write_csv</span>(<span class="string">&quot;example_data/doc_csv.csv&quot;</span>)<span class="question-mark">?</span>;
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
+    <span class="comment">// Write CSV
+    </span><span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[]);
+    df.push(<span class="string">&quot;a&quot;</span>, Series::new(<span class="macro">vec!</span>[<span class="string">&#39;x&#39;</span>, <span class="string">&#39;y&#39;</span>, <span class="string">&#39;z&#39;</span>]));
+    df.push(<span class="string">&quot;b&quot;</span>, Series::new(<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]));
+    df.push(<span class="string">&quot;c&quot;</span>, Series::new(<span class="macro">c!</span>(<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>)));
+    df.write_csv(<span class="string">&quot;example_data/doc_csv.csv&quot;</span>)<span class="question-mark">?</span>;
 
-    <span class="comment">// Read CSV</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dg</span> <span class="op">=</span> <span class="ident">DataFrame::read_csv</span>(<span class="string">&quot;example_data/doc_csv.csv&quot;</span>, <span class="string">&#39;,&#39;</span>)<span class="question-mark">?</span>;
-    <span class="ident">dg</span>.<span class="ident">as_types</span>(<span class="macro">vec!</span>[<span class="ident">Char</span>, <span class="ident">I32</span>, <span class="ident">F64</span>]);
+    <span class="comment">// Read CSV
+    </span><span class="kw">let </span><span class="kw-2">mut </span>dg = DataFrame::read_csv(<span class="string">&quot;example_data/doc_csv.csv&quot;</span>, <span class="string">&#39;,&#39;</span>)<span class="question-mark">?</span>;
+    dg.as_types(<span class="macro">vec!</span>[Char, I32, F64]);
 
-    <span class="macro">assert_eq!</span>(<span class="ident">df</span>, <span class="ident">dg</span>);
+    <span class="macro">assert_eq!</span>(df, dg);
 
     <span class="prelude-val">Ok</span>(())
 }</code></pre></div>
@@ -192,10 +185,10 @@
 <li>
 <p><code>WithNetCDF</code> trait</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">WithNetCDF</span>: <span class="ident">Sized</span> {
-    <span class="kw">fn</span> <span class="ident">write_nc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">file_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">read_nc</span>(<span class="ident">file_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span>;
-    <span class="kw">fn</span> <span class="ident">read_nc_by_header</span>(<span class="ident">file_path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">header</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">pub trait </span>WithNetCDF: Sized {
+    <span class="kw">fn </span>write_nc(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
+    <span class="kw">fn </span>read_nc(file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
+    <span class="kw">fn </span>read_nc_by_header(file_path: <span class="kw-2">&amp;</span>str, header: Vec&lt;<span class="kw-2">&amp;</span>str&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
 }</code></pre></div>
 <ul>
 <li><code>nc</code> feature should be required</li>
@@ -204,38 +197,34 @@
 explicit type casting is required.</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="comment">// Write netcdf</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">df</span> <span class="op">=</span> <span class="ident">DataFrame::new</span>(<span class="macro">vec!</span>[]);
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;a&quot;</span>, <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="string">&#39;x&#39;</span>, <span class="string">&#39;y&#39;</span>, <span class="string">&#39;z&#39;</span>]));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;b&quot;</span>, <span class="ident">Series::new</span>(<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;c&quot;</span>, <span class="ident">Series::new</span>(<span class="macro">c!</span>(<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>)));
-    <span class="ident">df</span>.<span class="ident">write_nc</span>(<span class="string">&quot;example_data/doc_nc.nc&quot;</span>)<span class="question-mark">?</span>;
+<span class="kw">fn </span>main() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
+    <span class="comment">// Write netcdf
+    </span><span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[]);
+    df.push(<span class="string">&quot;a&quot;</span>, Series::new(<span class="macro">vec!</span>[<span class="string">&#39;x&#39;</span>, <span class="string">&#39;y&#39;</span>, <span class="string">&#39;z&#39;</span>]));
+    df.push(<span class="string">&quot;b&quot;</span>, Series::new(<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]));
+    df.push(<span class="string">&quot;c&quot;</span>, Series::new(<span class="macro">c!</span>(<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>)));
+    df.write_nc(<span class="string">&quot;example_data/doc_nc.nc&quot;</span>)<span class="question-mark">?</span>;
 
-    <span class="comment">// Read netcdf</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dg</span> <span class="op">=</span> <span class="ident">DataFrame::read_nc</span>(<span class="string">&quot;example_data/doc_nc.nc&quot;</span>)<span class="question-mark">?</span>;
-    <span class="ident">dg</span>[<span class="number">0</span>].<span class="ident">as_type</span>(<span class="ident">Char</span>); <span class="comment">// Char, Bool are only read/written as U8 type</span>
+    <span class="comment">// Read netcdf
+    </span><span class="kw">let </span><span class="kw-2">mut </span>dg = DataFrame::read_nc(<span class="string">&quot;example_data/doc_nc.nc&quot;</span>)<span class="question-mark">?</span>;
+    dg[<span class="number">0</span>].as_type(Char); <span class="comment">// Char, Bool are only read/written as U8 type
 
-    <span class="macro">assert_eq!</span>(<span class="ident">df</span>, <span class="ident">dg</span>);
+    </span><span class="macro">assert_eq!</span>(df, dg);
 
     <span class="prelude-val">Ok</span>(())
 }</code></pre></div>
 </li>
 </ul>
-</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DataFrame.html" title="peroxide::structure::dataframe::DataFrame struct">DataFrame</a></div><div class="item-right docblock-short"><p>Generic <code>DataFrame</code> structure</p>
+</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DataFrame.html" title="peroxide::structure::dataframe::DataFrame struct">DataFrame</a></div><div class="item-right docblock-short"><p>Generic <code>DataFrame</code> structure</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Scalar.html" title="peroxide::structure::dataframe::Scalar struct">Scalar</a></div><div class="item-right docblock-short"><p>Generic Scalar</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Series.html" title="peroxide::structure::dataframe::Series struct">Series</a></div><div class="item-right docblock-short"><p>Generic Series</p>
-</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.DType.html" title="peroxide::structure::dataframe::DType enum">DType</a></div><div class="item-right docblock-short"><p>Data Type enum</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.DType.html" title="peroxide::structure::dataframe::DType enum">DType</a></div><div class="item-right docblock-short"><p>Data Type enum</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.DTypeArray.html" title="peroxide::structure::dataframe::DTypeArray enum">DTypeArray</a></div><div class="item-right docblock-short"><p>Vector with <code>DType</code></p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.DTypeValue.html" title="peroxide::structure::dataframe::DTypeValue enum">DTypeValue</a></div><div class="item-right docblock-short"><p>Scalar with <code>DType</code></p>
-</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.TypedScalar.html" title="peroxide::structure::dataframe::TypedScalar trait">TypedScalar</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.TypedVector.html" title="peroxide::structure::dataframe::TypedVector trait">TypedVector</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.WithCSV.html" title="peroxide::structure::dataframe::WithCSV trait">WithCSV</a></div><div class="item-right docblock-short"><p>To handle CSV file format</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.TypedScalar.html" title="peroxide::structure::dataframe::TypedScalar trait">TypedScalar</a></div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.TypedVector.html" title="peroxide::structure::dataframe::TypedVector trait">TypedVector</a></div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.WithCSV.html" title="peroxide::structure::dataframe::WithCSV trait">WithCSV</a></div><div class="item-right docblock-short"><p>To handle CSV file format</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.WithNetCDF.html" title="peroxide::structure::dataframe::WithNetCDF trait">WithNetCDF</a></div><div class="item-right docblock-short"><p>To handle with NetCDF file format</p>
-</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

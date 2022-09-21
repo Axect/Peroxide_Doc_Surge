@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Matrix for Scientific computation"><meta name="keywords" content="rust, rustlang, rust-lang, matrix"><title>peroxide::structure::matrix - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Matrix for Scientific computation"><meta name="keywords" content="rust, rustlang, rust-lang, matrix"><title>peroxide::structure::matrix - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,14 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"><a href="#">Module matrix</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">matrix</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/structure/matrix.rs.html#1-4721">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Matrix for Scientific computation</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"><a href="#">Module matrix</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="main-heading"><h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">matrix</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/structure/matrix.rs.html#1-4721">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Matrix for Scientific computation</p>
 <h3 id="declare-matrix"><a href="#declare-matrix">Declare matrix</a></h3>
 <ul>
 <li>You can declare matrix by various ways.
@@ -44,23 +37,23 @@
 <li><code>Shape</code>: <code>Enum</code> for matrix shape - <code>Row</code> &amp; <code>Col</code></li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="ident">a</span>.<span class="ident">print</span>();
-    <span class="comment">//       c[0] c[1]</span>
-    <span class="comment">// r[0]     1    2</span>
-    <span class="comment">// r[1]     3    4</span>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = matrix(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">2</span>, <span class="number">2</span>, Row);
+    a.print();
+    <span class="comment">//       c[0] c[1]
+    // r[0]     1    2
+    // r[1]     3    4
 
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Col</span>);
-    <span class="ident">b</span>.<span class="ident">print</span>();
-    <span class="comment">//       c[0] c[1]</span>
-    <span class="comment">// r[0]     1    3</span>
-    <span class="comment">// r[1]     2    4</span>
-}</code></pre></div>
+    </span><span class="kw">let </span>b = matrix(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">2</span>, <span class="number">2</span>, Col);
+    b.print();
+    <span class="comment">//       c[0] c[1]
+    // r[0]     1    3
+    // r[1]     2    4
+</span>}</code></pre></div>
 </li>
 </ul>
 <h4 id="matlabs-way"><a href="#matlabs-way">MATLAB’s way</a></h4>
@@ -71,16 +64,16 @@
 <li>
 <p>Type: <code>ml_matrix(&amp;str)</code></p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2; 3 4&quot;</span>);
-    <span class="ident">a</span>.<span class="ident">print</span>();
-    <span class="comment">//       c[0] c[1]</span>
-    <span class="comment">// r[0]     1    2</span>
-    <span class="comment">// r[1]     3    4</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;1 2; 3 4&quot;</span>);
+    a.print();
+    <span class="comment">//       c[0] c[1]
+    // r[0]     1    2
+    // r[1]     3    4
+</span>}</code></pre></div>
 </li>
 </ul>
 <h4 id="pythons-way"><a href="#pythons-way">Python’s way</a></h4>
@@ -91,16 +84,16 @@
 <li>
 <p>Type: <code>py_matrix(Vec&lt;Vec&lt;T&gt;&gt;) where T: std::convert::Into&lt;f64&gt; + Copy</code></p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">py_matrix</span>(<span class="macro">vec!</span>[<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>], <span class="macro">vec!</span>[<span class="number">3</span>, <span class="number">4</span>]]);
-    <span class="ident">a</span>.<span class="ident">print</span>();
-    <span class="comment">//       c[0] c[1]</span>
-    <span class="comment">// r[0]     1    2</span>
-    <span class="comment">// r[1]     3    4</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = py_matrix(<span class="macro">vec!</span>[<span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>], <span class="macro">vec!</span>[<span class="number">3</span>, <span class="number">4</span>]]);
+    a.print();
+    <span class="comment">//       c[0] c[1]
+    // r[0]     1    2
+    // r[1]     3    4
+</span>}</code></pre></div>
 </li>
 </ul>
 <h4 id="other-macro"><a href="#other-macro">Other macro</a></h4>
@@ -115,17 +108,17 @@ print(a)</code></pre></div></li>
 <li>
 <p>For <code>Peroxide</code>,</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="ident">a</span>.<span class="ident">print</span>();
-    <span class="comment">//       c[0] c[1]</span>
-    <span class="comment">// r[0]     1    2</span>
-    <span class="comment">// r[1]     3    4</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, Row);
+    a.print();
+    <span class="comment">//       c[0] c[1]
+    // r[0]     1    2
+    // r[1]     3    4
+</span>}</code></pre></div>
 </li>
 </ul>
 <h3 id="basic-method-for-matrix"><a href="#basic-method-for-matrix">Basic Method for Matrix</a></h3>
@@ -149,32 +142,32 @@ print(a)</code></pre></div></li>
 <li>
 <p><code>subs_row(&amp;mut self, usize, Vec&lt;f64&gt;)</code>: Substitute row with <code>Vec&lt;f64&gt;</code></p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2; 3 4&quot;</span>);
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span><span class="kw-2">mut </span>a = ml_matrix(<span class="string">&quot;1 2; 3 4&quot;</span>);
 
-    <span class="ident">a</span>.<span class="ident">row</span>(<span class="number">0</span>).<span class="ident">print</span>(); <span class="comment">// [1, 2]</span>
-    <span class="ident">a</span>.<span class="ident">col</span>(<span class="number">0</span>).<span class="ident">print</span>(); <span class="comment">// [1, 3]</span>
-    <span class="ident">a</span>.<span class="ident">diag</span>().<span class="ident">print</span>(); <span class="comment">// [1, 4]</span>
-    <span class="kw">unsafe</span> {
-        <span class="ident">a</span>.<span class="ident">swap</span>(<span class="number">0</span>, <span class="number">1</span>, <span class="ident">Row</span>);
+    a.row(<span class="number">0</span>).print(); <span class="comment">// [1, 2]
+    </span>a.col(<span class="number">0</span>).print(); <span class="comment">// [1, 3]
+    </span>a.diag().print(); <span class="comment">// [1, 4]
+    </span><span class="kw">unsafe </span>{
+        a.swap(<span class="number">0</span>, <span class="number">1</span>, Row);
     }
-    <span class="ident">a</span>.<span class="ident">print</span>();
-    <span class="comment">//      c[0] c[1]</span>
-    <span class="comment">// r[0]    3    4</span>
-    <span class="comment">// r[1]    1    2</span>
+    a.print();
+    <span class="comment">//      c[0] c[1]
+    // r[0]    3    4
+    // r[1]    1    2
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2;3 4&quot;</span>);
-    <span class="ident">b</span>.<span class="ident">subs_col</span>(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="macro">c!</span>(<span class="number">5</span>, <span class="number">6</span>));
-    <span class="ident">b</span>.<span class="ident">subs_row</span>(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="macro">c!</span>(<span class="number">7</span>, <span class="number">8</span>));
-    <span class="ident">b</span>.<span class="ident">print</span>();
-    <span class="comment">//       c[0] c[1]</span>
-    <span class="comment">// r[0]    5    2</span>
-    <span class="comment">// r[1]    7    8</span>
-}</code></pre></div>
+    </span><span class="kw">let </span><span class="kw-2">mut </span>b = ml_matrix(<span class="string">&quot;1 2;3 4&quot;</span>);
+    b.subs_col(<span class="number">0</span>, <span class="kw-2">&amp;</span><span class="macro">c!</span>(<span class="number">5</span>, <span class="number">6</span>));
+    b.subs_row(<span class="number">1</span>, <span class="kw-2">&amp;</span><span class="macro">c!</span>(<span class="number">7</span>, <span class="number">8</span>));
+    b.print();
+    <span class="comment">//       c[0] c[1]
+    // r[0]    5    2
+    // r[1]    7    8
+</span>}</code></pre></div>
 </li>
 </ul>
 <h3 id="read--write"><a href="#read--write">Read &amp; Write</a></h3>
@@ -190,16 +183,16 @@ print(a)</code></pre></div></li>
 <li>
 <p><code>write_with_header(&amp;self, file_path, header: Vec&lt;&amp;str&gt;)</code>: Write with header</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2;3 4&quot;</span>);
-    <span class="ident">a</span>.<span class="ident">write</span>(<span class="string">&quot;example_data/matrix.csv&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t write file&quot;</span>);
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;1 2;3 4&quot;</span>);
+    a.write(<span class="string">&quot;example_data/matrix.csv&quot;</span>).expect(<span class="string">&quot;Can&#39;t write file&quot;</span>);
 
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2; 3 4; 5 6&quot;</span>);
-    <span class="ident">b</span>.<span class="ident">write_with_header</span>(<span class="string">&quot;example_data/header.csv&quot;</span>, <span class="macro">vec!</span>[<span class="string">&quot;odd&quot;</span>, <span class="string">&quot;even&quot;</span>])
-        .<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t write header file&quot;</span>);
+    <span class="kw">let </span>b = ml_matrix(<span class="string">&quot;1 2; 3 4; 5 6&quot;</span>);
+    b.write_with_header(<span class="string">&quot;example_data/header.csv&quot;</span>, <span class="macro">vec!</span>[<span class="string">&quot;odd&quot;</span>, <span class="string">&quot;even&quot;</span>])
+        .expect(<span class="string">&quot;Can&#39;t write header file&quot;</span>);
     <span class="macro">println!</span>(<span class="string">&quot;Complete!&quot;</span>)
 }</code></pre></div>
 </li>
@@ -212,18 +205,18 @@ print(a)</code></pre></div></li>
 <li>
 <p>Description: <code>read(file_path, is_header, delimiter)</code></p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="comment">// `csv` feature should be required</span>
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">Matrix::read</span>(<span class="string">&quot;example_data/matrix.csv&quot;</span>, <span class="bool-val">false</span>, <span class="string">&#39;,&#39;</span>)
-        .<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t read matrix.csv file&quot;</span>);
-    <span class="ident">a</span>.<span class="ident">print</span>();
-    <span class="comment">//       c[0] c[1]</span>
-    <span class="comment">// r[0]     1    2</span>
-    <span class="comment">// r[1]     3    4</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="comment">// `csv` feature should be required
+    </span><span class="kw">let </span>a = Matrix::read(<span class="string">&quot;example_data/matrix.csv&quot;</span>, <span class="bool-val">false</span>, <span class="string">&#39;,&#39;</span>)
+        .expect(<span class="string">&quot;Can&#39;t read matrix.csv file&quot;</span>);
+    a.print();
+    <span class="comment">//       c[0] c[1]
+    // r[0]     1    2
+    // r[1]     3    4
+</span>}</code></pre></div>
 </li>
 </ul>
 <h4 id="convert-to-dataframe-recommended"><a href="#convert-to-dataframe-recommended">Convert to DataFrame (Recommended)</a></h4>
@@ -232,28 +225,28 @@ print(a)</code></pre></div></li>
 <li><code>nc</code> feature should be required - <code>netcdf</code> or <code>libnetcdf</code> are prerequisites.</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>), <span class="number">3</span>, <span class="number">2</span>, <span class="ident">Col</span>);
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = matrix(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>), <span class="number">3</span>, <span class="number">2</span>, Col);
 
-    <span class="comment">// Construct DataFrame</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">df</span> <span class="op">=</span> <span class="ident">DataFrame::new</span>(<span class="macro">vec!</span>[]);
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;x&quot;</span>, <span class="ident">Series::new</span>(<span class="ident">a</span>.<span class="ident">col</span>(<span class="number">0</span>)));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;y&quot;</span>, <span class="ident">Series::new</span>(<span class="ident">a</span>.<span class="ident">col</span>(<span class="number">1</span>)));
+    <span class="comment">// Construct DataFrame
+    </span><span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[]);
+    df.push(<span class="string">&quot;x&quot;</span>, Series::new(a.col(<span class="number">0</span>)));
+    df.push(<span class="string">&quot;y&quot;</span>, Series::new(a.col(<span class="number">1</span>)));
 
-    <span class="comment">// Write nc file (`nc` feature should be required)</span>
-    <span class="ident">df</span>.<span class="ident">write_nc</span>(<span class="string">&quot;data.nc&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t write data.nc&quot;</span>);
+    <span class="comment">// Write nc file (`nc` feature should be required)
+    </span>df.write_nc(<span class="string">&quot;data.nc&quot;</span>).expect(<span class="string">&quot;Can&#39;t write data.nc&quot;</span>);
 
-    <span class="comment">// Read nc file (`nc` feature should be required)</span>
-    <span class="kw">let</span> <span class="ident">dg</span> <span class="op">=</span> <span class="ident">DataFrame::read_nc</span>(<span class="string">&quot;data.nc&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t read data.nc&quot;</span>);
-    <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">dg</span>[<span class="string">&quot;x&quot;</span>].<span class="ident">to_vec</span>();
-    <span class="kw">let</span> <span class="ident">y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">dg</span>[<span class="string">&quot;y&quot;</span>].<span class="ident">to_vec</span>();
+    <span class="comment">// Read nc file (`nc` feature should be required)
+    </span><span class="kw">let </span>dg = DataFrame::read_nc(<span class="string">&quot;data.nc&quot;</span>).expect(<span class="string">&quot;Can&#39;t read data.nc&quot;</span>);
+    <span class="kw">let </span>x: Vec&lt;f64&gt; = dg[<span class="string">&quot;x&quot;</span>].to_vec();
+    <span class="kw">let </span>y: Vec&lt;f64&gt; = dg[<span class="string">&quot;y&quot;</span>].to_vec();
 
-    <span class="macro">assert_eq!</span>(<span class="ident">a</span>.<span class="ident">col</span>(<span class="number">0</span>), <span class="ident">x</span>);
-    <span class="macro">assert_eq!</span>(<span class="ident">a</span>.<span class="ident">col</span>(<span class="number">1</span>), <span class="ident">y</span>);
+    <span class="macro">assert_eq!</span>(a.col(<span class="number">0</span>), x);
+    <span class="macro">assert_eq!</span>(a.col(<span class="number">1</span>), y);
 }</code></pre></div>
 <h3 id="concatenation"><a href="#concatenation">Concatenation</a></h3>
 <p>There are two options to concatenate matrices.</p>
@@ -264,25 +257,25 @@ print(a)</code></pre></div></li>
 <li>
 <p><code>rbind</code>: Concatenate two matrices by row direction.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2;3 4&quot;</span>);
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;5 6;7 8&quot;</span>);
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;1 2;3 4&quot;</span>);
+    <span class="kw">let </span>b = ml_matrix(<span class="string">&quot;5 6;7 8&quot;</span>);
 
-    <span class="ident">cbind</span>(<span class="ident">a</span>.<span class="ident">clone</span>(), <span class="ident">b</span>.<span class="ident">clone</span>()).<span class="ident">print</span>();
-    <span class="comment">//      c[0] c[1] c[2] c[3]</span>
-    <span class="comment">// r[0]    1    2    5    7</span>
-    <span class="comment">// r[1]    3    4    6    8</span>
+    cbind(a.clone(), b.clone()).print();
+    <span class="comment">//      c[0] c[1] c[2] c[3]
+    // r[0]    1    2    5    7
+    // r[1]    3    4    6    8
 
-    <span class="ident">rbind</span>(<span class="ident">a</span>, <span class="ident">b</span>).<span class="ident">print</span>();
-    <span class="comment">//      c[0] c[1]</span>
-    <span class="comment">// r[0]    1    2</span>
-    <span class="comment">// r[1]    3    4</span>
-    <span class="comment">// r[2]    5    6</span>
-    <span class="comment">// r[3]    7    8</span>
-}</code></pre></div>
+    </span>rbind(a, b).print();
+    <span class="comment">//      c[0] c[1]
+    // r[0]    1    2
+    // r[1]    3    4
+    // r[2]    5    6
+    // r[3]    7    8
+</span>}</code></pre></div>
 </li>
 </ul>
 <h3 id="matrix-operations"><a href="#matrix-operations">Matrix operations</a></h3>
@@ -290,42 +283,42 @@ print(a)</code></pre></div></li>
 <li>
 <p>In peroxide, can use basic operations between matrices. I’ll show you by examples.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    (<span class="ident">a</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="number">1</span>).<span class="ident">print</span>(); <span class="comment">// -, *, / are also available</span>
-    <span class="comment">//      c[0] c[1]</span>
-    <span class="comment">// r[0]    2    3</span>
-    <span class="comment">// r[1]    4    5</span>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, Row);
+    (a.clone() + <span class="number">1</span>).print(); <span class="comment">// -, *, / are also available
+    //      c[0] c[1]
+    // r[0]    2    3
+    // r[1]    4    5
 
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="macro">matrix!</span>(<span class="number">5</span>;<span class="number">8</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    (<span class="ident">a</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="ident">b</span>.<span class="ident">clone</span>()).<span class="ident">print</span>(); <span class="comment">// - is also available</span>
-    <span class="comment">//      c[0] c[1]</span>
-    <span class="comment">// r[0]    6    8</span>
-    <span class="comment">// r[1]   10   12</span>
+    </span><span class="kw">let </span>b = <span class="macro">matrix!</span>(<span class="number">5</span>;<span class="number">8</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, Row);
+    (a.clone() + b.clone()).print(); <span class="comment">// - is also available
+    //      c[0] c[1]
+    // r[0]    6    8
+    // r[1]   10   12
 
-    (<span class="ident">a</span>.<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">b</span>.<span class="ident">clone</span>()).<span class="ident">print</span>(); <span class="comment">// Matrix multiplication</span>
-    <span class="comment">//      c[0] c[1]</span>
-    <span class="comment">// r[0]   19   22</span>
-    <span class="comment">// r[1]   43   50</span>
-}</code></pre></div>
+    </span>(a.clone() * b.clone()).print(); <span class="comment">// Matrix multiplication
+    //      c[0] c[1]
+    // r[0]   19   22
+    // r[1]   43   50
+</span>}</code></pre></div>
 </li>
 <li>
 <p><code>clone</code> is too annoying - We can use reference operations!</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2;3 4&quot;</span>);
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;5 6;7 8&quot;</span>);
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;1 2;3 4&quot;</span>);
+    <span class="kw">let </span>b = ml_matrix(<span class="string">&quot;5 6;7 8&quot;</span>);
 
-    (<span class="kw-2">&amp;</span><span class="ident">a</span> <span class="op">+</span> <span class="number">1</span>).<span class="ident">print</span>();
-    (<span class="kw-2">&amp;</span><span class="ident">a</span> <span class="op">+</span> <span class="kw-2">&amp;</span><span class="ident">b</span>).<span class="ident">print</span>();
-    (<span class="kw-2">&amp;</span><span class="ident">a</span> <span class="op">-</span> <span class="kw-2">&amp;</span><span class="ident">b</span>).<span class="ident">print</span>();
-    (<span class="kw-2">&amp;</span><span class="ident">a</span> <span class="op">*</span> <span class="kw-2">&amp;</span><span class="ident">b</span>).<span class="ident">print</span>();
+    (<span class="kw-2">&amp;</span>a + <span class="number">1</span>).print();
+    (<span class="kw-2">&amp;</span>a + <span class="kw-2">&amp;</span>b).print();
+    (<span class="kw-2">&amp;</span>a - <span class="kw-2">&amp;</span>b).print();
+    (<span class="kw-2">&amp;</span>a * <span class="kw-2">&amp;</span>b).print();
 }</code></pre></div>
 </li>
 </ul>
@@ -337,19 +330,19 @@ print(a)</code></pre></div></li>
 <li>
 <p>But you can use two-dimensional index to extract or modify components.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="ident">a</span>[(<span class="number">0</span>,<span class="number">0</span>)].<span class="ident">print</span>();   <span class="comment">// 1</span>
-    <span class="ident">a</span>[(<span class="number">0</span>,<span class="number">0</span>)] <span class="op">=</span> <span class="number">2f64</span>;    <span class="comment">// Modify component</span>
-    <span class="ident">a</span>.<span class="ident">print</span>();
-    <span class="comment">//       c[0] c[1]</span>
-    <span class="comment">//  r[0]    2    2</span>
-    <span class="comment">//  r[1]    3    4</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span><span class="kw-2">mut </span>a = <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, Row);
+    a[(<span class="number">0</span>,<span class="number">0</span>)].print();   <span class="comment">// 1
+    </span>a[(<span class="number">0</span>,<span class="number">0</span>)] = <span class="number">2f64</span>;    <span class="comment">// Modify component
+    </span>a.print();
+    <span class="comment">//       c[0] c[1]
+    //  r[0]    2    2
+    //  r[1]    3    4
+</span>}</code></pre></div>
 </li>
 </ul>
 <h3 id="conversion-to-vec"><a href="#conversion-to-vec">Conversion to Vec<f64></a></h3>
@@ -357,14 +350,14 @@ print(a)</code></pre></div></li>
 <li>
 <p>Just use <code>row</code> or <code>col</code> method (I already showed at Basic method section).</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="ident">a</span>.<span class="ident">row</span>(<span class="number">0</span>).<span class="ident">print</span>(); <span class="comment">// [1, 2]</span>
-    <span class="macro">assert_eq!</span>(<span class="ident">a</span>.<span class="ident">row</span>(<span class="number">0</span>), <span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="number">2f64</span>]);
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, Row);
+    a.row(<span class="number">0</span>).print(); <span class="comment">// [1, 2]
+    </span><span class="macro">assert_eq!</span>(a.row(<span class="number">0</span>), <span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="number">2f64</span>]);
 }</code></pre></div>
 </li>
 </ul>
@@ -379,19 +372,19 @@ print(a)</code></pre></div></li>
 <li>
 <p><code>rand(usize, usize)</code>: Construct random uniform matrix (from 0 to 1)</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="number">2</span>, <span class="number">2</span>);
-    <span class="macro">assert_eq!</span>(<span class="ident">a</span>, <span class="ident">ml_matrix</span>(<span class="string">&quot;0 0;0 0&quot;</span>));
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = zeros(<span class="number">2</span>, <span class="number">2</span>);
+    <span class="macro">assert_eq!</span>(a, ml_matrix(<span class="string">&quot;0 0;0 0&quot;</span>));
 
-    <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">eye</span>(<span class="number">2</span>);
-    <span class="macro">assert_eq!</span>(<span class="ident">b</span>, <span class="ident">ml_matrix</span>(<span class="string">&quot;1 0;0 1&quot;</span>));
+    <span class="kw">let </span>b = eye(<span class="number">2</span>);
+    <span class="macro">assert_eq!</span>(b, ml_matrix(<span class="string">&quot;1 0;0 1&quot;</span>));
 
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">rand</span>(<span class="number">2</span>, <span class="number">2</span>);
-    <span class="ident">c</span>.<span class="ident">print</span>(); <span class="comment">// Random 2x2 matrix</span>
-}</code></pre></div>
+    <span class="kw">let </span>c = rand(<span class="number">2</span>, <span class="number">2</span>);
+    c.print(); <span class="comment">// Random 2x2 matrix
+</span>}</code></pre></div>
 </li>
 </ul>
 <h2 id="linear-algebra"><a href="#linear-algebra">Linear Algebra</a></h2><h3 id="transpose"><a href="#transpose">Transpose</a></h3>
@@ -399,19 +392,19 @@ print(a)</code></pre></div></li>
 <li>
 <p>Caution: Transpose does not consume the original value.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="ident">a</span>.<span class="ident">transpose</span>().<span class="ident">print</span>();
-    <span class="comment">// Or you can use shorter one</span>
-    <span class="ident">a</span>.<span class="ident">t</span>().<span class="ident">print</span>();
-    <span class="comment">//      c[0] c[1]</span>
-    <span class="comment">// r[0]    1    3</span>
-    <span class="comment">// r[1]    2    4</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, Row);
+    a.transpose().print();
+    <span class="comment">// Or you can use shorter one
+    </span>a.t().print();
+    <span class="comment">//      c[0] c[1]
+    // r[0]    1    3
+    // r[1]    2    4
+</span>}</code></pre></div>
 </li>
 </ul>
 <h3 id="lu-decomposition"><a href="#lu-decomposition">LU Decomposition</a></h3>
@@ -435,39 +428,39 @@ print(a)</code></pre></div></li>
 <li>
 <p>The structure of <code>PQLU</code> is as follows:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PQLU</span> {
-    <span class="kw">pub</span> <span class="ident">p</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">q</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">l</span>: <span class="ident">Matrix</span>,
-    <span class="kw">pub</span> <span class="ident">u</span>: <span class="ident">Matrix</span>,
+<span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>PQLU {
+    <span class="kw">pub </span>p: Vec&lt;usize&gt;,
+    <span class="kw">pub </span>q: Vec&lt;usize&gt;,
+    <span class="kw">pub </span>l: Matrix,
+    <span class="kw">pub </span>u: Matrix,
 }</code></pre></div>
 </li>
 <li>
 <p>Example of LU decomposition:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="kw">let</span> <span class="ident">pqlu</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">lu</span>();
-    <span class="kw">let</span> (<span class="ident">p</span>,<span class="ident">q</span>,<span class="ident">l</span>,<span class="ident">u</span>) <span class="op">=</span> (<span class="ident">pqlu</span>.<span class="ident">p</span>, <span class="ident">pqlu</span>.<span class="ident">q</span>, <span class="ident">pqlu</span>.<span class="ident">l</span>, <span class="ident">pqlu</span>.<span class="ident">u</span>);
-    <span class="macro">assert_eq!</span>(<span class="ident">p</span>, <span class="macro">vec!</span>[<span class="number">1</span>]); <span class="comment">// swap 0 &amp; 1 (Row)</span>
-    <span class="macro">assert_eq!</span>(<span class="ident">q</span>, <span class="macro">vec!</span>[<span class="number">1</span>]); <span class="comment">// swap 0 &amp; 1 (Col)</span>
-    <span class="macro">assert_eq!</span>(<span class="ident">l</span>, <span class="ident">matrix</span>(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0.5</span>,<span class="number">1</span>),<span class="number">2</span>,<span class="number">2</span>,<span class="ident">Row</span>));
-    <span class="comment">//      c[0] c[1]</span>
-    <span class="comment">// r[0]    1    0</span>
-    <span class="comment">// r[1]  0.5    1</span>
-    <span class="macro">assert_eq!</span>(<span class="ident">u</span>, <span class="ident">matrix</span>(<span class="macro">c!</span>(<span class="number">4</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="op">-</span><span class="number">0.5</span>),<span class="number">2</span>,<span class="number">2</span>,<span class="ident">Row</span>));
-    <span class="comment">//      c[0] c[1]</span>
-    <span class="comment">// r[0]    4    3</span>
-    <span class="comment">// r[1]    0 -0.5</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = matrix(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>), <span class="number">2</span>, <span class="number">2</span>, Row);
+    <span class="kw">let </span>pqlu = a.lu();
+    <span class="kw">let </span>(p,q,l,u) = (pqlu.p, pqlu.q, pqlu.l, pqlu.u);
+    <span class="macro">assert_eq!</span>(p, <span class="macro">vec!</span>[<span class="number">1</span>]); <span class="comment">// swap 0 &amp; 1 (Row)
+    </span><span class="macro">assert_eq!</span>(q, <span class="macro">vec!</span>[<span class="number">1</span>]); <span class="comment">// swap 0 &amp; 1 (Col)
+    </span><span class="macro">assert_eq!</span>(l, matrix(<span class="macro">c!</span>(<span class="number">1</span>,<span class="number">0</span>,<span class="number">0.5</span>,<span class="number">1</span>),<span class="number">2</span>,<span class="number">2</span>,Row));
+    <span class="comment">//      c[0] c[1]
+    // r[0]    1    0
+    // r[1]  0.5    1
+    </span><span class="macro">assert_eq!</span>(u, matrix(<span class="macro">c!</span>(<span class="number">4</span>,<span class="number">3</span>,<span class="number">0</span>,-<span class="number">0.5</span>),<span class="number">2</span>,<span class="number">2</span>,Row));
+    <span class="comment">//      c[0] c[1]
+    // r[0]    4    3
+    // r[1]    0 -0.5
+</span>}</code></pre></div>
 </li>
 </ul>
 <h3 id="determinant"><a href="#determinant">Determinant</a></h3>
@@ -475,13 +468,13 @@ print(a)</code></pre></div></li>
 <li>
 <p>Peroxide uses LU decomposition to obtain determinant ($ \mathcal{O}(n^3) $)</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="macro">assert_eq!</span>(<span class="ident">a</span>.<span class="ident">det</span>(), <span class="op">-</span><span class="number">2f64</span>);
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, Row);
+    <span class="macro">assert_eq!</span>(a.det(), -<span class="number">2f64</span>);
 }</code></pre></div>
 </li>
 </ul>
@@ -494,17 +487,17 @@ print(a)</code></pre></div></li>
 $$ \begin{aligned} L &amp;= \begin{pmatrix} L_1 &amp; \mathbf{0} \\ L_2 &amp; L_3 \end{pmatrix} \\ L^{-1} &amp;= \begin{pmatrix} L_1^{-1} &amp; \mathbf{0} \\ -L_3^{-1}L_2 L_1^{-1} &amp; L_3^{-1} \end{pmatrix} \end{aligned} $$</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="ident">a</span>.<span class="ident">inv</span>().<span class="ident">print</span>();
-    <span class="comment">//      c[0] c[1]</span>
-    <span class="comment">// r[0]   -2    1</span>
-    <span class="comment">// r[1]  1.5 -0.5</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, Row);
+    a.inv().print();
+    <span class="comment">//      c[0] c[1]
+    // r[0]   -2    1
+    // r[1]  1.5 -0.5
+</span>}</code></pre></div>
 </li>
 </ul>
 <h3 id="tips-for-lu-det-inverse"><a href="#tips-for-lu-det-inverse">Tips for LU, Det, Inverse</a></h3>
@@ -513,15 +506,15 @@ $$ \begin{aligned} L &amp;= \begin{pmatrix} L_1 &amp; \mathbf{0} \\ L_2 &amp; L_
 can get better performance (via memoization)</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2;3 4&quot;</span>);
-    <span class="kw">let</span> <span class="ident">pqlu</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">lu</span>();  <span class="comment">// Memoization of LU</span>
-    <span class="ident">pqlu</span>.<span class="ident">det</span>().<span class="ident">print</span>(); <span class="comment">// Same as a.det() but do not need an additional LU</span>
-    <span class="ident">pqlu</span>.<span class="ident">inv</span>().<span class="ident">print</span>(); <span class="comment">// Same as a.inv() but do not need an additional LU</span>
-}</code></pre></div>
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;1 2;3 4&quot;</span>);
+    <span class="kw">let </span>pqlu = a.lu();  <span class="comment">// Memoization of LU
+    </span>pqlu.det().print(); <span class="comment">// Same as a.det() but do not need an additional LU
+    </span>pqlu.inv().print(); <span class="comment">// Same as a.inv() but do not need an additional LU
+</span>}</code></pre></div>
 <h3 id="qr-decomposition-o3-feature-only"><a href="#qr-decomposition-o3-feature-only">QR Decomposition (<code>O3</code> feature only)</a></h3>
 <ul>
 <li>
@@ -530,39 +523,39 @@ can get better performance (via memoization)</li>
 <li>
 <p>Return <code>QR</code> structure.</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">QR</span> {
-    <span class="kw">pub</span> <span class="ident">q</span>: <span class="ident">Matrix</span>,
-    <span class="kw">pub</span> <span class="ident">r</span>: <span class="ident">Matrix</span>,
+<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">pub struct </span>QR {
+    <span class="kw">pub </span>q: Matrix,
+    <span class="kw">pub </span>r: Matrix,
 }</code></pre></div>
 </li>
 <li>
 <p>Example</p>
 
-<div class='information'><div class='tooltip ignore'>ⓘ</div></div><div class="example-wrap"><pre class="rust rust-example-rendered ignore"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;
+<span class="kw">let </span>a = ml_matrix(<span class="string">&quot;
     1 -1 4;
     1 4 -2;
     1 4 2;
     1 -1 0
 &quot;</span>);
 
-<span class="comment">// QR decomposition</span>
-<span class="kw">let</span> <span class="ident">qr</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">qr</span>();
+<span class="comment">// QR decomposition
+</span><span class="kw">let </span>qr = a.qr();
 
-<span class="ident">qr</span>.<span class="ident">q</span>().<span class="ident">print</span>();
-<span class="comment">//         c[0]    c[1]    c[2]</span>
-<span class="comment">// r[0]    -0.5     0.5    -0.5</span>
-<span class="comment">// r[1]    -0.5 -0.5000  0.5000</span>
-<span class="comment">// r[2]    -0.5 -0.5000    -0.5</span>
-<span class="comment">// r[3]    -0.5     0.5  0.5000</span>
+qr.q().print();
+<span class="comment">//         c[0]    c[1]    c[2]
+// r[0]    -0.5     0.5    -0.5
+// r[1]    -0.5 -0.5000  0.5000
+// r[2]    -0.5 -0.5000    -0.5
+// r[3]    -0.5     0.5  0.5000
 
-<span class="ident">qr</span>.<span class="ident">r</span>().<span class="ident">print</span>();
-<span class="comment">//      c[0] c[1] c[2]</span>
-<span class="comment">// r[0]   -2   -3   -2</span>
-<span class="comment">// r[1]    0   -5    2</span>
-<span class="comment">// r[2]    0    0   -4</span></code></pre></div>
+</span>qr.r().print();
+<span class="comment">//      c[0] c[1] c[2]
+// r[0]   -2   -3   -2
+// r[1]    0   -5    2
+// r[2]    0    0   -4</span></code></pre></div>
 </li>
 </ul>
 <h3 id="singular-value-decomposition-o3-feature-only"><a href="#singular-value-decomposition-o3-feature-only">Singular Value Decomposition (<code>O3</code> feature only)</a></h3>
@@ -573,34 +566,34 @@ can get better performance (via memoization)</li>
 <li>
 <p>Return <code>SVD</code> structure</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SVD</span> {
-    <span class="kw">pub</span> <span class="ident">s</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">u</span>: <span class="ident">Matrix</span>,
-    <span class="kw">pub</span> <span class="ident">vt</span>: <span class="ident">Matrix</span>,
+<span class="kw">pub struct </span>SVD {
+    <span class="kw">pub </span>s: Vec&lt;f64&gt;,
+    <span class="kw">pub </span>u: Matrix,
+    <span class="kw">pub </span>vt: Matrix,
 }</code></pre></div>
 </li>
 <li>
 <p>Example</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;3 2 2;2 3 -2&quot;</span>);
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span><span class="op">=</span><span class="string">&quot;O3&quot;</span>)]</span>
-    {
-        <span class="comment">// Full SVD</span>
-        <span class="kw">let</span> <span class="ident">svd</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">svd</span>();
-        <span class="macro">assert!</span>(<span class="ident">eq_vec</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="number">5f64</span>, <span class="number">3f64</span>], <span class="kw-2">&amp;</span><span class="ident">svd</span>.<span class="ident">s</span>, <span class="number">1e-7</span>));
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;3 2 2;2 3 -2&quot;</span>);
+    <span class="attribute">#[cfg(feature=<span class="string">&quot;O3&quot;</span>)]
+    </span>{
+        <span class="comment">// Full SVD
+        </span><span class="kw">let </span>svd = a.svd();
+        <span class="macro">assert!</span>(eq_vec(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="number">5f64</span>, <span class="number">3f64</span>], <span class="kw-2">&amp;</span>svd.s, <span class="number">1e-7</span>));
 
-        <span class="comment">// Or Truncated SVD</span>
-        <span class="kw">let</span> <span class="ident">svd2</span> <span class="op">=</span> <span class="ident">svd</span>.<span class="ident">truncated</span>();
-        <span class="macro">assert!</span>(<span class="ident">eq_vec</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="number">5f64</span>, <span class="number">3f64</span>], <span class="kw-2">&amp;</span><span class="ident">svd2</span>.<span class="ident">s</span>, <span class="number">1e-7</span>));
+        <span class="comment">// Or Truncated SVD
+        </span><span class="kw">let </span>svd2 = svd.truncated();
+        <span class="macro">assert!</span>(eq_vec(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="number">5f64</span>, <span class="number">3f64</span>], <span class="kw-2">&amp;</span>svd2.s, <span class="number">1e-7</span>));
     }
-    <span class="ident">a</span>.<span class="ident">print</span>();
+    a.print();
 }</code></pre></div>
 </li>
 </ul>
@@ -615,20 +608,20 @@ can get better performance (via memoization)</li>
 <li>
 <p>Example</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2;2 5&quot;</span>);
-    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-    {
-        <span class="kw">let</span> <span class="ident">u</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">cholesky</span>(<span class="ident">Upper</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">u</span>, <span class="ident">ml_matrix</span>(<span class="string">&quot;1 2;0 1&quot;</span>));
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;1 2;2 5&quot;</span>);
+    <span class="attribute">#[cfg(feature = <span class="string">&quot;O3&quot;</span>)]
+    </span>{
+        <span class="kw">let </span>u = a.cholesky(Upper);
+        <span class="macro">assert_eq!</span>(u, ml_matrix(<span class="string">&quot;1 2;0 1&quot;</span>));
 
-        <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">cholesky</span>(<span class="ident">Lower</span>);
-        <span class="macro">assert_eq!</span>(<span class="ident">l</span>, <span class="ident">ml_matrix</span>(<span class="string">&quot;1 0;2 1&quot;</span>));
+        <span class="kw">let </span>l = a.cholesky(Lower);
+        <span class="macro">assert_eq!</span>(l, ml_matrix(<span class="string">&quot;1 0;2 1&quot;</span>));
     }
-    <span class="ident">a</span>.<span class="ident">print</span>();
+    a.print();
 }</code></pre></div>
 </li>
 </ul>
@@ -640,47 +633,40 @@ can get better performance (via memoization)</li>
 <li>
 <p>For <code>O3</code> feature, peroxide use SVD to obtain pseudo inverse</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="ident">Row</span>);
-    <span class="kw">let</span> <span class="ident">pinv_a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">pseudo_inv</span>();
-    <span class="kw">let</span> <span class="ident">inv_a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">inv</span>();
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>a = <span class="macro">matrix!</span>(<span class="number">1</span>;<span class="number">4</span>;<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, Row);
+    <span class="kw">let </span>pinv_a = a.pseudo_inv();
+    <span class="kw">let </span>inv_a = a.inv();
 
-    <span class="macro">assert_eq!</span>(<span class="ident">inv_a</span>, <span class="ident">pinv_a</span>); <span class="comment">// Nearly equal (not actually equal)</span>
-}</code></pre></div>
+    <span class="macro">assert_eq!</span>(inv_a, pinv_a); <span class="comment">// Nearly equal (not actually equal)
+</span>}</code></pre></div>
 </li>
 </ul>
-</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left import-item" id="reexport.Col"><code>pub use self::Shape::<a class="enum" href="enum.Shape.html" title="enum peroxide::structure::matrix::Shape">Col</a>;</code></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left import-item" id="reexport.Row"><code>pub use self::Shape::<a class="enum" href="enum.Shape.html" title="enum peroxide::structure::matrix::Shape">Row</a>;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DGEQRF.html" title="peroxide::structure::matrix::DGEQRF struct">DGEQRF</a></div><div class="item-right docblock-short"><p>Temporary data structure from <code>dgeqrf</code></p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DGESVD.html" title="peroxide::structure::matrix::DGESVD struct">DGESVD</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DGETRF.html" title="peroxide::structure::matrix::DGETRF struct">DGETRF</a></div><div class="item-right docblock-short"><p>Temporary data structure from <code>dgetrf</code></p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DPOTRF.html" title="peroxide::structure::matrix::DPOTRF struct">DPOTRF</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Matrix.html" title="peroxide::structure::matrix::Matrix struct">Matrix</a></div><div class="item-right docblock-short"><p>R-like matrix structure</p>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2><div class="item-table"><div class="item-row"><div class="item-left import-item" id="reexport.Col"><code>pub use self::Shape::<a class="enum" href="enum.Shape.html" title="enum peroxide::structure::matrix::Shape">Col</a>;</code></div></div><div class="item-row"><div class="item-left import-item" id="reexport.Row"><code>pub use self::Shape::<a class="enum" href="enum.Shape.html" title="enum peroxide::structure::matrix::Shape">Row</a>;</code></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DGEQRF.html" title="peroxide::structure::matrix::DGEQRF struct">DGEQRF</a></div><div class="item-right docblock-short"><p>Temporary data structure from <code>dgeqrf</code></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DGESVD.html" title="peroxide::structure::matrix::DGESVD struct">DGESVD</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DGETRF.html" title="peroxide::structure::matrix::DGETRF struct">DGETRF</a></div><div class="item-right docblock-short"><p>Temporary data structure from <code>dgetrf</code></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DPOTRF.html" title="peroxide::structure::matrix::DPOTRF struct">DPOTRF</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Matrix.html" title="peroxide::structure::matrix::Matrix struct">Matrix</a></div><div class="item-right docblock-short"><p>R-like matrix structure</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.PQLU.html" title="peroxide::structure::matrix::PQLU struct">PQLU</a></div><div class="item-right docblock-short"><p>Data structure for Complete Pivoting LU decomposition</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.QR.html" title="peroxide::structure::matrix::QR struct">QR</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SVD.html" title="peroxide::structure::matrix::SVD struct">SVD</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.WAZD.html" title="peroxide::structure::matrix::WAZD struct">WAZD</a></div><div class="item-right docblock-short"></div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Form.html" title="peroxide::structure::matrix::Form enum">Form</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.LAPACK_STATUS.html" title="peroxide::structure::matrix::LAPACK_STATUS enum">LAPACK_STATUS</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.POSITIVE_STATUS.html" title="peroxide::structure::matrix::POSITIVE_STATUS enum">POSITIVE_STATUS</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.SVD_STATUS.html" title="peroxide::structure::matrix::SVD_STATUS enum">SVD_STATUS</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Shape.html" title="peroxide::structure::matrix::Shape enum">Shape</a></div><div class="item-right docblock-short"><p>To select matrices’ binding.</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.SolveKind.html" title="peroxide::structure::matrix::SolveKind enum">SolveKind</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.UPLO.html" title="peroxide::structure::matrix::UPLO enum">UPLO</a></div><div class="item-right docblock-short"></div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Error.html" title="peroxide::structure::matrix::Error trait">Error</a></div><div class="item-right docblock-short"><p><code>Error</code> is a trait representing the basic expectations for error values,
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.QR.html" title="peroxide::structure::matrix::QR struct">QR</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SVD.html" title="peroxide::structure::matrix::SVD struct">SVD</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.WAZD.html" title="peroxide::structure::matrix::WAZD struct">WAZD</a></div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Form.html" title="peroxide::structure::matrix::Form enum">Form</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.LAPACK_STATUS.html" title="peroxide::structure::matrix::LAPACK_STATUS enum">LAPACK_STATUS</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.POSITIVE_STATUS.html" title="peroxide::structure::matrix::POSITIVE_STATUS enum">POSITIVE_STATUS</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.SVD_STATUS.html" title="peroxide::structure::matrix::SVD_STATUS enum">SVD_STATUS</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Shape.html" title="peroxide::structure::matrix::Shape enum">Shape</a></div><div class="item-right docblock-short"><p>To select matrices’ binding.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.SolveKind.html" title="peroxide::structure::matrix::SolveKind enum">SolveKind</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.UPLO.html" title="peroxide::structure::matrix::UPLO enum">UPLO</a></div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Error.html" title="peroxide::structure::matrix::Error trait">Error</a></div><div class="item-right docblock-short"><p><code>Error</code> is a trait representing the basic expectations for error values,
 i.e., values of type <code>E</code> in <a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="Result&lt;T, E&gt;"><code>Result&lt;T, E&gt;</code></a>.</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.LinearAlgebra.html" title="peroxide::structure::matrix::LinearAlgebra trait">LinearAlgebra</a></div><div class="item-right docblock-short"><p>Linear algebra trait</p>
-</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.blas_mul.html" title="peroxide::structure::matrix::blas_mul fn">blas_mul</a></div><div class="item-right docblock-short"><p>Matrix multiplication with BLAS</p>
+</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.blas_mul.html" title="peroxide::structure::matrix::blas_mul fn">blas_mul</a></div><div class="item-right docblock-short"><p>Matrix multiplication with BLAS</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.combine.html" title="peroxide::structure::matrix::combine fn">combine</a></div><div class="item-right docblock-short"><p>Combine separated matrix to one matrix</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.diag.html" title="peroxide::structure::matrix::diag fn">diag</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gemm.html" title="peroxide::structure::matrix::gemm fn">gemm</a></div><div class="item-right docblock-short"><p>GEMM wrapper for Matrixmultiply</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.diag.html" title="peroxide::structure::matrix::diag fn">diag</a></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gemm.html" title="peroxide::structure::matrix::gemm fn">gemm</a></div><div class="item-right docblock-short"><p>GEMM wrapper for Matrixmultiply</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gemv.html" title="peroxide::structure::matrix::gemv fn">gemv</a></div><div class="item-right docblock-short"><p>General Matrix-Vector multiplication</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gen_householder.html" title="peroxide::structure::matrix::gen_householder fn">gen_householder</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gevm.html" title="peroxide::structure::matrix::gevm fn">gevm</a></div><div class="item-right docblock-short"><p>General Vector-Matrix multiplication</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gen_householder.html" title="peroxide::structure::matrix::gen_householder fn">gen_householder</a></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gevm.html" title="peroxide::structure::matrix::gevm fn">gevm</a></div><div class="item-right docblock-short"><p>General Vector-Matrix multiplication</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.inv_l.html" title="peroxide::structure::matrix::inv_l fn">inv_l</a></div><div class="item-right docblock-short"><p>Inverse of Lower matrix</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.inv_u.html" title="peroxide::structure::matrix::inv_u fn">inv_u</a></div><div class="item-right docblock-short"><p>Inverse of upper triangular matrix</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgeqrf.html" title="peroxide::structure::matrix::lapack_dgeqrf fn">lapack_dgeqrf</a></div><div class="item-right docblock-short"><p>Peroxide version of <code>dgeqrf</code></p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgesvd.html" title="peroxide::structure::matrix::lapack_dgesvd fn">lapack_dgesvd</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgetrf.html" title="peroxide::structure::matrix::lapack_dgetrf fn">lapack_dgetrf</a></div><div class="item-right docblock-short"><p>Peroxide version of <code>dgetrf</code></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgesvd.html" title="peroxide::structure::matrix::lapack_dgesvd fn">lapack_dgesvd</a></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgetrf.html" title="peroxide::structure::matrix::lapack_dgetrf fn">lapack_dgetrf</a></div><div class="item-right docblock-short"><p>Peroxide version of <code>dgetrf</code></p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgetri.html" title="peroxide::structure::matrix::lapack_dgetri fn">lapack_dgetri</a></div><div class="item-right docblock-short"><p>Peroxide version of <code>dgetri</code></p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgetrs.html" title="peroxide::structure::matrix::lapack_dgetrs fn">lapack_dgetrs</a></div><div class="item-right docblock-short"><p>Peroxide version of <code>dgetrs</code></p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dpotrf.html" title="peroxide::structure::matrix::lapack_dpotrf fn">lapack_dpotrf</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.matrix.html" title="peroxide::structure::matrix::matrix fn">matrix</a></div><div class="item-right docblock-short"><p>R-like matrix constructor</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dpotrf.html" title="peroxide::structure::matrix::lapack_dpotrf fn">lapack_dpotrf</a></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.matrix.html" title="peroxide::structure::matrix::matrix fn">matrix</a></div><div class="item-right docblock-short"><p>R-like matrix constructor</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.ml_matrix.html" title="peroxide::structure::matrix::ml_matrix fn">ml_matrix</a></div><div class="item-right docblock-short"><p>Matlab-like matrix constructor</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.py_matrix.html" title="peroxide::structure::matrix::py_matrix fn">py_matrix</a></div><div class="item-right docblock-short"><p>Python-like matrix constructor</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.r_matrix.html" title="peroxide::structure::matrix::r_matrix fn">r_matrix</a></div><div class="item-right docblock-short"><p>R-like matrix constructor (Explicit ver.)</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.solve.html" title="peroxide::structure::matrix::solve fn">solve</a></div><div class="item-right docblock-short"></div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Perms.html" title="peroxide::structure::matrix::Perms type">Perms</a></div><div class="item-right docblock-short"></div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.solve.html" title="peroxide::structure::matrix::solve fn">solve</a></div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Perms.html" title="peroxide::structure::matrix::Perms type">Perms</a></div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

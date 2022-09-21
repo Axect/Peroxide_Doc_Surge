@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/fuga/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/fuga/mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -197,183 +191,182 @@
 <span id="175">175</span>
 <span id="176">176</span>
 <span id="177">177</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Choose what you want.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Philosophy</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Numerical algorithms are neglected in many codes.</span>
-<span class="doccomment">//! However, it is very important which algorithm is used for precise research and important numerical computation.</span>
-<span class="doccomment">//! `fuga` is the best for you.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Usage</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```ignore</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! // Then you can use everyting in peroxide.</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # Compare with `prelude`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Norm</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let a = c!(1, 2, 3);</span>
-<span class="doccomment">//!     let l1 = a.norm(Norm::L1);</span>
-<span class="doccomment">//!     let l2 = a.norm(Norm::L2);</span>
-<span class="doccomment">//!     let l_inf = a.norm(Norm::LInf);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     assert_eq!(l1, 6f64);</span>
-<span class="doccomment">//!     assert_eq!(l2, 14f64.sqrt());</span>
-<span class="doccomment">//!     assert_eq!(l_inf, 3f64);</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::prelude::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let a = c!(1, 2, 3);</span>
-<span class="doccomment">//!     let l2 = a.norm();      // L2 is default vector norm</span>
-<span class="doccomment">//!     // prelude can&#39;t compute l1 norm, l_inf norm</span>
-<span class="doccomment">//!     assert_eq!(l2, 14f64.sqrt());</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Numerical integration</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//! use std::f64::consts::PI;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let sin = |x: f64| x.sin();</span>
-<span class="doccomment">//!     integrate(sin, (0f64, PI), GaussLegendre(15)).print();</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::prelude::*;</span>
-<span class="doccomment">//! use std::f64::consts::PI;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let sin = |x: f64| x.sin();</span>
-<span class="doccomment">//!     integrate(sin, (0f64, PI)).print();</span>
-<span class="doccomment">//!     // Default integration = GaussLegendre(15)</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Solve</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let a = ml_matrix(&quot;1 2;3 4&quot;);</span>
-<span class="doccomment">//!     let b = c!(3, 7);</span>
-<span class="doccomment">//!     a.solve(&amp;b, LU).print();    // [1, 1]</span>
-<span class="doccomment">//!     a.solve(&amp;b, WAZ).print();   // [1, 1]</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::prelude::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let a = ml_matrix(&quot;1 2;3 4&quot;);</span>
-<span class="doccomment">//!     let b = c!(3, 7);</span>
-<span class="doccomment">//!     // Prelude can only solve with LU</span>
-<span class="doccomment">//!     a.solve(&amp;b).print();    // [1, 1]</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Choose what you want.
+//!
+//! # Philosophy
+//!
+//! Numerical algorithms are neglected in many codes.
+//! However, it is very important which algorithm is used for precise research and important numerical computation.
+//! `fuga` is the best for you.
+//!
+//! # Usage
+//!
+//! ```ignore
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! // Then you can use everyting in peroxide.
+//! ```
+//!
+//! # Compare with `prelude`
+//!
+//! * Norm
+//! ```
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     let a = c!(1, 2, 3);
+//!     let l1 = a.norm(Norm::L1);
+//!     let l2 = a.norm(Norm::L2);
+//!     let l_inf = a.norm(Norm::LInf);
+//!
+//!     assert_eq!(l1, 6f64);
+//!     assert_eq!(l2, 14f64.sqrt());
+//!     assert_eq!(l_inf, 3f64);
+//! }
+//! ```
+//!
+//! ```
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::prelude::*;
+//!
+//! fn main() {
+//!     let a = c!(1, 2, 3);
+//!     let l2 = a.norm();      // L2 is default vector norm
+//!     // prelude can&#39;t compute l1 norm, l_inf norm
+//!     assert_eq!(l2, 14f64.sqrt());
+//! }
+//! ```
+//!
+//! * Numerical integration
+//!
+//! ```
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//! use std::f64::consts::PI;
+//!
+//! fn main() {
+//!     let sin = |x: f64| x.sin();
+//!     integrate(sin, (0f64, PI), GaussLegendre(15)).print();
+//! }
+//! ```
+//!
+//! ```
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::prelude::*;
+//! use std::f64::consts::PI;
+//!
+//! fn main() {
+//!     let sin = |x: f64| x.sin();
+//!     integrate(sin, (0f64, PI)).print();
+//!     // Default integration = GaussLegendre(15)
+//! }
+//! ```
+//!
+//! * Solve
+//!
+//! ```
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     let a = ml_matrix(&quot;1 2;3 4&quot;);
+//!     let b = c!(3, 7);
+//!     a.solve(&amp;b, LU).print();    // [1, 1]
+//!     a.solve(&amp;b, WAZ).print();   // [1, 1]
+//! }
+//! ```
+//!
+//! ```
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::prelude::*;
+//!
+//! fn main() {
+//!     let a = ml_matrix(&quot;1 2;3 4&quot;);
+//!     let b = c!(3, 7);
+//!     // Prelude can only solve with LU
+//!     a.solve(&amp;b).print();    // [1, 1]
+//! }
+//! ```
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::macros</span>::{<span class="ident">julia_macro</span>::<span class="kw-2">*</span>, <span class="ident">matlab_macro</span>::<span class="kw-2">*</span>, <span class="ident">r_macro</span>::<span class="kw-2">*</span>};
+</span><span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::macros::{julia_macro::<span class="kw-2">*</span>, matlab_macro::<span class="kw-2">*</span>, r_macro::<span class="kw-2">*</span>};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">peroxide_ad</span>::{<span class="ident">ad_function</span>, <span class="ident">ad_closure</span>};
+<span class="kw">pub use </span>peroxide_ad::{ad_function, ad_closure};
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traits</span>::{
-    <span class="ident">fp</span>::{<span class="ident">FPMatrix</span>, <span class="ident">FPVector</span>},
-    <span class="ident">general::Algorithm</span>,
-    <span class="ident">math</span>::{<span class="ident">InnerProduct</span>, <span class="ident">LinearOp</span>, <span class="ident">MatrixProduct</span>, <span class="ident">Norm</span>, <span class="ident">Normed</span>, <span class="ident">Vector</span>, <span class="ident">VectorProduct</span>},
-    <span class="ident">mutable</span>::{<span class="ident">MutFP</span>, <span class="ident">MutMatrix</span>},
-    <span class="ident">num</span>::{<span class="ident">ExpLogOps</span>, <span class="ident">PowOps</span>, <span class="ident">Real</span>, <span class="ident">TrigOps</span>},
-    <span class="ident">pointer</span>::{<span class="ident">MatrixPtr</span>, <span class="ident">Oxide</span>, <span class="ident">Redox</span>, <span class="ident">RedoxCommon</span>},
-    <span class="ident">stable::StableFn</span>,
-    <span class="ident">sugar</span>::{<span class="ident">Scalable</span>, <span class="ident">ScalableMut</span>, <span class="ident">VecOps</span>, <span class="ident">ConvToMat</span>},
+<span class="kw">pub use </span><span class="kw">crate</span>::traits::{
+    fp::{FPMatrix, FPVector},
+    general::Algorithm,
+    math::{InnerProduct, LinearOp, MatrixProduct, Norm, Normed, Vector, VectorProduct},
+    mutable::{MutFP, MutMatrix},
+    num::{ExpLogOps, PowOps, Real, TrigOps},
+    pointer::{MatrixPtr, Oxide, Redox, RedoxCommon},
+    stable::StableFn,
+    sugar::{Scalable, ScalableMut, VecOps, ConvToMat},
 };
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure</span>::{
-    <span class="ident">matrix</span>::<span class="kw-2">*</span>, 
-    <span class="ident">polynomial</span>::<span class="kw-2">*</span>, 
-    <span class="ident">vector</span>::<span class="kw-2">*</span>, 
-    <span class="ident">dataframe</span>::<span class="kw-2">*</span>,
-    <span class="ident">ad</span>::<span class="kw-2">*</span>,
-    <span class="comment">//complex::C64,</span>
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::structure::{
+    matrix::<span class="kw-2">*</span>, 
+    polynomial::<span class="kw-2">*</span>, 
+    vector::<span class="kw-2">*</span>, 
+    dataframe::<span class="kw-2">*</span>,
+    ad::<span class="kw-2">*</span>,
+    <span class="comment">//complex::C64,
+</span>};
+
+<span class="kw">pub use </span><span class="kw">crate</span>::util::{api::<span class="kw-2">*</span>, low_level::<span class="kw-2">*</span>, non_macro::<span class="kw-2">*</span>, print::<span class="kw-2">*</span>, useful::<span class="kw-2">*</span>, wrapper::<span class="kw-2">*</span>};
+
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::statistics::{dist::<span class="kw-2">*</span>, ops::<span class="kw-2">*</span>, rand::<span class="kw-2">*</span>, stat::<span class="kw-2">*</span>};
+
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::special::function::<span class="kw-2">*</span>;
+
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::numerical::{
+    eigen::<span class="kw-2">*</span>, integral::<span class="kw-2">*</span>, interp::<span class="kw-2">*</span>, ode::<span class="kw-2">*</span>, optimize::<span class="kw-2">*</span>, root::<span class="kw-2">*</span>, spline::<span class="kw-2">*</span>, utils::<span class="kw-2">*</span>,
 };
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util</span>::{<span class="ident">api</span>::<span class="kw-2">*</span>, <span class="ident">low_level</span>::<span class="kw-2">*</span>, <span class="ident">non_macro</span>::<span class="kw-2">*</span>, <span class="ident">print</span>::<span class="kw-2">*</span>, <span class="ident">useful</span>::<span class="kw-2">*</span>, <span class="ident">wrapper</span>::<span class="kw-2">*</span>};
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::ml::reg::<span class="kw-2">*</span>;
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::statistics</span>::{<span class="ident">dist</span>::<span class="kw-2">*</span>, <span class="ident">ops</span>::<span class="kw-2">*</span>, <span class="ident">rand</span>::<span class="kw-2">*</span>, <span class="ident">stat</span>::<span class="kw-2">*</span>};
+<span class="attribute">#[allow(unused_imports)]
+#[cfg(feature = <span class="string">&quot;plot&quot;</span>)]
+</span><span class="kw">pub use </span><span class="kw">crate</span>::util::plot::<span class="kw-2">*</span>;
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::special::function</span>::<span class="kw-2">*</span>;
-
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::numerical</span>::{
-    <span class="ident">eigen</span>::<span class="kw-2">*</span>, <span class="ident">integral</span>::<span class="kw-2">*</span>, <span class="ident">interp</span>::<span class="kw-2">*</span>, <span class="ident">ode</span>::<span class="kw-2">*</span>, <span class="ident">optimize</span>::<span class="kw-2">*</span>, <span class="ident">root</span>::<span class="kw-2">*</span>, <span class="ident">spline</span>::<span class="kw-2">*</span>, <span class="ident">utils</span>::<span class="kw-2">*</span>,
+<span class="comment">// =============================================================================
+// Enums
+// =============================================================================
+</span><span class="kw">pub use </span><span class="kw">crate</span>::numerical::integral::Integral::{
+    GaussLegendre, 
+    NewtonCotes,
+    G7K15,
+    G10K21,
+    G15K31,
+    G20K41,
+    G25K51,
+    G30K61,
 };
-
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ml::reg</span>::<span class="kw-2">*</span>;
-
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;plot&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::plot</span>::<span class="kw-2">*</span>;
-
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Enums</span>
-<span class="comment">// =============================================================================</span>
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::numerical::integral::Integral</span>::{
-    <span class="ident">GaussLegendre</span>, 
-    <span class="ident">NewtonCotes</span>,
-    <span class="ident">G7K15</span>,
-    <span class="ident">G10K21</span>,
-    <span class="ident">G15K31</span>,
-    <span class="ident">G20K41</span>,
-    <span class="ident">G25K51</span>,
-    <span class="ident">G30K61</span>,
+<span class="kw">pub use </span><span class="kw">crate</span>::numerical::root::RootFind::{Bisection, FalsePosition, Newton, Secant};
+<span class="kw">pub use </span><span class="kw">crate</span>::statistics::stat::QType::{
+    Type1, Type2, Type3, Type4, Type5, Type6, Type7, Type8, Type9,
 };
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::numerical::root::RootFind</span>::{<span class="ident">Bisection</span>, <span class="ident">FalsePosition</span>, <span class="ident">Newton</span>, <span class="ident">Secant</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::statistics::stat::QType</span>::{
-    <span class="ident">Type1</span>, <span class="ident">Type2</span>, <span class="ident">Type3</span>, <span class="ident">Type4</span>, <span class="ident">Type5</span>, <span class="ident">Type6</span>, <span class="ident">Type7</span>, <span class="ident">Type8</span>, <span class="ident">Type9</span>,
+<span class="kw">pub use </span><span class="kw">crate</span>::structure::matrix::{
+    Form::{Diagonal, Identity},
+    SolveKind::{LU, WAZ},
+    UPLO::{Upper, Lower}
 };
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::matrix</span>::{
-    <span class="ident">Form</span>::{<span class="ident">Diagonal</span>, <span class="ident">Identity</span>},
-    <span class="ident">SolveKind</span>::{<span class="ident">LU</span>, <span class="ident">WAZ</span>},
-    <span class="ident">UPLO</span>::{<span class="ident">Upper</span>, <span class="ident">Lower</span>}
-};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::dataframe::DType</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::ad::AD</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::numerical::spline::SlopeMethod</span>::{<span class="ident">Akima</span>, <span class="ident">Quadratic</span>};
+<span class="kw">pub use </span><span class="kw">crate</span>::structure::dataframe::DType::<span class="kw-2">*</span>;
+<span class="kw">pub use </span><span class="kw">crate</span>::structure::ad::AD::<span class="kw-2">*</span>;
+<span class="kw">pub use </span><span class="kw">crate</span>::numerical::spline::SlopeMethod::{Akima, Quadratic};
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

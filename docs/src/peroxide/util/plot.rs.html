@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/plot.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>plot.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/plot.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>plot.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -442,352 +436,352 @@
 <span id="420">420</span>
 <span id="421">421</span>
 <span id="422">422</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Plotting module for peroxide</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! For Rust, there are some plot libraries but, still difficult to use.</span>
-<span class="doccomment">//! Practically, using python is best choice to plot. And there is awesome crate - [pyo3](https://crates.io/crates/pyo3).</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Let&#39;s see next ordinary code file.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let mut ode_solver = ExplicitODE::new(test_fn);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ode_solver</span>
-<span class="doccomment">//!         .set_method(ExMethod::RK4)</span>
-<span class="doccomment">//!         .set_initial_condition(init_state)</span>
-<span class="doccomment">//!         .set_step_size(0.01)</span>
-<span class="doccomment">//!         .set_times(1000);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let result = ode_solver.integrate();</span>
-<span class="doccomment">//!     result.write(&quot;example_data/test.csv&quot;);</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {</span>
-<span class="doccomment">//!     let x = st.param;</span>
-<span class="doccomment">//!     let y = &amp;st.value;</span>
-<span class="doccomment">//!     let dy = &amp;mut st.deriv;</span>
-<span class="doccomment">//!     dy[0] = (5f64*x.powi(2) - y[0]) / (x + y[0]).exp();</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Now, let&#39;s modify this code to below. Then it works surprisingly!</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let mut ode_solver = ExplicitODE::new(test_fn);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ode_solver</span>
-<span class="doccomment">//!         .set_method(ExMethod::RK4)</span>
-<span class="doccomment">//!         .set_initial_condition(init_state)</span>
-<span class="doccomment">//!         .set_step_size(0.01)</span>
-<span class="doccomment">//!         .set_times(1000);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let result = ode_solver.integrate();</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     let x = result.col(0);</span>
-<span class="doccomment">//!     let y = result.col(1);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     // Remove below comments to execute</span>
-<span class="doccomment">//!     //let mut plt = Plot2D::new();</span>
-<span class="doccomment">//!     //plt.set_domain(x)</span>
-<span class="doccomment">//!     //    .insert_image(y)</span>
-<span class="doccomment">//!     //    .set_title(&quot;Test Figure&quot;)</span>
-<span class="doccomment">//!     //    .set_fig_size((10, 6))</span>
-<span class="doccomment">//!     //    .set_dpi(300)</span>
-<span class="doccomment">//!     //    .set_legend(vec![&quot;RK4&quot;])</span>
-<span class="doccomment">//!     //    .set_path(&quot;example_data/test_plot.png&quot;);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     //plt.savefig();</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {</span>
-<span class="doccomment">//!     let x = st.param;</span>
-<span class="doccomment">//!     let y = &amp;st.value;</span>
-<span class="doccomment">//!     let dy = &amp;mut st.deriv;</span>
-<span class="doccomment">//!     dy[0] = (5f64 * x.powi(2) - y[0]) / (x + y[0]).exp();</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! It draws next image</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ![test_plot](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/test_plot.png)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! But now, the recommended way is exporting `netcdf` files. Refer to [dataframe](../../structure/dataframe/index.html)</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Plotting module for peroxide
+//!
+//! For Rust, there are some plot libraries but, still difficult to use.
+//! Practically, using python is best choice to plot. And there is awesome crate - [pyo3](https://crates.io/crates/pyo3).
+//!
+//! Let&#39;s see next ordinary code file.
+//!
+//! ```rust
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));
+//!
+//!     let mut ode_solver = ExplicitODE::new(test_fn);
+//!
+//!     ode_solver
+//!         .set_method(ExMethod::RK4)
+//!         .set_initial_condition(init_state)
+//!         .set_step_size(0.01)
+//!         .set_times(1000);
+//!
+//!     let result = ode_solver.integrate();
+//!     result.write(&quot;example_data/test.csv&quot;);
+//! }
+//!
+//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {
+//!     let x = st.param;
+//!     let y = &amp;st.value;
+//!     let dy = &amp;mut st.deriv;
+//!     dy[0] = (5f64*x.powi(2) - y[0]) / (x + y[0]).exp();
+//! }
+//! ```
+//!
+//! Now, let&#39;s modify this code to below. Then it works surprisingly!
+//!
+//! ```rust
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));
+//!
+//!     let mut ode_solver = ExplicitODE::new(test_fn);
+//!
+//!     ode_solver
+//!         .set_method(ExMethod::RK4)
+//!         .set_initial_condition(init_state)
+//!         .set_step_size(0.01)
+//!         .set_times(1000);
+//!
+//!     let result = ode_solver.integrate();
+//!
+//!     let x = result.col(0);
+//!     let y = result.col(1);
+//!
+//!     // Remove below comments to execute
+//!     //let mut plt = Plot2D::new();
+//!     //plt.set_domain(x)
+//!     //    .insert_image(y)
+//!     //    .set_title(&quot;Test Figure&quot;)
+//!     //    .set_fig_size((10, 6))
+//!     //    .set_dpi(300)
+//!     //    .set_legend(vec![&quot;RK4&quot;])
+//!     //    .set_path(&quot;example_data/test_plot.png&quot;);
+//!
+//!     //plt.savefig();
+//! }
+//!
+//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {
+//!     let x = st.param;
+//!     let y = &amp;st.value;
+//!     let dy = &amp;mut st.deriv;
+//!     dy[0] = (5f64 * x.powi(2) - y[0]) / (x + y[0]).exp();
+//! }
+//! ```
+//!
+//! It draws next image
+//!
+//! ![test_plot](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/test_plot.png)
+//!
+//! But now, the recommended way is exporting `netcdf` files. Refer to [dataframe](../../structure/dataframe/index.html)
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">pyo3</span>;
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::pyo3::types::IntoPyDict</span>;
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::pyo3</span>::{<span class="ident">PyResult</span>, <span class="ident">Python</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Grid</span>::{<span class="ident">Off</span>, <span class="ident">On</span>};
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::Markers</span>::{<span class="ident">Circle</span>, <span class="ident">Line</span>, <span class="ident">Point</span>};
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::PlotOptions</span>::{<span class="ident">Domain</span>, <span class="ident">Images</span>, <span class="ident">Legends</span>, <span class="ident">Pairs</span>, <span class="ident">Path</span>};
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
+</span><span class="kw">extern crate </span>pyo3;
+<span class="kw">use </span><span class="self">self</span>::pyo3::types::IntoPyDict;
+<span class="kw">use </span><span class="self">self</span>::pyo3::{PyResult, Python};
+<span class="kw">pub use </span><span class="self">self</span>::Grid::{Off, On};
+<span class="kw">pub use </span><span class="self">self</span>::Markers::{Circle, Line, Point};
+<span class="kw">use </span><span class="self">self</span>::PlotOptions::{Domain, Images, Legends, Pairs, Path};
+<span class="kw">use </span>std::collections::HashMap;
 
-<span class="kw">type</span> <span class="ident">Vector</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
+<span class="kw">type </span>Vector = Vec&lt;f64&gt;;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialOrd</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">PlotOptions</span> {
-    <span class="ident">Domain</span>,
-    <span class="ident">Images</span>,
-    <span class="ident">Pairs</span>,
-    <span class="ident">Legends</span>,
-    <span class="ident">Path</span>,
+<span class="attribute">#[derive(Debug, Copy, Clone, Hash, PartialOrd, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>PlotOptions {
+    Domain,
+    Images,
+    Pairs,
+    Legends,
+    Path,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialOrd</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Markers</span> {
-    <span class="ident">Point</span>,
-    <span class="ident">Line</span>,
-    <span class="ident">Circle</span>,
+<span class="attribute">#[derive(Debug, Copy, Clone, Hash, PartialOrd, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>Markers {
+    Point,
+    Line,
+    Circle,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">Hash</span>, <span class="ident">PartialOrd</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Grid</span> {
-    <span class="ident">On</span>,
-    <span class="ident">Off</span>,
+<span class="attribute">#[derive(Debug, Copy, Clone, Hash, PartialOrd, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>Grid {
+    On,
+    Off,
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Plot</span> {
-    <span class="kw">fn</span> <span class="ident">set_domain</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">insert_image</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">insert_pair</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">xy</span>: (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>)) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_title</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">title</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_xlabel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">xlabel</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_ylabel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ylabel</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_zlabel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">zlabel</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_legend</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">legends</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_path</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_fig_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">fig_size</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>)) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_dpi</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dpi</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">grid</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">grid</span>: <span class="ident">Grid</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_marker</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">styles</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Markers</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">savefig</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+<span class="kw">pub trait </span>Plot {
+    <span class="kw">fn </span>set_domain(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: Vec&lt;f64&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>insert_image(<span class="kw-2">&amp;mut </span><span class="self">self</span>, y: Vec&lt;f64&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>insert_pair(<span class="kw-2">&amp;mut </span><span class="self">self</span>, xy: (Vec&lt;f64&gt;, Vec&lt;f64&gt;)) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_title(<span class="kw-2">&amp;mut </span><span class="self">self</span>, title: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_xlabel(<span class="kw-2">&amp;mut </span><span class="self">self</span>, xlabel: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_ylabel(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ylabel: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_zlabel(<span class="kw-2">&amp;mut </span><span class="self">self</span>, zlabel: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_legend(<span class="kw-2">&amp;mut </span><span class="self">self</span>, legends: Vec&lt;<span class="kw-2">&amp;</span>str&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_path(<span class="kw-2">&amp;mut </span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_fig_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, fig_size: (usize, usize)) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_dpi(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dpi: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>grid(<span class="kw-2">&amp;mut </span><span class="self">self</span>, grid: Grid) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_marker(<span class="kw-2">&amp;mut </span><span class="self">self</span>, styles: Vec&lt;Markers&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>savefig(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PyResult&lt;()&gt;;
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Plot2D</span> {
-    <span class="ident">domain</span>: <span class="ident">Vector</span>,
-    <span class="ident">images</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vector</span><span class="op">&gt;</span>,
-    <span class="ident">pairs</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Vector</span>, <span class="ident">Vector</span>)<span class="op">&gt;</span>,
-    <span class="ident">title</span>: <span class="ident">String</span>,
-    <span class="ident">xlabel</span>: <span class="ident">String</span>,
-    <span class="ident">ylabel</span>: <span class="ident">String</span>,
-    <span class="ident">legends</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="ident">markers</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Markers</span><span class="op">&gt;</span>,
-    <span class="ident">path</span>: <span class="ident">String</span>,
-    <span class="ident">fig_size</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>),
-    <span class="ident">dpi</span>: <span class="ident">usize</span>,
-    <span class="ident">grid</span>: <span class="ident">Grid</span>,
-    <span class="ident">options</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">PlotOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Debug)]
+</span><span class="kw">pub struct </span>Plot2D {
+    domain: Vector,
+    images: Vec&lt;Vector&gt;,
+    pairs: Vec&lt;(Vector, Vector)&gt;,
+    title: String,
+    xlabel: String,
+    ylabel: String,
+    legends: Vec&lt;String&gt;,
+    markers: Vec&lt;Markers&gt;,
+    path: String,
+    fig_size: (usize, usize),
+    dpi: usize,
+    grid: Grid,
+    options: HashMap&lt;PlotOptions, bool&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">Plot2D</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">default_options</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">PlotOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-        <span class="ident">default_options</span>.<span class="ident">insert</span>(<span class="ident">Domain</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_options</span>.<span class="ident">insert</span>(<span class="ident">Images</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_options</span>.<span class="ident">insert</span>(<span class="ident">Pairs</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_options</span>.<span class="ident">insert</span>(<span class="ident">Legends</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_options</span>.<span class="ident">insert</span>(<span class="ident">Path</span>, <span class="bool-val">false</span>);
+<span class="kw">impl </span>Plot2D {
+    <span class="kw">pub fn </span>new() -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>default_options: HashMap&lt;PlotOptions, bool&gt; = HashMap::new();
+        default_options.insert(Domain, <span class="bool-val">false</span>);
+        default_options.insert(Images, <span class="bool-val">false</span>);
+        default_options.insert(Pairs, <span class="bool-val">false</span>);
+        default_options.insert(Legends, <span class="bool-val">false</span>);
+        default_options.insert(Path, <span class="bool-val">false</span>);
 
-        <span class="ident">Plot2D</span> {
-            <span class="ident">domain</span>: <span class="macro">vec!</span>[],
-            <span class="ident">images</span>: <span class="macro">vec!</span>[],
-            <span class="ident">pairs</span>: <span class="macro">vec!</span>[],
-            <span class="ident">title</span>: <span class="string">&quot;Title&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">xlabel</span>: <span class="string">&quot;$x$&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">ylabel</span>: <span class="string">&quot;$y$&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">legends</span>: <span class="macro">vec!</span>[],
-            <span class="ident">markers</span>: <span class="macro">vec!</span>[],
-            <span class="ident">path</span>: <span class="string">&quot;&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">fig_size</span>: (<span class="number">10</span>, <span class="number">6</span>),
-            <span class="ident">dpi</span>: <span class="number">300</span>,
-            <span class="ident">grid</span>: <span class="ident">On</span>,
-            <span class="ident">options</span>: <span class="ident">default_options</span>,
+        Plot2D {
+            domain: <span class="macro">vec!</span>[],
+            images: <span class="macro">vec!</span>[],
+            pairs: <span class="macro">vec!</span>[],
+            title: <span class="string">&quot;Title&quot;</span>.to_string(),
+            xlabel: <span class="string">&quot;$x$&quot;</span>.to_string(),
+            ylabel: <span class="string">&quot;$y$&quot;</span>.to_string(),
+            legends: <span class="macro">vec!</span>[],
+            markers: <span class="macro">vec!</span>[],
+            path: <span class="string">&quot;&quot;</span>.to_string(),
+            fig_size: (<span class="number">10</span>, <span class="number">6</span>),
+            dpi: <span class="number">300</span>,
+            grid: On,
+            options: default_options,
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Plot</span> <span class="kw">for</span> <span class="ident">Plot2D</span> {
-    <span class="kw">fn</span> <span class="ident">set_domain</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Domain</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">domain</span> <span class="op">=</span> <span class="ident">x</span>;
-        <span class="self">self</span>
-    }
+<span class="kw">impl </span>Plot <span class="kw">for </span>Plot2D {
+    <span class="kw">fn </span>set_domain(<span class="kw-2">&amp;mut </span><span class="self">self</span>, x: Vec&lt;f64&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Domain) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.domain = x;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">insert_image</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Images</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">images</span>.<span class="ident">push</span>(<span class="ident">y</span>);
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>insert_image(<span class="kw-2">&amp;mut </span><span class="self">self</span>, y: Vec&lt;f64&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Images) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.images.push(y);
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">insert_pair</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">xy</span>: (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>)) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">t</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Pairs</span>) {
-            <span class="kw-2">*</span><span class="ident">t</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">pairs</span>.<span class="ident">push</span>(<span class="ident">xy</span>);
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>insert_pair(<span class="kw-2">&amp;mut </span><span class="self">self</span>, xy: (Vec&lt;f64&gt;, Vec&lt;f64&gt;)) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(t) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Pairs) {
+            <span class="kw-2">*</span>t = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.pairs.push(xy);
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_title</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">title</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">title</span> <span class="op">=</span> <span class="ident">title</span>.<span class="ident">to_owned</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_title(<span class="kw-2">&amp;mut </span><span class="self">self</span>, title: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.title = title.to_owned();
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_xlabel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">xlabel</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">xlabel</span> <span class="op">=</span> <span class="ident">xlabel</span>.<span class="ident">to_owned</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_xlabel(<span class="kw-2">&amp;mut </span><span class="self">self</span>, xlabel: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.xlabel = xlabel.to_owned();
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_ylabel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">ylabel</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">ylabel</span> <span class="op">=</span> <span class="ident">ylabel</span>.<span class="ident">to_owned</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_ylabel(<span class="kw-2">&amp;mut </span><span class="self">self</span>, ylabel: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.ylabel = ylabel.to_owned();
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_zlabel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">_zlabel</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
+    <span class="kw">fn </span>set_zlabel(<span class="kw-2">&amp;mut </span><span class="self">self</span>, _zlabel: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">set_legend</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">legends</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Legends</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">legends</span> <span class="op">=</span> <span class="ident">legends</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span>.<span class="ident">to_owned</span>())
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_legend(<span class="kw-2">&amp;mut </span><span class="self">self</span>, legends: Vec&lt;<span class="kw-2">&amp;</span>str&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Legends) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.legends = legends
+            .into_iter()
+            .map(|x| x.to_owned())
+            .collect::&lt;Vec&lt;String&gt;&gt;();
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_path</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Path</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">to_owned</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_path(<span class="kw-2">&amp;mut </span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Path) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.path = path.to_owned();
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_fig_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">fig_size</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>)) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fig_size</span> <span class="op">=</span> <span class="ident">fig_size</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_fig_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, fig_size: (usize, usize)) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.fig_size = fig_size;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_dpi</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dpi</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">dpi</span> <span class="op">=</span> <span class="ident">dpi</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_dpi(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dpi: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.dpi = dpi;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">grid</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">grid</span>: <span class="ident">Grid</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">grid</span> <span class="op">=</span> <span class="ident">grid</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>grid(<span class="kw-2">&amp;mut </span><span class="self">self</span>, grid: Grid) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.grid = grid;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">set_marker</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">styles</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Markers</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">markers</span> <span class="op">=</span> <span class="ident">styles</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">fn </span>set_marker(<span class="kw-2">&amp;mut </span><span class="self">self</span>, styles: Vec&lt;Markers&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="self">self</span>.markers = styles;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">fn</span> <span class="ident">savefig</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">PyResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="comment">// Check domain</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Domain</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> =&gt; <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Pairs</span>) {
-                <span class="prelude-val">Some</span>(<span class="ident">xy</span>) <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">xy</span> =&gt; {
+    <span class="kw">fn </span>savefig(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PyResult&lt;()&gt; {
+        <span class="comment">// Check domain
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>Domain) {
+            <span class="prelude-val">Some</span>(x) <span class="kw">if </span>!<span class="kw-2">*</span>x =&gt; <span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>Pairs) {
+                <span class="prelude-val">Some</span>(xy) <span class="kw">if </span>!<span class="kw-2">*</span>xy =&gt; {
                     <span class="macro">panic!</span>(<span class="string">&quot;There are no data to plot&quot;</span>);
                 }
-                <span class="prelude-val">None</span> =&gt; {
+                <span class="prelude-val">None </span>=&gt; {
                     <span class="macro">panic!</span>(<span class="string">&quot;There are some serious problems in plot system&quot;</span>);
                 }
-                <span class="kw">_</span> =&gt; (),
+                <span class="kw">_ </span>=&gt; (),
             },
-            <span class="prelude-val">None</span> =&gt; {
+            <span class="prelude-val">None </span>=&gt; {
                 <span class="macro">panic!</span>(<span class="string">&quot;There are some serious problems in plot system&quot;</span>);
             }
-            <span class="kw">_</span> =&gt; (),
+            <span class="kw">_ </span>=&gt; (),
         }
 
-        <span class="comment">// Check images</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Images</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">x</span> =&gt; <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Pairs</span>) {
-                <span class="prelude-val">Some</span>(<span class="ident">xy</span>) <span class="kw">if</span> <span class="op">!</span><span class="kw-2">*</span><span class="ident">xy</span> =&gt; {
+        <span class="comment">// Check images
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>Images) {
+            <span class="prelude-val">Some</span>(x) <span class="kw">if </span>!<span class="kw-2">*</span>x =&gt; <span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>Pairs) {
+                <span class="prelude-val">Some</span>(xy) <span class="kw">if </span>!<span class="kw-2">*</span>xy =&gt; {
                     <span class="macro">panic!</span>(<span class="string">&quot;there are no data to plot&quot;</span>);
                 }
-                <span class="prelude-val">None</span> =&gt; {
+                <span class="prelude-val">None </span>=&gt; {
                     <span class="macro">panic!</span>(<span class="string">&quot;There are some serious problems in plot system&quot;</span>);
                 }
-                <span class="kw">_</span> =&gt; (),
+                <span class="kw">_ </span>=&gt; (),
             },
-            <span class="prelude-val">None</span> =&gt; {
+            <span class="prelude-val">None </span>=&gt; {
                 <span class="macro">panic!</span>(<span class="string">&quot;There are some serious problems in plot system&quot;</span>);
             }
-            <span class="kw">_</span> =&gt; (),
+            <span class="kw">_ </span>=&gt; (),
         }
 
-        <span class="comment">// Check legends</span>
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">options</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">Legends</span>) {
-            <span class="prelude-val">Some</span>(<span class="ident">x</span>) =&gt; {
-                <span class="macro">assert!</span>(<span class="kw-2">*</span><span class="ident">x</span>, <span class="string">&quot;Legends are not defined&quot;</span>);
+        <span class="comment">// Check legends
+        </span><span class="kw">match </span><span class="self">self</span>.options.get(<span class="kw-2">&amp;</span>Legends) {
+            <span class="prelude-val">Some</span>(x) =&gt; {
+                <span class="macro">assert!</span>(<span class="kw-2">*</span>x, <span class="string">&quot;Legends are not defined&quot;</span>);
                 <span class="macro">assert!</span>(
-                    <span class="self">self</span>.<span class="ident">images</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">pairs</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="self">self</span>.<span class="ident">legends</span>.<span class="ident">len</span>(),
-                    <span class="string">&quot;Legends are not matched with images&quot;</span>
-                );
+                    <span class="self">self</span>.images.len() + <span class="self">self</span>.pairs.len() == <span class="self">self</span>.legends.len(),
+                    <span class="string">&quot;Legends are not matched with images&quot;
+                </span>);
             }
-            <span class="prelude-val">None</span> =&gt; {
+            <span class="prelude-val">None </span>=&gt; {
                 <span class="macro">assert!</span>(<span class="bool-val">false</span>, <span class="string">&quot;Legends are None&quot;</span>);
             }
         }
 
-        <span class="comment">// Plot</span>
-        <span class="kw">let</span> <span class="ident">gil</span> <span class="op">=</span> <span class="ident">Python::acquire_gil</span>();
-        <span class="kw">let</span> <span class="ident">py</span> <span class="op">=</span> <span class="ident">gil</span>.<span class="ident">python</span>();
+        <span class="comment">// Plot
+        </span><span class="kw">let </span>gil = Python::acquire_gil();
+        <span class="kw">let </span>py = gil.python();
 
-        <span class="comment">// Input data</span>
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">domain</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">ys</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">images</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">pairs</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pairs</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">y_length</span> <span class="op">=</span> <span class="ident">ys</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">pair_length</span> <span class="op">=</span> <span class="ident">pairs</span>.<span class="ident">len</span>();
-        <span class="kw">let</span> <span class="ident">title</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">title</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">fig_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">fig_size</span>;
-        <span class="kw">let</span> <span class="ident">dpi</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">dpi</span>;
-        <span class="kw">let</span> <span class="ident">grid</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">grid</span> {
-            <span class="ident">On</span> =&gt; <span class="bool-val">true</span>,
-            <span class="ident">Off</span> =&gt; <span class="bool-val">false</span>,
+        <span class="comment">// Input data
+        </span><span class="kw">let </span>x = <span class="self">self</span>.domain.clone();
+        <span class="kw">let </span>ys = <span class="self">self</span>.images.clone();
+        <span class="kw">let </span>pairs = <span class="self">self</span>.pairs.clone();
+        <span class="kw">let </span>y_length = ys.len();
+        <span class="kw">let </span>pair_length = pairs.len();
+        <span class="kw">let </span>title = <span class="self">self</span>.title.clone();
+        <span class="kw">let </span>fig_size = <span class="self">self</span>.fig_size;
+        <span class="kw">let </span>dpi = <span class="self">self</span>.dpi;
+        <span class="kw">let </span>grid = <span class="kw">match </span><span class="self">self</span>.grid {
+            On =&gt; <span class="bool-val">true</span>,
+            Off =&gt; <span class="bool-val">false</span>,
         };
-        <span class="kw">let</span> <span class="ident">xlabel</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">xlabel</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">ylabel</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ylabel</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">legends</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">legends</span>.<span class="ident">clone</span>();
-        <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">path</span>.<span class="ident">clone</span>();
+        <span class="kw">let </span>xlabel = <span class="self">self</span>.xlabel.clone();
+        <span class="kw">let </span>ylabel = <span class="self">self</span>.ylabel.clone();
+        <span class="kw">let </span>legends = <span class="self">self</span>.legends.clone();
+        <span class="kw">let </span>path = <span class="self">self</span>.path.clone();
 
-        <span class="comment">// Global variables to plot</span>
-        <span class="kw">let</span> <span class="ident">globals</span> <span class="op">=</span> <span class="macro">vec!</span>[(<span class="string">&quot;plt&quot;</span>, <span class="ident">py</span>.<span class="ident">import</span>(<span class="string">&quot;matplotlib.pyplot&quot;</span>)<span class="question-mark">?</span>)].<span class="ident">into_py_dict</span>(<span class="ident">py</span>);
-        <span class="ident">globals</span>.<span class="ident">set_item</span>(<span class="string">&quot;x&quot;</span>, <span class="ident">x</span>)<span class="question-mark">?</span>;
-        <span class="ident">globals</span>.<span class="ident">set_item</span>(<span class="string">&quot;y&quot;</span>, <span class="ident">ys</span>)<span class="question-mark">?</span>;
-        <span class="ident">globals</span>.<span class="ident">set_item</span>(<span class="string">&quot;pair&quot;</span>, <span class="ident">pairs</span>)<span class="question-mark">?</span>;
-        <span class="ident">globals</span>.<span class="ident">set_item</span>(<span class="string">&quot;n&quot;</span>, <span class="ident">y_length</span>)<span class="question-mark">?</span>;
-        <span class="ident">globals</span>.<span class="ident">set_item</span>(<span class="string">&quot;p&quot;</span>, <span class="ident">pair_length</span>)<span class="question-mark">?</span>;
-        <span class="ident">globals</span>.<span class="ident">set_item</span>(<span class="string">&quot;fs&quot;</span>, <span class="ident">fig_size</span>)<span class="question-mark">?</span>;
-        <span class="ident">globals</span>.<span class="ident">set_item</span>(<span class="string">&quot;dp&quot;</span>, <span class="ident">dpi</span>)<span class="question-mark">?</span>;
-        <span class="ident">globals</span>.<span class="ident">set_item</span>(<span class="string">&quot;gr&quot;</span>, <span class="ident">grid</span>)<span class="question-mark">?</span>;
-        <span class="ident">globals</span>.<span class="ident">set_item</span>(<span class="string">&quot;pa&quot;</span>, <span class="ident">path</span>)<span class="question-mark">?</span>;
+        <span class="comment">// Global variables to plot
+        </span><span class="kw">let </span>globals = <span class="macro">vec!</span>[(<span class="string">&quot;plt&quot;</span>, py.import(<span class="string">&quot;matplotlib.pyplot&quot;</span>)<span class="question-mark">?</span>)].into_py_dict(py);
+        globals.set_item(<span class="string">&quot;x&quot;</span>, x)<span class="question-mark">?</span>;
+        globals.set_item(<span class="string">&quot;y&quot;</span>, ys)<span class="question-mark">?</span>;
+        globals.set_item(<span class="string">&quot;pair&quot;</span>, pairs)<span class="question-mark">?</span>;
+        globals.set_item(<span class="string">&quot;n&quot;</span>, y_length)<span class="question-mark">?</span>;
+        globals.set_item(<span class="string">&quot;p&quot;</span>, pair_length)<span class="question-mark">?</span>;
+        globals.set_item(<span class="string">&quot;fs&quot;</span>, fig_size)<span class="question-mark">?</span>;
+        globals.set_item(<span class="string">&quot;dp&quot;</span>, dpi)<span class="question-mark">?</span>;
+        globals.set_item(<span class="string">&quot;gr&quot;</span>, grid)<span class="question-mark">?</span>;
+        globals.set_item(<span class="string">&quot;pa&quot;</span>, path)<span class="question-mark">?</span>;
 
-        <span class="comment">// Plot Code</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">plot_string</span> <span class="op">=</span> <span class="macro">format!</span>(
+        <span class="comment">// Plot Code
+        </span><span class="kw">let </span><span class="kw-2">mut </span>plot_string = <span class="macro">format!</span>(
             <span class="string">&quot;\
              plt.rc(\&quot;text\&quot;, usetex=True)\n\
              plt.rc(\&quot;font\&quot;, family=\&quot;serif\&quot;)\n\
@@ -797,73 +791,72 @@
              plt.ylabel(r\&quot;{}\&quot;, fontsize=14)\n\
              if gr:\n\
              \tplt.grid()\n&quot;</span>,
-            <span class="ident">title</span>, <span class="ident">xlabel</span>, <span class="ident">ylabel</span>
+            title, xlabel, ylabel
         );
 
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">markers</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span> {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">y_length</span> {
-                <span class="ident">plot_string</span>
-                    .<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;plt.plot(x,y[{}],label=r\&quot;{}\&quot;)\n&quot;</span>, <span class="ident">i</span>, <span class="ident">legends</span>[<span class="ident">i</span>])[..])
+        <span class="kw">if </span><span class="self">self</span>.markers.len() == <span class="number">0 </span>{
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..y_length {
+                plot_string
+                    .push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;plt.plot(x,y[{}],label=r\&quot;{}\&quot;)\n&quot;</span>, i, legends[i])[..])
             }
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">pair_length</span> {
-                <span class="ident">plot_string</span>.<span class="ident">push_str</span>(
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..pair_length {
+                plot_string.push_str(
                     <span class="kw-2">&amp;</span><span class="macro">format!</span>(
                         <span class="string">&quot;plt.plot(pair[{}][0],pair[{}][1],label=r\&quot;{}\&quot;)\n&quot;</span>,
-                        <span class="ident">i</span>,
-                        <span class="ident">i</span>,
-                        <span class="ident">legends</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">y_length</span>]
+                        i,
+                        i,
+                        legends[i + y_length]
                     )[..],
                 )
             }
-        } <span class="kw">else</span> {
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">y_length</span> {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">markers</span>[<span class="ident">i</span>] {
-                    <span class="ident">Line</span> =&gt; <span class="ident">plot_string</span>
-                        .<span class="ident">push_str</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;plt.plot(x,y[{}],label=r\&quot;{}\&quot;)\n&quot;</span>, <span class="ident">i</span>, <span class="ident">legends</span>[<span class="ident">i</span>])[..]),
-                    <span class="ident">Point</span> =&gt; <span class="ident">plot_string</span>.<span class="ident">push_str</span>(
-                        <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;plt.plot(x,y[{}],\&quot;.\&quot;,label=r\&quot;{}\&quot;)\n&quot;</span>, <span class="ident">i</span>, <span class="ident">legends</span>[<span class="ident">i</span>])[..],
+        } <span class="kw">else </span>{
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..y_length {
+                <span class="kw">match </span><span class="self">self</span>.markers[i] {
+                    Line =&gt; plot_string
+                        .push_str(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;plt.plot(x,y[{}],label=r\&quot;{}\&quot;)\n&quot;</span>, i, legends[i])[..]),
+                    Point =&gt; plot_string.push_str(
+                        <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;plt.plot(x,y[{}],\&quot;.\&quot;,label=r\&quot;{}\&quot;)\n&quot;</span>, i, legends[i])[..],
                     ),
-                    <span class="ident">Circle</span> =&gt; <span class="ident">plot_string</span>.<span class="ident">push_str</span>(
-                        <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;plt.plot(x,y[{}],\&quot;o\&quot;,label=r\&quot;{}\&quot;)\n&quot;</span>, <span class="ident">i</span>, <span class="ident">legends</span>[<span class="ident">i</span>])[..],
+                    Circle =&gt; plot_string.push_str(
+                        <span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;plt.plot(x,y[{}],\&quot;o\&quot;,label=r\&quot;{}\&quot;)\n&quot;</span>, i, legends[i])[..],
                     ),
                 }
             }
-            <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">pair_length</span> {
-                <span class="kw">match</span> <span class="self">self</span>.<span class="ident">markers</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">y_length</span>] {
-                    <span class="ident">Line</span> =&gt; <span class="ident">plot_string</span>.<span class="ident">push_str</span>(
+            <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..pair_length {
+                <span class="kw">match </span><span class="self">self</span>.markers[i + y_length] {
+                    Line =&gt; plot_string.push_str(
                         <span class="kw-2">&amp;</span><span class="macro">format!</span>(
                             <span class="string">&quot;plt.plot(pair[{}][0],pair[{}][1],label=r\&quot;{}\&quot;)\n&quot;</span>,
-                            <span class="ident">i</span>,
-                            <span class="ident">i</span>,
-                            <span class="ident">legends</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">y_length</span>]
+                            i,
+                            i,
+                            legends[i + y_length]
                         )[..],
                     ),
-                    <span class="ident">Point</span> =&gt; <span class="ident">plot_string</span>.<span class="ident">push_str</span>(
+                    Point =&gt; plot_string.push_str(
                         <span class="kw-2">&amp;</span><span class="macro">format!</span>(
                             <span class="string">&quot;plt.plot(pair[{}][0],pair[{}][1],\&quot;.\&quot;,label=r\&quot;{}\&quot;)\n&quot;</span>,
-                            <span class="ident">i</span>,
-                            <span class="ident">i</span>,
-                            <span class="ident">legends</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">y_length</span>]
+                            i,
+                            i,
+                            legends[i + y_length]
                         )[..],
                     ),
-                    <span class="ident">Circle</span> =&gt; <span class="ident">plot_string</span>.<span class="ident">push_str</span>(
+                    Circle =&gt; plot_string.push_str(
                         <span class="kw-2">&amp;</span><span class="macro">format!</span>(
                             <span class="string">&quot;plt.plot(pair[{}][0],pair[{}][1],\&quot;o\&quot;,label=r\&quot;{}\&quot;)\n&quot;</span>,
-                            <span class="ident">i</span>,
-                            <span class="ident">i</span>,
-                            <span class="ident">legends</span>[<span class="ident">i</span> <span class="op">+</span> <span class="ident">y_length</span>]
+                            i,
+                            i,
+                            legends[i + y_length]
                         )[..],
                     ),
                 }
             }
         }
 
-        <span class="ident">plot_string</span>.<span class="ident">push_str</span>(<span class="string">&quot;plt.legend(fontsize=12)\nplt.savefig(pa)&quot;</span>);
+        plot_string.push_str(<span class="string">&quot;plt.legend(fontsize=12)\nplt.savefig(pa)&quot;</span>);
 
-        <span class="ident">py</span>.<span class="ident">run</span>(<span class="kw-2">&amp;</span><span class="ident">plot_string</span>[..], <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">globals</span>), <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
+        py.run(<span class="kw-2">&amp;</span>plot_string[..], <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>globals), <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/macros/r_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>r_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/macros/r_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>r_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -498,484 +492,483 @@
 <span id="476">476</span>
 <span id="477">477</span>
 <span id="478">478</span>
-</pre><pre class="rust"><code><span class="doccomment">//! R like macros</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! # List</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * `c`</span>
-<span class="doccomment">//! * `seq`</span>
-<span class="doccomment">//! * `matrix`</span>
-<span class="doccomment">//! * `cbind`</span>
-<span class="doccomment">//! * `rbind`</span>
-<span class="doccomment">//! * `runif`</span>
-<span class="doccomment">//! * `rnorm`</span>
-<span class="doccomment">//! * `dnorm`</span>
-<span class="doccomment">//! * `pnorm`</span>
-<span class="doccomment">//! * `rt`</span>
-<span class="doccomment">//! * `dt`</span>
-<span class="doccomment">//! * `pt`</span>
-<span class="doccomment">//! * `lm`</span>
+</pre><pre class="rust"><code><span class="doccomment">//! R like macros
+//!
+//! # List
+//!
+//! * `c`
+//! * `seq`
+//! * `matrix`
+//! * `cbind`
+//! * `rbind`
+//! * `runif`
+//! * `rnorm`
+//! * `dnorm`
+//! * `pnorm`
+//! * `rt`
+//! * `dt`
+//! * `pt`
+//! * `lm`
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::rand::prelude</span>::<span class="kw-2">*</span>;
+</span><span class="kw">extern crate </span>rand;
+<span class="kw">pub use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// R like concatenate (Type: Vec\&lt;f64\&gt;)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = c!(1,2,3,4);</span>
-<span class="doccomment">///     let b = c![5,6,7,8];</span>
-<span class="doccomment">///     let c = c![a; b];</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, a); // [1,2,3,4]</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, b); // [5,6,7,8]</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, c); // [1,2,3,4,5,6,7,8]</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">c</span> {
-    ( $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> ),<span class="op">*</span> ) =&gt; {
+<span class="doccomment">/// R like concatenate (Type: Vec\&lt;f64\&gt;)
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = c!(1,2,3,4);
+///     let b = c![5,6,7,8];
+///     let c = c![a; b];
+///     println!(&quot;{:?}&quot;, a); // [1,2,3,4]
+///     println!(&quot;{:?}&quot;, b); // [5,6,7,8]
+///     println!(&quot;{:?}&quot;, c); // [1,2,3,4,5,6,7,8]
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>c {
+    ( $( <span class="macro-nonterminal">$x</span>:expr ),* ) =&gt; {
         {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">l</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">0</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = Vec::new();
+            <span class="kw">let </span><span class="kw-2">mut </span>l: usize = <span class="number">0</span>;
             $(
-                <span class="ident">v</span>.<span class="ident">push</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>);
-                <span class="ident">l</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            )<span class="op">*</span>
-            <span class="ident">v</span>
+                v.push(<span class="macro-nonterminal">$x </span><span class="kw">as </span>f64);
+                l += <span class="number">1</span>;
+            )*
+            v
         }
     };
-    ( $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> );<span class="op">*</span> ) =&gt; {
+    ( $( <span class="macro-nonterminal">$x</span>:expr );* ) =&gt; {
         {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+            <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = Vec::new();
             $(
-                <span class="ident">v</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>);
-            )<span class="op">*</span>
-            <span class="ident">v</span>
+                v.extend(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$x</span>);
+            )*
+            v
         }
     }
 }
 
-<span class="doccomment">/// R like seq macro</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     assert_eq!(seq!(1,10,1), c!(1,2,3,4,5,6,7,8,9,10));</span>
-<span class="doccomment">///     assert_eq!(seq!(1,10,1), seq!(1;10;1));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">seq</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">step</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span> <span class="kw">as</span> <span class="ident">f64</span>;
+<span class="doccomment">/// R like seq macro
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     assert_eq!(seq!(1,10,1), c!(1,2,3,4,5,6,7,8,9,10));
+///     assert_eq!(seq!(1,10,1), seq!(1;10;1));
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>seq {
+    ( <span class="macro-nonterminal">$start</span>:expr, <span class="macro-nonterminal">$end</span>:expr, <span class="macro-nonterminal">$step</span>:expr ) =&gt; {{
+        <span class="kw">let </span>s = <span class="macro-nonterminal">$start </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>e = <span class="macro-nonterminal">$end </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>step = <span class="macro-nonterminal">$step </span><span class="kw">as </span>f64;
 
-        <span class="macro">assert!</span>(<span class="ident">e</span> <span class="op">&gt;</span> <span class="ident">s</span>);
+        <span class="macro">assert!</span>(e &gt; s);
 
-        <span class="kw">let</span> <span class="ident">factor</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="ident">e</span> <span class="op">-</span> <span class="ident">s</span>) <span class="op">/</span> <span class="ident">step</span>;
-        <span class="kw">let</span> <span class="ident">l</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">factor</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="kw">let </span>factor: f64 = (e - s) / step;
+        <span class="kw">let </span>l: usize = factor <span class="kw">as </span>usize + <span class="number">1</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = Vec::new();
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
-            <span class="ident">v</span>.<span class="ident">push</span>(<span class="ident">s</span> <span class="op">+</span> <span class="ident">step</span> <span class="op">*</span> (<span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span>));
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l {
+            v.push(s + step * (i <span class="kw">as </span>f64));
         }
-        <span class="ident">v</span>
+        v
     }};
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>:<span class="ident">expr</span> ) =&gt; {
-        <span class="macro">seq!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>)
+    ( <span class="macro-nonterminal">$start</span>:expr; <span class="macro-nonterminal">$end</span>:expr; <span class="macro-nonterminal">$step</span>:expr ) =&gt; {
+        <span class="macro">seq!</span>(<span class="macro-nonterminal">$start</span>, <span class="macro-nonterminal">$end</span>, <span class="macro-nonterminal">$step</span>)
     };
 }
 
-<span class="doccomment">/// More R like Matrix constructor (Macro)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = matrix!(1;4;1, 2, 2, Row); // start;end;step</span>
-<span class="doccomment">///     let b = matrix(c!(1,2,3,4), 2, 2, Row);</span>
-<span class="doccomment">///     let c = matrix(vec![1,2,3,4], 2, 2, Row); // Normal function</span>
-<span class="doccomment">///     assert!(a == b &amp;&amp; b == c);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let m = matrix!(0, 2, 2, Row);</span>
-<span class="doccomment">///     assert_eq!(m, zeros!(2, 2));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">matrix</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>;<span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="ident">matrix</span>(<span class="macro">seq!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">step</span>), <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>)
+<span class="doccomment">/// More R like Matrix constructor (Macro)
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = matrix!(1;4;1, 2, 2, Row); // start;end;step
+///     let b = matrix(c!(1,2,3,4), 2, 2, Row);
+///     let c = matrix(vec![1,2,3,4], 2, 2, Row); // Normal function
+///     assert!(a == b &amp;&amp; b == c);
+///
+///     let m = matrix!(0, 2, 2, Row);
+///     assert_eq!(m, zeros!(2, 2));
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>matrix {
+    ( <span class="macro-nonterminal">$start</span>:expr;<span class="macro-nonterminal">$end</span>:expr;<span class="macro-nonterminal">$step</span>:expr, <span class="macro-nonterminal">$row</span>:expr, <span class="macro-nonterminal">$col</span>:expr, <span class="macro-nonterminal">$shape</span>:expr ) =&gt; {{
+        matrix(<span class="macro">seq!</span>(<span class="macro-nonterminal">$start</span>, <span class="macro-nonterminal">$end</span>, <span class="macro-nonterminal">$step</span>), <span class="macro-nonterminal">$row</span>, <span class="macro-nonterminal">$col</span>, <span class="macro-nonterminal">$shape</span>)
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="ident">matrix</span>(<span class="macro">vec!</span>[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">value</span> <span class="kw">as</span> <span class="ident">f64</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span> <span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>], <span class="macro-nonterminal">$</span><span class="macro-nonterminal">row</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">col</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">shape</span>)
+    ( <span class="macro-nonterminal">$value</span>:expr, <span class="macro-nonterminal">$row</span>:expr, <span class="macro-nonterminal">$col</span>:expr, <span class="macro-nonterminal">$shape</span>:expr ) =&gt; {{
+        matrix(<span class="macro">vec!</span>[<span class="macro-nonterminal">$value </span><span class="kw">as </span>f64; <span class="macro-nonterminal">$row </span>* <span class="macro-nonterminal">$col</span>], <span class="macro-nonterminal">$row</span>, <span class="macro-nonterminal">$col</span>, <span class="macro-nonterminal">$shape</span>)
     }};
 }
 
-<span class="doccomment">/// R like cbind</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = matrix!(1;4;1, 2, 2, Col);</span>
-<span class="doccomment">///     let b = matrix(c!(5,6),2, 1, Col);</span>
-<span class="doccomment">///     let c = matrix(c!(7,8),2,1,Col);</span>
-<span class="doccomment">///     assert_eq!(cbind!(a.clone(),b.clone()), matrix!(1;6;1,2,3,Col));</span>
-<span class="doccomment">///     assert_eq!(cbind!(a,b,c), matrix!(1;8;1, 2, 4, Col));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">cbind</span> {
-    <span class="comment">// Two</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) =&gt; {
+<span class="doccomment">/// R like cbind
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = matrix!(1;4;1, 2, 2, Col);
+///     let b = matrix(c!(5,6),2, 1, Col);
+///     let c = matrix(c!(7,8),2,1,Col);
+///     assert_eq!(cbind!(a.clone(),b.clone()), matrix!(1;6;1,2,3,Col));
+///     assert_eq!(cbind!(a,b,c), matrix!(1;8;1, 2, 4, Col));
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>cbind {
+    <span class="comment">// Two
+    </span>( <span class="macro-nonterminal">$x</span>:expr, <span class="macro-nonterminal">$y</span>:expr ) =&gt; {
         {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
-            <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
-                <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
+            <span class="kw">let </span><span class="kw-2">mut </span>temp = <span class="macro-nonterminal">$x</span>;
+            <span class="kw">if </span>temp.shape != Col {
+                temp = temp.change_shape();
             }
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">data</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">col</span>;
-            <span class="kw">let</span> <span class="ident">r</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">row</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = temp.data;
+            <span class="kw">let </span><span class="kw-2">mut </span>c: usize = temp.col;
+            <span class="kw">let </span>r: usize = temp.row;
 
-            <span class="macro">assert_eq!</span>(<span class="ident">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>.<span class="ident">row</span>);
-            <span class="ident">v</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>.<span class="ident">data</span>.<span class="ident">clone</span>());
-            <span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>.<span class="ident">col</span>;
-            <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Col</span>)
+            <span class="macro">assert_eq!</span>(r, <span class="macro-nonterminal">$y</span>.row);
+            v.extend(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$y</span>.data.clone());
+            c += <span class="kw-2">&amp;</span><span class="macro-nonterminal">$y</span>.col;
+            matrix(v, r, c, Col)
         }
     };
 
-    <span class="comment">// Multi</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) =&gt; {
+    <span class="comment">// Multi
+    </span>( <span class="macro-nonterminal">$x0</span>:expr, $( <span class="macro-nonterminal">$x</span>: expr ),* ) =&gt; {
         {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp0</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>;
-            <span class="kw">if</span> <span class="ident">temp0</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
-                <span class="ident">temp0</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">change_shape</span>();
+            <span class="kw">let </span><span class="kw-2">mut </span>temp0 = <span class="macro-nonterminal">$x0</span>;
+            <span class="kw">if </span>temp0.shape != Col {
+                temp0 = temp0.change_shape();
             }
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">data</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">col</span>;
-            <span class="kw">let</span> <span class="ident">r</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">row</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = temp0.data;
+            <span class="kw">let </span><span class="kw-2">mut </span>c: usize = temp0.col;
+            <span class="kw">let </span>r: usize = temp0.row;
             $(
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
-                <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
-                    <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
+                <span class="kw">let </span><span class="kw-2">mut </span>temp = <span class="macro-nonterminal">$x</span>;
+                <span class="kw">if </span>temp.shape != Col {
+                    temp = temp.change_shape();
                 }
-                <span class="comment">// Must equal row</span>
-                <span class="macro">assert_eq!</span>(<span class="ident">r</span>, <span class="ident">temp</span>.<span class="ident">row</span>);
-                <span class="comment">// Add column</span>
-                <span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp</span>.<span class="ident">col</span>;
-                <span class="ident">v</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>.<span class="ident">data</span>.<span class="ident">clone</span>());
-            )<span class="op">*</span>
-            <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Col</span>)
+                <span class="comment">// Must equal row
+                </span><span class="macro">assert_eq!</span>(r, temp.row);
+                <span class="comment">// Add column
+                </span>c += temp.col;
+                v.extend(<span class="kw-2">&amp;</span>temp.data.clone());
+            )*
+            matrix(v, r, c, Col)
         }
     };
 }
 
-<span class="doccomment">/// R like rbind</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = matrix!(1;4;1, 2, 2, Row);</span>
-<span class="doccomment">///     let b = matrix(c!(5,6),1, 2, Row);</span>
-<span class="doccomment">///     let c = matrix(c!(7,8),1, 2, Row);</span>
-<span class="doccomment">///     assert_eq!(rbind!(a.clone(),b.clone()), matrix!(1;6;1, 3, 2, Row));</span>
-<span class="doccomment">///     assert_eq!(rbind!(a,b,c), matrix!(1;8;1, 4, 2, Row));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">rbind</span> {
-    <span class="comment">// Two</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">expr</span> ) =&gt; {
+<span class="doccomment">/// R like rbind
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = matrix!(1;4;1, 2, 2, Row);
+///     let b = matrix(c!(5,6),1, 2, Row);
+///     let c = matrix(c!(7,8),1, 2, Row);
+///     assert_eq!(rbind!(a.clone(),b.clone()), matrix!(1;6;1, 3, 2, Row));
+///     assert_eq!(rbind!(a,b,c), matrix!(1;8;1, 4, 2, Row));
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>rbind {
+    <span class="comment">// Two
+    </span>( <span class="macro-nonterminal">$x</span>:expr, <span class="macro-nonterminal">$y</span>:expr ) =&gt; {
         {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
-            <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
-                <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
+            <span class="kw">let </span><span class="kw-2">mut </span>temp = <span class="macro-nonterminal">$x</span>;
+            <span class="kw">if </span>temp.shape != Row {
+                temp = temp.change_shape();
             }
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp2</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>;
-            <span class="kw">if</span> <span class="ident">temp2</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
-                <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">change_shape</span>();
+            <span class="kw">let </span><span class="kw-2">mut </span>temp2 = <span class="macro-nonterminal">$y</span>;
+            <span class="kw">if </span>temp2.shape != Row {
+                temp2 = temp2.change_shape();
             }
 
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">data</span>;
-            <span class="kw">let</span> <span class="ident">c</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">col</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">row</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = temp.data;
+            <span class="kw">let </span>c: usize = temp.col;
+            <span class="kw">let </span><span class="kw-2">mut </span>r: usize = temp.row;
 
-            <span class="macro">assert_eq!</span>(<span class="ident">c</span>, <span class="ident">temp2</span>.<span class="ident">col</span>);
-            <span class="ident">v</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="ident">temp2</span>.<span class="ident">data</span>.<span class="ident">clone</span>());
-            <span class="ident">r</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">row</span>;
-            <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)
+            <span class="macro">assert_eq!</span>(c, temp2.col);
+            v.extend(<span class="kw-2">&amp;</span>temp2.data.clone());
+            r += temp2.row;
+            matrix(v, r, c, Row)
         }
     };
 
-    <span class="comment">// Multi</span>
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>: <span class="ident">expr</span> ),<span class="op">*</span> ) =&gt; {
+    <span class="comment">// Multi
+    </span>( <span class="macro-nonterminal">$x0</span>:expr, $( <span class="macro-nonterminal">$x</span>: expr ),* ) =&gt; {
         {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp0</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>;
-            <span class="kw">if</span> <span class="ident">temp0</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
-                <span class="ident">temp0</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">change_shape</span>();
+            <span class="kw">let </span><span class="kw-2">mut </span>temp0 = <span class="macro-nonterminal">$x0</span>;
+            <span class="kw">if </span>temp0.shape != Row {
+                temp0 = temp0.change_shape();
             }
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">data</span>;
-            <span class="kw">let</span> <span class="ident">c</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">col</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">temp0</span>.<span class="ident">row</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = temp0.data;
+            <span class="kw">let </span>c: usize = temp0.col;
+            <span class="kw">let </span><span class="kw-2">mut </span>r: usize = temp0.row;
             $(
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>;
-                <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
-                    <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
+                <span class="kw">let </span><span class="kw-2">mut </span>temp = <span class="macro-nonterminal">$x</span>;
+                <span class="kw">if </span>temp.shape != Row {
+                    temp = temp.change_shape();
                 }
-                <span class="comment">// Must equal row</span>
-                <span class="macro">assert_eq!</span>(<span class="ident">c</span>, <span class="ident">temp</span>.<span class="ident">col</span>);
-                <span class="comment">// Add column</span>
-                <span class="ident">r</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp</span>.<span class="ident">row</span>;
-                <span class="ident">v</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="ident">temp</span>.<span class="ident">data</span>.<span class="ident">clone</span>());
-            )<span class="op">*</span>
-            <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)
+                <span class="comment">// Must equal row
+                </span><span class="macro">assert_eq!</span>(c, temp.col);
+                <span class="comment">// Add column
+                </span>r += temp.row;
+                v.extend(<span class="kw-2">&amp;</span>temp.data.clone());
+            )*
+            matrix(v, r, c, Row)
         }
     };
 }
 
-<span class="doccomment">/// R like random uniform</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = runif!(5, -1, 1);</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, a);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let b = runif!(5); // same as runif!(5,0,1)</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, b);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">runif</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">n</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
+<span class="doccomment">/// R like random uniform
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = runif!(5, -1, 1);
+///     println!(&quot;{:?}&quot;, a);
+///
+///     let b = runif!(5); // same as runif!(5,0,1)
+///     println!(&quot;{:?}&quot;, b);
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>runif {
+    ( <span class="macro-nonterminal">$x0</span>:expr, <span class="macro-nonterminal">$start</span>:expr, <span class="macro-nonterminal">$end</span>:expr ) =&gt; {{
+        <span class="kw">let </span>n: usize = <span class="macro-nonterminal">$x0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
 
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span> <span class="kw">as</span> <span class="ident">f64</span>..<span class="op">=</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span> <span class="kw">as</span> <span class="ident">f64</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            v[i] = rng.gen_range(<span class="macro-nonterminal">$start </span><span class="kw">as </span>f64..=<span class="macro-nonterminal">$end </span><span class="kw">as </span>f64);
         }
-        <span class="ident">v</span>
+        v
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="macro">runif!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x0</span>, <span class="number">0</span>, <span class="number">1</span>)
-    }};
-}
-
-<span class="doccomment">/// R like random normal</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = rnorm!(5, 2, 1);</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, a);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let b = rnorm!(5); // same as rnorm!(5,0,1)</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, b);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">rnorm</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">n</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>;
-        <span class="kw">let</span> <span class="ident">normal</span> <span class="op">=</span> <span class="ident">Normal</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span> <span class="kw">as</span> <span class="ident">f64</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span> <span class="kw">as</span> <span class="ident">f64</span>);
-        <span class="ident">normal</span>.<span class="ident">sample</span>(<span class="ident">n</span>)
-    }};
-
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="macro">rnorm!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>, <span class="number">0</span>, <span class="number">1</span>)
+    ( <span class="macro-nonterminal">$x0</span>:expr ) =&gt; {{
+        <span class="macro">runif!</span>(<span class="macro-nonterminal">$x0</span>, <span class="number">0</span>, <span class="number">1</span>)
     }};
 }
 
-<span class="doccomment">/// R like `dnorm`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = dnorm!(2, 2, 1);</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, a); // 0.3989422804014327</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let b = dnorm!(0); // same as dnorm!(0,0,1)</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, b);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">dnorm</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span>: <span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">mean</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">sd</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">normal</span> <span class="op">=</span> <span class="ident">Normal</span>(<span class="ident">mean</span>, <span class="ident">sd</span>);
-        <span class="ident">normal</span>.<span class="ident">pdf</span>(<span class="ident">x</span>)
+<span class="doccomment">/// R like random normal
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = rnorm!(5, 2, 1);
+///     println!(&quot;{:?}&quot;, a);
+///
+///     let b = rnorm!(5); // same as rnorm!(5,0,1)
+///     println!(&quot;{:?}&quot;, b);
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>rnorm {
+    ( <span class="macro-nonterminal">$n</span>:expr, <span class="macro-nonterminal">$mean</span>:expr, <span class="macro-nonterminal">$sd</span>:expr ) =&gt; {{
+        <span class="kw">let </span>n: usize = <span class="macro-nonterminal">$n</span>;
+        <span class="kw">let </span>normal = Normal(<span class="macro-nonterminal">$mean </span><span class="kw">as </span>f64, <span class="macro-nonterminal">$sd </span><span class="kw">as </span>f64);
+        normal.sample(n)
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="macro">dnorm!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>, <span class="number">0</span>, <span class="number">1</span>)
+    ( <span class="macro-nonterminal">$n</span>:expr ) =&gt; {{
+        <span class="macro">rnorm!</span>(<span class="macro-nonterminal">$n</span>, <span class="number">0</span>, <span class="number">1</span>)
     }};
 }
 
-<span class="doccomment">/// R like `pnorm`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = pnorm!(2, 2, 1);</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, a); // 0.5</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let b = pnorm!(0); // same as pnorm!(0,0,1)</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, b);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">pnorm</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">mean</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">mean</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">sd</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sd</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">normal</span> <span class="op">=</span> <span class="ident">Normal</span>(<span class="ident">mean</span>, <span class="ident">sd</span>);
-        <span class="ident">normal</span>.<span class="ident">cdf</span>(<span class="ident">x</span>)
+<span class="doccomment">/// R like `dnorm`
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = dnorm!(2, 2, 1);
+///     println!(&quot;{:?}&quot;, a); // 0.3989422804014327
+///
+///     let b = dnorm!(0); // same as dnorm!(0,0,1)
+///     println!(&quot;{:?}&quot;, b);
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>dnorm {
+    ( <span class="macro-nonterminal">$x</span>:expr, <span class="macro-nonterminal">$mean</span>: expr, <span class="macro-nonterminal">$sd</span>:expr ) =&gt; {{
+        <span class="kw">let </span>x = <span class="macro-nonterminal">$x </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>mean = <span class="macro-nonterminal">$mean </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>sd = <span class="macro-nonterminal">$sd </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>normal = Normal(mean, sd);
+        normal.pdf(x)
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span> ) =&gt; {
-        <span class="macro">pnorm!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>, <span class="number">0</span>, <span class="number">1</span>)
+    ( <span class="macro-nonterminal">$x</span>:expr ) =&gt; {{
+        <span class="macro">dnorm!</span>(<span class="macro-nonterminal">$x</span>, <span class="number">0</span>, <span class="number">1</span>)
+    }};
+}
+
+<span class="doccomment">/// R like `pnorm`
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = pnorm!(2, 2, 1);
+///     println!(&quot;{:?}&quot;, a); // 0.5
+///
+///     let b = pnorm!(0); // same as pnorm!(0,0,1)
+///     println!(&quot;{:?}&quot;, b);
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>pnorm {
+    ( <span class="macro-nonterminal">$x</span>:expr, <span class="macro-nonterminal">$mean</span>:expr, <span class="macro-nonterminal">$sd</span>:expr ) =&gt; {{
+        <span class="kw">let </span>x = <span class="macro-nonterminal">$x </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>mean = <span class="macro-nonterminal">$mean </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>sd = <span class="macro-nonterminal">$sd </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>normal = Normal(mean, sd);
+        normal.cdf(x)
+    }};
+
+    ( <span class="macro-nonterminal">$x</span>:expr ) =&gt; {
+        <span class="macro">pnorm!</span>(<span class="macro-nonterminal">$x</span>, <span class="number">0</span>, <span class="number">1</span>)
     };
 }
 
-<span class="doccomment">/// R like random Student&#39;s t</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = rt!(5, 1);</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, a);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">rt</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">n</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>;
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">StudentT</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span> <span class="kw">as</span> <span class="ident">f64</span>);
-        <span class="ident">t</span>.<span class="ident">sample</span>(<span class="ident">n</span>)
+<span class="doccomment">/// R like random Student&#39;s t
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = rt!(5, 1);
+///     println!(&quot;{:?}&quot;, a);
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>rt {
+    ( <span class="macro-nonterminal">$n</span>:expr, <span class="macro-nonterminal">$df</span>:expr ) =&gt; {{
+        <span class="kw">let </span>n: usize = <span class="macro-nonterminal">$n</span>;
+        <span class="kw">let </span>t = StudentT(<span class="macro-nonterminal">$df </span><span class="kw">as </span>f64);
+        t.sample(n)
     }};
 }
 
-<span class="doccomment">/// R like `dt`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = dt!(1, 1);</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, a);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">dt</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">df</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">StudentT</span>(<span class="ident">df</span>);
-        <span class="ident">t</span>.<span class="ident">pdf</span>(<span class="ident">x</span>)
+<span class="doccomment">/// R like `dt`
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = dt!(1, 1);
+///     println!(&quot;{:?}&quot;, a);
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>dt {
+    ( <span class="macro-nonterminal">$x</span>:expr, <span class="macro-nonterminal">$df</span>:expr ) =&gt; {{
+        <span class="kw">let </span>x = <span class="macro-nonterminal">$x </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>df = <span class="macro-nonterminal">$df </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>t = StudentT(df);
+        t.pdf(x)
     }};
 }
 
-<span class="doccomment">/// R like `pt`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = pt!(1, 1);</span>
-<span class="doccomment">///     println!(&quot;{:?}&quot;, a); // 0.5</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">pt</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">df</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">df</span> <span class="kw">as</span> <span class="ident">f64</span>;
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">StudentT</span>(<span class="ident">df</span>);
-        <span class="ident">t</span>.<span class="ident">cdf</span>(<span class="ident">x</span>)
+<span class="doccomment">/// R like `pt`
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = pt!(1, 1);
+///     println!(&quot;{:?}&quot;, a); // 0.5
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>pt {
+    ( <span class="macro-nonterminal">$x</span>:expr, <span class="macro-nonterminal">$df</span>:expr ) =&gt; {{
+        <span class="kw">let </span>x = <span class="macro-nonterminal">$x </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>df = <span class="macro-nonterminal">$df </span><span class="kw">as </span>f64;
+        <span class="kw">let </span>t = StudentT(df);
+        t.cdf(x)
     }};
 }
 
-<span class="doccomment">/// R like lm</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Caution</span>
-<span class="doccomment">/// Should use single token to use this macro</span>
-<span class="doccomment">/// * `lm(y ~ x)` can be accepted</span>
-<span class="doccomment">/// * `lm(c!(1,2,3,4) ~ c!(1,2,3,4))` is not allowed!</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = matrix!(1;5;1, 5, 1, Col);</span>
-<span class="doccomment">///     let b = matrix(c!(3.7, 4.2, 4.9, 5.7, 6.0), 5, 1, Col);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     assert_eq!(lm!(b ~ a), matrix(c!(3.0700, 0.6100), 2, 1, Col));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">lm</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>:<span class="ident">tt</span> ~ <span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>:<span class="ident">tt</span> ) =&gt; {
-        <span class="ident">lm</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">x</span>, <span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">y</span>)
+<span class="doccomment">/// R like lm
+///
+/// # Caution
+/// Should use single token to use this macro
+/// * `lm(y ~ x)` can be accepted
+/// * `lm(c!(1,2,3,4) ~ c!(1,2,3,4))` is not allowed!
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = matrix!(1;5;1, 5, 1, Col);
+///     let b = matrix(c!(3.7, 4.2, 4.9, 5.7, 6.0), 5, 1, Col);
+///
+///     assert_eq!(lm!(b ~ a), matrix(c!(3.0700, 0.6100), 2, 1, Col));
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>lm {
+    ( <span class="macro-nonterminal">$y</span>:tt ~ <span class="macro-nonterminal">$x</span>:tt ) =&gt; {
+        lm(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$x</span>, <span class="kw-2">&amp;</span><span class="macro-nonterminal">$y</span>)
     };
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

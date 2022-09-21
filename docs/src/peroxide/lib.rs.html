@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../peroxide/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../peroxide/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -228,214 +222,213 @@
 <span id="206">206</span>
 <span id="207">207</span>
 <span id="208">208</span>
-</pre><pre class="rust"><code><span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Components</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! `peroxide` has various components for scientific computation.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Linear Algebra (with BLAS &amp; LAPACK)</span>
-<span class="doccomment">//!     * [Matrix](structure/matrix/index.html) operations</span>
-<span class="doccomment">//!         * `+,-,*,/`</span>
-<span class="doccomment">//!         * LU Decomposition, Determinant, Inverse</span>
-<span class="doccomment">//!         * QR Decomposition (`O3` feature needed)</span>
-<span class="doccomment">//!         * Singular Value Decomposition (`O3` feature needed)</span>
-<span class="doccomment">//!         * Cholesky Decomposition (`O3` feature needed)</span>
-<span class="doccomment">//!         * Reduced Row Echelon Form</span>
-<span class="doccomment">//!     * [Vector](structure/vector/index.html) operations</span>
-<span class="doccomment">//!     * [Eigenvalue, Eigenvector](numerical/eigen/index.html) algorithms</span>
-<span class="doccomment">//! * Statistics</span>
-<span class="doccomment">//!     * [Statistical operations](statistics/stat/index.html)</span>
-<span class="doccomment">//!         * `mean, var, sd`</span>
-<span class="doccomment">//!         * `factorial, P, C, H`</span>
-<span class="doccomment">//!     * [Distributions](statistics/dist/index.html)</span>
-<span class="doccomment">//!         * Bernoulli</span>
-<span class="doccomment">//!         * Uniform</span>
-<span class="doccomment">//!         * Binomial</span>
-<span class="doccomment">//!         * Normal</span>
-<span class="doccomment">//!         * Gamma</span>
-<span class="doccomment">//!         * Beta</span>
-<span class="doccomment">//!         * Student&#39;s t</span>
-<span class="doccomment">//! * [Special functions](special/function/index.html) (Using `puruspe` crate)</span>
-<span class="doccomment">//!     * Gaussian</span>
-<span class="doccomment">//!     * Gamma</span>
-<span class="doccomment">//!     * Beta</span>
-<span class="doccomment">//!     * Error</span>
-<span class="doccomment">//!     * Incomplete Gamma</span>
-<span class="doccomment">//!     * Incomplete Beta</span>
-<span class="doccomment">//! * Automatic Differentiation</span>
-<span class="doccomment">//!     * [Taylor mode forward AD](structure/ad/index.html)</span>
-<span class="doccomment">//! * Numerical Utils</span>
-<span class="doccomment">//!     * [Interpolation](numerical/interp/index.html)</span>
-<span class="doccomment">//!     * [Spline](numerical/spline/index.html)</span>
-<span class="doccomment">//!     * [Polynomial](structure/polynomial/index.html)</span>
-<span class="doccomment">//!     * [Lanczos Approximation](special/lanczos/index.html)</span>
-<span class="doccomment">//!     * [Numerical Integrations](numerical/integral/index.html)</span>
-<span class="doccomment">//! * [Optimization](numerical/optimize/index.html)</span>
-<span class="doccomment">//!     * Gradient Descent</span>
-<span class="doccomment">//!     * Levenberg-Marquardt</span>
-<span class="doccomment">//! * [Root Finding](numerical/root/index.html)</span>
-<span class="doccomment">//!     * Bisection</span>
-<span class="doccomment">//!     * False Position (Regula falsi)</span>
-<span class="doccomment">//!     * Secant</span>
-<span class="doccomment">//!     * Newton</span>
-<span class="doccomment">//! * [Differential Equations](numerical/ode/index.html)</span>
-<span class="doccomment">//!     * Explicit</span>
-<span class="doccomment">//!         * Runge-Kutta 4th order</span>
-<span class="doccomment">//!         * Euler methods</span>
-<span class="doccomment">//!     * Implicit</span>
-<span class="doccomment">//!         * Backward Euler</span>
-<span class="doccomment">//!         * Gauss-Legendre 4th order</span>
-<span class="doccomment">//! * Communication with Python</span>
-<span class="doccomment">//!     * [Plot with `matplotlib`](util/plot/index.html)</span>
-<span class="doccomment">//! * [DataFrame](structure/dataframe/index.html)</span>
-<span class="doccomment">//!     * Read &amp; Write with `netcdf` or `csv` format</span>
-<span class="doccomment">//! * Macros</span>
-<span class="doccomment">//!     * [R macros](macros/r_macro/index.html)</span>
-<span class="doccomment">//!     * [Matlab macros](macros/matlab_macro/index.html)</span>
-<span class="doccomment">//!     * [Julia macros](macros/julia_macro/index.html)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! And all these things are built on mathematical traits.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Traits</span>
-<span class="doccomment">//!     * [Functional Programming tools](traits/fp/index.html)</span>
-<span class="doccomment">//!     * [General algorithms](traits/general/index.html)</span>
-<span class="doccomment">//!     * [Mathematics](traits/math/index.html)</span>
-<span class="doccomment">//!     * [Mutable tools](traits/mutable/index.html)</span>
-<span class="doccomment">//!     * [Number &amp; Real](traits/num/index.html)</span>
-<span class="doccomment">//!     * [Pointer](traits/pointer/index.html)</span>
-<span class="doccomment">//!     * [Stable](traits/stable/index.html)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Quick Start</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Cargo.toml</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * To use `peroxide`, you should edit `Cargo.toml`</span>
-<span class="doccomment">//! * Current document version is corresponding to `0.30.11`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! 1. Default</span>
-<span class="doccomment">//!     ```toml</span>
-<span class="doccomment">//!     [dependencies]</span>
-<span class="doccomment">//!     peroxide = &quot;0.30&quot;</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//! 2. OpenBLAS</span>
-<span class="doccomment">//!     ```toml</span>
-<span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.30&quot;</span>
-<span class="doccomment">//!     default-features = false</span>
-<span class="doccomment">//!     features = [&quot;O3&quot;]</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//! 3. Plot</span>
-<span class="doccomment">//!     ```toml</span>
-<span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.30&quot;</span>
-<span class="doccomment">//!     default-features = false</span>
-<span class="doccomment">//!     features = [&quot;plot&quot;]</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//! 4. `netcdf` dependency for DataFrame</span>
-<span class="doccomment">//!     ```toml</span>
-<span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.30&quot;</span>
-<span class="doccomment">//!     default-features = false</span>
-<span class="doccomment">//!     features = [&quot;nc&quot;]</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//! 5. `csv` dependency for DataFrame</span>
-<span class="doccomment">//!     ```toml</span>
-<span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.30&quot;</span>
-<span class="doccomment">//!     default-features = false</span>
-<span class="doccomment">//!     features = [&quot;csv&quot;]</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//! 6. Together</span>
-<span class="doccomment">//!     ```toml</span>
-<span class="doccomment">//!     [dependencies.peroxide]</span>
-<span class="doccomment">//!     version = &quot;0.30&quot;</span>
-<span class="doccomment">//!     default-features = false</span>
-<span class="doccomment">//!     features = [&quot;O3&quot;, &quot;plot&quot;, &quot;nc&quot;]</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Import all at once</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Peroxide has two options.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * [`prelude`](prelude/index.html) : To simple use</span>
-<span class="doccomment">//! * [`fuga`](fuga/index.html) : To control numerical algorithms</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! To see differences, follow above two links.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! You can import all functions &amp; structures at once</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * `prelude`</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::prelude::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     // Write what you want</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * `fuga`</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! #[macro_use]</span>
-<span class="doccomment">//! extern crate peroxide;</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     // Write what you want</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Useful tips for features</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * After `0.28.0`, `dataframe` feature is replaced by `nc` feature.</span>
-<span class="doccomment">//! * If you want to use *QR* or *SVD* or *Cholesky Decomposition* then should use `O3` feature (there are no implementations for these decompositions in `default`)</span>
-<span class="doccomment">//! * If you want to write your numerical results, then use `nc` feature and `netcdf` format. (It is much more effective than `csv` and `json`.)</span>
-<span class="doccomment">//! * After `0.23.0`, there are two options - `fuga`, `prelude`. Choose proper option for your computations.</span>
-<span class="doccomment">//! * To plot, use `nc` feature to export data as netcdf format and use python to draw plot.</span>
-<span class="doccomment">//!     * `plot` feature has limited plot abilities.</span>
-<span class="doccomment">//!     * There is a template of python code. - [Socialst](https://github.com/Axect/Socialst/blob/master/Templates/PyPlot_Template/nc_plot.py)</span>
+</pre><pre class="rust"><code><span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.
+//!
+//! ## Components
+//!
+//! `peroxide` has various components for scientific computation.
+//!
+//! * Linear Algebra (with BLAS &amp; LAPACK)
+//!     * [Matrix](structure/matrix/index.html) operations
+//!         * `+,-,*,/`
+//!         * LU Decomposition, Determinant, Inverse
+//!         * QR Decomposition (`O3` feature needed)
+//!         * Singular Value Decomposition (`O3` feature needed)
+//!         * Cholesky Decomposition (`O3` feature needed)
+//!         * Reduced Row Echelon Form
+//!     * [Vector](structure/vector/index.html) operations
+//!     * [Eigenvalue, Eigenvector](numerical/eigen/index.html) algorithms
+//! * Statistics
+//!     * [Statistical operations](statistics/stat/index.html)
+//!         * `mean, var, sd`
+//!         * `factorial, P, C, H`
+//!     * [Distributions](statistics/dist/index.html)
+//!         * Bernoulli
+//!         * Uniform
+//!         * Binomial
+//!         * Normal
+//!         * Gamma
+//!         * Beta
+//!         * Student&#39;s t
+//! * [Special functions](special/function/index.html) (Using `puruspe` crate)
+//!     * Gaussian
+//!     * Gamma
+//!     * Beta
+//!     * Error
+//!     * Incomplete Gamma
+//!     * Incomplete Beta
+//! * Automatic Differentiation
+//!     * [Taylor mode forward AD](structure/ad/index.html)
+//! * Numerical Utils
+//!     * [Interpolation](numerical/interp/index.html)
+//!     * [Spline](numerical/spline/index.html)
+//!     * [Polynomial](structure/polynomial/index.html)
+//!     * [Lanczos Approximation](special/lanczos/index.html)
+//!     * [Numerical Integrations](numerical/integral/index.html)
+//! * [Optimization](numerical/optimize/index.html)
+//!     * Gradient Descent
+//!     * Levenberg-Marquardt
+//! * [Root Finding](numerical/root/index.html)
+//!     * Bisection
+//!     * False Position (Regula falsi)
+//!     * Secant
+//!     * Newton
+//! * [Differential Equations](numerical/ode/index.html)
+//!     * Explicit
+//!         * Runge-Kutta 4th order
+//!         * Euler methods
+//!     * Implicit
+//!         * Backward Euler
+//!         * Gauss-Legendre 4th order
+//! * Communication with Python
+//!     * [Plot with `matplotlib`](util/plot/index.html)
+//! * [DataFrame](structure/dataframe/index.html)
+//!     * Read &amp; Write with `netcdf` or `csv` format
+//! * Macros
+//!     * [R macros](macros/r_macro/index.html)
+//!     * [Matlab macros](macros/matlab_macro/index.html)
+//!     * [Julia macros](macros/julia_macro/index.html)
+//!
+//! And all these things are built on mathematical traits.
+//!
+//! * Traits
+//!     * [Functional Programming tools](traits/fp/index.html)
+//!     * [General algorithms](traits/general/index.html)
+//!     * [Mathematics](traits/math/index.html)
+//!     * [Mutable tools](traits/mutable/index.html)
+//!     * [Number &amp; Real](traits/num/index.html)
+//!     * [Pointer](traits/pointer/index.html)
+//!     * [Stable](traits/stable/index.html)
+//!
+//! ## Quick Start
+//!
+//! ### Cargo.toml
+//!
+//! * To use `peroxide`, you should edit `Cargo.toml`
+//! * Current document version is corresponding to `0.30.11`
+//!
+//! 1. Default
+//!     ```toml
+//!     [dependencies]
+//!     peroxide = &quot;0.30&quot;
+//!     ```
+//! 2. OpenBLAS
+//!     ```toml
+//!     [dependencies.peroxide]
+//!     version = &quot;0.30&quot;
+//!     default-features = false
+//!     features = [&quot;O3&quot;]
+//!     ```
+//! 3. Plot
+//!     ```toml
+//!     [dependencies.peroxide]
+//!     version = &quot;0.30&quot;
+//!     default-features = false
+//!     features = [&quot;plot&quot;]
+//!     ```
+//! 4. `netcdf` dependency for DataFrame
+//!     ```toml
+//!     [dependencies.peroxide]
+//!     version = &quot;0.30&quot;
+//!     default-features = false
+//!     features = [&quot;nc&quot;]
+//!     ```
+//! 5. `csv` dependency for DataFrame
+//!     ```toml
+//!     [dependencies.peroxide]
+//!     version = &quot;0.30&quot;
+//!     default-features = false
+//!     features = [&quot;csv&quot;]
+//!     ```
+//! 6. Together
+//!     ```toml
+//!     [dependencies.peroxide]
+//!     version = &quot;0.30&quot;
+//!     default-features = false
+//!     features = [&quot;O3&quot;, &quot;plot&quot;, &quot;nc&quot;]
+//!     ```
+//!
+//! ## Import all at once
+//!
+//! Peroxide has two options.
+//!
+//! * [`prelude`](prelude/index.html) : To simple use
+//! * [`fuga`](fuga/index.html) : To control numerical algorithms
+//!
+//! To see differences, follow above two links.
+//!
+//! You can import all functions &amp; structures at once
+//!
+//! * `prelude`
+//! ```
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::prelude::*;
+//!
+//! fn main() {
+//!     // Write what you want
+//! }
+//! ```
+//!
+//! * `fuga`
+//! ```
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     // Write what you want
+//! }
+//! ```
+//!
+//! ## Useful tips for features
+//!
+//! * After `0.28.0`, `dataframe` feature is replaced by `nc` feature.
+//! * If you want to use *QR* or *SVD* or *Cholesky Decomposition* then should use `O3` feature (there are no implementations for these decompositions in `default`)
+//! * If you want to write your numerical results, then use `nc` feature and `netcdf` format. (It is much more effective than `csv` and `json`.)
+//! * After `0.23.0`, there are two options - `fuga`, `prelude`. Choose proper option for your computations.
+//! * To plot, use `nc` feature to export data as netcdf format and use python to draw plot.
+//!     * `plot` feature has limited plot abilities.
+//!     * There is a template of python code. - [Socialst](https://github.com/Axect/Socialst/blob/master/Templates/PyPlot_Template/nc_plot.py)
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">blas</span>;
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;O3&quot;</span>)]
+</span><span class="kw">extern crate </span>blas;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;O3&quot;</span>)]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">lapack</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;O3&quot;</span>)]
+</span><span class="kw">extern crate </span>lapack;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;plot&quot;</span>)]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">pyo3</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;plot&quot;</span>)]
+</span><span class="kw">extern crate </span>pyo3;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">serde</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">extern crate </span>serde;
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
+<span class="kw">extern crate </span>rand;
 
-<span class="comment">// extern crate json;</span>
+<span class="comment">// extern crate json;
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">order_stat</span>;
+</span><span class="kw">extern crate </span>order_stat;
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">puruspe</span>;
+<span class="kw">extern crate </span>puruspe;
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">matrixmultiply</span>;
+<span class="kw">extern crate </span>matrixmultiply;
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;nc&quot;</span>)]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">netcdf</span>;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;nc&quot;</span>)]
+</span><span class="kw">extern crate </span>netcdf;
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide_ad</span>;
+<span class="kw">extern crate </span>peroxide_ad;
 
-<span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">macros</span>;
+<span class="attribute">#[macro_use]
+</span><span class="kw">pub mod </span>macros;
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">fuga</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">ml</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">numerical</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">prelude</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">special</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">statistics</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">structure</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">traits</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">util</span>;
+<span class="kw">pub mod </span>fuga;
+<span class="kw">pub mod </span>ml;
+<span class="kw">pub mod </span>numerical;
+<span class="kw">pub mod </span>prelude;
+<span class="kw">pub mod </span>special;
+<span class="kw">pub mod </span>statistics;
+<span class="kw">pub mod </span>structure;
+<span class="kw">pub mod </span>traits;
+<span class="kw">pub mod </span>util;
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

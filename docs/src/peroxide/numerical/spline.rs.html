@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/spline.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>spline.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/spline.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>spline.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -792,778 +786,777 @@
 <span id="770">770</span>
 <span id="771">771</span>
 <span id="772">772</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Spline interpolations</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! # Available splines</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! * Cubic spline</span>
-<span class="doccomment">//! * Cubic Hermite spline</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! # `Spline` trait</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ## Methods</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! Let `T: Into&lt;f64&gt; + Copy`</span>
-<span class="doccomment">//! * `fn eval&lt;T&gt;(&amp;self, x: T) -&gt; f64` : Evaluate the spline at x</span>
-<span class="doccomment">//! * `fn eval_vec&lt;T&gt;(&amp;self, v: &amp;[T]) -&gt; Vec&lt;f64&gt;` : Evaluate spline values for an array v</span>
-<span class="doccomment">//! * `fn polynomial_at&lt;T&gt;(&amp;self, x: T) -&gt; &amp;Polynomial` : Get the polynomial at x</span>
-<span class="doccomment">//! * `fn number_of_polynomials(&amp;self) -&gt; usize` : Get the number of polynomials</span>
-<span class="doccomment">//! * `fn get_ranged_polynomials(&amp;self) -&gt; &amp;Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;` : Get the polynomials</span>
-<span class="doccomment">//! * `fn eval_with_cond&lt;F&gt;(&amp;self, x: f64, cond: F) -&gt; f64` : Evaluate the spline at x, with a condition</span>
-<span class="doccomment">//! * `fn eval_vec_with_cond&lt;F&gt;(&amp;self, v: &amp;[f64], cond: F) -&gt; Vec&lt;f64&gt;` : Evaluate spline values for an array v, with a condition</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! # Low-level interface</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ## Members</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! * `CubicSpline`: Structure for cubic spline</span>
-<span class="doccomment">//!     * `fn from_nodes(node_x: &amp;[f64], node_y: &amp;[f64]) -&gt; Self` : Create a cubic spline from nodes</span>
-<span class="doccomment">//!     * `fn extend_with_nodes(&amp;mut self, node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;)` : Extend the spline with nodes</span>
-<span class="doccomment">//! * `CubicHermiteSpline`: Structure for cubic Hermite spline</span>
-<span class="doccomment">//!     * `fn from_nodes_with_slopes(node_x: &amp;[f64], node_y: &amp;[f64], m: &amp;[f64]) -&gt; Self` : Create a Cubic Hermite spline from nodes with slopes</span>
-<span class="doccomment">//!     * `fn from_nodes(node_x: &amp;[f64], node_y: &amp;[f64], slope_method: SlopeMethod) -&gt; Self` : Create a Cubic Hermite spline from nodes with slope estimation methods</span>
-<span class="doccomment">//! * `SlopeMethod`: Enum for slope estimation methods</span>
-<span class="doccomment">//!     * `Akima`: Akima&#39;s method to estimate slopes ([Akima (1970)](https://dl.acm.org/doi/abs/10.1145/321607.321609))</span>
-<span class="doccomment">//!     * `Quadratic`: Using quadratic interpolation to estimate slopes</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ## Usage</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let x = seq(0, 10, 1);</span>
-<span class="doccomment">//!     let y = x.fmap(|t| t.sin());</span>
-<span class="doccomment">//!     </span>
-<span class="doccomment">//!     let cs = CubicSpline::from_nodes(&amp;x, &amp;y);</span>
-<span class="doccomment">//!     let cs_akima = CubicHermiteSpline::from_nodes(&amp;x, &amp;y, SlopeMethod::Akima);</span>
-<span class="doccomment">//!     let cs_quad = CubicHermiteSpline::from_nodes(&amp;x, &amp;y, SlopeMethod::Quadratic);</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     cs.polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_akima.polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_quad.polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     // -0.1523x^3 + 0.9937x</span>
-<span class="doccomment">//!     // 0.1259x^3 - 0.5127x^2 + 1.2283x</span>
-<span class="doccomment">//!     // -0.0000x^3 - 0.3868x^2 + 1.2283x</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     let new_x = seq(4, 6, 0.1);</span>
-<span class="doccomment">//!     let new_y = new_x.fmap(|t| t.sin());</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     let y_cs = cs.eval_vec(&amp;new_x);</span>
-<span class="doccomment">//!     let y_akima = cs_akima.eval_vec(&amp;new_x);</span>
-<span class="doccomment">//!     let y_quad = cs_quad.eval_vec(&amp;new_x);</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     let mut df = DataFrame::new(vec![]);</span>
-<span class="doccomment">//!     df.push(&quot;x&quot;, Series::new(new_x));</span>
-<span class="doccomment">//!     df.push(&quot;y&quot;, Series::new(new_y));</span>
-<span class="doccomment">//!     df.push(&quot;y_cs&quot;, Series::new(y_cs));</span>
-<span class="doccomment">//!     df.push(&quot;y_akima&quot;, Series::new(y_akima));</span>
-<span class="doccomment">//!     df.push(&quot;y_quad&quot;, Series::new(y_quad));</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     df.print();</span>
-<span class="doccomment">//!     //          x       y    y_cs y_akima  y_quad</span>
-<span class="doccomment">//!     //  r[0]    5 -0.9589 -0.9589 -0.9589 -0.9589</span>
-<span class="doccomment">//!     //  r[1]  5.2 -0.8835 -0.8826 -0.8583 -0.8836</span>
-<span class="doccomment">//!     //  r[2]  5.4 -0.7728 -0.7706 -0.7360 -0.7629</span>
-<span class="doccomment">//!     //  r[3]  5.6 -0.6313 -0.6288 -0.5960 -0.6120</span>
-<span class="doccomment">//!     //  r[4]  5.8 -0.4646 -0.4631 -0.4424 -0.4459</span>
-<span class="doccomment">//!     //  r[5]    6 -0.2794 -0.2794 -0.2794 -0.2794</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! # High-level interface</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ## Functions</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! * `fn cubic_spline(node_x: &amp;[f64], node_y: &amp;[f64]) -&gt; CubicSpline` : Create a cubic spline from nodes</span>
-<span class="doccomment">//! * `fn cubic_hermite_spline(node_x: &amp;[f64], node_y: &amp;[f64], m: &amp;[f64]) -&gt; CubicHermiteSpline` : Create a cubic Hermite spline from nodes with slopes</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ## Usage</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let x = seq(0, 10, 1);</span>
-<span class="doccomment">//!     let y = x.fmap(|t| t.sin());</span>
-<span class="doccomment">//!     </span>
-<span class="doccomment">//!     let cs = cubic_spline(&amp;x, &amp;y);</span>
-<span class="doccomment">//!     let cs_akima = cubic_hermite_spline(&amp;x, &amp;y, SlopeMethod::Akima);</span>
-<span class="doccomment">//!     let cs_quad = cubic_hermite_spline(&amp;x, &amp;y, SlopeMethod::Quadratic);</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     cs.polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_akima.polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_quad.polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     // -0.1523x^3 + 0.9937x</span>
-<span class="doccomment">//!     // 0.1259x^3 - 0.5127x^2 + 1.2283x</span>
-<span class="doccomment">//!     // -0.0000x^3 - 0.3868x^2 + 1.2283x</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     let new_x = seq(4, 6, 0.1);</span>
-<span class="doccomment">//!     let new_y = new_x.fmap(|t| t.sin());</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     let y_cs = cs.eval_vec(&amp;new_x);</span>
-<span class="doccomment">//!     let y_akima = cs_akima.eval_vec(&amp;new_x);</span>
-<span class="doccomment">//!     let y_quad = cs_quad.eval_vec(&amp;new_x);</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     let mut df = DataFrame::new(vec![]);</span>
-<span class="doccomment">//!     df.push(&quot;x&quot;, Series::new(new_x));</span>
-<span class="doccomment">//!     df.push(&quot;y&quot;, Series::new(new_y));</span>
-<span class="doccomment">//!     df.push(&quot;y_cs&quot;, Series::new(y_cs));</span>
-<span class="doccomment">//!     df.push(&quot;y_akima&quot;, Series::new(y_akima));</span>
-<span class="doccomment">//!     df.push(&quot;y_quad&quot;, Series::new(y_quad));</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     df.print();</span>
-<span class="doccomment">//!     //          x       y    y_cs y_akima  y_quad</span>
-<span class="doccomment">//!     //  r[0]    5 -0.9589 -0.9589 -0.9589 -0.9589</span>
-<span class="doccomment">//!     //  r[1]  5.2 -0.8835 -0.8826 -0.8583 -0.8836</span>
-<span class="doccomment">//!     //  r[2]  5.4 -0.7728 -0.7706 -0.7360 -0.7629</span>
-<span class="doccomment">//!     //  r[3]  5.6 -0.6313 -0.6288 -0.5960 -0.6120</span>
-<span class="doccomment">//!     //  r[4]  5.8 -0.4646 -0.4631 -0.4424 -0.4459</span>
-<span class="doccomment">//!     //  r[5]    6 -0.2794 -0.2794 -0.2794 -0.2794</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! # Calculus with splines</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ## Usage</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! ```rust</span>
-<span class="doccomment">//! use peroxide::fuga::*;</span>
-<span class="doccomment">//! use std::f64::consts::PI;</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! fn main() {</span>
-<span class="doccomment">//!     let x = seq(0, 10, 1);</span>
-<span class="doccomment">//!     let y = x.fmap(|t| t.sin());</span>
-<span class="doccomment">//!     </span>
-<span class="doccomment">//!     let cs = cubic_spline(&amp;x, &amp;y);</span>
-<span class="doccomment">//!     let cs_akima = cubic_hermite_spline(&amp;x, &amp;y, SlopeMethod::Akima);</span>
-<span class="doccomment">//!     let cs_quad = cubic_hermite_spline(&amp;x, &amp;y, SlopeMethod::Quadratic);</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     println!(&quot;============ Polynomial at x=0 ============&quot;);</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     cs.polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_akima.polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_quad.polynomial_at(0f64).print();</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     println!(&quot;============ Derivative at x=0 ============&quot;);</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     cs.derivative().polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_akima.derivative().polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_quad.derivative().polynomial_at(0f64).print();</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     println!(&quot;============ Integral at x=0 ============&quot;);</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     cs.integral().polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_akima.integral().polynomial_at(0f64).print();</span>
-<span class="doccomment">//!     cs_quad.integral().polynomial_at(0f64).print();</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     println!(&quot;============ Integrate from x=0 to x=pi ============&quot;);</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     cs.integrate((0f64, PI)).print();</span>
-<span class="doccomment">//!     cs_akima.integrate((0f64, PI)).print();</span>
-<span class="doccomment">//!     cs_quad.integrate((0f64, PI)).print();</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//!     // ============ Polynomial at x=0 ============</span>
-<span class="doccomment">//!     // -0.1523x^3 + 0.9937x</span>
-<span class="doccomment">//!     // 0.1259x^3 - 0.5127x^2 + 1.2283x</span>
-<span class="doccomment">//!     // -0.0000x^3 - 0.3868x^2 + 1.2283x</span>
-<span class="doccomment">//!     // ============ Derivative at x=0 ============</span>
-<span class="doccomment">//!     // -0.4568x^2 + 0.9937</span>
-<span class="doccomment">//!     // 0.3776x^2 - 1.0254x + 1.2283</span>
-<span class="doccomment">//!     // -0.0000x^2 - 0.7736x + 1.2283</span>
-<span class="doccomment">//!     // ============ Integral at x=0 ============</span>
-<span class="doccomment">//!     // -0.0381x^4 + 0.4969x^2</span>
-<span class="doccomment">//!     // 0.0315x^4 - 0.1709x^3 + 0.6141x^2</span>
-<span class="doccomment">//!     // -0.0000x^4 - 0.1289x^3 + 0.6141x^2</span>
-<span class="doccomment">//!     // ============ Integrate from x=0 to x=pi ============</span>
-<span class="doccomment">//!     // 1.9961861265456702</span>
-<span class="doccomment">//!     // 2.0049920614062775</span>
-<span class="doccomment">//!     // 2.004327391790717</span>
-<span class="doccomment">//! }</span>
-<span class="doccomment">//! ```</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! # References</span>
-<span class="doccomment">//! </span>
-<span class="doccomment">//! * Gary D. Knott, *Interpolating Splines*, Birkhäuser Boston, MA, (2000).</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Spline interpolations
+//! 
+//! # Available splines
+//! 
+//! * Cubic spline
+//! * Cubic Hermite spline
+//! 
+//! # `Spline` trait
+//! 
+//! ## Methods
+//! 
+//! Let `T: Into&lt;f64&gt; + Copy`
+//! * `fn eval&lt;T&gt;(&amp;self, x: T) -&gt; f64` : Evaluate the spline at x
+//! * `fn eval_vec&lt;T&gt;(&amp;self, v: &amp;[T]) -&gt; Vec&lt;f64&gt;` : Evaluate spline values for an array v
+//! * `fn polynomial_at&lt;T&gt;(&amp;self, x: T) -&gt; &amp;Polynomial` : Get the polynomial at x
+//! * `fn number_of_polynomials(&amp;self) -&gt; usize` : Get the number of polynomials
+//! * `fn get_ranged_polynomials(&amp;self) -&gt; &amp;Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;` : Get the polynomials
+//! * `fn eval_with_cond&lt;F&gt;(&amp;self, x: f64, cond: F) -&gt; f64` : Evaluate the spline at x, with a condition
+//! * `fn eval_vec_with_cond&lt;F&gt;(&amp;self, v: &amp;[f64], cond: F) -&gt; Vec&lt;f64&gt;` : Evaluate spline values for an array v, with a condition
+//! 
+//! # Low-level interface
+//! 
+//! ## Members
+//! 
+//! * `CubicSpline`: Structure for cubic spline
+//!     * `fn from_nodes(node_x: &amp;[f64], node_y: &amp;[f64]) -&gt; Self` : Create a cubic spline from nodes
+//!     * `fn extend_with_nodes(&amp;mut self, node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;)` : Extend the spline with nodes
+//! * `CubicHermiteSpline`: Structure for cubic Hermite spline
+//!     * `fn from_nodes_with_slopes(node_x: &amp;[f64], node_y: &amp;[f64], m: &amp;[f64]) -&gt; Self` : Create a Cubic Hermite spline from nodes with slopes
+//!     * `fn from_nodes(node_x: &amp;[f64], node_y: &amp;[f64], slope_method: SlopeMethod) -&gt; Self` : Create a Cubic Hermite spline from nodes with slope estimation methods
+//! * `SlopeMethod`: Enum for slope estimation methods
+//!     * `Akima`: Akima&#39;s method to estimate slopes ([Akima (1970)](https://dl.acm.org/doi/abs/10.1145/321607.321609))
+//!     * `Quadratic`: Using quadratic interpolation to estimate slopes
+//! 
+//! ## Usage
+//! 
+//! ```rust
+//! use peroxide::fuga::*;
+//! 
+//! fn main() {
+//!     let x = seq(0, 10, 1);
+//!     let y = x.fmap(|t| t.sin());
+//!     
+//!     let cs = CubicSpline::from_nodes(&amp;x, &amp;y);
+//!     let cs_akima = CubicHermiteSpline::from_nodes(&amp;x, &amp;y, SlopeMethod::Akima);
+//!     let cs_quad = CubicHermiteSpline::from_nodes(&amp;x, &amp;y, SlopeMethod::Quadratic);
+//! 
+//!     cs.polynomial_at(0f64).print();
+//!     cs_akima.polynomial_at(0f64).print();
+//!     cs_quad.polynomial_at(0f64).print();
+//!     // -0.1523x^3 + 0.9937x
+//!     // 0.1259x^3 - 0.5127x^2 + 1.2283x
+//!     // -0.0000x^3 - 0.3868x^2 + 1.2283x
+//! 
+//!     let new_x = seq(4, 6, 0.1);
+//!     let new_y = new_x.fmap(|t| t.sin());
+//! 
+//!     let y_cs = cs.eval_vec(&amp;new_x);
+//!     let y_akima = cs_akima.eval_vec(&amp;new_x);
+//!     let y_quad = cs_quad.eval_vec(&amp;new_x);
+//! 
+//!     let mut df = DataFrame::new(vec![]);
+//!     df.push(&quot;x&quot;, Series::new(new_x));
+//!     df.push(&quot;y&quot;, Series::new(new_y));
+//!     df.push(&quot;y_cs&quot;, Series::new(y_cs));
+//!     df.push(&quot;y_akima&quot;, Series::new(y_akima));
+//!     df.push(&quot;y_quad&quot;, Series::new(y_quad));
+//! 
+//!     df.print();
+//!     //          x       y    y_cs y_akima  y_quad
+//!     //  r[0]    5 -0.9589 -0.9589 -0.9589 -0.9589
+//!     //  r[1]  5.2 -0.8835 -0.8826 -0.8583 -0.8836
+//!     //  r[2]  5.4 -0.7728 -0.7706 -0.7360 -0.7629
+//!     //  r[3]  5.6 -0.6313 -0.6288 -0.5960 -0.6120
+//!     //  r[4]  5.8 -0.4646 -0.4631 -0.4424 -0.4459
+//!     //  r[5]    6 -0.2794 -0.2794 -0.2794 -0.2794
+//! }
+//! ```
+//! 
+//! # High-level interface
+//! 
+//! ## Functions
+//! 
+//! * `fn cubic_spline(node_x: &amp;[f64], node_y: &amp;[f64]) -&gt; CubicSpline` : Create a cubic spline from nodes
+//! * `fn cubic_hermite_spline(node_x: &amp;[f64], node_y: &amp;[f64], m: &amp;[f64]) -&gt; CubicHermiteSpline` : Create a cubic Hermite spline from nodes with slopes
+//! 
+//! ## Usage
+//! 
+//! ```rust
+//! use peroxide::fuga::*;
+//! 
+//! fn main() {
+//!     let x = seq(0, 10, 1);
+//!     let y = x.fmap(|t| t.sin());
+//!     
+//!     let cs = cubic_spline(&amp;x, &amp;y);
+//!     let cs_akima = cubic_hermite_spline(&amp;x, &amp;y, SlopeMethod::Akima);
+//!     let cs_quad = cubic_hermite_spline(&amp;x, &amp;y, SlopeMethod::Quadratic);
+//! 
+//!     cs.polynomial_at(0f64).print();
+//!     cs_akima.polynomial_at(0f64).print();
+//!     cs_quad.polynomial_at(0f64).print();
+//!     // -0.1523x^3 + 0.9937x
+//!     // 0.1259x^3 - 0.5127x^2 + 1.2283x
+//!     // -0.0000x^3 - 0.3868x^2 + 1.2283x
+//! 
+//!     let new_x = seq(4, 6, 0.1);
+//!     let new_y = new_x.fmap(|t| t.sin());
+//! 
+//!     let y_cs = cs.eval_vec(&amp;new_x);
+//!     let y_akima = cs_akima.eval_vec(&amp;new_x);
+//!     let y_quad = cs_quad.eval_vec(&amp;new_x);
+//! 
+//!     let mut df = DataFrame::new(vec![]);
+//!     df.push(&quot;x&quot;, Series::new(new_x));
+//!     df.push(&quot;y&quot;, Series::new(new_y));
+//!     df.push(&quot;y_cs&quot;, Series::new(y_cs));
+//!     df.push(&quot;y_akima&quot;, Series::new(y_akima));
+//!     df.push(&quot;y_quad&quot;, Series::new(y_quad));
+//! 
+//!     df.print();
+//!     //          x       y    y_cs y_akima  y_quad
+//!     //  r[0]    5 -0.9589 -0.9589 -0.9589 -0.9589
+//!     //  r[1]  5.2 -0.8835 -0.8826 -0.8583 -0.8836
+//!     //  r[2]  5.4 -0.7728 -0.7706 -0.7360 -0.7629
+//!     //  r[3]  5.6 -0.6313 -0.6288 -0.5960 -0.6120
+//!     //  r[4]  5.8 -0.4646 -0.4631 -0.4424 -0.4459
+//!     //  r[5]    6 -0.2794 -0.2794 -0.2794 -0.2794
+//! }
+//! ```
+//! 
+//! # Calculus with splines
+//! 
+//! ## Usage
+//! 
+//! ```rust
+//! use peroxide::fuga::*;
+//! use std::f64::consts::PI;
+//! 
+//! fn main() {
+//!     let x = seq(0, 10, 1);
+//!     let y = x.fmap(|t| t.sin());
+//!     
+//!     let cs = cubic_spline(&amp;x, &amp;y);
+//!     let cs_akima = cubic_hermite_spline(&amp;x, &amp;y, SlopeMethod::Akima);
+//!     let cs_quad = cubic_hermite_spline(&amp;x, &amp;y, SlopeMethod::Quadratic);
+//! 
+//!     println!(&quot;============ Polynomial at x=0 ============&quot;);
+//! 
+//!     cs.polynomial_at(0f64).print();
+//!     cs_akima.polynomial_at(0f64).print();
+//!     cs_quad.polynomial_at(0f64).print();
+//! 
+//!     println!(&quot;============ Derivative at x=0 ============&quot;);
+//! 
+//!     cs.derivative().polynomial_at(0f64).print();
+//!     cs_akima.derivative().polynomial_at(0f64).print();
+//!     cs_quad.derivative().polynomial_at(0f64).print();
+//! 
+//!     println!(&quot;============ Integral at x=0 ============&quot;);
+//! 
+//!     cs.integral().polynomial_at(0f64).print();
+//!     cs_akima.integral().polynomial_at(0f64).print();
+//!     cs_quad.integral().polynomial_at(0f64).print();
+//! 
+//!     println!(&quot;============ Integrate from x=0 to x=pi ============&quot;);
+//! 
+//!     cs.integrate((0f64, PI)).print();
+//!     cs_akima.integrate((0f64, PI)).print();
+//!     cs_quad.integrate((0f64, PI)).print();
+//! 
+//!     // ============ Polynomial at x=0 ============
+//!     // -0.1523x^3 + 0.9937x
+//!     // 0.1259x^3 - 0.5127x^2 + 1.2283x
+//!     // -0.0000x^3 - 0.3868x^2 + 1.2283x
+//!     // ============ Derivative at x=0 ============
+//!     // -0.4568x^2 + 0.9937
+//!     // 0.3776x^2 - 1.0254x + 1.2283
+//!     // -0.0000x^2 - 0.7736x + 1.2283
+//!     // ============ Integral at x=0 ============
+//!     // -0.0381x^4 + 0.4969x^2
+//!     // 0.0315x^4 - 0.1709x^3 + 0.6141x^2
+//!     // -0.0000x^4 - 0.1289x^3 + 0.6141x^2
+//!     // ============ Integrate from x=0 to x=pi ============
+//!     // 1.9961861265456702
+//!     // 2.0049920614062775
+//!     // 2.004327391790717
+//! }
+//! ```
+//! 
+//! # References
+//! 
+//! * Gary D. Knott, *Interpolating Splines*, Birkhäuser Boston, MA, (2000).
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::matrix</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::polynomial</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::vector</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traits::num::PowOps</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::non_macro</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::useful::zip_range</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>)]</span>
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
-<span class="kw">use</span> <span class="ident">std::cmp</span>::{<span class="ident">max</span>, <span class="ident">min</span>};
-<span class="kw">use</span> <span class="ident">std::convert</span>::{<span class="ident">From</span>, <span class="ident">Into</span>};
-<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Index</span>, <span class="ident">Range</span>};
+</span><span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::<span class="kw-2">*</span>;
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::polynomial::<span class="kw-2">*</span>;
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::vector::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::traits::num::PowOps;
+<span class="attribute">#[allow(unused_imports)]
+</span><span class="kw">use </span><span class="kw">crate</span>::util::non_macro::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::util::useful::zip_range;
+<span class="attribute">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+</span><span class="kw">use </span>serde::{Deserialize, Serialize};
+<span class="kw">use </span>std::cmp::{max, min};
+<span class="kw">use </span>std::convert::{From, Into};
+<span class="kw">use </span>std::ops::{Index, Range};
 
-<span class="doccomment">/// Trait for spline interpolation</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// # Available Splines</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// - `CubicSpline`</span>
-<span class="doccomment">/// - `CubicHermiteSpline`</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Spline</span> {
-    <span class="kw">fn</span> <span class="ident">eval</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std::convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">T</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
+<span class="doccomment">/// Trait for spline interpolation
+/// 
+/// # Available Splines
+/// 
+/// - `CubicSpline`
+/// - `CubicHermiteSpline`
+</span><span class="kw">pub trait </span>Spline {
+    <span class="kw">fn </span>eval&lt;T: std::convert::Into&lt;f64&gt; + Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: T) -&gt; f64 {
+        <span class="kw">let </span>x = x.into();
 
-        <span class="self">self</span>.<span class="ident">polynomial_at</span>(<span class="ident">x</span>).<span class="ident">eval</span>(<span class="ident">x</span>)
+        <span class="self">self</span>.polynomial_at(x).eval(x)
     }
 
-    <span class="kw">fn</span> <span class="ident">eval_vec</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std::convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span>[<span class="ident">T</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">v</span>.<span class="ident">len</span>()];
+    <span class="kw">fn </span>eval_vec&lt;T: std::convert::Into&lt;f64&gt; + Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span>[T]) -&gt; Vec&lt;f64&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="number">0f64</span>; v.len()];
 
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">x</span>) <span class="kw">in</span> <span class="ident">v</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
-            <span class="ident">result</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="self">self</span>.<span class="ident">eval</span>(<span class="kw-2">*</span><span class="ident">x</span>);
+        <span class="kw">for </span>(i, x) <span class="kw">in </span>v.iter().enumerate() {
+            result[i] = <span class="self">self</span>.eval(<span class="kw-2">*</span>x);
         }
 
-        <span class="ident">result</span>
+        result
     }
 
-    <span class="kw">fn</span> <span class="ident">polynomial_at</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">std::convert::Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">T</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Polynomial</span> {
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
+    <span class="kw">fn </span>polynomial_at&lt;T: std::convert::Into&lt;f64&gt; + Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: T) -&gt; <span class="kw-2">&amp;</span>Polynomial {
+        <span class="kw">let </span>x = x.into();
 
-        <span class="kw">let</span> <span class="ident">poly</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_ranged_polynomials</span>();
+        <span class="kw">let </span>poly = <span class="self">self</span>.get_ranged_polynomials();
 
-        <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">poly</span>.<span class="ident">binary_search_by</span>(<span class="op">|</span>(<span class="ident">range</span>, <span class="kw">_</span>)<span class="op">|</span> {
-            <span class="kw">if</span> <span class="ident">range</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">x</span>) {
-                <span class="ident">core::cmp::Ordering::Equal</span>
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="ident">range</span>.<span class="ident">start</span> {
-                <span class="ident">core::cmp::Ordering::Greater</span>
-            } <span class="kw">else</span> {
-                <span class="ident">core::cmp::Ordering::Less</span>
+        <span class="kw">let </span>index = <span class="kw">match </span>poly.binary_search_by(|(range, <span class="kw">_</span>)| {
+            <span class="kw">if </span>range.contains(<span class="kw-2">&amp;</span>x) {
+                core::cmp::Ordering::Equal
+            } <span class="kw">else if </span>x &lt; range.start {
+                core::cmp::Ordering::Greater
+            } <span class="kw">else </span>{
+                core::cmp::Ordering::Less
             }
         }) {
-            <span class="prelude-val">Ok</span>(<span class="ident">index</span>) =&gt; <span class="ident">index</span>,
-            <span class="prelude-val">Err</span>(<span class="ident">index</span>) =&gt; <span class="ident">max</span>(<span class="number">0</span>, <span class="ident">min</span>(<span class="ident">index</span>, <span class="ident">poly</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>)),
+            <span class="prelude-val">Ok</span>(index) =&gt; index,
+            <span class="prelude-val">Err</span>(index) =&gt; max(<span class="number">0</span>, min(index, poly.len() - <span class="number">1</span>)),
         };
 
-        <span class="kw-2">&amp;</span><span class="ident">poly</span>[<span class="ident">index</span>].<span class="number">1</span>
+        <span class="kw-2">&amp;</span>poly[index].<span class="number">1
+    </span>}
+
+    <span class="kw">fn </span>number_of_polynomials(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="self">self</span>.get_ranged_polynomials().len()
     }
 
-    <span class="kw">fn</span> <span class="ident">number_of_polynomials</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">get_ranged_polynomials</span>().<span class="ident">len</span>()
+    <span class="kw">fn </span>get_ranged_polynomials(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;;
+
+    <span class="kw">fn </span>eval_with_cond&lt;F: Fn(f64) -&gt; f64&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f64, cond: F) -&gt; f64 {
+        cond(<span class="self">self</span>.eval(x))
     }
 
-    <span class="kw">fn</span> <span class="ident">get_ranged_polynomials</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span>;
-
-    <span class="kw">fn</span> <span class="ident">eval_with_cond</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f64</span>, <span class="ident">cond</span>: <span class="ident">F</span>) -&gt; <span class="ident">f64</span> {
-        <span class="ident">cond</span>(<span class="self">self</span>.<span class="ident">eval</span>(<span class="ident">x</span>))
-    }
-
-    <span class="kw">fn</span> <span class="ident">eval_vec_with_cond</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">cond</span>: <span class="ident">F</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="ident">x</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">eval_with_cond</span>(<span class="ident">x</span>, <span class="ident">cond</span>)).<span class="ident">collect</span>()
-    }
-}
-
-<span class="comment">// =============================================================================</span>
-<span class="comment">// High level functions</span>
-<span class="comment">// =============================================================================</span>
-<span class="doccomment">/// Cubic Spline (Natural)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Description</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Implement traits of Natural cubic splines, by Arne Morten Kvarving.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Type</span>
-<span class="doccomment">/// `(&amp;[f64], &amp;[f64]) -&gt; Cubic Spline`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let x = c!(0.9, 1.3, 1.9, 2.1);</span>
-<span class="doccomment">///     let y = c!(1.3, 1.5, 1.85, 2.1);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let s = cubic_spline(&amp;x, &amp;y);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let new_x = c!(1, 1.5, 2.0);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     // Generate Cubic polynomial</span>
-<span class="doccomment">///     for t in new_x.iter() {</span>
-<span class="doccomment">///         s.polynomial_at(*t).print();</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">///     // -0.2347x^3 + 0.6338x^2 - 0.0329x + 0.9873</span>
-<span class="doccomment">///     // 0.9096x^3 - 3.8292x^2 + 5.7691x - 1.5268</span>
-<span class="doccomment">///     // -2.2594x^3 + 14.2342x^2 - 28.5513x + 20.2094</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     // Evaluation</span>
-<span class="doccomment">///     for t in new_x.iter() {</span>
-<span class="doccomment">///         s.eval(*t).print();</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cubic_spline</span>(<span class="ident">node_x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">node_y</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>]) -&gt; <span class="ident">CubicSpline</span> {
-    <span class="ident">CubicSpline::from_nodes</span>(<span class="ident">node_x</span>, <span class="ident">node_y</span>)
-}
-
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cubic_hermite_spline</span>(<span class="ident">node_x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">node_y</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">slope_method</span>: <span class="ident">SlopeMethod</span>) -&gt; <span class="ident">CubicHermiteSpline</span> {
-    <span class="ident">CubicHermiteSpline::from_nodes</span>(<span class="ident">node_x</span>, <span class="ident">node_y</span>, <span class="ident">slope_method</span>)
-}
-
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Cubic Spline</span>
-<span class="comment">// =============================================================================</span>
-<span class="doccomment">/// Cubic Spline (Natural)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Description</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Implement traits of Natural cubic splines, by Arne Morten Kvarving.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Type</span>
-<span class="doccomment">/// `(&amp;[f64], &amp;[f64]) -&gt; Cubic Spline`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let x = c!(0.9, 1.3, 1.9, 2.1);</span>
-<span class="doccomment">///     let y = c!(1.3, 1.5, 1.85, 2.1);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let s = CubicSpline::from_nodes(&amp;x, &amp;y);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let new_x = c!(1, 1.5, 2.0);</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     // Generate Cubic polynomial</span>
-<span class="doccomment">///     for t in new_x.iter() {</span>
-<span class="doccomment">///         s.polynomial_at(*t).print();</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">///     // -0.2347x^3 + 0.6338x^2 - 0.0329x + 0.9873</span>
-<span class="doccomment">///     // 0.9096x^3 - 3.8292x^2 + 5.7691x - 1.5268</span>
-<span class="doccomment">///     // -2.2594x^3 + 14.2342x^2 - 28.5513x + 20.2094</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     // Evaluation</span>
-<span class="doccomment">///     for t in new_x.iter() {</span>
-<span class="doccomment">///         s.eval(*t).print();</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CubicSpline</span> {
-    <span class="ident">polynomials</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span>,
-}
-
-<span class="kw">impl</span> <span class="ident">Spline</span> <span class="kw">for</span> <span class="ident">CubicSpline</span> {
-    <span class="kw">fn</span> <span class="ident">get_ranged_polynomials</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">polynomials</span>
+    <span class="kw">fn </span>eval_vec_with_cond&lt;F: Fn(f64) -&gt; f64 + Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: <span class="kw-2">&amp;</span>[f64], cond: F) -&gt; Vec&lt;f64&gt; {
+        x.iter().map(|<span class="kw-2">&amp;</span>x| <span class="self">self</span>.eval_with_cond(x, cond)).collect()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">CubicSpline</span> {
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let x = c!(0.9, 1.3, 1.9, 2.1);</span>
-    <span class="doccomment">///     let y = c!(1.3, 1.5, 1.85, 2.1);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///     let s = CubicSpline::from_nodes(&amp;x, &amp;y);</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///     for i in 0 .. 4 {</span>
-    <span class="doccomment">///         println!(&quot;{}&quot;, s.eval(i as f64 / 2.0));</span>
-    <span class="doccomment">///     }</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_nodes</span>(<span class="ident">node_x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">node_y</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>]) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="ident">polynomials</span> <span class="op">=</span> <span class="ident">CubicSpline::cubic_spline</span>(<span class="ident">node_x</span>, <span class="ident">node_y</span>);
-        <span class="ident">CubicSpline</span> {
-            <span class="ident">polynomials</span>: <span class="ident">zip_range</span>(<span class="ident">node_x</span>, <span class="kw-2">&amp;</span><span class="ident">polynomials</span>),
+<span class="comment">// =============================================================================
+// High level functions
+// =============================================================================
+</span><span class="doccomment">/// Cubic Spline (Natural)
+///
+/// # Description
+///
+/// Implement traits of Natural cubic splines, by Arne Morten Kvarving.
+///
+/// # Type
+/// `(&amp;[f64], &amp;[f64]) -&gt; Cubic Spline`
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let x = c!(0.9, 1.3, 1.9, 2.1);
+///     let y = c!(1.3, 1.5, 1.85, 2.1);
+///
+///     let s = cubic_spline(&amp;x, &amp;y);
+///
+///     let new_x = c!(1, 1.5, 2.0);
+///
+///     // Generate Cubic polynomial
+///     for t in new_x.iter() {
+///         s.polynomial_at(*t).print();
+///     }
+///     // -0.2347x^3 + 0.6338x^2 - 0.0329x + 0.9873
+///     // 0.9096x^3 - 3.8292x^2 + 5.7691x - 1.5268
+///     // -2.2594x^3 + 14.2342x^2 - 28.5513x + 20.2094
+///
+///     // Evaluation
+///     for t in new_x.iter() {
+///         s.eval(*t).print();
+///     }
+/// }
+/// ```
+</span><span class="kw">pub fn </span>cubic_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; CubicSpline {
+    CubicSpline::from_nodes(node_x, node_y)
+}
+
+<span class="kw">pub fn </span>cubic_hermite_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64], slope_method: SlopeMethod) -&gt; CubicHermiteSpline {
+    CubicHermiteSpline::from_nodes(node_x, node_y, slope_method)
+}
+
+<span class="comment">// =============================================================================
+// Cubic Spline
+// =============================================================================
+</span><span class="doccomment">/// Cubic Spline (Natural)
+///
+/// # Description
+///
+/// Implement traits of Natural cubic splines, by Arne Morten Kvarving.
+///
+/// # Type
+/// `(&amp;[f64], &amp;[f64]) -&gt; Cubic Spline`
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let x = c!(0.9, 1.3, 1.9, 2.1);
+///     let y = c!(1.3, 1.5, 1.85, 2.1);
+///
+///     let s = CubicSpline::from_nodes(&amp;x, &amp;y);
+///
+///     let new_x = c!(1, 1.5, 2.0);
+///
+///     // Generate Cubic polynomial
+///     for t in new_x.iter() {
+///         s.polynomial_at(*t).print();
+///     }
+///     // -0.2347x^3 + 0.6338x^2 - 0.0329x + 0.9873
+///     // 0.9096x^3 - 3.8292x^2 + 5.7691x - 1.5268
+///     // -2.2594x^3 + 14.2342x^2 - 28.5513x + 20.2094
+///
+///     // Evaluation
+///     for t in new_x.iter() {
+///         s.eval(*t).print();
+///     }
+/// }
+/// ```
+</span><span class="attribute">#[derive(Debug, Clone, Default)]
+#[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(Serialize, Deserialize))]
+</span><span class="kw">pub struct </span>CubicSpline {
+    polynomials: Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;,
+}
+
+<span class="kw">impl </span>Spline <span class="kw">for </span>CubicSpline {
+    <span class="kw">fn </span>get_ranged_polynomials(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.polynomials
+    }
+}
+
+<span class="kw">impl </span>CubicSpline {
+    <span class="doccomment">/// # Examples
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let x = c!(0.9, 1.3, 1.9, 2.1);
+    ///     let y = c!(1.3, 1.5, 1.85, 2.1);
+    ///
+    ///     let s = CubicSpline::from_nodes(&amp;x, &amp;y);
+    ///
+    ///     for i in 0 .. 4 {
+    ///         println!(&quot;{}&quot;, s.eval(i as f64 / 2.0));
+    ///     }
+    /// }
+    /// ```
+    </span><span class="kw">pub fn </span>from_nodes(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>polynomials = CubicSpline::cubic_spline(node_x, node_y);
+        CubicSpline {
+            polynomials: zip_range(node_x, <span class="kw-2">&amp;</span>polynomials),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">cubic_spline</span>(<span class="ident">node_x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">node_y</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> {
-        <span class="doccomment">//! Pre calculated variables</span>
-        <span class="doccomment">//! node_x: n+1</span>
-        <span class="doccomment">//! node_y: n+1</span>
-        <span class="doccomment">//! h     : n</span>
-        <span class="doccomment">//! b     : n</span>
-        <span class="doccomment">//! v     : n</span>
-        <span class="doccomment">//! u     : n</span>
-        <span class="doccomment">//! z     : n+1</span>
-        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">node_x</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>;
-        <span class="macro">assert_eq!</span>(<span class="ident">n</span>, <span class="ident">node_y</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>);
+    <span class="kw">fn </span>cubic_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; Vec&lt;Polynomial&gt; {
+        <span class="doccomment">//! Pre calculated variables
+        //! node_x: n+1
+        //! node_y: n+1
+        //! h     : n
+        //! b     : n
+        //! v     : n
+        //! u     : n
+        //! z     : n+1
+        </span><span class="kw">let </span>n = node_x.len() - <span class="number">1</span>;
+        <span class="macro">assert_eq!</span>(n, node_y.len() - <span class="number">1</span>);
 
-        <span class="comment">// Pre-calculations</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">h</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">u</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="kw">if</span> <span class="ident">i</span> <span class="op">==</span> <span class="number">0</span> {
-                <span class="ident">h</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">node_x</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="ident">i</span>];
-                <span class="ident">b</span>[<span class="ident">i</span>] <span class="op">=</span> (<span class="ident">node_y</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">-</span> <span class="ident">node_y</span>[<span class="ident">i</span>]) <span class="op">/</span> <span class="ident">h</span>[<span class="ident">i</span>];
-            } <span class="kw">else</span> {
-                <span class="ident">h</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">node_x</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="ident">i</span>];
-                <span class="ident">b</span>[<span class="ident">i</span>] <span class="op">=</span> (<span class="ident">node_y</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>] <span class="op">-</span> <span class="ident">node_y</span>[<span class="ident">i</span>]) <span class="op">/</span> <span class="ident">h</span>[<span class="ident">i</span>];
-                <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="number">2.</span> <span class="op">*</span> (<span class="ident">h</span>[<span class="ident">i</span>] <span class="op">+</span> <span class="ident">h</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>]);
-                <span class="ident">u</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="number">6.</span> <span class="op">*</span> (<span class="ident">b</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">b</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>]);
+        <span class="comment">// Pre-calculations
+        </span><span class="kw">let </span><span class="kw-2">mut </span>h = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+        <span class="kw">let </span><span class="kw-2">mut </span>b = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+        <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+        <span class="kw">let </span><span class="kw-2">mut </span>u = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            <span class="kw">if </span>i == <span class="number">0 </span>{
+                h[i] = node_x[i + <span class="number">1</span>] - node_x[i];
+                b[i] = (node_y[i + <span class="number">1</span>] - node_y[i]) / h[i];
+            } <span class="kw">else </span>{
+                h[i] = node_x[i + <span class="number">1</span>] - node_x[i];
+                b[i] = (node_y[i + <span class="number">1</span>] - node_y[i]) / h[i];
+                v[i] = <span class="number">2. </span>* (h[i] + h[i - <span class="number">1</span>]);
+                u[i] = <span class="number">6. </span>* (b[i] - b[i - <span class="number">1</span>]);
             }
         }
 
-        <span class="comment">// Tri-diagonal matrix</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">vec!</span>[<span class="number">0f64</span>; (<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">*</span> (<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>)], <span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>, <span class="ident">Col</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> <span class="op">-</span> <span class="number">2</span> {
-            <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">i</span>)] <span class="op">=</span> <span class="ident">v</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>];
-            <span class="ident">m</span>[(<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>, <span class="ident">i</span>)] <span class="op">=</span> <span class="ident">h</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>];
-            <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>)] <span class="op">=</span> <span class="ident">h</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>];
+        <span class="comment">// Tri-diagonal matrix
+        </span><span class="kw">let </span><span class="kw-2">mut </span>m = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; (n - <span class="number">1</span>) * (n - <span class="number">1</span>)], n - <span class="number">1</span>, n - <span class="number">1</span>, Col);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n - <span class="number">2 </span>{
+            m[(i, i)] = v[i + <span class="number">1</span>];
+            m[(i + <span class="number">1</span>, i)] = h[i + <span class="number">1</span>];
+            m[(i, i + <span class="number">1</span>)] = h[i + <span class="number">1</span>];
         }
-        <span class="ident">m</span>[(<span class="ident">n</span> <span class="op">-</span> <span class="number">2</span>, <span class="ident">n</span> <span class="op">-</span> <span class="number">2</span>)] <span class="op">=</span> <span class="ident">v</span>[<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>];
+        m[(n - <span class="number">2</span>, n - <span class="number">2</span>)] = v[n - <span class="number">1</span>];
 
-        <span class="comment">// Calculate z</span>
-        <span class="kw">let</span> <span class="ident">z_inner</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">inv</span>() <span class="op">*</span> <span class="ident">Vec::from</span>(<span class="kw-2">&amp;</span><span class="ident">u</span>[<span class="number">1</span>..]);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">z</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>];
-        <span class="ident">z</span>.<span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="ident">z_inner</span>);
-        <span class="ident">z</span>.<span class="ident">push</span>(<span class="number">0f64</span>);
+        <span class="comment">// Calculate z
+        </span><span class="kw">let </span>z_inner = m.inv() * Vec::from(<span class="kw-2">&amp;</span>u[<span class="number">1</span>..]);
+        <span class="kw">let </span><span class="kw-2">mut </span>z = <span class="macro">vec!</span>[<span class="number">0f64</span>];
+        z.extend(<span class="kw-2">&amp;</span>z_inner);
+        z.push(<span class="number">0f64</span>);
 
-        <span class="comment">// Declare empty spline</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="comment">// Declare empty spline
+        </span><span class="kw">let </span><span class="kw-2">mut </span>s: Vec&lt;Polynomial&gt; = Vec::new();
 
-        <span class="comment">// Main process</span>
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="comment">// Memoization</span>
-            <span class="kw">let</span> <span class="ident">t_i</span> <span class="op">=</span> <span class="ident">node_x</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">t_i1</span> <span class="op">=</span> <span class="ident">node_x</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>];
-            <span class="kw">let</span> <span class="ident">z_i</span> <span class="op">=</span> <span class="ident">z</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">z_i1</span> <span class="op">=</span> <span class="ident">z</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>];
-            <span class="kw">let</span> <span class="ident">h_i</span> <span class="op">=</span> <span class="ident">h</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">y_i</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">y_i1</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>];
-            <span class="kw">let</span> <span class="ident">temp1</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="op">-</span><span class="ident">t_i</span>]);
-            <span class="kw">let</span> <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">poly</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="op">-</span><span class="ident">t_i1</span>]);
+        <span class="comment">// Main process
+        </span><span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            <span class="comment">// Memoization
+            </span><span class="kw">let </span>t_i = node_x[i];
+            <span class="kw">let </span>t_i1 = node_x[i + <span class="number">1</span>];
+            <span class="kw">let </span>z_i = z[i];
+            <span class="kw">let </span>z_i1 = z[i + <span class="number">1</span>];
+            <span class="kw">let </span>h_i = h[i];
+            <span class="kw">let </span>y_i = node_y[i];
+            <span class="kw">let </span>y_i1 = node_y[i + <span class="number">1</span>];
+            <span class="kw">let </span>temp1 = poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, -t_i]);
+            <span class="kw">let </span>temp2 = poly(<span class="macro">vec!</span>[<span class="number">1f64</span>, -t_i1]);
 
-            <span class="kw">let</span> <span class="ident">term1</span> <span class="op">=</span> <span class="ident">temp1</span>.<span class="ident">powi</span>(<span class="number">3</span>) <span class="op">*</span> (<span class="ident">z_i1</span> <span class="op">/</span> (<span class="number">6f64</span> <span class="op">*</span> <span class="ident">h_i</span>));
-            <span class="kw">let</span> <span class="ident">term2</span> <span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">powi</span>(<span class="number">3</span>) <span class="op">*</span> (<span class="op">-</span><span class="ident">z_i</span> <span class="op">/</span> (<span class="number">6f64</span> <span class="op">*</span> <span class="ident">h_i</span>));
-            <span class="kw">let</span> <span class="ident">term3</span> <span class="op">=</span> <span class="ident">temp1</span> <span class="op">*</span> (<span class="ident">y_i1</span> <span class="op">/</span> <span class="ident">h_i</span> <span class="op">-</span> <span class="ident">z_i1</span> <span class="op">*</span> <span class="ident">h_i</span> <span class="op">/</span> <span class="number">6.</span>);
-            <span class="kw">let</span> <span class="ident">term4</span> <span class="op">=</span> <span class="ident">temp2</span> <span class="op">*</span> (<span class="op">-</span><span class="ident">y_i</span> <span class="op">/</span> <span class="ident">h_i</span> <span class="op">+</span> <span class="ident">h_i</span> <span class="op">*</span> <span class="ident">z_i</span> <span class="op">/</span> <span class="number">6.0</span>);
+            <span class="kw">let </span>term1 = temp1.powi(<span class="number">3</span>) * (z_i1 / (<span class="number">6f64 </span>* h_i));
+            <span class="kw">let </span>term2 = temp2.powi(<span class="number">3</span>) * (-z_i / (<span class="number">6f64 </span>* h_i));
+            <span class="kw">let </span>term3 = temp1 * (y_i1 / h_i - z_i1 * h_i / <span class="number">6.</span>);
+            <span class="kw">let </span>term4 = temp2 * (-y_i / h_i + h_i * z_i / <span class="number">6.0</span>);
 
-            <span class="ident">s</span>.<span class="ident">push</span>(<span class="ident">term1</span> <span class="op">+</span> <span class="ident">term2</span> <span class="op">+</span> <span class="ident">term3</span> <span class="op">+</span> <span class="ident">term4</span>);
+            s.push(term1 + term2 + term3 + term4);
         }
-        <span class="kw">return</span> <span class="ident">s</span>;
+        <span class="kw">return </span>s;
     }
 
-    <span class="doccomment">/// Extends the spline with the given nodes.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Description</span>
-    <span class="doccomment">/// </span>
-    <span class="doccomment">/// The method ensures that the transition between each polynomial is smooth and that the spline</span>
-    <span class="doccomment">/// interpolation of the new nodes is calculated around `x = 0` in order to avoid that</span>
-    <span class="doccomment">/// successive spline extensions with large x values become inaccurate.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extend_with_nodes</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">node_x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">node_y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ext_node_x</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">node_x</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">1</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ext_node_y</span> <span class="op">=</span> <span class="ident">Vec::with_capacity</span>(<span class="ident">node_x</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="number">1</span>);
+    <span class="doccomment">/// Extends the spline with the given nodes.
+    ///
+    /// # Description
+    /// 
+    /// The method ensures that the transition between each polynomial is smooth and that the spline
+    /// interpolation of the new nodes is calculated around `x = 0` in order to avoid that
+    /// successive spline extensions with large x values become inaccurate.
+    </span><span class="kw">pub fn </span>extend_with_nodes(<span class="kw-2">&amp;mut </span><span class="self">self</span>, node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;) {
+        <span class="kw">let </span><span class="kw-2">mut </span>ext_node_x = Vec::with_capacity(node_x.len() + <span class="number">1</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>ext_node_y = Vec::with_capacity(node_x.len() + <span class="number">1</span>);
 
-        <span class="kw">let</span> (<span class="ident">r</span>, <span class="ident">polynomial</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">polynomials</span>[<span class="self">self</span>.<span class="ident">polynomials</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>];
-        <span class="ident">ext_node_x</span>.<span class="ident">push</span>(<span class="number">0.0f64</span>);
-        <span class="ident">ext_node_y</span>.<span class="ident">push</span>(<span class="ident">polynomial</span>.<span class="ident">eval</span>(<span class="ident">r</span>.<span class="ident">end</span>));
+        <span class="kw">let </span>(r, polynomial) = <span class="kw-2">&amp;</span><span class="self">self</span>.polynomials[<span class="self">self</span>.polynomials.len() - <span class="number">1</span>];
+        ext_node_x.push(<span class="number">0.0f64</span>);
+        ext_node_y.push(polynomial.eval(r.end));
 
-        <span class="comment">// translating the node towards x = 0 increases accuracy tremendously</span>
-        <span class="kw">let</span> <span class="ident">tx</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">end</span>;
-        <span class="ident">ext_node_x</span>.<span class="ident">extend</span>(<span class="ident">node_x</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">tx</span>));
-        <span class="ident">ext_node_y</span>.<span class="ident">extend</span>(<span class="ident">node_y</span>);
+        <span class="comment">// translating the node towards x = 0 increases accuracy tremendously
+        </span><span class="kw">let </span>tx = r.end;
+        ext_node_x.extend(node_x.into_iter().map(|x| x - tx));
+        ext_node_y.extend(node_y);
 
-        <span class="kw">let</span> <span class="ident">polynomials</span> <span class="op">=</span> <span class="ident">zip_range</span>(
-            <span class="kw-2">&amp;</span><span class="ident">ext_node_x</span>,
-            <span class="kw-2">&amp;</span><span class="ident">CubicSpline::cubic_spline</span>(<span class="kw-2">&amp;</span><span class="ident">ext_node_x</span>, <span class="kw-2">&amp;</span><span class="ident">ext_node_y</span>),
+        <span class="kw">let </span>polynomials = zip_range(
+            <span class="kw-2">&amp;</span>ext_node_x,
+            <span class="kw-2">&amp;</span>CubicSpline::cubic_spline(<span class="kw-2">&amp;</span>ext_node_x, <span class="kw-2">&amp;</span>ext_node_y),
         );
 
-        <span class="self">self</span>.<span class="ident">polynomials</span>
-            .<span class="ident">extend</span>(<span class="ident">polynomials</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">r</span>, <span class="ident">p</span>)<span class="op">|</span> {
+        <span class="self">self</span>.polynomials
+            .extend(polynomials.into_iter().map(|(r, p)| {
                 (
-                    <span class="ident">Range</span> {
-                        <span class="ident">start</span>: <span class="ident">r</span>.<span class="ident">start</span> <span class="op">+</span> <span class="ident">tx</span>,
-                        <span class="ident">end</span>: <span class="ident">r</span>.<span class="ident">end</span> <span class="op">+</span> <span class="ident">tx</span>,
+                    Range {
+                        start: r.start + tx,
+                        end: r.end + tx,
                     },
-                    <span class="ident">p</span>.<span class="ident">translate_x</span>(<span class="ident">tx</span>),
+                    p.translate_x(tx),
                 )
             }));
     }
 }
 
-<span class="kw">impl</span> <span class="ident">std::convert::Into</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CubicSpline</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">polynomials</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="ident">polynomial</span>)<span class="op">|</span> <span class="ident">polynomial</span>)
-            .<span class="ident">collect</span>()
+<span class="kw">impl </span>std::convert::Into&lt;Vec&lt;Polynomial&gt;&gt; <span class="kw">for </span>CubicSpline {
+    <span class="kw">fn </span>into(<span class="self">self</span>) -&gt; Vec&lt;Polynomial&gt; {
+        <span class="self">self</span>.polynomials
+            .into_iter()
+            .map(|(<span class="kw">_</span>, polynomial)| polynomial)
+            .collect()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CubicSpline</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">polynomials</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">CubicSpline</span> { <span class="ident">polynomials</span> }
+<span class="kw">impl </span>From&lt;Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;&gt; <span class="kw">for </span>CubicSpline {
+    <span class="kw">fn </span>from(polynomials: Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;) -&gt; <span class="self">Self </span>{
+        CubicSpline { polynomials }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CubicSpline</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">polynomials</span>
+<span class="kw">impl </span>Into&lt;Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;&gt; <span class="kw">for </span>CubicSpline {
+    <span class="kw">fn </span>into(<span class="self">self</span>) -&gt; Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt; {
+        <span class="self">self</span>.polynomials
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CubicSpline</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> (<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>);
+<span class="kw">impl </span>Index&lt;usize&gt; <span class="kw">for </span>CubicSpline {
+    <span class="kw">type </span>Output = (Range&lt;f64&gt;, Polynomial);
 
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">polynomials</span>[<span class="ident">index</span>]
+    <span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Output {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.polynomials[index]
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Calculus</span> <span class="kw">for</span> <span class="ident">CubicSpline</span> {
-    <span class="kw">fn</span> <span class="ident">derivative</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">polynomials</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
+<span class="kw">impl </span>Calculus <span class="kw">for </span>CubicSpline {
+    <span class="kw">fn </span>derivative(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>polynomials: Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt; = <span class="self">self</span>.clone().into();
 
-        <span class="ident">polynomials</span> <span class="op">=</span> <span class="ident">polynomials</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">r</span>, <span class="ident">poly</span>)<span class="op">|</span> (<span class="ident">r</span>, <span class="ident">poly</span>.<span class="ident">derivative</span>()))
-            .<span class="ident">collect</span>();
+        polynomials = polynomials
+            .into_iter()
+            .map(|(r, poly)| (r, poly.derivative()))
+            .collect();
 
-        <span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">polynomials</span>)
+        <span class="self">Self</span>::from(polynomials)
     }
 
-    <span class="kw">fn</span> <span class="ident">integral</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">polynomials</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
+    <span class="kw">fn </span>integral(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>polynomials: Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt; = <span class="self">self</span>.clone().into();
 
-        <span class="ident">polynomials</span> <span class="op">=</span> <span class="ident">polynomials</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">r</span>, <span class="ident">poly</span>)<span class="op">|</span> (<span class="ident">r</span>, <span class="ident">poly</span>.<span class="ident">integral</span>()))
-            .<span class="ident">collect</span>();
+        polynomials = polynomials
+            .into_iter()
+            .map(|(r, poly)| (r, poly.integral()))
+            .collect();
 
-        <span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">polynomials</span>)
+        <span class="self">Self</span>::from(polynomials)
     }
 
-    <span class="kw">fn</span> <span class="ident">integrate</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interval</span>: (<span class="ident">T</span>, <span class="ident">T</span>)) -&gt; <span class="ident">f64</span> {
-        <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="ident">interval</span>;
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">into</span>();
+    <span class="kw">fn </span>integrate&lt;T: Into&lt;f64&gt; + Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, interval: (T, T)) -&gt; f64 {
+        <span class="kw">let </span>(a, b) = interval;
+        <span class="kw">let </span>a = a.into();
+        <span class="kw">let </span>b = b.into();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">0f64</span>;
-        <span class="kw">for</span> (<span class="ident">r</span>, <span class="ident">p</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">polynomials</span>.<span class="ident">iter</span>() {
-            <span class="kw">if</span> <span class="ident">r</span>.<span class="ident">start</span> <span class="op">&gt;</span> <span class="ident">b</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="number">0f64</span>;
+        <span class="kw">for </span>(r, p) <span class="kw">in </span><span class="self">self</span>.polynomials.iter() {
+            <span class="kw">if </span>r.start &gt; b {
                 <span class="kw">break</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">r</span>.<span class="ident">end</span> <span class="op">&lt;</span> <span class="ident">a</span> {
+            } <span class="kw">else if </span>r.end &lt; a {
                 <span class="kw">continue</span>;
-            } <span class="kw">else</span> {
-                <span class="comment">// r.start &lt;= b, r.end &gt;= a</span>
-                <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">start</span>.<span class="ident">max</span>(<span class="ident">a</span>);
-                <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">end</span>.<span class="ident">min</span>(<span class="ident">b</span>);
-                <span class="ident">s</span> <span class="op">+</span><span class="op">=</span> <span class="ident">p</span>.<span class="ident">integrate</span>((<span class="ident">x</span>, <span class="ident">y</span>));
+            } <span class="kw">else </span>{
+                <span class="comment">// r.start &lt;= b, r.end &gt;= a
+                </span><span class="kw">let </span>x = r.start.max(a);
+                <span class="kw">let </span>y = r.end.min(b);
+                s += p.integrate((x, y));
             }
         }
-        <span class="ident">s</span>
+        s
     }
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Cubic Hermite Spline</span>
-<span class="comment">// =============================================================================</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CubicHermiteSpline</span> {
-    <span class="ident">polynomials</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span>,
+<span class="comment">// =============================================================================
+// Cubic Hermite Spline
+// =============================================================================
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>CubicHermiteSpline {
+    polynomials: Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">Spline</span> <span class="kw">for</span> <span class="ident">CubicHermiteSpline</span> {
-    <span class="kw">fn</span> <span class="ident">get_ranged_polynomials</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">polynomials</span>
+<span class="kw">impl </span>Spline <span class="kw">for </span>CubicHermiteSpline {
+    <span class="kw">fn </span>get_ranged_polynomials(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.polynomials
     }
 }
 
-<span class="kw">impl</span> <span class="ident">CubicHermiteSpline</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_nodes_with_slopes</span>(<span class="ident">node_x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">node_y</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">m</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>]) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">Range::default</span>(); <span class="ident">node_x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>];
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">u</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">Polynomial::default</span>(); <span class="ident">node_x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>];
+<span class="kw">impl </span>CubicHermiteSpline {
+    <span class="kw">pub fn </span>from_nodes_with_slopes(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64], m: <span class="kw-2">&amp;</span>[f64]) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>r = <span class="macro">vec!</span>[Range::default(); node_x.len()-<span class="number">1</span>];
+        <span class="kw">let </span><span class="kw-2">mut </span>u = <span class="macro">vec!</span>[Polynomial::default(); node_x.len()-<span class="number">1</span>];
         
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">node_x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span> {
-            <span class="kw">let</span> <span class="ident">a_i</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">b_i</span> <span class="op">=</span> <span class="ident">m</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="ident">node_x</span>[<span class="ident">i</span><span class="op">+</span><span class="number">1</span>] <span class="op">-</span> <span class="ident">node_x</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="ident">i</span><span class="op">+</span><span class="number">1</span>] <span class="op">-</span> <span class="ident">node_y</span>[<span class="ident">i</span>];
-            <span class="kw">let</span> <span class="ident">c_i</span> <span class="op">=</span> (<span class="number">3f64</span> <span class="op">*</span> <span class="ident">dy</span><span class="op">/</span><span class="ident">dx</span> <span class="op">-</span> <span class="number">2f64</span><span class="kw-2">*</span><span class="ident">m</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">m</span>[<span class="ident">i</span><span class="op">+</span><span class="number">1</span>]) <span class="op">/</span> <span class="ident">dx</span>;
-            <span class="kw">let</span> <span class="ident">d_i</span> <span class="op">=</span> (<span class="ident">m</span>[<span class="ident">i</span>] <span class="op">+</span> <span class="ident">m</span>[<span class="ident">i</span><span class="op">+</span><span class="number">1</span>] <span class="op">-</span> <span class="number">2f64</span> <span class="op">*</span> <span class="ident">dy</span><span class="op">/</span><span class="ident">dx</span>) <span class="op">/</span> <span class="ident">dx</span>.<span class="ident">powi</span>(<span class="number">2</span>);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. node_x.len()-<span class="number">1 </span>{
+            <span class="kw">let </span>a_i = node_y[i];
+            <span class="kw">let </span>b_i = m[i];
+            <span class="kw">let </span>dx = node_x[i+<span class="number">1</span>] - node_x[i];
+            <span class="kw">let </span>dy = node_y[i+<span class="number">1</span>] - node_y[i];
+            <span class="kw">let </span>c_i = (<span class="number">3f64 </span>* dy/dx - <span class="number">2f64</span><span class="kw-2">*</span>m[i] - m[i+<span class="number">1</span>]) / dx;
+            <span class="kw">let </span>d_i = (m[i] + m[i+<span class="number">1</span>] - <span class="number">2f64 </span>* dy/dx) / dx.powi(<span class="number">2</span>);
             
-            <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> <span class="ident">Polynomial::new</span>(<span class="macro">vec!</span>[<span class="number">1f64</span>, <span class="op">-</span><span class="ident">node_x</span>[<span class="ident">i</span>]]);
+            <span class="kw">let </span>p = Polynomial::new(<span class="macro">vec!</span>[<span class="number">1f64</span>, -node_x[i]]);
     
-            <span class="ident">r</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">Range</span> { <span class="ident">start</span>: <span class="ident">node_x</span>[<span class="ident">i</span>], <span class="ident">end</span>: <span class="ident">node_x</span>[<span class="ident">i</span><span class="op">+</span><span class="number">1</span>] };
-            <span class="ident">u</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">p</span>.<span class="ident">powi</span>(<span class="number">3</span>) <span class="op">*</span> <span class="ident">d_i</span> <span class="op">+</span> <span class="ident">p</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">*</span> <span class="ident">c_i</span> <span class="op">+</span> <span class="ident">p</span>.<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">b_i</span>;
-            <span class="ident">u</span>[<span class="ident">i</span>].<span class="ident">coef</span>[<span class="number">3</span>] <span class="op">+</span><span class="op">=</span> <span class="ident">a_i</span>;
+            r[i] = Range { start: node_x[i], end: node_x[i+<span class="number">1</span>] };
+            u[i] = p.powi(<span class="number">3</span>) * d_i + p.powi(<span class="number">2</span>) * c_i + p.clone() * b_i;
+            u[i].coef[<span class="number">3</span>] += a_i;
         }
 
-        <span class="ident">CubicHermiteSpline</span> {
-            <span class="ident">polynomials</span>: <span class="ident">r</span>.<span class="ident">into_iter</span>().<span class="ident">zip</span>(<span class="ident">u</span>).<span class="ident">collect</span>(),
+        CubicHermiteSpline {
+            polynomials: r.into_iter().zip(u).collect(),
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_nodes</span>(<span class="ident">node_x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">node_y</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">slope_method</span>: <span class="ident">SlopeMethod</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">match</span> <span class="ident">slope_method</span> {
-            <span class="ident">SlopeMethod::Akima</span> =&gt; {
-                <span class="ident">CubicHermiteSpline::from_nodes_with_slopes</span>(<span class="ident">node_x</span>, <span class="ident">node_y</span>, <span class="kw-2">&amp;</span><span class="ident">akima_slopes</span>(<span class="ident">node_x</span>, <span class="ident">node_y</span>))
+    <span class="kw">pub fn </span>from_nodes(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64], slope_method: SlopeMethod) -&gt; <span class="self">Self </span>{
+        <span class="kw">match </span>slope_method {
+            SlopeMethod::Akima =&gt; {
+                CubicHermiteSpline::from_nodes_with_slopes(node_x, node_y, <span class="kw-2">&amp;</span>akima_slopes(node_x, node_y))
             },
-            <span class="ident">SlopeMethod::Quadratic</span> =&gt; {
-                <span class="ident">CubicHermiteSpline::from_nodes_with_slopes</span>(<span class="ident">node_x</span>, <span class="ident">node_y</span>, <span class="kw-2">&amp;</span><span class="ident">quadratic_slopes</span>(<span class="ident">node_x</span>, <span class="ident">node_y</span>))
+            SlopeMethod::Quadratic =&gt; {
+                CubicHermiteSpline::from_nodes_with_slopes(node_x, node_y, <span class="kw-2">&amp;</span>quadratic_slopes(node_x, node_y))
             },
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">std::convert::Into</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CubicHermiteSpline</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Polynomial</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">polynomials</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="ident">polynomial</span>)<span class="op">|</span> <span class="ident">polynomial</span>)
-            .<span class="ident">collect</span>()
+<span class="kw">impl </span>std::convert::Into&lt;Vec&lt;Polynomial&gt;&gt; <span class="kw">for </span>CubicHermiteSpline {
+    <span class="kw">fn </span>into(<span class="self">self</span>) -&gt; Vec&lt;Polynomial&gt; {
+        <span class="self">self</span>.polynomials
+            .into_iter()
+            .map(|(<span class="kw">_</span>, polynomial)| polynomial)
+            .collect()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CubicHermiteSpline</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">polynomials</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">CubicHermiteSpline</span> { <span class="ident">polynomials</span> }
+<span class="kw">impl </span>From&lt;Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;&gt; <span class="kw">for </span>CubicHermiteSpline {
+    <span class="kw">fn </span>from(polynomials: Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;) -&gt; <span class="self">Self </span>{
+        CubicHermiteSpline { polynomials }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CubicHermiteSpline</span> {
-    <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">polynomials</span>
+<span class="kw">impl </span>Into&lt;Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt;&gt; <span class="kw">for </span>CubicHermiteSpline {
+    <span class="kw">fn </span>into(<span class="self">self</span>) -&gt; Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt; {
+        <span class="self">self</span>.polynomials
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CubicHermiteSpline</span> {
-    <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> (<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>);
+<span class="kw">impl </span>Index&lt;usize&gt; <span class="kw">for </span>CubicHermiteSpline {
+    <span class="kw">type </span>Output = (Range&lt;f64&gt;, Polynomial);
 
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">polynomials</span>[<span class="ident">index</span>]
+    <span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: usize) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Output {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.polynomials[index]
     }
 }
 
 
-<span class="kw">impl</span> <span class="ident">Calculus</span> <span class="kw">for</span> <span class="ident">CubicHermiteSpline</span> {
-    <span class="kw">fn</span> <span class="ident">derivative</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">polynomials</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
+<span class="kw">impl </span>Calculus <span class="kw">for </span>CubicHermiteSpline {
+    <span class="kw">fn </span>derivative(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>polynomials: Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt; = <span class="self">self</span>.clone().into();
 
-        <span class="ident">polynomials</span> <span class="op">=</span> <span class="ident">polynomials</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">r</span>, <span class="ident">poly</span>)<span class="op">|</span> (<span class="ident">r</span>, <span class="ident">poly</span>.<span class="ident">derivative</span>()))
-            .<span class="ident">collect</span>();
+        polynomials = polynomials
+            .into_iter()
+            .map(|(r, poly)| (r, poly.derivative()))
+            .collect();
 
-        <span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">polynomials</span>)
+        <span class="self">Self</span>::from(polynomials)
     }
 
-    <span class="kw">fn</span> <span class="ident">integral</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">polynomials</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Polynomial</span>)<span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">into</span>();
+    <span class="kw">fn </span>integral(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>polynomials: Vec&lt;(Range&lt;f64&gt;, Polynomial)&gt; = <span class="self">self</span>.clone().into();
 
-        <span class="ident">polynomials</span> <span class="op">=</span> <span class="ident">polynomials</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">r</span>, <span class="ident">poly</span>)<span class="op">|</span> (<span class="ident">r</span>, <span class="ident">poly</span>.<span class="ident">integral</span>()))
-            .<span class="ident">collect</span>();
+        polynomials = polynomials
+            .into_iter()
+            .map(|(r, poly)| (r, poly.integral()))
+            .collect();
 
-        <span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">polynomials</span>)
+        <span class="self">Self</span>::from(polynomials)
     }
 
-    <span class="kw">fn</span> <span class="ident">integrate</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">interval</span>: (<span class="ident">T</span>, <span class="ident">T</span>)) -&gt; <span class="ident">f64</span> {
-        <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="ident">interval</span>;
-        <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">a</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>.<span class="ident">into</span>();
+    <span class="kw">fn </span>integrate&lt;T: Into&lt;f64&gt; + Copy&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, interval: (T, T)) -&gt; f64 {
+        <span class="kw">let </span>(a, b) = interval;
+        <span class="kw">let </span>a = a.into();
+        <span class="kw">let </span>b = b.into();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="number">0f64</span>;
-        <span class="kw">for</span> (<span class="ident">r</span>, <span class="ident">p</span>) <span class="kw">in</span> <span class="self">self</span>.<span class="ident">polynomials</span>.<span class="ident">iter</span>() {
-            <span class="kw">if</span> <span class="ident">r</span>.<span class="ident">start</span> <span class="op">&gt;</span> <span class="ident">b</span> {
+        <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="number">0f64</span>;
+        <span class="kw">for </span>(r, p) <span class="kw">in </span><span class="self">self</span>.polynomials.iter() {
+            <span class="kw">if </span>r.start &gt; b {
                 <span class="kw">break</span>;
-            } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">r</span>.<span class="ident">end</span> <span class="op">&lt;</span> <span class="ident">a</span> {
+            } <span class="kw">else if </span>r.end &lt; a {
                 <span class="kw">continue</span>;
-            } <span class="kw">else</span> {
-                <span class="comment">// r.start &lt;= b, r.end &gt;= a</span>
-                <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">start</span>.<span class="ident">max</span>(<span class="ident">a</span>);
-                <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">end</span>.<span class="ident">min</span>(<span class="ident">b</span>);
-                <span class="ident">s</span> <span class="op">+</span><span class="op">=</span> <span class="ident">p</span>.<span class="ident">integrate</span>((<span class="ident">x</span>, <span class="ident">y</span>));
+            } <span class="kw">else </span>{
+                <span class="comment">// r.start &lt;= b, r.end &gt;= a
+                </span><span class="kw">let </span>x = r.start.max(a);
+                <span class="kw">let </span>y = r.end.min(b);
+                s += p.integrate((x, y));
             }
         }
-        <span class="ident">s</span>
+        s
     }
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Estimate Slopes</span>
-<span class="comment">// =============================================================================</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SlopeMethod</span> {
-    <span class="ident">Akima</span>,
-    <span class="ident">Quadratic</span>,
+<span class="comment">// =============================================================================
+// Estimate Slopes
+// =============================================================================
+</span><span class="attribute">#[derive(Debug, Copy, Clone, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>SlopeMethod {
+    Akima,
+    Quadratic,
 }
 
-<span class="kw">fn</span> <span class="ident">akima_slopes</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">y</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">x</span>.<span class="ident">len</span>() <span class="op">&lt;</span> <span class="number">3</span> {
+<span class="kw">fn </span>akima_slopes(x: <span class="kw-2">&amp;</span>[f64], y: <span class="kw-2">&amp;</span>[f64]) -&gt; Vec&lt;f64&gt; {
+    <span class="kw">if </span>x.len() &lt; <span class="number">3 </span>{
         <span class="macro">panic!</span>(<span class="string">&quot;Cubic spline need at least 3 nodes&quot;</span>);
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">x</span>.<span class="ident">len</span>()];
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">s</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">x</span>.<span class="ident">len</span>()<span class="op">+</span><span class="number">3</span>]; <span class="comment">// -2, -1, 0, ..., x.len()-1, x.len()</span>
+    <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="macro">vec!</span>[<span class="number">0f64</span>; x.len()];
+    <span class="kw">let </span><span class="kw-2">mut </span>s = <span class="macro">vec!</span>[<span class="number">0f64</span>; x.len()+<span class="number">3</span>]; <span class="comment">// -2, -1, 0, ..., x.len()-1, x.len()
 
-    <span class="kw">let</span> <span class="ident">l_i</span> <span class="op">=</span> <span class="ident">lagrange_polynomial</span>(<span class="ident">x</span>[<span class="number">0</span>..<span class="number">3</span>].<span class="ident">to_vec</span>(), <span class="ident">y</span>[<span class="number">0</span>..<span class="number">3</span>].<span class="ident">to_vec</span>());
-    <span class="kw">let</span> <span class="ident">l_f</span> <span class="op">=</span> <span class="ident">lagrange_polynomial</span>(<span class="ident">x</span>[<span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">3</span>..].<span class="ident">to_vec</span>(), <span class="ident">y</span>[<span class="ident">y</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">3</span>..].<span class="ident">to_vec</span>());
+    </span><span class="kw">let </span>l_i = lagrange_polynomial(x[<span class="number">0</span>..<span class="number">3</span>].to_vec(), y[<span class="number">0</span>..<span class="number">3</span>].to_vec());
+    <span class="kw">let </span>l_f = lagrange_polynomial(x[x.len()-<span class="number">3</span>..].to_vec(), y[y.len()-<span class="number">3</span>..].to_vec());
 
-    <span class="kw">let</span> <span class="ident">x_i</span> <span class="op">=</span> <span class="ident">x</span>[<span class="number">0</span>] <span class="op">-</span> (<span class="ident">x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="number">0</span>]) <span class="op">/</span> <span class="number">10f64</span>;
-    <span class="kw">let</span> <span class="ident">x_ii</span> <span class="op">=</span> <span class="ident">x_i</span> <span class="op">-</span> (<span class="ident">x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="number">0</span>]) <span class="op">/</span> <span class="number">10f64</span>;
-    <span class="kw">let</span> <span class="ident">x_f</span> <span class="op">=</span> <span class="ident">x</span>[<span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>] <span class="op">+</span> (<span class="ident">x</span>[<span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">2</span>]) <span class="op">/</span> <span class="number">10f64</span>;
-    <span class="kw">let</span> <span class="ident">x_ff</span> <span class="op">=</span> <span class="ident">x_f</span> <span class="op">+</span> (<span class="ident">x</span>[<span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">2</span>]) <span class="op">/</span> <span class="number">10f64</span>;
+    <span class="kw">let </span>x_i = x[<span class="number">0</span>] - (x[<span class="number">1</span>] - x[<span class="number">0</span>]) / <span class="number">10f64</span>;
+    <span class="kw">let </span>x_ii = x_i - (x[<span class="number">1</span>] - x[<span class="number">0</span>]) / <span class="number">10f64</span>;
+    <span class="kw">let </span>x_f = x[x.len()-<span class="number">1</span>] + (x[x.len()-<span class="number">1</span>] - x[x.len()-<span class="number">2</span>]) / <span class="number">10f64</span>;
+    <span class="kw">let </span>x_ff = x_f + (x[x.len()-<span class="number">1</span>] - x[x.len()-<span class="number">2</span>]) / <span class="number">10f64</span>;
 
-    <span class="kw">let</span> <span class="ident">y_i</span> <span class="op">=</span> <span class="ident">l_i</span>.<span class="ident">eval</span>(<span class="ident">x_i</span>);
-    <span class="kw">let</span> <span class="ident">y_ii</span> <span class="op">=</span> <span class="ident">l_i</span>.<span class="ident">eval</span>(<span class="ident">x_ii</span>);
-    <span class="kw">let</span> <span class="ident">y_f</span> <span class="op">=</span> <span class="ident">l_f</span>.<span class="ident">eval</span>(<span class="ident">x_f</span>);
-    <span class="kw">let</span> <span class="ident">y_ff</span> <span class="op">=</span> <span class="ident">l_f</span>.<span class="ident">eval</span>(<span class="ident">x_ff</span>);
+    <span class="kw">let </span>y_i = l_i.eval(x_i);
+    <span class="kw">let </span>y_ii = l_i.eval(x_ii);
+    <span class="kw">let </span>y_f = l_f.eval(x_f);
+    <span class="kw">let </span>y_ff = l_f.eval(x_ff);
 
-    <span class="kw">let</span> <span class="ident">new_x</span> <span class="op">=</span> <span class="ident">concat</span>(<span class="kw-2">&amp;</span><span class="ident">concat</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">x_ii</span>, <span class="ident">x_i</span>], <span class="kw-2">&amp;</span><span class="ident">x</span>.<span class="ident">to_vec</span>()), <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">x_f</span>, <span class="ident">x_ff</span>]);
-    <span class="kw">let</span> <span class="ident">new_y</span> <span class="op">=</span> <span class="ident">concat</span>(<span class="kw-2">&amp;</span><span class="ident">concat</span>(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">y_ii</span>, <span class="ident">y_i</span>], <span class="kw-2">&amp;</span><span class="ident">y</span>.<span class="ident">to_vec</span>()), <span class="kw-2">&amp;</span><span class="macro">vec!</span>[<span class="ident">y_f</span>, <span class="ident">y_ff</span>]);
+    <span class="kw">let </span>new_x = concat(<span class="kw-2">&amp;</span>concat(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[x_ii, x_i], <span class="kw-2">&amp;</span>x.to_vec()), <span class="kw-2">&amp;</span><span class="macro">vec!</span>[x_f, x_ff]);
+    <span class="kw">let </span>new_y = concat(<span class="kw-2">&amp;</span>concat(<span class="kw-2">&amp;</span><span class="macro">vec!</span>[y_ii, y_i], <span class="kw-2">&amp;</span>y.to_vec()), <span class="kw-2">&amp;</span><span class="macro">vec!</span>[y_f, y_ff]);
 
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">new_x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span> {
-        <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="ident">new_x</span>[<span class="ident">i</span><span class="op">+</span><span class="number">1</span>] <span class="op">-</span> <span class="ident">new_x</span>[<span class="ident">i</span>];
-        <span class="kw">if</span> <span class="ident">dx</span> <span class="op">==</span> <span class="number">0f64</span> {
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. new_x.len()-<span class="number">1 </span>{
+        <span class="kw">let </span>dx = new_x[i+<span class="number">1</span>] - new_x[i];
+        <span class="kw">if </span>dx == <span class="number">0f64 </span>{
             <span class="macro">panic!</span>(<span class="string">&quot;x nodes should be different!&quot;</span>);
         }
-        <span class="ident">s</span>[<span class="ident">i</span>] <span class="op">=</span> (<span class="ident">new_y</span>[<span class="ident">i</span><span class="op">+</span><span class="number">1</span>] <span class="op">-</span> <span class="ident">new_y</span>[<span class="ident">i</span>]) <span class="op">/</span> <span class="ident">dx</span>;
+        s[i] = (new_y[i+<span class="number">1</span>] - new_y[i]) / dx;
     }
     
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">x</span>.<span class="ident">len</span>() {
-        <span class="kw">let</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">i</span><span class="op">+</span><span class="number">2</span>;
-        <span class="kw">let</span> <span class="ident">ds_f</span> <span class="op">=</span> (<span class="ident">s</span>[<span class="ident">j</span><span class="op">+</span><span class="number">1</span>] <span class="op">-</span> <span class="ident">s</span>[<span class="ident">j</span>]).<span class="ident">abs</span>();
-        <span class="kw">let</span> <span class="ident">ds_i</span> <span class="op">=</span> (<span class="ident">s</span>[<span class="ident">j</span><span class="op">-</span><span class="number">1</span>] <span class="op">-</span> <span class="ident">s</span>[<span class="ident">j</span><span class="op">-</span><span class="number">2</span>]).<span class="ident">abs</span>();
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. x.len() {
+        <span class="kw">let </span>j = i+<span class="number">2</span>;
+        <span class="kw">let </span>ds_f = (s[j+<span class="number">1</span>] - s[j]).abs();
+        <span class="kw">let </span>ds_i = (s[j-<span class="number">1</span>] - s[j-<span class="number">2</span>]).abs();
 
-        <span class="ident">m</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="kw">if</span> <span class="ident">ds_f</span> <span class="op">==</span> <span class="number">0f64</span> <span class="op">&amp;&amp;</span> <span class="ident">ds_i</span> <span class="op">==</span> <span class="number">0f64</span> {
-            (<span class="ident">s</span>[<span class="ident">j</span><span class="op">-</span><span class="number">1</span>] <span class="op">+</span> <span class="ident">s</span>[<span class="ident">j</span>]) <span class="op">/</span> <span class="number">2f64</span>
-        } <span class="kw">else</span> {
-            (<span class="ident">ds_f</span> <span class="op">*</span> <span class="ident">s</span>[<span class="ident">j</span><span class="op">-</span><span class="number">1</span>] <span class="op">+</span> <span class="ident">ds_i</span> <span class="op">*</span> <span class="ident">s</span>[<span class="ident">j</span>]) <span class="op">/</span> (<span class="ident">ds_f</span> <span class="op">+</span> <span class="ident">ds_i</span>)
+        m[i] = <span class="kw">if </span>ds_f == <span class="number">0f64 </span>&amp;&amp; ds_i == <span class="number">0f64 </span>{
+            (s[j-<span class="number">1</span>] + s[j]) / <span class="number">2f64
+        </span>} <span class="kw">else </span>{
+            (ds_f * s[j-<span class="number">1</span>] + ds_i * s[j]) / (ds_f + ds_i)
         };
     }
-    <span class="ident">m</span>
+    m
 }
 
-<span class="kw">fn</span> <span class="ident">quadratic_slopes</span>(<span class="ident">x</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>], <span class="ident">y</span>: <span class="kw-2">&amp;</span>[<span class="ident">f64</span>]) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">x</span>.<span class="ident">len</span>()];
-    <span class="kw">let</span> <span class="ident">q_i</span> <span class="op">=</span> <span class="ident">lagrange_polynomial</span>(<span class="ident">x</span>[<span class="number">0</span>..<span class="number">3</span>].<span class="ident">to_vec</span>(), <span class="ident">y</span>[<span class="number">0</span>..<span class="number">3</span>].<span class="ident">to_vec</span>());
-    <span class="kw">let</span> <span class="ident">q_f</span> <span class="op">=</span> <span class="ident">lagrange_polynomial</span>(<span class="ident">x</span>[<span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">3</span>..].<span class="ident">to_vec</span>(), <span class="ident">y</span>[<span class="ident">y</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">3</span>..].<span class="ident">to_vec</span>());
+<span class="kw">fn </span>quadratic_slopes(x: <span class="kw-2">&amp;</span>[f64], y: <span class="kw-2">&amp;</span>[f64]) -&gt; Vec&lt;f64&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="macro">vec!</span>[<span class="number">0f64</span>; x.len()];
+    <span class="kw">let </span>q_i = lagrange_polynomial(x[<span class="number">0</span>..<span class="number">3</span>].to_vec(), y[<span class="number">0</span>..<span class="number">3</span>].to_vec());
+    <span class="kw">let </span>q_f = lagrange_polynomial(x[x.len()-<span class="number">3</span>..].to_vec(), y[y.len()-<span class="number">3</span>..].to_vec());
 
-    <span class="ident">m</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">q_i</span>.<span class="ident">derivative</span>().<span class="ident">eval</span>(<span class="ident">x</span>[<span class="number">0</span>]);
-    <span class="ident">m</span>[<span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>] <span class="op">=</span> <span class="ident">q_f</span>.<span class="ident">derivative</span>().<span class="ident">eval</span>(<span class="ident">x</span>[<span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>]);
+    m[<span class="number">0</span>] = q_i.derivative().eval(x[<span class="number">0</span>]);
+    m[x.len()-<span class="number">1</span>] = q_f.derivative().eval(x[x.len()-<span class="number">1</span>]);
 
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span> .. <span class="ident">x</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span> {
-        <span class="kw">let</span> <span class="ident">q</span> <span class="op">=</span> <span class="ident">lagrange_polynomial</span>(<span class="ident">x</span>[<span class="ident">i</span><span class="op">-</span><span class="number">1</span>..<span class="ident">i</span><span class="op">+</span><span class="number">2</span>].<span class="ident">to_vec</span>(), <span class="ident">y</span>[<span class="ident">i</span><span class="op">-</span><span class="number">1</span>..<span class="ident">i</span><span class="op">+</span><span class="number">2</span>].<span class="ident">to_vec</span>());
-        <span class="ident">m</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">q</span>.<span class="ident">derivative</span>().<span class="ident">eval</span>(<span class="ident">x</span>[<span class="ident">i</span>]);
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">1 </span>.. x.len()-<span class="number">1 </span>{
+        <span class="kw">let </span>q = lagrange_polynomial(x[i-<span class="number">1</span>..i+<span class="number">2</span>].to_vec(), y[i-<span class="number">1</span>..i+<span class="number">2</span>].to_vec());
+        m[i] = q.derivative().eval(x[i]);
     }
 
-    <span class="ident">m</span>
+    m
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

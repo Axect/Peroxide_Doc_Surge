@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/non_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>non_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/non_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>non_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -281,267 +275,282 @@
 <span id="259">259</span>
 <span id="260">260</span>
 <span id="261">261</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Macro to non macro function</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Macro to non macro function
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::rand::prelude</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure</span>::{
-    <span class="ident">matrix::Shape</span>::{<span class="ident">Col</span>, <span class="ident">Row</span>},
-    <span class="ident">matrix</span>::{<span class="ident">matrix</span>, <span class="ident">Matrix</span>, <span class="ident">Shape</span>},
+</span><span class="kw">extern crate </span>rand;
+<span class="kw">use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::structure::{
+    matrix::Shape::{Col, Row},
+    matrix::{matrix, Matrix, Shape},
 };
 
-<span class="kw">use</span> <span class="ident">std::convert::Into</span>;
+<span class="kw">use </span>std::convert::Into;
 
-<span class="doccomment">/// R like seq function</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Example</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let a = seq(1, 10, 2);</span>
-<span class="doccomment">/// assert_eq!(a, vec![1f64,3f64,5f64,7f64,9f64]);</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// let b = seq(1, 1, 1);</span>
-<span class="doccomment">/// assert_eq!(b, vec![1f64]);</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">seq</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">start</span>: <span class="ident">S</span>, <span class="ident">end</span>: <span class="ident">T</span>, <span class="ident">step</span>: <span class="ident">U</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
-    <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
-    <span class="ident">U</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+<span class="doccomment">/// R like seq function
+///
+/// # Example
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// let a = seq(1, 10, 2);
+/// assert_eq!(a, vec![1f64,3f64,5f64,7f64,9f64]);
+/// 
+/// let b = seq(1, 1, 1);
+/// assert_eq!(b, vec![1f64]);
+/// ```
+</span><span class="kw">pub fn </span>seq&lt;S, T, U&gt;(start: S, end: T, step: U) -&gt; Vec&lt;f64&gt;
+<span class="kw">where
+    </span>S: Into&lt;f64&gt; + Copy,
+    T: Into&lt;f64&gt; + Copy,
+    U: Into&lt;f64&gt; + Copy,
 {
-    <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="ident">start</span>.<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">e</span> <span class="op">=</span> <span class="ident">end</span>.<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">step</span> <span class="op">=</span> <span class="ident">step</span>.<span class="ident">into</span>();
+    <span class="kw">let </span>s = start.into();
+    <span class="kw">let </span>e = end.into();
+    <span class="kw">let </span>step = step.into();
 
-    <span class="macro">assert!</span>(<span class="ident">e</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">s</span>);
+    <span class="macro">assert!</span>(e &gt;= s);
 
-    <span class="kw">let</span> <span class="ident">factor</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="ident">e</span> <span class="op">-</span> <span class="ident">s</span>) <span class="op">/</span> <span class="ident">step</span>;
-    <span class="kw">let</span> <span class="ident">l</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">factor</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="number">1</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">l</span>];
+    <span class="kw">let </span>factor: f64 = (e - s) / step;
+    <span class="kw">let </span>l: usize = factor <span class="kw">as </span>usize + <span class="number">1</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = <span class="macro">vec!</span>[<span class="number">0f64</span>; l];
 
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
-        <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">s</span> <span class="op">+</span> <span class="ident">step</span> <span class="op">*</span> (<span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span>);
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l {
+        v[i] = s + step * (i <span class="kw">as </span>f64);
     }
-    <span class="ident">v</span>
+    v
 }
 
-<span class="doccomment">/// MATLAB like zeros (Matrix)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let a = zeros(2, 2);</span>
-<span class="doccomment">/// assert_eq!(a, matrix(vec![0f64;4], 2, 2, Row));</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeros</span>(<span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="ident">matrix</span>(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">r</span> <span class="op">*</span> <span class="ident">c</span>], <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)
+<span class="doccomment">/// MATLAB like zeros (Matrix)
+///
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// let a = zeros(2, 2);
+/// assert_eq!(a, matrix(vec![0f64;4], 2, 2, Row));
+/// ```
+</span><span class="kw">pub fn </span>zeros(r: usize, c: usize) -&gt; Matrix {
+    matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; r * c], r, c, Row)
 }
 
-<span class="doccomment">/// Zeros with custom shape</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeros_shape</span>(<span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>, <span class="ident">shape</span>: <span class="ident">Shape</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="ident">matrix</span>(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">r</span> <span class="op">*</span> <span class="ident">c</span>], <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">shape</span>)
+<span class="doccomment">/// Zeros with custom shape
+</span><span class="kw">pub fn </span>zeros_shape(r: usize, c: usize, shape: Shape) -&gt; Matrix {
+    matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; r * c], r, c, shape)
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">concat</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span>(<span class="ident">v1</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">v2</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">v1</span>.<span class="ident">clone</span>();
-    <span class="ident">v</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v2</span>[..]);
+<span class="kw">pub fn </span>concat&lt;T: Clone + Copy&gt;(v1: <span class="kw-2">&amp;</span>Vec&lt;T&gt;, v2: <span class="kw-2">&amp;</span>Vec&lt;T&gt;) -&gt; Vec&lt;T&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>v = v1.clone();
+    v.extend_from_slice(<span class="kw-2">&amp;</span>v2[..]);
 
-    <span class="ident">v</span>
+    v
 }
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cat</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Default</span><span class="op">&gt;</span>(<span class="ident">val</span>: <span class="ident">T</span>, <span class="ident">vec</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="ident">val</span>];
-    <span class="ident">v</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">vec</span>[..]);
+<span class="kw">pub fn </span>cat&lt;T: Clone + Copy + Default&gt;(val: T, vec: <span class="kw-2">&amp;</span>Vec&lt;T&gt;) -&gt; Vec&lt;T&gt; {
+    <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[val];
+    v.extend_from_slice(<span class="kw-2">&amp;</span>vec[..]);
 
-    <span class="ident">v</span>
+    v
 }
 
-<span class="doccomment">/// MATLAB like eye - Identity matrix</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// let a = eye(2);</span>
-<span class="doccomment">/// assert_eq!(a, MATLAB::new(&quot;1 0;0 1&quot;));</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eye</span>(<span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="ident">n</span>, <span class="ident">n</span>);
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-        <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">i</span>)] <span class="op">=</span> <span class="number">1f64</span>;
+<span class="doccomment">/// MATLAB like eye - Identity matrix
+///
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// let a = eye(2);
+/// assert_eq!(a, MATLAB::new(&quot;1 0;0 1&quot;));
+/// ```
+</span><span class="kw">pub fn </span>eye(n: usize) -&gt; Matrix {
+    <span class="kw">let </span><span class="kw-2">mut </span>m = zeros(n, n);
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+        m[(i, i)] = <span class="number">1f64</span>;
     }
-    <span class="ident">m</span>
+    m
 }
 
-<span class="doccomment">/// eye with custom shape</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eye_shape</span>(<span class="ident">n</span>: <span class="ident">usize</span>, <span class="ident">shape</span>: <span class="ident">Shape</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros_shape</span>(<span class="ident">n</span>, <span class="ident">n</span>, <span class="ident">shape</span>);
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-        <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">i</span>)] <span class="op">=</span> <span class="number">1f64</span>;
+<span class="doccomment">/// eye with custom shape
+</span><span class="kw">pub fn </span>eye_shape(n: usize, shape: Shape) -&gt; Matrix {
+    <span class="kw">let </span><span class="kw-2">mut </span>m = zeros_shape(n, n, shape);
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+        m[(i, i)] = <span class="number">1f64</span>;
     }
-    <span class="ident">m</span>
+    m
 }
 
-<span class="doccomment">/// MATLAB like linspace</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = linspace(1, 10, 10);</span>
-<span class="doccomment">///     assert_eq!(a, seq(1,10,1));</span>
-<span class="doccomment">///     assert_eq!(a.len(), 10);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">linspace</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">start</span>: <span class="ident">S</span>, <span class="ident">end</span>: <span class="ident">T</span>, <span class="ident">length</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
-    <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+<span class="doccomment">/// MATLAB like linspace
+/// 
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+/// 
+/// fn main() {
+///     let a = linspace(1, 10, 10);
+///     assert_eq!(a, seq(1,10,1));
+///     assert_eq!(a.len(), 10);
+/// }
+/// ```
+</span><span class="kw">pub fn </span>linspace&lt;S, T&gt;(start: S, end: T, length: usize) -&gt; Vec&lt;f64&gt;
+<span class="kw">where
+    </span>S: Into&lt;f64&gt; + Copy,
+    T: Into&lt;f64&gt; + Copy,
 {
-    <span class="kw">let</span> <span class="ident">step</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">length</span> <span class="op">&gt;</span> <span class="number">1</span> {
-        (<span class="ident">end</span>.<span class="ident">into</span>() <span class="op">-</span> <span class="ident">start</span>.<span class="ident">into</span>()) <span class="op">/</span> (<span class="ident">length</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">-</span> <span class="number">1f64</span>)
-    } <span class="kw">else</span> {
-        <span class="number">0f64</span>
-    };
-    <span class="ident">seq</span>(<span class="ident">start</span>, <span class="ident">end</span>, <span class="ident">step</span>)
+    <span class="kw">let </span>step: f64 = <span class="kw">if </span>length &gt; <span class="number">1 </span>{
+        (end.into() - start.into()) / (length <span class="kw">as </span>f64 - <span class="number">1f64</span>)
+    } <span class="kw">else </span>{
+        <span class="number">0f64
+    </span>};
+
+    <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; length];
+    v[<span class="number">0</span>] = start.into();
+    v[length - <span class="number">1</span>] = end.into();
+
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..length - <span class="number">1 </span>{
+        v[i] = v[i - <span class="number">1</span>] + step;
+    }
+    v
 }
 
-<span class="doccomment">/// Numpy like logspace</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = logspace(0, 10, 11, 2);</span>
-<span class="doccomment">///     let b = vec![1f64, 2f64, 4f64, 8f64, 16f64, 32f64, 64f64, 128f64, 256f64, 512f64, 1024f64];</span>
-<span class="doccomment">///     assert_eq!(a, b);</span>
-<span class="doccomment">/// </span>
-<span class="doccomment">///     let single = logspace(0f64, 0f64, 1, 10);</span>
-<span class="doccomment">///     assert_eq!(single, vec![1f64]);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">logspace</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">T</span>, <span class="ident">U</span><span class="op">&gt;</span>(<span class="ident">start</span>: <span class="ident">S</span>, <span class="ident">end</span>: <span class="ident">T</span>, <span class="ident">length</span>: <span class="ident">usize</span>, <span class="ident">base</span>: <span class="ident">U</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>
-<span class="kw">where</span>
-    <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
-    <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
-    <span class="ident">U</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Copy</span>,
+<span class="doccomment">/// Numpy like logspace
+/// 
+/// # Examples
+/// ```
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+/// 
+/// fn main() {
+///     let a = logspace(0, 10, 11, 2);
+///     let b = vec![1f64, 2f64, 4f64, 8f64, 16f64, 32f64, 64f64, 128f64, 256f64, 512f64, 1024f64];
+///     assert_eq!(a, b);
+/// 
+///     let single = logspace(0f64, 0f64, 1, 10);
+///     assert_eq!(single, vec![1f64]);
+/// }
+/// ```
+</span><span class="kw">pub fn </span>logspace&lt;S, T, U&gt;(start: S, end: T, length: usize, base: U) -&gt; Vec&lt;f64&gt;
+<span class="kw">where
+    </span>S: Into&lt;f64&gt; + Copy,
+    T: Into&lt;f64&gt; + Copy,
+    U: Into&lt;f64&gt; + Copy,
 {
-    <span class="kw">let</span> <span class="ident">s</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">start</span>.<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">e</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">end</span>.<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">b</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">base</span>.<span class="ident">into</span>();
+    <span class="kw">let </span>s: f64 = start.into();
+    <span class="kw">let </span>e: f64 = end.into();
+    <span class="kw">let </span>b: f64 = base.into();
 
-    <span class="macro">assert!</span>(<span class="ident">e</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">s</span>);
+    <span class="macro">assert!</span>(e &gt;= s);
 
-    <span class="kw">let</span> <span class="ident">step</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">length</span> <span class="op">&gt;</span> <span class="number">1</span> { 
-        (<span class="ident">e</span> <span class="op">-</span> <span class="ident">s</span>) <span class="op">/</span> (<span class="ident">length</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">-</span> <span class="number">1f64</span>)
-    } <span class="kw">else</span> {
-        <span class="number">0f64</span>
-    };
+    <span class="kw">let </span>step: f64 = <span class="kw">if </span>length &gt; <span class="number">1 </span>{ 
+        (e - s) / (length <span class="kw">as </span>f64 - <span class="number">1f64</span>)
+    } <span class="kw">else </span>{
+        <span class="number">0f64
+    </span>};
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">length</span>];
+    <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;f64&gt; = <span class="macro">vec!</span>[<span class="number">0f64</span>; length];
 
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">length</span> {
-        <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">b</span>.<span class="ident">powf</span>(<span class="ident">s</span> <span class="op">+</span> <span class="ident">step</span> <span class="op">*</span> (<span class="ident">i</span> <span class="kw">as</span> <span class="ident">f64</span>));
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..length {
+        v[i] = b.powf(s + step * (i <span class="kw">as </span>f64));
     }
-    <span class="ident">v</span>
+    v
 }
 
-<span class="doccomment">/// R like cbind - concatenate two matrix by column direction</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = matrix!(1;4;1, 2, 2, Col);</span>
-<span class="doccomment">///     let b = matrix!(5;8;1, 2, 2, Col);</span>
-<span class="doccomment">///     let c = matrix!(1;8;1, 2, 4, Col);</span>
-<span class="doccomment">///     assert_eq!(cbind(a,b), c);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">cbind</span>(<span class="ident">m1</span>: <span class="ident">Matrix</span>, <span class="ident">m2</span>: <span class="ident">Matrix</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">m1</span>;
-    <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
-        <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
+<span class="doccomment">/// R like cbind - concatenate two matrix by column direction
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = matrix!(1;4;1, 2, 2, Col);
+///     let b = matrix!(5;8;1, 2, 2, Col);
+///     let c = matrix!(1;8;1, 2, 4, Col);
+///     assert_eq!(cbind(a,b), c);
+/// }
+/// ```
+</span><span class="kw">pub fn </span>cbind(m1: Matrix, m2: Matrix) -&gt; Matrix {
+    <span class="kw">let </span><span class="kw-2">mut </span>temp = m1;
+    <span class="kw">if </span>temp.shape != Col {
+        temp = temp.change_shape();
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">m2</span>;
-    <span class="kw">if</span> <span class="ident">temp2</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Col</span> {
-        <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">change_shape</span>();
+    <span class="kw">let </span><span class="kw-2">mut </span>temp2 = m2;
+    <span class="kw">if </span>temp2.shape != Col {
+        temp2 = temp2.change_shape();
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">data</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">col</span>;
-    <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">row</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>v = temp.data;
+    <span class="kw">let </span><span class="kw-2">mut </span>c = temp.col;
+    <span class="kw">let </span>r = temp.row;
 
-    <span class="macro">assert_eq!</span>(<span class="ident">r</span>, <span class="ident">temp2</span>.<span class="ident">row</span>);
-    <span class="ident">v</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">temp2</span>.<span class="ident">data</span>[..]);
-    <span class="ident">c</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">col</span>;
-    <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Col</span>)
+    <span class="macro">assert_eq!</span>(r, temp2.row);
+    v.extend_from_slice(<span class="kw-2">&amp;</span>temp2.data[..]);
+    c += temp2.col;
+    matrix(v, r, c, Col)
 }
 
-<span class="doccomment">/// R like rbind - concatenate two matrix by row direction</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = matrix!(1;4;1, 2, 2, Row);</span>
-<span class="doccomment">///     let b = matrix!(5;8;1, 2, 2, Row);</span>
-<span class="doccomment">///     let c = matrix!(1;8;1, 4, 2, Row);</span>
-<span class="doccomment">///     assert_eq!(rbind(a,b), c);</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rbind</span>(<span class="ident">m1</span>: <span class="ident">Matrix</span>, <span class="ident">m2</span>: <span class="ident">Matrix</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp</span> <span class="op">=</span> <span class="ident">m1</span>;
-    <span class="kw">if</span> <span class="ident">temp</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
-        <span class="ident">temp</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">change_shape</span>();
+<span class="doccomment">/// R like rbind - concatenate two matrix by row direction
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = matrix!(1;4;1, 2, 2, Row);
+///     let b = matrix!(5;8;1, 2, 2, Row);
+///     let c = matrix!(1;8;1, 4, 2, Row);
+///     assert_eq!(rbind(a,b), c);
+/// }
+/// ```
+</span><span class="kw">pub fn </span>rbind(m1: Matrix, m2: Matrix) -&gt; Matrix {
+    <span class="kw">let </span><span class="kw-2">mut </span>temp = m1;
+    <span class="kw">if </span>temp.shape != Row {
+        temp = temp.change_shape();
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">m2</span>;
-    <span class="kw">if</span> <span class="ident">temp2</span>.<span class="ident">shape</span> <span class="op">!</span><span class="op">=</span> <span class="ident">Row</span> {
-        <span class="ident">temp2</span> <span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">change_shape</span>();
+    <span class="kw">let </span><span class="kw-2">mut </span>temp2 = m2;
+    <span class="kw">if </span>temp2.shape != Row {
+        temp2 = temp2.change_shape();
     }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">data</span>;
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">col</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">r</span> <span class="op">=</span> <span class="ident">temp</span>.<span class="ident">row</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>v = temp.data;
+    <span class="kw">let </span>c = temp.col;
+    <span class="kw">let </span><span class="kw-2">mut </span>r = temp.row;
 
-    <span class="macro">assert_eq!</span>(<span class="ident">c</span>, <span class="ident">temp2</span>.<span class="ident">col</span>);
-    <span class="ident">v</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">temp2</span>.<span class="ident">data</span>[..]);
-    <span class="ident">r</span> <span class="op">+</span><span class="op">=</span> <span class="ident">temp2</span>.<span class="ident">row</span>;
-    <span class="ident">matrix</span>(<span class="ident">v</span>, <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)
+    <span class="macro">assert_eq!</span>(c, temp2.col);
+    v.extend_from_slice(<span class="kw-2">&amp;</span>temp2.data[..]);
+    r += temp2.row;
+    matrix(v, r, c, Row)
 }
 
-<span class="doccomment">/// Rand matrix</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Description</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Range = from 0 to 1</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rand</span>(<span class="ident">r</span>: <span class="ident">usize</span>, <span class="ident">c</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="ident">r</span>, <span class="ident">c</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">r</span> {
-        <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-            <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">j</span>)] <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>..<span class="op">=</span><span class="number">1f64</span>);
+<span class="doccomment">/// Rand matrix
+///
+/// # Description
+///
+/// Range = from 0 to 1
+</span><span class="kw">pub fn </span>rand(r: usize, c: usize) -&gt; Matrix {
+    <span class="kw">let </span><span class="kw-2">mut </span>m = zeros(r, c);
+    <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..r {
+        <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..c {
+            m[(i, j)] = rng.gen_range(<span class="number">0f64</span>..=<span class="number">1f64</span>);
         }
     }
-    <span class="ident">m</span>
+    m
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

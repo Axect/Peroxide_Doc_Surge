@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/traits/num.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>num.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/traits/num.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>num.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -261,247 +255,246 @@
 <span id="239">239</span>
 <span id="240">240</span>
 <span id="241">241</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Missing operations &amp; comprehensive number structures</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## `Real` trait</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * `Real` is a trait for binding `f64`, `AD`</span>
-<span class="doccomment">//! * `Real` requires `PowOps, TrigOps, ExpLogOps` &amp; `std::Ops&lt;Self&gt;` &amp; `std::Ops&lt;f64&gt;`</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         let x_f64 = 2f64;</span>
-<span class="doccomment">//!         let x_ad1 = AD1(2f64,1f64);</span>
-<span class="doccomment">//!         let x_ad2 = AD2(2f64, 1f64, 0f64);</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         f(x_f64).print();</span>
-<span class="doccomment">//!         f(x_ad1).print();</span>
-<span class="doccomment">//!         f(x_ad2).print();</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn f&lt;T: Real&gt;(x: T) -&gt; T {</span>
-<span class="doccomment">//!         return x.powi(2)</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Missing operations &amp; comprehensive number structures
+//!
+//! ## `Real` trait
+//!
+//! * `Real` is a trait for binding `f64`, `AD`
+//! * `Real` requires `PowOps, TrigOps, ExpLogOps` &amp; `std::Ops&lt;Self&gt;` &amp; `std::Ops&lt;f64&gt;`
+//!
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         let x_f64 = 2f64;
+//!         let x_ad1 = AD1(2f64,1f64);
+//!         let x_ad2 = AD2(2f64, 1f64, 0f64);
+//!
+//!         f(x_f64).print();
+//!         f(x_ad1).print();
+//!         f(x_ad2).print();
+//!     }
+//!
+//!     fn f&lt;T: Real&gt;(x: T) -&gt; T {
+//!         return x.powi(2)
+//!     }
+//!     ```
 
-<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Neg</span>, <span class="ident">Add</span>, <span class="ident">Sub</span>, <span class="ident">Mul</span>, <span class="ident">Div</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::ad::AD</span>;
+</span><span class="kw">use </span>std::ops::{Neg, Add, Sub, Mul, Div};
+<span class="kw">use </span><span class="kw">crate</span>::structure::ad::AD;
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">PowOps</span>: <span class="ident">Sized</span> {
-    <span class="kw">fn</span> <span class="ident">powi</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">i32</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">pow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">sqrt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">powf</span>(<span class="number">0.5</span>)
+<span class="kw">pub trait </span>PowOps: Sized {
+    <span class="kw">fn </span>powi(<span class="kw-2">&amp;</span><span class="self">self</span>, n: i32) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>powf(<span class="kw-2">&amp;</span><span class="self">self</span>, f: f64) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>pow(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="self">Self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>sqrt(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.powf(<span class="number">0.5</span>)
     }
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">TrigOps</span>: <span class="ident">Sized</span> <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">sin_cos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>);
-    <span class="kw">fn</span> <span class="ident">sin</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="ident">s</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">sin_cos</span>();
-        <span class="ident">s</span>
+<span class="kw">pub trait </span>TrigOps: Sized + Div&lt;Output = <span class="self">Self</span>&gt; {
+    <span class="kw">fn </span>sin_cos(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>);
+    <span class="kw">fn </span>sin(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(s, <span class="kw">_</span>) = <span class="self">self</span>.sin_cos();
+        s
     }
-    <span class="kw">fn</span> <span class="ident">cos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">c</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">sin_cos</span>();
-        <span class="ident">c</span>
+    <span class="kw">fn </span>cos(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(<span class="kw">_</span>, c) = <span class="self">self</span>.sin_cos();
+        c
     }
-    <span class="kw">fn</span> <span class="ident">tan</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="ident">s</span>, <span class="ident">c</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">sin_cos</span>();
-        <span class="ident">s</span> <span class="op">/</span> <span class="ident">c</span>
+    <span class="kw">fn </span>tan(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(s, c) = <span class="self">self</span>.sin_cos();
+        s / c
     }
-    <span class="kw">fn</span> <span class="ident">sinh_cosh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>);
-    <span class="kw">fn</span> <span class="ident">sinh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="ident">s</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">sinh_cosh</span>();
-        <span class="ident">s</span>
+    <span class="kw">fn </span>sinh_cosh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>);
+    <span class="kw">fn </span>sinh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(s, <span class="kw">_</span>) = <span class="self">self</span>.sinh_cosh();
+        s
     }
-    <span class="kw">fn</span> <span class="ident">cosh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">c</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">sinh_cosh</span>();
-        <span class="ident">c</span>
+    <span class="kw">fn </span>cosh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(<span class="kw">_</span>, c) = <span class="self">self</span>.sinh_cosh();
+        c
     }
-    <span class="kw">fn</span> <span class="ident">tanh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="ident">s</span>, <span class="ident">c</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">sinh_cosh</span>();
-        <span class="ident">s</span> <span class="op">/</span> <span class="ident">c</span>
+    <span class="kw">fn </span>tanh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span>(s, c) = <span class="self">self</span>.sinh_cosh();
+        s / c
     }
-    <span class="kw">fn</span> <span class="ident">asin</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">acos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">atan</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">asin_acos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
-        (<span class="self">self</span>.<span class="ident">asin</span>(), <span class="self">self</span>.<span class="ident">acos</span>())
+    <span class="kw">fn </span>asin(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>acos(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>atan(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>asin_acos(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
+        (<span class="self">self</span>.asin(), <span class="self">self</span>.acos())
     }
-    <span class="kw">fn</span> <span class="ident">asinh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">acosh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">atanh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">asinh_acosh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
-        (<span class="self">self</span>.<span class="ident">asinh</span>(), <span class="self">self</span>.<span class="ident">acosh</span>())
-    }
-}
-
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ExpLogOps</span>: <span class="ident">Sized</span> {
-    <span class="kw">fn</span> <span class="ident">exp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">ln</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">log</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">base</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">log2</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">log</span>(<span class="number">2f64</span>)
-    }
-    <span class="kw">fn</span> <span class="ident">log10</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">log</span>(<span class="number">10f64</span>)
+    <span class="kw">fn </span>asinh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>acosh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>atanh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>asinh_acosh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
+        (<span class="self">self</span>.asinh(), <span class="self">self</span>.acosh())
     }
 }
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Real</span>:
-    <span class="ident">PowOps</span>
-    <span class="op">+</span> <span class="ident">TrigOps</span>
-    <span class="op">+</span> <span class="ident">ExpLogOps</span>
-    <span class="op">+</span> <span class="ident">Neg</span>
-    <span class="op">+</span> <span class="ident">PartialOrd</span>
-    <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident">f64</span>, <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Clone</span>
-    <span class="op">+</span> <span class="ident">Copy</span>
+<span class="kw">pub trait </span>ExpLogOps: Sized {
+    <span class="kw">fn </span>exp(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>ln(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>log(<span class="kw-2">&amp;</span><span class="self">self</span>, base: f64) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>log2(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.log(<span class="number">2f64</span>)
+    }
+    <span class="kw">fn </span>log10(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.log(<span class="number">10f64</span>)
+    }
+}
+
+<span class="kw">pub trait </span>Real:
+    PowOps
+    + TrigOps
+    + ExpLogOps
+    + Neg
+    + PartialOrd
+    + Add&lt;Output = <span class="self">Self</span>&gt;
+    + Mul&lt;Output = <span class="self">Self</span>&gt;
+    + Div&lt;Output = <span class="self">Self</span>&gt;
+    + Sub&lt;Output = <span class="self">Self</span>&gt;
+    + Add&lt;f64, Output = <span class="self">Self</span>&gt;
+    + Mul&lt;f64, Output = <span class="self">Self</span>&gt;
+    + Div&lt;f64, Output = <span class="self">Self</span>&gt;
+    + Sub&lt;f64, Output = <span class="self">Self</span>&gt;
+    + Clone
+    + Copy
 {
-    <span class="kw">fn</span> <span class="ident">to_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span>;
-    <span class="kw">fn</span> <span class="ident">from_f64</span>(<span class="ident">f</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">to_ad</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">AD</span>;
+    <span class="kw">fn </span>to_f64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64;
+    <span class="kw">fn </span>from_f64(f: f64) -&gt; <span class="self">Self</span>;
+    <span class="kw">fn </span>to_ad(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; AD;
 }
 
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Real Traits for f64</span>
-<span class="comment">// =============================================================================</span>
-<span class="kw">impl</span> <span class="ident">PowOps</span> <span class="kw">for</span> <span class="ident">f64</span> {
-    <span class="kw">fn</span> <span class="ident">powi</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">i32</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">powi</span>(<span class="ident">n</span>)
+<span class="comment">// =============================================================================
+// Real Traits for f64
+// =============================================================================
+</span><span class="kw">impl </span>PowOps <span class="kw">for </span>f64 {
+    <span class="kw">fn </span>powi(<span class="kw-2">&amp;</span><span class="self">self</span>, n: i32) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).powi(n)
     }
 
-    <span class="kw">fn</span> <span class="ident">powf</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">powf</span>(<span class="ident">f</span>)
+    <span class="kw">fn </span>powf(<span class="kw-2">&amp;</span><span class="self">self</span>, f: f64) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).powf(f)
     }
 
-    <span class="kw">fn</span> <span class="ident">pow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">powf</span>(<span class="ident">f</span>)
+    <span class="kw">fn </span>pow(<span class="kw-2">&amp;</span><span class="self">self</span>, f: f64) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).powf(f)
     }
 
-    <span class="kw">fn</span> <span class="ident">sqrt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">sqrt</span>()
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">TrigOps</span> <span class="kw">for</span> <span class="ident">f64</span> {
-    <span class="kw">fn</span> <span class="ident">sin</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">sin</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">cos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">cos</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">tan</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">tan</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">asin</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">asin</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">acos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">acos</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">atan</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">atan</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">sinh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">sinh</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">cosh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">cosh</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">sinh_cosh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
-        ((<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">sinh</span>(), (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">cosh</span>())
-    }
-
-    <span class="kw">fn</span> <span class="ident">tanh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">tanh</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">asinh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">asinh</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">acosh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">acosh</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">atanh</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">atanh</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">sin_cos</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">sin_cos</span>()
+    <span class="kw">fn </span>sqrt(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).sqrt()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">ExpLogOps</span> <span class="kw">for</span> <span class="ident">f64</span> {
-    <span class="kw">fn</span> <span class="ident">exp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">exp</span>()
+<span class="kw">impl </span>TrigOps <span class="kw">for </span>f64 {
+    <span class="kw">fn </span>sin(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).sin()
     }
 
-    <span class="kw">fn</span> <span class="ident">ln</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">ln</span>()
+    <span class="kw">fn </span>cos(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).cos()
     }
 
-    <span class="kw">fn</span> <span class="ident">log</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">base</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">log</span>(<span class="ident">base</span>)
+    <span class="kw">fn </span>tan(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).tan()
     }
 
-    <span class="kw">fn</span> <span class="ident">log2</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">log2</span>()
+    <span class="kw">fn </span>asin(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).asin()
     }
 
-    <span class="kw">fn</span> <span class="ident">log10</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
-        (<span class="kw-2">*</span><span class="self">self</span>).<span class="ident">log10</span>()
+    <span class="kw">fn </span>acos(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).acos()
+    }
+
+    <span class="kw">fn </span>atan(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).atan()
+    }
+
+    <span class="kw">fn </span>sinh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).sinh()
+    }
+
+    <span class="kw">fn </span>cosh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).cosh()
+    }
+
+    <span class="kw">fn </span>sinh_cosh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
+        ((<span class="kw-2">*</span><span class="self">self</span>).sinh(), (<span class="kw-2">*</span><span class="self">self</span>).cosh())
+    }
+
+    <span class="kw">fn </span>tanh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).tanh()
+    }
+
+    <span class="kw">fn </span>asinh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).asinh()
+    }
+
+    <span class="kw">fn </span>acosh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).acosh()
+    }
+
+    <span class="kw">fn </span>atanh(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).atanh()
+    }
+
+    <span class="kw">fn </span>sin_cos(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="self">Self</span>, <span class="self">Self</span>) {
+        (<span class="kw-2">*</span><span class="self">self</span>).sin_cos()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Real</span> <span class="kw">for</span> <span class="ident">f64</span> {
-    <span class="kw">fn</span> <span class="ident">to_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw-2">*</span><span class="self">self</span>
+<span class="kw">impl </span>ExpLogOps <span class="kw">for </span>f64 {
+    <span class="kw">fn </span>exp(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).exp()
     }
 
-    <span class="kw">fn</span> <span class="ident">from_f64</span>(<span class="ident">f</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">f</span>
+    <span class="kw">fn </span>ln(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).ln()
     }
 
-    <span class="kw">fn</span> <span class="ident">to_ad</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">AD</span> {
-        <span class="ident">AD::from</span>(<span class="kw-2">*</span><span class="self">self</span>)
+    <span class="kw">fn </span>log(<span class="kw-2">&amp;</span><span class="self">self</span>, base: f64) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).log(base)
+    }
+
+    <span class="kw">fn </span>log2(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).log2()
+    }
+
+    <span class="kw">fn </span>log10(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
+        (<span class="kw-2">*</span><span class="self">self</span>).log10()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Real</span> <span class="kw">for</span> <span class="ident">AD</span> {
-    <span class="kw">fn</span> <span class="ident">to_f64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
-        <span class="self">self</span>.<span class="ident">x</span>()
+<span class="kw">impl </span>Real <span class="kw">for </span>f64 {
+    <span class="kw">fn </span>to_f64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="kw-2">*</span><span class="self">self
+    </span>}
+
+    <span class="kw">fn </span>from_f64(f: f64) -&gt; <span class="self">Self </span>{
+        f
     }
 
-    <span class="kw">fn</span> <span class="ident">from_f64</span>(<span class="ident">f</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> {
-        <span class="ident">AD::from</span>(<span class="ident">f</span>)
+    <span class="kw">fn </span>to_ad(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; AD {
+        AD::from(<span class="kw-2">*</span><span class="self">self</span>)
+    }
+}
+
+<span class="kw">impl </span>Real <span class="kw">for </span>AD {
+    <span class="kw">fn </span>to_f64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.x()
     }
 
-    <span class="kw">fn</span> <span class="ident">to_ad</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">AD</span> {
-        <span class="kw-2">*</span><span class="self">self</span>
+    <span class="kw">fn </span>from_f64(f: f64) -&gt; <span class="self">Self </span>{
+        AD::from(f)
     }
+
+    <span class="kw">fn </span>to_ad(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; AD {
+        <span class="kw-2">*</span><span class="self">self
+    </span>}
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

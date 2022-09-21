@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/utils.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>utils.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/numerical/utils.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>utils.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -160,146 +154,145 @@
 <span id="138">138</span>
 <span id="139">139</span>
 <span id="140">140</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::matrix</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::ad</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::ad::AD</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::non_macro</span>::{<span class="ident">cat</span>, <span class="ident">zeros</span>};
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::structure::ad::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::structure::ad::AD::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::util::non_macro::{cat, zeros};
 
-<span class="doccomment">/// Jacobian Matrix</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Description</span>
-<span class="doccomment">/// : Exact jacobian matrix using Automatic Differenitation</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Type</span>
-<span class="doccomment">/// (Vector, F) -&gt; Matrix where F: Fn(&amp;Vec&lt;AD&gt;) -&gt; Vec&lt;AD&gt;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let x = c!(1, 1);</span>
-<span class="doccomment">///     let j = jacobian(f, &amp;x);</span>
-<span class="doccomment">///     j.print();</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     //      c[0] c[1]</span>
-<span class="doccomment">///     // r[0]    1   -1</span>
-<span class="doccomment">///     // r[1]    1    2</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn f(xs: &amp;Vec&lt;AD&gt;) -&gt; Vec&lt;AD&gt; {</span>
-<span class="doccomment">///     let x = xs[0];</span>
-<span class="doccomment">///     let y = xs[1];</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     vec![</span>
-<span class="doccomment">///        x - y,</span>
-<span class="doccomment">///        x + 2.*y,</span>
-<span class="doccomment">///    ]</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">jacobian</span><span class="op">&lt;</span><span class="ident">F</span>: <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, <span class="ident">x</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">len</span>();
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x_ad</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="ident">AD1</span>(<span class="ident">x</span>, <span class="number">0f64</span>)).<span class="ident">collect</span>();
-    <span class="kw">let</span> <span class="ident">l2</span> <span class="op">=</span> <span class="ident">f</span>(<span class="kw-2">&amp;</span><span class="ident">x_ad</span>).<span class="ident">len</span>();
+<span class="doccomment">/// Jacobian Matrix
+///
+/// # Description
+/// : Exact jacobian matrix using Automatic Differenitation
+///
+/// # Type
+/// (Vector, F) -&gt; Matrix where F: Fn(&amp;Vec&lt;AD&gt;) -&gt; Vec&lt;AD&gt;
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let x = c!(1, 1);
+///     let j = jacobian(f, &amp;x);
+///     j.print();
+///
+///     //      c[0] c[1]
+///     // r[0]    1   -1
+///     // r[1]    1    2
+/// }
+///
+/// fn f(xs: &amp;Vec&lt;AD&gt;) -&gt; Vec&lt;AD&gt; {
+///     let x = xs[0];
+///     let y = xs[1];
+///
+///     vec![
+///        x - y,
+///        x + 2.*y,
+///    ]
+/// }
+/// ```
+</span><span class="attribute">#[allow(non_snake_case)]
+</span><span class="kw">pub fn </span>jacobian&lt;F: Fn(<span class="kw-2">&amp;</span>Vec&lt;AD&gt;) -&gt; Vec&lt;AD&gt;&gt;(f: F, x: <span class="kw-2">&amp;</span>Vec&lt;f64&gt;) -&gt; Matrix {
+    <span class="kw">let </span>l = x.len();
+    <span class="kw">let </span><span class="kw-2">mut </span>x_ad: Vec&lt;AD&gt; = x.iter().map(|<span class="kw-2">&amp;</span>x| AD1(x, <span class="number">0f64</span>)).collect();
+    <span class="kw">let </span>l2 = f(<span class="kw-2">&amp;</span>x_ad).len();
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">J</span> <span class="op">=</span> <span class="ident">zeros</span>(<span class="ident">l2</span>, <span class="ident">l</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>J = zeros(l2, l);
 
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">l</span> {
-        <span class="ident">x_ad</span>[<span class="ident">i</span>][<span class="number">1</span>] <span class="op">=</span> <span class="number">1f64</span>;
-        <span class="kw">let</span> <span class="ident">slopes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">f</span>(<span class="kw-2">&amp;</span><span class="ident">x_ad</span>).<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">ad</span><span class="op">|</span> <span class="ident">ad</span>.<span class="ident">dx</span>()).<span class="ident">collect</span>();
-        <span class="ident">J</span>.<span class="ident">subs_col</span>(<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">slopes</span>);
-        <span class="ident">x_ad</span>[<span class="ident">i</span>][<span class="number">1</span>] <span class="op">=</span> <span class="number">0f64</span>;
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. l {
+        x_ad[i][<span class="number">1</span>] = <span class="number">1f64</span>;
+        <span class="kw">let </span>slopes: Vec&lt;f64&gt; = f(<span class="kw-2">&amp;</span>x_ad).iter().map(|ad| ad.dx()).collect();
+        J.subs_col(i, <span class="kw-2">&amp;</span>slopes);
+        x_ad[i][<span class="number">1</span>] = <span class="number">0f64</span>;
     }
-    <span class="ident">J</span>
+    J
 }
 
-<span class="comment">///// Hessian Matrix</span>
-<span class="comment">//#[allow(non_snake_case)]</span>
-<span class="comment">//pub fn hessian&lt;F: Fn(&amp;Vec&lt;AD&gt;) -&gt; AD&gt;(f: F, x: &amp;Vec&lt;f64&gt;) -&gt; Matrix {</span>
-<span class="comment">//    let l = x.len();</span>
-<span class="comment">//    let mut x_ad: Vec&lt;AD&gt; = x.iter().map(|&amp;x| AD2(x, 0f64, 0f64)).collect();</span>
-<span class="comment">//</span>
-<span class="comment">//    let mut H = zeros(l, l);</span>
-<span class="comment">//</span>
-<span class="comment">//    for i in 0 .. l {</span>
-<span class="comment">//        for j in 0 .. l {</span>
-<span class="comment">//        }</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    unimplemented!()</span>
-<span class="comment">//}</span>
+<span class="comment">///// Hessian Matrix
+//#[allow(non_snake_case)]
+//pub fn hessian&lt;F: Fn(&amp;Vec&lt;AD&gt;) -&gt; AD&gt;(f: F, x: &amp;Vec&lt;f64&gt;) -&gt; Matrix {
+//    let l = x.len();
+//    let mut x_ad: Vec&lt;AD&gt; = x.iter().map(|&amp;x| AD2(x, 0f64, 0f64)).collect();
+//
+//    let mut H = zeros(l, l);
+//
+//    for i in 0 .. l {
+//        for j in 0 .. l {
+//        }
+//    }
+//
+//    unimplemented!()
+//}
 
-<span class="comment">//#[allow(non_snake_case)]</span>
-<span class="comment">//pub fn jacobian_ad&lt;F: Fn(&amp;Vec&lt;AD&gt;) -&gt; Vec&lt;AD&gt;&gt;(f: F, x: &amp;Vec&lt;AD&gt;) -&gt; Vec&lt;Vec&lt;AD&gt;&gt; {</span>
-<span class="comment">//    let l = x.len();</span>
-<span class="comment">//    let mut x_ad: Vec&lt;AD&gt; = x.clone().into_iter().map(|mut t| {</span>
-<span class="comment">//        t.iter_mut().skip(1).for_each(|k| *k = 0f64);</span>
-<span class="comment">//        t</span>
-<span class="comment">//    }).collect();</span>
-<span class="comment">//    let l2 = f(&amp;x_ad).len();</span>
-<span class="comment">//</span>
-<span class="comment">//    let mut JT: Vec&lt;Vec&lt;AD&gt;&gt; = vec![vec![AD0(0f64); l2]; l];</span>
-<span class="comment">//</span>
-<span class="comment">//    for i in 0 .. l {</span>
-<span class="comment">//        x_ad[i][1] = 1f64;</span>
-<span class="comment">//        let ads = f(&amp;x_ad);</span>
-<span class="comment">//        JT[i] = ads;</span>
-<span class="comment">//        x_ad[i][1] = 0f64;</span>
-<span class="comment">//    }</span>
-<span class="comment">//    JT</span>
-<span class="comment">//}</span>
+//#[allow(non_snake_case)]
+//pub fn jacobian_ad&lt;F: Fn(&amp;Vec&lt;AD&gt;) -&gt; Vec&lt;AD&gt;&gt;(f: F, x: &amp;Vec&lt;AD&gt;) -&gt; Vec&lt;Vec&lt;AD&gt;&gt; {
+//    let l = x.len();
+//    let mut x_ad: Vec&lt;AD&gt; = x.clone().into_iter().map(|mut t| {
+//        t.iter_mut().skip(1).for_each(|k| *k = 0f64);
+//        t
+//    }).collect();
+//    let l2 = f(&amp;x_ad).len();
+//
+//    let mut JT: Vec&lt;Vec&lt;AD&gt;&gt; = vec![vec![AD0(0f64); l2]; l];
+//
+//    for i in 0 .. l {
+//        x_ad[i][1] = 1f64;
+//        let ads = f(&amp;x_ad);
+//        JT[i] = ads;
+//        x_ad[i][1] = 0f64;
+//    }
+//    JT
+//}
 
 
-<span class="doccomment">/// TriDiagonal Matrix Algorithm (TDMA)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Description</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Solve tri-diagonal matrix system efficiently (O(n))</span>
-<span class="doccomment">/// ```bash</span>
-<span class="doccomment">/// |b0 c0         | |x0|   |y0|</span>
-<span class="doccomment">/// |a1 b1 c1      | |x1|   |y1|</span>
-<span class="doccomment">/// |   a2 b2 c2   | |x2| = |y2|</span>
-<span class="doccomment">/// |      ...     | |..|   |..|</span>
-<span class="doccomment">/// |         am bm| |xm|   |ym|</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Caution</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// You should apply boundary condition yourself</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tdma</span>(<span class="ident">a_input</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">b_input</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">c_input</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">y_input</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Matrix</span> {
-    <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">b_input</span>.<span class="ident">len</span>();
-    <span class="macro">assert_eq!</span>(<span class="ident">a_input</span>.<span class="ident">len</span>(), <span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>);
-    <span class="macro">assert_eq!</span>(<span class="ident">c_input</span>.<span class="ident">len</span>(), <span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>);
-    <span class="macro">assert_eq!</span>(<span class="ident">y_input</span>.<span class="ident">len</span>(), <span class="ident">n</span>);
+</span><span class="doccomment">/// TriDiagonal Matrix Algorithm (TDMA)
+///
+/// # Description
+///
+/// Solve tri-diagonal matrix system efficiently (O(n))
+/// ```bash
+/// |b0 c0         | |x0|   |y0|
+/// |a1 b1 c1      | |x1|   |y1|
+/// |   a2 b2 c2   | |x2| = |y2|
+/// |      ...     | |..|   |..|
+/// |         am bm| |xm|   |ym|
+/// ```
+///
+/// # Caution
+///
+/// You should apply boundary condition yourself
+</span><span class="kw">pub fn </span>tdma(a_input: Vec&lt;f64&gt;, b_input: Vec&lt;f64&gt;, c_input: Vec&lt;f64&gt;, y_input: Vec&lt;f64&gt;) -&gt; Matrix {
+    <span class="kw">let </span>n = b_input.len();
+    <span class="macro">assert_eq!</span>(a_input.len(), n - <span class="number">1</span>);
+    <span class="macro">assert_eq!</span>(c_input.len(), n - <span class="number">1</span>);
+    <span class="macro">assert_eq!</span>(y_input.len(), n);
 
-    <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">cat</span>(<span class="number">0f64</span>, <span class="kw-2">&amp;</span><span class="ident">a_input</span>);
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b_input</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">c_temp</span> <span class="op">=</span> <span class="ident">c_input</span>.<span class="ident">clone</span>();
-        <span class="ident">c_temp</span>.<span class="ident">push</span>(<span class="number">0f64</span>);
-        <span class="ident">c_temp</span>.<span class="ident">clone</span>()
+    <span class="kw">let </span>a = cat(<span class="number">0f64</span>, <span class="kw-2">&amp;</span>a_input);
+    <span class="kw">let </span><span class="kw-2">mut </span>b = b_input.clone();
+    <span class="kw">let </span>c = {
+        <span class="kw">let </span><span class="kw-2">mut </span>c_temp = c_input.clone();
+        c_temp.push(<span class="number">0f64</span>);
+        c_temp.clone()
     };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">y_input</span>.<span class="ident">clone</span>();
+    <span class="kw">let </span><span class="kw-2">mut </span>y = y_input.clone();
 
-    <span class="comment">// Forward substitution</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">w</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">n</span> {
-        <span class="ident">w</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">a</span>[<span class="ident">i</span>] <span class="op">/</span> <span class="ident">b</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>];
-        <span class="ident">b</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">b</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">w</span>[<span class="ident">i</span>] <span class="op">*</span> <span class="ident">c</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>];
-        <span class="ident">y</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">y</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">w</span>[<span class="ident">i</span>] <span class="op">*</span> <span class="ident">y</span>[<span class="ident">i</span> <span class="op">-</span> <span class="number">1</span>];
+    <span class="comment">// Forward substitution
+    </span><span class="kw">let </span><span class="kw-2">mut </span>w = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">1</span>..n {
+        w[i] = a[i] / b[i - <span class="number">1</span>];
+        b[i] = b[i] - w[i] * c[i - <span class="number">1</span>];
+        y[i] = y[i] - w[i] * y[i - <span class="number">1</span>];
     }
 
-    <span class="comment">// Backward substitution</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-    <span class="ident">x</span>[<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">y</span>[<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>] <span class="op">/</span> <span class="ident">b</span>[<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>];
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span>..<span class="ident">n</span> <span class="op">-</span> <span class="number">1</span>).<span class="ident">rev</span>() {
-        <span class="ident">x</span>[<span class="ident">i</span>] <span class="op">=</span> (<span class="ident">y</span>[<span class="ident">i</span>] <span class="op">-</span> <span class="ident">c</span>[<span class="ident">i</span>] <span class="op">*</span> <span class="ident">x</span>[<span class="ident">i</span> <span class="op">+</span> <span class="number">1</span>]) <span class="op">/</span> <span class="ident">b</span>[<span class="ident">i</span>];
+    <span class="comment">// Backward substitution
+    </span><span class="kw">let </span><span class="kw-2">mut </span>x = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+    x[n - <span class="number">1</span>] = y[n - <span class="number">1</span>] / b[n - <span class="number">1</span>];
+    <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0</span>..n - <span class="number">1</span>).rev() {
+        x[i] = (y[i] - c[i] * x[i + <span class="number">1</span>]) / b[i];
     }
-    <span class="ident">x</span>.<span class="ident">into</span>()
+    x.into()
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

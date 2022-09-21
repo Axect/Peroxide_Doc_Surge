@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Solver for ordinary differential equations"><meta name="keywords" content="rust, rustlang, rust-lang, ode"><title>peroxide::numerical::ode - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="sidebar-items.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Solver for ordinary differential equations"><meta name="keywords" content="rust, rustlang, rust-lang, ode"><title>peroxide::numerical::ode - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,14 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"><a href="#">Module ode</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="main-heading">
-    <h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">ode</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/numerical/ode.rs.html#1-1065">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Solver for ordinary differential equations</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"><a href="#">Module ode</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="main-heading"><h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">ode</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/numerical/ode.rs.html#1-1065">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Solver for ordinary differential equations</p>
 <h3 id="introduce-ode-trait--structure"><a href="#introduce-ode-trait--structure">Introduce <code>ODE</code> Trait &amp; Structure</a></h3><h4 id="ode-trait"><a href="#ode-trait"><code>ODE</code> Trait</a></h4>
 <ul>
 <li>
@@ -34,29 +27,29 @@
 <li>
 <p><code>ODE</code> trait is given as</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::{<span class="ident">Real</span>, <span class="ident">State</span>, <span class="ident">BoundaryCondition</span>, <span class="ident">Environment</span>};
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::{Real, State, BoundaryCondition, Environment};
 
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Records</span>;
-    <span class="kw">type</span> <span class="ident">Vector</span>;
-    <span class="kw">type</span> <span class="ident">Param</span>;
-    <span class="kw">type</span> <span class="ident">ODEMethod</span>;
+<span class="kw">pub trait </span>ODE&lt;E: Environment&gt; {
+    <span class="kw">type </span>Records;
+    <span class="kw">type </span>Vector;
+    <span class="kw">type </span>Param;
+    <span class="kw">type </span>ODEMethod;
 
-    <span class="kw">fn</span> <span class="ident">mut_update</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>);
-    <span class="kw">fn</span> <span class="ident">integrate</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Records</span>;
-    <span class="kw">fn</span> <span class="ident">set_initial_condition</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">init</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_boundary_condition</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span>(
-        <span class="kw-2">&amp;mut</span> <span class="self">self</span>,
-        <span class="ident">bound1</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-        <span class="ident">bound2</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    ) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_step_size</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">dt</span>: <span class="ident">f64</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_method</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">method</span>: <span class="ident"><span class="self">Self</span>::ODEMethod</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_stop_condition</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">f</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">set_times</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
-    <span class="kw">fn</span> <span class="ident">check_enough</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>;
-    <span class="kw">fn</span> <span class="ident">set_env</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">env</span>: <span class="ident">E</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span>;
+    <span class="kw">fn </span>mut_update(<span class="kw-2">&amp;mut </span><span class="self">self</span>);
+    <span class="kw">fn </span>integrate(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Records;
+    <span class="kw">fn </span>set_initial_condition&lt;T: Real&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, init: State&lt;T&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_boundary_condition&lt;T: Real&gt;(
+        <span class="kw-2">&amp;mut </span><span class="self">self</span>,
+        bound1: (State&lt;T&gt;, BoundaryCondition),
+        bound2: (State&lt;T&gt;, BoundaryCondition),
+    ) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_step_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dt: f64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_method(<span class="kw-2">&amp;mut </span><span class="self">self</span>, method: <span class="self">Self</span>::ODEMethod) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_stop_condition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>set_times(<span class="kw-2">&amp;mut </span><span class="self">self</span>, n: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>check_enough(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
+    <span class="kw">fn </span>set_env(<span class="kw-2">&amp;mut </span><span class="self">self</span>, env: E) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
 }</code></pre></div>
 <ul>
 <li><code>Records</code> : The type to save results of ODE. Usually <code>Matrix</code> is used.</li>
@@ -92,14 +85,14 @@
 <li>
 <p>To use <code>ODE</code> trait, you should understand <code>State&lt;T&gt;</code> first.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga::Real</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::Real;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Real</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="ident">param</span>: <span class="ident">T</span>,
-    <span class="kw">pub</span> <span class="ident">value</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">deriv</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
+<span class="attribute">#[derive(Debug, Clone, Default)]
+</span><span class="kw">pub struct </span>State&lt;T: Real&gt; {
+    <span class="kw">pub </span>param: T,
+    <span class="kw">pub </span>value: Vec&lt;T&gt;,
+    <span class="kw">pub </span>deriv: Vec&lt;T&gt;,
 }</code></pre></div>
 <ul>
 <li><code>T</code> can be <code>f64</code> or <code>AD</code>
@@ -143,57 +136,57 @@
 </li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">seq</span>(<span class="number">0</span>, <span class="number">10</span>, <span class="number">1</span>);
-    <span class="ident">x</span>.<span class="ident">print</span>();
-    <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">t</span>)<span class="op">|</span> <span class="ident">t</span>.<span class="ident">powi</span>(<span class="number">5</span><span class="op">-</span><span class="ident">i</span> <span class="kw">as</span> <span class="ident">i32</span>)).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>();
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>x = seq(<span class="number">0</span>, <span class="number">10</span>, <span class="number">1</span>);
+    x.print();
+    <span class="kw">let </span>y = x.iter().enumerate().map(|(i, <span class="kw-2">&amp;</span>t)| t.powi(<span class="number">5</span>-i <span class="kw">as </span>i32)).collect::&lt;Vec&lt;f64&gt;&gt;();
 
-    <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="ident">CubicSpline::from_nodes</span>(<span class="kw-2">&amp;</span><span class="ident">x</span>, <span class="kw-2">&amp;</span><span class="ident">y</span>);
+    <span class="kw">let </span>c = CubicSpline::from_nodes(<span class="kw-2">&amp;</span>x, <span class="kw-2">&amp;</span>y);
 
-    <span class="kw">let</span> <span class="ident">init_state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="number">0f64</span>, <span class="macro">c!</span>(<span class="number">1</span>), <span class="macro">c!</span>(<span class="number">0</span>));
+    <span class="kw">let </span>init_state = State::&lt;f64&gt;::new(<span class="number">0f64</span>, <span class="macro">c!</span>(<span class="number">1</span>), <span class="macro">c!</span>(<span class="number">0</span>));
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ode_solver</span> <span class="op">=</span> <span class="ident">ExplicitODE::new</span>(<span class="ident">test_fn</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>ode_solver = ExplicitODE::new(test_fn);
 
-    <span class="ident">ode_solver</span>
-        .<span class="ident">set_method</span>(<span class="ident">ExMethod::RK4</span>)
-        .<span class="ident">set_initial_condition</span>(<span class="ident">init_state</span>)
-        .<span class="ident">set_step_size</span>(<span class="number">0.01</span>)
-        .<span class="ident">set_times</span>(<span class="number">1000</span>)
-        .<span class="ident">set_env</span>(<span class="ident">c</span>);
+    ode_solver
+        .set_method(ExMethod::RK4)
+        .set_initial_condition(init_state)
+        .set_step_size(<span class="number">0.01</span>)
+        .set_times(<span class="number">1000</span>)
+        .set_env(c);
 
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">ode_solver</span>.<span class="ident">integrate</span>();
-    <span class="ident">result</span>.<span class="ident">print</span>();
+    <span class="kw">let </span>result = ode_solver.integrate();
+    result.print();
 }
 
-<span class="kw">fn</span> <span class="ident">test_fn</span>(<span class="ident">st</span>: <span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">env</span>: <span class="kw-2">&amp;</span><span class="ident">CubicSpline</span>) {
-    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">st</span>.<span class="ident">param</span>;
-    <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">st</span>.<span class="ident">deriv</span>;
-    <span class="ident">dy</span>[<span class="number">0</span>] <span class="op">=</span> <span class="ident">env</span>.<span class="ident">eval</span>(<span class="ident">x</span>);
+<span class="kw">fn </span>test_fn(st: <span class="kw-2">&amp;mut </span>State&lt;f64&gt;, env: <span class="kw-2">&amp;</span>CubicSpline) {
+    <span class="kw">let </span>x = st.param;
+    <span class="kw">let </span>dy = <span class="kw-2">&amp;mut </span>st.deriv;
+    dy[<span class="number">0</span>] = env.eval(x);
 }</code></pre></div>
 <h4 id="explicitode-struct"><a href="#explicitode-struct"><code>ExplicitODE</code> struct</a></h4>
 <p><code>ExplicitODE</code> is given as follow :</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::{<span class="ident">State</span>, <span class="ident">ExMethod</span>, <span class="ident">BoundaryCondition</span>, <span class="ident">ODEOptions</span>, <span class="ident">Environment</span>};
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>peroxide::fuga::{State, ExMethod, BoundaryCondition, ODEOptions, Environment};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExplicitODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
-    <span class="ident">state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>),
-    <span class="ident">step_size</span>: <span class="ident">f64</span>,
-    <span class="ident">method</span>: <span class="ident">ExMethod</span>,
-    <span class="ident">init_cond</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>,
-    <span class="ident">bound_cond1</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    <span class="ident">bound_cond2</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    <span class="ident">stop_cond</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span>,
-    <span class="ident">times</span>: <span class="ident">usize</span>,
-    <span class="ident">to_use</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
-    <span class="ident">env</span>: <span class="ident">E</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>ExplicitODE&lt;E: Environment&gt; {
+    state: State&lt;f64&gt;,
+    func: <span class="kw">fn</span>(<span class="kw-2">&amp;mut </span>State&lt;f64&gt;, <span class="kw-2">&amp;</span>E),
+    step_size: f64,
+    method: ExMethod,
+    init_cond: State&lt;f64&gt;,
+    bound_cond1: (State&lt;f64&gt;, BoundaryCondition),
+    bound_cond2: (State&lt;f64&gt;, BoundaryCondition),
+    stop_cond: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool,
+    times: usize,
+    to_use: HashMap&lt;ODEOptions, bool&gt;,
+    env: E,
 }</code></pre></div>
 <ul>
 <li><code>state</code> : Current param, value, derivative</li>
@@ -209,104 +202,104 @@
 <h2 id="implicitode-struct"><a href="#implicitode-struct"><code>ImplicitODE</code> struct</a></h2>
 <p><code>ImplicitODE</code> is struct to solve stiff ODE with implicit methods.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::{<span class="ident">State</span>, <span class="ident">ImMethod</span>, <span class="ident">BoundaryCondition</span>, <span class="ident">ODEOptions</span>, <span class="ident">Environment</span>, <span class="ident">AD</span>};
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>std::collections::HashMap;
+<span class="kw">use </span>peroxide::fuga::{State, ImMethod, BoundaryCondition, ODEOptions, Environment, AD};
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ImplicitODE</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">Environment</span><span class="op">&gt;</span> {
-    <span class="ident">state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>,
-    <span class="ident">func</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">E</span>),
-    <span class="ident">step_size</span>: <span class="ident">f64</span>,
-    <span class="ident">method</span>: <span class="ident">ImMethod</span>,
-    <span class="ident">init_cond</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>,
-    <span class="ident">bound_cond1</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    <span class="ident">bound_cond2</span>: (<span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>, <span class="ident">BoundaryCondition</span>),
-    <span class="ident">stop_cond</span>: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span>,
-    <span class="ident">times</span>: <span class="ident">usize</span>,
-    <span class="ident">to_use</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ODEOptions</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
-    <span class="ident">env</span>: <span class="ident">E</span>,
+<span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>ImplicitODE&lt;E: Environment&gt; {
+    state: State&lt;AD&gt;,
+    func: <span class="kw">fn</span>(<span class="kw-2">&amp;mut </span>State&lt;AD&gt;, <span class="kw-2">&amp;</span>E),
+    step_size: f64,
+    method: ImMethod,
+    init_cond: State&lt;AD&gt;,
+    bound_cond1: (State&lt;AD&gt;, BoundaryCondition),
+    bound_cond2: (State&lt;AD&gt;, BoundaryCondition),
+    stop_cond: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool,
+    times: usize,
+    to_use: HashMap&lt;ODEOptions, bool&gt;,
+    env: E,
 }</code></pre></div>
 <h3 id="example"><a href="#example">Example</a></h3><h4 id="lorenz-butterfly"><a href="#lorenz-butterfly">Lorenz Butterfly</a></h4>
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="comment">// =========================================</span>
-    <span class="comment">//  Declare ODE (Euler)</span>
-    <span class="comment">// =========================================</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ex_test</span> <span class="op">=</span> <span class="ident">ExplicitODE::new</span>(<span class="ident">f</span>);
+<span class="kw">fn </span>main() {
+    <span class="comment">// =========================================
+    //  Declare ODE (Euler)
+    // =========================================
+    </span><span class="kw">let </span><span class="kw-2">mut </span>ex_test = ExplicitODE::new(f);
 
-    <span class="kw">let</span> <span class="ident">init_state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">State::new</span>(
+    <span class="kw">let </span>init_state: State&lt;f64&gt; = State::new(
         <span class="number">0.0</span>,
         <span class="macro">vec!</span>[<span class="number">10.0</span>, <span class="number">1.0</span>, <span class="number">1.0</span>],
         <span class="macro">vec!</span>[<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>],
     );
 
-    <span class="ident">ex_test</span>
-        .<span class="ident">set_initial_condition</span>(<span class="ident">init_state</span>)
-        .<span class="ident">set_method</span>(<span class="ident">ExMethod::Euler</span>)
-        .<span class="ident">set_step_size</span>(<span class="number">0.01f64</span>)
-        .<span class="ident">set_times</span>(<span class="number">10000</span>);
+    ex_test
+        .set_initial_condition(init_state)
+        .set_method(ExMethod::Euler)
+        .set_step_size(<span class="number">0.01f64</span>)
+        .set_times(<span class="number">10000</span>);
 
-    <span class="comment">// =========================================</span>
-    <span class="comment">//  Declare ODE (RK4)</span>
-    <span class="comment">// =========================================</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ex_test2</span> <span class="op">=</span> <span class="ident">ex_test</span>.<span class="ident">clone</span>();
-    <span class="ident">ex_test2</span>.<span class="ident">set_method</span>(<span class="ident">ExMethod::RK4</span>);
+    <span class="comment">// =========================================
+    //  Declare ODE (RK4)
+    // =========================================
+    </span><span class="kw">let </span><span class="kw-2">mut </span>ex_test2 = ex_test.clone();
+    ex_test2.set_method(ExMethod::RK4);
 
-    <span class="comment">// =========================================</span>
-    <span class="comment">//  Declare ODE (GL4)</span>
-    <span class="comment">// =========================================</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">im_test</span> <span class="op">=</span> <span class="ident">ImplicitODE::new</span>(<span class="ident">g</span>);
+    <span class="comment">// =========================================
+    //  Declare ODE (GL4)
+    // =========================================
+    </span><span class="kw">let </span><span class="kw-2">mut </span>im_test = ImplicitODE::new(g);
 
-    <span class="kw">let</span> <span class="ident">init_state</span>: <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">State::new</span>(
-        <span class="ident">AD0</span>(<span class="number">0.0</span>),
-        <span class="macro">vec!</span>[<span class="ident">AD0</span>(<span class="number">10f64</span>), <span class="ident">AD0</span>(<span class="number">1f64</span>), <span class="ident">AD0</span>(<span class="number">1f64</span>)],
-        <span class="macro">vec!</span>[<span class="ident">AD0</span>(<span class="number">0.0</span>), <span class="ident">AD0</span>(<span class="number">0.0</span>), <span class="ident">AD0</span>(<span class="number">0.0</span>)],
+    <span class="kw">let </span>init_state: State&lt;AD&gt; = State::new(
+        AD0(<span class="number">0.0</span>),
+        <span class="macro">vec!</span>[AD0(<span class="number">10f64</span>), AD0(<span class="number">1f64</span>), AD0(<span class="number">1f64</span>)],
+        <span class="macro">vec!</span>[AD0(<span class="number">0.0</span>), AD0(<span class="number">0.0</span>), AD0(<span class="number">0.0</span>)],
     );
 
-    <span class="ident">im_test</span>
-        .<span class="ident">set_initial_condition</span>(<span class="ident">init_state</span>)
-        .<span class="ident">set_method</span>(<span class="ident">ImMethod::GL4</span>)
-        .<span class="ident">set_step_size</span>(<span class="number">0.01f64</span>)
-        .<span class="ident">set_times</span>(<span class="number">10000</span>);
+    im_test
+        .set_initial_condition(init_state)
+        .set_method(ImMethod::GL4)
+        .set_step_size(<span class="number">0.01f64</span>)
+        .set_times(<span class="number">10000</span>);
 
-    <span class="comment">// =========================================</span>
-    <span class="comment">//  Save results</span>
-    <span class="comment">// =========================================</span>
-    <span class="kw">let</span> <span class="ident">results</span> <span class="op">=</span> <span class="ident">ex_test</span>.<span class="ident">integrate</span>();
-    <span class="kw">let</span> <span class="ident">results2</span> <span class="op">=</span> <span class="ident">ex_test2</span>.<span class="ident">integrate</span>();
-    <span class="kw">let</span> <span class="ident">results3</span> <span class="op">=</span> <span class="ident">im_test</span>.<span class="ident">integrate</span>();
+    <span class="comment">// =========================================
+    //  Save results
+    // =========================================
+    </span><span class="kw">let </span>results = ex_test.integrate();
+    <span class="kw">let </span>results2 = ex_test2.integrate();
+    <span class="kw">let </span>results3 = im_test.integrate();
 
-    <span class="comment">// Extract data</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">df</span> <span class="op">=</span> <span class="ident">DataFrame::new</span>(<span class="macro">vec!</span>[]);
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;x_euler&quot;</span>, <span class="ident">Series::new</span>(<span class="ident">results</span>.<span class="ident">col</span>(<span class="number">1</span>)));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;z_euler&quot;</span>, <span class="ident">Series::new</span>(<span class="ident">results</span>.<span class="ident">col</span>(<span class="number">3</span>)));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;x_rk4&quot;</span>, <span class="ident">Series::new</span>(<span class="ident">results2</span>.<span class="ident">col</span>(<span class="number">1</span>)));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;z_rk4&quot;</span>, <span class="ident">Series::new</span>(<span class="ident">results2</span>.<span class="ident">col</span>(<span class="number">3</span>)));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;x_gl4&quot;</span>, <span class="ident">Series::new</span>(<span class="ident">results3</span>.<span class="ident">col</span>(<span class="number">1</span>)));
-    <span class="ident">df</span>.<span class="ident">push</span>(<span class="string">&quot;z_gl4&quot;</span>, <span class="ident">Series::new</span>(<span class="ident">results3</span>.<span class="ident">col</span>(<span class="number">3</span>)));
+    <span class="comment">// Extract data
+    </span><span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[]);
+    df.push(<span class="string">&quot;x_euler&quot;</span>, Series::new(results.col(<span class="number">1</span>)));
+    df.push(<span class="string">&quot;z_euler&quot;</span>, Series::new(results.col(<span class="number">3</span>)));
+    df.push(<span class="string">&quot;x_rk4&quot;</span>, Series::new(results2.col(<span class="number">1</span>)));
+    df.push(<span class="string">&quot;z_rk4&quot;</span>, Series::new(results2.col(<span class="number">3</span>)));
+    df.push(<span class="string">&quot;x_gl4&quot;</span>, Series::new(results3.col(<span class="number">1</span>)));
+    df.push(<span class="string">&quot;z_gl4&quot;</span>, Series::new(results3.col(<span class="number">3</span>)));
 
-    <span class="comment">// Write netcdf file (`nc` feature required)</span>
-    <span class="ident">df</span>.<span class="ident">write_nc</span>(<span class="string">&quot;example_data/lorenz.nc&quot;</span>)
-        .<span class="ident">expect</span>(<span class="string">&quot;Can&#39;t write lorenz.nc&quot;</span>);
+    <span class="comment">// Write netcdf file (`nc` feature required)
+    </span>df.write_nc(<span class="string">&quot;example_data/lorenz.nc&quot;</span>)
+        .expect(<span class="string">&quot;Can&#39;t write lorenz.nc&quot;</span>);
 }
 
-<span class="kw">fn</span> <span class="ident">f</span>(<span class="ident">st</span>: <span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">NoEnv</span>) {
-    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">st</span>.<span class="ident">value</span>;
-    <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">st</span>.<span class="ident">deriv</span>;
-    <span class="ident">dx</span>[<span class="number">0</span>] <span class="op">=</span> <span class="number">10f64</span> <span class="op">*</span> (<span class="ident">x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="number">0</span>]);
-    <span class="ident">dx</span>[<span class="number">1</span>] <span class="op">=</span> <span class="number">28f64</span> <span class="op">*</span> <span class="ident">x</span>[<span class="number">0</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="number">0</span>] <span class="op">*</span> <span class="ident">x</span>[<span class="number">2</span>];
-    <span class="ident">dx</span>[<span class="number">2</span>] <span class="op">=</span> <span class="op">-</span><span class="number">8f64</span><span class="op">/</span><span class="number">3f64</span> <span class="op">*</span> <span class="ident">x</span>[<span class="number">2</span>] <span class="op">+</span> <span class="ident">x</span>[<span class="number">0</span>] <span class="op">*</span> <span class="ident">x</span>[<span class="number">1</span>];
+<span class="kw">fn </span>f(st: <span class="kw-2">&amp;mut </span>State&lt;f64&gt;, <span class="kw">_</span>: <span class="kw-2">&amp;</span>NoEnv) {
+    <span class="kw">let </span>x = <span class="kw-2">&amp;</span>st.value;
+    <span class="kw">let </span>dx = <span class="kw-2">&amp;mut </span>st.deriv;
+    dx[<span class="number">0</span>] = <span class="number">10f64 </span>* (x[<span class="number">1</span>] - x[<span class="number">0</span>]);
+    dx[<span class="number">1</span>] = <span class="number">28f64 </span>* x[<span class="number">0</span>] - x[<span class="number">1</span>] - x[<span class="number">0</span>] * x[<span class="number">2</span>];
+    dx[<span class="number">2</span>] = -<span class="number">8f64</span>/<span class="number">3f64 </span>* x[<span class="number">2</span>] + x[<span class="number">0</span>] * x[<span class="number">1</span>];
 }
 
-<span class="kw">fn</span> <span class="ident">g</span>(<span class="ident">st</span>: <span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">AD</span><span class="op">&gt;</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">NoEnv</span>) {
-    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">st</span>.<span class="ident">value</span>;
-    <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">st</span>.<span class="ident">deriv</span>;
-    <span class="ident">dx</span>[<span class="number">0</span>] <span class="op">=</span> <span class="number">10f64</span> <span class="op">*</span> (<span class="ident">x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="number">0</span>]);
-    <span class="ident">dx</span>[<span class="number">1</span>] <span class="op">=</span> <span class="number">28f64</span> <span class="op">*</span> <span class="ident">x</span>[<span class="number">0</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="number">1</span>] <span class="op">-</span> <span class="ident">x</span>[<span class="number">0</span>] <span class="op">*</span> <span class="ident">x</span>[<span class="number">2</span>];
-    <span class="ident">dx</span>[<span class="number">2</span>] <span class="op">=</span> <span class="op">-</span><span class="number">8f64</span><span class="op">/</span><span class="number">3f64</span> <span class="op">*</span> <span class="ident">x</span>[<span class="number">2</span>] <span class="op">+</span> <span class="ident">x</span>[<span class="number">0</span>] <span class="op">*</span> <span class="ident">x</span>[<span class="number">1</span>];
+<span class="kw">fn </span>g(st: <span class="kw-2">&amp;mut </span>State&lt;AD&gt;, <span class="kw">_</span>: <span class="kw-2">&amp;</span>NoEnv) {
+    <span class="kw">let </span>x = <span class="kw-2">&amp;</span>st.value;
+    <span class="kw">let </span>dx = <span class="kw-2">&amp;mut </span>st.deriv;
+    dx[<span class="number">0</span>] = <span class="number">10f64 </span>* (x[<span class="number">1</span>] - x[<span class="number">0</span>]);
+    dx[<span class="number">1</span>] = <span class="number">28f64 </span>* x[<span class="number">0</span>] - x[<span class="number">1</span>] - x[<span class="number">0</span>] * x[<span class="number">2</span>];
+    dx[<span class="number">2</span>] = -<span class="number">8f64</span>/<span class="number">3f64 </span>* x[<span class="number">2</span>] + x[<span class="number">0</span>] * x[<span class="number">1</span>];
 }</code></pre></div>
 <p>If plotting pickle data with python, then</p>
 <p><img src="https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_euler.png" alt="Lorenz with Euler" /></p>
@@ -315,39 +308,35 @@
 <h4 id="simple-1d-runge-kutta"><a href="#simple-1d-runge-kutta">Simple 1D Runge-Kutta</a></h4>
 <p>$$\begin{gathered} \frac{dy}{dx} = \frac{5x^2 - y}{e^{x+y}} \\ y(0) = 1 \end{gathered}$$</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[<span class="ident">macro_use</span>]</span>
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">peroxide</span>;
-<span class="kw">use</span> <span class="ident">peroxide::fuga</span>::<span class="kw-2">*</span>;
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">let</span> <span class="ident">init_state</span> <span class="op">=</span> <span class="ident">State</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="number">0f64</span>, <span class="macro">c!</span>(<span class="number">1</span>), <span class="macro">c!</span>(<span class="number">0</span>));
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>init_state = State::&lt;f64&gt;::new(<span class="number">0f64</span>, <span class="macro">c!</span>(<span class="number">1</span>), <span class="macro">c!</span>(<span class="number">0</span>));
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ode_solver</span> <span class="op">=</span> <span class="ident">ExplicitODE::new</span>(<span class="ident">test_fn</span>);
+    <span class="kw">let </span><span class="kw-2">mut </span>ode_solver = ExplicitODE::new(test_fn);
 
-    <span class="ident">ode_solver</span>
-        .<span class="ident">set_method</span>(<span class="ident">ExMethod::RK4</span>)
-        .<span class="ident">set_initial_condition</span>(<span class="ident">init_state</span>)
-        .<span class="ident">set_step_size</span>(<span class="number">0.01</span>)
-        .<span class="ident">set_times</span>(<span class="number">1000</span>);
+    ode_solver
+        .set_method(ExMethod::RK4)
+        .set_initial_condition(init_state)
+        .set_step_size(<span class="number">0.01</span>)
+        .set_times(<span class="number">1000</span>);
 
-    <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">ode_solver</span>.<span class="ident">integrate</span>();
+    <span class="kw">let </span>result = ode_solver.integrate();
 
-    <span class="comment">// Plot or Extract..</span>
-}
+    <span class="comment">// Plot or Extract..
+</span>}
 
-<span class="kw">fn</span> <span class="ident">test_fn</span>(<span class="ident">st</span>: <span class="kw-2">&amp;mut</span> <span class="ident">State</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="ident">NoEnv</span>) {
-    <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">st</span>.<span class="ident">param</span>;
-    <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">st</span>.<span class="ident">value</span>;
-    <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">st</span>.<span class="ident">deriv</span>;
-    <span class="ident">dy</span>[<span class="number">0</span>] <span class="op">=</span> (<span class="number">5f64</span><span class="kw-2">*</span><span class="ident">x</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">-</span> <span class="ident">y</span>[<span class="number">0</span>]) <span class="op">/</span> (<span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>[<span class="number">0</span>]).<span class="ident">exp</span>();
+<span class="kw">fn </span>test_fn(st: <span class="kw-2">&amp;mut </span>State&lt;f64&gt;, <span class="kw">_</span>: <span class="kw-2">&amp;</span>NoEnv) {
+    <span class="kw">let </span>x = st.param;
+    <span class="kw">let </span>y = <span class="kw-2">&amp;</span>st.value;
+    <span class="kw">let </span>dy = <span class="kw-2">&amp;mut </span>st.deriv;
+    dy[<span class="number">0</span>] = (<span class="number">5f64</span><span class="kw-2">*</span>x.powi(<span class="number">2</span>) - y[<span class="number">0</span>]) / (x + y[<span class="number">0</span>]).exp();
 }</code></pre></div>
-</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ExplicitODE.html" title="peroxide::numerical::ode::ExplicitODE struct">ExplicitODE</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ImplicitODE.html" title="peroxide::numerical::ode::ImplicitODE struct">ImplicitODE</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.NoEnv.html" title="peroxide::numerical::ode::NoEnv struct">NoEnv</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.State.html" title="peroxide::numerical::ode::State struct">State</a></div><div class="item-right docblock-short"><p>State for ODE</p>
-</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.BoundaryCondition.html" title="peroxide::numerical::ode::BoundaryCondition enum">BoundaryCondition</a></div><div class="item-right docblock-short"><p>Kinds of Boundary Conditions</p>
+</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ExplicitODE.html" title="peroxide::numerical::ode::ExplicitODE struct">ExplicitODE</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ImplicitODE.html" title="peroxide::numerical::ode::ImplicitODE struct">ImplicitODE</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.NoEnv.html" title="peroxide::numerical::ode::NoEnv struct">NoEnv</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.State.html" title="peroxide::numerical::ode::State struct">State</a></div><div class="item-right docblock-short"><p>State for ODE</p>
+</div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.BoundaryCondition.html" title="peroxide::numerical::ode::BoundaryCondition enum">BoundaryCondition</a></div><div class="item-right docblock-short"><p>Kinds of Boundary Conditions</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ExMethod.html" title="peroxide::numerical::ode::ExMethod enum">ExMethod</a></div><div class="item-right docblock-short"><p>Explicit ODE Methods</p>
-</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ImMethod.html" title="peroxide::numerical::ode::ImMethod enum">ImMethod</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ODEOptions.html" title="peroxide::numerical::ode::ODEOptions enum">ODEOptions</a></div><div class="item-right docblock-short"><p>Options for ODE</p>
-</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
-<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Environment.html" title="peroxide::numerical::ode::Environment trait">Environment</a></div><div class="item-right docblock-short"></div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ODE.html" title="peroxide::numerical::ode::ODE trait">ODE</a></div><div class="item-right docblock-short"><p>ODE solver</p>
-</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ImMethod.html" title="peroxide::numerical::ode::ImMethod enum">ImMethod</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ODEOptions.html" title="peroxide::numerical::ode::ODEOptions enum">ODEOptions</a></div><div class="item-right docblock-short"><p>Options for ODE</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Environment.html" title="peroxide::numerical::ode::Environment trait">Environment</a></div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.ODE.html" title="peroxide::numerical::ode::ODE trait">ODE</a></div><div class="item-right docblock-short"><p>ODE solver</p>
+</div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

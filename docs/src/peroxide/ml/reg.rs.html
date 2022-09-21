@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/ml/reg.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>reg.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/ml/reg.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>reg.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -79,65 +73,64 @@
 <span id="57">57</span>
 <span id="58">58</span>
 <span id="59">59</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::polynomial::Polynomial</span>;
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::structure::polynomial::Polynomial;
 
-<span class="doccomment">/// Simple Least Square 2D</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Type</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// (Vec&lt;f64&gt;, Vec&lt;f64&gt;) -&gt; Polynomial</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = c!(1,2,3,4,5);</span>
-<span class="doccomment">///     let b = c!(1.2, 1.8, 3.2, 3.8, 5.0);</span>
-<span class="doccomment">///     let ls = least_square(a, b);</span>
-<span class="doccomment">///     ls.print(); // 0.96x + 0.1200</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">least_square</span>(<span class="ident">node_x</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">node_y</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="ident">Polynomial</span> {
-    <span class="kw">let</span> <span class="ident">l</span> <span class="op">=</span> <span class="ident">node_x</span>.<span class="ident">len</span>();
-    <span class="macro">assert_eq!</span>(<span class="ident">l</span>, <span class="ident">node_y</span>.<span class="ident">len</span>());
+<span class="doccomment">/// Simple Least Square 2D
+///
+/// # Type
+///
+/// (Vec&lt;f64&gt;, Vec&lt;f64&gt;) -&gt; Polynomial
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = c!(1,2,3,4,5);
+///     let b = c!(1.2, 1.8, 3.2, 3.8, 5.0);
+///     let ls = least_square(a, b);
+///     ls.print(); // 0.96x + 0.1200
+/// }
+/// ```
+</span><span class="kw">pub fn </span>least_square(node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;) -&gt; Polynomial {
+    <span class="kw">let </span>l = node_x.len();
+    <span class="macro">assert_eq!</span>(l, node_y.len());
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x_bar</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">t_bar</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">xt_bar</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x_sq_bar</span> <span class="op">=</span> <span class="number">0f64</span>;
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">l</span> {
-        <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">node_x</span>[<span class="ident">i</span>];
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">node_y</span>[<span class="ident">i</span>];
+    <span class="kw">let </span><span class="kw-2">mut </span>x_bar = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>t_bar = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>xt_bar = <span class="number">0f64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>x_sq_bar = <span class="number">0f64</span>;
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..l {
+        <span class="kw">let </span>x = node_x[i];
+        <span class="kw">let </span>t = node_y[i];
 
-        <span class="ident">x_bar</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span>;
-        <span class="ident">t_bar</span> <span class="op">+</span><span class="op">=</span> <span class="ident">t</span>;
-        <span class="ident">xt_bar</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">t</span>;
-        <span class="ident">x_sq_bar</span> <span class="op">+</span><span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">x</span>;
+        x_bar += x;
+        t_bar += t;
+        xt_bar += x * t;
+        x_sq_bar += x * x;
     }
-    <span class="ident">x_bar</span> <span class="op">/</span><span class="op">=</span> <span class="ident">l</span> <span class="kw">as</span> <span class="ident">f64</span>;
-    <span class="ident">t_bar</span> <span class="op">/</span><span class="op">=</span> <span class="ident">l</span> <span class="kw">as</span> <span class="ident">f64</span>;
-    <span class="ident">xt_bar</span> <span class="op">/</span><span class="op">=</span> <span class="ident">l</span> <span class="kw">as</span> <span class="ident">f64</span>;
-    <span class="ident">x_sq_bar</span> <span class="op">/</span><span class="op">=</span> <span class="ident">l</span> <span class="kw">as</span> <span class="ident">f64</span>;
+    x_bar /= l <span class="kw">as </span>f64;
+    t_bar /= l <span class="kw">as </span>f64;
+    xt_bar /= l <span class="kw">as </span>f64;
+    x_sq_bar /= l <span class="kw">as </span>f64;
 
-    <span class="kw">let</span> <span class="ident">x_bar_sq</span> <span class="op">=</span> <span class="ident">x_bar</span>.<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">x_bar</span>.<span class="ident">clone</span>();
-    <span class="kw">let</span> <span class="ident">x_bar_t_bar</span> <span class="op">=</span> <span class="ident">x_bar</span>.<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">t_bar</span>.<span class="ident">clone</span>();
+    <span class="kw">let </span>x_bar_sq = x_bar.clone() * x_bar.clone();
+    <span class="kw">let </span>x_bar_t_bar = x_bar.clone() * t_bar.clone();
 
-    <span class="kw">let</span> <span class="ident">w1</span> <span class="op">=</span> (<span class="ident">xt_bar</span> <span class="op">-</span> <span class="ident">x_bar_t_bar</span>) <span class="op">/</span> (<span class="ident">x_sq_bar</span> <span class="op">-</span> <span class="ident">x_bar_sq</span>);
-    <span class="kw">let</span> <span class="ident">w0</span> <span class="op">=</span> <span class="ident">t_bar</span> <span class="op">-</span> <span class="ident">w1</span> <span class="op">*</span> <span class="ident">x_bar</span>;
+    <span class="kw">let </span>w1 = (xt_bar - x_bar_t_bar) / (x_sq_bar - x_bar_sq);
+    <span class="kw">let </span>w0 = t_bar - w1 * x_bar;
 
-    <span class="ident">Polynomial::new</span>(<span class="macro">vec!</span>[<span class="ident">w1</span>, <span class="ident">w0</span>])
+    Polynomial::new(<span class="macro">vec!</span>[w1, w0])
 }
 
-<span class="comment">// Polynomial Regression</span>
-<span class="comment">//pub fn poly_reg(node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;) -&gt; Polynomial {</span>
-<span class="comment">//    let n = node_x.len();</span>
-<span class="comment">//    assert_eq!(n, node_y.len());</span>
-<span class="comment">//    let a = matrix(vec![1f64; n], n, 1, Col);</span>
-<span class="comment">//</span>
-<span class="comment">//}</span>
-</code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+<span class="comment">// Polynomial Regression
+//pub fn poly_reg(node_x: Vec&lt;f64&gt;, node_y: Vec&lt;f64&gt;) -&gt; Polynomial {
+//    let n = node_x.len();
+//    assert_eq!(n, node_y.len());
+//    let a = matrix(vec![1f64; n], n, 1, Col);
+//
+//}
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

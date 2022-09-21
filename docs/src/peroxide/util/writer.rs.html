@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/writer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>writer.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/util/writer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>writer.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -179,165 +173,164 @@
 <span id="157">157</span>
 <span id="158">158</span>
 <span id="159">159</span>
-</pre><pre class="rust"><code><span class="doccomment">//! More convenient matrix writer</span>
+</pre><pre class="rust"><code><span class="doccomment">//! More convenient matrix writer
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::ToWriter</span>::{<span class="ident">Data</span>, <span class="ident">Header</span>, <span class="ident">Path</span>, <span class="ident">Round</span>};
-<span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
-<span class="comment">//use std::fs::File;</span>
-<span class="comment">//use std::io::Write;</span>
-<span class="comment">//use std::process::exit;</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::matrix::Matrix</span>;
+</span><span class="kw">pub use </span><span class="self">self</span>::ToWriter::{Data, Header, Path, Round};
+<span class="kw">use </span>std::collections::HashMap;
+<span class="comment">//use std::fs::File;
+//use std::io::Write;
+//use std::process::exit;
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::Matrix;
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Hash</span>, <span class="ident">PartialOrd</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">ToWriter</span> {
-    <span class="ident">Header</span>,
-    <span class="ident">Round</span>,
-    <span class="ident">Data</span>,
-    <span class="ident">Path</span>,
+<span class="attribute">#[derive(Debug, Clone, Copy, Hash, PartialOrd, PartialEq, Eq)]
+</span><span class="kw">pub enum </span>ToWriter {
+    Header,
+    Round,
+    Data,
+    Path,
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Queue</span> {
-    <span class="ident">Matrix</span>,
-    <span class="ident">Vector</span>,
+<span class="attribute">#[derive(Debug, Clone, Copy)]
+</span><span class="kw">pub enum </span>Queue {
+    Matrix,
+    Vector,
 }
 
-<span class="doccomment">/// Simple Matrix Writer</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Necessary Fields</span>
-<span class="doccomment">/// * `data: Vec&lt;Matrix&gt;`</span>
-<span class="doccomment">/// * `path: String`</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Option</span>
-<span class="doccomment">/// * `header: Vec&lt;String&gt;`</span>
-<span class="doccomment">/// * `round: u8`</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SimpleWriter</span> {
-    <span class="ident">header</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="ident">round</span>: <span class="ident">u8</span>,
-    <span class="ident">matrices</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Matrix</span><span class="op">&gt;</span>,
-    <span class="ident">vectors</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    <span class="ident">path</span>: <span class="ident">String</span>,
-    <span class="ident">queue</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Queue</span><span class="op">&gt;</span>,
-    <span class="ident">to_write</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ToWriter</span>, <span class="ident">bool</span><span class="op">&gt;</span>,
+<span class="doccomment">/// Simple Matrix Writer
+///
+/// # Necessary Fields
+/// * `data: Vec&lt;Matrix&gt;`
+/// * `path: String`
+///
+/// # Option
+/// * `header: Vec&lt;String&gt;`
+/// * `round: u8`
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub struct </span>SimpleWriter {
+    header: Vec&lt;String&gt;,
+    round: u8,
+    matrices: Vec&lt;Matrix&gt;,
+    vectors: Vec&lt;Vec&lt;f64&gt;&gt;,
+    path: String,
+    queue: Vec&lt;Queue&gt;,
+    to_write: HashMap&lt;ToWriter, bool&gt;,
 }
 
-<span class="kw">impl</span> <span class="ident">SimpleWriter</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">SimpleWriter</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">default_to_write</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ToWriter</span>, <span class="ident">bool</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
-        <span class="ident">default_to_write</span>.<span class="ident">insert</span>(<span class="ident">Header</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_write</span>.<span class="ident">insert</span>(<span class="ident">Round</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_write</span>.<span class="ident">insert</span>(<span class="ident">Data</span>, <span class="bool-val">false</span>);
-        <span class="ident">default_to_write</span>.<span class="ident">insert</span>(<span class="ident">Path</span>, <span class="bool-val">false</span>);
+<span class="kw">impl </span>SimpleWriter {
+    <span class="kw">pub fn </span>new() -&gt; SimpleWriter {
+        <span class="kw">let </span><span class="kw-2">mut </span>default_to_write: HashMap&lt;ToWriter, bool&gt; = HashMap::new();
+        default_to_write.insert(Header, <span class="bool-val">false</span>);
+        default_to_write.insert(Round, <span class="bool-val">false</span>);
+        default_to_write.insert(Data, <span class="bool-val">false</span>);
+        default_to_write.insert(Path, <span class="bool-val">false</span>);
 
-        <span class="ident">SimpleWriter</span> {
-            <span class="ident">header</span>: <span class="macro">vec!</span>[],
-            <span class="ident">round</span>: <span class="number">0</span>,
-            <span class="ident">matrices</span>: <span class="macro">vec!</span>[],
-            <span class="ident">vectors</span>: <span class="macro">vec!</span>[],
-            <span class="ident">path</span>: <span class="string">&quot;&quot;</span>.<span class="ident">to_string</span>(),
-            <span class="ident">queue</span>: <span class="macro">vec!</span>[],
-            <span class="ident">to_write</span>: <span class="ident">default_to_write</span>,
+        SimpleWriter {
+            header: <span class="macro">vec!</span>[],
+            round: <span class="number">0</span>,
+            matrices: <span class="macro">vec!</span>[],
+            vectors: <span class="macro">vec!</span>[],
+            path: <span class="string">&quot;&quot;</span>.to_string(),
+            queue: <span class="macro">vec!</span>[],
+            to_write: default_to_write,
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_header</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">head</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">to_write</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Header</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">header</span> <span class="op">=</span> <span class="ident">head</span>
-            .<span class="ident">into_iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span>.<span class="ident">to_owned</span>())
-            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span><span class="op">&gt;</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">pub fn </span>insert_header(<span class="kw-2">&amp;mut </span><span class="self">self</span>, head: Vec&lt;<span class="kw-2">&amp;</span>str&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.to_write.get_mut(<span class="kw-2">&amp;</span>Header) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.header = head
+            .into_iter()
+            .map(|t| t.to_owned())
+            .collect::&lt;Vec&lt;String&gt;&gt;();
+        <span class="self">self
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_round_level</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">nth</span>: <span class="ident">u8</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">to_write</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Round</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">round</span> <span class="op">=</span> <span class="ident">nth</span>;
-        <span class="self">self</span>
-    }
+    <span class="kw">pub fn </span>set_round_level(<span class="kw-2">&amp;mut </span><span class="self">self</span>, nth: u8) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.to_write.get_mut(<span class="kw-2">&amp;</span>Round) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.round = nth;
+        <span class="self">self
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_matrix</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">mat</span>: <span class="ident">Matrix</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">to_write</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Data</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">matrices</span>.<span class="ident">push</span>(<span class="ident">mat</span>);
-        <span class="self">self</span>.<span class="ident">queue</span>.<span class="ident">push</span>(<span class="ident">Queue::Matrix</span>);
-        <span class="self">self</span>
-    }
+    <span class="kw">pub fn </span>insert_matrix(<span class="kw-2">&amp;mut </span><span class="self">self</span>, mat: Matrix) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.to_write.get_mut(<span class="kw-2">&amp;</span>Data) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.matrices.push(mat);
+        <span class="self">self</span>.queue.push(Queue::Matrix);
+        <span class="self">self
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">insert_vector</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">vec</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">to_write</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Data</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">vectors</span>.<span class="ident">push</span>(<span class="ident">vec</span>);
-        <span class="self">self</span>.<span class="ident">queue</span>.<span class="ident">push</span>(<span class="ident">Queue::Vector</span>);
-        <span class="self">self</span>
-    }
+    <span class="kw">pub fn </span>insert_vector(<span class="kw-2">&amp;mut </span><span class="self">self</span>, vec: Vec&lt;f64&gt;) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.to_write.get_mut(<span class="kw-2">&amp;</span>Data) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.vectors.push(vec);
+        <span class="self">self</span>.queue.push(Queue::Vector);
+        <span class="self">self
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_path</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">x</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">to_write</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">Path</span>) {
-            <span class="kw-2">*</span><span class="ident">x</span> <span class="op">=</span> <span class="bool-val">true</span>
-        }
-        <span class="self">self</span>.<span class="ident">path</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">to_owned</span>();
-        <span class="self">self</span>
-    }
+    <span class="kw">pub fn </span>set_path(<span class="kw-2">&amp;mut </span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>str) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.to_write.get_mut(<span class="kw-2">&amp;</span>Path) {
+            <span class="kw-2">*</span>x = <span class="bool-val">true
+        </span>}
+        <span class="self">self</span>.path = path.to_owned();
+        <span class="self">self
+    </span>}
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_csv</span>(<span class="self">self</span>) {
+    <span class="kw">pub fn </span>write_csv(<span class="self">self</span>) {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="comment">// pub fn write_pickle(&amp;self) {</span>
-    <span class="comment">//     let mut writer: Box&lt;dyn Write&gt;;</span>
+    <span class="comment">// pub fn write_pickle(&amp;self) {
+    //     let mut writer: Box&lt;dyn Write&gt;;
 
-    <span class="comment">//     // Error handling - Path</span>
-    <span class="comment">//     if let Some(p) = self.to_write.get(&amp;Path) {</span>
-    <span class="comment">//         assert!(*p, &quot;No determined path!&quot;);</span>
-    <span class="comment">//     }</span>
+    //     // Error handling - Path
+    //     if let Some(p) = self.to_write.get(&amp;Path) {
+    //         assert!(*p, &quot;No determined path!&quot;);
+    //     }
 
-    <span class="comment">//     // Error handling - Data</span>
-    <span class="comment">//     if let Some(dat) = self.to_write.get(&amp;Data) {</span>
-    <span class="comment">//         assert!(*dat, &quot;No inserted data!&quot;);</span>
-    <span class="comment">//     }</span>
+    //     // Error handling - Data
+    //     if let Some(dat) = self.to_write.get(&amp;Data) {
+    //         assert!(*dat, &quot;No inserted data!&quot;);
+    //     }
 
-    <span class="comment">//     match File::create(self.path.clone()) {</span>
-    <span class="comment">//         Ok(p) =&gt; writer = Box::new(p),</span>
-    <span class="comment">//         Err(e) =&gt; {</span>
-    <span class="comment">//             println!(&quot;{:?}&quot;, e);</span>
-    <span class="comment">//             exit(1);</span>
-    <span class="comment">//         }</span>
-    <span class="comment">//     }</span>
+    //     match File::create(self.path.clone()) {
+    //         Ok(p) =&gt; writer = Box::new(p),
+    //         Err(e) =&gt; {
+    //             println!(&quot;{:?}&quot;, e);
+    //             exit(1);
+    //         }
+    //     }
 
-    <span class="comment">//     if let Some(head) = self.to_write.get(&amp;Header) {</span>
-    <span class="comment">//         if *head {</span>
-    <span class="comment">//             serde_pickle::to_writer(&amp;mut writer, &amp;self.header, true)</span>
-    <span class="comment">//                 .expect(&quot;Can&#39;t write header to pickle&quot;);</span>
-    <span class="comment">//         }</span>
-    <span class="comment">//     }</span>
+    //     if let Some(head) = self.to_write.get(&amp;Header) {
+    //         if *head {
+    //             serde_pickle::to_writer(&amp;mut writer, &amp;self.header, true)
+    //                 .expect(&quot;Can&#39;t write header to pickle&quot;);
+    //         }
+    //     }
 
-    <span class="comment">//     let mut queued = self.queue.clone().into_iter();</span>
-    <span class="comment">//     let mut matrices = self.matrices.clone().into_iter();</span>
-    <span class="comment">//     let mut vectors = self.vectors.clone().into_iter();</span>
+    //     let mut queued = self.queue.clone().into_iter();
+    //     let mut matrices = self.matrices.clone().into_iter();
+    //     let mut vectors = self.vectors.clone().into_iter();
 
-    <span class="comment">//     loop {</span>
-    <span class="comment">//         match queued.next() {</span>
-    <span class="comment">//             Some(Queue::Matrix) =&gt; {</span>
-    <span class="comment">//                 let mat = matrices.next().unwrap();</span>
-    <span class="comment">//                 mat.write_pickle(&amp;mut writer)</span>
-    <span class="comment">//                     .expect(&quot;Can&#39;t insert matrices&quot;);</span>
-    <span class="comment">//             }</span>
-    <span class="comment">//             Some(Queue::Vector) =&gt; {</span>
-    <span class="comment">//                 let vec = vectors.next().unwrap();</span>
-    <span class="comment">//                 vec.write_pickle(&amp;mut writer).expect(&quot;Can&#39;t insert vectors&quot;);</span>
-    <span class="comment">//             }</span>
-    <span class="comment">//             None =&gt; return,</span>
-    <span class="comment">//         }</span>
-    <span class="comment">//     }</span>
-    <span class="comment">// }</span>
-}
+    //     loop {
+    //         match queued.next() {
+    //             Some(Queue::Matrix) =&gt; {
+    //                 let mat = matrices.next().unwrap();
+    //                 mat.write_pickle(&amp;mut writer)
+    //                     .expect(&quot;Can&#39;t insert matrices&quot;);
+    //             }
+    //             Some(Queue::Vector) =&gt; {
+    //                 let vec = vectors.next().unwrap();
+    //                 vec.write_pickle(&amp;mut writer).expect(&quot;Can&#39;t insert vectors&quot;);
+    //             }
+    //             None =&gt; return,
+    //         }
+    //     }
+    // }
+</span>}
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/traits/sugar.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sugar.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/traits/sugar.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>sugar.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -476,462 +470,461 @@
 <span id="454">454</span>
 <span id="455">455</span>
 <span id="456">456</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::structure::matrix</span>::{<span class="ident">Matrix</span>, <span class="ident">Shape</span>, <span class="ident">matrix</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traits::fp::FPVector</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::non_macro::zeros_shape</span>;
-<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Add</span>, <span class="ident">Sub</span>, <span class="ident">Mul</span>, <span class="ident">Div</span>};
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::structure::matrix::{Matrix, Shape, matrix};
+<span class="kw">use </span><span class="kw">crate</span>::traits::fp::FPVector;
+<span class="kw">use </span><span class="kw">crate</span>::util::non_macro::zeros_shape;
+<span class="kw">use </span>std::ops::{Add, Sub, Mul, Div};
 
-<span class="doccomment">/// Syntactic sugar for Vector operations</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">VecOps</span>: <span class="ident">Sized</span> <span class="op">+</span> <span class="ident">FPVector</span> 
-<span class="kw">where</span> <span class="ident"><span class="self">Self</span>::Scalar</span>: <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Clone</span>
-    <span class="op">+</span> <span class="ident">Add</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Scalar</span>, <span class="ident">Output</span><span class="op">=</span><span class="ident"><span class="self">Self</span>::Scalar</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Sub</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Scalar</span>, <span class="ident">Output</span><span class="op">=</span><span class="ident"><span class="self">Self</span>::Scalar</span><span class="op">&gt;</span> 
-    <span class="op">+</span> <span class="ident">Mul</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Scalar</span>, <span class="ident">Output</span><span class="op">=</span><span class="ident"><span class="self">Self</span>::Scalar</span><span class="op">&gt;</span>
-    <span class="op">+</span> <span class="ident">Div</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Scalar</span>, <span class="ident">Output</span><span class="op">=</span><span class="ident"><span class="self">Self</span>::Scalar</span><span class="op">&gt;</span>
+<span class="doccomment">/// Syntactic sugar for Vector operations
+</span><span class="kw">pub trait </span>VecOps: Sized + FPVector 
+<span class="kw">where </span><span class="self">Self</span>::Scalar: Copy + Clone
+    + Add&lt;<span class="self">Self</span>::Scalar, Output=<span class="self">Self</span>::Scalar&gt;
+    + Sub&lt;<span class="self">Self</span>::Scalar, Output=<span class="self">Self</span>::Scalar&gt; 
+    + Mul&lt;<span class="self">Self</span>::Scalar, Output=<span class="self">Self</span>::Scalar&gt;
+    + Div&lt;<span class="self">Self</span>::Scalar, Output=<span class="self">Self</span>::Scalar&gt;
 {
-    <span class="comment">//type Scalar;</span>
-    <span class="kw">fn</span> <span class="ident">add_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">y</span>, <span class="ident">v</span>)
+    <span class="comment">//type Scalar;
+    </span><span class="kw">fn </span>add_v(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.zip_with(|x, y| x + y, v)
     }
-    <span class="kw">fn</span> <span class="ident">sub_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">y</span>, <span class="ident">v</span>)
+    <span class="kw">fn </span>sub_v(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.zip_with(|x, y| x - y, v)
     }
-    <span class="kw">fn</span> <span class="ident">mul_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">y</span>, <span class="ident">v</span>)
+    <span class="kw">fn </span>mul_v(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.zip_with(|x, y| x * y, v)
     }
-    <span class="kw">fn</span> <span class="ident">div_v</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">zip_with</span>(<span class="op">|</span><span class="ident">x</span>, <span class="ident">y</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">y</span>, <span class="ident">v</span>)
+    <span class="kw">fn </span>div_v(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.zip_with(|x, y| x / y, v)
     }
-    <span class="kw">fn</span> <span class="ident">add_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="ident"><span class="self">Self</span>::Scalar</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">s</span>)
+    <span class="kw">fn </span>add_s(<span class="kw-2">&amp;</span><span class="self">self</span>, s: <span class="self">Self</span>::Scalar) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fmap(|x| x + s)
     }
-    <span class="kw">fn</span> <span class="ident">sub_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="ident"><span class="self">Self</span>::Scalar</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">-</span> <span class="ident">s</span>)
+    <span class="kw">fn </span>sub_s(<span class="kw-2">&amp;</span><span class="self">self</span>, s: <span class="self">Self</span>::Scalar) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fmap(|x| x - s)
     }
-    <span class="kw">fn</span> <span class="ident">mul_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="ident"><span class="self">Self</span>::Scalar</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">s</span>)
+    <span class="kw">fn </span>mul_s(<span class="kw-2">&amp;</span><span class="self">self</span>, s: <span class="self">Self</span>::Scalar) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fmap(|x| x * s)
     }
-    <span class="kw">fn</span> <span class="ident">div_s</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">s</span>: <span class="ident"><span class="self">Self</span>::Scalar</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">self</span>.<span class="ident">fmap</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">/</span> <span class="ident">s</span>)
-    }
-}
-
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Scalable</span> {
-    <span class="kw">type</span> <span class="ident">Vec</span>;
-    <span class="kw">fn</span> <span class="ident">resize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">size</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">shape</span>: <span class="ident">Shape</span>) -&gt; <span class="ident">Matrix</span>;
-    <span class="kw">fn</span> <span class="ident">add_col</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>) -&gt; <span class="ident">Matrix</span>;
-    <span class="kw">fn</span> <span class="ident">add_row</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>) -&gt; <span class="ident">Matrix</span>;
-}
-
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ScalableMut</span> {
-    <span class="kw">type</span> <span class="ident">Vec</span>;
-    <span class="kw">fn</span> <span class="ident">resize_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">size</span>: (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">shape</span>: <span class="ident">Shape</span>);
-    <span class="kw">fn</span> <span class="ident">add_col_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>);
-    <span class="kw">fn</span> <span class="ident">add_row_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>);
-}
-
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ConvToMat</span> {
-    <span class="kw">fn</span> <span class="ident">to_col</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Matrix</span>;
-    <span class="kw">fn</span> <span class="ident">to_row</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Matrix</span>;
-}
-
-<span class="comment">// =============================================================================</span>
-<span class="comment">// Implementations</span>
-<span class="comment">// =============================================================================</span>
-
-<span class="kw">impl</span> <span class="ident">VecOps</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {}
-<span class="comment">//    /// Vector + Vector</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    /// #[macro_use]</span>
-<span class="comment">//    /// extern crate peroxide;</span>
-<span class="comment">//    /// use peroxide::fuga::*;</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// fn main() {</span>
-<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
-<span class="comment">//    ///     let b = c!(5,4,3,2,1);</span>
-<span class="comment">//    ///     assert_eq!(a.add_v(&amp;b), c!(6,6,6,6,6));</span>
-<span class="comment">//    /// }</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    fn add_v(&amp;self, v: &amp;Self) -&gt; Self {</span>
-<span class="comment">//        self.add_vec(&amp;v)</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    /// Vector - Vector</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    /// #[macro_use]</span>
-<span class="comment">//    /// extern crate peroxide;</span>
-<span class="comment">//    /// use peroxide::fuga::*;</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// fn main() {</span>
-<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
-<span class="comment">//    ///     let b = c!(5,4,3,2,1);</span>
-<span class="comment">//    ///     assert_eq!(a.sub_v(&amp;b), c!(-4, -2, 0, 2, 4));</span>
-<span class="comment">//    /// }</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    fn sub_v(&amp;self, v: &amp;Self) -&gt; Self {</span>
-<span class="comment">//        self.zip_with(|x, y| x - y, v)</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    /// Vector * Vector</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    /// #[macro_use]</span>
-<span class="comment">//    /// extern crate peroxide;</span>
-<span class="comment">//    /// use peroxide::fuga::*;</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// fn main() {</span>
-<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
-<span class="comment">//    ///     let b = c!(5,4,3,2,1);</span>
-<span class="comment">//    ///     assert_eq!(a.mul_v(&amp;b), c!(5, 8, 9, 8, 5));</span>
-<span class="comment">//    /// }</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    fn mul_v(&amp;self, v: &amp;Self) -&gt; Self {</span>
-<span class="comment">//        self.zip_with(|x, y| x * y, v)</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    /// Vector / Vector</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    /// #[macro_use]</span>
-<span class="comment">//    /// extern crate peroxide;</span>
-<span class="comment">//    /// use peroxide::fuga::*;</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// fn main() {</span>
-<span class="comment">//    ///     let a = c!(2, 4, 6, 8, 10);</span>
-<span class="comment">//    ///     let b = c!(2, 2, 2, 2, 2);</span>
-<span class="comment">//    ///     assert_eq!(a.div_v(&amp;b), c!(1,2,3,4,5));</span>
-<span class="comment">//    /// }</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    fn div_v(&amp;self, v: &amp;Self) -&gt; Self {</span>
-<span class="comment">//        self.zip_with(|x, y| x / y, v)</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    /// Vector + Scalar</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    /// #[macro_use]</span>
-<span class="comment">//    /// extern crate peroxide;</span>
-<span class="comment">//    /// use peroxide::fuga::*;</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// fn main() {</span>
-<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
-<span class="comment">//    ///     let b = 1f64;</span>
-<span class="comment">//    ///     assert_eq!(a.add_s(b), c!(2,3,4,5,6));</span>
-<span class="comment">//    /// }</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    fn add_s(&amp;self, s: Self::Scalar) -&gt; Self {</span>
-<span class="comment">//        self.fmap(|x| x + s)</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    /// Vector - Scalar</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    /// #[macro_use]</span>
-<span class="comment">//    /// extern crate peroxide;</span>
-<span class="comment">//    /// use peroxide::fuga::*;</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// fn main() {</span>
-<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
-<span class="comment">//    ///     let b = 1f64;</span>
-<span class="comment">//    ///     assert_eq!(a.sub_s(b), c!(0,1,2,3,4));</span>
-<span class="comment">//    /// }</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    fn sub_s(&amp;self, s: Self::Scalar) -&gt; Self {</span>
-<span class="comment">//        self.fmap(|x| x - s)</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    /// Vector * Scalar</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    /// #[macro_use]</span>
-<span class="comment">//    /// extern crate peroxide;</span>
-<span class="comment">//    /// use peroxide::fuga::*;</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// fn main() {</span>
-<span class="comment">//    ///     let a = c!(1,2,3,4,5);</span>
-<span class="comment">//    ///     let b = 2f64;</span>
-<span class="comment">//    ///     assert_eq!(a.mul_s(b), c!(2,4,6,8,10));</span>
-<span class="comment">//    /// }</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    fn mul_s(&amp;self, s: Self::Scalar) -&gt; Self {</span>
-<span class="comment">//        self.mul_scalar(s)</span>
-<span class="comment">//    }</span>
-<span class="comment">//</span>
-<span class="comment">//    /// Vector / Scalar</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    /// #[macro_use]</span>
-<span class="comment">//    /// extern crate peroxide;</span>
-<span class="comment">//    /// use peroxide::fuga::*;</span>
-<span class="comment">//    ///</span>
-<span class="comment">//    /// fn main() {</span>
-<span class="comment">//    ///     let a = c!(2,4,6,8,10);</span>
-<span class="comment">//    ///     let b = 2f64;</span>
-<span class="comment">//    ///     assert_eq!(a.div_s(b), c!(1,2,3,4,5));</span>
-<span class="comment">//    /// }</span>
-<span class="comment">//    /// ```</span>
-<span class="comment">//    fn div_s(&amp;self, s: Self::Scalar) -&gt; Self {</span>
-<span class="comment">//        self.fmap(|x| x / s)</span>
-<span class="comment">//    }</span>
-
-<span class="kw">impl</span> <span class="ident">Scalable</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Vec</span> <span class="op">=</span> <span class="self">Self</span>;
-
-    <span class="doccomment">/// Vector to Matrix</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3,4,5,6);</span>
-    <span class="doccomment">///     let b1 = a.resize((3,2), Row);</span>
-    <span class="doccomment">///     let b2 = a.resize((3,2), Col);</span>
-    <span class="doccomment">///     assert_eq!(b1, ml_matrix(&quot;1 2;3 4;5 6&quot;));</span>
-    <span class="doccomment">///     assert_eq!(b2, ml_matrix(&quot;1 4;2 5;3 6&quot;));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">resize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, (<span class="ident">r</span>, <span class="ident">c</span>): (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">shape</span>: <span class="ident">Shape</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">len</span>(), <span class="ident">r</span> <span class="op">*</span> <span class="ident">c</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros_shape</span>(<span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">shape</span>);
-        <span class="ident">m</span>.<span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>[..].<span class="ident">to_vec</span>();
-        <span class="ident">m</span>
-    }
-
-    <span class="doccomment">/// Vector + Vector = Matrix</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3);</span>
-    <span class="doccomment">///     let b = c!(4,5,6);</span>
-    <span class="doccomment">///     let c1 = a.add_row(&amp;b);</span>
-    <span class="doccomment">///     let c2 = a.add_col(&amp;b);</span>
-    <span class="doccomment">///     assert_eq!(c1, ml_matrix(&quot;1 2 3;4 5 6&quot;));</span>
-    <span class="doccomment">///     assert_eq!(c2, ml_matrix(&quot;1 4;2 5;3 6&quot;));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">add_row</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">len</span>(), <span class="ident">v</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>[..].<span class="ident">to_vec</span>();
-        <span class="ident">x</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-        <span class="ident">x</span>.<span class="ident">resize</span>((<span class="number">2</span>, <span class="self">self</span>.<span class="ident">len</span>()), <span class="ident">Shape::Row</span>)
-    }
-
-    <span class="doccomment">/// Vector + Vector = Matrix</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = c!(1,2,3);</span>
-    <span class="doccomment">///     let b = c!(4,5,6);</span>
-    <span class="doccomment">///     let c1 = a.add_row(&amp;b);</span>
-    <span class="doccomment">///     let c2 = a.add_col(&amp;b);</span>
-    <span class="doccomment">///     assert_eq!(c1, ml_matrix(&quot;1 2 3;4 5 6&quot;));</span>
-    <span class="doccomment">///     assert_eq!(c2, ml_matrix(&quot;1 4;2 5;3 6&quot;));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">add_col</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">len</span>(), <span class="ident">v</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>[..].<span class="ident">to_vec</span>();
-        <span class="ident">x</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-        <span class="ident">x</span>.<span class="ident">resize</span>((<span class="self">self</span>.<span class="ident">len</span>(), <span class="number">2</span>), <span class="ident">Shape::Col</span>)
+    <span class="kw">fn </span>div_s(<span class="kw-2">&amp;</span><span class="self">self</span>, s: <span class="self">Self</span>::Scalar) -&gt; <span class="self">Self </span>{
+        <span class="self">self</span>.fmap(|x| x / s)
     }
 }
 
-<span class="doccomment">/// Modify Matrix</span>
-<span class="kw">impl</span> <span class="ident">Scalable</span> <span class="kw">for</span> <span class="ident">Matrix</span> {
-    <span class="kw">type</span> <span class="ident">Vec</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
+<span class="kw">pub trait </span>Scalable {
+    <span class="kw">type </span>Vec;
+    <span class="kw">fn </span>resize(<span class="kw-2">&amp;</span><span class="self">self</span>, size: (usize, usize), shape: Shape) -&gt; Matrix;
+    <span class="kw">fn </span>add_col(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix;
+    <span class="kw">fn </span>add_row(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix;
+}
 
-    <span class="doccomment">/// Resize matrix</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = ml_matrix(&quot;1 2 3;4 5 6&quot;); // ml_matrix has shape `Col`</span>
-    <span class="doccomment">///     let b1 = a.resize((3, 2), Row);</span>
-    <span class="doccomment">///     let b2 = a.resize((3, 2), Col);</span>
-    <span class="doccomment">///     assert_eq!(b1, ml_matrix(&quot;1 2;3 4;5 6&quot;));</span>
-    <span class="doccomment">///     assert_eq!(b2, ml_matrix(&quot;1 4;2 5;3 6&quot;));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">resize</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, (<span class="ident">r</span>, <span class="ident">c</span>): (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">shape</span>: <span class="ident">Shape</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">row</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">col</span>, <span class="ident">r</span> <span class="op">*</span> <span class="ident">c</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">zeros_shape</span>(<span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">shape</span>);
-        <span class="ident">m</span>.<span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">data</span>[..].<span class="ident">to_vec</span>();
-        <span class="ident">m</span>
+<span class="kw">pub trait </span>ScalableMut {
+    <span class="kw">type </span>Vec;
+    <span class="kw">fn </span>resize_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, size: (usize, usize), shape: Shape);
+    <span class="kw">fn </span>add_col_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec);
+    <span class="kw">fn </span>add_row_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec);
+}
+
+<span class="kw">pub trait </span>ConvToMat {
+    <span class="kw">fn </span>to_col(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix;
+    <span class="kw">fn </span>to_row(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix;
+}
+
+<span class="comment">// =============================================================================
+// Implementations
+// =============================================================================
+
+</span><span class="kw">impl </span>VecOps <span class="kw">for </span>Vec&lt;f64&gt; {}
+<span class="comment">//    /// Vector + Vector
+//    ///
+//    /// ```
+//    /// #[macro_use]
+//    /// extern crate peroxide;
+//    /// use peroxide::fuga::*;
+//    ///
+//    /// fn main() {
+//    ///     let a = c!(1,2,3,4,5);
+//    ///     let b = c!(5,4,3,2,1);
+//    ///     assert_eq!(a.add_v(&amp;b), c!(6,6,6,6,6));
+//    /// }
+//    /// ```
+//    fn add_v(&amp;self, v: &amp;Self) -&gt; Self {
+//        self.add_vec(&amp;v)
+//    }
+//
+//    /// Vector - Vector
+//    ///
+//    /// ```
+//    /// #[macro_use]
+//    /// extern crate peroxide;
+//    /// use peroxide::fuga::*;
+//    ///
+//    /// fn main() {
+//    ///     let a = c!(1,2,3,4,5);
+//    ///     let b = c!(5,4,3,2,1);
+//    ///     assert_eq!(a.sub_v(&amp;b), c!(-4, -2, 0, 2, 4));
+//    /// }
+//    /// ```
+//    fn sub_v(&amp;self, v: &amp;Self) -&gt; Self {
+//        self.zip_with(|x, y| x - y, v)
+//    }
+//
+//    /// Vector * Vector
+//    ///
+//    /// ```
+//    /// #[macro_use]
+//    /// extern crate peroxide;
+//    /// use peroxide::fuga::*;
+//    ///
+//    /// fn main() {
+//    ///     let a = c!(1,2,3,4,5);
+//    ///     let b = c!(5,4,3,2,1);
+//    ///     assert_eq!(a.mul_v(&amp;b), c!(5, 8, 9, 8, 5));
+//    /// }
+//    /// ```
+//    fn mul_v(&amp;self, v: &amp;Self) -&gt; Self {
+//        self.zip_with(|x, y| x * y, v)
+//    }
+//
+//    /// Vector / Vector
+//    ///
+//    /// ```
+//    /// #[macro_use]
+//    /// extern crate peroxide;
+//    /// use peroxide::fuga::*;
+//    ///
+//    /// fn main() {
+//    ///     let a = c!(2, 4, 6, 8, 10);
+//    ///     let b = c!(2, 2, 2, 2, 2);
+//    ///     assert_eq!(a.div_v(&amp;b), c!(1,2,3,4,5));
+//    /// }
+//    /// ```
+//    fn div_v(&amp;self, v: &amp;Self) -&gt; Self {
+//        self.zip_with(|x, y| x / y, v)
+//    }
+//
+//    /// Vector + Scalar
+//    ///
+//    /// ```
+//    /// #[macro_use]
+//    /// extern crate peroxide;
+//    /// use peroxide::fuga::*;
+//    ///
+//    /// fn main() {
+//    ///     let a = c!(1,2,3,4,5);
+//    ///     let b = 1f64;
+//    ///     assert_eq!(a.add_s(b), c!(2,3,4,5,6));
+//    /// }
+//    /// ```
+//    fn add_s(&amp;self, s: Self::Scalar) -&gt; Self {
+//        self.fmap(|x| x + s)
+//    }
+//
+//    /// Vector - Scalar
+//    ///
+//    /// ```
+//    /// #[macro_use]
+//    /// extern crate peroxide;
+//    /// use peroxide::fuga::*;
+//    ///
+//    /// fn main() {
+//    ///     let a = c!(1,2,3,4,5);
+//    ///     let b = 1f64;
+//    ///     assert_eq!(a.sub_s(b), c!(0,1,2,3,4));
+//    /// }
+//    /// ```
+//    fn sub_s(&amp;self, s: Self::Scalar) -&gt; Self {
+//        self.fmap(|x| x - s)
+//    }
+//
+//    /// Vector * Scalar
+//    ///
+//    /// ```
+//    /// #[macro_use]
+//    /// extern crate peroxide;
+//    /// use peroxide::fuga::*;
+//    ///
+//    /// fn main() {
+//    ///     let a = c!(1,2,3,4,5);
+//    ///     let b = 2f64;
+//    ///     assert_eq!(a.mul_s(b), c!(2,4,6,8,10));
+//    /// }
+//    /// ```
+//    fn mul_s(&amp;self, s: Self::Scalar) -&gt; Self {
+//        self.mul_scalar(s)
+//    }
+//
+//    /// Vector / Scalar
+//    ///
+//    /// ```
+//    /// #[macro_use]
+//    /// extern crate peroxide;
+//    /// use peroxide::fuga::*;
+//    ///
+//    /// fn main() {
+//    ///     let a = c!(2,4,6,8,10);
+//    ///     let b = 2f64;
+//    ///     assert_eq!(a.div_s(b), c!(1,2,3,4,5));
+//    /// }
+//    /// ```
+//    fn div_s(&amp;self, s: Self::Scalar) -&gt; Self {
+//        self.fmap(|x| x / s)
+//    }
+
+</span><span class="kw">impl </span>Scalable <span class="kw">for </span>Vec&lt;f64&gt; {
+    <span class="kw">type </span>Vec = <span class="self">Self</span>;
+
+    <span class="doccomment">/// Vector to Matrix
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = c!(1,2,3,4,5,6);
+    ///     let b1 = a.resize((3,2), Row);
+    ///     let b2 = a.resize((3,2), Col);
+    ///     assert_eq!(b1, ml_matrix(&quot;1 2;3 4;5 6&quot;));
+    ///     assert_eq!(b2, ml_matrix(&quot;1 4;2 5;3 6&quot;));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>resize(<span class="kw-2">&amp;</span><span class="self">self</span>, (r, c): (usize, usize), shape: Shape) -&gt; Matrix {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.len(), r * c);
+        <span class="kw">let </span><span class="kw-2">mut </span>m = zeros_shape(r, c, shape);
+        m.data = <span class="self">self</span>[..].to_vec();
+        m
     }
 
-    <span class="doccomment">/// Add row</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = ml_matrix(&quot;1 2 3;4 5 6&quot;);</span>
-    <span class="doccomment">///     let b = c!(7,8,9);</span>
-    <span class="doccomment">///     let c = a.add_row(&amp;b);</span>
-    <span class="doccomment">///     assert_eq!(c, ml_matrix(&quot;1 2 3;4 5 6;7 8 9&quot;));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">add_row</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">col</span>, <span class="ident">v</span>.<span class="ident">len</span>());
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">shape</span> {
-            <span class="ident">Shape::Row</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
-                <span class="ident">m</span>.<span class="ident">data</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-                <span class="ident">m</span>.<span class="ident">row</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">m</span>
+    <span class="doccomment">/// Vector + Vector = Matrix
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = c!(1,2,3);
+    ///     let b = c!(4,5,6);
+    ///     let c1 = a.add_row(&amp;b);
+    ///     let c2 = a.add_col(&amp;b);
+    ///     assert_eq!(c1, ml_matrix(&quot;1 2 3;4 5 6&quot;));
+    ///     assert_eq!(c2, ml_matrix(&quot;1 4;2 5;3 6&quot;));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>add_row(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.len(), v.len());
+        <span class="kw">let </span><span class="kw-2">mut </span>x = <span class="self">self</span>[..].to_vec();
+        x.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+        x.resize((<span class="number">2</span>, <span class="self">self</span>.len()), Shape::Row)
+    }
+
+    <span class="doccomment">/// Vector + Vector = Matrix
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = c!(1,2,3);
+    ///     let b = c!(4,5,6);
+    ///     let c1 = a.add_row(&amp;b);
+    ///     let c2 = a.add_col(&amp;b);
+    ///     assert_eq!(c1, ml_matrix(&quot;1 2 3;4 5 6&quot;));
+    ///     assert_eq!(c2, ml_matrix(&quot;1 4;2 5;3 6&quot;));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>add_col(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.len(), v.len());
+        <span class="kw">let </span><span class="kw-2">mut </span>x = <span class="self">self</span>[..].to_vec();
+        x.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+        x.resize((<span class="self">self</span>.len(), <span class="number">2</span>), Shape::Col)
+    }
+}
+
+<span class="doccomment">/// Modify Matrix
+</span><span class="kw">impl </span>Scalable <span class="kw">for </span>Matrix {
+    <span class="kw">type </span>Vec = Vec&lt;f64&gt;;
+
+    <span class="doccomment">/// Resize matrix
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = ml_matrix(&quot;1 2 3;4 5 6&quot;); // ml_matrix has shape `Col`
+    ///     let b1 = a.resize((3, 2), Row);
+    ///     let b2 = a.resize((3, 2), Col);
+    ///     assert_eq!(b1, ml_matrix(&quot;1 2;3 4;5 6&quot;));
+    ///     assert_eq!(b2, ml_matrix(&quot;1 4;2 5;3 6&quot;));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>resize(<span class="kw-2">&amp;</span><span class="self">self</span>, (r, c): (usize, usize), shape: Shape) -&gt; Matrix {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.row * <span class="self">self</span>.col, r * c);
+        <span class="kw">let </span><span class="kw-2">mut </span>m = zeros_shape(r, c, shape);
+        m.data = <span class="self">self</span>.data[..].to_vec();
+        m
+    }
+
+    <span class="doccomment">/// Add row
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = ml_matrix(&quot;1 2 3;4 5 6&quot;);
+    ///     let b = c!(7,8,9);
+    ///     let c = a.add_row(&amp;b);
+    ///     assert_eq!(c, ml_matrix(&quot;1 2 3;4 5 6;7 8 9&quot;));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>add_row(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.col, v.len());
+        <span class="kw">match </span><span class="self">self</span>.shape {
+            Shape::Row =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.clone();
+                m.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                m.row += <span class="number">1</span>;
+                m
             }
-            <span class="ident">Shape::Col</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">change_shape</span>();
-                <span class="ident">m</span>.<span class="ident">data</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-                <span class="ident">m</span>.<span class="ident">row</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">m</span>
+            Shape::Col =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.change_shape();
+                m.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                m.row += <span class="number">1</span>;
+                m
             }
         }
     }
 
-    <span class="doccomment">/// Add column</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let a = ml_matrix(&quot;1 2 3;4 5 6&quot;);</span>
-    <span class="doccomment">///     let b = c!(7,8);</span>
-    <span class="doccomment">///     let c = a.add_col(&amp;b);</span>
-    <span class="doccomment">///     assert_eq!(c, ml_matrix(&quot;1 2 3 7;4 5 6 8&quot;));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">add_col</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">row</span>, <span class="ident">v</span>.<span class="ident">len</span>());
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">shape</span> {
-            <span class="ident">Shape::Col</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>();
-                <span class="ident">m</span>.<span class="ident">data</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-                <span class="ident">m</span>.<span class="ident">col</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">m</span>
+    <span class="doccomment">/// Add column
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let a = ml_matrix(&quot;1 2 3;4 5 6&quot;);
+    ///     let b = c!(7,8);
+    ///     let c = a.add_col(&amp;b);
+    ///     assert_eq!(c, ml_matrix(&quot;1 2 3 7;4 5 6 8&quot;));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>add_col(<span class="kw-2">&amp;</span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) -&gt; Matrix {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.row, v.len());
+        <span class="kw">match </span><span class="self">self</span>.shape {
+            Shape::Col =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.clone();
+                m.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                m.col += <span class="number">1</span>;
+                m
             }
-            <span class="ident">Shape::Row</span> =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">change_shape</span>();
-                <span class="ident">m</span>.<span class="ident">data</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-                <span class="ident">m</span>.<span class="ident">col</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-                <span class="ident">m</span>
-            }
-        }
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">ScalableMut</span> <span class="kw">for</span> <span class="ident">Matrix</span> {
-    <span class="kw">type</span> <span class="ident">Vec</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
-
-    <span class="doccomment">/// Resize matrix (Mutable)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let mut a = ml_matrix(&quot;1 2 3;4 5 6&quot;); // ml_matrix has shape `Row`</span>
-    <span class="doccomment">///     a.resize_mut((3, 2), Row);</span>
-    <span class="doccomment">///     assert_eq!(a, ml_matrix(&quot;1 2;3 4;5 6&quot;));</span>
-    <span class="doccomment">///     a.resize_mut((3, 2), Col);</span>
-    <span class="doccomment">///     assert_eq!(a, ml_matrix(&quot;1 4;2 5;3 6&quot;));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">resize_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, (<span class="ident">r</span>, <span class="ident">c</span>): (<span class="ident">usize</span>, <span class="ident">usize</span>), <span class="ident">shape</span>: <span class="ident">Shape</span>) {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">row</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">col</span>, <span class="ident">r</span> <span class="op">*</span> <span class="ident">c</span>);
-        <span class="self">self</span>.<span class="ident">row</span> <span class="op">=</span> <span class="ident">r</span>;
-        <span class="self">self</span>.<span class="ident">col</span> <span class="op">=</span> <span class="ident">c</span>;
-        <span class="self">self</span>.<span class="ident">shape</span> <span class="op">=</span> <span class="ident">shape</span>;
-    }
-
-    <span class="doccomment">/// Add row (Mutable)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let mut a = ml_matrix(&quot;1 2 3;4 5 6&quot;);</span>
-    <span class="doccomment">///     let b = c!(7,8,9);</span>
-    <span class="doccomment">///     a.add_row_mut(&amp;b);</span>
-    <span class="doccomment">///     assert_eq!(a, ml_matrix(&quot;1 2 3;4 5 6;7 8 9&quot;));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">add_row_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>) {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">col</span>, <span class="ident">v</span>.<span class="ident">len</span>());
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">shape</span> {
-            <span class="ident">Shape::Row</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-                <span class="self">self</span>.<span class="ident">row</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            }
-            <span class="ident">Shape::Col</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">change_shape_mut</span>();
-                <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-                <span class="self">self</span>.<span class="ident">row</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            }
-        }
-    }
-
-    <span class="doccomment">/// Add column (Mutable)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// #[macro_use]</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let mut a = ml_matrix(&quot;1 2 3;4 5 6&quot;);</span>
-    <span class="doccomment">///     let b = c!(7,8);</span>
-    <span class="doccomment">///     a.add_col_mut(&amp;b);</span>
-    <span class="doccomment">///     assert_eq!(a, ml_matrix(&quot;1 2 3 7;4 5 6 8&quot;));</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">add_col_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">v</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Vec</span>) {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">row</span>, <span class="ident">v</span>.<span class="ident">len</span>());
-        <span class="kw">match</span> <span class="self">self</span>.<span class="ident">shape</span> {
-            <span class="ident">Shape::Col</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-                <span class="self">self</span>.<span class="ident">col</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
-            }
-            <span class="ident">Shape::Row</span> =&gt; {
-                <span class="self">self</span>.<span class="ident">change_shape_mut</span>();
-                <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">extend_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>[..]);
-                <span class="self">self</span>.<span class="ident">col</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+            Shape::Row =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>m = <span class="self">self</span>.change_shape();
+                m.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                m.col += <span class="number">1</span>;
+                m
             }
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">ConvToMat</span> <span class="kw">for</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">to_col</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="ident">matrix</span>(<span class="self">self</span>.<span class="ident">clone</span>(), <span class="self">self</span>.<span class="ident">len</span>(), <span class="number">1</span>, <span class="ident">Shape::Col</span>)
+<span class="kw">impl </span>ScalableMut <span class="kw">for </span>Matrix {
+    <span class="kw">type </span>Vec = Vec&lt;f64&gt;;
+
+    <span class="doccomment">/// Resize matrix (Mutable)
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let mut a = ml_matrix(&quot;1 2 3;4 5 6&quot;); // ml_matrix has shape `Row`
+    ///     a.resize_mut((3, 2), Row);
+    ///     assert_eq!(a, ml_matrix(&quot;1 2;3 4;5 6&quot;));
+    ///     a.resize_mut((3, 2), Col);
+    ///     assert_eq!(a, ml_matrix(&quot;1 4;2 5;3 6&quot;));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>resize_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, (r, c): (usize, usize), shape: Shape) {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.row * <span class="self">self</span>.col, r * c);
+        <span class="self">self</span>.row = r;
+        <span class="self">self</span>.col = c;
+        <span class="self">self</span>.shape = shape;
+    }
+
+    <span class="doccomment">/// Add row (Mutable)
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let mut a = ml_matrix(&quot;1 2 3;4 5 6&quot;);
+    ///     let b = c!(7,8,9);
+    ///     a.add_row_mut(&amp;b);
+    ///     assert_eq!(a, ml_matrix(&quot;1 2 3;4 5 6;7 8 9&quot;));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>add_row_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.col, v.len());
+        <span class="kw">match </span><span class="self">self</span>.shape {
+            Shape::Row =&gt; {
+                <span class="self">self</span>.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                <span class="self">self</span>.row += <span class="number">1</span>;
+            }
+            Shape::Col =&gt; {
+                <span class="self">self</span>.change_shape_mut();
+                <span class="self">self</span>.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                <span class="self">self</span>.row += <span class="number">1</span>;
+            }
+        }
+    }
+
+    <span class="doccomment">/// Add column (Mutable)
+    ///
+    /// ```
+    /// #[macro_use]
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    ///
+    /// fn main() {
+    ///     let mut a = ml_matrix(&quot;1 2 3;4 5 6&quot;);
+    ///     let b = c!(7,8);
+    ///     a.add_col_mut(&amp;b);
+    ///     assert_eq!(a, ml_matrix(&quot;1 2 3 7;4 5 6 8&quot;));
+    /// }
+    /// ```
+    </span><span class="kw">fn </span>add_col_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>, v: <span class="kw-2">&amp;</span><span class="self">Self</span>::Vec) {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.row, v.len());
+        <span class="kw">match </span><span class="self">self</span>.shape {
+            Shape::Col =&gt; {
+                <span class="self">self</span>.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                <span class="self">self</span>.col += <span class="number">1</span>;
+            }
+            Shape::Row =&gt; {
+                <span class="self">self</span>.change_shape_mut();
+                <span class="self">self</span>.data.extend_from_slice(<span class="kw-2">&amp;</span>v[..]);
+                <span class="self">self</span>.col += <span class="number">1</span>;
+            }
+        }
+    }
+}
+
+<span class="kw">impl </span>ConvToMat <span class="kw">for </span>Vec&lt;f64&gt; {
+    <span class="kw">fn </span>to_col(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
+        matrix(<span class="self">self</span>.clone(), <span class="self">self</span>.len(), <span class="number">1</span>, Shape::Col)
     }
     
-    <span class="kw">fn</span> <span class="ident">to_row</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Matrix</span> {
-        <span class="ident">matrix</span>(<span class="self">self</span>.<span class="ident">clone</span>(), <span class="number">1</span>, <span class="self">self</span>.<span class="ident">len</span>(), <span class="ident">Shape::Row</span>)
+    <span class="kw">fn </span>to_row(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Matrix {
+        matrix(<span class="self">self</span>.clone(), <span class="number">1</span>, <span class="self">self</span>.len(), Shape::Row)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

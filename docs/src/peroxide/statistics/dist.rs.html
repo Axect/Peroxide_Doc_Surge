@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/dist.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dist.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/statistics/dist.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dist.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -811,796 +805,795 @@
 <span id="789">789</span>
 <span id="790">790</span>
 <span id="791">791</span>
-</pre><pre class="rust"><code><span class="doccomment">//! Probabilistic distributions</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ## Probability Distribution</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * There are some famous pdf in Peroxide (not checked pdfs will be implemented soon)</span>
-<span class="doccomment">//!     * Bernoulli</span>
-<span class="doccomment">//!     * Binomial</span>
-<span class="doccomment">//!     * Beta</span>
-<span class="doccomment">//!     * Dirichlet</span>
-<span class="doccomment">//!     * Gamma</span>
-<span class="doccomment">//!     * Normal</span>
-<span class="doccomment">//!     * Student&#39;s t</span>
-<span class="doccomment">//!     * Uniform</span>
-<span class="doccomment">//!     * Weighted Uniform</span>
-<span class="doccomment">//! * There are two enums to represent probability distribution</span>
-<span class="doccomment">//!     * `OPDist&lt;T&gt;` : One parameter distribution (Bernoulli)</span>
-<span class="doccomment">//!     * `TPDist&lt;T&gt;` : Two parameter distribution (Uniform, Normal, Beta, Gamma)</span>
-<span class="doccomment">//!         * `T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;`</span>
-<span class="doccomment">//! * There are some traits for pdf</span>
-<span class="doccomment">//!     * `RNG` trait - extract sample &amp; calculate pdf</span>
-<span class="doccomment">//!     * `Statistics` trait - already shown above</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### `RNG` trait</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * `RNG` trait is composed of two fields</span>
-<span class="doccomment">//!     * `sample`: Extract samples</span>
-<span class="doccomment">//!     * `pdf` : Calculate pdf value at specific point</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     extern crate rand;</span>
-<span class="doccomment">//!     use rand::distributions::uniform::SampleUniform;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     pub trait RNG {</span>
-<span class="doccomment">//!         /// Extract samples of distributions</span>
-<span class="doccomment">//!         fn sample(&amp;self, n: usize) -&gt; Vec&lt;f64&gt;;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!         /// Probability Distribution Function</span>
-<span class="doccomment">//!         ///</span>
-<span class="doccomment">//!         /// # Type</span>
-<span class="doccomment">//!         /// `f64 -&gt; f64`</span>
-<span class="doccomment">//!         fn pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(&amp;self, x: S) -&gt; f64;</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Bernoulli Distribution</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Definition</span>
-<span class="doccomment">//!     $$ \text{Bern}(x | \mu) = \mu^x (1-\mu)^{1-x} $$</span>
-<span class="doccomment">//! * Representative value</span>
-<span class="doccomment">//!     * Mean: $\mu$</span>
-<span class="doccomment">//!     * Var : $\mu(1 - \mu)$</span>
-<span class="doccomment">//! * In peroxide, to generate $\text{Bern}(x | \mu)$, use simple traits</span>
-<span class="doccomment">//!     1. Generate $U \sim \text{Unif}(0, 1)$</span>
-<span class="doccomment">//!     2. If $U \leq \mu$, then $X = 1$ else $X = 0$</span>
-<span class="doccomment">//! * Usage is very simple</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         let b = Bernoulli(0.1); // Bern(x | 0.1)</span>
-<span class="doccomment">//!         b.sample(100).print();  // Generate 100 samples</span>
-<span class="doccomment">//!         b.pdf(0).print();       // 0.9</span>
-<span class="doccomment">//!         b.mean().print();       // 0.1</span>
-<span class="doccomment">//!         b.var().print();        // 0.09 (approximately)</span>
-<span class="doccomment">//!         b.sd().print();         // 0.3  (approximately)</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Uniform Distribution</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Definition</span>
-<span class="doccomment">//!     $$\text{Unif}(x | a, b) = \begin{cases} \frac{1}{b - a} &amp; x \in [a,b]\\\ 0 &amp; \text{otherwise} \end{cases}$$</span>
-<span class="doccomment">//! * Representative value</span>
-<span class="doccomment">//!     * Mean: $\frac{a + b}{2}$</span>
-<span class="doccomment">//!     * Var : $\frac{1}{12}(b-a)^2$</span>
-<span class="doccomment">//! * To generate uniform random number, Peroxide uses `rand` crate</span>
-<span class="doccomment">//! * **Caution**: `Uniform(T, T)` generates `T` type samples (only for `Uniform`)</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         // Uniform(start, end)</span>
-<span class="doccomment">//!         let a = Uniform(0f64, 1f64); // It will generate `f64` samples.</span>
-<span class="doccomment">//!         a.sample(100).print();</span>
-<span class="doccomment">//!         a.pdf(0.2).print();</span>
-<span class="doccomment">//!         a.mean().print();</span>
-<span class="doccomment">//!         a.var().print();</span>
-<span class="doccomment">//!         a.sd().print();</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Normal Distribution</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! * Definition</span>
-<span class="doccomment">//!     $$\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp{\left( - \frac{(x - \mu)^2}{2\sigma^2}\right)}$$</span>
-<span class="doccomment">//! * Representative value</span>
-<span class="doccomment">//!     * Mean: $\mu$</span>
-<span class="doccomment">//!     * Var: $\sigma^2$</span>
-<span class="doccomment">//! * To generate normal random number, there are two famous algorithms</span>
-<span class="doccomment">//!     * Marsaglia-Polar method</span>
-<span class="doccomment">//!     * Ziggurat traits</span>
-<span class="doccomment">//! * In peroxide (after ver 0.19.1), use `rand_distr` to generate random normal samples.</span>
-<span class="doccomment">//! * &lt;del&gt;In peroxide, main traits is Ziggurat - most efficient traits to generate random normal samples.&lt;/del&gt;</span>
-<span class="doccomment">//!     * &lt;del&gt;Code is based on a [C implementation](https://www.seehuhn.de/pages/ziggurat.html) by Jochen Voss.&lt;/del&gt;</span>
-<span class="doccomment">//!     ```rust</span>
-<span class="doccomment">//!     extern crate peroxide;</span>
-<span class="doccomment">//!     use peroxide::fuga::*;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//!     fn main() {</span>
-<span class="doccomment">//!         // Normal(mean, std)</span>
-<span class="doccomment">//!         let a = Normal(0, 1); // Standard normal</span>
-<span class="doccomment">//!         a.sample(100).print();</span>
-<span class="doccomment">//!         a.pdf(0).print(); // Maximum probability</span>
-<span class="doccomment">//!         a.mean().print();</span>
-<span class="doccomment">//!         a.var().print();</span>
-<span class="doccomment">//!         a.sd().print();</span>
-<span class="doccomment">//!     }</span>
-<span class="doccomment">//!     ```</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Beta Distribution</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Gamma Distribution</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### Binomial Distribution</span>
-<span class="doccomment">//!</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Probabilistic distributions
+//!
+//! ## Probability Distribution
+//!
+//! * There are some famous pdf in Peroxide (not checked pdfs will be implemented soon)
+//!     * Bernoulli
+//!     * Binomial
+//!     * Beta
+//!     * Dirichlet
+//!     * Gamma
+//!     * Normal
+//!     * Student&#39;s t
+//!     * Uniform
+//!     * Weighted Uniform
+//! * There are two enums to represent probability distribution
+//!     * `OPDist&lt;T&gt;` : One parameter distribution (Bernoulli)
+//!     * `TPDist&lt;T&gt;` : Two parameter distribution (Uniform, Normal, Beta, Gamma)
+//!         * `T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;`
+//! * There are some traits for pdf
+//!     * `RNG` trait - extract sample &amp; calculate pdf
+//!     * `Statistics` trait - already shown above
+//!
+//! ### `RNG` trait
+//!
+//! * `RNG` trait is composed of two fields
+//!     * `sample`: Extract samples
+//!     * `pdf` : Calculate pdf value at specific point
+//!     ```rust
+//!     extern crate rand;
+//!     use rand::distributions::uniform::SampleUniform;
+//!
+//!     pub trait RNG {
+//!         /// Extract samples of distributions
+//!         fn sample(&amp;self, n: usize) -&gt; Vec&lt;f64&gt;;
+//!
+//!         /// Probability Distribution Function
+//!         ///
+//!         /// # Type
+//!         /// `f64 -&gt; f64`
+//!         fn pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(&amp;self, x: S) -&gt; f64;
+//!     }
+//!     ```
+//!
+//! ### Bernoulli Distribution
+//!
+//! * Definition
+//!     $$ \text{Bern}(x | \mu) = \mu^x (1-\mu)^{1-x} $$
+//! * Representative value
+//!     * Mean: $\mu$
+//!     * Var : $\mu(1 - \mu)$
+//! * In peroxide, to generate $\text{Bern}(x | \mu)$, use simple traits
+//!     1. Generate $U \sim \text{Unif}(0, 1)$
+//!     2. If $U \leq \mu$, then $X = 1$ else $X = 0$
+//! * Usage is very simple
+//!
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         let b = Bernoulli(0.1); // Bern(x | 0.1)
+//!         b.sample(100).print();  // Generate 100 samples
+//!         b.pdf(0).print();       // 0.9
+//!         b.mean().print();       // 0.1
+//!         b.var().print();        // 0.09 (approximately)
+//!         b.sd().print();         // 0.3  (approximately)
+//!     }
+//!     ```
+//!
+//! ### Uniform Distribution
+//!
+//! * Definition
+//!     $$\text{Unif}(x | a, b) = \begin{cases} \frac{1}{b - a} &amp; x \in [a,b]\\\ 0 &amp; \text{otherwise} \end{cases}$$
+//! * Representative value
+//!     * Mean: $\frac{a + b}{2}$
+//!     * Var : $\frac{1}{12}(b-a)^2$
+//! * To generate uniform random number, Peroxide uses `rand` crate
+//! * **Caution**: `Uniform(T, T)` generates `T` type samples (only for `Uniform`)
+//!
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         // Uniform(start, end)
+//!         let a = Uniform(0f64, 1f64); // It will generate `f64` samples.
+//!         a.sample(100).print();
+//!         a.pdf(0.2).print();
+//!         a.mean().print();
+//!         a.var().print();
+//!         a.sd().print();
+//!     }
+//!     ```
+//!
+//! ### Normal Distribution
+//!
+//! * Definition
+//!     $$\mathcal{N}(x | \mu, \sigma^2) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp{\left( - \frac{(x - \mu)^2}{2\sigma^2}\right)}$$
+//! * Representative value
+//!     * Mean: $\mu$
+//!     * Var: $\sigma^2$
+//! * To generate normal random number, there are two famous algorithms
+//!     * Marsaglia-Polar method
+//!     * Ziggurat traits
+//! * In peroxide (after ver 0.19.1), use `rand_distr` to generate random normal samples.
+//! * &lt;del&gt;In peroxide, main traits is Ziggurat - most efficient traits to generate random normal samples.&lt;/del&gt;
+//!     * &lt;del&gt;Code is based on a [C implementation](https://www.seehuhn.de/pages/ziggurat.html) by Jochen Voss.&lt;/del&gt;
+//!     ```rust
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!
+//!     fn main() {
+//!         // Normal(mean, std)
+//!         let a = Normal(0, 1); // Standard normal
+//!         a.sample(100).print();
+//!         a.pdf(0).print(); // Maximum probability
+//!         a.mean().print();
+//!         a.var().print();
+//!         a.sd().print();
+//!     }
+//!     ```
+//!
+//! ### Beta Distribution
+//!
+//! ### Gamma Distribution
+//!
+//! ### Binomial Distribution
+//!
 
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
-<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand_distr</span>;
-<span class="kw">use</span> <span class="ident">rand_distr::WeightedAliasIndex</span>;
+</span><span class="kw">extern crate </span>rand;
+<span class="kw">extern crate </span>rand_distr;
+<span class="kw">use </span>rand_distr::WeightedAliasIndex;
 
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::rand::distributions::uniform::SampleUniform</span>;
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::rand::prelude</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="self">self</span>::rand_distr::Distribution</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::OPDist</span>::<span class="kw-2">*</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::TPDist</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::traits::fp::FPVector</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::special::function</span>::<span class="kw-2">*</span>;
-<span class="comment">//use statistics::rand::ziggurat;</span>
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::statistics</span>::{<span class="ident">ops::C</span>, <span class="ident">stat::Statistics</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::non_macro</span>::{<span class="ident">linspace</span>, <span class="ident">seq</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::util::useful</span>::{<span class="ident">auto_zip</span>, <span class="ident">find_interval</span>};
-<span class="kw">use</span> <span class="ident">std::convert::Into</span>;
-<span class="kw">use</span> <span class="ident">std::f64::consts::E</span>;
+<span class="kw">use </span><span class="self">self</span>::rand::distributions::uniform::SampleUniform;
+<span class="kw">use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="self">self</span>::rand_distr::Distribution;
+<span class="kw">pub use </span><span class="self">self</span>::OPDist::<span class="kw-2">*</span>;
+<span class="kw">pub use </span><span class="self">self</span>::TPDist::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::traits::fp::FPVector;
+<span class="kw">use </span><span class="kw">crate</span>::special::function::<span class="kw-2">*</span>;
+<span class="comment">//use statistics::rand::ziggurat;
+</span><span class="kw">use </span><span class="kw">crate</span>::statistics::{ops::C, stat::Statistics};
+<span class="kw">use </span><span class="kw">crate</span>::util::non_macro::{linspace, seq};
+<span class="kw">use </span><span class="kw">crate</span>::util::useful::{auto_zip, find_interval};
+<span class="kw">use </span>std::convert::Into;
+<span class="kw">use </span>std::f64::consts::E;
 
-<span class="doccomment">/// One parameter distribution</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Distributions</span>
-<span class="doccomment">/// * `Bernoulli(prob)`: Bernoulli distribution</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident">Bernoulli</span>(<span class="ident">T</span>),
-    <span class="ident">StudentT</span>(<span class="ident">T</span>),
+<span class="doccomment">/// One parameter distribution
+///
+/// # Distributions
+/// * `Bernoulli(prob)`: Bernoulli distribution
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub enum </span>OPDist&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; {
+    Bernoulli(T),
+    StudentT(T),
 }
 
-<span class="doccomment">/// Two parameter distribution</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Distributions</span>
-<span class="doccomment">/// * `Uniform(start, end)`: Uniform distribution</span>
-<span class="doccomment">/// * `Normal(mean, std)`: Normal distribution</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident">Uniform</span>(<span class="ident">T</span>, <span class="ident">T</span>),
-    <span class="ident">Binomial</span>(<span class="ident">usize</span>, <span class="ident">T</span>),
-    <span class="ident">Normal</span>(<span class="ident">T</span>, <span class="ident">T</span>),
-    <span class="ident">Beta</span>(<span class="ident">T</span>, <span class="ident">T</span>),
-    <span class="ident">Gamma</span>(<span class="ident">T</span>, <span class="ident">T</span>),
+<span class="doccomment">/// Two parameter distribution
+///
+/// # Distributions
+/// * `Uniform(start, end)`: Uniform distribution
+/// * `Normal(mean, std)`: Normal distribution
+</span><span class="attribute">#[derive(Debug, Clone)]
+</span><span class="kw">pub enum </span>TPDist&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; {
+    Uniform(T, T),
+    Binomial(usize, T),
+    Normal(T, T),
+    Beta(T, T),
+    Gamma(T, T),
 }
 
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">WeightedUniform</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-    <span class="ident">weights</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">sum</span>: <span class="ident">T</span>,
-    <span class="ident">intervals</span>: <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">T</span>, <span class="ident">T</span>)<span class="op">&gt;</span>
+<span class="kw">pub struct </span>WeightedUniform&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; {
+    weights: Vec&lt;T&gt;,
+    sum: T,
+    intervals: Vec&lt;(T, T)&gt;
 }
 
-<span class="kw">impl</span> <span class="ident">WeightedUniform</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// Create a new weighted uniform distribution</span>
-    <span class="doccomment">/// </span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">/// </span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let weights = vec![1f64, 3f64, 0f64, 2f64];</span>
-    <span class="doccomment">///     let intervals = vec![0f64, 1f64, 2f64, 4f64, 5f64];</span>
-    <span class="doccomment">///     let w = WeightedUniform::new(weights, intervals);</span>
-    <span class="doccomment">///     assert_eq!(w.weights(), &amp;vec![1f64, 3f64, 2f64]);</span>
-    <span class="doccomment">///     assert_eq!(w.intervals(), &amp;vec![(0f64, 1f64), (1f64, 2f64), (4f64, 5f64)]);</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```    </span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">weights</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">intervals</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">weights</span> <span class="op">=</span> <span class="ident">weights</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">intervals</span> <span class="op">=</span> <span class="ident">auto_zip</span>(<span class="kw-2">&amp;</span><span class="ident">intervals</span>);
+<span class="kw">impl </span>WeightedUniform&lt;f64&gt; {
+    <span class="doccomment">/// Create a new weighted uniform distribution
+    /// 
+    /// # Examples
+    /// ```
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    /// 
+    /// fn main() {
+    ///     let weights = vec![1f64, 3f64, 0f64, 2f64];
+    ///     let intervals = vec![0f64, 1f64, 2f64, 4f64, 5f64];
+    ///     let w = WeightedUniform::new(weights, intervals);
+    ///     assert_eq!(w.weights(), &amp;vec![1f64, 3f64, 2f64]);
+    ///     assert_eq!(w.intervals(), &amp;vec![(0f64, 1f64), (1f64, 2f64), (4f64, 5f64)]);
+    /// }
+    /// ```    
+    </span><span class="kw">pub fn </span>new(weights: Vec&lt;f64&gt;, intervals: Vec&lt;f64&gt;) -&gt; <span class="self">Self </span>{
+        <span class="kw">let </span><span class="kw-2">mut </span>weights = weights;
+        <span class="kw">let </span><span class="kw-2">mut </span>intervals = auto_zip(<span class="kw-2">&amp;</span>intervals);
 
-        <span class="comment">// Remove zero weights &amp; corresponding intervals</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">i</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">j</span> <span class="op">=</span> <span class="ident">weights</span>.<span class="ident">len</span>();
-        <span class="kw">while</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">j</span> {
-            <span class="kw">if</span> <span class="ident">weights</span>[<span class="ident">i</span>] <span class="op">==</span> <span class="number">0f64</span> {
-                <span class="ident">weights</span>.<span class="ident">remove</span>(<span class="ident">i</span>);
-                <span class="ident">intervals</span>.<span class="ident">remove</span>(<span class="ident">i</span>);
-                <span class="ident">j</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-            } <span class="kw">else</span> {
-                <span class="ident">i</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+        <span class="comment">// Remove zero weights &amp; corresponding intervals
+        </span><span class="kw">let </span><span class="kw-2">mut </span>i = <span class="number">0</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>j = weights.len();
+        <span class="kw">while </span>i &lt; j {
+            <span class="kw">if </span>weights[i] == <span class="number">0f64 </span>{
+                weights.remove(i);
+                intervals.remove(i);
+                j -= <span class="number">1</span>;
+            } <span class="kw">else </span>{
+                i += <span class="number">1</span>;
             }
         }
 
-        <span class="kw">let</span> <span class="ident">sum</span> <span class="op">=</span> <span class="ident">weights</span>.<span class="ident">iter</span>().<span class="ident">sum</span>();
+        <span class="kw">let </span>sum = weights.iter().sum();
         
-        <span class="ident">WeightedUniform</span> {
-            <span class="ident">weights</span>,
-            <span class="ident">sum</span>,
-            <span class="ident">intervals</span>
+        WeightedUniform {
+            weights,
+            sum,
+            intervals
         }
     }
 
-    <span class="doccomment">/// Create WeightedUniform from max pooling</span>
-    <span class="doccomment">/// </span>
-    <span class="doccomment">/// # Examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// extern crate peroxide;</span>
-    <span class="doccomment">/// use peroxide::fuga::*;</span>
-    <span class="doccomment">/// </span>
-    <span class="doccomment">/// fn main() {</span>
-    <span class="doccomment">///     let w = WeightedUniform::from_max_pool_1d(f, (-2f64, 3f64), 10, 1e-3);</span>
-    <span class="doccomment">///     w.weights().print();</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// </span>
-    <span class="doccomment">/// fn f(x: f64) -&gt; f64 {</span>
-    <span class="doccomment">///     if x.abs() &lt; 1f64 {</span>
-    <span class="doccomment">///         (1f64 - x.abs())</span>
-    <span class="doccomment">///     } else {</span>
-    <span class="doccomment">///        0f64</span>
-    <span class="doccomment">///     }</span>
-    <span class="doccomment">/// }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_max_pool_1d</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>, (<span class="ident">a</span>, <span class="ident">b</span>): (<span class="ident">f64</span>, <span class="ident">f64</span>), <span class="ident">n</span>: <span class="ident">usize</span>, <span class="ident">eps</span>: <span class="ident">f64</span>) -&gt; <span class="self">Self</span> 
-    <span class="kw">where</span> <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">f64</span>) -&gt; <span class="ident">f64</span> <span class="op">+</span> <span class="ident">Copy</span> {
-        <span class="comment">// Find non-zero intervals</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident">a</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">b</span>;
-        <span class="kw">let</span> <span class="ident">trial</span> <span class="op">=</span> <span class="ident">seq</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">eps</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="ident">trial</span>.<span class="ident">len</span>() {
-            <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">trial</span>[<span class="ident">i</span>];
-            <span class="kw">if</span> <span class="ident">f</span>(<span class="ident">x</span>) <span class="op">&gt;</span> <span class="number">0f64</span> {
-                <span class="ident">a</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> { <span class="ident">trial</span>[<span class="ident">i</span><span class="op">-</span><span class="number">1</span>] } <span class="kw">else</span> { <span class="ident">x</span> };
+    <span class="doccomment">/// Create WeightedUniform from max pooling
+    /// 
+    /// # Examples
+    /// ```
+    /// extern crate peroxide;
+    /// use peroxide::fuga::*;
+    /// 
+    /// fn main() {
+    ///     let w = WeightedUniform::from_max_pool_1d(f, (-2f64, 3f64), 10, 1e-3);
+    ///     w.weights().print();
+    /// }
+    /// 
+    /// fn f(x: f64) -&gt; f64 {
+    ///     if x.abs() &lt; 1f64 {
+    ///         (1f64 - x.abs())
+    ///     } else {
+    ///        0f64
+    ///     }
+    /// }
+    /// ```
+    </span><span class="kw">pub fn </span>from_max_pool_1d&lt;F&gt;(f: F, (a, b): (f64, f64), n: usize, eps: f64) -&gt; <span class="self">Self 
+    </span><span class="kw">where </span>F: Fn(f64) -&gt; f64 + Copy {
+        <span class="comment">// Find non-zero intervals
+        </span><span class="kw">let </span><span class="kw-2">mut </span>a = a;
+        <span class="kw">let </span><span class="kw-2">mut </span>b = b;
+        <span class="kw">let </span>trial = seq(a, b, eps);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. trial.len() {
+            <span class="kw">let </span>x = trial[i];
+            <span class="kw">if </span>f(x) &gt; <span class="number">0f64 </span>{
+                a = <span class="kw">if </span>i &gt; <span class="number">0 </span>{ trial[i-<span class="number">1</span>] } <span class="kw">else </span>{ x };
                 <span class="kw">break</span>;
             }
         }
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> (<span class="number">0</span> .. <span class="ident">trial</span>.<span class="ident">len</span>()).<span class="ident">rev</span>() {
-            <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="ident">trial</span>[<span class="ident">i</span>];
-            <span class="kw">if</span> <span class="ident">f</span>(<span class="ident">x</span>) <span class="op">&gt;</span> <span class="number">0f64</span> {
-                <span class="ident">b</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">i</span> <span class="op">&lt;</span> <span class="ident">trial</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span> { <span class="ident">trial</span>[<span class="ident">i</span><span class="op">+</span><span class="number">1</span>] } <span class="kw">else</span> { <span class="ident">x</span> };
+        <span class="kw">for </span>i <span class="kw">in </span>(<span class="number">0 </span>.. trial.len()).rev() {
+            <span class="kw">let </span>x = trial[i];
+            <span class="kw">if </span>f(x) &gt; <span class="number">0f64 </span>{
+                b = <span class="kw">if </span>i &lt; trial.len() - <span class="number">1 </span>{ trial[i+<span class="number">1</span>] } <span class="kw">else </span>{ x };
                 <span class="kw">break</span>;
             }
         }
-        <span class="macro">assert!</span>(<span class="ident">a</span> <span class="op">&lt;</span> <span class="ident">b</span>, <span class="string">&quot;No non-zero interval found&quot;</span>);
-        <span class="kw">let</span> <span class="ident">domain</span> <span class="op">=</span> <span class="ident">linspace</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">n</span><span class="op">+</span><span class="number">1</span>);
+        <span class="macro">assert!</span>(a &lt; b, <span class="string">&quot;No non-zero interval found&quot;</span>);
+        <span class="kw">let </span>domain = linspace(a, b, n+<span class="number">1</span>);
 
-        <span class="comment">// Find intervals</span>
-        <span class="kw">let</span> <span class="ident">intervals</span> <span class="op">=</span> <span class="ident">auto_zip</span>(<span class="kw-2">&amp;</span><span class="ident">domain</span>);
+        <span class="comment">// Find intervals
+        </span><span class="kw">let </span>intervals = auto_zip(<span class="kw-2">&amp;</span>domain);
 
-        <span class="comment">// Find weights</span>
-        <span class="kw">let</span> <span class="ident">weights</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">intervals</span>.<span class="ident">iter</span>()
-            .<span class="ident">map</span>(
-                <span class="op">|</span>(<span class="ident">a</span>, <span class="ident">b</span>)<span class="op">|</span> {
-                    <span class="ident">seq</span>(<span class="kw-2">*</span><span class="ident">a</span>, <span class="kw-2">*</span><span class="ident">b</span><span class="op">+</span><span class="ident">eps</span>, <span class="ident">eps</span>).<span class="ident">reduce</span>(<span class="number">0f64</span>, <span class="op">|</span><span class="ident">acc</span>, <span class="ident">x</span><span class="op">|</span> <span class="ident">acc</span>.<span class="ident">max</span>(<span class="ident">f</span>(<span class="ident">x</span>)))
+        <span class="comment">// Find weights
+        </span><span class="kw">let </span>weights: Vec&lt;f64&gt; = intervals.iter()
+            .map(
+                |(a, b)| {
+                    seq(<span class="kw-2">*</span>a, <span class="kw-2">*</span>b+eps, eps).reduce(<span class="number">0f64</span>, |acc, x| acc.max(f(x)))
                 }
             )
-            .<span class="ident">collect</span>();
+            .collect();
 
-        <span class="kw">let</span> <span class="ident">sum</span> <span class="op">=</span> <span class="ident">weights</span>.<span class="ident">iter</span>().<span class="ident">sum</span>();
+        <span class="kw">let </span>sum = weights.iter().sum();
         
-        <span class="ident">WeightedUniform</span> {
-            <span class="ident">weights</span>,
-            <span class="ident">sum</span>,
-            <span class="ident">intervals</span>
+        WeightedUniform {
+            weights,
+            sum,
+            intervals
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">weights</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">weights</span>
+    <span class="kw">pub fn </span>weights(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;f64&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.weights
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">intervals</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>)<span class="op">&gt;</span> {
-        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">intervals</span>
+    <span class="kw">pub fn </span>intervals(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Vec&lt;(f64, f64)&gt; {
+        <span class="kw-2">&amp;</span><span class="self">self</span>.intervals
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">domain_linspace</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="ident">linspace</span>(<span class="self">self</span>.<span class="ident">intervals</span>[<span class="number">0</span>].<span class="number">0</span>, <span class="self">self</span>.<span class="ident">intervals</span>[<span class="self">self</span>.<span class="ident">intervals</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>].<span class="number">1</span>, <span class="ident">n</span>)
+    <span class="kw">pub fn </span>domain_linspace(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
+        linspace(<span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0</span>, <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len()-<span class="number">1</span>].<span class="number">1</span>, n)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">domain_seq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">step</span>: <span class="ident">f64</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="ident">seq</span>(<span class="self">self</span>.<span class="ident">intervals</span>[<span class="number">0</span>].<span class="number">0</span>, <span class="self">self</span>.<span class="ident">intervals</span>[<span class="self">self</span>.<span class="ident">intervals</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>].<span class="number">1</span>, <span class="ident">step</span>)
+    <span class="kw">pub fn </span>domain_seq(<span class="kw-2">&amp;</span><span class="self">self</span>, step: f64) -&gt; Vec&lt;f64&gt; {
+        seq(<span class="self">self</span>.intervals[<span class="number">0</span>].<span class="number">0</span>, <span class="self">self</span>.intervals[<span class="self">self</span>.intervals.len()-<span class="number">1</span>].<span class="number">1</span>, step)
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sum</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f64</span> {
-        <span class="self">self</span>.<span class="ident">sum</span>
+    <span class="kw">pub fn </span>sum(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; f64 {
+        <span class="self">self</span>.sum
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_weights</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">weights</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">intervals</span>.<span class="ident">len</span>(), <span class="ident">weights</span>.<span class="ident">len</span>());
-        <span class="self">self</span>.<span class="ident">weights</span> <span class="op">=</span> <span class="ident">weights</span>;
-        <span class="self">self</span>.<span class="ident">sum</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">weights</span>.<span class="ident">iter</span>().<span class="ident">sum</span>();
+    <span class="kw">pub fn </span>update_weights(<span class="kw-2">&amp;mut </span><span class="self">self</span>, weights: Vec&lt;f64&gt;) {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.intervals.len(), weights.len());
+        <span class="self">self</span>.weights = weights;
+        <span class="self">self</span>.sum = <span class="self">self</span>.weights.iter().sum();
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">update_intervals</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">intervals</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>) {
-        <span class="macro">assert_eq!</span>(<span class="self">self</span>.<span class="ident">weights</span>.<span class="ident">len</span>()<span class="op">+</span><span class="number">1</span>, <span class="ident">intervals</span>.<span class="ident">len</span>());
-        <span class="self">self</span>.<span class="ident">intervals</span> <span class="op">=</span> <span class="ident">auto_zip</span>(<span class="kw-2">&amp;</span><span class="ident">intervals</span>);
+    <span class="kw">pub fn </span>update_intervals(<span class="kw-2">&amp;mut </span><span class="self">self</span>, intervals: Vec&lt;f64&gt;) {
+        <span class="macro">assert_eq!</span>(<span class="self">self</span>.weights.len()+<span class="number">1</span>, intervals.len());
+        <span class="self">self</span>.intervals = auto_zip(<span class="kw-2">&amp;</span>intervals);
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">weight_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f64</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">find_interval</span>(<span class="self">self</span>.<span class="ident">intervals</span>(), <span class="ident">x</span>);
-        <span class="self">self</span>.<span class="ident">weights</span>[<span class="ident">i</span>]
+    <span class="kw">pub fn </span>weight_at(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f64) -&gt; f64 {
+        <span class="kw">let </span>i = find_interval(<span class="self">self</span>.intervals(), x);
+        <span class="self">self</span>.weights[i]
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">interval_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">f64</span>) -&gt; (<span class="ident">f64</span>, <span class="ident">f64</span>) {
-        <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="ident">find_interval</span>(<span class="self">self</span>.<span class="ident">intervals</span>(), <span class="ident">x</span>);
-        <span class="self">self</span>.<span class="ident">intervals</span>[<span class="ident">i</span>]
-    }
-}
-
-<span class="doccomment">/// Extract parameter</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ParametricDist</span> {
-    <span class="kw">type</span> <span class="ident">Parameter</span>;
-    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Parameter</span>;
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ParametricDist</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Parameter</span> <span class="op">=</span> <span class="ident">f64</span>;
-
-    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Parameter</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) =&gt; (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) =&gt; (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>(),
-        }
+    <span class="kw">pub fn </span>interval_at(<span class="kw-2">&amp;</span><span class="self">self</span>, x: f64) -&gt; (f64, f64) {
+        <span class="kw">let </span>i = find_interval(<span class="self">self</span>.intervals(), x);
+        <span class="self">self</span>.intervals[i]
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ParametricDist</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Parameter</span> <span class="op">=</span> (<span class="ident">f64</span>, <span class="ident">f64</span>);
+<span class="doccomment">/// Extract parameter
+</span><span class="kw">pub trait </span>ParametricDist {
+    <span class="kw">type </span>Parameter;
+    <span class="kw">fn </span>params(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Parameter;
+}
 
-    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Parameter</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
-            <span class="ident">Binomial</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; (<span class="kw-2">*</span><span class="ident">a</span> <span class="kw">as</span> <span class="ident">f64</span>, (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
-            <span class="ident">Normal</span>(<span class="ident">mu</span>, <span class="ident">sigma</span>) =&gt; ((<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">sigma</span>).<span class="ident">into</span>()),
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
+<span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; ParametricDist <span class="kw">for </span>OPDist&lt;T&gt; {
+    <span class="kw">type </span>Parameter = f64;
+
+    <span class="kw">fn </span>params(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Parameter {
+        <span class="kw">match </span><span class="self">self </span>{
+            Bernoulli(mu) =&gt; (<span class="kw-2">*</span>mu).into(),
+            StudentT(nu) =&gt; (<span class="kw-2">*</span>nu).into(),
         }
     }
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">ParametricDist</span> <span class="kw">for</span> <span class="ident">WeightedUniform</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Parameter</span> <span class="op">=</span> (<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span>(<span class="ident">f64</span>, <span class="ident">f64</span>)<span class="op">&gt;</span>);
+<span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; ParametricDist <span class="kw">for </span>TPDist&lt;T&gt; {
+    <span class="kw">type </span>Parameter = (f64, f64);
 
-    <span class="kw">fn</span> <span class="ident">params</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Parameter</span> {
-        <span class="kw">let</span> <span class="ident">weights</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">weights</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">x</span><span class="op">|</span> (<span class="kw-2">*</span><span class="ident">x</span>).<span class="ident">into</span>()).<span class="ident">collect</span>();
-        <span class="kw">let</span> <span class="ident">intervals</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">intervals</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">x</span>, <span class="ident">y</span>)<span class="op">|</span> ((<span class="kw-2">*</span><span class="ident">x</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">y</span>).<span class="ident">into</span>())).<span class="ident">collect</span>();
-        (<span class="ident">weights</span>, <span class="ident">intervals</span>)
+    <span class="kw">fn </span>params(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Parameter {
+        <span class="kw">match </span><span class="self">self </span>{
+            Uniform(a, b) =&gt; ((<span class="kw-2">*</span>a).into(), (<span class="kw-2">*</span>b).into()),
+            Binomial(a, b) =&gt; (<span class="kw-2">*</span>a <span class="kw">as </span>f64, (<span class="kw-2">*</span>b).into()),
+            Normal(mu, sigma) =&gt; ((<span class="kw-2">*</span>mu).into(), (<span class="kw-2">*</span>sigma).into()),
+            Beta(a, b) =&gt; ((<span class="kw-2">*</span>a).into(), (<span class="kw-2">*</span>b).into()),
+            Gamma(a, b) =&gt; ((<span class="kw-2">*</span>a).into(), (<span class="kw-2">*</span>b).into()),
+        }
     }
 }
 
-<span class="doccomment">/// Random Number Generator trait</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Methods</span>
-<span class="doccomment">/// * `sample`: extract samples</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">RNG</span> {
-    <span class="doccomment">/// Extract samples of distributions</span>
-    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
+<span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; ParametricDist <span class="kw">for </span>WeightedUniform&lt;T&gt; {
+    <span class="kw">type </span>Parameter = (Vec&lt;f64&gt;, Vec&lt;(f64, f64)&gt;);
 
-    <span class="doccomment">/// Probability Distribution Function</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Type</span>
-    <span class="doccomment">/// `f64 -&gt; f64`</span>
-    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) -&gt; <span class="ident">f64</span>;
-
-    <span class="doccomment">/// Cumulative Distribution Function</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Type</span>
-    <span class="doccomment">/// `f64` -&gt; `f64`</span>
-    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) -&gt; <span class="ident">f64</span>;
+    <span class="kw">fn </span>params(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Parameter {
+        <span class="kw">let </span>weights = <span class="self">self</span>.weights.iter().map(|x| (<span class="kw-2">*</span>x).into()).collect();
+        <span class="kw">let </span>intervals = <span class="self">self</span>.intervals.iter().map(|(x, y)| ((<span class="kw-2">*</span>x).into(), (<span class="kw-2">*</span>y).into())).collect();
+        (weights, intervals)
+    }
 }
 
-<span class="doccomment">/// RNG for OPDist</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">RNG</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">prob</span>) =&gt; {
+<span class="doccomment">/// Random Number Generator trait
+///
+/// # Methods
+/// * `sample`: extract samples
+</span><span class="kw">pub trait </span>RNG {
+    <span class="doccomment">/// Extract samples of distributions
+    </span><span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt;;
+
+    <span class="doccomment">/// Probability Distribution Function
+    ///
+    /// # Type
+    /// `f64 -&gt; f64`
+    </span><span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64;
+
+    <span class="doccomment">/// Cumulative Distribution Function
+    ///
+    /// # Type
+    /// `f64` -&gt; `f64`
+    </span><span class="kw">fn </span>cdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64;
+}
+
+<span class="doccomment">/// RNG for OPDist
+</span><span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; RNG <span class="kw">for </span>OPDist&lt;T&gt; {
+    <span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
+        <span class="kw">match </span><span class="self">self </span>{
+            Bernoulli(prob) =&gt; {
                 <span class="macro">assert!</span>(
-                    (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="number">1f64</span>,
-                    <span class="string">&quot;Probability should be smaller than 1&quot;</span>
-                );
+                    (<span class="kw-2">*</span>prob).into() &lt;= <span class="number">1f64</span>,
+                    <span class="string">&quot;Probability should be smaller than 1&quot;
+                </span>);
 
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
+                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+                <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
 
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-                    <span class="kw">let</span> <span class="ident">uniform</span> <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>..<span class="op">=</span><span class="number">1f64</span>);
-                    <span class="kw">if</span> <span class="ident">uniform</span> <span class="op">&lt;</span><span class="op">=</span> (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>() {
-                        <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="number">1f64</span>;
-                    } <span class="kw">else</span> {
-                        <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="number">0f64</span>;
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+                    <span class="kw">let </span>uniform = rng.gen_range(<span class="number">0f64</span>..=<span class="number">1f64</span>);
+                    <span class="kw">if </span>uniform &lt;= (<span class="kw-2">*</span>prob).into() {
+                        v[i] = <span class="number">1f64</span>;
+                    } <span class="kw">else </span>{
+                        v[i] = <span class="number">0f64</span>;
                     }
                 }
-                <span class="ident">v</span>
+                v
             }
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="ident">stud</span> <span class="op">=</span> <span class="ident">rand_distr::StudentT</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="ident">::new</span>((<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
-                <span class="ident">stud</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
-            }
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">prob</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">x</span>.<span class="ident">into</span>() <span class="op">==</span> <span class="number">1f64</span> {
-                    (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>()
-                } <span class="kw">else</span> {
-                    <span class="number">1f64</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>()
-                }
-            }
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">dof</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-                <span class="number">1f64</span> <span class="op">/</span> (<span class="ident">dof</span>.<span class="ident">sqrt</span>() <span class="op">*</span> <span class="ident">beta</span>(<span class="number">0.5f64</span>, <span class="ident">dof</span> <span class="op">/</span> <span class="number">2f64</span>))
-                    <span class="op">*</span> (<span class="number">1f64</span> <span class="op">+</span> <span class="ident">t</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="ident">dof</span>).<span class="ident">powf</span>(<span class="op">-</span>(<span class="ident">dof</span> <span class="op">+</span> <span class="number">1f64</span>) <span class="op">/</span> <span class="number">2f64</span>)
+            StudentT(nu) =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+                <span class="kw">let </span>stud = rand_distr::StudentT::&lt;f64&gt;::new((<span class="kw-2">*</span>nu).into()).unwrap();
+                stud.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect()
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">prob</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">k</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-                <span class="kw">if</span> <span class="ident">k</span> <span class="op">&lt;</span> <span class="number">0f64</span> {
-                    <span class="number">0f64</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">k</span> <span class="op">&lt;</span> <span class="number">1f64</span> {
-                    <span class="number">1f64</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">prob</span>).<span class="ident">into</span>()
-                } <span class="kw">else</span> {
-                    <span class="number">1f64</span>
+    <span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
+        <span class="kw">match </span><span class="self">self </span>{
+            Bernoulli(prob) =&gt; {
+                <span class="kw">if </span>x.into() == <span class="number">1f64 </span>{
+                    (<span class="kw-2">*</span>prob).into()
+                } <span class="kw">else </span>{
+                    <span class="number">1f64 </span>- (<span class="kw-2">*</span>prob).into()
                 }
             }
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">nu</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">_odd_nu</span> <span class="op">=</span> (<span class="ident">nu</span> <span class="op">+</span> <span class="number">1f64</span>) <span class="op">/</span> <span class="number">2f64</span>;
-                <span class="kw">let</span> <span class="ident">even_nu</span> <span class="op">=</span> <span class="ident">nu</span> <span class="op">/</span> <span class="number">2f64</span>;
+            StudentT(nu) =&gt; {
+                <span class="kw">let </span>dof = (<span class="kw-2">*</span>nu).into();
+                <span class="kw">let </span>t = x.into();
+                <span class="number">1f64 </span>/ (dof.sqrt() * beta(<span class="number">0.5f64</span>, dof / <span class="number">2f64</span>))
+                    * (<span class="number">1f64 </span>+ t.powi(<span class="number">2</span>) / dof).powf(-(dof + <span class="number">1f64</span>) / <span class="number">2f64</span>)
+            }
+        }
+    }
 
-                <span class="kw">if</span> <span class="ident">x</span> <span class="op">&gt;</span> <span class="number">0f64</span> {
-                    <span class="kw">let</span> <span class="ident">x_t</span> <span class="op">=</span> <span class="ident">nu</span> <span class="op">/</span> (<span class="ident">x</span>.<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">+</span> <span class="ident">nu</span>);
-                    <span class="number">1f64</span> <span class="op">-</span> <span class="number">0.5</span> <span class="op">*</span> <span class="ident">inc_beta</span>(<span class="ident">even_nu</span>, <span class="number">0.5</span>, <span class="ident">x_t</span>)
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="number">0f64</span> {
-                    <span class="self">self</span>.<span class="ident">cdf</span>(<span class="op">-</span><span class="ident">x</span>) <span class="op">-</span> <span class="number">0.5</span>
-                } <span class="kw">else</span> {
-                    <span class="number">0.5</span>
+    <span class="kw">fn </span>cdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
+        <span class="kw">match </span><span class="self">self </span>{
+            Bernoulli(prob) =&gt; {
+                <span class="kw">let </span>k: f64 = x.into();
+                <span class="kw">if </span>k &lt; <span class="number">0f64 </span>{
+                    <span class="number">0f64
+                </span>} <span class="kw">else if </span>k &lt; <span class="number">1f64 </span>{
+                    <span class="number">1f64 </span>- (<span class="kw-2">*</span>prob).into()
+                } <span class="kw">else </span>{
+                    <span class="number">1f64
+                </span>}
+            }
+            StudentT(nu) =&gt; {
+                <span class="kw">let </span>x: f64 = x.into();
+                <span class="kw">let </span>nu: f64 = (<span class="kw-2">*</span>nu).into();
+                <span class="kw">let </span>_odd_nu = (nu + <span class="number">1f64</span>) / <span class="number">2f64</span>;
+                <span class="kw">let </span>even_nu = nu / <span class="number">2f64</span>;
+
+                <span class="kw">if </span>x &gt; <span class="number">0f64 </span>{
+                    <span class="kw">let </span>x_t = nu / (x.powi(<span class="number">2</span>) + nu);
+                    <span class="number">1f64 </span>- <span class="number">0.5 </span>* inc_beta(even_nu, <span class="number">0.5</span>, x_t)
+                } <span class="kw">else if </span>x &lt; <span class="number">0f64 </span>{
+                    <span class="self">self</span>.cdf(-x) - <span class="number">0.5
+                </span>} <span class="kw">else </span>{
+                    <span class="number">0.5
+                </span>}
+                <span class="comment">// 0.5f64 + x * gamma(odd_nu) * hyp2f1(0.5, odd_nu, 1.5, -x.powi(2) / (*nu).into()) / (PI * (*nu).into()).sqrt() * gamma(even_nu)
+            </span>}
+        }
+    }
+}
+
+<span class="doccomment">/// RNG for TPDist
+</span><span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; RNG <span class="kw">for </span>TPDist&lt;T&gt; {
+    <span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
+        <span class="kw">match </span><span class="self">self </span>{
+            Uniform(start, end) =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+                <span class="kw">let </span><span class="kw-2">mut </span>v = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+
+                <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+                    v[i] = rng.gen_range(<span class="kw-2">*</span>start..=<span class="kw-2">*</span>end).into();
                 }
-                <span class="comment">// 0.5f64 + x * gamma(odd_nu) * hyp2f1(0.5, odd_nu, 1.5, -x.powi(2) / (*nu).into()) / (PI * (*nu).into()).sqrt() * gamma(even_nu)</span>
+                v
+            }
+
+            Binomial(num, mu) =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+                <span class="kw">let </span>binom = rand_distr::Binomial::new(<span class="kw-2">*</span>num <span class="kw">as </span>u64, (<span class="kw-2">*</span>mu).into()).unwrap();
+                binom
+                    .sample_iter(<span class="kw-2">&amp;mut </span>rng)
+                    .take(n)
+                    .map(|t| t <span class="kw">as </span>f64)
+                    .collect()
+            }
+
+            Normal(m, s) =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+                <span class="kw">let </span>normal = rand_distr::Normal::&lt;f64&gt;::new((<span class="kw-2">*</span>m).into(), (<span class="kw-2">*</span>s).into()).unwrap();
+                normal.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect()
+            }
+            <span class="comment">//            Normal(m, s) =&gt; {
+            //                let mut rng = thread_rng();
+            //                let mut v = vec![0f64; n];
+            //
+            //                for i in 0..n {
+            //                    v[i] = ziggurat(&amp;mut rng, (*s).into()) + (*m).into();
+            //                }
+            //                v
+            //            }
+            </span>Beta(a, b) =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+                <span class="kw">let </span>beta = rand_distr::Beta::&lt;f64&gt;::new((<span class="kw-2">*</span>a).into(), (<span class="kw-2">*</span>b).into()).unwrap();
+                beta.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect()
+            }
+            <span class="comment">//            Beta(a, b) =&gt; {
+            //                let mut rng1 = thread_rng();
+            //                let mut rng2 = thread_rng();
+            //                let mut v = vec![0f64; n];
+            //
+            //                let a_f64 = (*a).into();
+            //                let b_f64 = (*b).into();
+            //
+            //                // For acceptance-rejection method
+            //                let c_x = (a_f64 - 1f64) / (a_f64 + b_f64 - 2f64);
+            //                let c = self.pdf(c_x); // Beta(mode(x) | a, b)
+            //
+            //                let mut iter_num = 0usize;
+            //
+            //                while iter_num &lt; n {
+            //                    let u1 = rng1.gen_range(0f64, 1f64);
+            //                    let u2 = rng2.gen_range(0f64, 1f64);
+            //
+            //                    if u2 &lt;= 1f64 / c * self.pdf(u1) {
+            //                        v[iter_num] = u1;
+            //                        iter_num += 1;
+            //                    }
+            //                }
+            //                v
+            //            }
+            </span>Gamma(shape, scale) =&gt; {
+                <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+                <span class="kw">let </span>gamma =
+                    rand_distr::Gamma::&lt;f64&gt;::new((<span class="kw-2">*</span>shape).into(), (<span class="kw-2">*</span>scale).into()).unwrap();
+                gamma.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect()
+            } <span class="comment">//            Gamma(a, b) =&gt; {
+              //                let a_f64 = (*a).into();
+              //                let b_f64 = (*b).into();
+              //
+              //                // for Marsaglia &amp; Tsang&#39;s Method
+              //                let d = a_f64 - 1f64 / 3f64;
+              //                let c = 1f64 / (9f64 * d).sqrt();
+              //
+              //                let mut rng1 = thread_rng();
+              //                let mut rng2 = thread_rng();
+              //
+              //                let mut v = vec![0f64; n];
+              //                let mut iter_num = 0usize;
+              //
+              //                while iter_num &lt; n {
+              //                    let u = rng1.gen_range(0f64, 1f64);
+              //                    let z = ziggurat(&amp;mut rng2, 1f64);
+              //                    let w = (1f64 + c * z).powi(3);
+              //
+              //                    if z &gt;= -1f64 / c &amp;&amp; u.ln() &lt; 0.5 * z.powi(2) + d - d * w + d * w.ln() {
+              //                        v[iter_num] = d * w / b_f64;
+              //                        iter_num += 1;
+              //                    }
+              //                }
+              //                v
+              //            }
+        </span>}
+    }
+
+    <span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
+        <span class="kw">match </span><span class="self">self </span>{
+            Uniform(a, b) =&gt; {
+                <span class="kw">let </span>val = x.into();
+                <span class="kw">let </span>a_f64 = (<span class="kw-2">*</span>a).into();
+                <span class="kw">let </span>b_f64 = (<span class="kw-2">*</span>b).into();
+                <span class="kw">if </span>val &gt;= a_f64 &amp;&amp; val &lt;= b_f64 {
+                    <span class="kw">let </span>length = b_f64 - a_f64;
+                    <span class="number">1f64 </span>/ length
+                } <span class="kw">else </span>{
+                    <span class="number">0f64
+                </span>}
+            }
+            Binomial(n, mu) =&gt; {
+                <span class="kw">let </span>n = <span class="kw-2">*</span>n;
+                <span class="kw">let </span>mu = (<span class="kw-2">*</span>mu).into();
+                <span class="kw">let </span>m = x.into() <span class="kw">as </span>usize;
+                (C(n, m) <span class="kw">as </span>f64) * mu.powi(m <span class="kw">as </span>i32) * (<span class="number">1f64 </span>- mu).powi((n - m) <span class="kw">as </span>i32)
+            }
+            Normal(m, s) =&gt; {
+                <span class="kw">let </span>mean = (<span class="kw-2">*</span>m).into();
+                <span class="kw">let </span>std = (<span class="kw-2">*</span>s).into();
+                gaussian(x.into(), mean, std)
+            }
+            Beta(a, b) =&gt; {
+                <span class="kw">let </span>a_f64 = (<span class="kw-2">*</span>a).into();
+                <span class="kw">let </span>b_f64 = (<span class="kw-2">*</span>b).into();
+                <span class="number">1f64 </span>/ beta(a_f64, b_f64)
+                    * x.into().powf(a_f64 - <span class="number">1f64</span>)
+                    * (<span class="number">1f64 </span>- x.into()).powf(b_f64 - <span class="number">1f64</span>)
+            }
+            Gamma(a, b) =&gt; {
+                <span class="kw">let </span>a_f64 = (<span class="kw-2">*</span>a).into();
+                <span class="kw">let </span>b_f64 = (<span class="kw-2">*</span>b).into();
+                <span class="number">1f64 </span>/ gamma(a_f64)
+                    * b_f64.powf(a_f64)
+                    * x.into().powf(a_f64 - <span class="number">1f64</span>)
+                    * E.powf(-b_f64 * x.into())
+            }
+        }
+    }
+
+    <span class="kw">fn </span>cdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
+        <span class="kw">let </span>x: f64 = x.into();
+        <span class="kw">match </span><span class="self">self </span>{
+            Uniform(a, b) =&gt; {
+                <span class="kw">let </span>a: f64 = (<span class="kw-2">*</span>a).into();
+                <span class="kw">let </span>b: f64 = (<span class="kw-2">*</span>b).into();
+
+                <span class="kw">if </span>x &lt; a {
+                    <span class="number">0f64
+                </span>} <span class="kw">else if </span>x &lt;= b {
+                    (x - a) / (b - a)
+                } <span class="kw">else </span>{
+                    <span class="number">1f64
+                </span>}
+            }
+            Binomial(n, mu) =&gt; {
+                <span class="kw">let </span>n = <span class="kw-2">*</span>n;
+                <span class="kw">let </span>p = (<span class="kw-2">*</span>mu).into();
+                <span class="kw">let </span>q = <span class="number">1f64 </span>- p;
+                <span class="kw">let </span>k: f64 = x.into();
+                inc_beta(n <span class="kw">as </span>f64 - k, k + <span class="number">1f64</span>, q)
+            }
+            Normal(m, s) =&gt; phi((x - (<span class="kw-2">*</span>m).into()) / (<span class="kw-2">*</span>s).into()),
+            Beta(a, b) =&gt; {
+                <span class="kw">let </span>a: f64 = (<span class="kw-2">*</span>a).into();
+                <span class="kw">let </span>b: f64 = (<span class="kw-2">*</span>b).into();
+
+                inc_beta(a, b, x)
+            }
+            Gamma(a, b) =&gt; {
+                <span class="kw">let </span>a: f64 = (<span class="kw-2">*</span>a).into();
+                <span class="kw">let </span>b: f64 = (<span class="kw-2">*</span>b).into();
+
+                inc_gamma(a, b * x)
             }
         }
     }
 }
 
-<span class="doccomment">/// RNG for TPDist</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">RNG</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">start</span>, <span class="ident">end</span>) =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
+<span class="kw">impl </span>RNG <span class="kw">for </span>WeightedUniform&lt;f64&gt; {
+    <span class="kw">fn </span>sample(<span class="kw-2">&amp;</span><span class="self">self</span>, n: usize) -&gt; Vec&lt;f64&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+        <span class="kw">let </span>w = WeightedAliasIndex::new(<span class="self">self</span>.weights.clone()).unwrap();
+        <span class="kw">let </span>ics: Vec&lt;usize&gt; = w.sample_iter(<span class="kw-2">&amp;mut </span>rng).take(n).collect();
 
-                <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-                    <span class="ident">v</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="kw-2">*</span><span class="ident">start</span>..<span class="op">=</span><span class="kw-2">*</span><span class="ident">end</span>).<span class="ident">into</span>();
-                }
-                <span class="ident">v</span>
-            }
-
-            <span class="ident">Binomial</span>(<span class="ident">num</span>, <span class="ident">mu</span>) =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="ident">binom</span> <span class="op">=</span> <span class="ident">rand_distr::Binomial::new</span>(<span class="kw-2">*</span><span class="ident">num</span> <span class="kw">as</span> <span class="ident">u64</span>, (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
-                <span class="ident">binom</span>
-                    .<span class="ident">sample_iter</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>)
-                    .<span class="ident">take</span>(<span class="ident">n</span>)
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span> <span class="kw">as</span> <span class="ident">f64</span>)
-                    .<span class="ident">collect</span>()
-            }
-
-            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="ident">normal</span> <span class="op">=</span> <span class="ident">rand_distr::Normal</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="ident">::new</span>((<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
-                <span class="ident">normal</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
-            }
-            <span class="comment">//            Normal(m, s) =&gt; {</span>
-            <span class="comment">//                let mut rng = thread_rng();</span>
-            <span class="comment">//                let mut v = vec![0f64; n];</span>
-            <span class="comment">//</span>
-            <span class="comment">//                for i in 0..n {</span>
-            <span class="comment">//                    v[i] = ziggurat(&amp;mut rng, (*s).into()) + (*m).into();</span>
-            <span class="comment">//                }</span>
-            <span class="comment">//                v</span>
-            <span class="comment">//            }</span>
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="ident">beta</span> <span class="op">=</span> <span class="ident">rand_distr::Beta</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="ident">::new</span>((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
-                <span class="ident">beta</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
-            }
-            <span class="comment">//            Beta(a, b) =&gt; {</span>
-            <span class="comment">//                let mut rng1 = thread_rng();</span>
-            <span class="comment">//                let mut rng2 = thread_rng();</span>
-            <span class="comment">//                let mut v = vec![0f64; n];</span>
-            <span class="comment">//</span>
-            <span class="comment">//                let a_f64 = (*a).into();</span>
-            <span class="comment">//                let b_f64 = (*b).into();</span>
-            <span class="comment">//</span>
-            <span class="comment">//                // For acceptance-rejection method</span>
-            <span class="comment">//                let c_x = (a_f64 - 1f64) / (a_f64 + b_f64 - 2f64);</span>
-            <span class="comment">//                let c = self.pdf(c_x); // Beta(mode(x) | a, b)</span>
-            <span class="comment">//</span>
-            <span class="comment">//                let mut iter_num = 0usize;</span>
-            <span class="comment">//</span>
-            <span class="comment">//                while iter_num &lt; n {</span>
-            <span class="comment">//                    let u1 = rng1.gen_range(0f64, 1f64);</span>
-            <span class="comment">//                    let u2 = rng2.gen_range(0f64, 1f64);</span>
-            <span class="comment">//</span>
-            <span class="comment">//                    if u2 &lt;= 1f64 / c * self.pdf(u1) {</span>
-            <span class="comment">//                        v[iter_num] = u1;</span>
-            <span class="comment">//                        iter_num += 1;</span>
-            <span class="comment">//                    }</span>
-            <span class="comment">//                }</span>
-            <span class="comment">//                v</span>
-            <span class="comment">//            }</span>
-            <span class="ident">Gamma</span>(<span class="ident">shape</span>, <span class="ident">scale</span>) =&gt; {
-                <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-                <span class="kw">let</span> <span class="ident">gamma</span> <span class="op">=</span>
-                    <span class="ident">rand_distr::Gamma</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="ident">::new</span>((<span class="kw-2">*</span><span class="ident">shape</span>).<span class="ident">into</span>(), (<span class="kw-2">*</span><span class="ident">scale</span>).<span class="ident">into</span>()).<span class="ident">unwrap</span>();
-                <span class="ident">gamma</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>()
-            } <span class="comment">//            Gamma(a, b) =&gt; {</span>
-              <span class="comment">//                let a_f64 = (*a).into();</span>
-              <span class="comment">//                let b_f64 = (*b).into();</span>
-              <span class="comment">//</span>
-              <span class="comment">//                // for Marsaglia &amp; Tsang&#39;s Method</span>
-              <span class="comment">//                let d = a_f64 - 1f64 / 3f64;</span>
-              <span class="comment">//                let c = 1f64 / (9f64 * d).sqrt();</span>
-              <span class="comment">//</span>
-              <span class="comment">//                let mut rng1 = thread_rng();</span>
-              <span class="comment">//                let mut rng2 = thread_rng();</span>
-              <span class="comment">//</span>
-              <span class="comment">//                let mut v = vec![0f64; n];</span>
-              <span class="comment">//                let mut iter_num = 0usize;</span>
-              <span class="comment">//</span>
-              <span class="comment">//                while iter_num &lt; n {</span>
-              <span class="comment">//                    let u = rng1.gen_range(0f64, 1f64);</span>
-              <span class="comment">//                    let z = ziggurat(&amp;mut rng2, 1f64);</span>
-              <span class="comment">//                    let w = (1f64 + c * z).powi(3);</span>
-              <span class="comment">//</span>
-              <span class="comment">//                    if z &gt;= -1f64 / c &amp;&amp; u.ln() &lt; 0.5 * z.powi(2) + d - d * w + d * w.ln() {</span>
-              <span class="comment">//                        v[iter_num] = d * w / b_f64;</span>
-              <span class="comment">//                        iter_num += 1;</span>
-              <span class="comment">//                    }</span>
-              <span class="comment">//                }</span>
-              <span class="comment">//                v</span>
-              <span class="comment">//            }</span>
+        <span class="kw">let </span><span class="kw-2">mut </span>result = <span class="macro">vec!</span>[<span class="number">0f64</span>; n];
+        <span class="kw">for </span>(i, idx) <span class="kw">in </span>ics.into_iter().enumerate() {
+            <span class="kw">let </span>(l, r) = <span class="self">self</span>.intervals[idx];
+            result[i] = rng.gen_range(l ..=r);
         }
+        result
     }
 
-    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">val</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-                <span class="kw">if</span> <span class="ident">val</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">a_f64</span> <span class="op">&amp;&amp;</span> <span class="ident">val</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">b_f64</span> {
-                    <span class="kw">let</span> <span class="ident">length</span> <span class="op">=</span> <span class="ident">b_f64</span> <span class="op">-</span> <span class="ident">a_f64</span>;
-                    <span class="number">1f64</span> <span class="op">/</span> <span class="ident">length</span>
-                } <span class="kw">else</span> {
-                    <span class="number">0f64</span>
-                }
-            }
-            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">n</span>;
-                <span class="kw">let</span> <span class="ident">mu</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>() <span class="kw">as</span> <span class="ident">usize</span>;
-                (<span class="ident">C</span>(<span class="ident">n</span>, <span class="ident">m</span>) <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> <span class="ident">mu</span>.<span class="ident">powi</span>(<span class="ident">m</span> <span class="kw">as</span> <span class="ident">i32</span>) <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> <span class="ident">mu</span>).<span class="ident">powi</span>((<span class="ident">n</span> <span class="op">-</span> <span class="ident">m</span>) <span class="kw">as</span> <span class="ident">i32</span>)
-            }
-            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">mean</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">std</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>();
-                <span class="ident">gaussian</span>(<span class="ident">x</span>.<span class="ident">into</span>(), <span class="ident">mean</span>, <span class="ident">std</span>)
-            }
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-                <span class="number">1f64</span> <span class="op">/</span> <span class="ident">beta</span>(<span class="ident">a_f64</span>, <span class="ident">b_f64</span>)
-                    <span class="op">*</span> <span class="ident">x</span>.<span class="ident">into</span>().<span class="ident">powf</span>(<span class="ident">a_f64</span> <span class="op">-</span> <span class="number">1f64</span>)
-                    <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> <span class="ident">x</span>.<span class="ident">into</span>()).<span class="ident">powf</span>(<span class="ident">b_f64</span> <span class="op">-</span> <span class="number">1f64</span>)
-            }
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-                <span class="number">1f64</span> <span class="op">/</span> <span class="ident">gamma</span>(<span class="ident">a_f64</span>)
-                    <span class="op">*</span> <span class="ident">b_f64</span>.<span class="ident">powf</span>(<span class="ident">a_f64</span>)
-                    <span class="op">*</span> <span class="ident">x</span>.<span class="ident">into</span>().<span class="ident">powf</span>(<span class="ident">a_f64</span> <span class="op">-</span> <span class="number">1f64</span>)
-                    <span class="op">*</span> <span class="ident">E</span>.<span class="ident">powf</span>(<span class="op">-</span><span class="ident">b_f64</span> <span class="op">*</span> <span class="ident">x</span>.<span class="ident">into</span>())
-            }
-        }
+    <span class="kw">fn </span>pdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
+        <span class="kw">let </span>x: f64 = x.into();
+        <span class="kw">let </span>idx = find_interval(<span class="self">self</span>.intervals(), x);
+        <span class="self">self</span>.weights[idx] / <span class="self">self</span>.sum
     }
 
-    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">a</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">b</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-
-                <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="ident">a</span> {
-                    <span class="number">0f64</span>
-                } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">x</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">b</span> {
-                    (<span class="ident">x</span> <span class="op">-</span> <span class="ident">a</span>) <span class="op">/</span> (<span class="ident">b</span> <span class="op">-</span> <span class="ident">a</span>)
-                } <span class="kw">else</span> {
-                    <span class="number">1f64</span>
-                }
-            }
-            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">n</span>;
-                <span class="kw">let</span> <span class="ident">p</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">q</span> <span class="op">=</span> <span class="number">1f64</span> <span class="op">-</span> <span class="ident">p</span>;
-                <span class="kw">let</span> <span class="ident">k</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-                <span class="ident">inc_beta</span>(<span class="ident">n</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">-</span> <span class="ident">k</span>, <span class="ident">k</span> <span class="op">+</span> <span class="number">1f64</span>, <span class="ident">q</span>)
-            }
-            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">s</span>) =&gt; <span class="ident">phi</span>((<span class="ident">x</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>()) <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>()),
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">a</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">b</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-
-                <span class="ident">inc_beta</span>(<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">x</span>)
-            }
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">a</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">b</span>: <span class="ident">f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-
-                <span class="ident">inc_gamma</span>(<span class="ident">a</span>, <span class="ident">b</span> <span class="op">*</span> <span class="ident">x</span>)
-            }
-        }
+    <span class="kw">fn </span>cdf&lt;S: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, x: S) -&gt; f64 {
+        <span class="kw">let </span>x: f64 = x.into();
+        <span class="kw">let </span>idx = find_interval(<span class="self">self</span>.intervals(), x);
+        <span class="self">self</span>.weights[<span class="number">0 </span>..=idx].iter().sum::&lt;f64&gt;() / <span class="self">self</span>.sum
     }
 }
 
-<span class="kw">impl</span> <span class="ident">RNG</span> <span class="kw">for</span> <span class="ident">WeightedUniform</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">sample</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-        <span class="kw">let</span> <span class="ident">w</span> <span class="op">=</span> <span class="ident">WeightedAliasIndex::new</span>(<span class="self">self</span>.<span class="ident">weights</span>.<span class="ident">clone</span>()).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">ics</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">w</span>.<span class="ident">sample_iter</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rng</span>).<span class="ident">take</span>(<span class="ident">n</span>).<span class="ident">collect</span>();
+<span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; Statistics <span class="kw">for </span>OPDist&lt;T&gt; {
+    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
+    <span class="kw">type </span>Value = f64;
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span>];
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">idx</span>) <span class="kw">in</span> <span class="ident">ics</span>.<span class="ident">into_iter</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">let</span> (<span class="ident">l</span>, <span class="ident">r</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">intervals</span>[<span class="ident">idx</span>];
-            <span class="ident">result</span>[<span class="ident">i</span>] <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="ident">l</span> ..<span class="op">=</span><span class="ident">r</span>);
-        }
-        <span class="ident">result</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">pdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">find_interval</span>(<span class="self">self</span>.<span class="ident">intervals</span>(), <span class="ident">x</span>);
-        <span class="self">self</span>.<span class="ident">weights</span>[<span class="ident">idx</span>] <span class="op">/</span> <span class="self">self</span>.<span class="ident">sum</span>
-    }
-
-    <span class="kw">fn</span> <span class="ident">cdf</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">S</span>) -&gt; <span class="ident">f64</span> {
-        <span class="kw">let</span> <span class="ident">x</span>: <span class="ident">f64</span> <span class="op">=</span> <span class="ident">x</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">idx</span> <span class="op">=</span> <span class="ident">find_interval</span>(<span class="self">self</span>.<span class="ident">intervals</span>(), <span class="ident">x</span>);
-        <span class="self">self</span>.<span class="ident">weights</span>[<span class="number">0</span> ..<span class="op">=</span><span class="ident">idx</span>].<span class="ident">iter</span>().<span class="ident">sum</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">sum</span>
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Statistics</span> <span class="kw">for</span> <span class="ident">OPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Array</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">f64</span>;
-
-    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) =&gt; (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
-            <span class="ident">StudentT</span>(<span class="kw">_</span>) =&gt; <span class="number">0f64</span>,
+    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+        <span class="kw">match </span><span class="self">self </span>{
+            Bernoulli(mu) =&gt; (<span class="kw-2">*</span>mu).into(),
+            StudentT(<span class="kw">_</span>) =&gt; <span class="number">0f64</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">mu</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">mu_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>();
-                <span class="ident">mu_f64</span> <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> <span class="ident">mu_f64</span>)
+    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+        <span class="kw">match </span><span class="self">self </span>{
+            Bernoulli(mu) =&gt; {
+                <span class="kw">let </span>mu_f64 = (<span class="kw-2">*</span>mu).into();
+                mu_f64 * (<span class="number">1f64 </span>- mu_f64)
             }
-            <span class="ident">StudentT</span>(<span class="ident">nu</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">nu_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">nu</span>).<span class="ident">into</span>();
-                <span class="ident">nu_f64</span> <span class="op">/</span> (<span class="ident">nu_f64</span> <span class="op">-</span> <span class="number">2f64</span>)
+            StudentT(nu) =&gt; {
+                <span class="kw">let </span>nu_f64 = (<span class="kw-2">*</span>nu).into();
+                nu_f64 / (nu_f64 - <span class="number">2f64</span>)
             }
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Bernoulli</span>(<span class="ident">_mu</span>) =&gt; <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
-            <span class="ident">StudentT</span>(<span class="ident">_nu</span>) =&gt; <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
+    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+        <span class="kw">match </span><span class="self">self </span>{
+            Bernoulli(_mu) =&gt; <span class="self">self</span>.var().sqrt(),
+            StudentT(_nu) =&gt; <span class="self">self</span>.var().sqrt(),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span> {
+    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span> {
-        <span class="macro">unimplemented!</span>()
-    }
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">PartialOrd</span> <span class="op">+</span> <span class="ident">SampleUniform</span> <span class="op">+</span> <span class="ident">Copy</span> <span class="op">+</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">Statistics</span> <span class="kw">for</span> <span class="ident">TPDist</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Array</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">f64</span>;
-
-    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">+</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()) <span class="op">/</span> <span class="number">2f64</span>,
-            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) =&gt; (<span class="kw-2">*</span><span class="ident">n</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>(),
-            <span class="ident">Normal</span>(<span class="ident">m</span>, <span class="ident">_s</span>) =&gt; (<span class="kw-2">*</span><span class="ident">m</span>).<span class="ident">into</span>(),
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">/</span> ((<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">+</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>()),
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>(),
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; ((<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>() <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>()).<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">/</span> <span class="number">12f64</span>,
-            <span class="ident">Binomial</span>(<span class="ident">n</span>, <span class="ident">mu</span>) =&gt; (<span class="kw-2">*</span><span class="ident">n</span> <span class="kw">as</span> <span class="ident">f64</span>) <span class="op">*</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>() <span class="op">*</span> (<span class="number">1f64</span> <span class="op">-</span> (<span class="kw-2">*</span><span class="ident">mu</span>).<span class="ident">into</span>()),
-            <span class="ident">Normal</span>(<span class="ident">_m</span>, <span class="ident">s</span>) =&gt; (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>().<span class="ident">powi</span>(<span class="number">2</span>),
-            <span class="ident">Beta</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; {
-                <span class="kw">let</span> <span class="ident">a_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>();
-                <span class="kw">let</span> <span class="ident">b_f64</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>();
-                <span class="ident">a_f64</span> <span class="op">*</span> <span class="ident">b_f64</span> <span class="op">/</span> ((<span class="ident">a_f64</span> <span class="op">+</span> <span class="ident">b_f64</span>).<span class="ident">powi</span>(<span class="number">2</span>) <span class="op">*</span> (<span class="ident">a_f64</span> <span class="op">+</span> <span class="ident">b_f64</span> <span class="op">+</span> <span class="number">1f64</span>))
-            }
-            <span class="ident">Gamma</span>(<span class="ident">a</span>, <span class="ident">b</span>) =&gt; (<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">into</span>() <span class="op">/</span> (<span class="kw-2">*</span><span class="ident">b</span>).<span class="ident">into</span>().<span class="ident">powi</span>(<span class="number">2</span>),
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
-        <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">Uniform</span>(<span class="ident">_a</span>, <span class="ident">_b</span>) =&gt; <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
-            <span class="ident">Binomial</span>(<span class="ident">_n</span>, <span class="ident">_mu</span>) =&gt; <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
-            <span class="ident">Normal</span>(<span class="ident">_m</span>, <span class="ident">s</span>) =&gt; (<span class="kw-2">*</span><span class="ident">s</span>).<span class="ident">into</span>(),
-            <span class="ident">Beta</span>(<span class="ident">_a</span>, <span class="ident">_b</span>) =&gt; <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
-            <span class="ident">Gamma</span>(<span class="ident">_a</span>, <span class="ident">_b</span>) =&gt; <span class="self">self</span>.<span class="ident">var</span>().<span class="ident">sqrt</span>(),
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span> {
-        <span class="macro">unimplemented!</span>()
-    }
-
-    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span> {
+    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
         <span class="macro">unimplemented!</span>()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Statistics</span> <span class="kw">for</span> <span class="ident">WeightedUniform</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Array</span> <span class="op">=</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">Value</span> <span class="op">=</span> <span class="ident">f64</span>;
+<span class="kw">impl</span>&lt;T: PartialOrd + SampleUniform + Copy + Into&lt;f64&gt;&gt; Statistics <span class="kw">for </span>TPDist&lt;T&gt; {
+    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
+    <span class="kw">type </span>Value = f64;
 
-    <span class="kw">fn</span> <span class="ident">mean</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
-        <span class="self">self</span>.<span class="ident">intervals</span>().<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="self">self</span>.<span class="ident">weights</span>().<span class="ident">iter</span>())
-            .<span class="ident">map</span>(<span class="op">|</span>((<span class="ident">l</span>, <span class="ident">r</span>), <span class="ident">w</span>)<span class="op">|</span> (<span class="ident">l</span><span class="op">+</span><span class="ident">r</span>)<span class="op">/</span><span class="number">2f64</span> <span class="op">*</span> <span class="ident">w</span>)
-            .<span class="ident">sum</span>::<span class="op">&lt;</span><span class="ident">f64</span><span class="op">&gt;</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">sum</span>
+    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+        <span class="kw">match </span><span class="self">self </span>{
+            Uniform(a, b) =&gt; ((<span class="kw-2">*</span>a).into() + (<span class="kw-2">*</span>b).into()) / <span class="number">2f64</span>,
+            Binomial(n, mu) =&gt; (<span class="kw-2">*</span>n <span class="kw">as </span>f64) * (<span class="kw-2">*</span>mu).into(),
+            Normal(m, _s) =&gt; (<span class="kw-2">*</span>m).into(),
+            Beta(a, b) =&gt; (<span class="kw-2">*</span>a).into() / ((<span class="kw-2">*</span>a).into() + (<span class="kw-2">*</span>b).into()),
+            Gamma(a, b) =&gt; (<span class="kw-2">*</span>a).into() / (<span class="kw-2">*</span>b).into(),
+        }
     }
 
-    <span class="kw">fn</span> <span class="ident">var</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
+    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+        <span class="kw">match </span><span class="self">self </span>{
+            Uniform(a, b) =&gt; ((<span class="kw-2">*</span>b).into() - (<span class="kw-2">*</span>a).into()).powi(<span class="number">2</span>) / <span class="number">12f64</span>,
+            Binomial(n, mu) =&gt; (<span class="kw-2">*</span>n <span class="kw">as </span>f64) * (<span class="kw-2">*</span>mu).into() * (<span class="number">1f64 </span>- (<span class="kw-2">*</span>mu).into()),
+            Normal(_m, s) =&gt; (<span class="kw-2">*</span>s).into().powi(<span class="number">2</span>),
+            Beta(a, b) =&gt; {
+                <span class="kw">let </span>a_f64 = (<span class="kw-2">*</span>a).into();
+                <span class="kw">let </span>b_f64 = (<span class="kw-2">*</span>b).into();
+                a_f64 * b_f64 / ((a_f64 + b_f64).powi(<span class="number">2</span>) * (a_f64 + b_f64 + <span class="number">1f64</span>))
+            }
+            Gamma(a, b) =&gt; (<span class="kw-2">*</span>a).into() / (<span class="kw-2">*</span>b).into().powi(<span class="number">2</span>),
+        }
+    }
+
+    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+        <span class="kw">match </span><span class="self">self </span>{
+            Uniform(_a, _b) =&gt; <span class="self">self</span>.var().sqrt(),
+            Binomial(_n, _mu) =&gt; <span class="self">self</span>.var().sqrt(),
+            Normal(_m, s) =&gt; (<span class="kw-2">*</span>s).into(),
+            Beta(_a, _b) =&gt; <span class="self">self</span>.var().sqrt(),
+            Gamma(_a, _b) =&gt; <span class="self">self</span>.var().sqrt(),
+        }
+    }
+
+    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
+        <span class="macro">unimplemented!</span>()
+    }
+
+    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
+        <span class="macro">unimplemented!</span>()
+    }
+}
+
+<span class="kw">impl </span>Statistics <span class="kw">for </span>WeightedUniform&lt;f64&gt; {
+    <span class="kw">type </span>Array = Vec&lt;f64&gt;;
+    <span class="kw">type </span>Value = f64;
+
+    <span class="kw">fn </span>mean(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
+        <span class="self">self</span>.intervals().iter().zip(<span class="self">self</span>.weights().iter())
+            .map(|((l, r), w)| (l+r)/<span class="number">2f64 </span>* w)
+            .sum::&lt;f64&gt;() / <span class="self">self</span>.sum
+    }
+
+    <span class="kw">fn </span>var(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
         <span class="macro">todo!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">sd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Value</span> {
+    <span class="kw">fn </span>sd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Value {
         <span class="macro">todo!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">cov</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span> {
+    <span class="kw">fn </span>cov(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
         <span class="macro">todo!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">cor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="self">Self</span>::Array</span> {
+    <span class="kw">fn </span>cor(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span>::Array {
         <span class="macro">todo!</span>()
     }
 }</code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>

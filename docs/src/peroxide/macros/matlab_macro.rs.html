@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/macros/matlab_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>matlab_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/macros/matlab_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>matlab_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,13 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a><h2 class="location"></h2>
-    </nav>
-    <nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
-        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1">
-                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
-                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -131,117 +125,116 @@
 <span id="109">109</span>
 <span id="110">110</span>
 <span id="111">111</span>
-</pre><pre class="rust"><code><span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">rand</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::rand::prelude</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">extern crate </span>rand;
+<span class="kw">pub use </span><span class="self">self</span>::rand::prelude::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// MATLAB like zeros - zero matrix</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = zeros!(4);</span>
-<span class="doccomment">///     assert_eq!(a, c!(0,0,0,0));</span>
-<span class="doccomment">///</span>
-<span class="doccomment">///     let b = zeros!(3, 2);</span>
-<span class="doccomment">///     assert_eq!(b, matrix(c!(0,0,0,0,0,0), 3, 2, Row));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">zeros</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span> ) =&gt; {
-        <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>]
+<span class="doccomment">/// MATLAB like zeros - zero matrix
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = zeros!(4);
+///     assert_eq!(a, c!(0,0,0,0));
+///
+///     let b = zeros!(3, 2);
+///     assert_eq!(b, matrix(c!(0,0,0,0,0,0), 3, 2, Row));
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>zeros {
+    ( <span class="macro-nonterminal">$n</span>:expr ) =&gt; {
+        <span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="macro-nonterminal">$n</span>]
     };
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">c</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> (<span class="ident">r</span>, <span class="ident">c</span>) <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">r</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">c</span>);
-        <span class="ident">matrix</span>(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">r</span> <span class="op">*</span> <span class="ident">c</span>], <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>)
+    ( <span class="macro-nonterminal">$r</span>:expr, <span class="macro-nonterminal">$c</span>:expr ) =&gt; {{
+        <span class="kw">let </span>(r, c) = (<span class="macro-nonterminal">$r</span>, <span class="macro-nonterminal">$c</span>);
+        matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; r * c], r, c, Row)
     }};
 }
 
-<span class="doccomment">/// MATLAB like rand - random matrix</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = rand!(2, 2);</span>
-<span class="doccomment">///     println!(&quot;{}&quot;, a);  // 2 x 2 random matrix (0 ~ 1)</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">rand</span> {
+<span class="doccomment">/// MATLAB like rand - random matrix
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = rand!(2, 2);
+///     println!(&quot;{}&quot;, a);  // 2 x 2 random matrix (0 ~ 1)
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>rand {
     () =&gt; {{
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-        <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>..<span class="op">=</span><span class="number">1f64</span>)
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+        rng.gen_range(<span class="number">0f64</span>..=<span class="number">1f64</span>)
     }};
 
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">m</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">m</span>;
-        <span class="kw">let</span> <span class="ident">c</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rng</span> <span class="op">=</span> <span class="ident">thread_rng</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">r</span> <span class="op">*</span> <span class="ident">c</span>], <span class="ident">r</span>, <span class="ident">c</span>, <span class="ident">Row</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">r</span> {
-            <span class="kw">for</span> <span class="ident">j</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">c</span> {
-                <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">j</span>)] <span class="op">=</span> <span class="ident">rng</span>.<span class="ident">gen_range</span>(<span class="number">0f64</span>..<span class="op">=</span><span class="number">1f64</span>);
+    ( <span class="macro-nonterminal">$m</span>:expr, <span class="macro-nonterminal">$n</span>:expr ) =&gt; {{
+        <span class="kw">let </span>r = <span class="macro-nonterminal">$m</span>;
+        <span class="kw">let </span>c = <span class="macro-nonterminal">$n</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>rng = thread_rng();
+        <span class="kw">let </span><span class="kw-2">mut </span>m = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; r * c], r, c, Row);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..r {
+            <span class="kw">for </span>j <span class="kw">in </span><span class="number">0</span>..c {
+                m[(i, j)] = rng.gen_range(<span class="number">0f64</span>..=<span class="number">1f64</span>);
             }
         }
-        <span class="ident">m</span>
+        m
     }};
 }
 
-<span class="doccomment">/// MATLAB like eye - identity matrix</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let i = eye!(2);</span>
-<span class="doccomment">///     assert_eq!(i, matrix(c!(1,0,0,1), 2, 2, Row));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">eye</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>:<span class="ident">expr</span> ) =&gt; {{
-        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">n</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">m</span> <span class="op">=</span> <span class="ident">matrix</span>(<span class="macro">vec!</span>[<span class="number">0f64</span>; <span class="ident">n</span> <span class="op">*</span> <span class="ident">n</span>], <span class="ident">n</span>, <span class="ident">n</span>, <span class="ident">Row</span>);
-        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">n</span> {
-            <span class="ident">m</span>[(<span class="ident">i</span>, <span class="ident">i</span>)] <span class="op">=</span> <span class="number">1f64</span>;
+<span class="doccomment">/// MATLAB like eye - identity matrix
+///
+/// # Examples
+///
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let i = eye!(2);
+///     assert_eq!(i, matrix(c!(1,0,0,1), 2, 2, Row));
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>eye {
+    ( <span class="macro-nonterminal">$n</span>:expr ) =&gt; {{
+        <span class="kw">let </span>n = <span class="macro-nonterminal">$n</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>m = matrix(<span class="macro">vec!</span>[<span class="number">0f64</span>; n * n], n, n, Row);
+        <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..n {
+            m[(i, i)] = <span class="number">1f64</span>;
         }
-        <span class="ident">m</span>
+        m
     }};
 }
 
-<span class="doccomment">/// MATLAB like linspace</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Examples</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">/// #[macro_use]</span>
-<span class="doccomment">/// extern crate peroxide;</span>
-<span class="doccomment">/// use peroxide::fuga::*;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// fn main() {</span>
-<span class="doccomment">///     let a = linspace!(1, 10, 10);</span>
-<span class="doccomment">///     assert_eq!(a, seq!(1,10,1));</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">linspace</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">length</span>: <span class="ident">expr</span>) =&gt; {{
-        <span class="kw">let</span> <span class="ident">step</span> <span class="op">=</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span> <span class="op">-</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>) <span class="kw">as</span> <span class="ident">f64</span> <span class="op">/</span> (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">length</span> <span class="kw">as</span> <span class="ident">f64</span> <span class="op">-</span> <span class="number">1f64</span>);
-        <span class="macro">seq!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">start</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">end</span>, <span class="ident">step</span>)
+<span class="doccomment">/// MATLAB like linspace
+///
+/// # Examples
+/// ```
+/// #[macro_use]
+/// extern crate peroxide;
+/// use peroxide::fuga::*;
+///
+/// fn main() {
+///     let a = linspace!(1, 10, 10);
+///     assert_eq!(a, seq!(1,10,1));
+/// }
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>linspace {
+    ( <span class="macro-nonterminal">$start</span>:expr, <span class="macro-nonterminal">$end</span>:expr, <span class="macro-nonterminal">$length</span>: expr) =&gt; {{
+        <span class="kw">let </span>step = (<span class="macro-nonterminal">$end </span>- <span class="macro-nonterminal">$start</span>) <span class="kw">as </span>f64 / (<span class="macro-nonterminal">$length </span><span class="kw">as </span>f64 - <span class="number">1f64</span>);
+        <span class="macro">seq!</span>(<span class="macro-nonterminal">$start</span>, <span class="macro-nonterminal">$end</span>, step)
     }};
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.64.0-nightly (6dba4ed21 2022-07-09)" ></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>
