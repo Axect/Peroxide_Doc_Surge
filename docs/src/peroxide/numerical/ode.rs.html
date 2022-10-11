@@ -1079,6 +1079,53 @@
 <span id="1063">1063</span>
 <span id="1064">1064</span>
 <span id="1065">1065</span>
+<span id="1066">1066</span>
+<span id="1067">1067</span>
+<span id="1068">1068</span>
+<span id="1069">1069</span>
+<span id="1070">1070</span>
+<span id="1071">1071</span>
+<span id="1072">1072</span>
+<span id="1073">1073</span>
+<span id="1074">1074</span>
+<span id="1075">1075</span>
+<span id="1076">1076</span>
+<span id="1077">1077</span>
+<span id="1078">1078</span>
+<span id="1079">1079</span>
+<span id="1080">1080</span>
+<span id="1081">1081</span>
+<span id="1082">1082</span>
+<span id="1083">1083</span>
+<span id="1084">1084</span>
+<span id="1085">1085</span>
+<span id="1086">1086</span>
+<span id="1087">1087</span>
+<span id="1088">1088</span>
+<span id="1089">1089</span>
+<span id="1090">1090</span>
+<span id="1091">1091</span>
+<span id="1092">1092</span>
+<span id="1093">1093</span>
+<span id="1094">1094</span>
+<span id="1095">1095</span>
+<span id="1096">1096</span>
+<span id="1097">1097</span>
+<span id="1098">1098</span>
+<span id="1099">1099</span>
+<span id="1100">1100</span>
+<span id="1101">1101</span>
+<span id="1102">1102</span>
+<span id="1103">1103</span>
+<span id="1104">1104</span>
+<span id="1105">1105</span>
+<span id="1106">1106</span>
+<span id="1107">1107</span>
+<span id="1108">1108</span>
+<span id="1109">1109</span>
+<span id="1110">1110</span>
+<span id="1111">1111</span>
+<span id="1112">1112</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Solver for ordinary differential equations
 //!
 //! ## Introduce `ODE` Trait &amp; Structure
@@ -1111,6 +1158,7 @@
 //!         fn set_step_size(&amp;mut self, dt: f64) -&gt; &amp;mut Self;
 //!         fn set_method(&amp;mut self, method: Self::ODEMethod) -&gt; &amp;mut Self;
 //!         fn set_stop_condition(&amp;mut self, f: fn(&amp;Self) -&gt; bool) -&gt; &amp;mut Self;
+//!         fn has_stopped(&amp;self) -&gt; bool;
 //!         fn set_times(&amp;mut self, n: usize) -&gt; &amp;mut Self;
 //!         fn check_enough(&amp;self) -&gt; bool;
 //!         fn set_env(&amp;mut self, env: E) -&gt; &amp;mut Self;
@@ -1234,6 +1282,7 @@
 //!     bound_cond1: (State&lt;f64&gt;, BoundaryCondition),
 //!     bound_cond2: (State&lt;f64&gt;, BoundaryCondition),
 //!     stop_cond: fn(&amp;Self) -&gt; bool,
+//!     has_stopped: bool,
 //!     times: usize,
 //!     to_use: HashMap&lt;ODEOptions, bool&gt;,
 //!     env: E,
@@ -1246,6 +1295,7 @@
 //! * `bound_cond1` : If boundary problem, then first boundary condition
 //! * `bound_cond2` : second boundary condition
 //! * `stop_cond` : Stop condition (stop before `times`)
+//! * `has_stopped`: Has the stop condition been reached
 //! * `times` : How many times do you want to update?
 //! * `to_use` : Just check whether information is enough
 //! * `env` : Environment
@@ -1269,6 +1319,7 @@
 //!     bound_cond1: (State&lt;AD&gt;, BoundaryCondition),
 //!     bound_cond2: (State&lt;AD&gt;, BoundaryCondition),
 //!     stop_cond: fn(&amp;Self) -&gt; bool,
+//!     has_stopped: bool,
 //!     times: usize,
 //!     to_use: HashMap&lt;ODEOptions, bool&gt;,
 //!     env: E,
@@ -1365,14 +1416,6 @@
 //! }
 //! ```
 //!
-//! If plotting pickle data with python, then
-//!
-//! ![Lorenz with Euler](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_euler.png)
-//!
-//! ![Lorenz with RK4](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_rk4.png)
-//!
-//! ![Lorenz with GL4](https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_gl4.png)
-//!
 //! ### Simple 1D Runge-Kutta
 //!
 //! $$\begin{gathered} \frac{dy}{dx} = \frac{5x^2 - y}{e^{x+y}} \\\ y(0) = 1 \end{gathered}$$
@@ -1402,7 +1445,49 @@
 //!     let x = st.param;
 //!     let y = &amp;st.value;
 //!     let dy = &amp;mut st.deriv;
-//!     dy[0] = (5f64*x.powi(2) - y[0]) / (x + y[0]).exp();
+//!     dy[0] = (5f64 * x.powi(2) - y[0]) / (x + y[0]).exp();
+//! }
+//! ```
+//!
+//! ### With stop condition
+//!
+//! ```rust
+//! #[macro_use]
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//! 
+//! fn main() {
+//!     let init_state = State::&lt;f64&gt;::new(0f64, c!(1), c!(0));
+//! 
+//!     let mut ode_solver = ExplicitODE::new(test_fn);
+//! 
+//!     ode_solver
+//!         .set_method(ExMethod::RK4)
+//!         .set_initial_condition(init_state)
+//!         .set_step_size(0.01)
+//!         .set_stop_condition(stop)        // Add stop condition
+//!         .set_times(1000);
+//! 
+//!     let result = ode_solver.integrate();
+//!     if ode_solver.has_stopped() {
+//!         println!(&quot;It reached to stop condition&quot;);
+//!     } else {
+//!         println!(&quot;It didn&#39;t reach to stop condition&quot;);
+//!     }
+//! 
+//!     // Plot or Extract..
+//! }
+//! 
+//! fn test_fn(st: &amp;mut State&lt;f64&gt;, _: &amp;NoEnv) {
+//!     let x = st.param;
+//!     let y = &amp;st.value;
+//!     let dy = &amp;mut st.deriv;
+//!     dy[0] = (5f64 * x.powi(2) - y[0]) / (x + y[0]).exp();
+//! }
+//! 
+//! fn stop&lt;E: Environment&gt;(st: &amp;ExplicitODE&lt;E&gt;) -&gt; bool {
+//!     let y = &amp;st.get_state().value[0];
+//!     (*y - 2.4).abs() &lt; 0.01
 //! }
 //! ```
 
@@ -1412,7 +1497,7 @@
 <span class="kw">use </span><span class="self">self</span>::ODEOptions::{BoundCond, InitCond, Method, StepSize, StopCond, Times};
 <span class="kw">use </span><span class="kw">crate</span>::numerical::{spline::CubicSpline, utils::jacobian};
 <span class="kw">use </span><span class="kw">crate</span>::structure::{
-    ad::{AD, ADVec, AD::<span class="kw-2">*</span>},
+    ad::{ADVec, AD, AD::<span class="kw-2">*</span>},
     matrix::{LinearAlgebra, Matrix},
     polynomial::Polynomial,
 };
@@ -1556,6 +1641,7 @@
     <span class="kw">fn </span>set_step_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dt: f64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>set_method(<span class="kw-2">&amp;mut </span><span class="self">self</span>, method: <span class="self">Self</span>::ODEMethod) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>set_stop_condition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>has_stopped(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
     <span class="kw">fn </span>set_times(<span class="kw-2">&amp;mut </span><span class="self">self</span>, n: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>check_enough(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
     <span class="kw">fn </span>set_env(<span class="kw-2">&amp;mut </span><span class="self">self</span>, env: E) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
@@ -1571,6 +1657,7 @@
     bound_cond1: (State&lt;f64&gt;, BoundaryCondition),
     bound_cond2: (State&lt;f64&gt;, BoundaryCondition),
     stop_cond: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool,
+    has_stopped: bool,
     times: usize,
     options: HashMap&lt;ODEOptions, bool&gt;,
     env: E,
@@ -1595,6 +1682,7 @@
             bound_cond1: (Default::default(), Dirichlet),
             bound_cond2: (Default::default(), Dirichlet),
             stop_cond: |_x| <span class="bool-val">false</span>,
+            has_stopped: <span class="bool-val">false</span>,
             times: <span class="number">0</span>,
             options: default_to_use,
             env: E::default(),
@@ -1628,9 +1716,9 @@
                 //        blas_daxpy(dt, &amp;self.state.deriv, &amp;mut self.state.value);
                 //    }
                 //    _ =&gt; {
-                        </span><span class="self">self</span>.state
-                            .value
-                            .mut_zip_with(|x, y| x + y * dt, <span class="kw-2">&amp;</span><span class="self">self</span>.state.deriv);
+                </span><span class="self">self</span>.state
+                    .value
+                    .mut_zip_with(|x, y| x + y * dt, <span class="kw-2">&amp;</span><span class="self">self</span>.state.deriv);
                 <span class="comment">//    }
                 //}
                 </span><span class="self">self</span>.state.param += dt;
@@ -1685,9 +1773,7 @@
                     result.subs_row(i, <span class="kw-2">&amp;</span>cat(<span class="self">self</span>.state.param, <span class="kw-2">&amp;</span><span class="self">self</span>.state.value));
                     key += <span class="number">1</span>;
                     <span class="kw">if </span>(<span class="self">self</span>.stop_cond)(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-                        <span class="macro">println!</span>(<span class="string">&quot;Reach the stop condition!&quot;</span>);
-                        <span class="macro">print!</span>(<span class="string">&quot;Current values are: &quot;</span>);
-                        cat(<span class="self">self</span>.state.param, <span class="kw-2">&amp;</span><span class="self">self</span>.state.value).print();
+                        <span class="self">self</span>.has_stopped = <span class="bool-val">true</span>;
                         <span class="kw">break</span>;
                     }
                 }
@@ -1748,6 +1834,10 @@
         <span class="self">self</span>.stop_cond = f;
         <span class="self">self
     </span>}
+
+    <span class="kw">fn </span>has_stopped(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.has_stopped
+    }
 
     <span class="kw">fn </span>set_times(<span class="kw-2">&amp;mut </span><span class="self">self</span>, n: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Times) {
@@ -1830,6 +1920,7 @@
     bound_cond1: (State&lt;f64&gt;, BoundaryCondition),
     bound_cond2: (State&lt;f64&gt;, BoundaryCondition),
     stop_cond: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool,
+    has_stopped: bool,
     times: usize,
     options: HashMap&lt;ODEOptions, bool&gt;,
     env: E,
@@ -1855,6 +1946,7 @@
             bound_cond1: (Default::default(), Dirichlet),
             bound_cond2: (Default::default(), Dirichlet),
             stop_cond: |_x| <span class="bool-val">false</span>,
+            has_stopped: <span class="bool-val">false</span>,
             times: <span class="number">0</span>,
             options: default_to_use,
             env: E::default(),
@@ -1992,9 +2084,7 @@
                     );
                     key += <span class="number">1</span>;
                     <span class="kw">if </span>(<span class="self">self</span>.stop_cond)(<span class="kw-2">&amp;</span><span class="self">self</span>) {
-                        <span class="macro">println!</span>(<span class="string">&quot;Reach the stop condition!&quot;</span>);
-                        <span class="macro">print!</span>(<span class="string">&quot;Current values are: &quot;</span>);
-                        cat(<span class="self">self</span>.state.param.to_f64(), <span class="kw-2">&amp;</span><span class="self">self</span>.state.value.to_f64_vec()).print();
+                        <span class="self">self</span>.has_stopped = <span class="bool-val">true</span>;
                         <span class="kw">break</span>;
                     }
                 }
@@ -2058,6 +2148,10 @@
         <span class="self">self</span>.stop_cond = f;
         <span class="self">self
     </span>}
+
+    <span class="kw">fn </span>has_stopped(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+        <span class="self">self</span>.has_stopped
+    }
 
     <span class="kw">fn </span>set_times(<span class="kw-2">&amp;mut </span><span class="self">self</span>, n: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self </span>{
         <span class="kw">if let </span><span class="prelude-val">Some</span>(x) = <span class="self">self</span>.options.get_mut(<span class="kw-2">&amp;</span>Times) {

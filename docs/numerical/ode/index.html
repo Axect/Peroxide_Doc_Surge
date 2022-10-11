@@ -14,7 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"><a href="#">Module ode</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="main-heading"><h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">ode</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/numerical/ode.rs.html#1-1065">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Solver for ordinary differential equations</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"><a href="#">Module ode</a></h2><div class="sidebar-elems"><section><div class="block"><ul><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li></ul></div></section></div></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="main-heading"><h1 class="fqn"><span class="in-band">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">numerical</a>::<wbr><a class="mod" href="#">ode</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/numerical/ode.rs.html#1-1112">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Solver for ordinary differential equations</p>
 <h3 id="introduce-ode-trait--structure"><a href="#introduce-ode-trait--structure">Introduce <code>ODE</code> Trait &amp; Structure</a></h3><h4 id="ode-trait"><a href="#ode-trait"><code>ODE</code> Trait</a></h4>
 <ul>
 <li>
@@ -47,6 +47,7 @@
     <span class="kw">fn </span>set_step_size(<span class="kw-2">&amp;mut </span><span class="self">self</span>, dt: f64) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>set_method(<span class="kw-2">&amp;mut </span><span class="self">self</span>, method: <span class="self">Self</span>::ODEMethod) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>set_stop_condition(<span class="kw-2">&amp;mut </span><span class="self">self</span>, f: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
+    <span class="kw">fn </span>has_stopped(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
     <span class="kw">fn </span>set_times(<span class="kw-2">&amp;mut </span><span class="self">self</span>, n: usize) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
     <span class="kw">fn </span>check_enough(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool;
     <span class="kw">fn </span>set_env(<span class="kw-2">&amp;mut </span><span class="self">self</span>, env: E) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>;
@@ -184,6 +185,7 @@
     bound_cond1: (State&lt;f64&gt;, BoundaryCondition),
     bound_cond2: (State&lt;f64&gt;, BoundaryCondition),
     stop_cond: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool,
+    has_stopped: bool,
     times: usize,
     to_use: HashMap&lt;ODEOptions, bool&gt;,
     env: E,
@@ -195,6 +197,7 @@
 <li><code>bound_cond1</code> : If boundary problem, then first boundary condition</li>
 <li><code>bound_cond2</code> : second boundary condition</li>
 <li><code>stop_cond</code> : Stop condition (stop before <code>times</code>)</li>
+<li><code>has_stopped</code>: Has the stop condition been reached</li>
 <li><code>times</code> : How many times do you want to update?</li>
 <li><code>to_use</code> : Just check whether information is enough</li>
 <li><code>env</code> : Environment</li>
@@ -216,6 +219,7 @@
     bound_cond1: (State&lt;AD&gt;, BoundaryCondition),
     bound_cond2: (State&lt;AD&gt;, BoundaryCondition),
     stop_cond: <span class="kw">fn</span>(<span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool,
+    has_stopped: bool,
     times: usize,
     to_use: HashMap&lt;ODEOptions, bool&gt;,
     env: E,
@@ -301,10 +305,6 @@
     dx[<span class="number">1</span>] = <span class="number">28f64 </span>* x[<span class="number">0</span>] - x[<span class="number">1</span>] - x[<span class="number">0</span>] * x[<span class="number">2</span>];
     dx[<span class="number">2</span>] = -<span class="number">8f64</span>/<span class="number">3f64 </span>* x[<span class="number">2</span>] + x[<span class="number">0</span>] * x[<span class="number">1</span>];
 }</code></pre></div>
-<p>If plotting pickle data with python, then</p>
-<p><img src="https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_euler.png" alt="Lorenz with Euler" /></p>
-<p><img src="https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_rk4.png" alt="Lorenz with RK4" /></p>
-<p><img src="https://raw.githubusercontent.com/Axect/Peroxide/master/example_data/lorenz_gl4.png" alt="Lorenz with GL4" /></p>
 <h4 id="simple-1d-runge-kutta"><a href="#simple-1d-runge-kutta">Simple 1D Runge-Kutta</a></h4>
 <p>$$\begin{gathered} \frac{dy}{dx} = \frac{5x^2 - y}{e^{x+y}} \\ y(0) = 1 \end{gathered}$$</p>
 
@@ -332,8 +332,46 @@
     <span class="kw">let </span>x = st.param;
     <span class="kw">let </span>y = <span class="kw-2">&amp;</span>st.value;
     <span class="kw">let </span>dy = <span class="kw-2">&amp;mut </span>st.deriv;
-    dy[<span class="number">0</span>] = (<span class="number">5f64</span><span class="kw-2">*</span>x.powi(<span class="number">2</span>) - y[<span class="number">0</span>]) / (x + y[<span class="number">0</span>]).exp();
+    dy[<span class="number">0</span>] = (<span class="number">5f64 </span>* x.powi(<span class="number">2</span>) - y[<span class="number">0</span>]) / (x + y[<span class="number">0</span>]).exp();
 }</code></pre></div>
+<h4 id="with-stop-condition"><a href="#with-stop-condition">With stop condition</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+</span><span class="kw">extern crate </span>peroxide;
+<span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
+ 
+<span class="kw">fn </span>main() {
+    <span class="kw">let </span>init_state = State::&lt;f64&gt;::new(<span class="number">0f64</span>, <span class="macro">c!</span>(<span class="number">1</span>), <span class="macro">c!</span>(<span class="number">0</span>));
+ 
+    <span class="kw">let </span><span class="kw-2">mut </span>ode_solver = ExplicitODE::new(test_fn);
+ 
+    ode_solver
+        .set_method(ExMethod::RK4)
+        .set_initial_condition(init_state)
+        .set_step_size(<span class="number">0.01</span>)
+        .set_stop_condition(stop)        <span class="comment">// Add stop condition
+        </span>.set_times(<span class="number">1000</span>);
+ 
+    <span class="kw">let </span>result = ode_solver.integrate();
+    <span class="kw">if </span>ode_solver.has_stopped() {
+        <span class="macro">println!</span>(<span class="string">&quot;It reached to stop condition&quot;</span>);
+    } <span class="kw">else </span>{
+        <span class="macro">println!</span>(<span class="string">&quot;It didn&#39;t reach to stop condition&quot;</span>);
+    }
+ 
+    <span class="comment">// Plot or Extract..
+</span>}
+ 
+<span class="kw">fn </span>test_fn(st: <span class="kw-2">&amp;mut </span>State&lt;f64&gt;, <span class="kw">_</span>: <span class="kw-2">&amp;</span>NoEnv) {
+    <span class="kw">let </span>x = st.param;
+    <span class="kw">let </span>y = <span class="kw-2">&amp;</span>st.value;
+    <span class="kw">let </span>dy = <span class="kw-2">&amp;mut </span>st.deriv;
+    dy[<span class="number">0</span>] = (<span class="number">5f64 </span>* x.powi(<span class="number">2</span>) - y[<span class="number">0</span>]) / (x + y[<span class="number">0</span>]).exp();
+}
+ 
+<span class="kw">fn </span>stop&lt;E: Environment&gt;(st: <span class="kw-2">&amp;</span>ExplicitODE&lt;E&gt;) -&gt; bool {
+    <span class="kw">let </span>y = <span class="kw-2">&amp;</span>st.get_state().value[<span class="number">0</span>];
+    (<span class="kw-2">*</span>y - <span class="number">2.4</span>).abs() &lt; <span class="number">0.01
+</span>}</code></pre></div>
 </div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ExplicitODE.html" title="peroxide::numerical::ode::ExplicitODE struct">ExplicitODE</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ImplicitODE.html" title="peroxide::numerical::ode::ImplicitODE struct">ImplicitODE</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.NoEnv.html" title="peroxide::numerical::ode::NoEnv struct">NoEnv</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.State.html" title="peroxide::numerical::ode::State struct">State</a></div><div class="item-right docblock-short"><p>State for ODE</p>
 </div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.BoundaryCondition.html" title="peroxide::numerical::ode::BoundaryCondition enum">BoundaryCondition</a></div><div class="item-right docblock-short"><p>Kinds of Boundary Conditions</p>
 </div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.ExMethod.html" title="peroxide::numerical::ode::ExMethod enum">ExMethod</a></div><div class="item-right docblock-short"><p>Explicit ODE Methods</p>
