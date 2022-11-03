@@ -14,7 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../peroxide/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../peroxide/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -210,18 +210,6 @@
 <span id="194">194</span>
 <span id="195">195</span>
 <span id="196">196</span>
-<span id="197">197</span>
-<span id="198">198</span>
-<span id="199">199</span>
-<span id="200">200</span>
-<span id="201">201</span>
-<span id="202">202</span>
-<span id="203">203</span>
-<span id="204">204</span>
-<span id="205">205</span>
-<span id="206">206</span>
-<span id="207">207</span>
-<span id="208">208</span>
 </pre><pre class="rust"><code><span class="doccomment">//! `peroxide` is comprehensive numerical library for Rust.
 //!
 //! ## Components
@@ -283,7 +271,7 @@
 //! * Communication with Python
 //!     * [Plot with `matplotlib`](util/plot/index.html)
 //! * [DataFrame](structure/dataframe/index.html)
-//!     * Read &amp; Write with `netcdf` or `csv` format
+//!     * Read &amp; Write with `parquet` or `netcdf` or `csv` format
 //! * Macros
 //!     * [R macros](macros/r_macro/index.html)
 //!     * [Matlab macros](macros/matlab_macro/index.html)
@@ -304,48 +292,35 @@
 //!
 //! ### Cargo.toml
 //!
-//! * To use `peroxide`, you should edit `Cargo.toml`
-//! * Current document version is corresponding to `0.30.11`
+//! * Run below commands in your project directory
 //!
 //! 1. Default
-//!     ```toml
-//!     [dependencies]
-//!     peroxide = &quot;0.30&quot;
+//!     ```bash
+//!     cargo add peroxide
 //!     ```
 //! 2. OpenBLAS
-//!     ```toml
-//!     [dependencies.peroxide]
-//!     version = &quot;0.30&quot;
-//!     default-features = false
-//!     features = [&quot;O3&quot;]
+//!     ```bash
+//!     cargo add peroxide --features O3
 //!     ```
 //! 3. Plot
-//!     ```toml
-//!     [dependencies.peroxide]
-//!     version = &quot;0.30&quot;
-//!     default-features = false
-//!     features = [&quot;plot&quot;]
+//!     ```bash
+//!     cargo add peroxide --features plot
 //!     ```
-//! 4. `netcdf` dependency for DataFrame
-//!     ```toml
-//!     [dependencies.peroxide]
-//!     version = &quot;0.30&quot;
-//!     default-features = false
-//!     features = [&quot;nc&quot;]
+//! 4. NetCDF dependency for DataFrame
+//!     ```bash
+//!     cargo add peroxide --features nc
 //!     ```
-//! 5. `csv` dependency for DataFrame
-//!     ```toml
-//!     [dependencies.peroxide]
-//!     version = &quot;0.30&quot;
-//!     default-features = false
-//!     features = [&quot;csv&quot;]
+//! 5. CSV dependency for DataFrame
+//!     ```bash
+//!     cargo add peroxide --features csv
 //!     ```
-//! 6. Together
-//!     ```toml
-//!     [dependencies.peroxide]
-//!     version = &quot;0.30&quot;
-//!     default-features = false
-//!     features = [&quot;O3&quot;, &quot;plot&quot;, &quot;nc&quot;]
+//! 6. Parquet dependency for DataFrame
+//!     ```bash
+//!     cargo add peroxide --features parquet
+//!     ```
+//! 7. All features
+//!     ```bash
+//!     cargo add peroxide --features &quot;O3 plot nc csv parquet&quot;
 //!     ```
 //!
 //! ## Import all at once
@@ -385,11 +360,12 @@
 //!
 //! * After `0.28.0`, `dataframe` feature is replaced by `nc` feature.
 //! * If you want to use *QR* or *SVD* or *Cholesky Decomposition* then should use `O3` feature (there are no implementations for these decompositions in `default`)
-//! * If you want to write your numerical results, then use `nc` feature and `netcdf` format. (It is much more effective than `csv` and `json`.)
+//! * If you want to write your numerical results, then use `parquet` or `nc` features (corresponding to `parquet` or `netcdf` format. (It is much more effective than `csv` and `json`.)
 //! * After `0.23.0`, there are two options - `fuga`, `prelude`. Choose proper option for your computations.
-//! * To plot, use `nc` feature to export data as netcdf format and use python to draw plot.
+//! * To plot, use `parquet` or `nc` feature to export data as parquet or netcdf format and use python to draw plot.
 //!     * `plot` feature has limited plot abilities.
-//!     * There is a template of python code. - [Socialst](https://github.com/Axect/Socialst/blob/master/Templates/PyPlot_Template/nc_plot.py)
+//!     * To read parquet file in python, use `pandas` &amp; `pyarrow` libraries.
+//!     * There is a template of python code for netcdf. - [Socialst](https://github.com/Axect/Socialst/blob/master/Templates/PyPlot_Template/nc_plot.py)
 
 </span><span class="attribute">#[cfg(feature = <span class="string">&quot;O3&quot;</span>)]
 </span><span class="kw">extern crate </span>blas;
@@ -431,4 +407,4 @@
 <span class="kw">pub mod </span>traits;
 <span class="kw">pub mod </span>util;
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (bed4ad65b 2022-10-25)" ></div></body></html>

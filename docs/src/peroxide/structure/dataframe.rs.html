@@ -14,7 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+</head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><div class="width-limiter"><nav class="sub"><a class="sub-logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><pre class="src-line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -1733,6 +1733,226 @@
 <span id="1717">1717</span>
 <span id="1718">1718</span>
 <span id="1719">1719</span>
+<span id="1720">1720</span>
+<span id="1721">1721</span>
+<span id="1722">1722</span>
+<span id="1723">1723</span>
+<span id="1724">1724</span>
+<span id="1725">1725</span>
+<span id="1726">1726</span>
+<span id="1727">1727</span>
+<span id="1728">1728</span>
+<span id="1729">1729</span>
+<span id="1730">1730</span>
+<span id="1731">1731</span>
+<span id="1732">1732</span>
+<span id="1733">1733</span>
+<span id="1734">1734</span>
+<span id="1735">1735</span>
+<span id="1736">1736</span>
+<span id="1737">1737</span>
+<span id="1738">1738</span>
+<span id="1739">1739</span>
+<span id="1740">1740</span>
+<span id="1741">1741</span>
+<span id="1742">1742</span>
+<span id="1743">1743</span>
+<span id="1744">1744</span>
+<span id="1745">1745</span>
+<span id="1746">1746</span>
+<span id="1747">1747</span>
+<span id="1748">1748</span>
+<span id="1749">1749</span>
+<span id="1750">1750</span>
+<span id="1751">1751</span>
+<span id="1752">1752</span>
+<span id="1753">1753</span>
+<span id="1754">1754</span>
+<span id="1755">1755</span>
+<span id="1756">1756</span>
+<span id="1757">1757</span>
+<span id="1758">1758</span>
+<span id="1759">1759</span>
+<span id="1760">1760</span>
+<span id="1761">1761</span>
+<span id="1762">1762</span>
+<span id="1763">1763</span>
+<span id="1764">1764</span>
+<span id="1765">1765</span>
+<span id="1766">1766</span>
+<span id="1767">1767</span>
+<span id="1768">1768</span>
+<span id="1769">1769</span>
+<span id="1770">1770</span>
+<span id="1771">1771</span>
+<span id="1772">1772</span>
+<span id="1773">1773</span>
+<span id="1774">1774</span>
+<span id="1775">1775</span>
+<span id="1776">1776</span>
+<span id="1777">1777</span>
+<span id="1778">1778</span>
+<span id="1779">1779</span>
+<span id="1780">1780</span>
+<span id="1781">1781</span>
+<span id="1782">1782</span>
+<span id="1783">1783</span>
+<span id="1784">1784</span>
+<span id="1785">1785</span>
+<span id="1786">1786</span>
+<span id="1787">1787</span>
+<span id="1788">1788</span>
+<span id="1789">1789</span>
+<span id="1790">1790</span>
+<span id="1791">1791</span>
+<span id="1792">1792</span>
+<span id="1793">1793</span>
+<span id="1794">1794</span>
+<span id="1795">1795</span>
+<span id="1796">1796</span>
+<span id="1797">1797</span>
+<span id="1798">1798</span>
+<span id="1799">1799</span>
+<span id="1800">1800</span>
+<span id="1801">1801</span>
+<span id="1802">1802</span>
+<span id="1803">1803</span>
+<span id="1804">1804</span>
+<span id="1805">1805</span>
+<span id="1806">1806</span>
+<span id="1807">1807</span>
+<span id="1808">1808</span>
+<span id="1809">1809</span>
+<span id="1810">1810</span>
+<span id="1811">1811</span>
+<span id="1812">1812</span>
+<span id="1813">1813</span>
+<span id="1814">1814</span>
+<span id="1815">1815</span>
+<span id="1816">1816</span>
+<span id="1817">1817</span>
+<span id="1818">1818</span>
+<span id="1819">1819</span>
+<span id="1820">1820</span>
+<span id="1821">1821</span>
+<span id="1822">1822</span>
+<span id="1823">1823</span>
+<span id="1824">1824</span>
+<span id="1825">1825</span>
+<span id="1826">1826</span>
+<span id="1827">1827</span>
+<span id="1828">1828</span>
+<span id="1829">1829</span>
+<span id="1830">1830</span>
+<span id="1831">1831</span>
+<span id="1832">1832</span>
+<span id="1833">1833</span>
+<span id="1834">1834</span>
+<span id="1835">1835</span>
+<span id="1836">1836</span>
+<span id="1837">1837</span>
+<span id="1838">1838</span>
+<span id="1839">1839</span>
+<span id="1840">1840</span>
+<span id="1841">1841</span>
+<span id="1842">1842</span>
+<span id="1843">1843</span>
+<span id="1844">1844</span>
+<span id="1845">1845</span>
+<span id="1846">1846</span>
+<span id="1847">1847</span>
+<span id="1848">1848</span>
+<span id="1849">1849</span>
+<span id="1850">1850</span>
+<span id="1851">1851</span>
+<span id="1852">1852</span>
+<span id="1853">1853</span>
+<span id="1854">1854</span>
+<span id="1855">1855</span>
+<span id="1856">1856</span>
+<span id="1857">1857</span>
+<span id="1858">1858</span>
+<span id="1859">1859</span>
+<span id="1860">1860</span>
+<span id="1861">1861</span>
+<span id="1862">1862</span>
+<span id="1863">1863</span>
+<span id="1864">1864</span>
+<span id="1865">1865</span>
+<span id="1866">1866</span>
+<span id="1867">1867</span>
+<span id="1868">1868</span>
+<span id="1869">1869</span>
+<span id="1870">1870</span>
+<span id="1871">1871</span>
+<span id="1872">1872</span>
+<span id="1873">1873</span>
+<span id="1874">1874</span>
+<span id="1875">1875</span>
+<span id="1876">1876</span>
+<span id="1877">1877</span>
+<span id="1878">1878</span>
+<span id="1879">1879</span>
+<span id="1880">1880</span>
+<span id="1881">1881</span>
+<span id="1882">1882</span>
+<span id="1883">1883</span>
+<span id="1884">1884</span>
+<span id="1885">1885</span>
+<span id="1886">1886</span>
+<span id="1887">1887</span>
+<span id="1888">1888</span>
+<span id="1889">1889</span>
+<span id="1890">1890</span>
+<span id="1891">1891</span>
+<span id="1892">1892</span>
+<span id="1893">1893</span>
+<span id="1894">1894</span>
+<span id="1895">1895</span>
+<span id="1896">1896</span>
+<span id="1897">1897</span>
+<span id="1898">1898</span>
+<span id="1899">1899</span>
+<span id="1900">1900</span>
+<span id="1901">1901</span>
+<span id="1902">1902</span>
+<span id="1903">1903</span>
+<span id="1904">1904</span>
+<span id="1905">1905</span>
+<span id="1906">1906</span>
+<span id="1907">1907</span>
+<span id="1908">1908</span>
+<span id="1909">1909</span>
+<span id="1910">1910</span>
+<span id="1911">1911</span>
+<span id="1912">1912</span>
+<span id="1913">1913</span>
+<span id="1914">1914</span>
+<span id="1915">1915</span>
+<span id="1916">1916</span>
+<span id="1917">1917</span>
+<span id="1918">1918</span>
+<span id="1919">1919</span>
+<span id="1920">1920</span>
+<span id="1921">1921</span>
+<span id="1922">1922</span>
+<span id="1923">1923</span>
+<span id="1924">1924</span>
+<span id="1925">1925</span>
+<span id="1926">1926</span>
+<span id="1927">1927</span>
+<span id="1928">1928</span>
+<span id="1929">1929</span>
+<span id="1930">1930</span>
+<span id="1931">1931</span>
+<span id="1932">1932</span>
+<span id="1933">1933</span>
+<span id="1934">1934</span>
+<span id="1935">1935</span>
+<span id="1936">1936</span>
+<span id="1937">1937</span>
+<span id="1938">1938</span>
+<span id="1939">1939</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Pandas-like dataframe &amp; series.
 //!
 //! ## Series
@@ -1942,7 +2162,46 @@
 //!
 //!         // Read netcdf
 //!         let mut dg = DataFrame::read_nc(&quot;example_data/doc_nc.nc&quot;)?;
-//!         dg[0].as_type(Char); // Char, Bool are only read/written as U8 type
+//!         dg[&quot;a&quot;].as_type(Char); // Char, Bool are only read/written as U8 type
+//!
+//!         assert_eq!(df, dg);
+//!     #    }
+//!
+//!         Ok(())
+//!     }
+//!     ```
+//! 
+//! * `WithParquet` trait
+//! 
+//!     ```ignore
+//!     pub trait WithParquet: Sized {
+//!         fn write_parquet(&amp;self, file_path: &amp;str) -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt;;
+//!         fn read_parquet(file_path: &amp;str) -&gt; Result&lt;Self, Box&lt;dyn Error&gt;&gt;;
+//!     }
+//!     ```
+//! 
+//!     * `parquet` feature should be required
+//!     * `Char` is saved with `String` type. Thus, for reading `Char` type parquet file,
+//!     the output type is `String`.
+//!     * **Caution** : For different length `Bool` type column, missing values are filled with `false`.
+//!     ```
+//!     #[macro_use]
+//!     extern crate peroxide;
+//!     use peroxide::fuga::*;
+//!     
+//!     fn main() -&gt; Result&lt;(), Box&lt;dyn Error&gt;&gt; {
+//!     #    #[cfg(feature = &quot;parquet&quot;)]
+//!     #    {
+//!         // Write parquet
+//!         let mut df = DataFrame::new(vec![]);
+//!         df.push(&quot;a&quot;, Series::new(vec![&#39;x&#39;, &#39;y&#39;, &#39;z&#39;]));
+//!         df.push(&quot;b&quot;, Series::new(vec![0, 1, 2]));
+//!         df.push(&quot;c&quot;, Series::new(c!(0.1, 0.2, 0.3)));
+//!         df.write_parquet(&quot;example_data/doc_pq.parquet&quot;)?;
+//!
+//!         // Read parquet
+//!         let mut dg = DataFrame::read_parquet(&quot;example_data/doc_pq.parquet&quot;)?;
+//!         dg[&quot;a&quot;].as_type(Char); // Char is only read/written as String type
 //!
 //!         assert_eq!(df, dg);
 //!     #    }
@@ -1956,7 +2215,7 @@
 <span class="kw">use </span>std::fmt;
 <span class="kw">use </span>std::ops::{Index, IndexMut};
 <span class="kw">use </span>std::cmp::{max, min};
-<span class="attribute">#[cfg(any(feature=<span class="string">&quot;csv&quot;</span>, feature=<span class="string">&quot;nc&quot;</span>))]
+<span class="attribute">#[cfg(any(feature=<span class="string">&quot;csv&quot;</span>, feature=<span class="string">&quot;nc&quot;</span>, feature=<span class="string">&quot;parquet&quot;</span>))]
 </span><span class="kw">use </span>std::error::Error;
 <span class="kw">use </span><span class="kw">crate</span>::util::{
     useful::tab,
@@ -1976,6 +2235,31 @@
     types::VariableType,
     variable::{VariableMut, Variable},
     Numeric,
+};
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">use </span>arrow2::{
+    array::{
+        PrimitiveArray,
+        BooleanArray,
+        Utf8Array,
+        Array
+    },
+    chunk::Chunk,
+    datatypes::{Field, DataType, Schema},
+    types::NativeType,
+    io::parquet::write::{
+        WriteOptions,
+        CompressionOptions,
+        RowGroupIterator,
+        Version,
+        FileWriter,
+        Encoding
+    },
+    io::parquet::read::{
+        read_metadata,
+        infer_schema,
+        FileReader,
+    }
 };
 
 <span class="comment">// =============================================================================
@@ -2597,6 +2881,98 @@
     <span class="prelude-val">Ok</span>(Series::new(v.clone()))
 }
 
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">fn </span>dtype_to_arrow(dt: DType) -&gt; DataType {
+    <span class="kw">match </span>dt {
+        USIZE =&gt; DataType::UInt64,
+        U8 =&gt; DataType::UInt8,
+        U16 =&gt; DataType::UInt16,
+        U32 =&gt; DataType::UInt32,
+        U64 =&gt; DataType::UInt64,
+        ISIZE =&gt; DataType::Int64,
+        I8 =&gt; DataType::Int8,
+        I16 =&gt; DataType::Int16,
+        I32 =&gt; DataType::Int32,
+        I64 =&gt; DataType::Int64,
+        F32 =&gt; DataType::Float32,
+        F64 =&gt; DataType::Float64,
+        Bool =&gt; DataType::Boolean,
+        Str =&gt; DataType::Utf8,
+        Char =&gt; DataType::Utf8,
+    }
+}
+
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">fn </span>arrow_to_dtype(dt: DataType) -&gt; DType {
+    <span class="kw">match </span>dt {
+        DataType::Boolean =&gt; DType::Bool,
+        DataType::Int8 =&gt; DType::I8,
+        DataType::Int16 =&gt; DType::I16,
+        DataType::Int32 =&gt; DType::I32,
+        DataType::Int64 =&gt; DType::I64,
+        DataType::UInt8 =&gt; DType::U8,
+        DataType::UInt16 =&gt; DType::U16,
+        DataType::UInt32 =&gt; DType::U32,
+        DataType::UInt64 =&gt; DType::U64,
+        <span class="comment">// DataType::Float16 =&gt; DType::F16,
+        </span>DataType::Float32 =&gt; DType::F32,
+        DataType::Float64 =&gt; DType::F64,
+        DataType::Utf8 =&gt; DType::Str,
+        <span class="kw">_ </span>=&gt; <span class="macro">unimplemented!</span>()
+    }
+}
+
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="macro">macro_rules! </span>dtype_case_to_arrow {
+    (<span class="macro-nonterminal">$ty</span>:ty, <span class="macro-nonterminal">$to_arr</span>:expr, <span class="macro-nonterminal">$value</span>:expr, <span class="macro-nonterminal">$chunk_vec</span>:expr; <span class="macro-nonterminal">$length</span>:expr) =&gt; {{
+        <span class="kw">let </span>v: Vec&lt;<span class="macro-nonterminal">$ty</span>&gt; = <span class="macro-nonterminal">$value</span>;
+        <span class="kw">let </span>v_wrap = (<span class="number">0usize</span>..<span class="macro-nonterminal">$length</span>).map(|i| {
+            <span class="kw">if </span>i &lt; v.len() {
+                <span class="prelude-val">Some</span>(v[i].clone())
+            } <span class="kw">else </span>{
+                <span class="prelude-val">None
+            </span>}
+        }).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+        <span class="kw">let </span>arr = <span class="macro-nonterminal">$to_arr</span>(v_wrap);
+        <span class="macro-nonterminal">$chunk_vec</span>.push(arr.boxed())
+    }}
+}
+
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="macro">macro_rules! </span>dtype_match_to_arrow {
+    (<span class="macro-nonterminal">$dtype</span>:expr, <span class="macro-nonterminal">$value</span>:expr, <span class="macro-nonterminal">$chunk_vec</span>:expr; <span class="macro-nonterminal">$length</span>:expr) =&gt; {{
+        <span class="kw">match </span><span class="macro-nonterminal">$dtype </span>{
+            Bool =&gt; <span class="macro">dtype_case_to_arrow!</span>(bool, BooleanArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            Str =&gt; <span class="macro">dtype_case_to_arrow!</span>(String, Utf8Array::&lt;i32&gt;::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            Char =&gt; {
+                <span class="kw">let </span>v: Vec&lt;char&gt; = <span class="macro-nonterminal">$value</span>;
+                <span class="kw">let </span>v = v.into_iter().map(|t| t.to_string()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+                <span class="macro">dtype_case_to_arrow!</span>(String, Utf8Array::&lt;i32&gt;::from, v, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>)
+            }
+            USIZE =&gt; <span class="macro">dtype_case_to_arrow!</span>(u64, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            U8 =&gt; <span class="macro">dtype_case_to_arrow!</span>(u8, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            U16 =&gt; <span class="macro">dtype_case_to_arrow!</span>(u16, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            U32 =&gt; <span class="macro">dtype_case_to_arrow!</span>(u32, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            U64 =&gt; <span class="macro">dtype_case_to_arrow!</span>(u64, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            ISIZE =&gt; <span class="macro">dtype_case_to_arrow!</span>(i64, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            I8 =&gt; <span class="macro">dtype_case_to_arrow!</span>(i8, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            I16 =&gt; <span class="macro">dtype_case_to_arrow!</span>(i16, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            I32 =&gt; <span class="macro">dtype_case_to_arrow!</span>(i32, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            I64 =&gt; <span class="macro">dtype_case_to_arrow!</span>(i64, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            F32 =&gt; <span class="macro">dtype_case_to_arrow!</span>(f32, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+            F64 =&gt; <span class="macro">dtype_case_to_arrow!</span>(f64, PrimitiveArray::from, <span class="macro-nonterminal">$value</span>, <span class="macro-nonterminal">$chunk_vec</span>; <span class="macro-nonterminal">$length</span>),
+        }
+    }};
+}
+
+<span class="attribute">#[cfg(feature= <span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">fn </span>parquet_read_value&lt;<span class="lifetime">&#39;f</span>, T: Default + Clone + NativeType&gt;(arr: <span class="kw-2">&amp;</span>Box&lt;<span class="kw">dyn </span>Array&gt;, v: Vec&lt;T&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Series, arrow2::error::Error&gt; <span class="kw">where </span>Series: TypedVector&lt;T&gt; {
+    <span class="kw">let </span>x = arr.as_any().downcast_ref::&lt;PrimitiveArray&lt;T&gt;&gt;().unwrap();
+    <span class="kw">let </span>x = x.values_iter().cloned().collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+
+    <span class="prelude-val">Ok</span>(Series::new(x))
+}
+
 <span class="kw">fn </span>add_vec&lt;T: std::ops::Add&lt;T, Output=T&gt; + Clone&gt;(v: Vec&lt;T&gt;, w: Vec&lt;T&gt;) -&gt; Series 
 <span class="kw">where </span>Series: TypedVector&lt;T&gt; {
     Series::new(v.into_iter().zip(w.into_iter()).map(|(x, y)| x + y).collect::&lt;Vec&lt;T&gt;&gt;())
@@ -2612,49 +2988,7 @@
     Series::new(v.into_iter().map(|x| x * s).collect::&lt;Vec&lt;T&gt;&gt;())
 }
 
-<span class="comment">// fn map&lt;T, F&gt;(v: Vec&lt;T&gt;, f: F) -&gt; Series
-// where Series: TypedVector&lt;T&gt;, F: Fn(Scalar) -&gt; Scalar, Scalar: TypedScalar&lt;T&gt; {
-//     Series::new(v.into_iter().map(|x| f(Scalar::new(x)).unwrap()).collect::&lt;Vec&lt;T&gt;&gt;())
-// }
-//
-// fn reduce&lt;T, F&gt;(v: Vec&lt;T&gt;, f: F) -&gt; Scalar
-// where Scalar: TypedScalar&lt;T&gt;, F: Fn(Scalar, Scalar) -&gt; Scalar, T: Default {
-//     v.into_iter().fold(Scalar::new(T::default()), |x, y| f(x, Scalar::new(y)))
-// }
-//
-// fn zip_with&lt;T, F&gt;(v: Vec&lt;T&gt;, w: Vec&lt;T&gt;, f: F) -&gt; Series
-// where Series: TypedVector&lt;T&gt;, F: Fn(Scalar, Scalar) -&gt; Scalar, Scalar: TypedScalar&lt;T&gt; {
-//     Series::new(
-//         v.into_iter().zip(w.into_iter())
-//             .map(|(x, y)| f(Scalar::new(x), Scalar::new(y)).unwrap())
-//             .collect::&lt;Vec&lt;T&gt;&gt;()
-//     )
-// }
-//
-// fn filter&lt;T, F&gt;(v: Vec&lt;T&gt;, f: F) -&gt; Series
-// where Series: TypedVector&lt;T&gt;, F: Fn(Scalar) -&gt; bool, Scalar: TypedScalar&lt;T&gt;, T: Clone {
-//     Series::new(
-//         v.into_iter()
-//             .filter(|x| f(Scalar::new(x.clone())))
-//             .collect::&lt;Vec&lt;T&gt;&gt;()
-//     )
-// }
-//
-// fn take&lt;T&gt;(v: Vec&lt;T&gt;, n: usize) -&gt; Series
-// where Series: TypedVector&lt;T&gt; {
-//     Series::new(
-//         v.into_iter().take(n).collect::&lt;Vec&lt;T&gt;&gt;()
-//     )
-// }
-//
-// fn skip&lt;T&gt;(v: Vec&lt;T&gt;, n: usize) -&gt; Series
-//     where Series: TypedVector&lt;T&gt; {
-//     Series::new(
-//         v.into_iter().skip(n).collect::&lt;Vec&lt;T&gt;&gt;()
-//     )
-// }
-
-// =============================================================================
+<span class="comment">// =============================================================================
 // Implementations of DType variables
 // =============================================================================
 </span><span class="kw">impl </span>DType {
@@ -3452,5 +3786,110 @@
         <span class="prelude-val">Ok</span>(df)
     }
 }
-</code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (750bd1a7f 2022-09-14)" ></div></body></html>
+
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">pub trait </span>WithParquet {
+    <span class="kw">fn </span>write_parquet(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
+    <span class="kw">fn </span>read_parquet(file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>Error&gt;&gt; <span class="kw">where </span><span class="self">Self</span>: Sized;
+    <span class="comment">// fn read_parquet_by_header(file_path: &amp;str, header: Vec&lt;&amp;str&gt;) -&gt; Result&lt;Self, Box&lt;dyn Error&gt;&gt; where Self: Sized;
+</span>}
+
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">impl </span>WithParquet <span class="kw">for </span>DataFrame {
+    <span class="doccomment">/// Write DataFrame to parquet
+    </span><span class="kw">fn </span>write_parquet(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
+        <span class="kw">let </span>file = std::fs::File::create(file_path)<span class="question-mark">?</span>;
+
+        <span class="kw">let </span><span class="kw-2">mut </span>schema_vec = <span class="macro">vec!</span>[];
+        <span class="kw">let </span><span class="kw-2">mut </span>arr_vec = <span class="macro">vec!</span>[];
+
+        <span class="kw">let </span>max_length = <span class="self">self</span>.data.iter().fold(<span class="number">0usize</span>, |acc, x| acc.max(x.len()));
+
+        <span class="kw">for </span>h <span class="kw">in </span><span class="self">self</span>.header().iter() {
+            <span class="kw">let </span>v = <span class="kw-2">&amp;</span><span class="self">self</span>[h.as_str()];
+            <span class="kw">let </span>field = Field::new(h.as_str(), dtype_to_arrow(v.dtype), <span class="bool-val">false</span>);
+
+            <span class="macro">dtype_match_to_arrow!</span>(v.dtype, v.to_vec(), arr_vec; max_length);
+            schema_vec.push(field);
+        }
+
+        <span class="kw">let </span>schema = Schema::from(schema_vec);
+        <span class="kw">let </span>l = arr_vec.len();
+        <span class="kw">let </span>chunk = Chunk::new(arr_vec);
+        <span class="kw">let </span>encodings = (<span class="number">0 </span>.. l).map(|<span class="kw">_</span>| <span class="macro">vec!</span>[Encoding::Plain]).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+        <span class="kw">let </span>options = WriteOptions {
+            write_statistics: <span class="bool-val">true</span>,
+            compression: CompressionOptions::Snappy,
+            version: Version::V2,
+        };
+
+        <span class="kw">let </span>row_groups = RowGroupIterator::try_new(
+            <span class="macro">vec!</span>[<span class="prelude-val">Ok</span>(chunk)].into_iter(),
+            <span class="kw-2">&amp;</span>schema,
+            options,
+            encodings,
+        )<span class="question-mark">?</span>;
+
+        <span class="kw">let </span><span class="kw-2">mut </span>writer = FileWriter::try_new(file, schema, options)<span class="question-mark">?</span>;
+
+        <span class="kw">for </span>row_group <span class="kw">in </span>row_groups {
+            writer.write(row_group<span class="question-mark">?</span>)<span class="question-mark">?</span>;
+        }
+
+        <span class="kw">let _ </span>= writer.end(<span class="prelude-val">None</span>)<span class="question-mark">?</span>;
+
+        <span class="prelude-val">Ok</span>(())
+    }
+
+    <span class="doccomment">/// Read parquet to DataFrame
+    </span><span class="kw">fn </span>read_parquet(file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>Error&gt;&gt; <span class="kw">where </span><span class="self">Self</span>: Sized {
+        <span class="kw">let </span><span class="kw-2">mut </span>df = DataFrame::new(<span class="macro">vec!</span>[]);
+
+        <span class="kw">let </span><span class="kw-2">mut </span>reader = std::fs::File::open(file_path)<span class="question-mark">?</span>;
+        <span class="kw">let </span>metadata = read_metadata(<span class="kw-2">&amp;mut </span>reader)<span class="question-mark">?</span>;
+        <span class="kw">let </span>schema = infer_schema(<span class="kw-2">&amp;</span>metadata)<span class="question-mark">?</span>;
+        <span class="kw">let </span>fields = schema.fields.clone();
+
+        <span class="kw">let </span>row_groups = metadata.row_groups;
+        <span class="kw">let </span>chunks = FileReader::new(reader, row_groups, schema, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>);
+
+        <span class="kw">for </span>may_chunk <span class="kw">in </span>chunks {
+            <span class="kw">let </span>chunk = may_chunk<span class="question-mark">?</span>;
+            <span class="kw">let </span>arrs = chunk.into_arrays();
+
+            <span class="kw">for </span>(field, arr) <span class="kw">in </span>fields.iter().zip(arrs.iter()) {
+                <span class="kw">let </span>h = <span class="kw-2">&amp;</span>field.name;
+                <span class="kw">let </span>dt = field.data_type();
+                <span class="kw">let </span>at = arrow_to_dtype(dt.clone());
+                <span class="kw">match </span>at {
+                    dtype <span class="kw">if </span>dtype.is_numeric() =&gt; {
+                        <span class="kw">let </span>series = <span class="macro">dtype_match!</span>(N; dtype, <span class="macro">vec!</span>[], |vec| parquet_read_value(arr, vec); Vec)<span class="question-mark">?</span>;
+                        df.push(h, series);
+                    }
+                    Bool =&gt; {
+                        <span class="kw">let </span>data = arr.as_any().downcast_ref::&lt;BooleanArray&gt;().unwrap();
+                        <span class="kw">let </span>data = data.values_iter().collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+                        df.push(h, Series::new(data));
+                    }
+                    Char =&gt; {
+                        <span class="kw">let </span>data = arr.as_any().downcast_ref::&lt;Utf8Array&lt;i32&gt;&gt;().unwrap();
+                        <span class="kw">let </span>data = data.values_iter().map(|t| t.chars().next().unwrap()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+                        df.push(<span class="kw-2">&amp;</span>h, Series::new(data))
+                    }
+                    Str =&gt; {
+                        <span class="kw">let </span>data = arr.as_any().downcast_ref::&lt;Utf8Array&lt;i32&gt;&gt;().unwrap();
+                        <span class="kw">let </span>data = data.values_iter().map(|t| t.to_string()).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
+                        df.push(<span class="kw-2">&amp;</span>h, Series::new(data))
+                    }
+                    <span class="kw">_ </span>=&gt; <span class="macro">unreachable!</span>()
+                }
+            }
+        }
+        <span class="prelude-val">Ok</span>(df)
+    }
+
+    <span class="comment">// fn read_parquet_by_header(file_path: &amp;str, header: Vec&lt;&amp;str&gt;) -&gt; Result&lt;Self, Box&lt;dyn Error&gt;&gt; where Self: Sized {
+    //     todo!()
+    // }
+</span>}</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (bed4ad65b 2022-10-25)" ></div></body></html>
