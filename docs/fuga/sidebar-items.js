@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"attr":[["ad_function",""]],"macro":[["ad_closure",""]]};
+window.SIDEBAR_ITEMS = {"attr":[["ad_function",""]],"enum":[["CompressionOptions","Defines the compression settings for writing a parquet file."]],"macro":[["ad_closure",""]]};

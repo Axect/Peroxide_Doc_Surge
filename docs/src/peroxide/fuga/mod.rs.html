@@ -191,6 +191,51 @@
 <span id="175">175</span>
 <span id="176">176</span>
 <span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Choose what you want.
 //!
 //! # Philosophy
@@ -206,7 +251,7 @@
 //! extern crate peroxide;
 //! use peroxide::fuga::*;
 //!
-//! // Then you can use everyting in peroxide.
+//! // Then you can use everything in peroxide.
 //! ```
 //!
 //! # Compare with `prelude`
@@ -296,6 +341,48 @@
 //!     a.solve(&amp;b).print();    // [1, 1]
 //! }
 //! ```
+//!
+//! * DataFrame with Parquet
+//!
+//! ```
+//! extern crate peroxide;
+//! use peroxide::fuga::*;
+//!
+//! fn main() {
+//!     let x = seq(0, 1, 0.1);
+//!     let y = x.fmap(|t| t.powi(2));
+//!
+//!     let mut df = DataFrame::new(vec![]);
+//!     df.push(&quot;x&quot;, Series::new(x));
+//!     df.push(&quot;y&quot;, Series::new(y));
+//!
+//!     df.print();
+//!
+//!     # #[cfg(feature=&quot;parquet&quot;)] {
+//!     df.write_parquet(&quot;example_data/test.parquet&quot;, CompressionOptions::Uncompressed).unwrap();
+//!     # }
+//! }
+//! ```
+//!
+//! ```
+//! extern crate peroxide;
+//! use peroxide::prelude::*;
+//!
+//! fn main() {
+//!     let x = seq(0, 1, 0.1);
+//!     let y = x.fmap(|t| t.powi(2));
+//!
+//!     let mut df = DataFrame::new(vec![]);
+//!     df.push(&quot;x&quot;, Series::new(x));
+//!     df.push(&quot;y&quot;, Series::new(y));
+//!
+//!     df.print();
+//!
+//!     # #[cfg(feature=&quot;parquet&quot;)] {
+//!     df.write_parquet(&quot;example_data/test.parquet&quot;).unwrap();
+//!     # }
+//! }
+//! ```
 
 </span><span class="attribute">#[allow(unused_imports)]
 </span><span class="kw">pub use </span><span class="kw">crate</span>::macros::{julia_macro::<span class="kw-2">*</span>, matlab_macro::<span class="kw-2">*</span>, r_macro::<span class="kw-2">*</span>};
@@ -368,5 +455,8 @@
 <span class="kw">pub use </span><span class="kw">crate</span>::structure::dataframe::DType::<span class="kw-2">*</span>;
 <span class="kw">pub use </span><span class="kw">crate</span>::structure::ad::AD::<span class="kw-2">*</span>;
 <span class="kw">pub use </span><span class="kw">crate</span>::numerical::spline::SlopeMethod::{Akima, Quadratic};
+
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">pub use </span>arrow2::io::parquet::write::CompressionOptions;
 </code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (bed4ad65b 2022-10-25)" ></div></body></html>

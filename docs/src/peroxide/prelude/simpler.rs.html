@@ -159,7 +159,31 @@
 <span id="143">143</span>
 <span id="144">144</span>
 <span id="145">145</span>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::numerical::{
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+</pre><pre class="rust"><code><span class="kw">use </span>std::error::Error;
+<span class="kw">use </span><span class="kw">crate</span>::numerical::{
     eigen,
     eigen::{Eigen, EigenMethod::Jacobi},
     integral,
@@ -170,6 +194,10 @@
 <span class="kw">use </span><span class="kw">crate</span>::structure::matrix::{<span class="self">self</span>, Matrix};
 <span class="kw">use </span><span class="kw">crate</span>::structure::polynomial;
 <span class="kw">use </span><span class="kw">crate</span>::traits::math::{Norm, Normed};
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">use </span><span class="kw">crate</span>::structure::dataframe::{DataFrame, WithParquet};
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">use </span>arrow2::io::parquet::write::CompressionOptions;
 
 <span class="doccomment">/// Simple Norm
 </span><span class="kw">pub trait </span>SimpleNorm: Normed {
@@ -303,5 +331,23 @@
 
 <span class="kw">pub fn </span>cubic_hermite_spline(node_x: <span class="kw-2">&amp;</span>[f64], node_y: <span class="kw-2">&amp;</span>[f64]) -&gt; CubicHermiteSpline {
     spline::cubic_hermite_spline(node_x, node_y, Quadratic)
+}
+
+<span class="doccomment">/// Simple handle parquet
+</span><span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">pub trait </span>SimpleParquet: Sized {
+    <span class="kw">fn </span>write_parquet(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
+    <span class="kw">fn </span>read_parquet(path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
+}
+
+<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+</span><span class="kw">impl </span>SimpleParquet <span class="kw">for </span>DataFrame {
+    <span class="kw">fn </span>write_parquet(<span class="kw-2">&amp;</span><span class="self">self</span>, path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
+        WithParquet::write_parquet(<span class="self">self</span>, path, CompressionOptions::Uncompressed)
+    }
+
+    <span class="kw">fn </span>read_parquet(path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
+        WithParquet::read_parquet(path)
+    }
 }</code></pre></div>
 </section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (bed4ad65b 2022-10-25)" ></div></body></html>

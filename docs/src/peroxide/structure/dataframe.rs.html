@@ -1953,6 +1953,7 @@
 <span id="1937">1937</span>
 <span id="1938">1938</span>
 <span id="1939">1939</span>
+<span id="1940">1940</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Pandas-like dataframe &amp; series.
 //!
 //! ## Series
@@ -2197,7 +2198,7 @@
 //!         df.push(&quot;a&quot;, Series::new(vec![&#39;x&#39;, &#39;y&#39;, &#39;z&#39;]));
 //!         df.push(&quot;b&quot;, Series::new(vec![0, 1, 2]));
 //!         df.push(&quot;c&quot;, Series::new(c!(0.1, 0.2, 0.3)));
-//!         df.write_parquet(&quot;example_data/doc_pq.parquet&quot;)?;
+//!         df.write_parquet(&quot;example_data/doc_pq.parquet&quot;, CompressionOptions::Uncompressed)?;
 //!
 //!         // Read parquet
 //!         let mut dg = DataFrame::read_parquet(&quot;example_data/doc_pq.parquet&quot;)?;
@@ -3787,9 +3788,10 @@
     }
 }
 
-<span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
+<span class="doccomment">/// To handle parquet format
+</span><span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
 </span><span class="kw">pub trait </span>WithParquet {
-    <span class="kw">fn </span>write_parquet(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
+    <span class="kw">fn </span>write_parquet(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str, compression: CompressionOptions) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt;;
     <span class="kw">fn </span>read_parquet(file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Box&lt;<span class="kw">dyn </span>Error&gt;&gt; <span class="kw">where </span><span class="self">Self</span>: Sized;
     <span class="comment">// fn read_parquet_by_header(file_path: &amp;str, header: Vec&lt;&amp;str&gt;) -&gt; Result&lt;Self, Box&lt;dyn Error&gt;&gt; where Self: Sized;
 </span>}
@@ -3797,7 +3799,7 @@
 <span class="attribute">#[cfg(feature=<span class="string">&quot;parquet&quot;</span>)]
 </span><span class="kw">impl </span>WithParquet <span class="kw">for </span>DataFrame {
     <span class="doccomment">/// Write DataFrame to parquet
-    </span><span class="kw">fn </span>write_parquet(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
+    </span><span class="kw">fn </span>write_parquet(<span class="kw-2">&amp;</span><span class="self">self</span>, file_path: <span class="kw-2">&amp;</span>str, compression: CompressionOptions) -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;<span class="kw">dyn </span>Error&gt;&gt; {
         <span class="kw">let </span>file = std::fs::File::create(file_path)<span class="question-mark">?</span>;
 
         <span class="kw">let </span><span class="kw-2">mut </span>schema_vec = <span class="macro">vec!</span>[];
@@ -3819,7 +3821,7 @@
         <span class="kw">let </span>encodings = (<span class="number">0 </span>.. l).map(|<span class="kw">_</span>| <span class="macro">vec!</span>[Encoding::Plain]).collect::&lt;Vec&lt;<span class="kw">_</span>&gt;&gt;();
         <span class="kw">let </span>options = WriteOptions {
             write_statistics: <span class="bool-val">true</span>,
-            compression: CompressionOptions::Snappy,
+            compression,
             version: Version::V2,
         };
 
