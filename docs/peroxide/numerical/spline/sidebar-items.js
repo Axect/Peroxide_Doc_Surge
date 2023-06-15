@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["SlopeMethod",""]],"fn":[["cubic_hermite_spline",""],["cubic_spline","Cubic Spline (Natural)"]],"struct":[["CubicHermiteSpline",""],["CubicSpline","Cubic Spline (Natural)"]],"trait":[["Spline","Trait for spline interpolation"]]};
+window.SIDEBAR_ITEMS = {"enum":["SlopeMethod"],"fn":["cubic_hermite_spline","cubic_spline"],"struct":["CubicHermiteSpline","CubicSpline"],"trait":["Spline"]};

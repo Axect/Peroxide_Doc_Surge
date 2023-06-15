@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Matrix for Scientific computation"><meta name="keywords" content="rust, rustlang, rust-lang, matrix"><title>peroxide::structure::matrix - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Matrix for Scientific computation"><title>peroxide::structure::matrix - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../static.files/rustdoc-ba5701c5741a7b69.css" id="mainThemeStyle"><div id="rustdoc-vars" data-root-path="../../../" data-static-root-path="../../../static.files/" data-current-crate="peroxide" data-themes="" data-resource-suffix="" data-rustdoc-version="1.70.0 (90c541806 2023-05-31)" data-search-js="search-e077946657036a58.js" data-settings-js="settings-298e1ea74db45b39.js" data-settings-css="settings-7bfb4c59cc6bc502.css" data-theme-light-css="light-0f8c037637f9eb3e.css" data-theme-dark-css="dark-1097f8e92a01e3cf.css" data-theme-ayu-css="ayu-614652228113ac93.css" ></div><script src="../../../static.files/storage-62ce34ea385b278a.js"></script><script defer src="../../../static.files/main-f61008743c98d196.js"></script><noscript><link rel="stylesheet" media="(prefers-color-scheme:light)" href="../../../static.files/light-0f8c037637f9eb3e.css"><link rel="stylesheet" media="(prefers-color-scheme:dark)" href="../../../static.files/dark-1097f8e92a01e3cf.css"><link rel="stylesheet" href="../../../static.files/noscript-13285aec31fa243e.css"></noscript><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -14,7 +14,7 @@
     });
 </script>
 
-</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../peroxide/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"><a href="#">Module matrix</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></section></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1 class="fqn">Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">matrix</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/structure/matrix.rs.html#1-4721">source</a> · <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Matrix for Scientific computation</p>
+</head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2></h2></nav><nav class="sidebar"><a class="logo-container" href="../../../peroxide/index.html"><img class="rust-logo" src="../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><h2 class="location"><a href="#">Module matrix</a></h2><div class="sidebar-elems"><section><ul class="block"><li><a href="#reexports">Re-exports</a></li><li><a href="#structs">Structs</a></li><li><a href="#enums">Enums</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></section></div></nav><main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Module <a href="../../index.html">peroxide</a>::<wbr><a href="../index.html">structure</a>::<wbr><a class="mod" href="#">matrix</a><button id="copy-path" title="Copy item path to clipboard"><img src="../../../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="srclink" href="../../../src/peroxide/structure/matrix.rs.html#1-4723">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Matrix for Scientific computation</p>
 <h3 id="declare-matrix"><a href="#declare-matrix">Declare matrix</a></h3>
 <ul>
 <li>You can declare matrix by various ways.
@@ -37,7 +37,7 @@
 <li><code>Shape</code>: <code>Enum</code> for matrix shape - <code>Row</code> &amp; <code>Col</code></li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -103,12 +103,17 @@
 </li>
 <li>
 <p>For <code>R</code>,</p>
-<div class="example-wrap"><pre class="language-R"><code>a = matrix(1:4:1, 2, 2, Row)
-print(a)</code></pre></div></li>
+<div class="example-wrap"><pre class="language-R"><code># R
+a = matrix(1:4:1, 2, 2, Row)
+print(a)
+#      [,1] [,2]
+# [1,]    1    2
+# [2,]    3    4
+</code></pre></div></li>
 <li>
 <p>For <code>Peroxide</code>,</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -142,7 +147,7 @@ print(a)</code></pre></div></li>
 <li>
 <p><code>subs_row(&amp;mut self, usize, Vec&lt;f64&gt;)</code>: Substitute row with <code>Vec&lt;f64&gt;</code></p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -225,7 +230,7 @@ print(a)</code></pre></div></li>
 <li><code>nc</code> feature should be required - <code>netcdf</code> or <code>libnetcdf</code> are prerequisites.</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -283,7 +288,7 @@ print(a)</code></pre></div></li>
 <li>
 <p>In peroxide, can use basic operations between matrices. I’ll show you by examples.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -330,7 +335,7 @@ print(a)</code></pre></div></li>
 <li>
 <p>But you can use two-dimensional index to extract or modify components.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -350,7 +355,7 @@ print(a)</code></pre></div></li>
 <li>
 <p>Just use <code>row</code> or <code>col</code> method (I already showed at Basic method section).</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -392,7 +397,7 @@ print(a)</code></pre></div></li>
 <li>
 <p>Caution: Transpose does not consume the original value.</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -431,7 +436,7 @@ print(a)</code></pre></div></li>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
-<span class="attribute">#[derive(Debug, Clone)]
+<span class="attr">#[derive(Debug, Clone)]
 </span><span class="kw">pub struct </span>PQLU {
     <span class="kw">pub </span>p: Vec&lt;usize&gt;,
     <span class="kw">pub </span>q: Vec&lt;usize&gt;,
@@ -442,7 +447,7 @@ print(a)</code></pre></div></li>
 <li>
 <p>Example of LU decomposition:</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -468,7 +473,7 @@ print(a)</code></pre></div></li>
 <li>
 <p>Peroxide uses LU decomposition to obtain determinant ($ \mathcal{O}(n^3) $)</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -487,7 +492,7 @@ print(a)</code></pre></div></li>
 $$ \begin{aligned} L &amp;= \begin{pmatrix} L_1 &amp; \mathbf{0} \\ L_2 &amp; L_3 \end{pmatrix} \\ L^{-1} &amp;= \begin{pmatrix} L_1^{-1} &amp; \mathbf{0} \\ -L_3^{-1}L_2 L_1^{-1} &amp; L_3^{-1} \end{pmatrix} \end{aligned} $$</li>
 </ul>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -523,7 +528,7 @@ can get better performance (via memoization)</li>
 <li>
 <p>Return <code>QR</code> structure.</p>
 
-<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">pub struct </span>QR {
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">pub struct </span>QR {
     <span class="kw">pub </span>q: Matrix,
     <span class="kw">pub </span>r: Matrix,
 }</code></pre></div>
@@ -531,7 +536,7 @@ can get better performance (via memoization)</li>
 <li>
 <p>Example</p>
 
-<div class="example-wrap ignore"><div class='tooltip'>ⓘ</div><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
 <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;
@@ -583,7 +588,7 @@ qr.q().print();
 
 <span class="kw">fn </span>main() {
     <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;3 2 2;2 3 -2&quot;</span>);
-    <span class="attribute">#[cfg(feature=<span class="string">&quot;O3&quot;</span>)]
+    <span class="attr">#[cfg(feature=<span class="string">&quot;O3&quot;</span>)]
     </span>{
         <span class="comment">// Full SVD
         </span><span class="kw">let </span>svd = a.svd();
@@ -613,7 +618,7 @@ qr.q().print();
 
 <span class="kw">fn </span>main() {
     <span class="kw">let </span>a = ml_matrix(<span class="string">&quot;1 2;2 5&quot;</span>);
-    <span class="attribute">#[cfg(feature = <span class="string">&quot;O3&quot;</span>)]
+    <span class="attr">#[cfg(feature = <span class="string">&quot;O3&quot;</span>)]
     </span>{
         <span class="kw">let </span>u = a.cholesky(Upper);
         <span class="macro">assert_eq!</span>(u, ml_matrix(<span class="string">&quot;1 2;0 1&quot;</span>));
@@ -633,7 +638,7 @@ qr.q().print();
 <li>
 <p>For <code>O3</code> feature, peroxide use SVD to obtain pseudo inverse</p>
 
-<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#[macro_use]
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[macro_use]
 </span><span class="kw">extern crate </span>peroxide;
 <span class="kw">use </span>peroxide::fuga::<span class="kw-2">*</span>;
 
@@ -646,5 +651,5 @@ qr.q().print();
 </span>}</code></pre></div>
 </li>
 </ul>
-</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2><div class="item-table"><div class="item-row"><div class="item-left import-item" id="reexport.Col"><code>pub use self::Shape::<a class="enum" href="enum.Shape.html" title="enum peroxide::structure::matrix::Shape">Col</a>;</code></div></div><div class="item-row"><div class="item-left import-item" id="reexport.Row"><code>pub use self::Shape::<a class="enum" href="enum.Shape.html" title="enum peroxide::structure::matrix::Shape">Row</a>;</code></div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DGEQRF.html" title="peroxide::structure::matrix::DGEQRF struct">DGEQRF</a></div><div class="item-right docblock-short">Temporary data structure from <code>dgeqrf</code></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DGESVD.html" title="peroxide::structure::matrix::DGESVD struct">DGESVD</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DGETRF.html" title="peroxide::structure::matrix::DGETRF struct">DGETRF</a></div><div class="item-right docblock-short">Temporary data structure from <code>dgetrf</code></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DPOTRF.html" title="peroxide::structure::matrix::DPOTRF struct">DPOTRF</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Matrix.html" title="peroxide::structure::matrix::Matrix struct">Matrix</a></div><div class="item-right docblock-short">R-like matrix structure</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.PQLU.html" title="peroxide::structure::matrix::PQLU struct">PQLU</a></div><div class="item-right docblock-short">Data structure for Complete Pivoting LU decomposition</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.QR.html" title="peroxide::structure::matrix::QR struct">QR</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SVD.html" title="peroxide::structure::matrix::SVD struct">SVD</a></div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.WAZD.html" title="peroxide::structure::matrix::WAZD struct">WAZD</a></div></div></div><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Form.html" title="peroxide::structure::matrix::Form enum">Form</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.LAPACK_STATUS.html" title="peroxide::structure::matrix::LAPACK_STATUS enum">LAPACK_STATUS</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.POSITIVE_STATUS.html" title="peroxide::structure::matrix::POSITIVE_STATUS enum">POSITIVE_STATUS</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.SVD_STATUS.html" title="peroxide::structure::matrix::SVD_STATUS enum">SVD_STATUS</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.Shape.html" title="peroxide::structure::matrix::Shape enum">Shape</a></div><div class="item-right docblock-short">To select matrices’ binding.</div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.SolveKind.html" title="peroxide::structure::matrix::SolveKind enum">SolveKind</a></div></div><div class="item-row"><div class="item-left module-item"><a class="enum" href="enum.UPLO.html" title="peroxide::structure::matrix::UPLO enum">UPLO</a></div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Error.html" title="peroxide::structure::matrix::Error trait">Error</a></div><div class="item-right docblock-short"><code>Error</code> is a trait representing the basic expectations for error values,
-i.e., values of type <code>E</code> in <a href="https://doc.rust-lang.org/nightly/core/result/enum.Result.html" title="Result&lt;T, E&gt;"><code>Result&lt;T, E&gt;</code></a>.</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.LinearAlgebra.html" title="peroxide::structure::matrix::LinearAlgebra trait">LinearAlgebra</a></div><div class="item-right docblock-short">Linear algebra trait</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.blas_mul.html" title="peroxide::structure::matrix::blas_mul fn">blas_mul</a></div><div class="item-right docblock-short">Matrix multiplication with BLAS</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.combine.html" title="peroxide::structure::matrix::combine fn">combine</a></div><div class="item-right docblock-short">Combine separated matrix to one matrix</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.diag.html" title="peroxide::structure::matrix::diag fn">diag</a></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gemm.html" title="peroxide::structure::matrix::gemm fn">gemm</a></div><div class="item-right docblock-short">GEMM wrapper for Matrixmultiply</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gemv.html" title="peroxide::structure::matrix::gemv fn">gemv</a></div><div class="item-right docblock-short">General Matrix-Vector multiplication</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gen_householder.html" title="peroxide::structure::matrix::gen_householder fn">gen_householder</a></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.gevm.html" title="peroxide::structure::matrix::gevm fn">gevm</a></div><div class="item-right docblock-short">General Vector-Matrix multiplication</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.inv_l.html" title="peroxide::structure::matrix::inv_l fn">inv_l</a></div><div class="item-right docblock-short">Inverse of Lower matrix</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.inv_u.html" title="peroxide::structure::matrix::inv_u fn">inv_u</a></div><div class="item-right docblock-short">Inverse of upper triangular matrix</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgeqrf.html" title="peroxide::structure::matrix::lapack_dgeqrf fn">lapack_dgeqrf</a></div><div class="item-right docblock-short">Peroxide version of <code>dgeqrf</code></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgesvd.html" title="peroxide::structure::matrix::lapack_dgesvd fn">lapack_dgesvd</a></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgetrf.html" title="peroxide::structure::matrix::lapack_dgetrf fn">lapack_dgetrf</a></div><div class="item-right docblock-short">Peroxide version of <code>dgetrf</code></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgetri.html" title="peroxide::structure::matrix::lapack_dgetri fn">lapack_dgetri</a></div><div class="item-right docblock-short">Peroxide version of <code>dgetri</code></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dgetrs.html" title="peroxide::structure::matrix::lapack_dgetrs fn">lapack_dgetrs</a></div><div class="item-right docblock-short">Peroxide version of <code>dgetrs</code></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.lapack_dpotrf.html" title="peroxide::structure::matrix::lapack_dpotrf fn">lapack_dpotrf</a></div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.matrix.html" title="peroxide::structure::matrix::matrix fn">matrix</a></div><div class="item-right docblock-short">R-like matrix constructor</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.ml_matrix.html" title="peroxide::structure::matrix::ml_matrix fn">ml_matrix</a></div><div class="item-right docblock-short">Matlab-like matrix constructor</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.py_matrix.html" title="peroxide::structure::matrix::py_matrix fn">py_matrix</a></div><div class="item-right docblock-short">Python-like matrix constructor</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.r_matrix.html" title="peroxide::structure::matrix::r_matrix fn">r_matrix</a></div><div class="item-right docblock-short">R-like matrix constructor (Explicit ver.)</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.solve.html" title="peroxide::structure::matrix::solve fn">solve</a></div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2><div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.Perms.html" title="peroxide::structure::matrix::Perms type">Perms</a></div></div></div></section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="peroxide" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.66.0-nightly (bed4ad65b 2022-10-25)" ></div></body></html>
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2><ul class="item-table"><li><div class="item-name" id="reexport.Col"><code>pub use self::Shape::<a class="enum" href="enum.Shape.html" title="enum peroxide::structure::matrix::Shape">Col</a>;</code></div></li><li><div class="item-name" id="reexport.Row"><code>pub use self::Shape::<a class="enum" href="enum.Shape.html" title="enum peroxide::structure::matrix::Shape">Row</a>;</code></div></li></ul><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2><ul class="item-table"><li><div class="item-name"><a class="struct" href="struct.DGEQRF.html" title="struct peroxide::structure::matrix::DGEQRF">DGEQRF</a></div><div class="desc docblock-short">Temporary data structure from <code>dgeqrf</code></div></li><li><div class="item-name"><a class="struct" href="struct.DGESVD.html" title="struct peroxide::structure::matrix::DGESVD">DGESVD</a></div></li><li><div class="item-name"><a class="struct" href="struct.DGETRF.html" title="struct peroxide::structure::matrix::DGETRF">DGETRF</a></div><div class="desc docblock-short">Temporary data structure from <code>dgetrf</code></div></li><li><div class="item-name"><a class="struct" href="struct.DPOTRF.html" title="struct peroxide::structure::matrix::DPOTRF">DPOTRF</a></div></li><li><div class="item-name"><a class="struct" href="struct.Matrix.html" title="struct peroxide::structure::matrix::Matrix">Matrix</a></div><div class="desc docblock-short">R-like matrix structure</div></li><li><div class="item-name"><a class="struct" href="struct.PQLU.html" title="struct peroxide::structure::matrix::PQLU">PQLU</a></div><div class="desc docblock-short">Data structure for Complete Pivoting LU decomposition</div></li><li><div class="item-name"><a class="struct" href="struct.QR.html" title="struct peroxide::structure::matrix::QR">QR</a></div></li><li><div class="item-name"><a class="struct" href="struct.SVD.html" title="struct peroxide::structure::matrix::SVD">SVD</a></div></li><li><div class="item-name"><a class="struct" href="struct.WAZD.html" title="struct peroxide::structure::matrix::WAZD">WAZD</a></div></li></ul><h2 id="enums" class="small-section-header"><a href="#enums">Enums</a></h2><ul class="item-table"><li><div class="item-name"><a class="enum" href="enum.Form.html" title="enum peroxide::structure::matrix::Form">Form</a></div></li><li><div class="item-name"><a class="enum" href="enum.LAPACK_STATUS.html" title="enum peroxide::structure::matrix::LAPACK_STATUS">LAPACK_STATUS</a></div></li><li><div class="item-name"><a class="enum" href="enum.POSITIVE_STATUS.html" title="enum peroxide::structure::matrix::POSITIVE_STATUS">POSITIVE_STATUS</a></div></li><li><div class="item-name"><a class="enum" href="enum.SVD_STATUS.html" title="enum peroxide::structure::matrix::SVD_STATUS">SVD_STATUS</a></div></li><li><div class="item-name"><a class="enum" href="enum.Shape.html" title="enum peroxide::structure::matrix::Shape">Shape</a></div><div class="desc docblock-short">To select matrices’ binding.</div></li><li><div class="item-name"><a class="enum" href="enum.SolveKind.html" title="enum peroxide::structure::matrix::SolveKind">SolveKind</a></div></li><li><div class="item-name"><a class="enum" href="enum.UPLO.html" title="enum peroxide::structure::matrix::UPLO">UPLO</a></div></li></ul><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2><ul class="item-table"><li><div class="item-name"><a class="trait" href="trait.Error.html" title="trait peroxide::structure::matrix::Error">Error</a></div><div class="desc docblock-short"><code>Error</code> is a trait representing the basic expectations for error values,
+i.e., values of type <code>E</code> in <a href="https://doc.rust-lang.org/1.70.0/core/result/enum.Result.html" title="enum core::result::Result"><code>Result&lt;T, E&gt;</code></a>.</div></li><li><div class="item-name"><a class="trait" href="trait.LinearAlgebra.html" title="trait peroxide::structure::matrix::LinearAlgebra">LinearAlgebra</a></div><div class="desc docblock-short">Linear algebra trait</div></li></ul><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.blas_mul.html" title="fn peroxide::structure::matrix::blas_mul">blas_mul</a></div><div class="desc docblock-short">Matrix multiplication with BLAS</div></li><li><div class="item-name"><a class="fn" href="fn.combine.html" title="fn peroxide::structure::matrix::combine">combine</a></div><div class="desc docblock-short">Combine separated matrix to one matrix</div></li><li><div class="item-name"><a class="fn" href="fn.diag.html" title="fn peroxide::structure::matrix::diag">diag</a></div></li><li><div class="item-name"><a class="fn" href="fn.gemm.html" title="fn peroxide::structure::matrix::gemm">gemm</a></div><div class="desc docblock-short">GEMM wrapper for Matrixmultiply</div></li><li><div class="item-name"><a class="fn" href="fn.gemv.html" title="fn peroxide::structure::matrix::gemv">gemv</a></div><div class="desc docblock-short">General Matrix-Vector multiplication</div></li><li><div class="item-name"><a class="fn" href="fn.gen_householder.html" title="fn peroxide::structure::matrix::gen_householder">gen_householder</a></div></li><li><div class="item-name"><a class="fn" href="fn.gevm.html" title="fn peroxide::structure::matrix::gevm">gevm</a></div><div class="desc docblock-short">General Vector-Matrix multiplication</div></li><li><div class="item-name"><a class="fn" href="fn.inv_l.html" title="fn peroxide::structure::matrix::inv_l">inv_l</a></div><div class="desc docblock-short">Inverse of Lower matrix</div></li><li><div class="item-name"><a class="fn" href="fn.inv_u.html" title="fn peroxide::structure::matrix::inv_u">inv_u</a></div><div class="desc docblock-short">Inverse of upper triangular matrix</div></li><li><div class="item-name"><a class="fn" href="fn.lapack_dgeqrf.html" title="fn peroxide::structure::matrix::lapack_dgeqrf">lapack_dgeqrf</a></div><div class="desc docblock-short">Peroxide version of <code>dgeqrf</code></div></li><li><div class="item-name"><a class="fn" href="fn.lapack_dgesvd.html" title="fn peroxide::structure::matrix::lapack_dgesvd">lapack_dgesvd</a></div></li><li><div class="item-name"><a class="fn" href="fn.lapack_dgetrf.html" title="fn peroxide::structure::matrix::lapack_dgetrf">lapack_dgetrf</a></div><div class="desc docblock-short">Peroxide version of <code>dgetrf</code></div></li><li><div class="item-name"><a class="fn" href="fn.lapack_dgetri.html" title="fn peroxide::structure::matrix::lapack_dgetri">lapack_dgetri</a></div><div class="desc docblock-short">Peroxide version of <code>dgetri</code></div></li><li><div class="item-name"><a class="fn" href="fn.lapack_dgetrs.html" title="fn peroxide::structure::matrix::lapack_dgetrs">lapack_dgetrs</a></div><div class="desc docblock-short">Peroxide version of <code>dgetrs</code></div></li><li><div class="item-name"><a class="fn" href="fn.lapack_dpotrf.html" title="fn peroxide::structure::matrix::lapack_dpotrf">lapack_dpotrf</a></div></li><li><div class="item-name"><a class="fn" href="fn.matrix.html" title="fn peroxide::structure::matrix::matrix">matrix</a></div><div class="desc docblock-short">R-like matrix constructor</div></li><li><div class="item-name"><a class="fn" href="fn.ml_matrix.html" title="fn peroxide::structure::matrix::ml_matrix">ml_matrix</a></div><div class="desc docblock-short">Matlab-like matrix constructor</div></li><li><div class="item-name"><a class="fn" href="fn.py_matrix.html" title="fn peroxide::structure::matrix::py_matrix">py_matrix</a></div><div class="desc docblock-short">Python-like matrix constructor</div></li><li><div class="item-name"><a class="fn" href="fn.r_matrix.html" title="fn peroxide::structure::matrix::r_matrix">r_matrix</a></div><div class="desc docblock-short">R-like matrix constructor (Explicit ver.)</div></li><li><div class="item-name"><a class="fn" href="fn.solve.html" title="fn peroxide::structure::matrix::solve">solve</a></div></li></ul><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2><ul class="item-table"><li><div class="item-name"><a class="type" href="type.Perms.html" title="type peroxide::structure::matrix::Perms">Perms</a></div></li></ul></section></div></main></body></html>

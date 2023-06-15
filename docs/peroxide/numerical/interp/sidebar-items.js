@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["chebyshev_nodes",""]]};
+window.SIDEBAR_ITEMS = {"fn":["chebyshev_nodes"]};

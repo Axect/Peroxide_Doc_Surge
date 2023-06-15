@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["Grid",""],["Markers",""],["PlotOptions",""]],"struct":[["Plot2D",""]],"trait":[["Plot",""]]};
+window.SIDEBAR_ITEMS = {"enum":["Grid","Markers","PlotOptions"],"struct":["Plot2D"],"trait":["Plot"]};

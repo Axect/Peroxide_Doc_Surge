@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["copy_vec_ptr",""],["ptr_to_vec",""],["swap_vec_ptr",""]]};
+window.SIDEBAR_ITEMS = {"fn":["copy_vec_ptr","ptr_to_vec","swap_vec_ptr"]};

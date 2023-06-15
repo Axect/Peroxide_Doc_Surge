@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["AD",""]],"struct":[["ADFn","Generic AD functions"],["ADIntoIter",""],["ADIter",""],["ADIterMut",""]],"trait":[["ADVec",""]]};
+window.SIDEBAR_ITEMS = {"enum":["AD"],"struct":["ADFn","ADIntoIter","ADIter","ADIterMut"],"trait":["ADVec"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["QType","R Quantile Type enums"]],"fn":[["cor","Pearson’s correlation coefficient"],["cov","Covariance (to Value)"],["lm","R like linear regression"],["quantile",""]],"trait":[["OrderedStat","Trait for Ordered Statistics"],["Statistics","Statistics Trait"]]};
+window.SIDEBAR_ITEMS = {"enum":["Metric","QType"],"fn":["cor","cov","lm","quantile"],"struct":["ConfusionMatrix"],"trait":["OrderedStat","Statistics"]};

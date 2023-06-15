@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["newton","Newton-Raphson Method"]]};
+window.SIDEBAR_ITEMS = {"fn":["newton"]};

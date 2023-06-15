@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["C","Combination"],["H","Combination with Repetition"],["P","Permutation"],["double_factorial","Double Factorial"],["factorial","Factorial"]]};
+window.SIDEBAR_ITEMS = {"fn":["C","H","P","double_factorial","factorial"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Multinomial",""]]};
+window.SIDEBAR_ITEMS = {"struct":["Multinomial"]};

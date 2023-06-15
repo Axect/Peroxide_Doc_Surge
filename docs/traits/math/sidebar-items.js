@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["Norm","Kinds of Vector & Matrix norm"]],"trait":[["InnerProduct","Inner product Vector"],["LinearOp","Linear operation for Vector"],["MatrixProduct","Matrix Products"],["Normed","Normed Vector"],["Vector","Mathematical Vector"],["VectorProduct","Vector Products"]]};
+window.SIDEBAR_ITEMS = {"enum":["Norm"],"trait":["InnerProduct","LinearOp","MatrixProduct","Normed","Vector","VectorProduct"]};

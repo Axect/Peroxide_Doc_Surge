@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["BoundaryCondition","Kinds of Boundary Conditions"],["ExMethod","Explicit ODE Methods"],["ImMethod",""],["ODEOptions","Options for ODE"]],"struct":[["ExplicitODE",""],["ImplicitODE",""],["NoEnv",""],["State","State for ODE"]],"trait":[["Environment",""],["ODE","ODE solver"]]};
+window.SIDEBAR_ITEMS = {"enum":["BoundaryCondition","ExMethod","ImMethod","ODEOptions"],"struct":["ExplicitODE","ImplicitODE","NoEnv","State"],"trait":["Environment","ODE"]};

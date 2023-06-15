@@ -1,1 +1,1 @@
-window.ALL_CRATES = ["parquet_test","peroxide"];
+window.ALL_CRATES = ["peroxide"];

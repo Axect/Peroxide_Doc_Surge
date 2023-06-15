@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["SpecialKind",""]],"fn":[["chebyshev_polynomial","Chebyshev Polynomial"],["lagrange_polynomial","Lagrange Polynomial"],["legendre_polynomial","Legendre Polynomial"],["poly","Convenient to declare polynomial"]],"struct":[["Polynomial","Polynomial Structure"]],"trait":[["Calculus",""]]};
+window.SIDEBAR_ITEMS = {"enum":["SpecialKind"],"fn":["chebyshev_polynomial","lagrange_polynomial","legendre_polynomial","poly"],"struct":["Polynomial"],"trait":["Calculus"]};

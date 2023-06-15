@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"struct":[["Redox",""]],"trait":[["MatrixPtr","Pointer for col or row"],["Oxide",""],["RedoxCommon",""]]};
+window.SIDEBAR_ITEMS = {"struct":["Redox"],"trait":["MatrixPtr","Oxide","RedoxCommon"]};

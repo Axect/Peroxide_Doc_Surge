@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["OptMethod",""],["OptOption",""]],"struct":[["Optimizer","Optimizer for optimization (non-linear regression)"]]};
+window.SIDEBAR_ITEMS = {"enum":["OptMethod","OptOption"],"struct":["Optimizer"]};

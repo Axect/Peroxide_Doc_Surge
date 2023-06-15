@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["OPDist","One parameter distribution"],["TPDist","Two parameter distribution"]],"struct":[["WeightedUniform",""]],"trait":[["ParametricDist","Extract parameter"],["RNG","Random Number Generator trait"]]};
+window.SIDEBAR_ITEMS = {"enum":["OPDist","TPDist"],"struct":["WeightedUniform"],"trait":["ParametricDist","RNG"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"trait":[["ExpLogOps",""],["PowOps",""],["Real",""],["TrigOps",""]]};
+window.SIDEBAR_ITEMS = {"trait":["ExpLogOps","PowOps","Real","TrigOps"]};

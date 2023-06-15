@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"fn":[["blas_daxpy",""],["blas_daxpy_return",""],["map","Explicit version of `map`"],["reduce","Explicit version of `reduce`"],["zip_with","Explicit version of `zip_with`"]]};
+window.SIDEBAR_ITEMS = {"fn":["blas_daxpy","blas_daxpy_return","map","reduce","zip_with"]};

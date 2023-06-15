@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"enum":[["RootBool",""],["RootError",""],["RootFind",""],["RootState",""]],"fn":[["bisection","Bisection method to find root"],["false_position","False position method to find root"],["newton","Newton method to find root"],["secant","Secant method to find root"]],"struct":[["RootFinder","Structure for Root finding"]]};
+window.SIDEBAR_ITEMS = {"enum":["RootBool","RootError","RootFind","RootState"],"fn":["bisection","false_position","newton","secant"],"struct":["RootFinder"]};

@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"trait":[["MutFP",""],["MutMatrix",""]]};
+window.SIDEBAR_ITEMS = {"trait":["MutFP","MutMatrix"]};

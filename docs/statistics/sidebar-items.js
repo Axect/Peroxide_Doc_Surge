@@ -1,1 +1,1 @@
-window.SIDEBAR_ITEMS = {"mod":[["dist","Probabilistic distributions"],["ops",""],["rand","Random number generator"],["stat","Basic statistics"]]};
+window.SIDEBAR_ITEMS = {"mod":["dist","ops","rand","stat"]};
